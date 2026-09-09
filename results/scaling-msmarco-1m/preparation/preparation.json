@@ -1,0 +1,114 @@
+{
+  "arrays": {
+    "codes": {
+      "dtype": "uint64",
+      "sha256": "14c1f435857b13ab177c22c0e74aecf1432630e1ba67289686bf8a1159273d0e",
+      "shape": [
+        1000000,
+        4
+      ]
+    },
+    "full_documents": {
+      "dtype": "float32",
+      "sha256": "572e837a3db8e11fe9a822050b601fde7c6d571a2018d135c420603eeb5dd5d1",
+      "shape": [
+        1000000,
+        768
+      ]
+    },
+    "full_queries": {
+      "dtype": "float32",
+      "sha256": "442d3cdce43cf87aa905cb07187728a849a5a28424f2d91c10a65bbcdcd460af",
+      "shape": [
+        300,
+        768
+      ]
+    },
+    "queries": {
+      "dtype": "float32",
+      "sha256": "81e7006fe9dcaf22c6d5381a50dd193c912fe27e381f36d9e4c5ac42714f4554",
+      "shape": [
+        300,
+        256
+      ]
+    }
+  },
+  "dataset": "MS MARCO passage v1, fixed random subset",
+  "development_queries": 100,
+  "documents": 1000000,
+  "embedding_hash": "e867d7419fedbd667eaea8e1febe56b2fe16881be9570f6ae11c6bef51bff273",
+  "encoder_source_commit": "0faf41975829d9bcb64c3dd3ecb4e0477bb67a8a",
+  "encoding": {
+    "batch_size": 32,
+    "chunk_size": 4096,
+    "device": "mps",
+    "full_dimensions": 768,
+    "max_length": 512,
+    "model": "nomic-ai/nomic-embed-text-v1.5",
+    "package_versions": {
+      "numpy": "2.5.3",
+      "sentence-transformers": "6.0.1",
+      "torch": "2.14.0"
+    },
+    "recipe": "nomic-v1.5-st-layernorm-eps1e-5-prefix-l2-v1",
+    "revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+    "schema_version": 1,
+    "selection_hash": "1be0393b70430821be5a67e569bcc2df11106c0e17afdeb574350f4930bea7d3"
+  },
+  "evaluation_queries": 200,
+  "fresh_row_check": {
+    "max_absolute_error": {
+      "documents": 2.048211691918489e-08,
+      "queries": 1.460300333433473e-08
+    },
+    "rows_checked_per_type": 3,
+    "wrong_row_control_rejected": true
+  },
+  "input_hash": "b50d75cdde5fcd7975b834d10ed571f9a946fb79eed4240c42ba2ec8babf13a9",
+  "preparation_seconds": {
+    "first_chunk_and_queries": 13.808438582811505,
+    "remaining_chunks_combine_and_derive": 3328.876068416983
+  },
+  "selection_hash": "1be0393b70430821be5a67e569bcc2df11106c0e17afdeb574350f4930bea7d3",
+  "selection_parameters": {
+    "development_queries": 100,
+    "document_seed": 42,
+    "evaluation_queries": 200,
+    "max_documents": 1000000,
+    "query_seed": 43
+  },
+  "source": {
+    "archive_sha256": "decac356eb8cc5b9cea2e30b8738dc6f367e4147aaefe8fc7526ddda382fd2fc",
+    "counts": {
+      "collection_rows": 8841823,
+      "qrel_rows": 7437,
+      "query_rows": 6980
+    },
+    "member_sha256": {
+      "collection.tsv": "86e0c5820be6b22280337a67e54cbb626645453d9ac3c377bac45abb81c5653d",
+      "qrels.dev.small.tsv": "ddc607dbe7b748d7168e8675a242f0811d47febaa2e69d3af09d7ab249c68d7e",
+      "queries.dev.small.tsv": "f4f71fa87b6be4fb968cca2b8f8554c4ebd003e6c3488af3ac1cc5629c3de189"
+    },
+    "url": "https://msmarco.z22.web.core.windows.net/msmarcoranking/collectionandqueries.tar.gz"
+  },
+  "validation": {
+    "all_codes_match_document_signs": true,
+    "complete_cache_reused_without_encoder": true,
+    "documents_checked": 1000000,
+    "embedding_hash": "e867d7419fedbd667eaea8e1febe56b2fe16881be9570f6ae11c6bef51bff273",
+    "encoder_source_commit": "0faf41975829d9bcb64c3dd3ecb4e0477bb67a8a",
+    "input_hash": "b50d75cdde5fcd7975b834d10ed571f9a946fb79eed4240c42ba2ec8babf13a9",
+    "maximum_full_norm_error": 1.1920928955078125e-07,
+    "native_sample": {
+      "candidate_limit": 100,
+      "checked_documents": 1000,
+      "checked_queries": 5,
+      "dimensions": 256,
+      "near_boundary_ambiguities": 0,
+      "status": "pass"
+    },
+    "queries_checked": 300,
+    "worker_source_commit": "bc62c9b"
+  },
+  "worker_source_commit": "bc62c9b"
+}

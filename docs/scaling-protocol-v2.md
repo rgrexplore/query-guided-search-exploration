@@ -84,7 +84,8 @@ job database, plugin system or service is needed.
 - `scaling_worker.py`: load arrays, build the existing index, execute one case, save rows.
 - `scaling.py`: ordinary loops over phases, pool sizes, settings and repetitions; a small child
   process wrapper with a whole-case timeout and RSS sampling.
-- `scaling_analysis.py`: choose settings from development results and draw the reports.
+- `scaling_analysis.py`: check measurements, calculate statistics and choose development settings.
+- `scaling_plots.py`: draw the graphs and format the report from those calculated values.
 
 ## Measurement rules that matter
 
