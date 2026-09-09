@@ -2,18 +2,21 @@
 
 import hashlib
 import json
-import re
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 from zipfile import BadZipFile
 
 import numpy as np
-import torch
-from huggingface_hub import model_info
-from sentence_transformers import SentenceTransformer
 
 from data import Dataset
+from embedding_model import (
+    choose_device as _choose_device,
+    encode_texts as _encode_texts,
+    matryoshka_vectors as _matryoshka_vectors,
+    normalized_prefix as _normalized_prefix,
+    resolve_revision as _resolve_revision,
+)
 
 
 @dataclass
@@ -45,75 +48,6 @@ def encode_signs(vectors: np.ndarray) -> np.ndarray:
     return np.ascontiguousarray(words, dtype=np.uint64)
 
 
-def _resolve_revision(model_name: str, revision: str | None) -> str:
-    if revision is not None and re.fullmatch(r"[0-9a-f]{40}", revision):
-        return revision
-    resolved = model_info(model_name, revision=revision).sha
-    if not resolved:
-        raise ValueError(f"Could not resolve a commit for {model_name}.")
-    return resolved
-
-
-def _choose_device(device: str) -> str:
-    if device != "auto":
-        return device
-    if torch.cuda.is_available():
-        return "cuda"
-    if torch.backends.mps.is_available():
-        return "mps"
-    return "cpu"
-
-
-def _encode_texts(
-    document_texts: list[str],
-    query_texts: list[str],
-    *,
-    model_name: str,
-    revision: str,
-    batch_size: int,
-    max_length: int,
-    device: str,
-    cache_dir: Path,
-) -> tuple[np.ndarray, np.ndarray]:
-    model = SentenceTransformer(
-        model_name,
-        revision=revision,
-        device=device,
-        trust_remote_code=False,
-        cache_folder=str(cache_dir / "model"),
-    )
-    model.max_seq_length = max_length
-    # Keep normalization below, where the full and short vectors can share the same recipe.
-    options = {
-        "batch_size": batch_size,
-        "show_progress_bar": True,
-        "convert_to_numpy": True,
-        "normalize_embeddings": False,
-    }
-    documents = model.encode(document_texts, **options)
-    queries = model.encode(query_texts, **options)
-    return documents, queries
-
-
-def _matryoshka_vectors(raw: np.ndarray, dimensions: int) -> tuple[np.ndarray, np.ndarray]:
-    raw = np.asarray(raw, dtype=np.float32)
-    if raw.ndim != 2 or raw.shape[1] != 768 or not np.isfinite(raw).all():
-        raise ValueError("Expected finite 768-dimensional Nomic embeddings.")
-    # The model recipe is: layer norm the full vector, take a prefix, then L2-normalize.
-    centered = raw - raw.mean(axis=1, keepdims=True)
-    variance = np.mean(centered * centered, axis=1, keepdims=True)
-    scale = np.sqrt(variance + 1e-5)
-    normalized = centered / scale
-    full_norm = np.linalg.norm(normalized, axis=1, keepdims=True)
-    short = normalized[:, :dimensions].copy()
-    short_norm = np.linalg.norm(short, axis=1, keepdims=True)
-    if np.any(full_norm == 0) or np.any(short_norm == 0):
-        raise ValueError("The encoder produced an empty embedding.")
-    short_vectors = np.ascontiguousarray(short / short_norm)
-    full_vectors = np.ascontiguousarray(normalized / full_norm)
-    return short_vectors, full_vectors
-
-
 def _validate_arrays(arrays: EmbeddingArrays, rows: int, queries: int, dimensions: int) -> None:
     expected_shapes = {
         "documents": (rows, dimensions),
@@ -136,14 +70,6 @@ def _validate_arrays(arrays: EmbeddingArrays, rows: int, queries: int, dimension
         arrays.codes, encode_signs(arrays.documents)
     ):
         raise ValueError("Invalid embedding cache: binary codes do not match document signs.")
-
-
-def _normalized_prefix(full_vectors: np.ndarray, dimensions: int) -> np.ndarray:
-    prefix = full_vectors[:, :dimensions].copy()
-    norms = np.linalg.norm(prefix, axis=1, keepdims=True)
-    if np.any(norms == 0):
-        raise ValueError("The cached full vectors have an empty prefix.")
-    return np.ascontiguousarray(prefix / norms)
 
 
 def prepare_embeddings(
