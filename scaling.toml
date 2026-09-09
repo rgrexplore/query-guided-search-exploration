@@ -1,0 +1,43 @@
+[data]
+cache_dir = "data/scaling"
+max_documents = 1000000
+pool_sizes = [1000, 3000, 10000, 30000, 100000, 300000, 1000000]
+document_seed = 42
+query_seed = 43
+development_queries = 100
+evaluation_queries = 200
+
+[embedding]
+model = "nomic-ai/nomic-embed-text-v1.5"
+revision = "e9b6763023c676ca8431644204f50c2b100d9aab"
+batch_size = 32
+max_length = 512
+device = "auto"
+chunk_size = 4096
+
+[search]
+dimensions = 256
+candidate_limit = 100
+leaf_size = 32
+explore_probability = 0.0
+seed = 42
+
+[tuning]
+targets = [0.95, 0.99]
+initial_budgets = [32, 128, 512, 2048, 8192, 32768]
+max_budget = 262144
+refinement_rounds = 3
+
+[measurement]
+repetitions = 3
+warmup_queries = 3
+schedule_seed = 44
+bootstrap_samples = 1000
+bootstrap_seed = 45
+
+[limits]
+setup_seconds = 120
+query_seconds = 10
+attempt_seconds = 1800
+rss_gib = 32
+poll_seconds = 0.1
