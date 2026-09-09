@@ -663,6 +663,11 @@ def _execute_phase(
         raise error
     try:
         for case in cases:
+            # Short cases can finish before their own 15-second timer fires.
+            observed = observe_power()
+            _record_power(run_dir, phase, "before_case", observed)
+            if not _same_power(expected, observed):
+                raise PowerChanged(expected, observed)
             summary = execute_case(
                 run_dir, case, limits, resume=resume, expected_power=expected
             )
@@ -701,11 +706,10 @@ def run_stage(
 ) -> Path:
     """Run one preparation, measurement, selection, evaluation, or report stage."""
     config_path = Path(config_path).resolve()
-    config = _resolved_config(config_path)
     if stage == "prepare":
         if run_dir is not None:
             raise ValueError("preparation does not use a run directory")
-        return _prepare(config, prepare_check)
+        return _prepare(_resolved_config(config_path), prepare_check)
     if prepare_check:
         raise ValueError("--prepare-check is only valid for preparation")
     if run_dir is None:
@@ -713,11 +717,10 @@ def run_stage(
     run_dir = Path(run_dir).resolve()
     if stage == "report":
         _ensure_valid_run(run_dir)
-        metadata = _read_json(run_dir / "metadata.json")
-        if metadata.get("config") != config:
-            raise ValueError("run config does not match the requested config")
+        # Saved measurements already carry their settings and need no vector cache.
         return scaling_analysis.analyze_run(run_dir)
 
+    config = _resolved_config(config_path)
     pointer, selection, _, inputs = _load_prepared(config)
     if stage == "pilot" and not resume:
         metadata = _create_run(config_path, config, run_dir, pointer, selection, inputs)

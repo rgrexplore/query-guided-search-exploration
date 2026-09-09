@@ -435,3 +435,43 @@ def test_fixture_prepare_pilot_tune_evaluate_report_and_resume_identity_checks(
     shutil.copytree(run_dir, copied)
     shutil.rmtree(cache_dir)
     assert scaling.run_stage(config_path, "report", copied) == copied / "analysis/report.md"
+
+
+def test_power_change_is_seen_between_short_cases(tmp_path, monkeypatch):
+    normal = {"source": "AC Power", "mode": "lowpowermode=2"}
+    low = {"source": "AC Power", "mode": "lowpowermode=1"}
+
+    def run_phase(change):
+        elapsed = 0
+
+        def observe():
+            return low if change and 10 <= elapsed < 40 else normal
+
+        def execute(*args, **kwargs):
+            nonlocal elapsed
+            elapsed += 10  # Each case is shorter than the 15-second sampling interval.
+            return {"status": "complete"}
+
+        monkeypatch.setattr(scaling, "observe_power", observe)
+        monkeypatch.setattr(scaling, "execute_case", execute)
+        directory = tmp_path / ("changed" if change else "healthy")
+        scaling._execute_phase(directory, "development", [{}] * 5, {}, False, normal)
+
+    run_phase(False)
+    with pytest.raises(scaling.PowerChanged):
+        run_phase(True)
+    assert (tmp_path / "changed/invalid-run.json").is_file()
+
+
+def test_report_uses_saved_settings_with_a_copied_config(tmp_path, monkeypatch):
+    original = tmp_path / "original.toml"
+    original.write_text(_config_text(Path("cache")))
+    run_dir = tmp_path / "run"
+    _write_json(run_dir / "metadata.json", {"config": scaling._resolved_config(original)})
+    copied_config = run_dir / "config.toml"
+    shutil.copyfile(original, copied_config)
+    report = run_dir / "analysis/report.md"
+    monkeypatch.setattr(scaling.scaling_analysis, "analyze_run", lambda directory: report)
+
+    assert scaling.run_stage(original, "report", run_dir) == report
+    assert scaling.run_stage(copied_config, "report", run_dir) == report
