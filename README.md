@@ -19,8 +19,9 @@ The path through the code is:
 
 ## Explore the cost calculator
 
-[Search cost explorer](calculator/README.md) compares seven approaches with adjustable inputs,
-work counts, query steps, and checks against the saved measurements. It runs in a browser with
+[Three ways to search](calculator/README.md) compares scan, bitplane branching and walking
+backwards from a query key. Four shared controls, small query examples and the saved measurements
+show where the work goes. It runs in a browser with
 no build step. Estimated costs and measured results are shown separately.
 
 ```bash

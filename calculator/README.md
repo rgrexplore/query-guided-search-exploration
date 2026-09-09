@@ -1,7 +1,11 @@
-# Search cost explorer
+# Three ways to search
 
-A local calculator for scan, branching, and key-probing ideas. Change the inputs, inspect the
-work counts, and compare the time model with the saved MS MARCO measurements.
+Four inputs: total documents, number of groups, groups opened per search, and bits per document.
+The page compares:
+
+- Baseline: cluster, then full scan.
+- Cluster, then bitplane branching.
+- Cluster, then walk backwards from the query's sign key.
 
 From the project root:
 
@@ -9,258 +13,118 @@ From the project root:
 python3 -m http.server 8767 --bind 127.0.0.1
 ```
 
-Open **http://127.0.0.1:8767/calculator/**. No packages or build step are needed to view it.
-Serve the project root so the links to the original measurements work too.
+Open **http://127.0.0.1:8767/calculator/**. There is no build step or browser dependency.
 
-## Try these first
+## Follow the example
 
-1. Keep the default one-million-document case. Select **Dense bitplanes** and expand its
-   calculation: 352 million split-word visits plus 160 million leaf-word visits.
-2. Compare that with **Packed scan**: 64 million four-sign lookup terms. A word visit and a
-   score term are different kinds of work, so their counts cannot be compared as equal-cost instructions.
-3. Change the first stage to similarity clusters or sign-bit buckets. Adjust the number of
-   visited clusters. Use the measured-work table to load a smaller-pool branch profile if needed.
-4. Try sparse bitplanes. Change the assumed active documents per split and sparse-word cost.
-   Any modeled advantage depends on those assumptions; this implementation has not been benchmarked.
-5. Try short keys and substring tables. Watch both expected candidates and stored payload.
-   A fast lookup that finds almost nothing does not solve the retrieval problem.
-6. In the small query example, change random exploration and step through the visits.
-   The node budget stays fixed. Even at zero probability, alternative branches can still be visited.
+With one million documents in 100 equally sized groups, each group has 10,000 documents.
+Opening one group makes all three methods start with those same 10,000 documents.
 
-The graph varies N while keeping other controls fixed. It does **not** retune each method to
-matched recall. Branch survivor counts are capped by leaf capacity. A workload with more
-nonempty leaves than scored documents is inconsistent; its curve is omitted and its table
-entry is marked. Feasible counts are a necessary check, not proof that a real search will
-produce that workload.
+A scores all of them. B splits by bits, visits the more promising side first, and later scores
+small remaining groups. Its masks still span the entire opened group. C tries the query's own
+key, then different combinations of flipped bits. It can spend its budget on empty keys.
 
-## Files
+The small visual examples use 16 documents and an 8-bit query. “Next step” follows actual
+branch visits. “Try next key” enumerates all 256 flip sets by total query-weight penalty.
+The other side of a split stays queued; it is not automatically thrown away.
 
-| File                      | Job                                                                             |
-| ------------------------- | ------------------------------------------------------------------------------- |
-| `model.mjs`               | Work counts, probability calculations, timing model, and the small query search |
-| `app.mjs`                 | Controls, SVG plot, tables, and query steps                                     |
-| `style.css`, `index.html` | Layout and page text                                                            |
-| `measurements.json`       | 100 complete validation/test setting summaries from the saved run               |
-| `export_measurements.py`  | Regenerates the data and fits four time coefficients                            |
-| `model.test.mjs`          | Checks formulas against enumeration, source bytes, and known search results     |
+## What is estimated
 
-## What the time estimate means
+All methods target 100 binary candidates, with the query embedding already available and one
+CPU thread. Embedding, building the index, final float reranking and network time are excluded.
+Grouping adds a fixed **assumed 0.05 ms**, unless there is only one group. The page does not
+claim to reproduce Exa's production timing.
 
-All estimates are for **one query, one CPU thread, cached embeddings, top 100 binary candidates**.
-They exclude embedding, network calls, building the index, and float reranking. The small
-browser example uses top 10 instead.
+`measurements.json` contains 100 complete validation/test setting summaries from the original
+MS MARCO run. `export_measurements.py` fits nonnegative coefficients on validation rows:
 
 ```text
-time = fixed setup + routing
-     + score terms × score cost
-     + bitmap work × bitmap cost
-     + visited nodes × node cost
-     + key lookup / enumeration / dedup work
+scan time = fixed setup + score terms × score cost
+branch time = scan cost for surviving documents
+            + bitmap words visited × word cost
+            + visited nodes × node cost
 ```
 
-Costs in ns become ms by dividing by 1,000,000. These are effective measured or assumed costs,
-not CPU instruction latencies. Scoring includes average top-100 selection work. The dense node
-term includes an average allowance for allocations and the pending-node queue. Input size,
-cache behavior, query weights, heap replacements, and compiler optimizations can change them.
-Moving to GPU or batching queries needs different measurements; there is no universal CPU-to-GPU multiplier.
+One score term handles four signs. The fitted coefficients include average memory and result
+selection work; they are not individual CPU instruction latencies. The branch word rate is an
+average over splits and leaf visits. The node rate allows for the queue and allocations.
+The fit minimizes squared relative timing errors, so large cases do not dominate it.
 
-`export_measurements.py` fits nonnegative coefficients on **validation rows only**:
+To estimate branch work in a group, the calculator takes the closest measured group size and
+uses its fastest validation setting that reached 95% binary recall. It scales that setting's
+node and scored-document counts to the requested group size, then multiplies the bitmap work
+by `ceil(documents per group / 64)`. Other bit lengths reuse these counts.
 
-- Scan: fixed ms and ns per four-sign lookup term.
-- Branch: additional ns per bitmap word visit and ns per visited node, with scan costs held fixed.
-- Each residual is divided by that row's measured time, so the largest cases do not drown out
-  the small cases. The fitted model minimizes squared relative residuals.
-- Counters are means, while the time target is a median; this is an aggregate approximation.
+That is a **workload assumption**, not a prediction of recall in new clusters. The chart shows
+recorded group sizes, plus the current size when it exceeds the measured range. It does not
+retune the new scenario to matched recall. Each opened group contributes work; a shared setup
+cost is added once. Cache effects and the merging of per-group results can differ in a real run.
 
-The browser checks the model against all 23 held-out test setting summaries. At the original
-coefficients the largest absolute relative error is about **27.84%**. This is a check of time
-**given observed work**, not a prediction of how many branches a new query needs. The bounds
-of that observed error are not confidence intervals for new methods or larger datasets.
+The maximum absolute relative timing error on the 23 held-out test settings is about **27.8%**,
+given their observed work counts. That range is not an uncertainty bound for unbuilt methods.
+The actual one-million-document test timings were 25.1365 ms for scan and 244.9848 ms for
+branching at 99.26% binary recall. These are shown separately from estimates.
 
-The actual one-million-document test measurements are 25.1365 ms for scan and 244.9848 ms for
-branching at budget 32,768 and recall 0.9926. The current model predicts about 25.475 ms and
-261.16 ms from those counts. Inspect the page for the exact current coefficients and errors.
+## Bitmap work and memory
 
-Sparse word access, counter operations, hashing, key enumeration, and routing have editable
-**unmeasured** costs. The calculator shows them so we can decide what to measure next. It
-cannot establish a speedup from those assumptions. Statements copied into `some-requests.md`
-about other prototypes are not treated as verified benchmark evidence here.
+For S splits, L leaves and W words per group:
 
-## Work formulas
+- Split-word visits: `S × W`. Each does two ANDs, a bit count, complements, an addition,
+  active/plane reads and two child writes. Initializing the child arrays costs work too.
+- Leaf-word visits: `L × W`, even when most words are zero.
+- Logical traffic estimate: `48 × split words + 8 × leaf words + survivor code bytes`.
+  The 48 bytes include active/plane reads, two child writes and their zero-initialization.
+  This is not measured DRAM traffic; cache reuse matters.
+- Extra bitplane payload: `groups × bits × W × 8` bytes. At ten billion 256-bit documents
+  without padding overhead, that is **320 GB**. GB here means one billion bytes.
+- One queued dense mask needs `W × 8` bytes. Many nodes can be queued, so the extra payload
+  shown on the card is not process peak RAM.
 
-Let N be total documents, D dimensions, C clusters, and P visited clusters. With balanced
-clusters, n = N/C documents per cluster and M = nP selected documents. Sign routing with r bits
-has C = 2^r possible buckets. Similarity clustering has its own C; it is not first-r-bit routing.
-With no routing, C = P = 1. Routing time is supplied separately.
+The “one split costs about X document scores” number compares a fitted average word visit
+plus node overhead with full scoring. It is a rough comparison, not proof that splitting will
+save time: the other branch may still be visited, and leaf reads cost time too.
 
-Packed row bytes are `8 × ceil(D/64)`. A dense bitplane occupies W = ceil(n/64) 64-bit words.
-The calculator uses expected bucket sizes; real empty buckets, imbalance, and correlations
-need observed counts. More clusters alone cannot predict routing recall.
+## Walk backwards
 
-### Packed scan
+The query's signs give an ideal full key. Flipping bits costs the sum of their absolute query
+values. Enumerating combinations in that order is different from just accumulating flips.
 
-Score M documents, each with G = ceil(D/4) table lookups. There are 16 table entries for each
-group of four query values. The source scanner builds those entries once per query. The fixed
-cost is fitted at D=256, so its setup component becomes less reliable when changing D.
-
-Logical code bytes read: `M × 8 × ceil(D/64)`. Stored payload: packed codes plus one 8-byte ID
-per document. This ideal scan layout omits the bitplanes that the current shared native Index
-also builds for scan; it is not the measured process memory.
-
-### Dense bitplanes
-
-B means visits per probed cluster. A supplied fraction splits; the rest are leaves. Both are
-workload assumptions, or observed means loaded from a saved setting. They are not inferred
-from a recall target. With S splits and L leaves over all visited clusters:
+The page fixes the attempt budget at **65,536 different keys per opened group**. Under
+independent, uniformly distributed document signs, expected matches are:
 
 ```text
-split word visits = S × W
-leaf word visits  = L × W
-fully scored documents = min(M × scored fraction, L × leaf size)
+selected documents × 65,536 / 2^bits
 ```
 
-Per split word, the source performs two ANDs, a population count, complements and an addition,
-reads the active mask and plane, and writes both children. Creating the two vectors also
-zero-initializes them. The logical byte estimate counts **48 bytes per split word** (16 bytes
-read, 16 written, 16 initialized), **8 bytes per leaf word**, and packed code reads for scoring.
-Compilers, cache reuse and allocation behavior can change actual traffic. It is not a measured
-DRAM-byte counter. Queue traffic and score-table accesses are not included in that byte ledger;
-their average time is covered by the effective coefficients.
+For long full keys, this is extremely small. The card shows the time spent trying, not a
+successful search time. This is a distribution assumption, not a claim about real recall.
+The model uses unmeasured allowances of 100 ns per lookup, 2 ns per key word and 5 ns per queue
+comparison, with about `log2(65,537)` comparisons per attempt. It includes expected candidate
+scoring. Hash metadata allows 32 extra bytes per document; enumeration queues are additional.
 
-Stored payload adds `C × D × W × 8` bitplane bytes. One active dense node needs `W × 8` mask
-bytes. The pending queue can hold many such nodes, so this per-node figure is not peak RAM.
-The saved runs record process peak RAM separately.
+A shorter lookup key is a different design. It is not silently substituted for the full-key
+method to make the numbers look better.
 
-### Sparse bitplanes
+## Source and checks
 
-Retain `(word ID, mask)` pairs only where a node still has active documents. The model assumes
-16 bytes per pair. With a active documents uniformly scattered through a bucket, the expected
-number of occupied full words is approximately:
-
-```text
-floor(n/64) × [1 − (1 − a/n)^64]
-```
-
-The remaining partial word is counted using its actual size. This uses independent occupancy
-as an approximation. If survivors are clustered or correlated it can be wrong. The assumed
-mean active documents per split controls split visits; leaf occupancy uses scored documents
-per leaf. Scattering is not the same as compacting all survivors into adjacent words.
-
-The logical traffic allowance is 64 bytes per visited split word and 16 per leaf word, plus
-code reads. Sparse ns/word must include pair access, building children, and less sequential
-access. Using the dense node coefficient is another explicit approximation, not calibration
-of a sparse implementation. Packed codes and dense document bitplanes are still stored.
-
-### Bitplane prefilter
-
-Read the K largest-magnitude query dimensions. Quantize each absolute query value to b bits;
-for example b=4 allows integer weights from 0 to 15 after a shared scale. Add mismatch weights
-in bit-sliced counters, compare their sums with a threshold, then score survivors with the
-original float query. The threshold's survivor fraction is an input here, not derived from K.
-
-Maximum counter width: `c = ceil(log2(K × (2^b − 1) + 1))`.
-A simple conservative carry schedule is counted as:
-
-```text
-plane words = K × W × P
-logical operations = 5 × plane words × b × c + 3 × W × P × c
-```
-
-A full-adder has five logical operations; the estimate allows a full-width add for each
-quantized weight bit. The last term allows a threshold comparison. An actual implementation
-can skip zero weight bits, shorten carries, or choose another adder. This is a specified cost
-schedule, **not** a claim that every optimized implementation needs this many operations.
-The traffic allowance is 8 bytes per input plane word plus 24 per counter operation and
-survivor code reads. Counter scratch per cluster is `c × W × 8` bytes.
-
-### Full-key probing
-
-The ideal key has the signs of the query. Flip sets are ordered by the sum of their |query|
-values. If H distinct full keys are checked, expected documents found under independent,
-uniform signs are `M × H / 2^D`. H includes empty lookups. This does not assume that a stored
-nearest neighbor is actually uniformly random; it is an occupancy example.
-
-Each key costs a hash lookup plus key-word access. The model adds
-`H × log2(H+1) × queue-comparison cost` for enumerating flip combinations, per visited cluster.
-It is an approximate priority-queue schedule. More sophisticated key enumeration may differ.
-Hash-table overhead is assumed to be 32 bytes per stored document in addition to codes and IDs.
-Candidate-ID scratch is shown, but the enumeration queue and hash allocator add more memory.
-
-### Short-key probing
-
-Keep h bits for an inner key. Probe all keys with at most t flipped bits:
-
-```text
-V(h,t) = sum of choose(h,j), for j = 0..min(t,h)
-lookups = P × V(h,t)
-expected candidate documents = M × V(h,t) / 2^h
-```
-
-The model uses a sorted posting array with a dense offset directory: `(2^h + 1) × 8` bytes per
-outer cluster. The directory can become expensive even if queries visit only a few clusters.
-Hamming shells count flips equally. Weighted best-first short-key probes would use a different
-schedule; they cannot reuse this radius formula as a weighted recall guarantee.
-
-### Multi-index hashing
-
-Divide D across m disjoint substrings, distributing the remainder one bit at a time. Probe
-radius t in each table, read posting IDs, remove duplicates, and score the union. With substring
-hit probabilities pj = V(dj,t)/2^dj, expected unique candidates are:
-
-```text
-M × [1 − product(1 − pj)]
-```
-
-This assumes independent signs between disjoint substrings. Posting reads count the sum of
-hits before deduplication, and dedup gets a lookup-cost allowance. Payload adds 8N bytes of
-postings per table and 32 bytes per possible occupied key, capped at N per table. This is a
-sparse hash-directory size allowance, not an exact allocator layout.
-
-Short/full-key traffic allows 32 bytes of metadata plus the key words per lookup, posting IDs,
-and candidate codes. Hash collisions, queue traffic, sorting and cache misses need measurements.
-The current page estimates a fixed-radius substring probe, not the paper's full adaptive
-exact-neighbor algorithm.
-
-## Quality
-
-Three different things appear separately:
-
-- **Measured binary recall:** overlap with exact top 100 from the same dataset, pool and score.
-- **Small-search recall:** exact top-10 comparison for the generated 128-document browser example.
-- **Hypothetical inclusion probability:** assume a relevant document mismatches each sign
-  independently with probability p, then compute binomial inclusion for key radii. This is
-  conditional on the document already being in the selected outer clusters.
-
-A normal query-value distribution does not determine document/query correlations, the true
-nearest neighbors, or semantic relevance labels. There is no justified real recall curve for
-new branching, prefilter or clustering parameters without running them on real data.
-
-The toy uses fixed illustrative query values and seeded generated document signs. It implements
-penalty ordering and random pending-node selection, not every native optimization or bound.
-Its exact reference sorts every toy document with the same score and row-ID tie break.
-
-## Checks and data regeneration
+`model.mjs` owns the calculations and the small query search. `app.mjs` connects those results
+to the four controls, cards and SVG graph. `index.html` and `style.css` own the page.
 
 ```bash
 node --test calculator/model.test.mjs
 .venv/bin/python calculator/export_measurements.py
 ```
 
-The exported JSON records a SHA-256 of the original CSV. Tests verify it, compare Hamming
-volumes with exhaustive enumeration, verify the one-million-document counters, check sparse
-occupancy, and compare a complete small search with exact top-10 results. Validation data
-fits the coefficients; held-out test rows are displayed without refitting.
+Tests check the source CSV hash, the grouping example, the one-million-document split/leaf
+counts, bitmap storage, empty-key expectations, available input ranges, and the complete small
+search against an exact score sort. The JSON can be regenerated from the source CSV; no
+embeddings or new searches are needed.
 
-The calculator uses plain static files. It does not change the native index or launch a new
-benchmark. New search structures should get their own measured experiment before their
-assumed time rates are promoted to evidence.
+- [Original scaling measurements](../results/scaling-msmarco-1m/analysis/settings.csv)
+- [Scaling report](../results/scaling-msmarco-1m/README.md)
+- [Exa's published approach](https://exa.ai/blog/building-web-scale-vector-db): similarity
+  groups, binary document codes, float queries and lookup-based scoring. Its clusters are not
+  defined by taking the first few sign bits.
 
-## Sources
-
-- [Exa: how we built a web-scale vector database](https://exa.ai/blog/building-web-scale-vector-db)
-  describes similarity clustering, binary documents, float queries and subvector lookup tables.
-- [Norouzi, Punjani and Fleet: Fast Exact Search in Hamming Space with Multi-Index Hashing](https://arxiv.org/abs/1307.2982)
-  is the substring-hashing reference. Its Hamming guarantees do not automatically transfer to
-  query-weighted mismatch costs.
-- [Saved scaling report](../results/scaling-msmarco-1m/README.md) and
-  [original summary CSV](../results/scaling-msmarco-1m/analysis/settings.csv) own the measurements.
+The previous seven-method calculator is preserved in commit `97a16be`. This page keeps the
+three requested methods and moves fixed modeling assumptions out of the controls.
