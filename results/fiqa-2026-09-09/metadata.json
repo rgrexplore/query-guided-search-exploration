@@ -1,0 +1,172 @@
+{
+  "created_at": "2026-09-09T03:17:15.879864+00:00",
+  "config": {
+    "data": {
+      "dataset": "fiqa",
+      "cache_dir": "data",
+      "max_documents": 0,
+      "max_queries": 0
+    },
+    "embedding": {
+      "model": "nomic-ai/nomic-embed-text-v1.5",
+      "revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+      "dimensions": 256,
+      "batch_size": 32,
+      "max_length": 512,
+      "device": "auto"
+    },
+    "routing": {
+      "methods": [
+        "ivf",
+        "sign"
+      ],
+      "clusters": 64,
+      "sign_bits": 8,
+      "probes": [
+        1,
+        4,
+        16
+      ],
+      "seed": 42,
+      "threads": 1
+    },
+    "search": {
+      "candidate_limit": 100,
+      "top_k": 10,
+      "node_budgets": [
+        32,
+        128,
+        512
+      ],
+      "leaf_size": 32,
+      "explore_probabilities": [
+        0.0,
+        0.1
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ]
+    },
+    "benchmark": {
+      "warmup_queries": 3,
+      "repetitions": 3,
+      "output_dir": "runs"
+    }
+  },
+  "platform": "macOS-26.3.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "python": "3.12.11",
+  "packages": {
+    "numpy": "2.5.3",
+    "faiss-cpu": "1.15.0",
+    "torch": "2.14.0",
+    "transformers": "5.16.1",
+    "sentence-transformers": "6.0.1",
+    "matplotlib": "3.11.1"
+  },
+  "source_sha256": {
+    "run.py": "d2e219c9809effe958415499d46d973ce662e39e0078213a874a428820e3ac81",
+    "data.py": "2317b51ad042a0262582275456f295ba85baff5eaeb9ee3680ecc6d7ecc9cb89",
+    "embeddings.py": "577d589ff98c98a5e108943a815e5d859276e29b967eb94eeeccd6f208948d98",
+    "routing.py": "dd145e6126ff718d7557ebb6259c3a1df17c9a52c15ec9248cbe0547d6723ab2",
+    "benchmark.py": "070c39dc0d80f68b6ed8df9d4651d0832ca94b0f630669d983806d602a385378",
+    "cpp/index.hpp": "d5791a861c3c6044fddd2cfb2a67f8465be5596dce2161a781bd884a8d8ba39a",
+    "cpp/index.cpp": "58e140ae48578e1f1c54fc2151f7df022de71353972f1457bc1417984e65b766",
+    "cpp/bindings.cpp": "f7c81560f0a3b43d39ff7834f5886218c8f10787e15b18ee781a0a54acbcdff6",
+    "CMakeLists.txt": "b4a6fd34bd23d51c812e9fb43a1ce344be5baa53df10c5abd99068e6a28ad17a",
+    "pyproject.toml": "b70a7c0bd44dc890a6e28c8b2f6d94420078251b329096a1cad81d51e3cf6fde"
+  },
+  "native_sha256": "88754e0b49cb5bd437c6e9a8d0181d044e3795d4990dd78e1033843b751e5bcf",
+  "dataset": {
+    "source": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/fiqa.zip (archive sha256: 32c7df99ed21252fdfb2cf3f5673502a8d245ee0c44c4a133570d92ce2b3ad02)",
+    "fingerprint": "07333250a3f218e10cf45b39825762db578d55871abe234eb1f38d30608c8322",
+    "documents": 57638,
+    "queries": 648,
+    "full_documents": 57638,
+    "full_queries": 648,
+    "is_subset": false,
+    "query_ids_sha256": "94499beb924a6bd482673595687768451466fc4188df73959863994e20126bed"
+  },
+  "embedding": {
+    "content_sha256": "89a09a1394b603ec3d6a6941e3613ef0d5ecb073d4a4e3370942089ae22cb7f3",
+    "dataset_fingerprint": "07333250a3f218e10cf45b39825762db578d55871abe234eb1f38d30608c8322",
+    "device": "mps",
+    "dimensions": 256,
+    "full_dimensions": 768,
+    "max_length": 512,
+    "model_name": "nomic-ai/nomic-embed-text-v1.5",
+    "model_revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+    "recipe": "nomic-v1.5-st-layernorm-eps1e-5-prefix-l2-v1"
+  },
+  "timing": "Warm CPU retrieval with cached query embeddings; routing + call + float rerank. Encoding excluded.",
+  "float_reference": "Exhaustive inner product over full normalized document embeddings.",
+  "binary_reference": "Exact LUT scan in the same selected buckets, at candidate_limit.",
+  "seed_rule": "Native search seed = setting seed + query row; repeats reuse that seed.",
+  "builds": [
+    {
+      "routing": {
+        "method": "ivf",
+        "dimensions": 256,
+        "clusters": 64,
+        "seed": 42,
+        "threads": 1,
+        "spherical_centroids": true,
+        "routing": "nearest inner-product centroids, including empty lists",
+        "possible_buckets": 64,
+        "occupied_buckets": 64,
+        "bucket_sizes": {
+          "min": 134,
+          "mean": 900.59375,
+          "p95": 1425.4999999999998,
+          "max": 1901
+        }
+      },
+      "routing_build_ms": 48.28083422034979,
+      "native_build_ms": 42.760916985571384,
+      "native_storage": {
+        "documents": 57638,
+        "dimensions": 256,
+        "buckets": 64,
+        "codes_bytes": 1844416,
+        "bitplanes_bytes": 1908736,
+        "row_ids_bytes": 461104,
+        "logical_bytes": 4214256
+      }
+    },
+    {
+      "routing": {
+        "method": "sign",
+        "dimensions": 256,
+        "routing_bits": 8,
+        "threads": 1,
+        "routing": "scan occupied prefixes with float-query / binary-code scores",
+        "zero_sign": "positive",
+        "possible_buckets": 256,
+        "occupied_buckets": 120,
+        "bucket_sizes": {
+          "min": 1,
+          "mean": 480.31666666666666,
+          "p95": 2795.699999999999,
+          "max": 5914
+        }
+      },
+      "routing_build_ms": 2.099167089909315,
+      "native_build_ms": 44.27783330902457,
+      "native_storage": {
+        "documents": 57638,
+        "dimensions": 256,
+        "buckets": 120,
+        "codes_bytes": 1844416,
+        "bitplanes_bytes": 1998848,
+        "row_ids_bytes": 461104,
+        "logical_bytes": 4304368
+      }
+    }
+  ],
+  "float_reference_p50_ms": 3.181812586262822,
+  "preparation_call_ms": 1059.6180418506265,
+  "dataset_loading_ms": 179.08283416181803,
+  "preparation_note": "This is the current call time; a matching cache skips encoding."
+}

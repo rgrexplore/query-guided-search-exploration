@@ -1,0 +1,29 @@
+{
+  "observations": [
+    {
+      "at": "2026-09-09T03:29:34.173361+00:00",
+      "source": "AC Power",
+      "powermode": "2",
+      "settings": "Battery Power:\n Sleep On Power Button 1\n powermode            1\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         2\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            10\nAC Power:\n Sleep On Power Button 1\n powermode            2\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 1\n networkoversleep     0\n sleep                1\n tcpkeepalive         1\n disksleep            10\n",
+      "battery": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22610019)\t80%; AC attached; not charging present: true\n"
+    },
+    {
+      "at": "2026-09-09T03:29:49.195302+00:00",
+      "source": "AC Power",
+      "powermode": "2",
+      "settings": "Battery Power:\n Sleep On Power Button 1\n powermode            1\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         2\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            10\nAC Power:\n Sleep On Power Button 1\n powermode            2\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 1\n networkoversleep     0\n sleep                1\n tcpkeepalive         1\n disksleep            10\n",
+      "battery": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22610019)\t80%; AC attached; not charging present: true\n"
+    },
+    {
+      "at": "2026-09-09T03:30:01.635771+00:00",
+      "source": "AC Power",
+      "powermode": "2",
+      "settings": "Battery Power:\n Sleep On Power Button 1\n powermode            1\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         2\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            10\nAC Power:\n Sleep On Power Button 1\n powermode            2\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 1\n networkoversleep     0\n sleep                1\n tcpkeepalive         1\n disksleep            10\n",
+      "battery": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22610019)\t80%; AC attached; not charging present: true\n"
+    }
+  ],
+  "sample_interval_seconds": 15,
+  "power_changes_detected": false,
+  "exit_code": 0,
+  "log": "power-rerun-20260909T032934Z.log"
+}
