@@ -10,3 +10,4 @@ dist/
 data/
 runs/
 .DS_Store
+.worktrees/
