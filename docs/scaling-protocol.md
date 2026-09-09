@@ -6,6 +6,9 @@ This is an adapted public copy with unchanged experimental requirements. The sou
 
 # Bitplane search scaling study
 
+This earlier design is retained for reference. The current protocol is
+[version 2](scaling-protocol-v2.md).
+
 **Date:** 9 September 2026  
 **Scope:** The existing packed scan and bitplane branching engines, on real text vectors through one million passages.  
 **Code baseline:** `63ac9467d74e7c457eeb863f279fd337802f86d6` in `/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project`.
