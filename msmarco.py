@@ -98,7 +98,7 @@ def select_positions(total_rows: int, count: int, seed: int) -> np.ndarray:
     return generator.permutation(total_rows)[:count].astype(np.int64)
 
 
-def _download_archive(cache_dir: Path) -> tuple[Path, bool]:
+def _download_archive(cache_dir: Path) -> tuple[Path, bool, str]:
     archive_path = cache_dir / ARCHIVE_NAME
     if archive_path.is_file():
         try:
@@ -111,7 +111,7 @@ def _download_archive(cache_dir: Path) -> tuple[Path, bool]:
                 str(archive_path),
                 f"archive SHA256 is {digest}, expected {EXPECTED_ARCHIVE_SHA256}",
             )
-        return archive_path, False
+        return archive_path, False, digest
     if archive_path.exists():
         _invalid("CACHE_INVALID", str(archive_path), "archive path is not a regular file")
 
@@ -134,7 +134,7 @@ def _download_archive(cache_dir: Path) -> tuple[Path, bool]:
             SOURCE_URL,
             f"downloaded archive SHA256 is {digest}, expected {EXPECTED_ARCHIVE_SHA256}",
         )
-    return partial_path, True
+    return partial_path, True, digest
 
 
 def _member_stream(archive: tarfile.TarFile, member: tarfile.TarInfo) -> BinaryIO:
@@ -151,6 +151,7 @@ def _read_collection(
 ) -> tuple[list[str], list[str], int, str]:
     selected_ids = [""] * len(positions)
     selected_texts = [""] * len(positions)
+    # Stream positions in source order, then place each match back in its saved random slot.
     source_order = np.argsort(positions)
     sorted_positions = positions[source_order]
     selected_offset = 0
@@ -405,8 +406,7 @@ def prepare_selection(
         cache_dir.mkdir(parents=True, exist_ok=True)
     except OSError as error:
         _invalid("CACHE_INVALID", str(cache_dir), str(error))
-    archive_path, downloaded = _download_archive(cache_dir)
-    archive_sha256 = _sha256(archive_path)
+    archive_path, downloaded, archive_sha256 = _download_archive(cache_dir)
     parameters = {
         "max_documents": max_documents,
         "document_seed": document_seed,
