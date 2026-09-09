@@ -17,6 +17,18 @@ The path through the code is:
 
 **documents → embeddings → buckets → binary candidates → float reranking → measurements**
 
+## Explore the cost calculator
+
+[Search cost explorer](calculator/README.md) compares seven approaches with adjustable inputs,
+work counts, query steps, and checks against the saved measurements. It runs in a browser with
+no build step. Estimated costs and measured results are shown separately.
+
+```bash
+python3 -m http.server 8767 --bind 127.0.0.1
+```
+
+Open http://127.0.0.1:8767/calculator/.
+
 ## Run it
 
 Python 3.12 and a C++20 compiler are needed. On macOS, the compiler comes with the Xcode

@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Search cost explorer · Bitplane experiments</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a href="../README.md" class="brand"
+        ><span class="brand-icon" aria-hidden="true">▥</span> BITPLANE
+        <span>/ EXPERIMENTS</span></a
+      ><span class="local">Local calculator · CPU, one query at a time</span>
+    </header>
+    <main>
+      <div class="intro">
+        <div>
+          <p class="eyebrow">SCAN · BRANCH · PROBE</p>
+          <h1>Search cost explorer</h1>
+          <p class="lede">
+            Change the workload. See what gets read, scored, and skipped.
+          </p>
+        </div>
+        <div class="actions">
+          <button id="reset">Reset</button
+          ><button id="export">Export calculations ↗</button>
+        </div>
+      </div>
+      <div class="workspace">
+        <aside class="controls" aria-label="Experiment parameters">
+          <div class="panel-head">
+            <h2>Your experiment</h2>
+            <span class="pill">LIVE</span>
+          </div>
+          <div id="shared-controls"></div>
+          <div id="method-controls"></div>
+          <details class="control-section">
+            <summary>Time assumptions <span>CPU costs</span></summary>
+            <p class="help">
+              Scan and dense-branch rates are fitted to saved validation runs.
+              Other rates are editable assumptions. They include work and memory
+              effects; they are not individual instruction timings.
+            </p>
+            <div id="rate-controls"></div>
+            <button id="restore-rates">Restore fitted rates</button>
+          </details>
+          <p class="aside-note">
+            Query embeddings are already available. Index construction,
+            embedding, network calls, and final float reranking are outside
+            these search times.
+          </p>
+        </aside>
+        <div class="results">
+          <section class="pool-strip" aria-label="Selected search pool">
+            <div>
+              <span>Documents in the database</span
+              ><strong id="total-docs"></strong>
+            </div>
+            <i>→</i>
+            <div>
+              <span>Documents per cluster</span
+              ><strong id="bucket-docs"></strong>
+            </div>
+            <i>→</i>
+            <div>
+              <span>Documents in selected clusters</span
+              ><strong id="pool-docs"></strong>
+            </div>
+          </section>
+          <p id="routing-note" class="annotation"></p>
+          <section class="panel chart-panel">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">01 / COST CURVES</p>
+                <h2>Documents vs. estimated time</h2>
+              </div>
+              <button id="save-chart" class="small">Save SVG</button>
+            </div>
+            <p class="help">
+              Same controls at every point. Both axes use a log scale. These
+              methods can return different results—this is not a comparison at
+              matched recall.
+            </p>
+            <div id="chart-legend" class="legend"></div>
+            <div id="chart"></div>
+            <p id="chart-note" class="annotation"></p>
+          </section>
+          <section class="panel comparison-panel">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">02 / WORK AT THIS SIZE</p>
+                <h2>Every method pays for something</h2>
+              </div>
+              <span class="pill">ESTIMATES</span>
+            </div>
+            <p class="help">
+              Select a row to inspect the flow and calculation. “Bytes touched”
+              includes repeated reads and writes; it is not the size of the
+              index.
+            </p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Method</th>
+                    <th>Estimated time</th>
+                    <th>Documents scored</th>
+                    <th>Bytes touched</th>
+                    <th>Stored payload</th>
+                  </tr>
+                </thead>
+                <tbody id="comparison"></tbody>
+              </table>
+            </div>
+          </section>
+          <section
+            class="panel inspector"
+            aria-label="Selected method calculation"
+          >
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">03 / FOLLOW ONE QUERY</p>
+                <h2 id="method-title"></h2>
+              </div>
+              <span id="method-quality" class="pill"></span>
+            </div>
+            <p id="method-note" class="help"></p>
+            <div id="flow" class="flow"></div>
+            <div id="time-parts" class="time-parts"></div>
+            <details open>
+              <summary>Show the calculation</summary>
+              <div class="table-wrap">
+                <table class="formula-table">
+                  <thead>
+                    <tr>
+                      <th>Work</th>
+                      <th>Amount</th>
+                      <th>Calculation</th>
+                    </tr>
+                  </thead>
+                  <tbody id="formula-rows"></tbody>
+                </table>
+              </div>
+              <p id="memory-note" class="help"></p>
+            </details>
+          </section>
+        </div>
+      </div>
+      <section class="panel evidence">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">04 / CHECK AGAINST REAL RUNS</p>
+            <h2>What we measured, and what the model misses</h2>
+          </div>
+          <a href="../results/scaling-msmarco-1m/analysis/settings.csv"
+            >Raw measurements ↗</a
+          >
+        </div>
+        <p id="evidence-scope" class="help"></p>
+        <div id="evidence-summary" class="evidence-summary"></div>
+        <div class="evidence-layout">
+          <div>
+            <label for="evidence-pool">Document count</label
+            ><select id="evidence-pool"></select>
+            <p class="help">
+              Budget sweep: saved validation runs. Recall means overlap with the
+              exact binary top 100. Select a branch setting to load its observed
+              work counts into the calculator.
+            </p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Method / budget</th>
+                    <th>Measured p50</th>
+                    <th>Recall</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="budget-rows"></tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <h3>Independent timing check</h3>
+            <p class="help">
+              Fitted on validation runs; checked here on held-out test runs. The
+              branch column uses each test setting's actual work counts. It does
+              not predict how much work a new search will need.
+            </p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>N / method</th>
+                    <th>Measured</th>
+                    <th>Model</th>
+                    <th>Error</th>
+                  </tr>
+                </thead>
+                <tbody id="check-rows"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="panel toy">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">05 / A SMALL, COMPLETE EXAMPLE</p>
+            <h2>Which branch gets visited next?</h2>
+          </div>
+          <span class="pill">128 DOCUMENTS · 8 BITS</span>
+        </div>
+        <p class="help">
+          This runs a real search over generated binary documents in your
+          browser. It uses the query below, a leaf size of 8, and top 10
+          results. It explains the ordering; it does not predict recall for the
+          large experiment above.
+        </p>
+        <div class="toy-controls">
+          <label
+            >Random exploration probability
+            <input
+              id="toy-probability"
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              value="0"
+            /><output id="toy-probability-value">0%</output></label
+          ><label
+            >Nodes to visit
+            <input
+              id="toy-budget"
+              type="range"
+              min="1"
+              max="64"
+              step="1"
+              value="16"
+            /><output id="toy-budget-value">16</output></label
+          ><label
+            >Random seed
+            <input id="toy-seed" type="number" min="1" max="99999" value="7"
+          /></label>
+        </div>
+        <div id="query-values" class="query-values"></div>
+        <div class="toy-layout">
+          <div>
+            <div class="toy-status">
+              <strong id="toy-recall"></strong><span id="toy-count"></span>
+            </div>
+            <div class="step-controls">
+              <button id="previous-step" aria-label="Previous query step">
+                ←</button
+              ><label for="toy-step"
+                >Visit <output id="toy-step-value"></output></label
+              ><input
+                id="toy-step"
+                type="range"
+                min="0"
+                max="15"
+                value="0"
+              /><button id="next-step" aria-label="Next query step">→</button>
+            </div>
+            <p id="toy-step-description"></p>
+            <div
+              id="document-dots"
+              class="document-dots"
+              aria-label="Documents active at this visit"
+            ></div>
+            <p class="help">
+              Filled squares are active documents. Outlined squares are exact
+              top-10 results. A random visit changes which pending branch is
+              taken; it does not add to the node budget. Even at 0%, the search
+              can visit alternative branches.
+            </p>
+          </div>
+          <div>
+            <h3>The other direction: start at the ideal key</h3>
+            <p class="help">
+              Ideal signs: <code id="ideal-key"></code>. These are the first
+              flip sets in increasing total penalty. A set can skip a cheaper
+              bit; it isn't just a growing prefix.
+            </p>
+            <div id="flip-list" class="flip-list"></div>
+            <p class="help">
+              Penalty = sum of |query value| for flipped bits. Binary score =
+              sum of |query values| − 2 × penalty. A lookup still has a cost
+              when no document has that key.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="panel assumptions">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">06 / QUALITY ASSUMPTIONS</p>
+            <h2>A distribution is an assumption, not ground truth</h2>
+          </div>
+        </div>
+        <p class="help">
+          For short-key and substring probing, assume a relevant document
+          independently disagrees with each query sign with probability
+          <em>p</em>. This gives a toy probability of including that document.
+          It is not measured nearest-neighbor recall or answer accuracy. A
+          normal distribution alone does not tell us <em>p</em>.
+        </p>
+        <div class="quality-controls">
+          <label for="mismatch"
+            >Mismatch probability p
+            <input
+              id="mismatch"
+              type="range"
+              min="0"
+              max="0.5"
+              step="0.01"
+              value="0.15" /><output id="mismatch-value"></output
+          ></label>
+          <div id="quality-estimates"></div>
+        </div>
+        <p class="help">
+          Short key: P[Binomial(key bits, p) ≤ radius]. Multiple substrings: 1 −
+          product of each substring's miss probability, assuming independence.
+          Outer-cluster misses are not included. There is no corresponding
+          justified real-data recall formula for the branch or prefilter
+          controls.
+        </p>
+      </section>
+      <footer>
+        <div>
+          <h3>About this calculator</h3>
+          <p>
+            Plain JavaScript, local data, no build step. Seven candidate
+            approaches; no claim that an unbuilt method is faster.
+          </p>
+          <a href="README.md">Formulas, limits, and how to run ↗</a>
+        </div>
+        <div>
+          <h3>Sources and boundaries</h3>
+          <p>
+            <a href="https://exa.ai/blog/building-web-scale-vector-db"
+              >Exa's vector database</a
+            >
+            uses similarity clusters and float-query × binary-document scoring.
+            It does not describe a first-bits router. Our scanner is a local
+            reference, not Exa's optimized production implementation.
+          </p>
+          <p>
+            <a href="https://arxiv.org/abs/1307.2982">Multi-index hashing</a>
+            searches binary substrings. Its Hamming guarantees need care when
+            query dimensions have different weights.
+          </p>
+        </div>
+      </footer>
+      <p id="status" role="status"></p>
+    </main>
+    <script type="module" src="app.mjs"></script>
+  </body>
+</html>
