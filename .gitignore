@@ -1,4 +1,4 @@
-.venv/
+/.venv
 __pycache__/
 .pytest_cache/
 *.pyc
@@ -7,7 +7,7 @@ __pycache__/
 *.egg-info/
 build/
 dist/
-data/
-runs/
+/data
+/runs
 .DS_Store
 .worktrees/
