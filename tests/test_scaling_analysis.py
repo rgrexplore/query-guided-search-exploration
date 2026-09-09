@@ -498,6 +498,18 @@ def test_analysis_writes_fixed_outputs_counts_once_and_survives_a_portable_copy(
         "scaling_analysis.py",
         "scaling_plots.py",
     }
+    scaling_svg = (report.parent / "scaling.svg").read_text()
+    for label in (
+        "95% recall target",
+        "99% recall target",
+        "Below recall target",
+        "Median search time",
+        "95th-percentile search time",
+        "Cached evaluation queries",
+        "<!-- 10 -->",
+        "<!-- 20 -->",
+    ):
+        assert label in scaling_svg
     text = report.read_text()
     assert "2 evaluation queries" in text
     assert "No observed median crossover" in text

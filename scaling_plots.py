@@ -8,6 +8,35 @@ import numpy as np
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.ticker import NullFormatter
+
+
+DISPLAY_LABELS = {
+    "scan": "Scan",
+    "target95": "95% recall target",
+    "target99": "99% recall target",
+    "unlimited": "Unlimited branch",
+}
+LINE_STYLES = {
+    "scan": {"linestyle": "-", "marker": "o"},
+    "target95": {"linestyle": "--", "marker": "s", "markerfacecolor": "white"},
+    "target99": {"linestyle": ":", "marker": "^", "markerfacecolor": "white"},
+    "unlimited": {"linestyle": "-.", "marker": "D"},
+}
+
+
+def _format_count(value: int) -> str:
+    if value >= 1_000_000:
+        return f"{value / 1_000_000:g}M"
+    if value >= 1_000:
+        return f"{value / 1_000:g}k"
+    return str(value)
+
+
+def _set_pool_ticks(axis, pools: list[int]) -> None:
+    axis.set_xscale("log")
+    axis.set_xticks(pools, [_format_count(pool) for pool in pools])
+    axis.xaxis.set_minor_formatter(NullFormatter())
 
 
 def _series(
@@ -63,17 +92,18 @@ def _plot_scaling(
     }
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.5), constrained_layout=True)
     fields = ("api_p50_ms", "api_p95_ms")
-    titles = ("Request p50", "Request p95")
+    titles = ("Median search time", "95th-percentile search time")
     for axis, field, title in zip(axes, fields, titles):
+        miss_label_added = False
         for label in ("scan", "target95", "target99", "unlimited"):
             values, misses = _series(pools, evaluation, points, label, field)
             axis.plot(
                 pools,
                 values,
-                marker="o",
                 linewidth=1.8,
-                label=label,
+                label=DISPLAY_LABELS[label],
                 color=colors[label],
+                **LINE_STYLES[label],
             )
             for pool, value, miss in zip(pools, values, misses):
                 if miss and math.isfinite(value):
@@ -85,13 +115,16 @@ def _plot_scaling(
                         linewidth=2.0,
                         color="#a40000",
                         zorder=5,
+                        label="Below recall target" if not miss_label_added else None,
                     )
-        axis.set_xscale("log")
+                    miss_label_added = True
+        _set_pool_ticks(axis, pools)
         axis.set_xlabel("Pool size N")
-        axis.set_ylabel("API latency (ms)")
+        axis.set_ylabel("Search call time (ms)")
         axis.set_title(title)
         axis.grid(alpha=0.2)
-    axes[0].legend(frameon=False, ncol=2)
+    axes[0].legend(frameon=False, ncol=2, fontsize=8)
+    fig.suptitle("Cached evaluation queries", fontsize=11)
     fig.savefig(directory / "scaling.png", dpi=180)
     fig.savefig(directory / "scaling.svg")
     plt.close(fig)
@@ -100,7 +133,11 @@ def _plot_scaling(
 def _plot_speedup(directory: Path, pools: list[int], points: list[dict]) -> None:
     fig, axis = plt.subplots(figsize=(7.5, 4.5), constrained_layout=True)
     axis.axhline(1.0, color="#555555", linewidth=1, linestyle="--")
-    for target, color in ((0.95, "#2878b5"), (0.99, "#d65f2d")):
+    miss_label_added = False
+    for target, label, color in (
+        (0.95, "target95", "#2878b5"),
+        (0.99, "target99", "#d65f2d"),
+    ):
         selected = [
             next(
                 row
@@ -121,7 +158,13 @@ def _plot_speedup(directory: Path, pools: list[int], points: list[dict]) -> None
             row["speedup_ci_high"] if row["speedup_ci_high"] is not None else np.nan
             for row in selected
         ]
-        axis.plot(pools, values, marker="o", color=color, label=f"target{round(target * 100)}")
+        axis.plot(
+            pools,
+            values,
+            color=color,
+            label=DISPLAY_LABELS[label],
+            **LINE_STYLES[label],
+        )
         axis.fill_between(pools, low, high, color=color, alpha=0.12)
         for pool, value, row in zip(pools, values, selected):
             if math.isfinite(value) and not row["achieved"]:
@@ -133,11 +176,13 @@ def _plot_speedup(directory: Path, pools: list[int], points: list[dict]) -> None
                     linewidth=2,
                     color="#a40000",
                     zorder=5,
+                    label="Below recall target" if not miss_label_added else None,
                 )
-    axis.set_xscale("log")
+                miss_label_added = True
+    _set_pool_ticks(axis, pools)
     axis.set_xlabel("Pool size N")
     axis.set_ylabel("Scan median / branch median")
-    axis.set_title("Paired request speedup")
+    axis.set_title("Median speedup on cached evaluation queries")
     axis.grid(alpha=0.2)
     axis.legend(frameon=False)
     fig.savefig(directory / "speedup.png", dpi=180)
@@ -162,12 +207,19 @@ def _plot_work(
             values, _ = _series(pools, evaluation, points, label, field)
             if field == "sampled_peak_rss_bytes":
                 values = [value / 2**30 for value in values]
-            axis.plot(pools, values, marker="o", linewidth=1.4, label=label)
-        axis.set_xscale("log")
+            axis.plot(
+                pools,
+                values,
+                linewidth=1.4,
+                label=DISPLAY_LABELS[label],
+                **LINE_STYLES[label],
+            )
+        _set_pool_ticks(axis, pools)
         axis.set_title(title)
         axis.set_xlabel("Pool size N")
         axis.grid(alpha=0.2)
-    axes.flat[0].legend(frameon=False, ncol=2)
+    axes.flat[0].legend(frameon=False, ncol=2, fontsize=8)
+    fig.suptitle("Cached evaluation queries", fontsize=11)
     fig.savefig(directory / "work.png", dpi=180)
     plt.close(fig)
 
@@ -196,11 +248,12 @@ def _plot_budgets(
             latency.append(
                 row["api_p50_ms"] if row["status"] == "complete" else np.nan
             )
-        axes[0].plot(positions, recall, marker="o", linewidth=1.2, label=f"N={pool:,}")
-        axes[1].plot(positions, latency, marker="o", linewidth=1.2, label=f"N={pool:,}")
+        label = f"N={_format_count(pool)}"
+        axes[0].plot(positions, recall, marker="o", linewidth=1.2, label=label)
+        axes[1].plot(positions, latency, marker="o", linewidth=1.2, label=label)
     labels = ["unlimited" if budget == 0 else f"{budget:,}" for budget in ordered]
-    titles = ("Development recall", "Development p50")
-    ylabels = ("Candidate recall", "API latency (ms)")
+    titles = ("Development recall", "Development median search time")
+    ylabels = ("Candidate recall", "Search call time (ms)")
     for axis, title, ylabel in zip(axes, titles, ylabels):
         axis.set_xticks(positions, labels, rotation=45, ha="right")
         axis.set_title(title)
@@ -208,6 +261,7 @@ def _plot_budgets(
         axis.set_ylabel(ylabel)
         axis.grid(alpha=0.2)
     axes[0].legend(frameon=False, fontsize=8, ncol=2)
+    fig.suptitle("Cached development queries", fontsize=11)
     fig.savefig(directory / "budgets.png", dpi=180)
     plt.close(fig)
 
