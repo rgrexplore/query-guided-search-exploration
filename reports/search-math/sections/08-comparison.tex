@@ -1,0 +1,169 @@
+\section{Bring the formulas together}
+\label{sec:comparison}
+The three methods share query embedding, preparation, routing, filtering, and the optional
+final reranker. Their difference is the work used to obtain candidates from the selected pool.
+This is the right boundary for comparing the index algorithms without hiding common costs.
+
+\subsection{Latency, one method at a time}
+Using the earlier definitions,
+\begin{align}
+T_A={}&\Tcommon+P c_{\rm range}
+ +\Nelig Gc_{\rm lut}+H_s(\Nelig,R)c_{\rm heap}
+ +T_{\rm rank}(R)+\Tfinish(R'),\label{eq:final-A}\\[3pt]
+T_B={}&\Tcommon+T_{\rm order}+T_{\rm roots}
+ +\sum_j s_jW_jc_{\rm split}+\sum_j\ell_jW_jc_{\rm leafword}\notag\\
+ &+Vc_{\rm node}+FGc_{\rm lut,leaf}
+ +H_s(F,R)c_{\rm heap}+T_{\rm rank}(R)+\Tfinish(R'),\label{eq:final-B}\\[3pt]
+T_C={}&\Tcommon+T_{\rm keyprep}
+ +\sum_j\left(E_jc_{\rm enum}+C_j^{\rm copy}c_{\rm copy}
+              +H_jc_{\rm lookup}+F_jc_{\rm post}\right)\notag\\
+ &+\sum_j F_jG_{C,j}c_{\rm lut,gather}+H_s(F,R)c_{\rm heap}
+ +T_{\rm rank}(R)+\Tfinish(R').\label{eq:final-C}
+\end{align}
+$G_{C,j}$ is the candidate scoring work actually needed after reusing the key contribution; it can be zero for a full key with its exact score already known.
+
+All cluster sums in query work run over $j\in\mathcal P(q)$. If C uses a merged stream,
+add its explicitly counted stream-selection cost. Different execution choices can share
+preparation or reuse buffers; record those choices rather than charging duplicated work.
+
+\subsection{An index speedup is not the same as an end-to-end speedup}
+If two configurations have identical embedding and final-stage costs, write their shared time
+as $T_0$. Replacing index time $t_A$ by $t_B$ gives speedup
+\[
+\frac{T_0+t_A}{T_0+t_B},
+\]
+not $t_A/t_B$. Even removing index time entirely cannot exceed $1+t_A/T_0$ when $T_0>0$.
+If candidate counts or final-vector fetches differ, those costs are no longer shared and must
+be evaluated separately. This is why cached-query index timings and complete text-query timings
+should both be reported rather than substituted for one another.
+
+\subsection{Persistent storage}
+For the reference layouts selected in this report,
+\begin{align}
+M_{A,\rm index}&=\Mbase,\label{eq:final-storageA}\\
+M_{B,\rm index}&=\Mbase+d b_w\sum_{j=1}^{C}\ceil{n_j/w},\label{eq:final-storageB}\\
+M_{C,\rm index}&=\Mbase+N b_{\rm ref}
+ +\sum_{j=1}^{C}\ceil{U_j/\alpha}\,[b_k(h_j)+2b_o+b_{\rm slot}].
+\label{eq:final-storageC}
+\end{align}
+Storage sums run over \emph{all} clusters, not only probed clusters. Increasing probes usually
+changes query work and scratch, not the already built index size. For literal prefix relaxation, substitute the trie directory and query-work formula from Equation~\eqref{eq:trie-cost}.
+
+A different C layout can
+remove the additional posting permutation; it cannot remove the information needed to map
+results back to documents.
+
+\subsection{Peak query RAM and the serving budget}
+\fig{memory}{Persistent index data, runtime reserve and simultaneous scratch are separate terms. Sequential stage buffers need a lifetime analysis.}{.85}
+
+The search-stage scratch terms are
+\begin{align}
+Q_{A,\rm search}&=\Qbase+Q_{\rm scan\ workspace},\\
+Q_{B,\rm search}&=\Qbase+Q_{\rm order}
+ +\max_t[\gamma_B Q_{B,\rm frontier}(t)+Q_{\rm current}(t)+Q_{\rm children}(t)],\\
+Q_{C,\rm search}&=\Qbase+
+ \max_t\left[\sum_j\gamma_C Q_j(t)b_{\rm enum,j}
+ +Q_{\rm stream\ merge}(t)+Q_{\rm posting\ buffer}(t)+Q_{\rm gather}(t)\right].
+\end{align}
+Small iterator state is included in workspace terms. Embedding and final reranking can have
+larger scratch than search, so use Equation~\eqref{eq:peak} to obtain the full query peak.
+With resident index size $M_{m,\rm resident}$ for method $m$, the RAM constraint is
+\begin{equation}
+\boxed{M_{m,\rm resident}+M_{\rm model}+M_{\rm runtime}
+       +\max_t\sum_{u\in\mathcal A(t)}Q_{m,u}(t)\leq M_{\rm RAM}.}
+\label{eq:final-ram}
+\end{equation}
+$M_{\rm model}$ is the shared resident embedding-model memory if encoding runs locally; it is zero in this memory domain when an external service performs encoding. It is not multiplied by the number of queries.
+
+For a conservative bound, replace the sum by $JQ_{m,\rm peak,max}$. A loose upper bound that
+exceeds RAM does not prove that a tighter implementation cannot fit. An observed peak below
+the limit does not prove that every possible query fits. These are different claims.
+
+\subsection{A compact comparison table}
+\small
+\begin{longtable}{@{}P{.16\linewidth}P{.25\linewidth}P{.25\linewidth}P{.25\linewidth}@{}}
+\toprule & A: full scan & B: bitplanes & C: key enumeration\\\midrule\endfirsthead
+\toprule & A: full scan & B: bitplanes & C: key enumeration\\\midrule\endhead
+Additional index & none beyond common layout & $d b_w\sum_jW_j$ & postings and key directory\\
+Principal work & every eligible code & split masks, leaf masks, full scores, frontier & empty and occupied keys, enumeration, postings, full scores\\
+Variable counts & $\Nelig$ & $s_j,\ell_j,f_j,V$ & $H_j,F_j,E_j,Q_j^{\max}$\\
+Largest scratch concern & selection or batch score buffers & many full-width pending masks & many pending flip sets or candidate gather buffers\\
+Local exactness & scan all eligible rows & valid bounds, sufficient traversal, correct ties & full-key weighted order or a valid full-score bound\\
+Approximation control & routing probes; candidate/rerank boundary & node budget, visit policy, earlier routing & prefix width, candidate or key budget, earlier routing\\
+What must be measured & kernel cost, routing quality & skipped scores versus bitmap/queue cost and recall & empty-key volume versus useful candidates, timing and recall\\\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{The variables most likely to move the tradeoff}
+\textbf{Documents per physical cluster, $n_j$.} A grows roughly linearly with eligible row
+count. In B, a larger cluster also widens every active bitmap. In C, more documents per key can
+reduce the number of empty probes needed, while increasing posting and scoring work.
+
+\textbf{Binary dimension, $d$.} Longer codes increase score terms and stored bits. B may gain
+more from avoiding full scores, but also stores more planes and can traverse more coordinates.
+For full-key C, the number of possible keys grows exponentially. For short-key C, $h$ and $d$
+are separate parameters.
+
+\textbf{Probes, $P$.} More clusters can recover missed neighbors. They also increase eligible
+rows, root masks, active key streams and candidate competition. Cluster sizes and the query's
+routing behavior matter, not just the number $P$.
+
+\textbf{Leaf size and node budget.} A small leaf threshold can trade scoring for more mask work.
+A finite node budget caps visits but does not specify how many useful leaves are reached.
+The best choice depends on the query and data, not a general monotonic recall formula.
+
+\textbf{Lookup width and candidate target.} A short key has denser postings and a smaller key
+space, but leaves more score information out. A longer key can improve candidate discrimination
+and simultaneously make empty-key enumeration costly. A strong prefix can improve recall;
+that does not remove the enumeration cost.
+
+\textbf{Kernel and memory system.} SIMD, cache residency, batch size, alignment, layout and
+thread count change the effective coefficients. Keep them fixed for an algorithm comparison,
+or report their changes as a separate experiment.
+
+\subsection{Choosing configurations at fixed N and RAM}
+Let $\theta_m$ contain the chosen method's tunable parameters and let $r_0$ be a recall target.
+Choose the latency objective explicitly, for example median or p95 across queries. A valid
+optimization statement is
+\begin{equation}
+\theta_m^*\in\arg\min_{\theta_m}\operatorname{Quantile}_{p}[T_m(q;\theta_m)]
+\end{equation}
+subject to the RAM condition in Equation~\eqref{eq:final-ram} and
+\begin{equation}
+\E_q[\operatorname{Recall@}K(q;\theta_m)]\geq r_0.
+\label{eq:optimization}
+\end{equation}
+The expectation specifies an average-recall target. A requirement that almost every query
+reach $r_0$ is stronger and needs a different probability constraint.
+
+\begin{lstlisting}[caption={A defensible finite-grid experiment.}]
+ChooseConfiguration(corpus, queries, fixed_reference, RAM_limit, targets):
+    build or cache every configuration's required index
+    compute exact reference results once for each query
+    on tuning queries:
+        for every configuration in the declared grid:
+            measure latency, quality, work counts and peak RAM
+            keep failures and empty returns in the record
+    choose qualifying configurations for each target
+    on separate test queries:
+        evaluate those choices without retuning
+    report lowest tested latency only where the target and RAM checks pass
+    distinguish measured results from untested model predictions
+\end{lstlisting}
+
+A mathematical model can reduce the grid and explain its results. It cannot manufacture the
+unknown query/document distribution or the true hardware coefficients. A ``best estimated
+point'' from a model is a proposed experiment, not a verified engineering choice.
+
+If $d$ is also varied, keep the quality reference fixed across choices, for example the same
+long-vector top $K$ or the same relevance labels. Recomputing a different binary ground truth
+for every $d$ makes a tiny representation look perfectly accurate against its own changed task.
+
+\begin{resultbox}{Final interpretation}
+A pays to score the selected pool. B pays to discover which scores can be avoided, and dense
+bitmaps can make that discovery expensive. C pays to discover which keys contain useful
+candidates, including empty keys and queue work. Each can be exact under a suitable stopping
+rule. Which is fastest at a recall target is determined by the data, the representation,
+the visited work, the memory layout and the hardware---not by one operation count or one
+assumed normal distribution.
+\end{resultbox}

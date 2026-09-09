@@ -1,0 +1,144 @@
+\section{A finite-sample view of prefix recall}
+The population-tail approximation is not the only mathematical definition available. This
+appendix shows what an exact finite-$N_*$ calculation would require, under independent,
+identically distributed document score pairs and no score ties. It is useful for understanding
+why knowing only a correlation is insufficient.
+
+For a particular document with full score $s$ and prefix score $t$, classify another document
+into four events:
+\begin{align*}
+p_{11}(s,t)&=\Pr(S>s,T>t),&p_{10}(s,t)&=\Pr(S>s,T\leq t),\\
+p_{01}(s,t)&=\Pr(S\leq s,T>t),&p_{00}(s,t)&=\Pr(S\leq s,T\leq t).
+\end{align*}
+Among the other $N_*-1$ documents, let $(a,b,c,e)$ count these categories. A multinomial distribution counts how many independent documents land in each of the four categories, using those probabilities. The chosen document belongs to the full
+top $K$ when $a+b\leq K-1$, and belongs to the prefix top $R$ when $a+c\leq R-1$.
+Therefore, with $e=N_*-1-a-b-c$,
+\begin{align}
+P_{K,R}(s,t)=
+\sum_{\substack{a,b,c\geq0;\ a+b\leq K-1;\ a+c\leq R-1\\a+b+c\leq N_*-1}}
+\frac{(N_*-1)!}{a!b!c!e!},
+p_{11}^{a}p_{10}^{b}p_{01}^{c}p_{00}^{e}.
+\end{align}
+If $F_{S,T}$ is the joint distribution of one document's scores, every document has the same event probability under the identical-sampling assumption. Summing over all $N_*$ documents and dividing by $K$ gives
+\begin{equation}
+\E[\operatorname{Recall@}K]=
+\frac{N_*}{K}\int P_{K,R}(s,t)\,dF_{S,T}(s,t).
+\label{eq:finite-recall}
+\end{equation}
+This assumes the candidate stage returns exactly the prefix top $R$ and the final stage uses
+the same full score. Retrieving whole tied prefix keys changes that candidate rule; ties can
+be handled by augmenting the ordering with document IDs or by explicitly integrating their
+selection probabilities.
+
+Equation~\eqref{eq:finite-recall} is much harder to evaluate than the conditional-normal
+approximation. More importantly, it still needs $F_{S,T}$. Matryoshka training, a code length,
+a cluster count and a RAM budget do not uniquely specify that distribution. Exact mathematics
+can organize unknown inputs; it cannot infer them from the algorithm's name.
+
+\section{Checklist for an honest numerical implementation}
+\begin{enumerate}
+\item Fix the score and tie rule. Keep original-float, truncated-float, binary-score and human
+relevance references distinct.
+\item Check the score identity on small vectors and enumerate the actual top $K$.
+\item Check that the weighted-subset stream emits every subset once, in nondecreasing penalty,
+and processes the final boundary tie before claiming exactness.
+\item Count split words and leaf words separately. Use each cluster's physical width, including
+padding; do not substitute the number of active documents for the bitmap length.
+\item Record the ownership of codes, external IDs, posting references and key storage. Any
+shared or reordered array must be stated before removing its bytes from a formula.
+\item Count temporary state at its lifetime peak. A queue-capacity bound and an observed
+allocation peak are different quantities.
+\item Keep key attempts separate from occupied keys and returned postings. Expected first hit
+is not the same threshold as finding $R$ candidates.
+\item Price centroid float arithmetic separately from binary score lookups. Charge selection,
+allocation, copying and gathers where the implementation performs them.
+\item Use either a calibrated combined cost or a disaggregated operation model for each block.
+Do not count the same memory and selection work in both.
+\item Test statistical predictions on queries not used to estimate their parameters. Evaluate
+recall after the actual candidate and tie rules, not merely a probability of finding some key.
+\end{enumerate}
+
+\section{Floating-point arithmetic and exactness}
+The score and bound proofs use real arithmetic. A numerical implementation must ensure its
+computed upper bounds remain conservative under rounding. The local C++ reference includes a
+rounding allowance for bound pruning and a deterministic row-ID tie order. A report should not
+claim exactness merely because an unguarded floating-point comparison resembles the algebra.
+
+This does not require inventing a collection of hypothetical production patches. It requires
+checking the numerical path used by the implementation and testing it against a full reference
+scan on the same inputs. The small examples and archived candidate checks provide such evidence
+for their stated scopes; they do not prove every future implementation correct.
+
+\section{Optional expansion of the embedding cost}
+The main formulas keep $T_{\rm emb}$ and $Q_{\rm emb}$ as measured model-specific functions.
+If a more detailed encoder estimate is needed, its architecture must be another set of inputs,
+not an unexplained constant.
+
+For an illustrative standard dense Transformer encoder, let $n_t$ be query tokens, $L_e$ the
+number of layers, $m$ hidden width, $f$ feed-forward width, and $H_a$ attention heads. For one
+layer with ordinary two-matrix feed-forward computation, multiply-add contributions are
+\begin{equation}
+U_{\rm layer}=4n_t m^2+2n_t^2m+2n_tmf.
+\end{equation}
+The first term comes from the query, key, value and attention-output projections. The second
+comes from attention-score and attention-value matrix products. The third comes from the
+feed-forward expansion and contraction. Activation, normalization and softmax operations add
+separate elementwise terms. A different block, gated feed-forward network or sparse attention
+requires different counts.
+
+A corresponding parameterized time model is
+\[
+T_{\rm emb}=T_{\rm tokenize}+L_e\big(U_{\rm layer}c_{\rm enc,mac}
+ +U_{\rm elementwise}c_{\rm enc,elt}\big)+T_{\rm pool/project}.
+\]
+These effective coefficients depend on batching, device kernels, precision and memory behavior.
+Alternatively use the resource bound in Equation~\eqref{eq:resource}, without adding it on top
+of coefficients that already include the same work.
+
+A non-fused attention implementation may materialize $H_a n_t^2$ attention values. With bytes
+per activation $b_a$, an explicit scratch model can be written
+\[
+Q_{\rm emb}=b_a\big(\eta_m n_t m+\eta_f n_t f+\eta_a H_a n_t^2\big)+Q_{\rm kernel},
+\]
+where the $\eta$ coefficients count simultaneously live buffers, not time. Fused attention
+can avoid materializing the square attention matrix, so its chosen buffer counts differ.
+Layer workspaces can be reused during inference; multiplying a per-layer peak by $L_e$ is not
+a general inference-RAM formula. Resident model weights are shared and counted separately.
+
+A Matryoshka prefix normally reuses an already computed embedding. Halving the search prefix
+$d$ does not automatically halve the encoder's layer count or hidden width. It reduces the
+subsequent representation and search work unless the actual encoder implementation also changes.
+
+\section{Reproduction and parameter ledger}
+The editable source is \texttt{report.tex}, with chapter files in \texttt{sections/}. Mermaid
+sources and rendered diagrams are in \texttt{figures/}. The build instructions are in the
+adjacent \texttt{README.md}. The arithmetic checks are implemented in \texttt{verify\_math.py}.
+They validate the worked examples, exact subset ordering, binomial conditional-recall example,
+word widths, selected storage identities, and quoted measured rows. The statistical evidence
+is preserved with its source hash.
+
+The following ledger identifies the inputs a future calculator must obtain rather than infer
+from one document count.
+\small
+\begin{longtable}{@{}P{.25\linewidth}P{.35\linewidth}P{.33\linewidth}@{}}
+\toprule Input family & Parameters or counts & How to obtain them\\\midrule\endfirsthead
+\toprule Input family & Parameters or counts & How to obtain them\\\midrule\endhead
+Representation & $D,d,d_r,d_f$, preparation and score rule & fixed experimental definition; embedding/model metadata\\
+Retrieval target & $K,R$, filter, reference score, tie rule & fixed task definition\\
+Cluster layout & $C,n_j,\mathcal P(q),e_j$ & built index and per-query routing/filter traces\\
+Storage widths & $w,b_w,b_{\rm id},b_o,b_c,b_f,b_s$ & actual types, packing and alignment\\
+Baseline scoring & $g,G,H_s,c_{\rm lut}$ & source code, work counters and kernel measurements\\
+Bitplane search & $L,B_{\rm node},s_j,\ell_j,f_j,V$ & configuration plus query traces; not budget alone\\
+Bitplane RAM & frontier masks, current/child buffers, capacities & allocation/capacity measurements or an explicit bound\\
+Key index & $I_h,h_j,U_j,\alpha,b_k,b_{\rm ref}$ & chosen lookup coordinates, index build and slot layout\\
+Key search & $H_j,F_j,E_j,Q_j^{\max}$, stopping rule & actual key enumeration, posting and frontier traces\\
+Prefix-trie variant & $Z_j,b_{\rm trie},u_j$, posting ranges & actual stored nodes, path and range visits\\
+Hardware & compute rates, bandwidth, cache regime, SIMD, threads & calibrated for the actual workload and machine\\
+Optional final stage & fetch policy, $R',u_f,d_f$, rerank score & execution pipeline and storage-residency decision\\
+Statistical model & query/data distribution, covariance, score tails & declared synthetic assumptions or measured and checked estimates\\
+Serving RAM & $M_{\rm resident},M_{\rm model},M_{\rm runtime},J,Q_{\rm peak}$ & ownership/lifetime analysis and process measurements\\\bottomrule
+\end{longtable}
+\normalsize
+A numerical example can assign values to these parameters. The equations themselves remain
+parameterized, so changing the workload changes the inputs instead of requiring a different
+explanation of the algorithm.

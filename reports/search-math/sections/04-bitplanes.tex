@@ -1,0 +1,204 @@
+\section{Approach B: cluster, then inverted bitplanes and branching}
+\label{sec:bitplanes}
+Approach B keeps the same document score and common routing stage. Its extra index stores
+the document bits by coordinate instead of only by row. That makes one sign test applicable
+to many document positions at once.
+
+\fig{bitplanes}{Approach B. A pending node has a set of active documents and an optimistic score bound.}{1}
+
+\subsection{What a bitplane stores}
+For the opened example cluster $\mathcal C_1=(2,5,7,8)$, the document codes are
+\texttt{1011}, \texttt{1110}, \texttt{1001}, \texttt{0011}. The transposed index is
+\begin{center}
+\begin{tabular}{@{}lcccc@{}}\toprule
+ & doc 2 & doc 5 & doc 7 & doc 8\\\midrule
+bitplane 1 & 1&1&1&0\\
+bitplane 2 & 0&1&0&0\\
+bitplane 3 & 1&1&0&1\\
+bitplane 4 & 1&0&1&1\\\bottomrule
+\end{tabular}
+\end{center}
+Each row is a bitmap over document positions, not a list of full document vectors. An active
+bitmap says which document positions still belong to the current node. To require coordinate
+$i$ to be 1, intersect the active bitmap with plane $i$. To require 0, intersect with its
+complement, while masking unused padding positions.
+
+\begin{lstlisting}[caption={Build the additional bitplane index.}]
+BuildBitplanes(cluster_codes, d, w):
+    for each cluster j:
+        W[j] = ceil(number_of_rows(j) / w)
+        planes[j] = d arrays of W[j] zero words
+        for local row u in j:
+            for coordinate i in 0 .. d-1:
+                if code[j, u, i] is 1:
+                    set bit (u mod w) in planes[j, i, floor(u/w)]
+    return planes
+\end{lstlisting}
+
+The extra persistent storage is exactly, for this layout,
+\begin{equation}
+M_{\rm planes}=d b_w\sum_{j=1}^{C}W_j,
+\qquad M_{B,\rm index}=\Mbase+M_{\rm planes}.
+\label{eq:planes-storage}
+\end{equation}
+Without per-cluster padding this is $Nd/8$, a second binary-code-sized payload.
+For example, ten billion 256-bit codes occupy 320 GB; their bitplanes add approximately
+another 320 GB, not 32 TB. Padding and other index structures are additional.
+
+\subsection{Why the query suggests a traversal direction}
+At coordinate $i$, choosing the query's sign adds no penalty; choosing the opposite sign adds
+$a_i=|q_i|$. Sorting coordinates by descending $a_i$ tests the largest potential penalties first.
+For the four-bit query, the order is $1,2,3,4$ with weights $0.7,0.4,0.2,0.1$.
+
+In $\mathcal C_1$, matching bit 1 keeps documents $2,5,7$; the alternative contains document 8
+with accumulated penalty $0.7$. Matching bit 2 next keeps $2,7$; document 5 moves to another
+pending node with penalty $0.4$. This is a useful order, but neither alternative is automatically
+safe to discard.
+
+\begin{examplebox}{A greedy path can miss the best document}
+Take $q=(0.6,0.5,0.4,0.3)$ and two documents: \texttt{0111} and \texttt{1000}.
+The first has penalty $0.6$ and score $0.6$. The second has penalty $1.2$ and score $-0.6$.
+A greedy choice of the matching first bit selects \texttt{1000} and misses the better document.
+The largest individual weight is smaller than the sum of several remaining weights.
+\end{examplebox}
+
+\subsection{A bound makes branching safe}
+Let a node have accumulated penalty $p$ on coordinates already tested. Untested coordinates
+cannot contribute a negative mismatch penalty. Consequently,
+\begin{equation}
+U(\text{node})=A-2p
+\label{eq:branch-bound}
+\end{equation}
+is an upper bound on every active document's final score. If the result heap is full and
+$U$ is strictly below its worst retained score, that node cannot improve the result.
+For equal scores, keep searching unless the ID tie rule is also certified.
+
+The \textbf{frontier} is the collection of pending nodes. A best-first search takes the node
+with the largest upper bound, or equivalently the smallest penalty. The bound is optimistic:
+it may describe a sign combination that no actual document can achieve. A weak bound can keep
+many nodes alive even though none ultimately improves the answer.
+
+\begin{lstlisting}[caption={Dense bitplane search across the selected clusters.}]
+SearchBitplanes(q, selected_clusters, eligible, table, R, L, B_node):
+    order = coordinates sorted by decreasing abs(q[i])
+    frontier = empty min-penalty priority queue
+    best = empty top-R heap
+    for each selected cluster j:
+        active = bitmap of eligible rows, with physical width W[j]
+        if active is not empty:
+            frontier.push(j, depth=0, penalty=0, active)
+    visits = 0
+    while frontier is not empty:
+        if best is full and best_possible(frontier) < best.worst_score:
+            break
+        if a finite B_node is set and visits == B_node:
+            break
+        node = frontier.pop_smallest_penalty()
+        visits += 1
+        if node.count <= L or node.depth == d:
+            for word in node.active:             # includes zero words
+                for each set bit in word:
+                    score its document and offer it to best
+            continue
+        i = order[node.depth]
+        matching = active AND preferred_sign_plane(j, i, q)
+        opposite = active AND NOT preferred_sign_plane(j, i, q)
+        queue nonempty matching child with the same penalty
+        queue nonempty opposite child with penalty + abs(q[i])
+    return best
+\end{lstlisting}
+$L$ is the leaf-size threshold and $B_{\rm node}$ the total node budget across all probes.
+An unlimited budget permits exact termination by bounds; a finite budget can stop before the
+remaining nodes are safely ruled out. A random exploration probability changes which pending
+node is visited next. It is not a direct formula for recall or a synonym for the number of nodes.
+
+\subsection{Count split visits, leaf visits, and scored documents separately}
+For each selected cluster, let
+\[
+s_j=\text{visited split nodes},\quad
+\ell_j=\text{visited leaf nodes},\quad
+f_j=\text{documents fully scored}.
+\]
+Define $V=\sum_j(s_j+\ell_j)$ and $F=\sum_j f_j$. For a disjoint traversal without rescoring,
+$F\leq\Nelig$. A finite node budget gives $V\leq B_{\rm node}$, but does not determine $F$.
+The two principal bitmap counts are
+\begin{equation}
+U_{\rm split}=\sum_j s_j W_j,\qquad
+U_{\rm leaf}=\sum_j \ell_j W_j.
+\label{eq:bitmap-work}
+\end{equation}
+A split word in the reference implementation reads an active word and a plane word, produces
+two child words, and counts matches. It includes two ANDs, a population count, complements and
+an accumulation. Allocating zero-filled child arrays can add two initialization writes.
+A leaf still scans all words in its active bitmap before enumerating set bits.
+
+With separate effective coefficients,
+\begin{align}
+T_{B,\rm candidates}={}&T_{\rm order}+T_{\rm roots}
+ +U_{\rm split}c_{\rm split}+U_{\rm leaf}c_{\rm leafword}
+ +V c_{\rm node} \notag\\
+ &+F G c_{\rm lut,leaf}+H_s(F,R)c_{\rm heap}+T_{\rm rank}(R),
+\label{eq:branch-time}\\
+\boxed{T_B=\Tcommon+T_{B,\rm candidates}+\Tfinish(R').}
+\end{align}
+Here $T_{\rm order}=O(d\log d)$ and $T_{\rm roots}=O(\sum_jW_j)$ for dense root construction.
+$c_{\rm node}$ may be replaced by explicit queue-comparison, mask-allocation and copy terms.
+Use one convention consistently; do not charge an allocation twice.
+
+\subsection{The full-width cost is the important hidden term}
+\begin{examplebox}{Few scores do not imply little work}
+In the saved one-million-document run, $w=64$ gives $W=15{,}625$. A node budget of $32{,}768$
+produced a mean $22{,}557.88$ split visits and $10{,}210.12$ leaf visits. Therefore
+\[
+U_{\rm split}=352{,}466{,}875,\quad U_{\rm leaf}=159{,}533{,}125.
+\]
+Their sum is 512 million word-loop visits. About $163{,}766$ documents were fully scored.
+With $g=4$, that is 10.48 million score-table terms, versus 64 million terms for the scan.
+The reduction in scoring was real, but it came with hundreds of millions of bitmap visits.
+Word visits and score-table terms are not equal-cost instructions.
+\end{examplebox}
+
+If a tree were fully explored, perfectly balanced, and every internal node had two nonempty
+children, then with $L$ documents per leaf there would be roughly $n_j/L$ leaves and one fewer
+split. This gives a dense bitmap term of order
+\begin{equation}
+O\!\left(\sum_j\frac{n_j^2}{Lw}\right).
+\label{eq:balanced-branch}
+\end{equation}
+This is an explanatory idealization, not a predictor for real embeddings. Fixed-bit splits can
+have only one nonempty child. A finite traversal also leaves unvisited nodes. Thus the actual
+split count need not be half the visited-node count.
+
+A single greedy path visits only about $\log_2(n_j/L)$ levels in a balanced example, but still
+pays a full $W_j$ at each level and has no general recall guarantee. In the broad worst case,
+a fixed-coordinate trie can contain $O(n_jd)$ nonempty prefix nodes, making dense traversal
+work as large as $O(d\sum_j n_j^2/w)$ before scoring and queue costs. Growing $N$ alone does
+not guarantee that branching will overtake a scan.
+
+\subsection{Peak query RAM: the pending masks matter}
+Let $\mathcal F(t)$ be the frontier at time $t$, and let $j(v)$ identify a node's cluster.
+If a node record needs $b_{\rm node}$ bytes and bitmap capacity is fully allocated,
+\begin{equation}
+Q_{B,\rm frontier}(t)=\sum_{v\in\mathcal F(t)}(b_{\rm node}+b_wW_{j(v)}).
+\label{eq:frontier-memory}
+\end{equation}
+Capacity growth and allocator overhead can be represented by a factor $\gamma_B\geq1$ or,
+preferably, by measured capacities. During a split, the parent and newly allocated children
+can coexist. A conservative candidate-stage expression is
+\begin{equation}
+Q_{B,\rm search}=\Qbase+Q_{\rm order}
+ +\max_t\left[\gamma_B Q_{B,\rm frontier}(t)+Q_{\rm current}(t)+Q_{\rm children}(t)\right].
+\label{eq:branch-ram}
+\end{equation}
+For nonempty, disjoint pending sets, frontier count is at most $\Nelig$. Starting with at most
+$P$ roots, each processed binary split can increase that count by at most one, so a finite
+budget also gives $|\mathcal F|\leq P+B_{\rm node}$. Multiplying that bound by the largest
+possible mask is conservative and can be very loose. It should not be reported as measured RAM.
+
+\begin{resultbox}{When Approach B can help}
+B can help when it avoids enough full scoring to repay the bitmap, queue and allocation work.
+Useful conditions include strong early query penalties, small physical bitmaps, tight score
+bounds and a modest live frontier. Unlimited search is exact inside the selected pool under
+valid bounds and ties. Budget-limited search needs measured recall; its budget is not itself
+an accuracy percentage.
+\end{resultbox}

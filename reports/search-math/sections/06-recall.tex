@@ -1,0 +1,279 @@
+\section{Deriving recall without assuming the answer}
+\label{sec:recall}
+The work formulas require counts such as visited nodes, retrieved postings and scored rows.
+They do not, by themselves, give recall. Recall depends on \emph{which} rows survive and on the
+reference ranking. This section starts with an exact definition, then adds assumptions one at
+a time so their consequences can be checked.
+
+\subsection{The exact measured definition}
+Let $\mathcal E(q)$ be the eligible document set after the intended filter, across the whole
+database. Let $\mathcal G_K(q)$ be its exact top $K$ under the chosen reference score, and let
+$\mathcal R_K(q)$ be the returned results. Then
+\begin{equation}
+\operatorname{Recall@}K(q)=
+\frac{|\mathcal G_K(q)\cap\mathcal R_K(q)|}{K}.
+\label{eq:recall-exact}
+\end{equation}
+Use the same tie rule in both sets. Average this quantity over queries. Repeating one query
+for timing does not create new independent quality observations.
+
+If a candidate set $\mathcal D(q)$ is reranked with the \emph{same exact reference score}, every
+true top-$K$ document in that set survives into the final top $K$. Therefore
+\begin{equation}
+\operatorname{Recall@}K(q)=\frac{|\mathcal G_K(q)\cap\mathcal D(q)|}{K}.
+\label{eq:candidate-recall}
+\end{equation}
+A different reranking score breaks that identity. In particular, exact binary candidates may
+still miss the true float-vector top $K$ or the documents relevant to a human question.
+
+\subsection{Separate routing loss from candidate-search loss}
+Let $\mathcal U(q)$ be the eligible pool in the probed clusters. Define
+\[
+r_{\rm route}(q)=\frac{|\mathcal G_K(q)\cap\mathcal U(q)|}{K},\qquad
+r_{\rm local}(q)=\frac{|\mathcal G_K(q)\cap\mathcal D(q)|}
+ {|\mathcal G_K(q)\cap\mathcal U(q)|}.
+\]
+When the denominator is positive and $\mathcal D\subseteq\mathcal U$,
+\begin{equation}
+\operatorname{Recall@}K(q)=r_{\rm route}(q)r_{\rm local}(q).
+\label{eq:recall-stages}
+\end{equation}
+If no true top-$K$ result enters the selected pool, total recall is zero. This factorization is
+exact when both factors refer to the \emph{same true global neighbors}. However, multiplying
+an average routing recall by an average local recall is generally wrong:
+\[
+\E[r_{\rm route}r_{\rm local}]
+=\E[r_{\rm route}]\E[r_{\rm local}]+\Cov(r_{\rm route},r_{\rm local}).
+\]
+Nor is recall against a cluster's own local top $K$ automatically the same as recall for the
+particular global neighbors routed into it. That distinction matters when transferring the
+flat-pool branch measurements into a clustered model.
+
+For A, local binary search is exact. For unlimited B with valid bounds, it is exact as well.
+For full-key C with complete weighted ordering, it is exact. Their global recall can still
+be limited by routing. Finite node budgets and short-key quotas add a second possible loss.
+
+\subsection{A deterministic error bound for a short prefix}
+Split the full score into retained and omitted coordinates:
+\begin{equation}
+S=T_h+Z_h,\qquad T_h=\sum_{i\in I_h}q_i b_i,\qquad
+Z_h=\sum_{i\notin I_h}q_i b_i.
+\end{equation}
+Because $b_i\in\{-1,+1\}$,
+\begin{equation}
+|Z_h|\leq A_{\rm tail}=\sum_{i\notin I_h}|q_i|.
+\label{eq:tail-error}
+\end{equation}
+Two documents can reverse their prefix order if the omitted contributions overcome their
+prefix score difference. A prefix gap greater than $2A_{\rm tail}$ is sufficient to preserve
+that pair's order. This is a sufficient bound, not a typical-error estimate.
+
+A more useful query-time certificate compares the best unseen prefix score plus
+$A_{\rm tail}$ with the worst fully scored retained result, as in Equation~\eqref{eq:prefix-bound}.
+It adapts to the actual query. If the bound is too loose, more keys must be visited. Returning
+a fixed candidate count without checking that condition remains approximate.
+
+For float truncation, the analogous score error obeys Cauchy--Schwarz:
+\[
+|q_{\rm tail}^{\top}x_{\rm tail}|
+\leq \|q_{\rm tail}\|_2\|x_{\rm tail}\|_2.
+\]
+Truncation and binary quantization are separate approximations. Matryoshka training can improve
+the usefulness of prefixes, but it does not set either bound to zero or supply a universal
+recall percentage.
+
+\subsection{Random documents: what the independence assumption actually gives}
+The following distribution models first omit routing. When routing is added, retain the same global true-neighbor event or apply Equation~\eqref{eq:recall-stages}; replacing it with a different local top-$K$ event changes the question. Assume nonzero score variance when computing a correlation.
+
+First condition on a particular query $q$. Assume document signs are independent and equally
+likely to be $-1$ or $+1$. Then
+\begin{align}
+\E[S\mid q]&=0,&\Var(S\mid q)&=\sum_{i=1}^{d}q_i^2,\\
+\E[T_h\mid q]&=0,&\Var(T_h\mid q)&=\sum_{i\in I_h}q_i^2,\\
+\Cov(T_h,S\mid q)&=\Var(T_h\mid q).&&
+\end{align}
+Hence the score correlation is exactly
+\begin{equation}
+\rho_q=\Corr(T_h,S\mid q)=
+\sqrt{\frac{\sum_{i\in I_h}q_i^2}{\sum_{i=1}^{d}q_i^2}}.
+\label{eq:rho-independent}
+\end{equation}
+High retained variance is not the same as a small worst-case tail bound. Many small omitted coordinates can have a modest sum of squares but a large sum of absolute values. A useful approximate prefix can therefore still lack a cheap exactness certificate.
+
+The square root is important. Retaining a fraction $v$ of score variance gives correlation
+$\sqrt v$, not recall $v$ and not recall $\sqrt v$.
+
+\begin{examplebox}{Two random-data cases can have very different prefix recall}
+With equal coordinate variances, a 24-coordinate prefix of a 256-coordinate query retains
+roughly $24/256$ of expected score variance. If instead the first 24 coordinates are constructed
+to hold 80\% of expected score variance, their score is much more strongly correlated with the
+full score. The controlled measurements in Section~\ref{sec:evidence} test both cases. The
+second is a deliberately favorable distribution, not the definition of Matryoshka embeddings.
+\end{examplebox}
+
+If query coordinates are random normals $q_i\sim\mathcal N(0,\sigma_i^2)$, we can choose a
+variance profile $\sigma_i^2$. The ratio of \emph{expected} prefix and full variances is
+$\sum_{i\in I_h}\sigma_i^2/\sum_i\sigma_i^2$. For a specific sampled query, use its actual
+Equation~\eqref{eq:rho-independent}. The expectation of a ratio need not equal the ratio of
+expectations.
+
+\subsection{Real documents need a covariance model, not just a label}
+A covariance matrix records how coordinates vary together. Its diagonal entries are individual variances. An off-diagonal entry describes whether two coordinates tend to move together or in opposite directions. Independent, balanced signs have unit diagonal entries and zero off-diagonal entries.
+
+For a general binary document vector with mean $\mu$ and covariance matrix $\Sigma$, let
+$q_h$ be $q$ with omitted coordinates set to zero. Then
+\begin{equation}
+\rho_q=\frac{q_h^\top\Sigma q}
+ {\sqrt{(q_h^\top\Sigma q_h)(q^\top\Sigma q)}}.
+\label{eq:rho-covariance}
+\end{equation}
+This includes dependencies between coordinates. Conditioning on a cluster or filter can
+change both $\mu$ and $\Sigma$. A covariance measured globally is not automatically the
+conditional covariance inside the query's selected clusters.
+
+A learned prefix may preserve ranking information through these dependencies even when its
+raw coordinate-energy share is small. Conversely, a prefix can have considerable energy and
+still fail to identify the extreme nearest neighbors. Estimating covariance also does not
+prove a normal distribution in the tails.
+
+\subsection{Equal-weight mistakes lead to a binomial model}
+Let $X_i=\ind[b_i\ne t_i]$. If the $X_i$ are independent with the same disagreement probability
+$p$, and all relevant weights equal $a$, then a mismatch count over $h$ coordinates satisfies
+\begin{equation}
+M_h=\sum_{i=1}^{h}X_i\sim\operatorname{Binomial}(h,p),\qquad
+\pi_h=aM_h.
+\label{eq:binomial}
+\end{equation}
+A Hamming radius $r$ visits
+\begin{equation}
+V_h(r)=\sum_{u=0}^{r}\binom{h}{u}
+\label{eq:hamming-volume}
+\end{equation}
+keys, and its expected candidate population is
+\begin{equation}
+N_*\,\Pr(M_h\leq r)
+=N_*\sum_{u=0}^{r}\binom{h}{u}p^u(1-p)^{h-u}.
+\label{eq:binomial-hits}
+\end{equation}
+Here $N_*$ is the relevant reference pool size; it is $N$ without filters or cluster restriction.
+Equation~\eqref{eq:binomial-hits} is a candidate-count model, not yet recall.
+
+If $p=1/2$, every key has equal probability and the expected count reduces to $N_*V_h(r)/2^h$.
+Different $p_i$ with equal weights give a Poisson-binomial count. Unequal weights give a
+weighted Bernoulli sum. Neither is described by one ordinary binomial with an average $p$.
+
+\subsection{Derive recall by asking which true neighbors pass}
+Write $F_X(x)=\Pr(X\leq x)$ for a cumulative distribution function (CDF): the probability that $X$ is at or below a threshold.
+
+Let $A_h$ be the prefix penalty and $B_h$ the omitted-coordinate penalty. Full penalty is
+$A_h+B_h$. Under coordinate independence, the two sums are independent. Let $u$ define the
+true full-score tail, and let $v$ be the candidate prefix-penalty threshold. Then
+\begin{equation}
+r_{\rm population}(u,v)=
+\frac{\Pr(A_h\leq v,\ A_h+B_h\leq u)}{\Pr(A_h+B_h\leq u)}
+=\frac{\displaystyle\int_{a\leq v}F_{B_h}(u-a)\,dF_{A_h}(a)}
+ {F_{A_h+B_h}(u)}.
+\label{eq:population-recall}
+\end{equation}
+Read the numerator as a weighted sum: for each allowed prefix penalty, ask whether the remaining coordinates fit within the full-score threshold, multiply by the probability of that prefix penalty, and add.
+
+This is the logic missing from a candidate-count-only calculation: a retrieved document counts
+toward recall only if it also belongs to the true full-score tail.
+
+For equal weights and an integer full radius $r_d$, the formula becomes
+\begin{equation}
+\frac{\displaystyle\sum_{u=0}^{\min(h,r_h,r_d)}
+ \binom{h}{u}p^u(1-p)^{h-u}
+ F_{\operatorname{Bin}(d-h,p)}(r_d-u)}
+ {F_{\operatorname{Bin}(d,p)}(r_d)}.
+\label{eq:binomial-recall}
+\end{equation}
+This is exact for the stated population events. Choosing those radii to approximate top $K$
+and a candidate budget is another step. Finite-sample ranks and score ties need care.
+
+\begin{examplebox}{Candidate fraction is not recall}
+Use all 64 six-bit codes as documents and an all-positive equal-weight query. The best seven
+codes have zero or one mistake. Keep only codes matching the first two query bits: 16 codes
+pass, so the candidate fraction is $16/64=25\%$. Five of the true seven pass: the ideal code
+and the four codes whose one error is in an omitted coordinate. Recall is $5/7$, about 71.4\%,
+not 25\%. Allowing one error in the two-bit prefix retrieves 48 codes and includes all seven.
+Both numbers follow by counting the same true-neighbor event.
+\end{examplebox}
+
+\subsection{Unequal query weights: count weighted subsets}
+For a fixed query and lookup coordinates $I_h$, define
+\begin{equation}
+V_q(v)=\#\left\{S\subseteq I_h:\sum_{i\in S}|q_i|\leq v\right\}.
+\label{eq:weighted-volume}
+\end{equation}
+This counts every attempted key through threshold $v$, whether occupied or empty. Under
+independent uniform keys, expected candidates are $N_*V_q(v)/2^h$. With real key probabilities,
+\begin{equation}
+\E[F(v)\mid q]=N_*\sum_{k:\pi_q(k)\leq v}\Pr(\text{key}=k\mid q,\text{cluster},\text{filter}).
+\label{eq:general-hits}
+\end{equation}
+For a clustered lookup, apply Equation~\eqref{eq:general-hits} separately with pool size $e_j$ and the conditional key distribution in cluster $j$, then sum the results.
+
+An average bit-disagreement rate is insufficient to determine these joint probabilities.
+The empty-key count $V_q$ and occupied candidate count $F$ are separate inputs to the latency
+formula. A dense document distribution near the query key can make $F$ large while $V_q$
+remains small; a sparse key space can do the reverse.
+
+For small $h$, split weights in two, enumerate each half's subset sums, sort one list, and
+count pairs whose sum is at most $v$. This meet-in-the-middle calculation uses roughly
+$O(2^{h/2})$ memory and $O(h2^{h/2})$ sorting/search work. It is an analysis tool for counting
+keys, not the measured latency of an online hash enumerator.
+
+For quantized nonnegative integer weights $a_i$, a dynamic program computes probability mass:
+\begin{equation}
+f_{i}(s)=(1-p_i)f_{i-1}(s)+p_i f_{i-1}(s-a_i).
+\label{eq:dp}
+\end{equation}
+Replacing probabilities by counts and adding both predecessor counts computes key volumes.
+This is exact for the quantized-weight model. It does not silently become an exact calculation
+for unquantized query weights. If score quantization incurs a uniform score error at most
+$\epsilon$, a score gap greater than $2\epsilon$ is sufficient to preserve a pair's order.
+Otherwise candidates near the boundary need exact scoring or a safe expanded bound.
+
+\subsection{The conditional-normal approximation}
+For many small independent contributions, a joint-normal approximation for full and prefix
+scores can be convenient. Subtract each score's mean and divide by its standard deviation. This standardizes them to $(Z,Y)$ with correlation $\rho$. For a true
+fraction $a=K/N_*$ and selected candidate fraction $f$, set
+\[
+z_K=\Phi^{-1}(1-a),\qquad y_f=\Phi^{-1}(1-f),
+\]
+where $\Phi$ and $\phi$ are the standard normal CDF and density. The implied recall is
+\begin{equation}
+\widehat r=
+\frac{1}{a}\int_{z_K}^{\infty}
+\phi(z)\,\Phi\!\left(\frac{\rho z-y_f}{\sqrt{1-\rho^2}}\right)dz.
+\label{eq:normal-recall}
+\end{equation}
+We average over the \emph{entire} true tail. Substituting only $z=z_K$ calculates a boundary
+conditional probability, not the integral. When $\rho=0$, recall is $f$. In the limit of
+identical rankings, $\rho=1$, it is $\min(1,f/a)$, subject to ties.
+
+This formula is not valid simply because an embedding is called Matryoshka. A short weighted
+binary prefix has finite, discrete support. Its extreme-score distribution can differ greatly
+from a normal tail. At a billion documents, top-$K$ events may be far deeper in the tail than
+any small validation sample covers. Strong overall score correlation does not certify 99\% recall.
+
+The controlled study below fits score correlation on one query group and checks predicted
+recall on different queries. Even there, the real-data normal approximation misses by several
+percentage points. Such a model can generate hypotheses; it should not declare a real
+99\%-recall winner.
+
+\subsection{What can be concluded about the three methods}
+\begin{itemize}
+\item \textbf{A:} exact local scanning has no local candidate-search loss; global loss comes
+from routing, candidate/reranker score changes, and the declared filtering task.
+\item \textbf{B:} exact bound-based traversal has the same binary result as A on the same
+selected pool. Finite budgets require query-level measurements or a distribution model for
+visited nodes and surviving true neighbors. A node count alone is not enough.
+\item \textbf{C:} full keys with complete weighted ordering are exact locally. Short keys can
+be accurate when their ranking preserves true neighbors and the candidate budget is sufficient.
+That possibility should be measured, not dismissed. Their enumeration and posting costs remain
+separate from the recall benefit.
+\end{itemize}
+The exact empirical definition is always available. Distribution models explain mechanisms;
+validation determines where their numerical estimates are useful.

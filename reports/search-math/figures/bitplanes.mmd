@@ -1,0 +1,11 @@
+flowchart TB
+  R[Eligible root masks from selected clusters] --> P[Take the best pending node]
+  P -->|Bound cannot improve| D[Discard node]
+  P -->|Small active set| S[Scan leaf mask and score rows]
+  P -->|Split needed| X[Intersect with next bitplane]
+  X --> C[Queue both nonempty children]
+  D --> N{Continue within budget?}
+  S --> N
+  C --> N
+  N -->|Yes| P
+  N -->|No| O[Return current candidates]

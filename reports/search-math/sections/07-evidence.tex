@@ -1,0 +1,131 @@
+\section{What the existing measurements support}
+\label{sec:evidence}
+The purpose of these measurements is to check the reasoning, not to fit every equation until
+one method appears to win. The experiments have different scopes, so their numbers must not be
+merged into one unqualified performance claim.
+
+\subsection{The one-million-passage scaling study}
+The archived study used one flat cluster, a fixed 256-bit score, 100 binary candidates,
+leaf size 32, deterministic branching, cached query embeddings, and one CPU thread.
+There were 100 validation queries for selecting configurations and 200 held-out test queries,
+with three timing repeats. It covered pools from 1,000 to one million real MS MARCO passages.
+
+\begin{center}
+\begin{tabular}{@{}lrrr@{}}\toprule
+One-million-document test & Median latency & Binary recall & Fully scored rows\\\midrule
+Packed scan & 25.14 ms & 100\% & 1,000,000\\
+Branch, budget 32,768 & 244.98 ms & 99.26\% & about 163,766\\
+Unlimited branch & 1,068.84 ms & 100\% & about 999,961\\\bottomrule
+\end{tabular}
+\end{center}
+The branch reduced scoring at the finite budget, but did not win at matched target recall.
+The whole study found no median or p95 crossover among the tested 95\% and 99\% target settings.
+This conclusion belongs to that implementation, dataset, hardware and grid. It is not a theorem
+that every bitplane representation loses.
+
+The original implementation uses dense active masks for every node. Its measured split-word
+counter omits leaf reads, which must be derived from the visited-node counts and cluster widths.
+The physical mask size at one million rows is $15{,}625\times8=125{,}000$ bytes. A frontier with
+20,000 such masks would contain 2.5 GB of masks alone. This example explains how query RAM can
+be much larger than the packed-code payload; it is not a claimed observed frontier count.
+
+The source summary is
+\path{results/scaling-msmarco-1m/analysis/settings.csv}. Full run metadata and the validation
+protocol live beside it. The report's verification script checks the numerical rows quoted here.
+
+\subsection{The FiQA study asked a broader pipeline question}
+The denser FiQA run used 57,638 documents and 648 queries, with 583 settings including random
+seeds. Its timings include routing, binary candidate search and float reranking, with embeddings
+cached. Its quality measures include float Recall@10 and nDCG@10, rather than the scaling study's
+binary Recall@100.
+
+\begin{center}\small
+\begin{tabular}{@{}lrrrr@{}}\toprule
+Method & Probes & Node budget & Median ms & Float Recall@10\\\midrule
+Sign-route binary scan & 16 & -- & 0.7524 & 0.6784\\
+Sign-route branch & 32 & 2,048 & 0.6256 & 0.7006\\
+Sign-route branch & 64 & 2,048 & 0.6466 & 0.7062\\
+Float IVF reference & 8 & -- & 0.1661 & 0.9127\\\bottomrule
+\end{tabular}\normalsize\end{center}
+These selected examples show that probing more clusters with limited work inside them can be
+a useful combined tradeoff. They do not isolate traversal efficiency: the selected pools differ.
+Within the same selected buckets, unlimited branching was slower than scanning. The float IVF
+row uses a different scorer and was a strong practical reference in that experiment.
+
+Random exploration at probability 0.1 did not show a consistent improvement. Its purpose is to
+change visit order; it does not provide a mathematical guarantee of higher recall. The full
+FiQA report retains losing configurations, empty returns, and the relevant measurement scope.
+Its source is \path{results/fiqa-2026-09-09-dense/README.md} and the accompanying data.
+
+\subsection{A new controlled check of the 24-bit prefix}
+The small quality study used the same full weighted-binary score and row-ID tie rule for all
+methods. There was no outer routing: $C=P=1$. Two synthetic datasets had 20,000 random binary
+documents. The real-data case used the first 100,000 rows of the cached Nomic/MS MARCO sample.
+All cases used $d=256$ and $h=24$.
+
+One synthetic query distribution gave all coordinates equal variance. The other multiplied the
+first 24 coordinates so that they held 80\% of \emph{expected} full-score variance. It was a
+controlled favorable case for a prefix, not a model of what Matryoshka always does.
+
+For each case, 16 queries estimated a score correlation and 16 different queries checked the
+normal-model prediction. The native full scan agreed with an independent exact score sort on
+all 96 query references. The short-key candidate set included all documents in keys tied at
+the final prefix threshold, then used the exact full score to keep the top 100.
+
+\begin{center}\small
+\begin{tabular}{@{}lrrrr@{}}\toprule
+Data, candidate target & Measured recall & Normal prediction & Gap & Median keys\\\midrule
+Random equal variance, 1,000 & 23.00\% & 21.84\% & $-1.16$ pp & 846,156\\
+Strong prefix, 1,000 & 95.00\% & 97.01\% & $+2.01$ pp & 846,156\\
+Cached Nomic, 1,000 & 25.25\% & 17.41\% & $-7.84$ pp & 6,976\\
+Cached Nomic, 5,000 & 52.13\% & 42.57\% & $-9.56$ pp & 35,504\\
+Cached Nomic, 10,000 & 66.19\% & 58.46\% & $-7.73$ pp & 78,370\\\bottomrule
+\end{tabular}\normalsize\end{center}
+``Gap'' is prediction minus measurement in percentage points. Values are rounded from the
+per-query evidence. The identical synthetic key counts are expected: the strong-prefix case
+scales all first-24 query weights by the same factor, which changes neither their key order nor
+the prefix candidate sets. It changes their importance in the \emph{full} score.
+
+These results support two different conclusions. First, a short prefix is not inherently
+inaccurate: the constructed favorable case reaches 95\% recall with 1,000 candidates.
+Second, a simple statistical prediction can still miss real recall by several points. An
+error of that size is unacceptable as a certificate of a 99\% recall target.
+
+\fig{recall-validation}{Measured short-key recall versus the checked normal approximation. Each panel has its own explicitly stated document population.}{1}
+
+The key counts were calculated from the actual query weights by meet-in-the-middle counting,
+including empty keys. The candidate set was constructed using an exhaustive prefix-score
+calculation for quality evaluation. \textbf{That computation is not an implemented hash-search
+latency benchmark.} Its wall time must not be plotted as the latency of Approach C.
+
+In the same favorable synthetic case, native B at budget 512 recovered about 99.38\% of the
+binary top 100 while fully scoring about 4,122 documents on average. In the real-data case,
+B reached about 58.06\%, 86.56\% and 99.56\% at budgets 512, 2,048 and 8,192. These are quality
+and work observations for a flat pool with a 1,000-candidate heap. They do not establish a
+latency ranking between an implemented native B and a hypothetical C.
+
+\subsection{What was not validated}
+The study does not validate:
+\begin{itemize}
+\item real recall at a billion documents;
+\item a routing-recall model across arbitrary cluster counts;
+\item a normal tail for every query or a fixed percentage of Matryoshka prefix information;
+\item a concrete hash enumerator's timing, peak queue size, or SIMD speed;
+\item float-vector recall, human relevance, or final answer accuracy from binary recall alone.
+\end{itemize}
+The supplied calculator notes mixed float top-100 references at different dimensions with the
+binary-score reference. That mismatch cannot validate one common recall curve. The new report
+uses the same binary truth where it makes direct index comparisons and labels the other evidence.
+
+\subsection{How to extend the checks fairly}
+Freeze the representation, query set, filtering task and reference score first. Tune on one
+query set; check selected configurations on a different one. For every method, retain failures
+and empty returns, and record counts as well as times. For C, implement the actual enumerator
+before claiming its measured latency. For B, record split words, leaf words, documents scored
+and peak frontier memory separately.
+
+At each target recall, compare measured latency quantiles using configurations that actually
+reach that target. Use the same query population and report the uncertainty of quality estimates.
+Query-level resampling is appropriate; counting repeated timings as independent quality samples
+is not. A few measured cases are useful evidence about mechanisms, not a complete characterization
+of every data distribution.

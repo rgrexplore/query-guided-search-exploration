@@ -1,0 +1,12 @@
+flowchart TB
+  Q[Query text] --> E[Embed and prepare prefixes]
+  E --> R[Route to selected clusters]
+  R --> F[Apply the same eligibility filter]
+  F --> A[A: scan selected rows]
+  F --> B[B: traverse bitplanes]
+  F --> C[C: enumerate lookup keys]
+  A --> K[Keep binary candidates]
+  B --> K
+  C --> K
+  K --> V[Optional longer-vector rerank]
+  V --> O[Return top K documents]
