@@ -24,9 +24,7 @@ seed = 42
 
 [tuning]
 targets = [0.95, 0.99]
-initial_budgets = [32, 128, 512, 2048, 8192, 32768]
-max_budget = 262144
-refinement_rounds = 3
+node_budgets = [32, 128, 512, 2048, 8192, 32768, 65536, 131072, 262144, 0]
 
 [measurement]
 repetitions = 3
@@ -36,8 +34,5 @@ bootstrap_samples = 1000
 bootstrap_seed = 45
 
 [limits]
-setup_seconds = 120
-query_seconds = 10
-attempt_seconds = 1800
+case_seconds = 1800
 rss_gib = 32
-poll_seconds = 0.1
