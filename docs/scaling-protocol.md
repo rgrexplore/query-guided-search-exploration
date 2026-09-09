@@ -1,7 +1,7 @@
 <!--
 Reviewed source: /Users/vinroger/DATA/STUDY/latihan/docs/superpowers/plans/2026-09-09-bitplane-scaling-spec.md
 Source SHA256: 9874eed1302644d2a77f3e35b625f3ec1554f553795d6534c55575d2f1307bcd
-This committed copy is the complete protocol. The source path is provenance only.
+This is an adapted public copy with unchanged experimental requirements. The source path is provenance only.
 -->
 
 # Bitplane search scaling study
@@ -10,7 +10,7 @@ This committed copy is the complete protocol. The source path is provenance only
 **Scope:** The existing packed scan and bitplane branching engines, on real text vectors through one million passages.  
 **Code baseline:** `63ac9467d74e7c457eeb863f279fd337802f86d6` in `/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project`.
 
-This specification records the agreed direction: matched recall plus an exact reference, up to one million MS MARCO passages, with no semantic routing in the first experiment. It replaces the earlier draft stage-one document in `AGENT_MEMORY/plans/`. GPU kernels, a replacement bitplane algorithm and deeper routing remain later decisions. This document specifies work; it does not report new measurements.
+This specification records the agreed direction: matched recall plus an exact reference, up to one million MS MARCO passages, with no semantic routing in the first experiment. GPU kernels, a replacement bitplane algorithm and deeper routing remain later decisions. This document specifies work; it does not report new measurements.
 
 ## 1. The question
 
@@ -184,11 +184,7 @@ For semantic confirmation, select a full BEIR component rather than presenting a
 - [ColBERTv2 Figure 3 / Appendix C](https://aclanthology.org/2022.naacl-main.272.pdf#page=16): a relevant example of probes/bits/candidates versus latency and quality; its different model/hardware are not our results.
 - [ANN-Benchmarks paper](https://arxiv.org/abs/1807.05614) and [provided vector/neighbor files](https://github.com/erikbern/ann-benchmarks/blob/main/README.md). The historical harness is no longer actively maintained; its data are optional references.
 
-## 13. Delivery boundary
-
-Canonical spec, contract and implementation plan live in `/Users/vinroger/DATA/STUDY/latihan/docs/superpowers/plans/` as requested. This parent folder is outside the standalone Git repository. During implementation, commit a copy of the reviewed spec as `docs/scaling-protocol.md` inside that repository, with the source document hash recorded. Keep memory as a pointer to the canonical documents. Do not initialize a Git repository over the whole workspace just to commit these plans.
-
-## 14. Implemented shared boundary
+## 13. Implemented shared boundary
 
 `scaling_config.py` is the shared reader for configuration and worker case files:
 

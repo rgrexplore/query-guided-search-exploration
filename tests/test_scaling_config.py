@@ -57,7 +57,9 @@ EXPECTED_CONFIG = {
 
 def changed_config(tmp_path, old, new):
     path = tmp_path / "changed.toml"
-    path.write_text(Path("scaling.toml").read_text().replace(old, new))
+    original = Path("scaling.toml").read_text()
+    assert old in original, f"Test setup could not find {old!r} in scaling.toml"
+    path.write_text(original.replace(old, new))
     return path
 
 
