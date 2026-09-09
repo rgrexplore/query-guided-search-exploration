@@ -1,0 +1,428 @@
+{
+  "run_fingerprint": "9f26939fa8a2a241946cae6bd948b85902e32c8b389a4c2bc168fcb35858c454",
+  "provenance": {
+    "git_commit": "f5e1bc8ea8a2790a003e0ffa559e92205200bfcc",
+    "hardware": {
+      "cpu_count": 18,
+      "machine": "arm64",
+      "platform": "macOS-26.3.2-arm64-arm-64bit",
+      "processor": "arm"
+    },
+    "initial_power": {
+      "mode": "powermode=2",
+      "source": "AC Power"
+    },
+    "native_binary": {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.venv/lib/python3.12/site-packages/bitplane_index.cpython-312-darwin.so",
+      "sha256": "9fd1b355086aed5935b8edf8e2958ae9d3c1e467e6121a8e8bb6f1e9808b7801"
+    },
+    "packages": {
+      "numpy": "2.5.3",
+      "psutil": "7.2.2",
+      "python": "3.12.11",
+      "threadpoolctl": "3.6.0"
+    },
+    "protocol_sha256": "74f6fa5fd14c91519cf13f2789756f4b75391014c0ecf51389eee4a7bfa7b5a2",
+    "source_sha256": {
+      "cpp/bindings.cpp": "a2c394c1e3141f41c293544236c451c05f60d3485faee1662737b790c776098a",
+      "cpp/index.cpp": "7455b7163e2dbb545e27d6d475f998a12451a44c0e88a1dc0e8e939ec9ff5968",
+      "cpp/index.hpp": "bfb9b98dbcea36e7b4dce4c429a7b33f33271ba5809b536cf080d332348a667c",
+      "scaling.py": "8b4a97ea546706bafe64654b7ddeac76ba51d8c1f4fd9888d1f386e44d44aa48",
+      "scaling_analysis.py": "3f9a1ca16dc4560e3a1b0491dd1bbda03a5b29ff4c2ed17c4a97845a278f6d1f",
+      "scaling_config.py": "10adfc5fff38f081f82719d5ea28ae22d3c922f1e238b66ba434e8f1cfd50d88",
+      "scaling_worker.py": "229f435bbe4ace4322754f6df95baea2167d38c1f8ac26e3f9bd7fc8c76d6065"
+    }
+  },
+  "cases": [
+    {
+      "phase": "pilot",
+      "pool_size": 1000,
+      "method": "branch",
+      "node_budget": 0,
+      "completed_queries": 5,
+      "native_peak_rss_bytes": 34226176,
+      "sampled_peak_rss_bytes": 147456,
+      "setup_ms": 10.959541890770197,
+      "status": "complete",
+      "wall_ms": 12.583374977111816
+    },
+    {
+      "phase": "pilot",
+      "pool_size": 1000,
+      "method": "branch",
+      "node_budget": 512,
+      "completed_queries": 5,
+      "native_peak_rss_bytes": 34209792,
+      "sampled_peak_rss_bytes": 131072,
+      "setup_ms": 10.563832707703114,
+      "status": "complete",
+      "wall_ms": 11.75066689029336
+    },
+    {
+      "phase": "pilot",
+      "pool_size": 1000,
+      "method": "scan",
+      "node_budget": 0,
+      "completed_queries": 5,
+      "native_peak_rss_bytes": 34127872,
+      "sampled_peak_rss_bytes": 163840,
+      "setup_ms": 11.968917213380337,
+      "status": "complete",
+      "wall_ms": 13.766124844551086
+    },
+    {
+      "phase": "pilot",
+      "pool_size": 100000,
+      "method": "branch",
+      "node_budget": 0,
+      "completed_queries": 5,
+      "native_peak_rss_bytes": 79134720,
+      "sampled_peak_rss_bytes": 147456,
+      "setup_ms": 71.63554197177291,
+      "status": "complete",
+      "wall_ms": 201.81929180398583
+    },
+    {
+      "phase": "pilot",
+      "pool_size": 100000,
+      "method": "branch",
+      "node_budget": 512,
+      "completed_queries": 5,
+      "native_peak_rss_bytes": 53329920,
+      "sampled_peak_rss_bytes": 147456,
+      "setup_ms": 66.44145911559463,
+      "status": "complete",
+      "wall_ms": 71.40108291059732
+    },
+    {
+      "phase": "pilot",
+      "pool_size": 100000,
+      "method": "scan",
+      "node_budget": 0,
+      "completed_queries": 5,
+      "native_peak_rss_bytes": 47923200,
+      "sampled_peak_rss_bytes": 147456,
+      "setup_ms": 65.4103746637702,
+      "status": "complete",
+      "wall_ms": 86.22195804491639
+    },
+    {
+      "phase": "pilot",
+      "pool_size": 1000000,
+      "method": "branch",
+      "node_budget": 0,
+      "completed_queries": 5,
+      "native_peak_rss_bytes": 2483372032,
+      "sampled_peak_rss_bytes": 2472574976,
+      "setup_ms": 568.1363749317825,
+      "status": "complete",
+      "wall_ms": 9236.209124792367
+    },
+    {
+      "phase": "pilot",
+      "pool_size": 1000000,
+      "method": "branch",
+      "node_budget": 512,
+      "completed_queries": 5,
+      "native_peak_rss_bytes": 224591872,
+      "sampled_peak_rss_bytes": 170311680,
+      "setup_ms": 569.3329158239067,
+      "status": "complete",
+      "wall_ms": 604.7656671144068
+    },
+    {
+      "phase": "pilot",
+      "pool_size": 1000000,
+      "method": "scan",
+      "node_budget": 0,
+      "completed_queries": 5,
+      "native_peak_rss_bytes": 170868736,
+      "sampled_peak_rss_bytes": 170852352,
+      "setup_ms": 555.6184998713434,
+      "status": "complete",
+      "wall_ms": 757.7621666714549
+    },
+    {
+      "phase": "reference",
+      "pool_size": 1000,
+      "method": "scan",
+      "node_budget": 0,
+      "completed_queries": 300,
+      "native_peak_rss_bytes": 36847616,
+      "sampled_peak_rss_bytes": 180224,
+      "setup_ms": 171.84212524443865,
+      "status": "complete",
+      "wall_ms": 207.72687485441566,
+      "verification": {
+        "candidate_limit": 100,
+        "checked_documents": 1000,
+        "checked_queries": 5,
+        "dimensions": 256,
+        "near_boundary_ambiguities": 0,
+        "status": "pass"
+      }
+    },
+    {
+      "phase": "reference",
+      "pool_size": 10000,
+      "method": "scan",
+      "node_budget": 0,
+      "completed_queries": 300,
+      "native_peak_rss_bytes": 38453248,
+      "sampled_peak_rss_bytes": 35880960,
+      "setup_ms": 175.37449998781085,
+      "status": "complete",
+      "wall_ms": 282.2882919572294,
+      "verification": {
+        "candidate_limit": 100,
+        "checked_documents": 1000,
+        "checked_queries": 5,
+        "dimensions": 256,
+        "near_boundary_ambiguities": 0,
+        "status": "pass"
+      }
+    },
+    {
+      "phase": "reference",
+      "pool_size": 100000,
+      "method": "scan",
+      "node_budget": 0,
+      "completed_queries": 300,
+      "native_peak_rss_bytes": 50806784,
+      "sampled_peak_rss_bytes": 50429952,
+      "setup_ms": 222.00033301487565,
+      "status": "complete",
+      "wall_ms": 1029.7636250033975,
+      "verification": {
+        "candidate_limit": 100,
+        "checked_documents": 1000,
+        "checked_queries": 5,
+        "dimensions": 256,
+        "near_boundary_ambiguities": 0,
+        "status": "pass"
+      }
+    },
+    {
+      "phase": "reference",
+      "pool_size": 1000000,
+      "method": "scan",
+      "node_budget": 0,
+      "completed_queries": 300,
+      "native_peak_rss_bytes": 175783936,
+      "sampled_peak_rss_bytes": 175505408,
+      "setup_ms": 724.1405001841486,
+      "status": "complete",
+      "wall_ms": 8183.387250173837,
+      "verification": {
+        "candidate_limit": 100,
+        "checked_documents": 1000,
+        "checked_queries": 5,
+        "dimensions": 256,
+        "near_boundary_ambiguities": 0,
+        "status": "pass"
+      }
+    },
+    {
+      "phase": "reference",
+      "pool_size": 3000,
+      "method": "scan",
+      "node_budget": 0,
+      "completed_queries": 300,
+      "native_peak_rss_bytes": 37552128,
+      "sampled_peak_rss_bytes": 36356096,
+      "setup_ms": 168.02349966019392,
+      "status": "complete",
+      "wall_ms": 218.27600011602044,
+      "verification": {
+        "candidate_limit": 100,
+        "checked_documents": 1000,
+        "checked_queries": 5,
+        "dimensions": 256,
+        "near_boundary_ambiguities": 0,
+        "status": "pass"
+      }
+    },
+    {
+      "phase": "reference",
+      "pool_size": 30000,
+      "method": "scan",
+      "node_budget": 0,
+      "completed_queries": 300,
+      "native_peak_rss_bytes": 40271872,
+      "sampled_peak_rss_bytes": 37339136,
+      "setup_ms": 190.94441691413522,
+      "status": "complete",
+      "wall_ms": 450.4678752273321,
+      "verification": {
+        "candidate_limit": 100,
+        "checked_documents": 1000,
+        "checked_queries": 5,
+        "dimensions": 256,
+        "near_boundary_ambiguities": 0,
+        "status": "pass"
+      }
+    },
+    {
+      "phase": "reference",
+      "pool_size": 300000,
+      "method": "scan",
+      "node_budget": 0,
+      "completed_queries": 300,
+      "native_peak_rss_bytes": 84426752,
+      "sampled_peak_rss_bytes": 84017152,
+      "setup_ms": 326.4664588496089,
+      "status": "complete",
+      "wall_ms": 2615.423292387277,
+      "verification": {
+        "candidate_limit": 100,
+        "checked_documents": 1000,
+        "checked_queries": 5,
+        "dimensions": 256,
+        "near_boundary_ambiguities": 0,
+        "status": "pass"
+      }
+    }
+  ],
+  "power_observations": [
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:16.342873+00:00",
+      "phase": "reference",
+      "point": "start",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:16.369259+00:00",
+      "phase": "reference",
+      "point": "before_case",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:16.919510+00:00",
+      "phase": "reference",
+      "point": "before_case",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:17.474885+00:00",
+      "phase": "reference",
+      "point": "before_case",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:18.026985+00:00",
+      "phase": "reference",
+      "point": "before_case",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:18.576817+00:00",
+      "phase": "reference",
+      "point": "before_case",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:19.902156+00:00",
+      "phase": "reference",
+      "point": "before_case",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:22.750050+00:00",
+      "phase": "reference",
+      "point": "before_case",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:31.188910+00:00",
+      "phase": "reference",
+      "point": "end",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:31.219580+00:00",
+      "phase": "pilot",
+      "point": "start",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:31.247525+00:00",
+      "phase": "pilot",
+      "point": "before_case",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:31.537749+00:00",
+      "phase": "pilot",
+      "point": "before_case",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:31.839080+00:00",
+      "phase": "pilot",
+      "point": "before_case",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:41.312718+00:00",
+      "phase": "pilot",
+      "point": "before_case",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:42.115078+00:00",
+      "phase": "pilot",
+      "point": "before_case",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:43.170066+00:00",
+      "phase": "pilot",
+      "point": "before_case",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:43.477543+00:00",
+      "phase": "pilot",
+      "point": "before_case",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:43.783670+00:00",
+      "phase": "pilot",
+      "point": "before_case",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:44.075733+00:00",
+      "phase": "pilot",
+      "point": "before_case",
+      "source": "AC Power"
+    },
+    {
+      "mode": "powermode=2",
+      "observed_at": "2026-09-09T12:13:44.373114+00:00",
+      "phase": "pilot",
+      "point": "end",
+      "source": "AC Power"
+    }
+  ]
+}
