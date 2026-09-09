@@ -1,0 +1,23 @@
+{
+  "status": "pass",
+  "cases_by_phase": {
+    "reference": 7,
+    "pilot": 9,
+    "development": 231,
+    "evaluation": 69
+  },
+  "total_cases": 316,
+  "query_rows_checked": 39045,
+  "exact_ordered_candidate_checks": 14730,
+  "summary_rows_checked": 109,
+  "frozen_choices_unchanged": true,
+  "repeat_candidates_scores_and_work_stable": true,
+  "power_observations": 459,
+  "power_states": [
+    [
+      "AC Power",
+      "powermode=2"
+    ]
+  ],
+  "percentiles_recomputed_from_raw_requests": true
+}

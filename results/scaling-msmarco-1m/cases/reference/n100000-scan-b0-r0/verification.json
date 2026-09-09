@@ -1,0 +1,8 @@
+{
+  "candidate_limit": 100,
+  "checked_documents": 1000,
+  "checked_queries": 5,
+  "dimensions": 256,
+  "near_boundary_ambiguities": 0,
+  "status": "pass"
+}

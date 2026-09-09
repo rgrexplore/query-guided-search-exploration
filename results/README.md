@@ -1,6 +1,11 @@
-# FiQA runs
+# Experiment results
 
-The [dense sweep](fiqa-2026-09-09-dense/README.md) is the latest result: 583 settings and
+[Million-passage scaling](scaling-msmarco-1m/README.md): scan remained faster at both recall targets.
+The saved study includes seven pool sizes, fixed budget curves and the complete raw results.
+
+## FiQA runs
+
+The [dense sweep](fiqa-2026-09-09-dense/README.md) is the expanded FiQA result: 583 settings and
 1,133,352 requests, with fixed-probe curves, paired uncertainty and failure rates. It uses the
 same data and index but expands the grid and shuffles conditions globally.
 

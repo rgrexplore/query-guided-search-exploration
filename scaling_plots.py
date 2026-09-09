@@ -119,12 +119,13 @@ def _plot_scaling(
                     )
                     miss_label_added = True
         _set_pool_ticks(axis, pools)
-        axis.set_xlabel("Pool size N")
-        axis.set_ylabel("Search call time (ms)")
+        axis.set_yscale("log")
+        axis.set_xlabel("Documents in pool")
+        axis.set_ylabel("Search time (ms, log scale)")
         axis.set_title(title)
         axis.grid(alpha=0.2)
     axes[0].legend(frameon=False, ncol=2, fontsize=8)
-    fig.suptitle("Cached evaluation queries", fontsize=11)
+    fig.suptitle("Cached test queries", fontsize=11)
     fig.savefig(directory / "scaling.png", dpi=180)
     fig.savefig(directory / "scaling.svg")
     plt.close(fig)
@@ -182,7 +183,7 @@ def _plot_speedup(directory: Path, pools: list[int], points: list[dict]) -> None
     _set_pool_ticks(axis, pools)
     axis.set_xlabel("Pool size N")
     axis.set_ylabel("Scan median / branch median")
-    axis.set_title("Median speedup on cached evaluation queries")
+    axis.set_title("Median speedup on cached test queries")
     axis.grid(alpha=0.2)
     axis.legend(frameon=False)
     fig.savefig(directory / "speedup.png", dpi=180)
@@ -199,13 +200,13 @@ def _plot_work(
         ("mean_fraction_fully_scored", "Fraction fully scored"),
         ("mean_nodes", "Branch nodes"),
         ("mean_bitplane_words", "Split bitmap words"),
-        ("sampled_peak_rss_bytes", "Sampled peak memory (GiB)"),
+        ("native_peak_rss_bytes", "Worker peak memory (GiB)"),
     )
     fig, axes = plt.subplots(2, 2, figsize=(10, 7), constrained_layout=True)
     for axis, (field, title) in zip(axes.flat, fields):
         for label in ("scan", "target95", "target99", "unlimited"):
             values, _ = _series(pools, evaluation, points, label, field)
-            if field == "sampled_peak_rss_bytes":
+            if field == "native_peak_rss_bytes":
                 values = [value / 2**30 for value in values]
             axis.plot(
                 pools,
@@ -219,7 +220,7 @@ def _plot_work(
         axis.set_xlabel("Pool size N")
         axis.grid(alpha=0.2)
     axes.flat[0].legend(frameon=False, ncol=2, fontsize=8)
-    fig.suptitle("Cached evaluation queries", fontsize=11)
+    fig.suptitle("Cached test queries", fontsize=11)
     fig.savefig(directory / "work.png", dpi=180)
     plt.close(fig)
 
@@ -320,7 +321,7 @@ def report_text(
         "",
         (
             f"This report uses {query_count} evaluation queries with three measured repeats per "
-            "query. Development choices were frozen before evaluation. Each choice is the fastest "
+            "query. Development choices were fixed before the test run. Each choice is the fastest "
             "tested complete setting that reached its development target; it is not a global "
             "optimum."
         ),
@@ -328,7 +329,7 @@ def report_text(
         "## Results",
         "",
         (
-            "| Pool | Target | Budget | Development recall | Evaluation recall | p50 ms | "
+            "| Pool | Target | Budget | Validation recall | Test recall | p50 ms | "
             "p95 ms | Achieved | Speedup |"
         ),
         "|---:|---:|---:|---:|---:|---:|---:|:---:|---:|",
@@ -400,8 +401,9 @@ def report_text(
             "## Measurement limits",
             "",
             (
-                "The shared Index builds packed rows and bitplanes for both scan and branch, so "
-                "peak memory is the memory of that shared structure. The `bitplane_words` counter "
+                "Worker peak memory includes Python, input arrays, the shared Index and temporary "
+                "search buffers. The worker's own peak reading captures short peaks that periodic "
+                "sampling can miss. Both methods build packed rows and bitplanes. The `bitplane_words` counter "
                 "reports split bitmap words only; leaf bitmap reads are not counted. The plots do "
                 "not claim to measure all memory traffic."
             ),

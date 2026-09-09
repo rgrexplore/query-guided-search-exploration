@@ -1,0 +1,17 @@
+{
+  "method": "scan",
+  "node_budget": 0,
+  "output_dir": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/runs/scaling-msmarco-1m/cases/pilot/n1000-scan-b0-r0",
+  "phase": "pilot",
+  "pool_size": 1000,
+  "query_rows": [
+    2,
+    1,
+    4,
+    0,
+    3
+  ],
+  "reference_path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/runs/scaling-msmarco-1m/cases/reference/n1000-scan-b0-r0/reference.npz",
+  "repeat": 0,
+  "run_path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/runs/scaling-msmarco-1m/metadata.json"
+}

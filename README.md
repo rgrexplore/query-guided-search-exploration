@@ -4,7 +4,11 @@ This compares two ways to search binary document embeddings: scan the rows, or w
 bitplanes and score smaller groups. Both use float queries and the same binary documents.
 Faiss supplies the coarse buckets and a separate float-IVF baseline.
 
-[Latest full FiQA run](results/fiqa-2026-09-09-dense/README.md): 583 settings, clearer curves,
+[Million-passage scaling results](results/scaling-msmarco-1m/README.md): the existing bitplane
+search did not beat scan at the tested recall targets. The report keeps the full parameter grid
+and explains the bitmap work behind the timings.
+
+[Full FiQA run](results/fiqa-2026-09-09-dense/README.md): 583 settings, clearer curves,
 paired uncertainty and every measured request. Limited branching improves some sign-routing
 tradeoffs across probe counts; exact branching is slower than scanning the same buckets.
 [Earlier runs and comparison](results/README.md) are preserved too.
@@ -39,8 +43,10 @@ To prepare the arrays without running the comparisons:
 
 ## Run the fixed scaling study
 
-The scaling study uses a fixed sample of MS MARCO passages and separate development and
-evaluation queries. Run its stages in order. Pick a new run folder for each timing run.
+The scaling study uses a fixed sample of MS MARCO passages: 100 tuning/validation queries
+choose settings, and 200 held-out test queries check them. These are our own subsets of the
+provider's dev-small queries; no model is trained. Internal files call the two groups
+`development` and `evaluation`. Run its stages in order. Pick a new run folder for each timing run.
 
 ```bash
 .venv/bin/python scaling.py --config scaling.toml --stage prepare
@@ -244,8 +250,8 @@ then prefix slicing and L2 normalization. Queries use `search_query:` and docume
 `search_document:`. Search uses 256 signs; reranking uses the full normalized vectors. Shorter
 Matryoshka vectors do not guarantee that their first signs make good routing buckets.
 
-The index is static. Each bucket owns a compact local bitmap, so a bitplane operation doesn't
-walk a bitmap covering the whole corpus. Small tests cover packing, score bounds, ties and the
+The index is static. With routing, each bucket owns a local bitmap. In the no-routing scaling
+study, one bucket covers the whole pool, and every branch keeps a bitmap of that full width. Small tests cover packing, score bounds, ties and the
 case where a greedy sign choice misses the best document. See [the algorithm](docs/algorithm.md).
 
 The earlier Exa description uses binary documents, float queries, clustering and lookup tables.

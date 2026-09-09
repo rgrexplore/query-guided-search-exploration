@@ -1,0 +1,3215 @@
+[
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:16.342873+00:00",
+    "phase": "reference",
+    "point": "start",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:16.369259+00:00",
+    "phase": "reference",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:16.919510+00:00",
+    "phase": "reference",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:17.474885+00:00",
+    "phase": "reference",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:18.026985+00:00",
+    "phase": "reference",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:18.576817+00:00",
+    "phase": "reference",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:19.902156+00:00",
+    "phase": "reference",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:22.750050+00:00",
+    "phase": "reference",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:31.188910+00:00",
+    "phase": "reference",
+    "point": "end",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:31.219580+00:00",
+    "phase": "pilot",
+    "point": "start",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:31.247525+00:00",
+    "phase": "pilot",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:31.537749+00:00",
+    "phase": "pilot",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:31.839080+00:00",
+    "phase": "pilot",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:41.312718+00:00",
+    "phase": "pilot",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:42.115078+00:00",
+    "phase": "pilot",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:43.170066+00:00",
+    "phase": "pilot",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:43.477543+00:00",
+    "phase": "pilot",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:43.783670+00:00",
+    "phase": "pilot",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:44.075733+00:00",
+    "phase": "pilot",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:13:44.373114+00:00",
+    "phase": "pilot",
+    "point": "end",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:16:59.596396+00:00",
+    "phase": "development",
+    "point": "start",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:16:59.628264+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:16:59.924976+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:00.221931+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:02.296369+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:02.593512+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:17.637579+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:18.441724+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:18.743278+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:34.025052+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:45.006005+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:45.564057+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:47.895726+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:48.194819+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:48.491595+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:51.844898+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:52.651228+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:52.954087+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:53.263105+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:53.557875+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:55.880316+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:56.180127+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:56.486131+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:56.784916+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:57.861313+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:58.166568+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:58.462119+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:58.767277+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:59.067931+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:17:59.375920+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:14.650128+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:15.443954+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:15.742268+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:22.917750+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:23.724034+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:24.021308+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:24.328876+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:24.627960+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:24.931615+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:26.262723+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:26.570258+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:41.614677+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:42.684451+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:43.999989+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:44.561876+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:46.894902+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:47.448605+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:47.750274+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:48.309144+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:48.607146+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:49.929841+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:50.228371+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:18:52.581011+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:19:07.636161+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:19:22.664965+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:19:37.695876+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:19:44.090356+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:19:59.127786+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:20:14.148875+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:20:29.169358+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:20:44.193865+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:20:59.215803+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:21:14.234615+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:21:29.485749+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:21:35.356525+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:21:35.642799+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:21:36.182013+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:21:51.462242+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:22:06.486757+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:22:21.518352+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:22:36.557233+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:22:51.613612+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:23:06.645665+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:23:21.687371+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:23:24.775905+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:23:39.816977+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:23:54.860663+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:24:09.911709+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:24:24.955635+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:24:40.008668+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:24:55.065234+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:00.679418+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:00.963645+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:01.501140+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:02.046909+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:02.345137+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:02.634502+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:04.448554+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:04.741433+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:05.280729+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:05.574086+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:05.857103+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:16.310362+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:16.593626+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:16.894086+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:17.176363+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:17.470505+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:30.748488+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:31.037105+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:34.385417+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:34.675009+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:34.958033+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:35.501560+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:35.796048+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:36.079842+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:36.613915+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:36.908855+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:39.241537+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:39.534262+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:40.584471+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:40.872447+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:25:55.926809+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:10.960326+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:26.014370+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:29.354014+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:29.637544+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:29.926820+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:30.215327+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:30.510180+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:31.308910+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:32.355102+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:32.650999+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:32.938468+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:33.482213+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:33.769157+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:34.566075+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:34.855151+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:35.144542+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:35.438516+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:38.776148+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:39.064274+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:39.348878+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:41.166411+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:41.454281+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:41.987634+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:42.277483+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:42.558416+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:43.094573+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:43.382817+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:43.921789+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:44.206373+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:44.744077+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:45.278616+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:45.565765+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:58.845584+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:59.129660+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:26:59.411678+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:27:01.235688+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:27:15.258827+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:27:15.549647+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:27:16.099850+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:27:16.389663+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:27:18.206944+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:27:18.495082+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:27:18.796450+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:27:19.084990+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:27:34.147105+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:27:49.201852+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:28:04.248926+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:28:19.297139+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:28:34.339174+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:28:49.356770+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:28:54.479948+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:28:54.768458+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:28:55.052481+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:29:10.331532+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:29:25.357342+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:29:40.403502+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:29:55.449840+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:30:10.478197+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:30:25.509005+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:30:40.540537+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:30:43.119448+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:30:58.153696+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:30:58.447130+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:11.712147+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:12.005330+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:22.986216+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:23.270844+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:25.085718+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:25.370469+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:40.407939+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:50.631568+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:51.180073+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:51.474166+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:51.759873+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:53.576871+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:54.889620+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:55.181325+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:55.474303+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:55.774502+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:56.067877+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:31:56.360641+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:32:03.500408+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:32:03.788891+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:32:19.058216+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:32:34.095344+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:32:49.105496+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:33:04.146023+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:33:19.190819+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:33:34.219776+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:33:49.255155+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:33:52.333973+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:33:52.873411+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:33:53.922362+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:33:54.219031+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:33:54.768623+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:33:58.113949+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:33:59.420291+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:33:59.709323+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:00.002406+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:00.562827+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:00.853611+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:02.660712+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:02.951604+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:03.251592+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:05.067250+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:05.362273+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:05.904344+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:06.199666+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:06.485010+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:07.532907+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:07.826459+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:08.112630+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:08.412125+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:08.967304+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:09.248892+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:09.546315+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:09.834244+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:11.907874+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:12.192546+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:12.732470+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:13.020025+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:13.817794+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:14.113419+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:14.399165+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:16.224247+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:16.783395+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:17.070225+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:32.111146+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:43.573558+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:45.141907+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:45.684533+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:45.984431+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:46.782405+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:47.319871+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:47.612652+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:49.939027+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:50.233175+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:34:50.529108+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:35:05.565748+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:35:06.610533+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:35:14.013914+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:35:14.299739+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:35:14.590738+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:35:29.623830+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:35:44.637620+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:35:59.684324+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:36:14.701694+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:36:29.715067+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:36:44.768519+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:36:56.004008+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:37:11.059750+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:37:26.100907+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:37:41.153457+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:37:56.203561+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:38:11.246522+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:38:26.317765+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:38:41.375518+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:38:41.660725+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:38:41.958034+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:38:42.499501+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:38:42.805799+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:38:43.096372+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:38:43.394773+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:38:53.873540+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:39:07.634619+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:39:22.680114+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:39:37.732124+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:39:52.770804+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:40:07.815453+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:40:22.860308+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:40:37.910000+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:40:52.460155+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:41:05.991497+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:41:06.277168+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:41:08.090097+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:41:08.373758+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:41:21.657860+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:41:21.946257+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:41:22.239338+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:41:22.520552+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:41:37.798292+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:41:52.842019+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:42:07.861405+00:00",
+    "phase": "development",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:42:13.503916+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:42:13.795234+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:42:14.091030+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:42:15.406666+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:42:15.944928+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:42:16.235038+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:42:16.519911+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:42:16.818743+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:42:17.361727+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:42:20.457399+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:42:23.801110+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:42:24.085873+00:00",
+    "phase": "development",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:42:24.382226+00:00",
+    "phase": "development",
+    "point": "end",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:45:00.323641+00:00",
+    "phase": "evaluation",
+    "point": "start",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:45:00.358357+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:45:01.162059+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:45:16.208044+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:45:31.232189+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:45:31.776485+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:45:32.071616+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:45:32.368589+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:45:32.666557+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:45:33.476127+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:45:48.539158+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:46:03.587354+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:46:18.618245+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:46:24.760753+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:46:25.057084+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:46:25.356777+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:46:25.659866+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:46:27.992878+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:46:43.276001+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:46:52.223432+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:46:52.525274+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:46:53.079290+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:46:53.638587+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:47:08.899236+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:47:23.926515+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:47:38.966264+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:47:53.995966+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:48:09.006126+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:48:24.047179+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:48:39.080007+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:48:54.120317+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:49:09.120624+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:49:24.147803+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:49:39.188375+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:49:54.216003+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:50:09.217250+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:50:24.227060+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:50:32.910311+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:50:37.017122+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:50:37.312741+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:50:37.612557+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:50:43.758886+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:50:49.631548+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:50:51.699733+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:50:52.499004+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:50:58.640728+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:50:58.930932+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:50:59.229896+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:50:59.788128+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:51:00.079757+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:51:15.114928+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:51:30.134721+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:51:45.139213+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:51:51.281105+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:51:52.081641+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:51:52.379434+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:51:58.251053+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:51:58.545285+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:52:13.816335+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:52:28.825150+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:52:44.071500+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:52:59.085334+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:53:14.113156+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:53:29.129264+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:53:44.152730+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:53:59.189263+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:54:14.214590+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:54:29.226380+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:54:44.232470+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:54:59.233662+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:55:14.262130+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:55:29.283677+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:55:38.219285+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:55:40.803239+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:55:41.099265+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:55:43.187856+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:55:43.743909+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:55:44.055254+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:55:44.859176+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:55:45.668518+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:55:45.965463+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:56:01.233620+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:56:16.256115+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:56:17.817265+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:56:32.849774+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:56:42.027164+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:56:46.377826+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:56:46.676934+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:57:01.949573+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:57:17.187334+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:57:32.210458+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:57:37.577628+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:57:52.849790+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:58:07.859430+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:58:09.423841+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:58:09.718911+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:58:10.019189+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:58:10.579363+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:58:11.382548+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:58:17.782008+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:58:18.350849+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:58:33.615052+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:58:48.855441+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:59:03.884011+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:59:18.910071+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:59:33.940330+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T12:59:48.963827+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:00:03.989989+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:00:18.998290+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:00:33.999816+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:00:49.020170+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:01:04.266327+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:01:19.300934+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:01:34.315795+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:01:49.345431+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:02:00.059882+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:02:00.363162+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:02:15.640383+00:00",
+    "phase": "evaluation",
+    "point": "case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:02:25.343891+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:02:25.643765+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:02:25.939639+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:02:28.011397+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:02:33.902417+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:02:34.196497+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:02:38.304108+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:02:40.878818+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:02:41.172211+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:02:41.470096+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:02:41.765855+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:02:42.582413+00:00",
+    "phase": "evaluation",
+    "point": "before_case",
+    "source": "AC Power"
+  },
+  {
+    "mode": "powermode=2",
+    "observed_at": "2026-09-09T13:02:43.388094+00:00",
+    "phase": "evaluation",
+    "point": "end",
+    "source": "AC Power"
+  }
+]

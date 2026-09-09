@@ -1,0 +1,9 @@
+[
+  "cases/reference/n1000-scan-b0-r0/case.json",
+  "cases/reference/n3000-scan-b0-r0/case.json",
+  "cases/reference/n10000-scan-b0-r0/case.json",
+  "cases/reference/n30000-scan-b0-r0/case.json",
+  "cases/reference/n100000-scan-b0-r0/case.json",
+  "cases/reference/n300000-scan-b0-r0/case.json",
+  "cases/reference/n1000000-scan-b0-r0/case.json"
+]
