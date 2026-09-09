@@ -505,7 +505,7 @@ def test_analysis_writes_fixed_outputs_counts_once_and_survives_a_portable_copy(
         "Below recall target",
         "Median search time",
         "95th-percentile search time",
-        "Cached evaluation queries",
+        "Cached test queries",
         "<!-- 10 -->",
         "<!-- 20 -->",
     ):
