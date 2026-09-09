@@ -37,6 +37,55 @@ To prepare the arrays without running the comparisons:
 .venv/bin/python run.py --prepare-only
 ```
 
+## Run the fixed scaling study
+
+The scaling study uses a fixed sample of MS MARCO passages and separate development and
+evaluation queries. Run its stages in order. Pick a new run folder for each timing run.
+
+```bash
+.venv/bin/python scaling.py --config scaling.toml --stage prepare
+.venv/bin/python scaling.py --config scaling.toml --stage pilot --run-dir runs/scaling-1
+.venv/bin/python scaling.py --config scaling.toml --stage tune --run-dir runs/scaling-1
+.venv/bin/python scaling.py --config scaling.toml --stage evaluate --run-dir runs/scaling-1
+.venv/bin/python scaling.py --config scaling.toml --stage report --run-dir runs/scaling-1
+```
+
+Use `--prepare-check` with the prepare stage to encode one document chunk and all queries before
+committing to the full preparation. Run prepare again without that flag to continue from saved
+chunks. Completed full vectors are reused when the search width changes; only the short query
+vectors and packed document signs are created again. Preparation writes `prepared.json`, which
+points to the selected text, full-vector and search-input manifests. Later stages read those
+manifests and never start the encoder.
+
+If a measured command is interrupted, repeat that command with `--resume`. Finished cases and
+cases that reached a time or memory limit stay saved. An unfinished case is moved under the run's
+`interrupted/` folder before it is run again. A pilot without `--resume` always requires a new run
+folder, so an older result cannot be overwritten by accident.
+
+The main settings in `scaling.toml` are:
+
+- `pool_sizes`: nested document counts tested from the same saved sample.
+- `dimensions`: the number of leading embedding values converted to document sign bits.
+- `candidate_limit`: how many binary candidates each method returns.
+- `leaf_size`: the group size at which branching scores documents directly.
+- `node_budgets`: the fixed amounts of branch work tested during development; zero means no limit.
+- `targets`: the mean development recall levels used to select a budget.
+- `repetitions`: repeated timings of each saved setting.
+- `case_seconds` and `rss_gib`: the whole-case time and sampled memory limits.
+
+Read a completed run in this order: `metadata.json` for the inputs and machine record,
+`selections.json` for the frozen development choices, `analysis/report.md` for the main findings,
+then `analysis/target-points.csv` and `analysis/settings.csv` for the exact values. Case folders
+under `cases/` retain the raw query rows and terminal status. Schedules contain relative case paths,
+so a copied run can be reported again without the vector cache.
+
+Recall here is overlap with the exact scan's best binary candidates from the same document pool.
+For example, recall 0.95 with 100 candidates means 95 of the scan's candidates were returned. It
+does not mean that 95% of all relevant passages were found. Query vectors are already cached, so
+query encoding time is excluded from search timing. The selected budget is the fastest complete
+setting in the saved fixed grid that reached the target on development queries. It is not a claim
+that the budget is the best possible setting outside that tested grid.
+
 To try fewer evaluation queries while keeping the full document collection and embedding cache:
 
 ```bash
