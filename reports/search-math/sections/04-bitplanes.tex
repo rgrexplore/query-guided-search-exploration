@@ -6,6 +6,7 @@ to many document positions at once.
 
 \fig{bitplanes}{Approach B. A pending node has a set of active documents and an optimistic score bound.}{1}
 
+\Needspace{12\baselineskip}
 \subsection{What a bitplane stores}
 For the opened example cluster $\mathcal C_1=(2,5,7,8)$, the document codes are
 \texttt{1011}, \texttt{1110}, \texttt{1001}, \texttt{0011}. The transposed index is
@@ -23,6 +24,7 @@ bitmap says which document positions still belong to the current node. To requir
 $i$ to be 1, intersect the active bitmap with plane $i$. To require 0, intersect with its
 complement, while masking unused padding positions.
 
+\par\noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={Build the additional bitplane index.}]
 BuildBitplanes(cluster_codes, d, w):
     for each cluster j:
@@ -34,6 +36,7 @@ BuildBitplanes(cluster_codes, d, w):
                     set bit (u mod w) in planes[j, i, floor(u/w)]
     return planes
 \end{lstlisting}
+\end{minipage}\par
 
 The extra persistent storage is exactly, for this layout,
 \begin{equation}
@@ -45,6 +48,7 @@ Without per-cluster padding this is $Nd/8$, a second binary-code-sized payload.
 For example, ten billion 256-bit codes occupy 320 GB; their bitplanes add approximately
 another 320 GB, not 32 TB. Padding and other index structures are additional.
 
+\Needspace{12\baselineskip}
 \subsection{Why the query suggests a traversal direction}
 At coordinate $i$, choosing the query's sign adds no penalty; choosing the opposite sign adds
 $a_i=|q_i|$. Sorting coordinates by descending $a_i$ tests the largest potential penalties first.
@@ -62,6 +66,7 @@ A greedy choice of the matching first bit selects \texttt{1000} and misses the b
 The largest individual weight is smaller than the sum of several remaining weights.
 \end{examplebox}
 
+\Needspace{12\baselineskip}
 \subsection{A bound makes branching safe}
 Let a node have accumulated penalty $p$ on coordinates already tested. Untested coordinates
 cannot contribute a negative mismatch penalty. Consequently,
@@ -78,6 +83,7 @@ with the largest upper bound, or equivalently the smallest penalty. The bound is
 it may describe a sign combination that no actual document can achieve. A weak bound can keep
 many nodes alive even though none ultimately improves the answer.
 
+\par\noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={Dense bitplane search across the selected clusters.}]
 SearchBitplanes(q, selected_clusters, eligible, table, R, L, B_node):
     order = coordinates sorted by decreasing abs(q[i])
@@ -107,11 +113,13 @@ SearchBitplanes(q, selected_clusters, eligible, table, R, L, B_node):
         queue nonempty opposite child with penalty + abs(q[i])
     return best
 \end{lstlisting}
+\end{minipage}\par
 $L$ is the leaf-size threshold and $B_{\rm node}$ the total node budget across all probes.
 An unlimited budget permits exact termination by bounds; a finite budget can stop before the
 remaining nodes are safely ruled out. A random exploration probability changes which pending
 node is visited next. It is not a direct formula for recall or a synonym for the number of nodes.
 
+\Needspace{12\baselineskip}
 \subsection{Count split visits, leaf visits, and scored documents separately}
 For each selected cluster, let
 \[
@@ -145,6 +153,7 @@ Here $T_{\rm order}=O(d\log d)$ and $T_{\rm roots}=O(\sum_jW_j)$ for dense root 
 $c_{\rm node}$ may be replaced by explicit queue-comparison, mask-allocation and copy terms.
 Use one convention consistently; do not charge an allocation twice.
 
+\Needspace{12\baselineskip}
 \subsection{The full-width cost is the important hidden term}
 \begin{examplebox}{Few scores do not imply little work}
 In the saved one-million-document run, $w=64$ gives $W=15{,}625$. A node budget of $32{,}768$
@@ -175,6 +184,7 @@ a fixed-coordinate trie can contain $O(n_jd)$ nonempty prefix nodes, making dens
 work as large as $O(d\sum_j n_j^2/w)$ before scoring and queue costs. Growing $N$ alone does
 not guarantee that branching will overtake a scan.
 
+\Needspace{12\baselineskip}
 \subsection{Peak query RAM: the pending masks matter}
 Let $\mathcal F(t)$ be the frontier at time $t$, and let $j(v)$ identify a node's cluster.
 If a node record needs $b_{\rm node}$ bytes and bitmap capacity is fully allocated,

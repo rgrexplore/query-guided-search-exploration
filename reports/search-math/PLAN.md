@@ -24,12 +24,14 @@ The primary third method starts with clusters; a global hash is the C=1 special 
 
 ## Scope and checks
 
-- [ ] Write and mathematically check the report.
-- [ ] Render Mermaid diagrams and include them in LaTeX.
-- [ ] Verify small score, key-order, memory and bitmap examples independently.
-- [ ] Compile the PDF and resolve layout/cross-reference warnings.
-- [ ] Inspect rendered pages, including every diagram and long table.
-- [ ] Save sources, PDF, reproduction instructions and a memory pointer.
+- [x] Write and mathematically check the report.
+- [x] Render Mermaid diagrams and include them in LaTeX.
+- [x] Verify small score, key-order, memory and bitmap examples independently.
+- [x] Compile the PDF and resolve layout/cross-reference warnings.
+- [x] Inspect rendered pages, including every diagram and long table.
+- [x] Save sources, PDF, reproduction instructions and a memory pointer.
 
 No new retrieval implementation, optimizer calibration, embedding run or billion-document
 benchmark is part of this deliverable. The report explicitly identifies what remains empirical.
+
+Completed: 43-page PDF, six figures, twelve complete pseudocode blocks. All arithmetic checks pass; final compilation has no warnings or unresolved references. Every page was visually reviewed.

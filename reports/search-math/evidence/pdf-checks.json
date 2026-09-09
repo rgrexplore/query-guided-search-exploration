@@ -1,0 +1,44 @@
+{
+  "pages": 43,
+  "listing_start_pages": {
+    "BuildCommonIndex(": 7,
+    "PrepareQuery(": 8,
+    "Route(q_route,": 8,
+    "BuildScoreTable(": 10,
+    "ScanSelectedClusters(": 13,
+    "BuildBitplanes(": 16,
+    "SearchBitplanes(": 17,
+    "BuildKeyIndex(": 21,
+    "SortedFlipSets(": 22,
+    "SearchShortKeys(": 23,
+    "SearchByRelaxingPrefix(": 25,
+    "ChooseConfiguration(": 39
+  },
+  "unresolved_references": 0,
+  "out_of_page_text": [],
+  "diagram_fonts": [
+    {
+      "page": 4,
+      "minimum_points": 10.21
+    },
+    {
+      "page": 12,
+      "minimum_points": 11.59
+    },
+    {
+      "page": 15,
+      "minimum_points": 8.69
+    },
+    {
+      "page": 20,
+      "minimum_points": 10.81
+    },
+    {
+      "page": 37,
+      "minimum_points": 9.41
+    }
+  ],
+  "pdf_sha256": "06ff2abd1405001d19a66ac3818b7a6a31ecfaf3e87e2319ad1e2c511fed3f96",
+  "visual_review": "All 43 rendered pages inspected; no clipping, broken code blocks or unreadable diagrams found.",
+  "latex_warnings": 0
+}

@@ -9,6 +9,7 @@ the special case $C=P=1$. We do not silently switch between clustered and global
 
 \fig{keys}{Approach C. Each cluster has a key directory and postings. Empty lookups still consume work.}{1}
 
+\Needspace{12\baselineskip}
 \subsection{Full keys and short keys are different choices}
 Let $I_h$ be the fixed set of $h$ lookup coordinates, often the first $h$ positions. A
 \textbf{full key} has $h=d$. Its weighted penalty determines the complete binary score.
@@ -20,11 +21,13 @@ the result-boundary tie. A short-key candidate quota does not have that guarante
 work well, and can also be made exact with a valid full-score stopping bound. These are
 properties of the stopping rule, not of the name ``walk backwards.''
 
+\Needspace{12\baselineskip}
 \subsection{The data structure behind a key lookup}
 For each cluster, a directory maps a key to a posting range containing the local row references
 of documents with that key. There may be many documents per key. Finding a directory entry
 without finding its document rows is not enough to produce results.
 
+\par\noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={Build a clustered key index.}]
 BuildKeyIndex(cluster_codes, lookup_coordinates):
     for each cluster j:
@@ -34,12 +37,14 @@ BuildKeyIndex(cluster_codes, lookup_coordinates):
             directory[j][key] = (posting_start, posting_count)
     return directories, postings
 \end{lstlisting}
+\end{minipage}\par
 
 A \textbf{dense directory} has an offset for every possible key. A \textbf{sparse hash table}
 only stores occupied keys but adds key, slot and load-factor overhead. A sorted-key array is
 another option: it can use less overhead, but a lookup uses comparisons or another search
 structure instead of an assumed constant-time hash access.
 
+\Needspace{12\baselineskip}
 \subsection{Do not index fixed routing bits as if they were still free}
 If sign-prefix routing fixes some lookup coordinates inside cluster $j$, those coordinates
 cannot vary within it. Let $r_j$ be the number of lookup coordinates fixed by that cluster,
@@ -61,6 +66,7 @@ the cluster's constant routing penalty when it is compared with a different clus
 The number of local possibilities is four, not sixteen.
 \end{examplebox}
 
+\Needspace{12\baselineskip}
 \subsection{Index storage: name every array}
 Use the common baseline row order and ID mapping. Let $b_{\rm ref}$ be the bytes for a local
 posting reference, $b_k(h_j)$ the bytes storing a key, and $b_{\rm slot}$ the remaining per-slot
@@ -89,6 +95,7 @@ M_{\rm dense-dir}=\sum_j(2^{h_j}+1)b_o.
 Exponential key space makes dense directories expensive. Sparse directories avoid storing
 empty keys, but do not make probing empty keys free.
 
+\Needspace{12\baselineskip}
 \subsection{How to enumerate all flip combinations in weighted order}
 Let the free-coordinate weights be sorted in ascending order,
 $a_{(1)}\leq\cdots\leq a_{(h_j)}$. Flipping a subset $S$ costs
@@ -97,6 +104,7 @@ misses other subsets. We need a stream containing \emph{all} subsets in order.
 
 The following priority-queue construction has at most two children per nonempty subset.
 It starts with the empty subset, then the subset containing coordinate 1.
+\par\noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={A complete sorted-subset stream, not one chain of flips.}]
 SortedFlipSets(weights):
     sort weights ascending, remembering original coordinate IDs
@@ -111,6 +119,7 @@ SortedFlipSets(weights):
             queue.push((S minus {i}) union {i+1}, i+1,
                        cost - weights[i] + weights[i+1])
 \end{lstlisting}
+\end{minipage}\par
 
 Both child costs are no smaller than the parent cost. Every nonempty subset has one parent:
 if the coordinate before its largest coordinate is also present, remove the largest one;
@@ -130,12 +139,14 @@ Complete weighted enumeration finds the better document first, even though it di
 the query's largest coordinate. It may have to check several empty keys before that hit.
 \end{examplebox}
 
+\Needspace{12\baselineskip}
 \subsection{Lookup and stopping within selected clusters}
 For short keys, a simple implementation allocates candidate targets $m_j$ to probed clusters.
 A more flexible implementation merges their next-prefix-key scores and draws candidates from
 the best available stream. Whichever policy is used must be a parameter of the experiment;
 a per-cluster target and a global target are not interchangeable.
 
+\par\noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={Short-key candidate search with explicit per-cluster targets.}]
 SearchShortKeys(q, selected_clusters, h, targets m[j], R):
     candidates = empty collection
@@ -154,6 +165,7 @@ SearchShortKeys(q, selected_clusters, h, targets m[j], R):
     keep the best R with the same score/ID rule as A
     return best R
 \end{lstlisting}
+\end{minipage}\par
 
 A full-key exact version instead merges the cluster streams by their \emph{total full-key}
 penalty, including fixed-sign penalties. Once at least $R$ documents have been found, continue
@@ -172,6 +184,7 @@ the result is certified. If not, continue even when a nominal candidate quota ha
 A larger tail makes this bound less selective. Fixed routing-coordinate contributions must be
 included consistently; no coordinate may be counted twice.
 
+\Needspace{12\baselineskip}
 \subsection{Do we need to rescore a document whose full key is known?}
 Not always. With a full key and the true query weights, its complete score is already
 $A-2\pi_q(\text{key})$. Every document in that key's posting range has that same binary score.
@@ -191,6 +204,7 @@ can also avoid a redundant per-document code copy by using its stored full keys,
 ID/posting and key ownership are redesigned and counted. Equation~\eqref{eq:keys-storage} is
 one explicit layout, not a universal lower bound on every possible key index.
 
+\Needspace{12\baselineskip}
 \subsection{If ``work upwards'' means removing a constraint}
 There is another reasonable interpretation of the idea. Instead of flipping a bit and probing
 one more exact key, remove a bit constraint. For example, \texttt{101*} means either
@@ -220,6 +234,7 @@ In this particular query the last coordinate is the cheapest one to relax. That 
 for every query.
 \end{examplebox}
 
+\par\noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={A fixed-prefix relaxation variant of Approach C.}]
 SearchByRelaxingPrefix(q, query_key, trie, table, R, candidate_target):
     path = follow query_key as far as the stored trie permits
@@ -236,6 +251,7 @@ SearchByRelaxingPrefix(q, query_key, trie, table, R, candidate_target):
             return best                       # approximate stopping rule
     return best
 \end{lstlisting}
+\end{minipage}\par
 An exact version may stop early only after bounding \emph{every} unvisited region against the
 current full-score heap. Simply finding enough IDs in a relaxed prefix is not such a proof.
 The remaining score can still change the ordering.
@@ -267,6 +283,7 @@ have the same constant-cost parent operation. A query-adaptive bit order require
 traversal or a different index. This is the main difference between a prebuilt fixed trie and
 the query-ordered bitplane traversal.
 
+\Needspace{12\baselineskip}
 \subsection{Count keys, postings, scores and enumeration states}
 Let $H_j$ be the number of keys attempted in cluster $j$, including empty keys. Let $F_j$ be
 the number of eligible posting rows retrieved and scored. Let $E_j$ be the number of
@@ -295,6 +312,7 @@ $O((\sum_jH_j)\log(P+1))$; include it when that variant is used.
 The hash directory can be built before the query, but query-specific weighted order depends
 on $q$. Precomputing a hash table does not precompute this order for every float query.
 
+\Needspace{12\baselineskip}
 \subsection{Query RAM while enumerating}
 Let $b_{\rm enum,j}$ include a key mask, penalty and queue metadata. For simultaneously active
 streams, the candidate-search scratch is

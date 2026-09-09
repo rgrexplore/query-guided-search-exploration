@@ -10,6 +10,7 @@ reranking step may use longer float embeddings, but that is a different score an
 reference ranking. Exact binary search need not recover the exact float ranking, and neither
 ranking is automatically the same as human relevance.
 
+\Needspace{12\baselineskip}
 \subsection{Three costs that must not be confused}
 \begin{enumerate}
 \item \textbf{Index storage:} data built in advance and kept between queries. Examples are
@@ -22,6 +23,7 @@ thousand times does not require a thousand stored copies, but it can cost a thou
 The number of scored documents alone does not measure work. A method can score fewer documents
 and still read more memory or manage a much larger queue.
 
+\Needspace{12\baselineskip}
 \subsection{The shared pipeline}
 All three primary methods begin with clusters. The no-clustering experiment is the special
 case $C=P=1$, not a different definition of the task.
@@ -35,6 +37,7 @@ If the experiment only measures the index, cache the query embedding and omit th
 reranker. If the experiment claims end-to-end query latency, include them. We will keep both
 versions visible in the formulas.
 
+\Needspace{12\baselineskip}
 \subsection{A four-bit example we can calculate by hand}
 Let
 \[
@@ -67,12 +70,13 @@ Document & Code & Mismatching coordinates & Score\\\midrule
 \end{tabular}
 \end{center}
 For example, document 7 pays $0.2+0.1=0.3$, so its score is $1.4-2(0.3)=0.8$.
-The exact global top two are documents 1 and 2. We break equal scores by document ID throughout.
+The exact global top two are documents 1 and 2. We break equal scores by a stable numeric document ID throughout. This is the internal ID used by the index; an external identifier or URL can be recovered through metadata.
 
 The query gives both a preferred sign and a cost for getting that sign wrong. It does
 \emph{not} tell us which preferred patterns exist in the database. That distinction drives
 both branching and key enumeration.
 
+\Needspace{12\baselineskip}
 \subsection{Matryoshka prefixes are useful; they are not sorted magnitudes}
 A Matryoshka model trains selected prefixes of an embedding to remain useful representations
 \cite{mrl}. It does not impose
@@ -89,6 +93,7 @@ There are three distinct choices:
 A hash table built for one fixed prefix does not become a table for the query's largest-magnitude
 coordinates just because the query is sorted. The lookup coordinates would have changed.
 
+\Needspace{12\baselineskip}
 \subsection{Parameters and units}
 The formulas below are not tied to a particular code length, cluster count, word width, or
 SIMD implementation. Table~\ref{tab:parameters} is the common notation. Additional symbols are
@@ -133,6 +138,7 @@ The first describes one packed \emph{document}; the second describes one bitplan
 \emph{cluster}. They have different axes. If a filter leaves only a few eligible rows,
 $W_j$ does not shrink unless the data is physically rebuilt or represented differently.
 
+\Needspace{12\baselineskip}
 \subsection{Three kinds of statement in this report}
 An algebraic identity, such as Equation~\eqref{eq:score}, is exact under its stated score.
 An operation count is exact for the stated pseudocode or layout, but can change with the

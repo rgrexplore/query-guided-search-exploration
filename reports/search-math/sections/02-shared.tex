@@ -1,5 +1,6 @@
 \section{What is built once, and what every query pays}
 \label{sec:shared}
+\Needspace{12\baselineskip}
 \subsection{The public Exa-style starting point}
 Exa's public description combines Matryoshka prefixes, binary document codes, float-query
 scoring through small lookup tables, similarity-based clustering, filtering, and final
@@ -7,12 +8,14 @@ reranking \cite{exa}. Its published example uses particular dimensions and clust
 our formulas replace those choices with parameters. The pseudocode here is an explicit
 reference design, not a claim to reproduce Exa's private implementation or production latency.
 
+\Needspace{12\baselineskip}
 \subsection{Preprocessing and the common index}
 A document is encoded before queries arrive. Its code and document ID are placed in its
 cluster's contiguous row range. The baseline ownership convention is simple: each document
 has one packed code and one ID. Cluster offsets identify the ranges. Bitplanes or hash-key
 postings are additional structures described later.
 
+\par\noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={Common preprocessing; executed before serving queries.}]
 BuildCommonIndex(documents, model, d, routing_configuration):
     vectors = encode documents with model
@@ -26,6 +29,7 @@ BuildCommonIndex(documents, model, d, routing_configuration):
     save filter metadata and optional final vectors
     return common index
 \end{lstlisting}
+\end{minipage}\par
 
 Offline encoding, clustering and sorting are build costs. They are not charged as query
 latency. Their outputs \emph{are} charged as index storage. Build-time temporary arrays can be
@@ -49,7 +53,9 @@ need 40 GB before centroids or metadata. Here GB means $10^9$ bytes. These are e
 for $N,d,b_{\rm id}$, not constants in Equation~\eqref{eq:base}.
 \end{examplebox}
 
+\Needspace{12\baselineskip}
 \subsection{Step 1: encode and prepare the query}
+\par\noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={Query preparation shared by all methods.}]
 PrepareQuery(text, model, D, d, d_r):
     full_query = model.encode(text, D)
@@ -59,6 +65,7 @@ PrepareQuery(text, model, D, d, d_r):
     a[i] = abs(q[i])
     return full_query, q, routing_query, t, a
 \end{lstlisting}
+\end{minipage}\par
 The model's tokenization, neural-network computation and output processing cost
 $T_{\rm emb}(\ell_q,D)$ for query length $\ell_q$. This is a measured function, not a universal
 linear formula in $D$. Truncation, optional normalization, signs and magnitudes add
@@ -69,9 +76,11 @@ Query-vector storage is $O(D+d+d_r)$ floats, with possible views instead of copi
 chosen ownership. We denote the actual retained query buffers by $Q_{\rm vec}$ and the
 embedding model's own scratch peak by $Q_{\rm emb}$.
 
+\Needspace{12\baselineskip}
 \subsection{Step 2: select clusters}
 With a flat centroid router, score all $C$ centroids, then retain the best $P$. This is distinct
 from scoring binary documents: centroids are normally floats.
+\par\noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={A simple flat centroid router with bounded selection memory.}]
 Route(q_route, centroids, P):
     nearest = heap with capacity P
@@ -80,6 +89,7 @@ Route(q_route, centroids, P):
         offer (route_score, j) to nearest
     return the P selected cluster IDs
 \end{lstlisting}
+\end{minipage}\par
 Let $c_{\rm fma}$ price one centroid coordinate's multiply-add contribution, and let
 $H_r$ be the number of heap comparisons or equivalent selection operations. Then
 \begin{equation}
@@ -103,6 +113,7 @@ A direct or multi-probe address generator can replace that router, but must coun
 key-generation and queue work. When every cluster is probed, routing can simply return all
 cluster IDs and skip distance-based selection.
 
+\Needspace{12\baselineskip}
 \subsection{Cluster count does not determine the selected document count}
 Exactly,
 \begin{equation}
@@ -115,6 +126,7 @@ constant as $P$ changes. For bitplanes, the individual $n_j$ matter because wide
 make each node more expensive. A mean load factor does not identify the largest cluster or
 peak frontier memory.
 
+\Needspace{12\baselineskip}
 \subsection{Step 3: apply optional filters}
 A filter can return eligible row IDs or a bitmap. Denote its time by $T_{\rm filter}$ and
 its scratch by $Q_{\rm filter}$. For a bitmap intersection over the probed clusters, a reference
@@ -129,9 +141,11 @@ bitplane intersection short.
 The reference set for recall must obey the \emph{same filter}. Otherwise a correct filtered
 search is unfairly penalized for not returning ineligible documents.
 
+\Needspace{12\baselineskip}
 \subsection{Step 4: build the float-query score tables}
 Split the $d$ document signs into groups of $g$. A group has at most $2^g$ sign patterns.
 For each query group, precompute its dot product with every possible pattern.
+\par\noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={The score table. Padding contributes zero in the last group.}]
 BuildScoreTable(q, g):
     for group in ceil(len(q) / g) groups:
@@ -148,6 +162,7 @@ ScoreDocument(packed_code, table):
         score += table[group, pattern]
     return score
 \end{lstlisting}
+\end{minipage}\par
 For this straightforward build,
 \begin{align}
 G&=\ceil{d/g}, & U_{\rm build}&\leq G2^g g,\\
@@ -171,6 +186,7 @@ Plain XOR followed by a population count computes \emph{unweighted} Hamming dist
 matches Equation~\eqref{eq:score} only when all query magnitudes are equal up to a common
 scale. Replacing weighted scoring by that operation changes the task.
 
+\Needspace{12\baselineskip}
 \subsection{Step 5: retain candidates and optionally rerank}
 A top-$R$ heap stores the worst retained candidate at its root. Every scored document needs
 at least a comparison with that root once the heap is full. Let $H_s(F,R)$ be the actual
@@ -190,6 +206,7 @@ $T_{\rm fetch}$ depends on whether vectors are already resident, on SSD, or remo
 vectors are fetched in a batch, the temporary float-vector buffer is $u_f d_f b_f$, not
 necessarily $R'd_f b_f$. The candidate IDs must remain live until fetching and scoring finish.
 
+\Needspace{12\baselineskip}
 \subsection{Shared latency and peak RAM}
 For sequential stages, define
 \begin{equation}

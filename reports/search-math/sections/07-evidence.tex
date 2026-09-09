@@ -4,6 +4,7 @@ The purpose of these measurements is to check the reasoning, not to fit every eq
 one method appears to win. The experiments have different scopes, so their numbers must not be
 merged into one unqualified performance claim.
 
+\Needspace{12\baselineskip}
 \subsection{The one-million-passage scaling study}
 The archived study used one flat cluster, a fixed 256-bit score, 100 binary candidates,
 leaf size 32, deterministic branching, cached query embeddings, and one CPU thread.
@@ -33,6 +34,7 @@ The source summary is
 \path{results/scaling-msmarco-1m/analysis/settings.csv}. Full run metadata and the validation
 protocol live beside it. The report's verification script checks the numerical rows quoted here.
 
+\Needspace{12\baselineskip}
 \subsection{The FiQA study asked a broader pipeline question}
 The denser FiQA run used 57,638 documents and 648 queries, with 583 settings including random
 seeds. Its timings include routing, binary candidate search and float reranking, with embeddings
@@ -57,6 +59,7 @@ change visit order; it does not provide a mathematical guarantee of higher recal
 FiQA report retains losing configurations, empty returns, and the relevant measurement scope.
 Its source is \path{results/fiqa-2026-09-09-dense/README.md} and the accompanying data.
 
+\Needspace{12\baselineskip}
 \subsection{A new controlled check of the 24-bit prefix}
 The small quality study used the same full weighted-binary score and row-ID tie rule for all
 methods. There was no outer routing: $C=P=1$. Two synthetic datasets had 20,000 random binary
@@ -104,6 +107,7 @@ B reached about 58.06\%, 86.56\% and 99.56\% at budgets 512, 2,048 and 8,192. Th
 and work observations for a flat pool with a 1,000-candidate heap. They do not establish a
 latency ranking between an implemented native B and a hypothetical C.
 
+\Needspace{12\baselineskip}
 \subsection{What was not validated}
 The study does not validate:
 \begin{itemize}
@@ -117,6 +121,7 @@ The supplied calculator notes mixed float top-100 references at different dimens
 binary-score reference. That mismatch cannot validate one common recall curve. The new report
 uses the same binary truth where it makes direct index comparisons and labels the other evidence.
 
+\Needspace{12\baselineskip}
 \subsection{How to extend the checks fairly}
 Freeze the representation, query set, filtering task and reference score first. Tune on one
 query set; check selected configurations on a different one. For every method, retain failures

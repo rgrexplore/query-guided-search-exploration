@@ -5,6 +5,7 @@ They do not, by themselves, give recall. Recall depends on \emph{which} rows sur
 reference ranking. This section starts with an exact definition, then adds assumptions one at
 a time so their consequences can be checked.
 
+\Needspace{12\baselineskip}
 \subsection{The exact measured definition}
 Let $\mathcal E(q)$ be the eligible document set after the intended filter, across the whole
 database. Let $\mathcal G_K(q)$ be its exact top $K$ under the chosen reference score, and let
@@ -26,6 +27,7 @@ true top-$K$ document in that set survives into the final top $K$. Therefore
 A different reranking score breaks that identity. In particular, exact binary candidates may
 still miss the true float-vector top $K$ or the documents relevant to a human question.
 
+\Needspace{12\baselineskip}
 \subsection{Separate routing loss from candidate-search loss}
 Let $\mathcal U(q)$ be the eligible pool in the probed clusters. Define
 \[
@@ -53,6 +55,7 @@ For A, local binary search is exact. For unlimited B with valid bounds, it is ex
 For full-key C with complete weighted ordering, it is exact. Their global recall can still
 be limited by routing. Finite node budgets and short-key quotas add a second possible loss.
 
+\Needspace{12\baselineskip}
 \subsection{A deterministic error bound for a short prefix}
 Split the full score into retained and omitted coordinates:
 \begin{equation}
@@ -82,6 +85,7 @@ Truncation and binary quantization are separate approximations. Matryoshka train
 the usefulness of prefixes, but it does not set either bound to zero or supply a universal
 recall percentage.
 
+\Needspace{12\baselineskip}
 \subsection{Random documents: what the independence assumption actually gives}
 The following distribution models first omit routing. When routing is added, retain the same global true-neighbor event or apply Equation~\eqref{eq:recall-stages}; replacing it with a different local top-$K$ event changes the question. Assume nonzero score variance when computing a correlation.
 
@@ -117,6 +121,7 @@ $\sum_{i\in I_h}\sigma_i^2/\sum_i\sigma_i^2$. For a specific sampled query, use 
 Equation~\eqref{eq:rho-independent}. The expectation of a ratio need not equal the ratio of
 expectations.
 
+\Needspace{12\baselineskip}
 \subsection{Real documents need a covariance model, not just a label}
 A covariance matrix records how coordinates vary together. Its diagonal entries are individual variances. An off-diagonal entry describes whether two coordinates tend to move together or in opposite directions. Independent, balanced signs have unit diagonal entries and zero off-diagonal entries.
 
@@ -136,6 +141,7 @@ raw coordinate-energy share is small. Conversely, a prefix can have considerable
 still fail to identify the extreme nearest neighbors. Estimating covariance also does not
 prove a normal distribution in the tails.
 
+\Needspace{12\baselineskip}
 \subsection{Equal-weight mistakes lead to a binomial model}
 Let $X_i=\ind[b_i\ne t_i]$. If the $X_i$ are independent with the same disagreement probability
 $p$, and all relevant weights equal $a$, then a mismatch count over $h$ coordinates satisfies
@@ -162,6 +168,7 @@ If $p=1/2$, every key has equal probability and the expected count reduces to $N
 Different $p_i$ with equal weights give a Poisson-binomial count. Unequal weights give a
 weighted Bernoulli sum. Neither is described by one ordinary binomial with an average $p$.
 
+\Needspace{12\baselineskip}
 \subsection{Derive recall by asking which true neighbors pass}
 Write $F_X(x)=\Pr(X\leq x)$ for a cumulative distribution function (CDF): the probability that $X$ is at or below a threshold.
 
@@ -200,6 +207,7 @@ not 25\%. Allowing one error in the two-bit prefix retrieves 48 codes and includ
 Both numbers follow by counting the same true-neighbor event.
 \end{examplebox}
 
+\Needspace{12\baselineskip}
 \subsection{Unequal query weights: count weighted subsets}
 For a fixed query and lookup coordinates $I_h$, define
 \begin{equation}
@@ -235,6 +243,7 @@ for unquantized query weights. If score quantization incurs a uniform score erro
 $\epsilon$, a score gap greater than $2\epsilon$ is sufficient to preserve a pair's order.
 Otherwise candidates near the boundary need exact scoring or a safe expanded bound.
 
+\Needspace{12\baselineskip}
 \subsection{The conditional-normal approximation}
 For many small independent contributions, a joint-normal approximation for full and prefix
 scores can be convenient. Subtract each score's mean and divide by its standard deviation. This standardizes them to $(Z,Y)$ with correlation $\rho$. For a true
@@ -263,6 +272,7 @@ recall on different queries. Even there, the real-data normal approximation miss
 percentage points. Such a model can generate hypotheses; it should not declare a real
 99\%-recall winner.
 
+\Needspace{12\baselineskip}
 \subsection{What can be concluded about the three methods}
 \begin{itemize}
 \item \textbf{A:} exact local scanning has no local candidate-search loss; global loss comes

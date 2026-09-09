@@ -6,11 +6,13 @@ The work is regular and can read packed codes sequentially when filtering does n
 
 \fig{scan}{Approach A. The selected pool is smaller than the corpus only because of routing or filters.}{1}
 
+\Needspace{12\baselineskip}
 \subsection{Data layout and preprocessing}
 The common index from Equation~\eqref{eq:base} is sufficient. Cluster $j$ occupies the row
 range between offsets $j$ and $j+1$. A row contains its packed code, and the corresponding ID
 array maps the row back to the original document.
 
+\par\noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={Candidate search for Approach A.}]
 ScanSelectedClusters(q, selected_clusters, eligible, table, R):
     best = empty top-R heap
@@ -20,11 +22,13 @@ ScanSelectedClusters(q, selected_clusters, eligible, table, R):
             best.offer(score, document_id[row])
     return best in descending score, breaking ties by ID
 \end{lstlisting}
+\end{minipage}\par
 
 The loop is over $\Nelig$ rows, not necessarily $NP/C$. If all clusters are searched and no
 filter removes documents, $\Nelig=N$. Empty filtered clusters require no document scoring,
 although finding that they are empty can still have a cost.
 
+\Needspace{12\baselineskip}
 \subsection{Step-by-step cost}
 \begin{center}\small
 \begin{tabularx}{\linewidth}{@{}P{.25\linewidth}YP{.23\linewidth}@{}}\toprule
@@ -53,6 +57,7 @@ O\!\left(P+\Nelig\ceil{d/g}+\Nelig\log(R+1)+R\log(R+1)\right).
 \]
 The lookup term count is not a claim that each term is exactly one CPU instruction.
 
+\Needspace{12\baselineskip}
 \subsection{What is read, and what must remain in RAM?}
 The packed-code payload read for scoring is
 \begin{equation}
@@ -72,6 +77,7 @@ A streaming scan does not need an $N$-element score array. A matrix-based batch 
 may choose to allocate such an array; then that allocation must be added. The same algorithmic
 ranking can therefore have different peak RAM under different implementations.
 
+\Needspace{12\baselineskip}
 \subsection{A routing miss in the four-bit example}
 Partition the eight documents from Section 1 into
 \[
@@ -85,6 +91,7 @@ $1/2$. The scan did nothing wrong inside the opened cluster: document 1 was neve
 Opening both clusters returns documents 1 and 2. This is why a scan can be exact in its selected
 pool and still have imperfect global recall.
 
+\Needspace{12\baselineskip}
 \subsection{SIMD changes a coefficient, not the score}
 SIMD means one instruction operates on several data lanes. It can accelerate code extraction,
 lookup accumulation, and selection. It does not by itself change the number of stored bits.

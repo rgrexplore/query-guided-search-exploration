@@ -4,6 +4,7 @@ The three methods share query embedding, preparation, routing, filtering, and th
 final reranker. Their difference is the work used to obtain candidates from the selected pool.
 This is the right boundary for comparing the index algorithms without hiding common costs.
 
+\Needspace{12\baselineskip}
 \subsection{Latency, one method at a time}
 Using the earlier definitions,
 \begin{align}
@@ -26,6 +27,7 @@ All cluster sums in query work run over $j\in\mathcal P(q)$. If C uses a merged 
 add its explicitly counted stream-selection cost. Different execution choices can share
 preparation or reuse buffers; record those choices rather than charging duplicated work.
 
+\Needspace{12\baselineskip}
 \subsection{An index speedup is not the same as an end-to-end speedup}
 If two configurations have identical embedding and final-stage costs, write their shared time
 as $T_0$. Replacing index time $t_A$ by $t_B$ gives speedup
@@ -37,6 +39,7 @@ If candidate counts or final-vector fetches differ, those costs are no longer sh
 be evaluated separately. This is why cached-query index timings and complete text-query timings
 should both be reported rather than substituted for one another.
 
+\Needspace{12\baselineskip}
 \subsection{Persistent storage}
 For the reference layouts selected in this report,
 \begin{align}
@@ -53,6 +56,7 @@ A different C layout can
 remove the additional posting permutation; it cannot remove the information needed to map
 results back to documents.
 
+\Needspace{12\baselineskip}
 \subsection{Peak query RAM and the serving budget}
 \fig{memory}{Persistent index data, runtime reserve and simultaneous scratch are separate terms. Sequential stage buffers need a lifetime analysis.}{.85}
 
@@ -79,6 +83,7 @@ For a conservative bound, replace the sum by $JQ_{m,\rm peak,max}$. A loose uppe
 exceeds RAM does not prove that a tighter implementation cannot fit. An observed peak below
 the limit does not prove that every possible query fits. These are different claims.
 
+\Needspace{12\baselineskip}
 \subsection{A compact comparison table}
 \small
 \begin{longtable}{@{}P{.16\linewidth}P{.25\linewidth}P{.25\linewidth}P{.25\linewidth}@{}}
@@ -94,6 +99,7 @@ What must be measured & kernel cost, routing quality & skipped scores versus bit
 \end{longtable}
 \normalsize
 
+\Needspace{12\baselineskip}
 \subsection{The variables most likely to move the tradeoff}
 \textbf{Documents per physical cluster, $n_j$.} A grows roughly linearly with eligible row
 count. In B, a larger cluster also widens every active bitmap. In C, more documents per key can
@@ -121,6 +127,7 @@ that does not remove the enumeration cost.
 thread count change the effective coefficients. Keep them fixed for an algorithm comparison,
 or report their changes as a separate experiment.
 
+\Needspace{12\baselineskip}
 \subsection{Choosing configurations at fixed N and RAM}
 Let $\theta_m$ contain the chosen method's tunable parameters and let $r_0$ be a recall target.
 Choose the latency objective explicitly, for example median or p95 across queries. A valid
@@ -136,6 +143,7 @@ subject to the RAM condition in Equation~\eqref{eq:final-ram} and
 The expectation specifies an average-recall target. A requirement that almost every query
 reach $r_0$ is stronger and needs a different probability constraint.
 
+\par\noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={A defensible finite-grid experiment.}]
 ChooseConfiguration(corpus, queries, fixed_reference, RAM_limit, targets):
     build or cache every configuration's required index
@@ -150,6 +158,7 @@ ChooseConfiguration(corpus, queries, fixed_reference, RAM_limit, targets):
     report lowest tested latency only where the target and RAM checks pass
     distinguish measured results from untested model predictions
 \end{lstlisting}
+\end{minipage}\par
 
 A mathematical model can reduce the grid and explain its results. It cannot manufacture the
 unknown query/document distribution or the true hardware coefficients. A ``best estimated
