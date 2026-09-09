@@ -102,6 +102,13 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _change_saved_manifest(manifest: dict, field: str, value) -> None:
+    manifest_path = Path(manifest["files"]["documents"]["path"]).parent / "selection.json"
+    saved = json.loads(manifest_path.read_text(encoding="utf-8"))
+    saved[field] = value
+    manifest_path.write_text(json.dumps(saved) + "\n", encoding="utf-8")
+
+
 def test_select_positions_uses_unique_ordered_pcg64_positions():
     positions = select_positions(total_rows=7, count=5, seed=42)
 
@@ -359,3 +366,70 @@ def test_cached_selection_detects_file_corruption(tmp_path, monkeypatch):
         prepare_selection(cache_dir, 4, 7, 43, 2, 2)
 
     assert error.value.code == "CACHE_INVALID"
+
+
+def test_cached_selection_rejects_query_count_that_differs_from_query_ids(
+    tmp_path, monkeypatch
+):
+    cache_dir = tmp_path / "cache"
+    _install_fixture(monkeypatch, cache_dir, _fixture_members())
+    manifest = prepare_selection(cache_dir, 4, 7, 43, 2, 2)
+    _change_saved_manifest(manifest, "query_count", 999)
+
+    with pytest.raises(ScalingConfigError) as error:
+        prepare_selection(cache_dir, 4, 7, 43, 2, 2)
+
+    assert error.value.code == "CACHE_INVALID"
+    assert error.value.field == "query_count"
+
+
+def test_cached_selection_rejects_document_count_that_differs_from_identity(
+    tmp_path, monkeypatch
+):
+    cache_dir = tmp_path / "cache"
+    _install_fixture(monkeypatch, cache_dir, _fixture_members())
+    manifest = prepare_selection(cache_dir, 4, 7, 43, 2, 2)
+    _change_saved_manifest(manifest, "document_count", 999)
+
+    with pytest.raises(ScalingConfigError) as error:
+        prepare_selection(cache_dir, 4, 7, 43, 2, 2)
+
+    assert error.value.code == "CACHE_INVALID"
+    assert error.value.field == "document_count"
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("schema_version", True),
+        ("schema_version", 1.0),
+        ("document_count", 4.0),
+        ("query_count", 4.0),
+    ],
+)
+def test_cached_selection_rejects_noninteger_version_and_counts(
+    tmp_path, monkeypatch, field, value
+):
+    cache_dir = tmp_path / "cache"
+    _install_fixture(monkeypatch, cache_dir, _fixture_members())
+    manifest = prepare_selection(cache_dir, 4, 7, 43, 2, 2)
+    _change_saved_manifest(manifest, field, value)
+
+    with pytest.raises(ScalingConfigError) as error:
+        prepare_selection(cache_dir, 4, 7, 43, 2, 2)
+
+    assert error.value.code == "CACHE_INVALID"
+    assert error.value.field == field
+
+
+def test_cached_selection_rejects_unsupported_integer_schema_version(tmp_path, monkeypatch):
+    cache_dir = tmp_path / "cache"
+    _install_fixture(monkeypatch, cache_dir, _fixture_members())
+    manifest = prepare_selection(cache_dir, 4, 7, 43, 2, 2)
+    _change_saved_manifest(manifest, "schema_version", 2)
+
+    with pytest.raises(ScalingConfigError) as error:
+        prepare_selection(cache_dir, 4, 7, 43, 2, 2)
+
+    assert error.value.code == "CACHE_INVALID"
+    assert error.value.field == "schema_version"

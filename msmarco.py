@@ -46,6 +46,12 @@ def _integer(value: Any, field: str, minimum: int) -> int:
     return value
 
 
+def _cached_integer(value: Any, field: str, minimum: int) -> int:
+    if isinstance(value, bool) or not isinstance(value, int) or value < minimum:
+        _invalid("CACHE_INVALID", field, f"must be an integer >= {minimum}")
+    return value
+
+
 def _sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as stream:
@@ -299,10 +305,26 @@ def _validate_cached_manifest(path: Path) -> SelectionManifest:
     }
     if not isinstance(manifest, dict) or set(manifest) != required:
         _invalid("CACHE_INVALID", str(path), "manifest fields do not match schema version 1")
-    if manifest["schema_version"] != 1:
-        _invalid("CACHE_INVALID", str(path), "unsupported schema version")
+    schema_version = _cached_integer(manifest["schema_version"], "schema_version", 1)
+    if schema_version != 1:
+        _invalid("CACHE_INVALID", "schema_version", "unsupported schema version")
     if not isinstance(manifest["identity"], dict):
         _invalid("CACHE_INVALID", str(path), "identity must be an object")
+    if manifest["identity"].get("schema_version") != schema_version:
+        _invalid("CACHE_INVALID", "schema_version", "does not match identity")
+    document_count = _cached_integer(manifest["document_count"], "document_count", 1)
+    query_count = _cached_integer(manifest["query_count"], "query_count", 1)
+    query_ids = manifest["query_ids"]
+    if not isinstance(query_ids, list) or any(
+        not isinstance(query_id, str) or not query_id for query_id in query_ids
+    ):
+        _invalid("CACHE_INVALID", "query_ids", "must contain nonempty strings")
+    if len(query_ids) != query_count:
+        _invalid("CACHE_INVALID", "query_count", "does not match query_ids")
+    if manifest["identity"].get("document_count") != document_count:
+        _invalid("CACHE_INVALID", "document_count", "does not match identity")
+    if manifest["identity"].get("query_count") != query_count:
+        _invalid("CACHE_INVALID", "query_count", "does not match identity")
     if not isinstance(manifest["selection_hash"], str):
         _invalid("CACHE_INVALID", str(path), "selection_hash must be a string")
     try:
@@ -349,9 +371,6 @@ def _validate_cached_manifest(path: Path) -> SelectionManifest:
     )
     if rebuilt_identity != manifest["identity"]:
         _invalid("CACHE_INVALID", str(path), "manifest values do not match identity")
-    document_count = manifest["document_count"]
-    if isinstance(document_count, bool) or not isinstance(document_count, int):
-        _invalid("CACHE_INVALID", "document_count", "must be an integer")
     try:
         positions = np.load(files["source_positions"]["path"], allow_pickle=False)
     except (OSError, ValueError) as error:
