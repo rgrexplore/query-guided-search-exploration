@@ -161,6 +161,21 @@ def test_config_rejects_wrong_scalar_types_ranges_and_hashes(tmp_path, old, new,
 
 
 @pytest.mark.parametrize(
+    "old,new,setting",
+    [
+        ("dimensions = 256", "dimensions = 256.0", "dimensions"),
+        ('device = "auto"', 'device = ["auto"]', "device"),
+        ("dimensions = 256", "dimensions = [256]", "dimensions"),
+    ],
+)
+def test_config_rejects_float_integers_and_container_enum_values(
+    tmp_path, old, new, setting
+):
+    with pytest.raises(ValueError, match=f"CONFIG_INVALID.*{setting}"):
+        load_config(changed_config(tmp_path, old, new))
+
+
+@pytest.mark.parametrize(
     "extra,setting",
     [
         ("\n[extra]\nvalue = 1\n", "sections"),
@@ -251,6 +266,26 @@ def test_case_validator_rejects_identity_shape_path_and_derived_id_errors(
 
     with pytest.raises(ValueError, match=f"CASE_INVALID.*{setting}"):
         validate_case(case, expected_identity=expected)
+
+
+@pytest.mark.parametrize(
+    "change,setting",
+    [
+        (lambda case: case.update(schema_version=1.0), "schema_version"),
+        (lambda case: case.update(dimensions=256.0), "dimensions"),
+        (lambda case: case.update(phase=[]), "phase"),
+        (lambda case: case.update(method={}), "method"),
+        (lambda case: case.update(dimensions=[256]), "dimensions"),
+    ],
+)
+def test_case_validator_rejects_float_integers_and_container_enum_values(
+    tmp_path, change, setting
+):
+    case = valid_case(tmp_path)
+    change(case)
+
+    with pytest.raises(ValueError, match=f"CASE_INVALID.*{setting}"):
+        validate_case(case)
 
 
 def test_case_validator_rejects_unknown_fields_in_the_case_limits_and_expected_identity(tmp_path):

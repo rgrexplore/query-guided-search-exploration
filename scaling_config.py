@@ -210,14 +210,18 @@ def _validate_config(config: Any) -> StudyConfig:
     )
     if max_length > 2_048:
         _invalid("CONFIG_INVALID", "embedding.max_length", "must be <= 2048")
-    if embedding["device"] not in {"auto", "cpu", "mps", "cuda"}:
+    device = _nonempty_string(
+        embedding["device"], "CONFIG_INVALID", "embedding.device"
+    )
+    if device not in {"auto", "cpu", "mps", "cuda"}:
         _invalid("CONFIG_INVALID", "embedding.device", "must be auto, cpu, mps, or cuda")
     _integer(embedding["chunk_size"], "CONFIG_INVALID", "embedding.chunk_size")
 
     search = config["search"]
-    if search["dimensions"] not in {64, 128, 256, 512, 768} or isinstance(
-        search["dimensions"], bool
-    ):
+    dimensions = _integer(
+        search["dimensions"], "CONFIG_INVALID", "search.dimensions"
+    )
+    if dimensions not in {64, 128, 256, 512, 768}:
         _invalid("CONFIG_INVALID", "search.dimensions", "has an unsupported value")
     candidate_limit = _integer(
         search["candidate_limit"], "CONFIG_INVALID", "search.candidate_limit"
@@ -320,7 +324,10 @@ def validate_case(
 ) -> CaseSpec:
     """Validate a worker case without opening its manifests or array files."""
     case = _check_fields(value, CASE_FIELDS, "CASE_INVALID", "fields")
-    if case["schema_version"] != 1 or isinstance(case["schema_version"], bool):
+    schema_version = _integer(
+        case["schema_version"], "CASE_INVALID", "schema_version"
+    )
+    if schema_version != 1:
         _invalid("CASE_INVALID", "schema_version", "must be 1")
     for name in IDENTITY_FIELDS | {"case_key", "attempt_id"}:
         _hash(case[name], "CASE_INVALID", name)
@@ -337,9 +344,11 @@ def validate_case(
             if case[name] != expected[name]:
                 _invalid("CASE_INVALID", name, "does not match the expected identity")
 
-    if case["phase"] not in {"reference", "pilot", "development", "evaluation"}:
+    phase = _nonempty_string(case["phase"], "CASE_INVALID", "phase")
+    if phase not in {"reference", "pilot", "development", "evaluation"}:
         _invalid("CASE_INVALID", "phase", "has an unsupported value")
-    if case["method"] not in {"scan", "branch"}:
+    method = _nonempty_string(case["method"], "CASE_INVALID", "method")
+    if method not in {"scan", "branch"}:
         _invalid("CASE_INVALID", "method", "must be scan or branch")
     _integer(case["pool_size"], "CASE_INVALID", "pool_size")
     _integer(case["node_budget"], "CASE_INVALID", "node_budget", 0)
@@ -352,9 +361,8 @@ def validate_case(
     )
     if candidate_limit > case["pool_size"]:
         _invalid("CASE_INVALID", "candidate_limit", "cannot exceed pool_size")
-    if case["dimensions"] not in {64, 128, 256, 512, 768} or isinstance(
-        case["dimensions"], bool
-    ):
+    dimensions = _integer(case["dimensions"], "CASE_INVALID", "dimensions")
+    if dimensions not in {64, 128, 256, 512, 768}:
         _invalid("CASE_INVALID", "dimensions", "has an unsupported value")
     _integer(case["leaf_size"], "CASE_INVALID", "leaf_size")
     probability = _number(
