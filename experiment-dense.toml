@@ -1,0 +1,37 @@
+[data]
+dataset = "fiqa"
+cache_dir = "data"
+max_documents = 0
+max_queries = 0
+
+[embedding]
+model = "nomic-ai/nomic-embed-text-v1.5"
+revision = "e9b6763023c676ca8431644204f50c2b100d9aab"
+dimensions = 256
+batch_size = 32
+max_length = 512
+device = "auto"
+
+[routing]
+methods = ["ivf", "sign"]
+clusters = 64
+sign_bits = 8
+probes = [1, 2, 4, 8, 16, 32, 64]
+seed = 42
+threads = 1
+
+[search]
+candidate_limit = 100
+top_k = 10
+node_budgets = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 0]
+leaf_size = 32
+explore_probabilities = [0.0, 0.1]
+seeds = [42, 43, 44]
+
+[benchmark]
+warmup_queries = 3
+repetitions = 3
+output_dir = "runs"
+complete_routing_endpoint = true
+bootstrap_samples = 1000
+analysis_seed = 20260909
