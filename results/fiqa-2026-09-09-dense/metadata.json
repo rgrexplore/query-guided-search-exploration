@@ -1,0 +1,5439 @@
+{
+  "created_at": "2026-09-09T05:59:37.544816+00:00",
+  "config": {
+    "data": {
+      "dataset": "fiqa",
+      "cache_dir": "data",
+      "max_documents": 0,
+      "max_queries": 0
+    },
+    "embedding": {
+      "model": "nomic-ai/nomic-embed-text-v1.5",
+      "revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+      "dimensions": 256,
+      "batch_size": 32,
+      "max_length": 512,
+      "device": "auto"
+    },
+    "routing": {
+      "methods": [
+        "ivf",
+        "sign"
+      ],
+      "clusters": 64,
+      "sign_bits": 8,
+      "probes": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "seed": 42,
+      "threads": 1
+    },
+    "search": {
+      "candidate_limit": 100,
+      "top_k": 10,
+      "node_budgets": [
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        4096,
+        0
+      ],
+      "leaf_size": 32,
+      "explore_probabilities": [
+        0.0,
+        0.1
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ]
+    },
+    "benchmark": {
+      "warmup_queries": 3,
+      "repetitions": 3,
+      "output_dir": "runs",
+      "complete_routing_endpoint": true,
+      "bootstrap_samples": 1000,
+      "analysis_seed": 20260909
+    }
+  },
+  "platform": "macOS-26.3.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "python": "3.12.11",
+  "packages": {
+    "numpy": "2.5.3",
+    "faiss-cpu": "1.15.0",
+    "torch": "2.14.0",
+    "transformers": "5.16.1",
+    "sentence-transformers": "6.0.1",
+    "matplotlib": "3.11.1"
+  },
+  "source_sha256": {
+    "run.py": "266cb503b42db6e9285f571176ad4ee79f8eaa868865bffa9fb8ac206bbc7f41",
+    "data.py": "c9da6f05ee35df96feb45ebcde7c12f2fff1520b2b84c0917e38e78e11b0e586",
+    "embeddings.py": "140a19d24945cf7df52a740c7c4fbaa5549511ab3f620f824be29f058f391798",
+    "routing.py": "c4da765f30ddd4bc0adfe19f98939a97ff01770f4cc76d8cdb2b642ec9c26c04",
+    "benchmark.py": "bb9a752155324da3122c93838c23d87c55bdfab49fe2dd65dd840dc4202942a3",
+    "cpp/index.hpp": "bfb9b98dbcea36e7b4dce4c429a7b33f33271ba5809b536cf080d332348a667c",
+    "cpp/index.cpp": "7455b7163e2dbb545e27d6d475f998a12451a44c0e88a1dc0e8e939ec9ff5968",
+    "cpp/bindings.cpp": "a2c394c1e3141f41c293544236c451c05f60d3485faee1662737b790c776098a",
+    "CMakeLists.txt": "b4a6fd34bd23d51c812e9fb43a1ce344be5baa53df10c5abd99068e6a28ad17a",
+    "pyproject.toml": "7d0d0f5325bc9d95a98da8c68526354e2f98074a8be4f567de92dd28b1f41470"
+  },
+  "native_sha256": "9fd1b355086aed5935b8edf8e2958ae9d3c1e467e6121a8e8bb6f1e9808b7801",
+  "dataset": {
+    "source": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/fiqa.zip (archive sha256: 32c7df99ed21252fdfb2cf3f5673502a8d245ee0c44c4a133570d92ce2b3ad02)",
+    "fingerprint": "07333250a3f218e10cf45b39825762db578d55871abe234eb1f38d30608c8322",
+    "documents": 57638,
+    "queries": 648,
+    "full_documents": 57638,
+    "full_queries": 648,
+    "is_subset": false,
+    "query_ids_sha256": "94499beb924a6bd482673595687768451466fc4188df73959863994e20126bed"
+  },
+  "embedding": {
+    "content_sha256": "89a09a1394b603ec3d6a6941e3613ef0d5ecb073d4a4e3370942089ae22cb7f3",
+    "dataset_fingerprint": "07333250a3f218e10cf45b39825762db578d55871abe234eb1f38d30608c8322",
+    "device": "mps",
+    "dimensions": 256,
+    "full_dimensions": 768,
+    "max_length": 512,
+    "model_name": "nomic-ai/nomic-embed-text-v1.5",
+    "model_revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+    "recipe": "nomic-v1.5-st-layernorm-eps1e-5-prefix-l2-v1"
+  },
+  "timing": "Warm CPU retrieval with cached query embeddings; routing + call + float rerank. Encoding excluded.",
+  "float_reference": "Exhaustive inner product over full normalized document embeddings.",
+  "binary_reference": "Exact LUT scan in the same selected buckets, at candidate_limit.",
+  "seed_rule": "Native search seed = setting seed + query row; repeats reuse that seed.",
+  "builds": [
+    {
+      "routing": {
+        "method": "ivf",
+        "dimensions": 256,
+        "clusters": 64,
+        "seed": 42,
+        "threads": 1,
+        "spherical_centroids": true,
+        "routing": "nearest inner-product centroids, including empty lists",
+        "possible_buckets": 64,
+        "occupied_buckets": 64,
+        "bucket_sizes": {
+          "min": 134,
+          "mean": 900.59375,
+          "p95": 1425.4999999999998,
+          "max": 1901
+        }
+      },
+      "routing_build_ms": 41.175708174705505,
+      "native_build_ms": 31.046542339026928,
+      "native_storage": {
+        "documents": 57638,
+        "dimensions": 256,
+        "buckets": 64,
+        "codes_bytes": 1844416,
+        "bitplanes_bytes": 1908736,
+        "row_ids_bytes": 461104,
+        "logical_bytes": 4214256
+      }
+    },
+    {
+      "routing": {
+        "method": "sign",
+        "dimensions": 256,
+        "routing_bits": 8,
+        "threads": 1,
+        "routing": "scan occupied prefixes with float-query / binary-code scores",
+        "zero_sign": "positive",
+        "possible_buckets": 256,
+        "occupied_buckets": 120,
+        "bucket_sizes": {
+          "min": 1,
+          "mean": 480.31666666666666,
+          "p95": 2795.699999999999,
+          "max": 5914
+        }
+      },
+      "routing_build_ms": 1.6962089575827122,
+      "native_build_ms": 31.576000154018402,
+      "native_storage": {
+        "documents": 57638,
+        "dimensions": 256,
+        "buckets": 120,
+        "codes_bytes": 1844416,
+        "bitplanes_bytes": 1998848,
+        "row_ids_bytes": 461104,
+        "logical_bytes": 4304368
+      }
+    }
+  ],
+  "status": "complete",
+  "float_reference_p50_ms": 2.459375187754631,
+  "cases": [
+    {
+      "case_id": "case-0000",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "scan",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0001",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0002",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0003",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0004",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0005",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0006",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0007",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0008",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0009",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0010",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0011",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0012",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0013",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0014",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0015",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0016",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0017",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0018",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0019",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0020",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0021",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0022",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0023",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0024",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0025",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0026",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0027",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0028",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0029",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0030",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0031",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0032",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0033",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0034",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0035",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0036",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0037",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0038",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0039",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0040",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0041",
+      "routing_method": "ivf",
+      "probes": 1,
+      "kind": "float",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0042",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "scan",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0043",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0044",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0045",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0046",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0047",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0048",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0049",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0050",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0051",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0052",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0053",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0054",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0055",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0056",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0057",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0058",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0059",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0060",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0061",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0062",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0063",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0064",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0065",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0066",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0067",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0068",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0069",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0070",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0071",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0072",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0073",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0074",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0075",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0076",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0077",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0078",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0079",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0080",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0081",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0082",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0083",
+      "routing_method": "ivf",
+      "probes": 2,
+      "kind": "float",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0084",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "scan",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0085",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0086",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0087",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0088",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0089",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0090",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0091",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0092",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0093",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0094",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0095",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0096",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0097",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0098",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0099",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0100",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0101",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0102",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0103",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0104",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0105",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0106",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0107",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0108",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0109",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0110",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0111",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0112",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0113",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0114",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0115",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0116",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0117",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0118",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0119",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0120",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0121",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0122",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0123",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0124",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0125",
+      "routing_method": "ivf",
+      "probes": 4,
+      "kind": "float",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0126",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "scan",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0127",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0128",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0129",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0130",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0131",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0132",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0133",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0134",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0135",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0136",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0137",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0138",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0139",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0140",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0141",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0142",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0143",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0144",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0145",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0146",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0147",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0148",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0149",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0150",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0151",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0152",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0153",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0154",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0155",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0156",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0157",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0158",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0159",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0160",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0161",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0162",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0163",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0164",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0165",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0166",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0167",
+      "routing_method": "ivf",
+      "probes": 8,
+      "kind": "float",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0168",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "scan",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0169",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0170",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0171",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0172",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0173",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0174",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0175",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0176",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0177",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0178",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0179",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0180",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0181",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0182",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0183",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0184",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0185",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0186",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0187",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0188",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0189",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0190",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0191",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0192",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0193",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0194",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0195",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0196",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0197",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0198",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0199",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0200",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0201",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0202",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0203",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0204",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0205",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0206",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0207",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0208",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0209",
+      "routing_method": "ivf",
+      "probes": 16,
+      "kind": "float",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0210",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "scan",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0211",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0212",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0213",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0214",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0215",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0216",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0217",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0218",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0219",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0220",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0221",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0222",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0223",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0224",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0225",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0226",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0227",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0228",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0229",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0230",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0231",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0232",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0233",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0234",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0235",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0236",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0237",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0238",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0239",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0240",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0241",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0242",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0243",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0244",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0245",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0246",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0247",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0248",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0249",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0250",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0251",
+      "routing_method": "ivf",
+      "probes": 32,
+      "kind": "float",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0252",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "scan",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0253",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0254",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0255",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0256",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0257",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0258",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0259",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0260",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0261",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0262",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0263",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0264",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0265",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0266",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0267",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0268",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0269",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0270",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0271",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0272",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0273",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0274",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0275",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0276",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0277",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0278",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0279",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0280",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0281",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0282",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0283",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0284",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0285",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0286",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0287",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0288",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0289",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0290",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0291",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0292",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0293",
+      "routing_method": "ivf",
+      "probes": 64,
+      "kind": "float",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0294",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "scan",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0295",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0296",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0297",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0298",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0299",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0300",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0301",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0302",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0303",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0304",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0305",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0306",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0307",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0308",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0309",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0310",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0311",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0312",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0313",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0314",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0315",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0316",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0317",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0318",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0319",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0320",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0321",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0322",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0323",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0324",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0325",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0326",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0327",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0328",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0329",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0330",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0331",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0332",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0333",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0334",
+      "routing_method": "sign",
+      "probes": 1,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0335",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "scan",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0336",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0337",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0338",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0339",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0340",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0341",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0342",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0343",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0344",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0345",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0346",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0347",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0348",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0349",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0350",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0351",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0352",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0353",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0354",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0355",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0356",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0357",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0358",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0359",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0360",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0361",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0362",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0363",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0364",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0365",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0366",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0367",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0368",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0369",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0370",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0371",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0372",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0373",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0374",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0375",
+      "routing_method": "sign",
+      "probes": 2,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0376",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "scan",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0377",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0378",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0379",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0380",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0381",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0382",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0383",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0384",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0385",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0386",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0387",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0388",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0389",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0390",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0391",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0392",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0393",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0394",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0395",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0396",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0397",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0398",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0399",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0400",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0401",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0402",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0403",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0404",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0405",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0406",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0407",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0408",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0409",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0410",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0411",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0412",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0413",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0414",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0415",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0416",
+      "routing_method": "sign",
+      "probes": 4,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0417",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "scan",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0418",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0419",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0420",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0421",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0422",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0423",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0424",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0425",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0426",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0427",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0428",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0429",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0430",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0431",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0432",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0433",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0434",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0435",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0436",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0437",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0438",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0439",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0440",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0441",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0442",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0443",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0444",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0445",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0446",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0447",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0448",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0449",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0450",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0451",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0452",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0453",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0454",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0455",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0456",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0457",
+      "routing_method": "sign",
+      "probes": 8,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0458",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "scan",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0459",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0460",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0461",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0462",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0463",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0464",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0465",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0466",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0467",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0468",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0469",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0470",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0471",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0472",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0473",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0474",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0475",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0476",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0477",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0478",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0479",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0480",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0481",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0482",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0483",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0484",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0485",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0486",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0487",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0488",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0489",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0490",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0491",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0492",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0493",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0494",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0495",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0496",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0497",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0498",
+      "routing_method": "sign",
+      "probes": 16,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0499",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "scan",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0500",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0501",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0502",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0503",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0504",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0505",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0506",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0507",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0508",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0509",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0510",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0511",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0512",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0513",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0514",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0515",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0516",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0517",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0518",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0519",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0520",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0521",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0522",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0523",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0524",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0525",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0526",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0527",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0528",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0529",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0530",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0531",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0532",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0533",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0534",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0535",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0536",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0537",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0538",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0539",
+      "routing_method": "sign",
+      "probes": 32,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0540",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "scan",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0541",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0542",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0543",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0544",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 16,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0545",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0546",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0547",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0548",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 32,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0549",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0550",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0551",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0552",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 64,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0553",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0554",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0555",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0556",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 128,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0557",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0558",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0559",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0560",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 256,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0561",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0562",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0563",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0564",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 512,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0565",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0566",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0567",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0568",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 1024,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0569",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0570",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0571",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0572",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 2048,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0573",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0574",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0575",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0576",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 4096,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0577",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0578",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0579",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 43
+    },
+    {
+      "case_id": "case-0580",
+      "routing_method": "sign",
+      "probes": 64,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.1,
+      "seed": 44
+    },
+    {
+      "case_id": "case-0581",
+      "routing_method": "sign",
+      "probes": 120,
+      "kind": "scan",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    },
+    {
+      "case_id": "case-0582",
+      "routing_method": "sign",
+      "probes": 120,
+      "kind": "branch",
+      "node_budget": 0,
+      "explore_probability": 0.0,
+      "seed": 42
+    }
+  ],
+  "expected_requests": 1133352,
+  "measured_requests": 1133352,
+  "unlimited_candidate_checks": 110808,
+  "preparation_call_ms": 300.15629110857844,
+  "dataset_loading_ms": 189.4086659885943,
+  "preparation_note": "This is the current call time; a matching cache skips encoding."
+}

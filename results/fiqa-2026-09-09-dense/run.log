@@ -1,0 +1,49 @@
+[1/5] Load documents, queries and relevance labels
+57,638 documents, 648 queries
+[2/5] Prepare embeddings (reuse the cache when it matches)
+Loaded cached embeddings: 57,638 documents, 648 queries.
+[3/5] Build buckets and compare searches
+Computing the full-float reference...
+Building ivf buckets...
+Building sign buckets...
+Measuring 583 cases × 648 queries × 3 repeats
+Repeat 1/3: 50/583 cases saved
+Repeat 1/3: 100/583 cases saved
+Repeat 1/3: 150/583 cases saved
+Repeat 1/3: 200/583 cases saved
+Repeat 1/3: 250/583 cases saved
+Repeat 1/3: 300/583 cases saved
+Repeat 1/3: 350/583 cases saved
+Repeat 1/3: 400/583 cases saved
+Repeat 1/3: 450/583 cases saved
+Repeat 1/3: 500/583 cases saved
+Repeat 1/3: 550/583 cases saved
+Repeat 1/3: 583/583 cases saved
+Repeat 2/3: 50/583 cases saved
+Repeat 2/3: 100/583 cases saved
+Repeat 2/3: 150/583 cases saved
+Repeat 2/3: 200/583 cases saved
+Repeat 2/3: 250/583 cases saved
+Repeat 2/3: 300/583 cases saved
+Repeat 2/3: 350/583 cases saved
+Repeat 2/3: 400/583 cases saved
+Repeat 2/3: 450/583 cases saved
+Repeat 2/3: 500/583 cases saved
+Repeat 2/3: 550/583 cases saved
+Repeat 2/3: 583/583 cases saved
+Repeat 3/3: 50/583 cases saved
+Repeat 3/3: 100/583 cases saved
+Repeat 3/3: 150/583 cases saved
+Repeat 3/3: 200/583 cases saved
+Repeat 3/3: 250/583 cases saved
+Repeat 3/3: 300/583 cases saved
+Repeat 3/3: 350/583 cases saved
+Repeat 3/3: 400/583 cases saved
+Repeat 3/3: 450/583 cases saved
+Repeat 3/3: 500/583 cases saved
+Repeat 3/3: 550/583 cases saved
+Repeat 3/3: 583/583 cases saved
+[4/5] Save measurements
+[5/5] Plot latency and quality
+Report: /Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/runs/20260909T055937544570Z/report.md
+Analysis: /Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/runs/20260909T055937544570Z/analysis/report.md

@@ -1,0 +1,28 @@
+{
+  "requests": 1133352,
+  "cases": 583,
+  "queries": 648,
+  "timing_repetitions": 3,
+  "saved_schedule_matches_every_raw_request": true,
+  "source_hashes_match": {
+    "run.py": true,
+    "data.py": true,
+    "embeddings.py": true,
+    "routing.py": true,
+    "benchmark.py": true,
+    "cpp/index.hpp": true,
+    "cpp/index.cpp": true,
+    "cpp/bindings.cpp": true,
+    "CMakeLists.txt": true,
+    "pyproject.toml": true
+  },
+  "unlimited_candidate_checks": 110808,
+  "power_samples": 31,
+  "observed_power_states": [
+    [
+      "AC Power",
+      2
+    ]
+  ],
+  "validation_note": "analyze.load_run additionally checked planned case identities, completeness, query IDs, metric ranges, unchanged quality/work across repeats and fixed routing across policies."
+}

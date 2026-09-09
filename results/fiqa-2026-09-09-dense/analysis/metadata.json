@@ -1,0 +1,12 @@
+{
+  "analysis_sha256": "dd488dfcf11908e6fc55c940dda9397f5196461fdc444fc4ec0945e653c1ffe2",
+  "bootstrap": {
+    "samples": 1000,
+    "seed": 20260909
+  },
+  "source_sha256": {
+    "metadata.json": "2a99e7211b8ccdc7eea6035c5f44440f377a6c9c8c8eacada05b844a6920dcb1",
+    "queries.csv": "12f65c5e0a72974a18baf34bcc0e1a6aa7b2433ef0aa15284650afd53b68f452",
+    "reference.csv": "a9a06bb168d196d270f86fac20c36e6b77666a5cb1dfc3032b9234b8b9f38116"
+  }
+}
