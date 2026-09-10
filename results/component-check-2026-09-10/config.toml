@@ -1,0 +1,19 @@
+# A quick component check. These random signs test equations, not embedding quality.
+[data]
+kind = "random_signs"
+sizes = [64, 65, 1024, 16384]
+dimensions = 256
+queries = 8
+seed = 42
+
+[search]
+top_k = 100
+key_bits = 8
+key_offset = 0
+candidate_target = 0
+key_limit = 0
+node_budget = 0
+leaf_size = 32
+
+[measurement]
+repetitions = 3

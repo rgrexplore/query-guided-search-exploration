@@ -2,13 +2,10 @@
 #include "score.hpp"
 
 #include <algorithm>
-#include <array>
 #include <bit>
 #include <chrono>
 #include <cmath>
-#include <limits>
 #include <numeric>
-#include <queue>
 #include <random>
 #include <stdexcept>
 #include <utility>

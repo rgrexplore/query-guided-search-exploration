@@ -63,7 +63,7 @@ struct StorageInfo {
 };
 
 // Bit j lives at word j / 64, offset j % 64. A 1 scores as +1; a 0 scores as -1.
-// Each bucket owns packed rows for scoring and bitplanes for splitting.
+// Each bucket owns packed rows for scoring and, when requested, bitplanes for splitting.
 class Index {
 public:
     Index(const std::uint64_t* codes, const std::int64_t* assignments,

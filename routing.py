@@ -67,21 +67,25 @@ class Router:
 class IVFRouter(Router):
     """Faiss owns centroid training, assignments, and the float IVF baseline."""
 
-    def __init__(self, documents, clusters, seed, threads):
+    def __init__(self, documents, clusters, seed, threads, retain_float_index=True):
         self.dimensions = documents.shape[1]
         self.threads = threads
 
         # The quantizer stores centroids. IVF uses them to assign documents to lists.
         self.quantizer = faiss.IndexFlatIP(self.dimensions)
-        self.index = faiss.IndexIVFFlat(
+        trained_index = faiss.IndexIVFFlat(
             self.quantizer, self.dimensions, clusters, faiss.METRIC_INNER_PRODUCT
         )
-        self.index.cp.spherical = True
-        self.index.cp.seed = seed
-        self.index.cp.min_points_per_centroid = 1
+        trained_index.cp.spherical = True
+        trained_index.cp.seed = seed
+        trained_index.cp.min_points_per_centroid = 1
         faiss.omp_set_num_threads(threads)
-        self.index.train(documents)
-        self.index.add(documents)
+        trained_index.train(documents)
+        # Binary A/B/C only need the centroids. Retain full float documents solely
+        # for the separate float-IVF baseline, which remains the default here.
+        self.index = trained_index if retain_float_index else None
+        if self.index is not None:
+            self.index.add(documents)
 
         # Give the C++ index the same assignments as the float IVF baseline.
         _, assignments = self.quantizer.search(documents, 1)
@@ -93,6 +97,7 @@ class IVFRouter(Router):
             "seed": seed,
             "threads": threads,
             "spherical_centroids": True,
+            "float_documents_stored": len(documents) if retain_float_index else 0,
             "routing": "nearest inner-product centroids, including empty lists",
             **_bucket_info(self.assignments, clusters),
         }
@@ -110,6 +115,8 @@ class IVFRouter(Router):
         queries = _matrix(queries, "queries", self.dimensions, allow_empty=True)
         candidate_limit = _positive_integer(candidate_limit, "candidate_limit")
         requested_probes = _positive_integer(probes, "probes")
+        if self.index is None:
+            raise RuntimeError("float index was not retained; this router only selects clusters")
         self.index.nprobe = min(requested_probes, self.index.nlist)
         faiss.omp_set_num_threads(self.threads)
         return _timed_search(self.index, queries, candidate_limit)
@@ -162,7 +169,8 @@ class SignRouter(Router):
         return rows, latencies
 
 
-def build_router(documents, method="ivf", clusters=64, routing_bits=8, seed=42, threads=1):
+def build_router(documents, method="ivf", clusters=64, routing_bits=8, seed=42, threads=1,
+                 retain_float_index=True):
     """Build once from float32 vectors. Input vectors are not normalized here."""
     documents = _matrix(documents, "documents")
     threads = _positive_integer(threads, "threads")
@@ -178,6 +186,7 @@ def build_router(documents, method="ivf", clusters=64, routing_bits=8, seed=42, 
             clusters=clusters,
             seed=int(seed),
             threads=threads,
+            retain_float_index=retain_float_index,
         )
     elif method == "sign":
         routing_bits = _positive_integer(routing_bits, "routing_bits")

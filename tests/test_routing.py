@@ -192,3 +192,15 @@ def test_empty_queries_keep_the_requested_output_shape():
     assert buckets.shape == (0, 5) and times.shape == (0,)
     rows, scores, times = exact_search(documents, queries, top_k=5)
     assert rows.shape == scores.shape == (0, 5) and times.shape == (0,)
+
+
+def test_centroid_only_router_matches_routing_without_retaining_float_documents():
+    documents = np.array([[1, 0], [.9, .1], [0, 1], [.1, .9]], dtype=np.float32)
+    full = build_router(documents, clusters=2, seed=7)
+    routing_only = build_router(documents, clusters=2, seed=7, retain_float_index=False)
+    assert routing_only.index is None
+    assert routing_only.info['float_documents_stored'] == 0
+    np.testing.assert_array_equal(full.assignments, routing_only.assignments)
+    np.testing.assert_array_equal(full.select(documents, 2)[0], routing_only.select(documents, 2)[0])
+    with pytest.raises(RuntimeError, match='float index was not retained'):
+        routing_only.ivf_search(documents, 2, 2)
