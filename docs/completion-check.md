@@ -22,16 +22,16 @@ global optimum over every index or certify a billion-document latency prediction
 
 ## Final verification
 
-- Integrated the research branch into main at1dbd1d4; subsequent documentation checkpoints remain in Git.
--258tests passed in the main checkout. The six-document example returned the independently calculated results.
-- The standard-library report checker passed, including frozen8M predictions, the real-query target miss,
+- Integrated the research branch into main at 1dbd1d4; subsequent documentation checkpoints remain in Git.
+- 258 tests passed in the main checkout. The six-document example returned the independently calculated results.
+- The standard-library report checker passed, including frozen 8M predictions, the real-query target miss,
   text-query totals, hypergeometric calculations and billion-row RAM lower bounds.
--72-page PDF:11figures,15listings, zero LaTeX warnings, undefined references or out-of-page text.
+- 72-page PDF: 11 figures, 15 listings, zero LaTeX warnings, undefined references or out-of-page text.
   New sections, final equations, tables and plots were visually inspected.
--69-file source ZIP passed byte checks and rebuilt from a separate directory. Its pure calculation
+- 69-file source ZIP passed byte checks and rebuilt from a separate directory. Its pure calculation
   reproduced every saved scenario without the corpus or native extension.
 - Earlier calculator files were checked against their pre-integration hashes and remain unchanged.
   Their existing README wording was restored as an uncommitted change.
 
-The1B values remain conditional forecasts. The measured conclusions are limited to the declared
+The 1B values remain conditional forecasts. The measured conclusions are limited to the declared
 representations, data, hardware and parameter spaces; the report does not claim a universal optimum.

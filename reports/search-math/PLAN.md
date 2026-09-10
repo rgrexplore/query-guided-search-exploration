@@ -66,6 +66,6 @@ its own query provenance required; previously inspected queries are not relabele
 - [x] Finish repository integration and final reproduction audit.
 
 
-Final evidence edition:72pages,11figures,15listings. It includes the explicit limits of the1B
-forecasts rather than claiming a measured1B run or a global optimum. Original and intermediate
+Final evidence edition: 72 pages, 11 figures, 15 listings. It includes the explicit limits of the 1B
+forecasts rather than claiming a measured 1B run or a global optimum. Original and intermediate
 PDF/source versions remain available in Git.
