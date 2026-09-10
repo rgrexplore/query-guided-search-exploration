@@ -1,4 +1,4 @@
-"""Run the small component study from one explicit configuration."""
+"""Run a saved search experiment configuration."""
 import argparse
 import shutil
 import tomllib

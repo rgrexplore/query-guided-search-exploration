@@ -1,0 +1,2690 @@
+[
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000/routers/ivf-16384-seed73",
+    "router_kind": "ivf",
+    "clusters": 16384,
+    "probes": 8935,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0041",
+    "selection_uses": [
+      {
+        "target": 0.9,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/direct-16-seed73",
+    "router_kind": "direct",
+    "clusters": 16,
+    "probes": 16,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0094",
+    "selection_uses": [
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-256-seed73",
+    "router_kind": "ivf",
+    "clusters": 256,
+    "probes": 189,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "keys",
+    "key_bits": 4,
+    "key_offset": 0,
+    "candidate_target": 0,
+    "key_limit": 262144,
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0093",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-16-seed73",
+    "router_kind": "ivf",
+    "clusters": 16,
+    "probes": 15,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "keys",
+    "key_bits": 4,
+    "key_offset": 0,
+    "candidate_target": 0,
+    "key_limit": 262144,
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0168",
+    "selection_uses": [
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-16-seed73",
+    "router_kind": "ivf",
+    "clusters": 16,
+    "probes": 15,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "keys",
+    "key_bits": 4,
+    "key_offset": 0,
+    "candidate_target": 0,
+    "key_limit": 262144,
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0168",
+    "selection_uses": [
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": null,
+    "router_kind": "none",
+    "clusters": 1,
+    "probes": 1,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "keys",
+    "key_bits": 8,
+    "key_offset": 0,
+    "candidate_target": 0,
+    "key_limit": 262144,
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0169",
+    "selection_uses": [
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000/routers/ivf-8192-seed73",
+    "router_kind": "ivf",
+    "clusters": 8192,
+    "probes": 4920,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0008",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000/routers/ivf-16384-seed73",
+    "router_kind": "ivf",
+    "clusters": 16384,
+    "probes": 6359,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0037",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-256-seed73",
+    "router_kind": "ivf",
+    "clusters": 256,
+    "probes": 218,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "keys",
+    "key_bits": 4,
+    "key_offset": 0,
+    "candidate_target": 0,
+    "key_limit": 262144,
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0222",
+    "selection_uses": [
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000/routers/ivf-16384-seed73",
+    "router_kind": "ivf",
+    "clusters": 16384,
+    "probes": 11087,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0223",
+    "selection_uses": [
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-256-seed73",
+    "router_kind": "ivf",
+    "clusters": 256,
+    "probes": 189,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "keys",
+    "key_bits": 4,
+    "key_offset": 0,
+    "candidate_target": 0,
+    "key_limit": 262144,
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0093",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000/routers/ivf-16384-seed73",
+    "router_kind": "ivf",
+    "clusters": 16384,
+    "probes": 3570,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0077",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": null,
+    "router_kind": "none",
+    "clusters": 1,
+    "probes": 1,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "branch",
+    "node_budget": 0,
+    "leaf_size": 160,
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0081",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/direct-16-seed73",
+    "router_kind": "direct",
+    "clusters": 16,
+    "probes": 16,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0094",
+    "selection_uses": [
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-256-seed73",
+    "router_kind": "ivf",
+    "clusters": 256,
+    "probes": 218,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0194",
+    "selection_uses": [
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000/routers/ivf-16-seed73",
+    "router_kind": "ivf",
+    "clusters": 16,
+    "probes": 15,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0055",
+    "selection_uses": [
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": null,
+    "router_kind": "none",
+    "clusters": 1,
+    "probes": 1,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "keys",
+    "key_bits": 14,
+    "key_offset": 0,
+    "candidate_target": 0,
+    "key_limit": 262144,
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0123",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": null,
+    "router_kind": "none",
+    "clusters": 1,
+    "probes": 1,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "branch",
+    "node_budget": 0,
+    "leaf_size": 160,
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0213",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000/routers/ivf-256-seed73",
+    "router_kind": "ivf",
+    "clusters": 256,
+    "probes": 255,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0007",
+    "selection_uses": [
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000/routers/ivf-16384-seed73",
+    "router_kind": "ivf",
+    "clusters": 16384,
+    "probes": 3570,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0077",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-256-seed73",
+    "router_kind": "ivf",
+    "clusters": 256,
+    "probes": 218,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "keys",
+    "key_bits": 4,
+    "key_offset": 0,
+    "candidate_target": 0,
+    "key_limit": 262144,
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0222",
+    "selection_uses": [
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000/routers/ivf-16384-seed73",
+    "router_kind": "ivf",
+    "clusters": 16384,
+    "probes": 11087,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0223",
+    "selection_uses": [
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000/routers/ivf-16384-seed73",
+    "router_kind": "ivf",
+    "clusters": 16384,
+    "probes": 8935,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0041",
+    "selection_uses": [
+      {
+        "target": 0.9,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": null,
+    "router_kind": "none",
+    "clusters": 1,
+    "probes": 1,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "keys",
+    "key_bits": 14,
+    "key_offset": 0,
+    "candidate_target": 0,
+    "key_limit": 262144,
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0123",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-256-seed73",
+    "router_kind": "ivf",
+    "clusters": 256,
+    "probes": 218,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0194",
+    "selection_uses": [
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000/routers/ivf-8192-seed73",
+    "router_kind": "ivf",
+    "clusters": 8192,
+    "probes": 4920,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0008",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-256-seed73",
+    "router_kind": "ivf",
+    "clusters": 256,
+    "probes": 218,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0194",
+    "selection_uses": [
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000/routers/ivf-16-seed73",
+    "router_kind": "ivf",
+    "clusters": 16,
+    "probes": 15,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0055",
+    "selection_uses": [
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": null,
+    "router_kind": "none",
+    "clusters": 1,
+    "probes": 1,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "branch",
+    "node_budget": 0,
+    "leaf_size": 160,
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0081",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-4096-seed73",
+    "router_kind": "ivf",
+    "clusters": 4096,
+    "probes": 2361,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0018",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000/routers/ivf-16384-seed73",
+    "router_kind": "ivf",
+    "clusters": 16384,
+    "probes": 6359,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0037",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000/routers/ivf-16384-seed73",
+    "router_kind": "ivf",
+    "clusters": 16384,
+    "probes": 11087,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0223",
+    "selection_uses": [
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000/routers/ivf-16384-seed73",
+    "router_kind": "ivf",
+    "clusters": 16384,
+    "probes": 8935,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0041",
+    "selection_uses": [
+      {
+        "target": 0.9,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": null,
+    "router_kind": "none",
+    "clusters": 1,
+    "probes": 1,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "branch",
+    "node_budget": 0,
+    "leaf_size": 160,
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0081",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-4096-seed73",
+    "router_kind": "ivf",
+    "clusters": 4096,
+    "probes": 2361,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0018",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": null,
+    "router_kind": "none",
+    "clusters": 1,
+    "probes": 1,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "branch",
+    "node_budget": 0,
+    "leaf_size": 160,
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0213",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000/routers/ivf-8192-seed73",
+    "router_kind": "ivf",
+    "clusters": 8192,
+    "probes": 4920,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0008",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000/routers/ivf-16384-seed73",
+    "router_kind": "ivf",
+    "clusters": 16384,
+    "probes": 6359,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0037",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-16-seed73",
+    "router_kind": "ivf",
+    "clusters": 16,
+    "probes": 15,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "keys",
+    "key_bits": 4,
+    "key_offset": 0,
+    "candidate_target": 0,
+    "key_limit": 262144,
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0168",
+    "selection_uses": [
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/direct-16-seed73",
+    "router_kind": "direct",
+    "clusters": 16,
+    "probes": 16,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0094",
+    "selection_uses": [
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": null,
+    "router_kind": "none",
+    "clusters": 1,
+    "probes": 1,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "keys",
+    "key_bits": 8,
+    "key_offset": 0,
+    "candidate_target": 0,
+    "key_limit": 262144,
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0169",
+    "selection_uses": [
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": null,
+    "router_kind": "none",
+    "clusters": 1,
+    "probes": 1,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "branch",
+    "node_budget": 0,
+    "leaf_size": 160,
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0213",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": null,
+    "router_kind": "none",
+    "clusters": 1,
+    "probes": 1,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "keys",
+    "key_bits": 14,
+    "key_offset": 0,
+    "candidate_target": 0,
+    "key_limit": 262144,
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0123",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": null,
+    "router_kind": "none",
+    "clusters": 1,
+    "probes": 1,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "keys",
+    "key_bits": 8,
+    "key_offset": 0,
+    "candidate_target": 0,
+    "key_limit": 262144,
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0169",
+    "selection_uses": [
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000/routers/ivf-256-seed73",
+    "router_kind": "ivf",
+    "clusters": 256,
+    "probes": 255,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0007",
+    "selection_uses": [
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-256-seed73",
+    "router_kind": "ivf",
+    "clusters": 256,
+    "probes": 218,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "keys",
+    "key_bits": 4,
+    "key_offset": 0,
+    "candidate_target": 0,
+    "key_limit": 262144,
+    "block": 0,
+    "seed": 0,
+    "setting_id": "s0222",
+    "selection_uses": [
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000/routers/ivf-16-seed73",
+    "router_kind": "ivf",
+    "clusters": 16,
+    "probes": 15,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 1,
+    "seed": 0,
+    "setting_id": "s0055",
+    "selection_uses": [
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000/routers/ivf-16384-seed73",
+    "router_kind": "ivf",
+    "clusters": 16384,
+    "probes": 3570,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0077",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-4096-seed73",
+    "router_kind": "ivf",
+    "clusters": 4096,
+    "probes": 2361,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0018",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000",
+    "documents": 100000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-256-seed73",
+    "router_kind": "ivf",
+    "clusters": 256,
+    "probes": 189,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "keys",
+    "key_bits": 4,
+    "key_offset": 0,
+    "candidate_target": 0,
+    "key_limit": 262144,
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0093",
+    "selection_uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      }
+    ]
+  },
+  {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000",
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_rows": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000/routers/ivf-256-seed73",
+    "router_kind": "ivf",
+    "clusters": 256,
+    "probes": 255,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "scan",
+    "block": 2,
+    "seed": 0,
+    "setting_id": "s0007",
+    "selection_uses": [
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ]
+  }
+]

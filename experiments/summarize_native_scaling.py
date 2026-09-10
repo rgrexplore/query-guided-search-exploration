@@ -9,7 +9,9 @@ import numpy as np
 from scipy.optimize import nnls
 
 from experiments.analysis import load_cases
+from experiments.choices import read_cohorts
 from experiments.isolated import ROOT
+from experiments.models import predict_native_cost as predict
 
 
 def fit_median_scaling(rows):
@@ -43,16 +45,9 @@ def score_and_selection(rows, row_cost):
                 per_scored_row_ms=row_cost,per_log_ratio_ms=float(coefficients[1]),top_k=100)
 
 
-def predict(model, row):
-    if model['kind']=='score_and_selection':
-        count=row['documents_scored']
-        return (model['fixed_ms']+count*model['per_scored_row_ms']
-                +model['per_log_ratio_ms']*np.log(max(count/model['top_k'],1)))
-    return model['fixed_ms']+model['per_million_ms']*row['documents']/1000000
-
-
 def summarize(folder):
     cases, failures = load_cases(folder)
+    cohorts=read_cohorts(folder,cases)
     assert not failures
     models=[]; summaries=[]
     for support in ('fixed','adaptive'):
@@ -60,7 +55,7 @@ def summarize(folder):
         eligible=set(range(8))
         for item in selected:
             case=item['case']
-            meta=json.loads((Path(case['pool'])/'pool.json').read_text())
+            meta=cohorts[case['pool']]
             eligible &= {q for q,count in enumerate(meta['strong_match_counts']) if count>=100}
             if case['method']=='branch':
                 words=(case['documents']+63)//64

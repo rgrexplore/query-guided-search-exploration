@@ -1,0 +1,64 @@
+{
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/data/native-scale-check-2026-09-11/adaptive/n8000000": {
+    "documents": 8000000,
+    "dimensions": 256,
+    "query_ids": [
+      "adaptive-scale-q0",
+      "adaptive-scale-q1",
+      "adaptive-scale-q2",
+      "adaptive-scale-q3",
+      "adaptive-scale-q4",
+      "adaptive-scale-q5",
+      "adaptive-scale-q6",
+      "adaptive-scale-q7"
+    ],
+    "strong_match_counts": [
+      903,
+      1008,
+      958,
+      942,
+      964,
+      997,
+      992,
+      958
+    ],
+    "support": "adaptive",
+    "hashes": {
+      "codes.npy": "075da1241d09ac9187069d245b026bcd16a1080402ec443a2371037fb0ad8c61",
+      "queries.npy": "c9c43def2b0265cd52e83d6564791ec2338ede9c6cc89b81b74ee7d6097eaf79",
+      "reference.npy": "39397511bbbbb782c86f192b405e4d17cba6ecbfd464f53b03baf50eafe2d535"
+    },
+    "scope": "Packed random signs; document prefix matches the earlier controlled corpus. New query seed197. Independent count-based full-score reference."
+  },
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/data/native-scale-check-2026-09-11/fixed/n8000000": {
+    "documents": 8000000,
+    "dimensions": 256,
+    "query_ids": [
+      "fixed-scale-q0",
+      "fixed-scale-q1",
+      "fixed-scale-q2",
+      "fixed-scale-q3",
+      "fixed-scale-q4",
+      "fixed-scale-q5",
+      "fixed-scale-q6",
+      "fixed-scale-q7"
+    ],
+    "strong_match_counts": [
+      985,
+      948,
+      955,
+      971,
+      1027,
+      1007,
+      997,
+      1000
+    ],
+    "support": "fixed",
+    "hashes": {
+      "codes.npy": "075da1241d09ac9187069d245b026bcd16a1080402ec443a2371037fb0ad8c61",
+      "queries.npy": "5421e193e8e368c05fe918a9f9c1eaa0319cd9b94ece6246675e0d6e69582f82",
+      "reference.npy": "04c9ecb57761fd6ff580810ff0f60dc432151ddbf63b8244d75cc2c8b8e409b0"
+    },
+    "scope": "Packed random signs; document prefix matches the earlier controlled corpus. New query seed197. Independent count-based full-score reference."
+  }
+}

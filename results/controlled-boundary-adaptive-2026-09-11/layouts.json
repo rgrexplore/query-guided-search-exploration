@@ -1,0 +1,94 @@
+{
+  "100000": [
+    {
+      "path": null,
+      "kind": "none",
+      "clusters": 1,
+      "routing_bits": 0,
+      "probes": [
+        1
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000/routers/sign-16384-seed73",
+      "kind": "sign",
+      "clusters": 16384,
+      "routing_bits": 14,
+      "probes": [
+        16348
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000/routers/ivf-16384-seed73",
+      "kind": "ivf",
+      "clusters": 16384,
+      "routing_bits": 0,
+      "probes": [
+        3570,
+        6095,
+        8524,
+        12430,
+        16336
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n100000/routers/direct-16384-seed73",
+      "kind": "direct",
+      "clusters": 16384,
+      "routing_bits": 14,
+      "probes": [
+        9017,
+        12421,
+        14373,
+        15971,
+        16343
+      ]
+    }
+  ],
+  "1000000": [
+    {
+      "path": null,
+      "kind": "none",
+      "clusters": 1,
+      "routing_bits": 0,
+      "probes": [
+        1
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000/routers/sign-16384-seed73",
+      "kind": "sign",
+      "clusters": 16384,
+      "routing_bits": 14,
+      "probes": [
+        16383
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000/routers/ivf-16384-seed73",
+      "kind": "ivf",
+      "clusters": 16384,
+      "routing_bits": 0,
+      "probes": [
+        6359,
+        8935,
+        11087,
+        14427,
+        16270
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-adaptive-2026-09-11/n1000000/routers/direct-16384-seed73",
+      "kind": "direct",
+      "clusters": 16384,
+      "routing_bits": 14,
+      "probes": [
+        8461,
+        12246,
+        14234,
+        15991,
+        16374
+      ]
+    }
+  ]
+}

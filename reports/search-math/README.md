@@ -35,9 +35,10 @@ npx -p @mermaid-js/mermaid-cli mmdc \
 ```
 
 Mermaid CLI needs its supported browser runtime. This build used Mermaid CLI with a temporary
-headless Chrome process; no personal browser profile is needed. Four additional figures use Matplotlib: `recall-validation.pdf` shows the earlier quality
+headless Chrome process; no personal browser profile is needed. Five additional figures use Matplotlib: `recall-validation.pdf` shows the earlier quality
 study; `nearest-distance.pdf` and `recall-model-checks.pdf` show the derivation checks;
-`measured-cases.pdf` compares independently evaluated settings on three data distributions.
+`measured-cases.pdf` compares independently evaluated settings on three data distributions;
+`billion-break-even.pdf` shows the conditional scan-fraction crossing.
 
 ## Arithmetic and evidence checks
 
@@ -102,7 +103,7 @@ real-data test or a bound on total model error.
 
 Version checkpoints: `67bdfc7` preserves the report before this extension; `0fd1ae3` saves the
 expanded derivations and checked distributions. That edition has 55 pages, nine figures and fourteen pseudocode listings. The current
-measured-study edition has 65 pages, ten figures and fifteen listings.
+measured-study edition has 72 pages, eleven figures and fifteen listings.
 
 
 ## Implemented study
@@ -127,6 +128,24 @@ folder before checking its native counters on a fresh checkout. The plotting scr
 saved independent-evaluation tables. The full dataset runs are documented in
 `experiments/README.md`; ordinary PDF compilation still needs no dataset or native extension.
 
-The current edition preserves the original report and adds evidence. Further parameter-boundary
-checks and larger-working-set cost measurements are needed before stronger optimum or
-billion-document timing claims. The calculator remains separate from this evidence update.
+The current edition preserves the original report and adds evidence. The bounded parameter follow-ups, larger buffers and frozen 8M native checks are included.
+The billion-document scenarios remain extrapolations, with assumptions and limitations stated explicitly. The calculator remains separate from this evidence update.
+
+
+## Final evidence and calculations
+
+The final cost section includes the retained cache/model failures, the corrected median fit,
+small-posting selection work, a frozen 8M check, parameter-boundary follow-ups, a shortest-key
+control and actual single-text-query timing. `verify_math.py` checks the quoted values from
+frozen copies under `evidence/`.
+
+The source ZIP also includes the small pure-Python cost modules. With NumPy and SciPy installed,
+recalculate the scenarios from the saved inputs without the native extension or corpus:
+
+```bash
+python -m experiments.project_costs --inputs reports/search-math/evidence/projected-cases.json \
+  --output results/my-scenarios --documents 1000000000 --ram-gb 32 64 1000
+```
+
+Ordinary PDF compilation still needs only LaTeX and the included vector figures. The full
+project checkout contains all experiment drivers and case archives.

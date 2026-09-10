@@ -61,5 +61,11 @@ its own query provenance required; previously inspected queries are not relabele
 - [x] Compare 447 applicable work predictions with native counters.
 - [x] Add a small runnable query and a paper-to-code map.
 - [x] Compile and inspect the expanded 65-page report.
-- [ ] Check relevant parameter boundaries and larger working-set costs before extending timing claims.
-- [ ] Update larger-corpus numerical projections and finish repository integration.
+- [x] Check relevant parameter boundaries and larger working-set costs before extending timing claims.
+- [x] Update conditional larger-corpus numerical projections.
+- [ ] Finish repository integration and final reproduction audit.
+
+
+Final evidence edition:72pages,11figures,15listings. It includes the explicit limits of the1B
+forecasts rather than claiming a measured1B run or a global optimum. Original and intermediate
+PDF/source versions remain available in Git.

@@ -15,17 +15,16 @@ T_B={}&\Tcommon+T_{\rm order}+T_{\rm roots}
  +\sum_j s_jW_jc_{\rm split}+\sum_j\ell_jW_jc_{\rm leafword}\notag\\
  &+Vc_{\rm node}+FGc_{\rm lut,leaf}
  +H_s(F,R)c_{\rm heap}+T_{\rm rank}(R)+\Tfinish(R'),\label{eq:final-B}\\[3pt]
-T_C={}&\Tcommon+T_{\rm keyprep}
- +\sum_j\left(E_jc_{\rm enum}+C_j^{\rm copy}c_{\rm copy}
-              +H_jc_{\rm lookup}+F_jc_{\rm post}\right)\notag\\
- &+\sum_j F_jG_{C,j}c_{\rm lut,gather}+H_s(F,R)c_{\rm heap}
+T_C={}&\Tcommon+T_{\rm keyprep}+E c_{\rm enum}+C^{\rm copy}c_{\rm copy}
+ +\sum_j\left(H_jc_{\rm lookup}+F_jc_{\rm post}\right)\notag\\
+ &+FGc_{\rm lut,posting}+H_s(F,R)c_{\rm heap}
  +T_{\rm rank}(R)+\Tfinish(R').\label{eq:final-C}
 \end{align}
-$G_{C,j}$ is the candidate scoring work actually needed after reusing the key contribution; it can be zero for a full key with its exact score already known.
-
-All cluster sums in query work run over $j\in\mathcal P(q)$. If C uses a merged stream,
-add its explicitly counted stream-selection cost. Different execution choices can share
-preparation or reuse buffers; record those choices rather than charging duplicated work.
+This C expression follows the implemented shared stream: $E$ counts its enumeration work once,
+and $C^{\rm copy}$ counts its mask-copy work once. Cluster sums cover actual directory lookups
+and postings. $F=\sum_jF_j$, and the current scorer evaluates all $G$ groups per candidate.
+A tail-only or full-key score-reuse implementation would substitute its actual group count;
+those savings are not credited to the measurements here.
 
 \Needspace{12\baselineskip}
 \subsection{An index speedup is not the same as an end-to-end speedup}
@@ -41,20 +40,25 @@ should both be reported rather than substituted for one another.
 
 \Needspace{12\baselineskip}
 \subsection{Persistent storage}
-For the reference layouts selected in this report,
+The earlier reference layouts explain logical payload. For the implemented native cores,
+write the allocated terms explicitly:
 \begin{align}
-M_{A,\rm index}&=\Mbase,\label{eq:final-storageA}\\
-M_{B,\rm index}&=\Mbase+d b_w\sum_{j=1}^{C}\ceil{n_j/w},\label{eq:final-storageB}\\
-M_{C,\rm index}&=\Mbase+N b_{\rm ref}
- +\sum_{j=1}^{C}\ceil{U_j/\alpha}\,[b_k(h_j)+2b_o+b_{\rm slot}].
+M_{A,\rm core}&=M_{\rm codes,cap}+M_{\rm IDs,cap}+M_{\rm other,A},\label{eq:final-storageA}\\
+M_{B,\rm core}&=M_{\rm codes,cap}+M_{\rm IDs,cap}+M_{\rm planes,cap}
+ +M_{\rm other,B},\label{eq:final-storageB}\\
+M_{C,\rm core}&=M_{\rm codes,cap}+M_{\rm IDs,cap}
+ +\sum_j(U_jb_{\rm node}+L_jb_{\rm ptr})+M_{\rm other,C}.
 \label{eq:final-storageC}
 \end{align}
-Storage sums run over \emph{all} clusters, not only probed clusters. Increasing probes usually
-changes query work and scratch, not the already built index size. For literal prefix relaxation, substitute the trie directory and query-work formula from Equation~\eqref{eq:trie-cost}.
+``cap'' means allocated array capacity. The remaining terms cover bucket objects, the outer
+label map and allocator bookkeeping not already counted. C's IDs are its postings; there is
+no second $N$-row posting permutation. Its hash-node and bucket-pointer terms use the separate
+chaining layout in Equation~\eqref{eq:native-key-storage}.
 
-A different C layout can
-remove the additional posting permutation; it cannot remove the information needed to map
-results back to documents.
+The plane payload is $d b_w\sum_j\ceil{n_j/w}$; allocated capacity is at least that payload.
+Storage sums run over all clusters, not just the probed ones. Add any retained routing index,
+filters and fine-ranking vectors to the native core to obtain the resident index. Input arrays
+kept only during construction belong to the build peak, not the serving-state sum.
 
 \Needspace{12\baselineskip}
 \subsection{Peak query RAM and the serving budget}
@@ -65,10 +69,19 @@ The search-stage scratch terms are
 Q_{A,\rm search}&=\Qbase+Q_{\rm scan\ workspace},\\
 Q_{B,\rm search}&=\Qbase+Q_{\rm order}
  +\max_t[\gamma_B Q_{B,\rm frontier}(t)+Q_{\rm current}(t)+Q_{\rm children}(t)],\\
-Q_{C,\rm search}&=\Qbase+
- \max_t\left[\sum_j\gamma_C Q_j(t)b_{\rm enum,j}
- +Q_{\rm stream\ merge}(t)+Q_{\rm posting\ buffer}(t)+Q_{\rm gather}(t)\right].
+Q_{C,\rm search}&=\Qbase+Q_{\rm keyorder}+Q_{\rm selected}
+ +\max_t[\gamma_C Q_{\rm enum}(t)b_{\rm state}].
 \end{align}
+C has one queue for the common key coordinates, not one queue per probed cluster.
+$Q_{\rm keyorder}$ stores the sorted coordinate indices; $Q_{\rm selected}$ stores the selected
+bucket pointers. $\gamma_C Q_{\rm enum}$ accounts for queue capacity rather than only live entries.
+The candidate heap is already in $\Qbase$, so it is not added again. The current C implementation
+reads posting ranges directly and allocates no separate gathered-document buffer.
+
+At the Python boundary, native result vectors and output arrays may coexist. Include that
+interface workspace when evaluating the full request peak. Whole-process observations include
+it even when individual interface allocations are not separately instrumented.
+
 Small iterator state is included in workspace terms. Embedding and final reranking can have
 larger scratch than search, so use Equation~\eqref{eq:peak} to obtain the full query peak.
 With resident index size $M_{m,\rm resident}$ for method $m$, the RAM constraint is
@@ -94,10 +107,10 @@ to the measured results.
 \begin{longtable}{@{}P{.16\linewidth}P{.25\linewidth}P{.25\linewidth}P{.25\linewidth}@{}}
 \toprule & A: full scan & B: bitplanes & C: key enumeration\\\midrule\endfirsthead
 \toprule & A: full scan & B: bitplanes & C: key enumeration\\\midrule\endhead
-Additional index & none beyond common layout & $d b_w\sum_jW_j$ & postings and key directory\\
+Additional index & none beyond common layout & $d b_w\sum_jW_j$ & key directory; IDs already counted\\
 Principal work & every eligible code & split masks, leaf masks, full scores, frontier & empty and occupied keys, enumeration, postings, full scores\\
-Variable counts & $\Nelig$ & $s_j,\ell_j,f_j,V$ & $H_j,F_j,E_j,Q_j^{\max}$\\
-Largest scratch concern & selection or batch score buffers & many full-width pending masks & many pending flip sets or candidate gather buffers\\
+Variable counts & $\Nelig$ & $s_j,\ell_j,f_j,V$ & $H_j,F_j,E,Q_{\rm enum}^{\max}$\\
+Largest scratch concern & selection or batch score buffers & many full-width pending masks & pending flip sets and interface outputs\\
 Local exactness & scan all eligible rows & valid bounds, sufficient traversal, correct ties & full-key weighted order or a valid full-score bound\\
 Approximation control & routing probes; candidate/rerank boundary & node budget, visit policy, earlier routing & prefix width, candidate or key budget, earlier routing\\
 What must be measured & kernel cost, routing quality & skipped scores versus bitmap/queue cost and recall & empty-key volume versus useful candidates, timing and recall\\\bottomrule
@@ -182,6 +195,8 @@ real-data errors are too large to establish such a winner.
 If $d$ is also varied, keep the quality reference fixed across choices, for example the same
 long-vector top $K$ or the same relevance labels. Recomputing a different binary ground truth
 for every $d$ makes a tiny representation look perfectly accurate against its own changed task.
+
+\input{sections/08b-projections}
 
 \begin{resultbox}{What the comparison tells us}
 A pays to score the selected pool. B pays to discover which scores can be avoided, and dense

@@ -1,0 +1,3 @@
+documents,target,selection,method,scan_setting,other_setting,both_qualified,speedup,speedup_low,speedup_high,supported_speedup
+1000000,0.99,conservative,branch,s4707,s4886,False,0.9681436529521046,0.9582512145639759,0.9795885676892532,False
+1000000,0.99,conservative,keys,s4707,one-bit-keys,False,0.9047358255410582,0.8746010970315974,0.9590621989499919,False

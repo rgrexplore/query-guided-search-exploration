@@ -1,0 +1,91 @@
+{
+  "100000": [
+    {
+      "path": null,
+      "kind": "none",
+      "clusters": 1,
+      "routing_bits": 0,
+      "probes": [
+        1
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-fixed-2026-09-11/n100000/routers/sign-16384-seed73",
+      "kind": "sign",
+      "clusters": 16384,
+      "routing_bits": 14,
+      "probes": [
+        16334
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-fixed-2026-09-11/n100000/routers/ivf-16384-seed73",
+      "kind": "ivf",
+      "clusters": 16384,
+      "routing_bits": 0,
+      "probes": [
+        3375,
+        5544,
+        7899,
+        11676,
+        15144
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-fixed-2026-09-11/n100000/routers/direct-16384-seed73",
+      "kind": "direct",
+      "clusters": 16384,
+      "routing_bits": 14,
+      "probes": [
+        22,
+        25,
+        27,
+        28
+      ]
+    }
+  ],
+  "1000000": [
+    {
+      "path": null,
+      "kind": "none",
+      "clusters": 1,
+      "routing_bits": 0,
+      "probes": [
+        1
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-fixed-2026-09-11/n1000000/routers/sign-16384-seed73",
+      "kind": "sign",
+      "clusters": 16384,
+      "routing_bits": 14,
+      "probes": [
+        2,
+        15
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-fixed-2026-09-11/n1000000/routers/ivf-16384-seed73",
+      "kind": "ivf",
+      "clusters": 16384,
+      "routing_bits": 0,
+      "probes": [
+        6398,
+        9126,
+        11030,
+        14326,
+        16233
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-boundary-fixed-2026-09-11/n1000000/routers/direct-16384-seed73",
+      "kind": "direct",
+      "clusters": 16384,
+      "routing_bits": 14,
+      "probes": [
+        2,
+        3
+      ]
+    }
+  ]
+}

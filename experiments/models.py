@@ -80,3 +80,12 @@ def mean_recall(values, top_k):
     turning an exact 99% total into 0.9899999999999999 during averaging.
     """
     return sum(round(float(value)*top_k) for value in values)/(len(values)*top_k)
+
+
+def predict_native_cost(model, row):
+    """Evaluate the saved complete-call model for its declared workload."""
+    if model['kind']=='score_and_selection':
+        count=row['documents_scored']
+        return (model['fixed_ms']+count*model['per_scored_row_ms']
+                +model['per_log_ratio_ms']*np.log(max(count/model['top_k'],1)))
+    return model['fixed_ms']+model['per_million_ms']*row['documents']/1000000

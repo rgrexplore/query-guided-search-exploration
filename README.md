@@ -13,7 +13,7 @@ what each one checks. It needs the installed native extension but no downloaded 
 .venv/bin/python -m experiments.run --config experiments/configs/controlled-small.toml --output results/my-small-check
 ```
 
-Installation is below under **Run it**. A complete study keeps its settings, per-query
+Installation is below under **Install and try the small example**. A complete study keeps its settings, per-query
 measurements, machine details and result tables together in one output folder.
 
 ## Current measured results
@@ -38,6 +38,19 @@ and [changing-coordinate evaluation](results/controlled-adaptive-2026-09-10/eval
 for exact settings, achieved recall, uncertainty and target misses. The paper explains the
 formulas and their limits. Billion-document projections remain a separate modeling question.
 
+## Follow-up checks
+
+The [parameter-boundary check](results/controlled-boundary-adaptive-2026-09-11/evaluation/report/README.md)
+selected a leaf size of 160 and retained a large bitplane advantage in the constructed changing-coordinate case.
+The [one-bit real-data control](results/one-bit-evaluation-2026-09-11/report/README.md) found no key-search
+advantage; all methods reached 98.95% on its new query sample, below the 99% target.
+Those outcomes remain separate from the original table above.
+
+[Native size-transfer checks](results/native-scale-confirmation-2026-09-11/README.md)
+cover 8M generated binary rows. [Complete text-query measurements](results/text-queries-2026-09-11/README.md)
+include single-query MPS encoding. [Larger-corpus scenarios](results/projected-cases-2026-09-11/README.md)
+are conditional forecasts, not a billion-document benchmark.
+
 ## Earlier studies
 
 The original FiQA pipeline compares scan and bitplane search with a float reranking step.
@@ -57,7 +70,9 @@ The path through the code is:
 
 **documents → embeddings → buckets → binary candidates → float reranking → measurements**
 
-## Explore the cost calculator
+## Earlier cost calculator
+
+The calculator is an earlier exploratory model. The paper contains the current checked results.
 
 [Three ways to search](calculator/README.md) compares scan, bitplane branching and walking
 backwards from a query key. Four shared controls, small query examples and the saved measurements
@@ -70,7 +85,7 @@ python3 -m http.server 8767 --bind 127.0.0.1
 
 Open http://127.0.0.1:8767/calculator/.
 
-## Run it
+## Install and try the small example
 
 Python 3.12 and a C++20 compiler are needed. On macOS, the compiler comes with the Xcode
 command-line tools. The native search runs on CPU; embedding preparation can use MPS or CUDA.
@@ -81,10 +96,16 @@ to that file's folder.
 uv venv --python 3.12
 uv pip install --python .venv/bin/python -e '.[test]'
 .venv/bin/python -m pytest -q
+.venv/bin/python examples/small_search.py
+```
+
+## Original FiQA pipeline
+
+```bash
 .venv/bin/python run.py --config experiment.toml
 ```
 
-The first run downloads FiQA and Nomic's model weights, then encodes 57,638 documents and 648
+Running this original pipeline downloads FiQA and Nomic's model weights, then encodes 57,638 documents and 648
 queries. Later runs reuse matching arrays. Model revision, text IDs, preprocessing and dimensions
 are recorded in the cache. Changing the prefix dimension reuses the full vectors.
 

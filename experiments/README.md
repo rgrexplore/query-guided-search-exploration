@@ -229,3 +229,41 @@ real-data results are in `../results/independent-evaluation-2026-09-10/report/`.
 and gathered leaf scores. The largest bitmap is125MB; the whole-index memory is counted
 separately. `buffer_costs.py` records source copies and OS peaks; `summarize_buffer_costs.py`
 keeps the failed cost-model checks. These measurements do not replace the retrieval studies.
+
+
+## Final follow-ups and complete-query checks
+
+The parameter follow-up uses the first 40 constructed queries for tuning and IDs 40–59 for the
+new evaluation. Run the fixed case first: the adaptive case reuses its routers after checking
+that their document hashes match.
+
+```bash
+python -m experiments.run --config experiments/configs/controlled-boundary-fixed.toml --output results/my-fixed-boundary
+python -m experiments.run --config experiments/configs/controlled-boundary-adaptive.toml --output results/my-adaptive-boundary
+```
+
+These saved configurations reference the original frozen choices and caches by name. For a new
+output naming scheme, update `prior_shortlist` and `router_source_cache` accordingly. They are
+inputs, not hidden downloads.
+
+For the native scaling check and frozen cost-model check:
+
+```bash
+python -m experiments.native_scaling --output results/my-native-scale
+python -m experiments.summarize_native_scaling results/my-native-scale
+python -m experiments.native_scaling --sizes 8000000 --output results/my-native-confirmation
+python -m experiments.check_native_model results/my-native-confirmation --models results/native-scale-check-2026-09-11/frozen-models.json
+```
+
+The last command uses the published frozen coefficients. The native scaling generator needs
+only packed signs and small score arrays; it checks its first1M codes against the earlier
+controlled cache. It does not claim a new real-text dataset or optimal routing at8M.
+
+`text_queries.py` measures one text at a time through the pinned MPS model, normalization,
+routing and frozen native search. `project_costs.py` reads the saved evidence to calculate the
+conditional larger-N/RAM scenarios. The paper describes the assumptions and retained failures.
+
+For a fresh real-data preparation, follow the root scaling preparation command and use the
+resulting embedding directory as `data.embedding_dir` in the experiment configuration. Its
+content-addressed path can differ with the environment. Do not point a new run at a cache
+created with different preprocessing just to match an example path.

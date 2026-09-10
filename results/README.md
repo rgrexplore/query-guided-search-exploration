@@ -1,5 +1,25 @@
 # Experiment results
 
+## Current three-method study
+
+| Question | Result folder |
+|---|---|
+| What happened on real embeddings after tuning? | [Independent real queries](independent-evaluation-2026-09-10/report/README.md) |
+| What if important coordinates stay fixed? | [Fixed-coordinate follow-up](controlled-boundary-fixed-2026-09-11/evaluation/report/README.md) |
+| What if important coordinates change per query? | [Changing-coordinate follow-up](controlled-boundary-adaptive-2026-09-11/evaluation/report/README.md) |
+| Does the smallest key improve the real baseline? | [One-bit control](one-bit-evaluation-2026-09-11/report/README.md) |
+| Do the native cost predictions transfer to a larger corpus? | [Frozen 8M check](native-scale-confirmation-2026-09-11/frozen-model-check.json) |
+| What changes when encoding is included? | [Actual text-query timings](text-queries-2026-09-11/summary.json) |
+| What can be estimated at larger N and RAM? | [Conditional scenarios](projected-cases-2026-09-11/results.json) |
+
+Each case archive retains raw measurements, exact settings and process status. Extract `cases.zip`
+in its containing directory before re-running an aggregate analysis. The saved summaries and
+paper can be read without downloading the corpus. Generating new measurements requires the
+configured data and environment.
+
+## Earlier studies
+
+
 [Million-passage scaling](scaling-msmarco-1m/README.md): scan remained faster at both recall targets.
 The saved study includes seven pool sizes, fixed budget curves and the complete raw results.
 

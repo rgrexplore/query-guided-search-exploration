@@ -1,0 +1,60 @@
+{
+  "model_sha256": "4db2c75b332f4624b70f9c0d6f06ad179158f0d48e12594ad79bbfcede426968",
+  "rows": [
+    {
+      "support": "adaptive",
+      "method": "branch",
+      "documents": 8000000,
+      "measured_ms": 0.8999789133667946,
+      "predicted_ms": 0.8591276127845049,
+      "error_percent": -4.539139748226562,
+      "within_twenty_percent": true
+    },
+    {
+      "support": "fixed",
+      "method": "branch",
+      "documents": 8000000,
+      "measured_ms": 0.8538123220205307,
+      "predicted_ms": 0.8843766991049047,
+      "error_percent": 3.5797535706727723,
+      "within_twenty_percent": true
+    },
+    {
+      "support": "adaptive",
+      "method": "scan",
+      "documents": 8000000,
+      "measured_ms": 196.66391680948436,
+      "predicted_ms": 197.81554528084936,
+      "error_percent": 0.5855819867966128,
+      "within_twenty_percent": true
+    },
+    {
+      "support": "fixed",
+      "method": "scan",
+      "documents": 8000000,
+      "measured_ms": 197.02910375781357,
+      "predicted_ms": 203.0161332335559,
+      "error_percent": 3.038652341991832,
+      "within_twenty_percent": true
+    },
+    {
+      "support": "adaptive",
+      "method": "keys",
+      "documents": 8000000,
+      "measured_ms": 202.76685408316553,
+      "predicted_ms": 207.08566880784923,
+      "error_percent": 2.1299411800867363,
+      "within_twenty_percent": true
+    },
+    {
+      "support": "fixed",
+      "method": "keys",
+      "documents": 8000000,
+      "measured_ms": 0.04810444079339504,
+      "predicted_ms": 0.051811686260345935,
+      "error_percent": 7.706659522087023,
+      "within_twenty_percent": true
+    }
+  ],
+  "scope": "Frozen model checked at a larger corpus size; no refit. Same prescribed query distribution and existing query IDs; this checks size transfer, not new-query generalization."
+}

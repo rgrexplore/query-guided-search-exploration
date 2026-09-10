@@ -1,0 +1,28 @@
+{
+  "experiment": {
+    "stage": "evaluate",
+    "shortlist": "results/one-bit-control-frozen-2026-09-11/shortlist.json"
+  },
+  "data": {
+    "kind": "cached_vectors",
+    "embedding_dir": "data/scaling/1be0393b70430821be5a67e569bcc2df11106c0e17afdeb574350f4930bea7d3/embeddings/e867d7419fedbd667eaea8e1febe56b2fe16881be9570f6ae11c6bef51bff273",
+    "query_dir": "data/one-bit-queries-2026-09-11",
+    "cache_dir": "data/one-bit-evaluation-2026-09-11",
+    "dimensions": 256,
+    "queries": 100,
+    "query_start": 0
+  },
+  "search": {
+    "top_k": 100
+  },
+  "measurement": {
+    "repetitions": 3,
+    "blocks": 3,
+    "schedule_seed": 103
+  },
+  "limits": {
+    "ram_budget_bytes": 32000000000,
+    "worker_stop_bytes": 34359738368,
+    "case_seconds": 180
+  }
+}

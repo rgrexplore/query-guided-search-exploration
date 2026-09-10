@@ -1,0 +1,7 @@
+{
+  "bootstrap_samples": 2000,
+  "seed": 63,
+  "unit": "query and independent process block",
+  "paired": true,
+  "scope": "Query/process-block bootstrap, conditional on the tested seed set and observed machine state. Repeated timings are not independent quality samples. Intervals are not simultaneous guarantees over all comparisons."
+}

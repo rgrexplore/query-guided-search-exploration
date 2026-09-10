@@ -1,3 +1,7 @@
+> Historical assumed-cost examples. The current implementation uses integrated C postings
+> and a different measured cost model. Use `experiments/project_costs.py` and
+> `results/projected-cases-2026-09-11/` for the current conditional scenarios.
+
 # Numerical cases under a 32 GB RAM budget
 
 These are calculated what-if cases, not new benchmark results. They instantiate the report's

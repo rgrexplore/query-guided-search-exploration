@@ -1,0 +1,15 @@
+{
+  "sizes": [
+    8000000
+  ],
+  "dimensions": 256,
+  "queries": 8,
+  "query_seed": 197,
+  "top_k": 100,
+  "strong_bits": 13,
+  "repetitions": 2,
+  "limits": {
+    "worker_stop_bytes": 34359738368,
+    "case_seconds": 180
+  }
+}

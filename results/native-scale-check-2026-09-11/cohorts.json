@@ -1,0 +1,188 @@
+{
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/data/native-scale-check-2026-09-11/adaptive/n1000000": {
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_ids": [
+      "adaptive-scale-q0",
+      "adaptive-scale-q1",
+      "adaptive-scale-q2",
+      "adaptive-scale-q3",
+      "adaptive-scale-q4",
+      "adaptive-scale-q5",
+      "adaptive-scale-q6",
+      "adaptive-scale-q7"
+    ],
+    "strong_match_counts": [
+      133,
+      111,
+      127,
+      135,
+      109,
+      113,
+      108,
+      115
+    ],
+    "support": "adaptive",
+    "hashes": {
+      "codes.npy": "c73da5d472e253f5b12d035b673abdf1be0ab1e87c5491a8918729bd188e9308",
+      "queries.npy": "c9c43def2b0265cd52e83d6564791ec2338ede9c6cc89b81b74ee7d6097eaf79",
+      "reference.npy": "9d45a193fb5ea7b1bf74cb4f5829076028153e4e64883f79668dd3d6b55f85e6"
+    },
+    "scope": "Packed random signs; document prefix matches the earlier controlled corpus. New query seed197. Independent count-based full-score reference."
+  },
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/data/native-scale-check-2026-09-11/adaptive/n2000000": {
+    "documents": 2000000,
+    "dimensions": 256,
+    "query_ids": [
+      "adaptive-scale-q0",
+      "adaptive-scale-q1",
+      "adaptive-scale-q2",
+      "adaptive-scale-q3",
+      "adaptive-scale-q4",
+      "adaptive-scale-q5",
+      "adaptive-scale-q6",
+      "adaptive-scale-q7"
+    ],
+    "strong_match_counts": [
+      243,
+      244,
+      247,
+      251,
+      245,
+      259,
+      220,
+      234
+    ],
+    "support": "adaptive",
+    "hashes": {
+      "codes.npy": "8bed90187a761c5550e907ebd8f74c3e4f20d46d9f1919ef42fafa9ad9b79292",
+      "queries.npy": "c9c43def2b0265cd52e83d6564791ec2338ede9c6cc89b81b74ee7d6097eaf79",
+      "reference.npy": "ca8f7f01b5b95b83de869e7b71a87bdebb87d4d0eeae715a6e22dd7a8a9c1fa4"
+    },
+    "scope": "Packed random signs; document prefix matches the earlier controlled corpus. New query seed197. Independent count-based full-score reference."
+  },
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/data/native-scale-check-2026-09-11/adaptive/n4000000": {
+    "documents": 4000000,
+    "dimensions": 256,
+    "query_ids": [
+      "adaptive-scale-q0",
+      "adaptive-scale-q1",
+      "adaptive-scale-q2",
+      "adaptive-scale-q3",
+      "adaptive-scale-q4",
+      "adaptive-scale-q5",
+      "adaptive-scale-q6",
+      "adaptive-scale-q7"
+    ],
+    "strong_match_counts": [
+      450,
+      511,
+      461,
+      499,
+      480,
+      478,
+      483,
+      477
+    ],
+    "support": "adaptive",
+    "hashes": {
+      "codes.npy": "227f8717130f13d3f88281f9fd8dc24c6ffe6a9422004ce3ac35e895f60b895b",
+      "queries.npy": "c9c43def2b0265cd52e83d6564791ec2338ede9c6cc89b81b74ee7d6097eaf79",
+      "reference.npy": "014396bb9b4a01c24c50263484e1637fc7fc90ac97ec7dac56cbaf6a8467142e"
+    },
+    "scope": "Packed random signs; document prefix matches the earlier controlled corpus. New query seed197. Independent count-based full-score reference."
+  },
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/data/native-scale-check-2026-09-11/fixed/n1000000": {
+    "documents": 1000000,
+    "dimensions": 256,
+    "query_ids": [
+      "fixed-scale-q0",
+      "fixed-scale-q1",
+      "fixed-scale-q2",
+      "fixed-scale-q3",
+      "fixed-scale-q4",
+      "fixed-scale-q5",
+      "fixed-scale-q6",
+      "fixed-scale-q7"
+    ],
+    "strong_match_counts": [
+      123,
+      147,
+      124,
+      112,
+      135,
+      129,
+      124,
+      125
+    ],
+    "support": "fixed",
+    "hashes": {
+      "codes.npy": "c73da5d472e253f5b12d035b673abdf1be0ab1e87c5491a8918729bd188e9308",
+      "queries.npy": "5421e193e8e368c05fe918a9f9c1eaa0319cd9b94ece6246675e0d6e69582f82",
+      "reference.npy": "b37408c3b1f3eaf75e1c81de3afea850c202e9b7a41779b7241fe212d10686e3"
+    },
+    "scope": "Packed random signs; document prefix matches the earlier controlled corpus. New query seed197. Independent count-based full-score reference."
+  },
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/data/native-scale-check-2026-09-11/fixed/n2000000": {
+    "documents": 2000000,
+    "dimensions": 256,
+    "query_ids": [
+      "fixed-scale-q0",
+      "fixed-scale-q1",
+      "fixed-scale-q2",
+      "fixed-scale-q3",
+      "fixed-scale-q4",
+      "fixed-scale-q5",
+      "fixed-scale-q6",
+      "fixed-scale-q7"
+    ],
+    "strong_match_counts": [
+      239,
+      259,
+      237,
+      226,
+      262,
+      255,
+      266,
+      238
+    ],
+    "support": "fixed",
+    "hashes": {
+      "codes.npy": "8bed90187a761c5550e907ebd8f74c3e4f20d46d9f1919ef42fafa9ad9b79292",
+      "queries.npy": "5421e193e8e368c05fe918a9f9c1eaa0319cd9b94ece6246675e0d6e69582f82",
+      "reference.npy": "71c8a117107d50752dad000f505e2d9da9ada022b4c47b7df9d41e8a1e6d8df7"
+    },
+    "scope": "Packed random signs; document prefix matches the earlier controlled corpus. New query seed197. Independent count-based full-score reference."
+  },
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/data/native-scale-check-2026-09-11/fixed/n4000000": {
+    "documents": 4000000,
+    "dimensions": 256,
+    "query_ids": [
+      "fixed-scale-q0",
+      "fixed-scale-q1",
+      "fixed-scale-q2",
+      "fixed-scale-q3",
+      "fixed-scale-q4",
+      "fixed-scale-q5",
+      "fixed-scale-q6",
+      "fixed-scale-q7"
+    ],
+    "strong_match_counts": [
+      521,
+      488,
+      493,
+      487,
+      523,
+      509,
+      497,
+      505
+    ],
+    "support": "fixed",
+    "hashes": {
+      "codes.npy": "227f8717130f13d3f88281f9fd8dc24c6ffe6a9422004ce3ac35e895f60b895b",
+      "queries.npy": "5421e193e8e368c05fe918a9f9c1eaa0319cd9b94ece6246675e0d6e69582f82",
+      "reference.npy": "29a16132960df91456f7addd59d1b62af1ae90a7f31734d723d6cf61994319eb"
+    },
+    "scope": "Packed random signs; document prefix matches the earlier controlled corpus. New query seed197. Independent count-based full-score reference."
+  }
+}

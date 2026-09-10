@@ -283,6 +283,46 @@ def check_implemented_study():
     return dict(work_predictions=checked, ideal_key_recall=recall, source_sha256=hashes)
 
 
+def check_final_study():
+    data=json.loads((HERE/'evidence/final-study.json').read_text())['data']
+    check=data['native_check']
+    assert len(check['rows'])==6 and all(r['within_twenty_percent'] for r in check['rows'])
+    assert max(abs(r['error_percent']) for r in check['rows']) < 7.8
+    assert check['model_sha256']==hashlib.sha256(json.dumps(data['native_models'],indent=2).encode()+b'\n').hexdigest()
+    for row in data['one_bit_targets']:
+        assert float(row['recall'])==.9895 and row['met_target']=='False'
+    assert not any(r['supported_speedup']=='True' for r in data['one_bit_comparisons'])
+    point=next(r for r in data['adaptive_boundary_targets'] if r['documents']=='1000000'
+               and r['method']=='branch' and r['selection']=='conservative' and r['target']=='0.99')
+    assert point['leaf_size']=='160' and float(point['recall'])==1
+    assert abs(float(point['p50_ms'])-.14462508261203766)<1e-12
+    measurements=json.loads((HERE/'evidence/text-query-measurements.json').read_text())
+    assert len(measurements)==360
+    for row in measurements:
+        assert math.isclose(row['total_ms'],row['encoding_ms']+row['retrieval_ms'],abs_tol=1e-9)
+    for summary in data['text_summary']:
+        values=sorted(r['total_ms'] for r in measurements if r['method']==summary['method'])
+        assert len(values)==120
+        assert (values[59]+values[60])/2==summary['total_p50_ms']
+        assert summary['recall']==.9945
+    projected=json.loads((HERE/'evidence/projected-cases.json').read_text())
+    billion=[r for r in projected['rows'] if r['documents']==10**9 and r['branch_scale']==1]
+    assert all(r['status']=='payload_exceeds_budget' for r in billion if r['ram_gb']==32)
+    assert all(r['status']=='payload_exceeds_budget' for r in billion if r['ram_gb']==64 and r['method'].startswith('branch'))
+    scan=next(r for r in billion if r['ram_gb']==1000 and r['method']=='scan_all')
+    branch=next(r for r in billion if r['ram_gb']==1000 and r['method']=='branch')
+    assert scan['payload_lower_bytes']==40*10**9
+    assert branch['payload_lower_bytes']==72*10**9 and branch['scratch_bytes']==1875000000
+    assert branch['leaf_size']==160000 and .004<branch['break_even_scan_fraction']<.0042
+    assert math.isclose(branch['break_even_scan_fraction'],branch['modeled_ms']/scan['modeled_ms'])
+    for h in (12,13,14,24):
+        row=next(r for r in projected['key_work_model'] if r['documents']==10**9 and r['key_bits']==h)
+        probability=math.prod((256-13-i)/(256-i) for i in range(h))
+        assert math.isclose(probability,row['no_strong_coordinate_probability'],abs_tol=1e-14)
+    return dict(native_confirmation_cases=6,largest_native_error_percent=max(abs(r['error_percent']) for r in check['rows']),
+                text_requests=len(measurements),one_bit_recall=.9895,billion_ram_checks='passed')
+
+
 if __name__ == '__main__':
     check_scores()
     check_subsets()
@@ -290,7 +330,8 @@ if __name__ == '__main__':
     finite_recall = check_finite_recall()
     evidence = check_memory_and_evidence()
     implemented = check_implemented_study()
+    final_study = check_final_study()
     result = {'score_identity_and_lookup': 'passed', 'complete_weighted_subset_order': 'passed',
-              'finite_binary_recall_example': 'passed', 'finite_top_k_recall': finite_recall, 'memory_and_archived_numbers': 'passed', 'implemented_study': implemented, **evidence}
+              'finite_binary_recall_example': 'passed', 'finite_top_k_recall': finite_recall, 'memory_and_archived_numbers': 'passed', 'implemented_study': implemented, 'final_study': final_study, **evidence}
     (HERE/'evidence/math-checks.json').write_text(json.dumps(result, indent=2)+'\n')
     print(json.dumps(result, indent=2))
