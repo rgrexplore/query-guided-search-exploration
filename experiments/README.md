@@ -221,3 +221,11 @@ the split/leaf work formula against a complete eight-bit example.
 
 The final report is written under `<output>/evaluation/report/`. The independent
 real-data results are in `../results/independent-evaluation-2026-09-10/report/`.
+
+
+## Buffer and scattered-row costs
+
+`../docs/buffer-costs.md` describes a small macOS profile of bitmap paths, contiguous scores
+and gathered leaf scores. The largest bitmap is125MB; the whole-index memory is counted
+separately. `buffer_costs.py` records source copies and OS peaks; `summarize_buffer_costs.py`
+keeps the failed cost-model checks. These measurements do not replace the retrieval studies.

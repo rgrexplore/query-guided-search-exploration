@@ -1,0 +1,52 @@
+{
+  "config": {
+    "words": [
+      15625,
+      15625000
+    ],
+    "depth": 8,
+    "rows": [
+      128
+    ],
+    "dimensions": [
+      256
+    ],
+    "top_k": 100,
+    "repeats": 5,
+    "seed": 79,
+    "gather_pools": [
+      1000000,
+      4000000,
+      16000000
+    ],
+    "gather_depths": [
+      8,
+      10,
+      12,
+      13
+    ]
+  },
+  "compile_command": [
+    "clang++",
+    "-std=c++20",
+    "-O3",
+    "-DNDEBUG",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Icpp",
+    "experiments/cost_kernels.cpp",
+    "-o",
+    "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/build/cost-kernels"
+  ],
+  "source_sha256": {
+    "experiments/cost_kernels.cpp": "a1cf54d571ee838e824b5b6f8d8deb193989d2589ec5774d50a75f98c6e4aa91",
+    "experiments/buffer_costs.py": "726027183af6454d38282085205bf0314487e722a5bfd5dea5d3ccac1b5f7c80",
+    "cpp/score.hpp": "d1ad2090a548a8d140d25dbb545ff6332031a39db4c4c450037620fe0761032a",
+    "cpp/index.hpp": "c8a270c4ac0155b56092d36bdbd800c732784f9486c1a2c7b91d458a4a54b72e"
+  },
+  "binary_sha256": "a0858d35855f6be2e9d6b0cbde503ae6cf5654f2b6f0653206fbc8d4d7be29e8",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.1.1.101)\nTarget: arm64-apple-darwin25.3.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin\n",
+  "hardware": "Apple M5 Max\n137438953472\n",
+  "scope": "Kernel-only costs. Timed path retains alternative masks and includes parent release. Leaf measures enumeration/checksum only. Scorer includes table preparation, full scores and top-K selection. Gather includes bitmap enumeration and scattered document/ID reads. Input generation and partition verification are untimed. Warmup path omitted; independent process confidence intervals are not claimed."
+}

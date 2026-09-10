@@ -1,0 +1,77 @@
+{
+  "operation": "gather_fresh",
+  "training_sizes": [
+    1000000,
+    4000000
+  ],
+  "check_size": 16000000,
+  "coefficients": {
+    "fixed_ms": 0.0,
+    "per_bitmap_word_ms": 7.839421383982521e-07,
+    "per_scored_row_ms": 0.00011225541118742808
+  },
+  "matrix_rank": 3,
+  "predictions": [
+    {
+      "source": "results/buffer-fresh-2026-09-11",
+      "case": 0,
+      "operation": "gather_fresh",
+      "size": 16000000,
+      "dimensions": 256,
+      "step": 8,
+      "count": 62492,
+      "p50_ms": 8.271458,
+      "min_ms": 8.082875,
+      "max_ms": 8.7945,
+      "live_payload_bytes": 642001024,
+      "predicted_ms": 7.211050690524319,
+      "error_percent": -12.820077300467247
+    },
+    {
+      "source": "results/buffer-fresh-2026-09-11",
+      "case": 4,
+      "operation": "gather_fresh",
+      "size": 16000000,
+      "dimensions": 256,
+      "step": 12,
+      "count": 3900,
+      "p50_ms": 0.875917,
+      "min_ms": 0.85975,
+      "max_ms": 0.892208,
+      "live_payload_bytes": 642001024,
+      "predicted_ms": 0.6337816382305326,
+      "error_percent": -27.64364223658947
+    },
+    {
+      "source": "results/buffer-fresh-2026-09-11",
+      "case": 6,
+      "operation": "gather_fresh",
+      "size": 16000000,
+      "dimensions": 256,
+      "step": 10,
+      "count": 15653,
+      "p50_ms": 2.3955,
+      "min_ms": 2.305084,
+      "max_ms": 2.436542,
+      "live_payload_bytes": 642001024,
+      "predicted_ms": 1.9531194859163747,
+      "error_percent": -18.46714732137864
+    },
+    {
+      "source": "results/buffer-fresh-2026-09-11",
+      "case": 9,
+      "operation": "gather_fresh",
+      "size": 16000000,
+      "dimensions": 256,
+      "step": 13,
+      "count": 1958,
+      "p50_ms": 0.455416,
+      "min_ms": 0.438916,
+      "max_ms": 0.501083,
+      "live_payload_bytes": 642001024,
+      "predicted_ms": 0.41578162970454724,
+      "error_percent": -8.702893683017887
+    }
+  ],
+  "scope": "Combined leaf cost: preparation, bitmap traversal, scattered scoring and top-K. Repeated timings are not independent queries. This is not a 40GB-buffer validation or a full-search latency model."
+}

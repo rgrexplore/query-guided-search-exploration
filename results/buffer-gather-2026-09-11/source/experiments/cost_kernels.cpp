@@ -213,7 +213,7 @@ void measure_scores(std::size_t documents, std::size_t dimensions, std::size_t t
 }
 
 void measure_gather(std::size_t documents, std::size_t dimensions, std::size_t depth,
-                    std::size_t top_k, int repeats, Word seed, bool fresh = false) {
+                    std::size_t top_k, int repeats, Word seed) {
     std::mt19937_64 random(seed);
     std::vector<Word> codes(documents * ((dimensions + 63) / 64));
     std::vector<std::int64_t> ids(documents);
@@ -223,22 +223,14 @@ void measure_gather(std::size_t documents, std::size_t dimensions, std::size_t d
     std::iota(ids.begin(), ids.end(), 0);
     std::normal_distribution<float> normal;
     for (auto& value : query) value = normal(random);
+    for (auto& mask : active)
+        for (std::size_t bit = 0; bit < depth; ++bit) mask &= random();
+    if (documents % 64) active.back() &= (Word{1} << (documents % 64)) - 1;
     std::size_t found = 0;
-    auto choose_candidates = [&]() {
-        found = 0;
-        for (auto& mask : active) {
-            mask = ~Word{0};
-            for (std::size_t bit = 0; bit < depth; ++bit) mask &= random();
-        }
-        if (documents % 64) active.back() &= (Word{1} << (documents % 64)) - 1;
-        for (const auto mask : active) found += std::popcount(mask);
-    };
-    if (!fresh) choose_candidates();
+    for (const auto mask : active) found += std::popcount(mask);
     const auto bytes = codes.size() * 8 + ids.size() * 8 + active.size() * 8 + query.size() * 4;
     std::cout << "operation,size,dimensions,repetition,step,milliseconds,count,live_payload_bytes,checksum\n";
     for (int repetition = -1; repetition < repeats; ++repetition) {
-        // Selecting a new bitmap is preparation, outside the timed leaf call.
-        if (fresh) choose_candidates();
         const auto start = Clock::now();
         const auto result = score_leaf(codes, ids, query, active, top_k);
         const auto elapsed = std::chrono::duration<double, std::milli>(Clock::now() - start).count();
@@ -249,7 +241,7 @@ void measure_gather(std::size_t documents, std::size_t dimensions, std::size_t d
             checksum += row;
         }
         if (repetition >= 0)
-            std::cout << (fresh ? "gather_fresh," : "gather,") << documents << ',' << dimensions << ',' << repetition << ',' << depth << ','
+            std::cout << "gather," << documents << ',' << dimensions << ',' << repetition << ',' << depth << ','
                       << elapsed << ',' << found << ',' << bytes << ',' << checksum << '\n';
     }
 }
@@ -260,7 +252,7 @@ int main(int argc, char** argv) {
         if (argc < 2) throw std::invalid_argument("choose path or score");
         const std::string operation = argv[1];
         const auto expected_argc = operation == "path" ? 6 : operation == "score" ? 7 : 8;
-        if (argc != expected_argc || (operation != "path" && operation != "score" && operation != "gather" && operation != "gather_fresh"))
+        if (argc != expected_argc || (operation != "path" && operation != "score" && operation != "gather"))
             throw std::invalid_argument("usage: path WORDS DEPTH REPEATS SEED | score ROWS DIMENSIONS K REPEATS SEED | gather ROWS DIMENSIONS DEPTH K REPEATS SEED");
         const auto size = std::stoull(argv[2]);
         const auto parameter = std::stoull(argv[3]);
@@ -273,7 +265,7 @@ int main(int argc, char** argv) {
             const auto top_k = std::stoull(argv[operation == "score" ? 4 : 5]);
             if (top_k == 0) throw std::invalid_argument("K must be positive");
             if (operation == "score") measure_scores(size, parameter, top_k, repeats, seed);
-            else measure_gather(size, parameter, std::stoull(argv[4]), top_k, repeats, seed, operation == "gather_fresh");
+            else measure_gather(size, parameter, std::stoull(argv[4]), top_k, repeats, seed);
         }
     } catch (const std::exception& error) {
         std::cerr << error.what() << '\n';

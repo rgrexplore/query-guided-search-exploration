@@ -1,0 +1,76 @@
+{
+  "training_sizes": [
+    1000000,
+    4000000
+  ],
+  "check_size": 16000000,
+  "coefficients": {
+    "fixed_ms": 0.004425993110127153,
+    "per_bitmap_word_ms": 4.383406118720957e-07,
+    "per_scored_row_ms": 3.661922774388355e-05
+  },
+  "matrix_rank": 3,
+  "predictions": [
+    {
+      "source": "results/buffer-gather-2026-09-11",
+      "case": 3,
+      "operation": "gather",
+      "size": 16000000,
+      "dimensions": 256,
+      "step": 10,
+      "count": 15778,
+      "p50_ms": 0.6935,
+      "min_ms": 0.677583,
+      "max_ms": 0.704167,
+      "live_payload_bytes": 642001024,
+      "predicted_ms": 0.6917893214211457,
+      "error_percent": -0.2466731908946418
+    },
+    {
+      "source": "results/buffer-gather-2026-09-11",
+      "case": 7,
+      "operation": "gather",
+      "size": 16000000,
+      "dimensions": 256,
+      "step": 12,
+      "count": 3902,
+      "p50_ms": 0.238625,
+      "min_ms": 0.236208,
+      "max_ms": 0.24375,
+      "live_payload_bytes": 642001024,
+      "predicted_ms": 0.2568993727347847,
+      "error_percent": 7.65819706015074
+    },
+    {
+      "source": "results/buffer-gather-2026-09-11",
+      "case": 8,
+      "operation": "gather",
+      "size": 16000000,
+      "dimensions": 256,
+      "step": 8,
+      "count": 62692,
+      "p50_ms": 4.399542,
+      "min_ms": 4.279625,
+      "max_ms": 5.352708,
+      "live_payload_bytes": 642001024,
+      "predicted_ms": 2.4097437717976984,
+      "error_percent": -45.2273947652347
+    },
+    {
+      "source": "results/buffer-gather-2026-09-11",
+      "case": 10,
+      "operation": "gather",
+      "size": 16000000,
+      "dimensions": 256,
+      "step": 13,
+      "count": 1957,
+      "p50_ms": 0.159209,
+      "min_ms": 0.157583,
+      "max_ms": 0.165125,
+      "live_payload_bytes": 642001024,
+      "predicted_ms": 0.18567497477293116,
+      "error_percent": 16.623416247153845
+    }
+  ],
+  "scope": "Combined leaf cost: preparation, bitmap traversal, scattered scoring and top-K. Repeated timings are not independent queries. This is not a 40GB-buffer validation or a full-search latency model."
+}

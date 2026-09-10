@@ -68,26 +68,6 @@ __attribute__((noinline)) bitplane::QueryResult score_rows(
     return result;
 }
 
-// This is the leaf loop from Index::search, including scattered code/ID reads.
-__attribute__((noinline)) bitplane::QueryResult score_leaf(
-        const std::vector<Word>& codes, const std::vector<std::int64_t>& ids,
-        const std::vector<float>& query, const std::vector<Word>& active, std::size_t top_k) {
-    bitplane::detail::ScoreTable table(query.data(), query.size());
-    bitplane::detail::TopCandidates best(top_k);
-    const auto words = (query.size() + 63) / 64;
-    for (std::size_t word = 0; word < active.size(); ++word) {
-        auto remaining = active[word];
-        while (remaining) {
-            const auto row = word * 64 + std::countr_zero(remaining);
-            best.offer(ids[row], table.score(codes.data() + row * words));
-            remaining &= remaining - 1;
-        }
-    }
-    bitplane::QueryResult result;
-    best.write_to(result);
-    return result;
-}
-
 void self_test() {
     const std::vector<Word> active{0x97, 0xf0}, plane{0x65, 0x3c};
     const auto split = split_masks(active, plane.data());
@@ -121,13 +101,7 @@ void self_test() {
     for (std::size_t row = 0; row < ranked.rows.size(); ++row)
         if (ranked.rows[row] != reference[row].second || ranked.scores[row] != -reference[row].first)
             throw std::runtime_error("score mismatch");
-    const auto selected = score_leaf(codes, ids, query, std::vector<Word>{0b010101}, 2);
-    reference.erase(std::remove_if(reference.begin(), reference.end(), [](const auto& entry) {
-        return (entry.second % 2) != 0;
-    }), reference.end());
-    for (std::size_t row = 0; row < selected.rows.size(); ++row)
-        if (selected.rows[row] != reference[row].second) throw std::runtime_error("gather mismatch");
-    std::cout << "split, leaf, contiguous and gathered scorer checks passed\n";
+    std::cout << "split, leaf and shared scorer checks passed\n";
 }
 
 void measure_path(std::size_t words, std::size_t depth, int repeats, Word seed) {
@@ -212,68 +186,25 @@ void measure_scores(std::size_t documents, std::size_t dimensions, std::size_t t
     }
 }
 
-void measure_gather(std::size_t documents, std::size_t dimensions, std::size_t depth,
-                    std::size_t top_k, int repeats, Word seed, bool fresh = false) {
-    std::mt19937_64 random(seed);
-    std::vector<Word> codes(documents * ((dimensions + 63) / 64));
-    std::vector<std::int64_t> ids(documents);
-    std::vector<float> query(dimensions);
-    std::vector<Word> active((documents + 63) / 64, ~Word{0});
-    for (auto& code : codes) code = random();
-    std::iota(ids.begin(), ids.end(), 0);
-    std::normal_distribution<float> normal;
-    for (auto& value : query) value = normal(random);
-    std::size_t found = 0;
-    auto choose_candidates = [&]() {
-        found = 0;
-        for (auto& mask : active) {
-            mask = ~Word{0};
-            for (std::size_t bit = 0; bit < depth; ++bit) mask &= random();
-        }
-        if (documents % 64) active.back() &= (Word{1} << (documents % 64)) - 1;
-        for (const auto mask : active) found += std::popcount(mask);
-    };
-    if (!fresh) choose_candidates();
-    const auto bytes = codes.size() * 8 + ids.size() * 8 + active.size() * 8 + query.size() * 4;
-    std::cout << "operation,size,dimensions,repetition,step,milliseconds,count,live_payload_bytes,checksum\n";
-    for (int repetition = -1; repetition < repeats; ++repetition) {
-        // Selecting a new bitmap is preparation, outside the timed leaf call.
-        if (fresh) choose_candidates();
-        const auto start = Clock::now();
-        const auto result = score_leaf(codes, ids, query, active, top_k);
-        const auto elapsed = std::chrono::duration<double, std::milli>(Clock::now() - start).count();
-        if (result.rows.size() != std::min(top_k, found)) throw std::runtime_error("gather count mismatch");
-        Word checksum = 0;
-        for (const auto row : result.rows) {
-            if (!(active[row / 64] & (Word{1} << (row % 64)))) throw std::runtime_error("row outside leaf");
-            checksum += row;
-        }
-        if (repetition >= 0)
-            std::cout << (fresh ? "gather_fresh," : "gather,") << documents << ',' << dimensions << ',' << repetition << ',' << depth << ','
-                      << elapsed << ',' << found << ',' << bytes << ',' << checksum << '\n';
-    }
-}
-
 int main(int argc, char** argv) {
     try {
         if (argc == 2 && std::string(argv[1]) == "--self-test") { self_test(); return 0; }
         if (argc < 2) throw std::invalid_argument("choose path or score");
         const std::string operation = argv[1];
-        const auto expected_argc = operation == "path" ? 6 : operation == "score" ? 7 : 8;
-        if (argc != expected_argc || (operation != "path" && operation != "score" && operation != "gather" && operation != "gather_fresh"))
-            throw std::invalid_argument("usage: path WORDS DEPTH REPEATS SEED | score ROWS DIMENSIONS K REPEATS SEED | gather ROWS DIMENSIONS DEPTH K REPEATS SEED");
+        if ((operation == "path" && argc != 6) || (operation == "score" && argc != 7))
+            throw std::invalid_argument("usage: cost_kernels path WORDS DEPTH REPEATS SEED | score ROWS DIMENSIONS K REPEATS SEED");
+        if (operation != "path" && operation != "score") throw std::invalid_argument("operation must be path or score");
         const auto size = std::stoull(argv[2]);
         const auto parameter = std::stoull(argv[3]);
-        const auto repeats = std::stoi(argv[argc - 2]);
-        const auto seed = std::stoull(argv[argc - 1]);
+        const auto repeats = std::stoi(argv[operation == "path" ? 4 : 5]);
+        const auto seed = std::stoull(argv[operation == "path" ? 5 : 6]);
         if (size == 0 || parameter == 0 || repeats <= 0) throw std::invalid_argument("sizes and repeats must be positive");
         std::cout.precision(12);
         if (operation == "path") measure_path(size, parameter, repeats, seed);
         else {
-            const auto top_k = std::stoull(argv[operation == "score" ? 4 : 5]);
+            const auto top_k = std::stoull(argv[4]);
             if (top_k == 0) throw std::invalid_argument("K must be positive");
-            if (operation == "score") measure_scores(size, parameter, top_k, repeats, seed);
-            else measure_gather(size, parameter, std::stoull(argv[4]), top_k, repeats, seed, operation == "gather_fresh");
+            measure_scores(size, parameter, top_k, repeats, seed);
         }
     } catch (const std::exception& error) {
         std::cerr << error.what() << '\n';

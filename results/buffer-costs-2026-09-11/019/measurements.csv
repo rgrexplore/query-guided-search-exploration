@@ -1,0 +1,6 @@
+operation,size,dimensions,repetition,step,milliseconds,count,live_payload_bytes,checksum
+score,128,128,0,0,0.007334,128,3584,6191
+score,128,128,1,0,0.005416,128,3584,6191
+score,128,128,2,0,0.004875,128,3584,6191
+score,128,128,3,0,0.00625,128,3584,6191
+score,128,128,4,0,0.004416,128,3584,6191

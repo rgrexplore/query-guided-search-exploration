@@ -32,14 +32,10 @@ def run(args):
     check = subprocess.run([str(binary), '--self-test'], capture_output=True, text=True, check=True)
     (output / 'self-test.txt').write_text(check.stdout)
     sources = ['experiments/cost_kernels.cpp', 'experiments/buffer_costs.py', 'cpp/score.hpp', 'cpp/index.hpp']
-    for name in sources:
-        saved = output / 'source' / name
-        saved.parent.mkdir(parents=True, exist_ok=True)
-        saved.write_bytes((ROOT / name).read_bytes())
     config = dict(words=args.words, depth=args.depth, rows=args.rows, dimensions=args.dimensions,
                   top_k=args.top_k, repeats=args.repeats, seed=args.seed,
                   gather_pools=args.gather_pools, gather_depths=args.gather_depths, fresh_subsets=args.fresh_subsets)
-    metadata = dict(config=config, source_commit=subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=ROOT, capture_output=True, text=True).stdout.strip(), compile_command=compile_command, source_sha256={p:digest(ROOT/p) for p in sources},
+    metadata = dict(config=config, compile_command=compile_command, source_sha256={p:digest(ROOT/p) for p in sources},
                     binary_sha256=digest(binary),
                     compiler=subprocess.run(['clang++', '--version'], capture_output=True, text=True).stdout,
                     hardware=subprocess.run(['sysctl', '-n', 'machdep.cpu.brand_string', 'hw.memsize'], capture_output=True, text=True).stdout,
