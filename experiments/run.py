@@ -5,6 +5,7 @@ import tomllib
 from pathlib import Path
 
 from experiments.components import run_components
+from experiments.isolated import run_isolated
 
 
 def main():
@@ -13,9 +14,13 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     args=parser.parse_args()
     config=tomllib.loads(args.config.read_text())
-    if config['data']['kind'] != 'random_signs':
-        raise ValueError('this first component runner supports random_signs only')
-    run_components(config, args.output)
+    stage = config.get('experiment', {}).get('stage', 'components')
+    if stage == 'isolated':
+        run_isolated(config, args.output)
+    elif stage == 'components':
+        run_components(config, args.output)
+    else:
+        raise ValueError(f'unknown experiment stage: {stage}')
     shutil.copyfile(args.config, args.output/'config.toml')
 
 

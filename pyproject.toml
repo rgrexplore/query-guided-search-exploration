@@ -9,6 +9,7 @@ description = "Weighted binary retrieval with bucket-local bitplanes"
 requires-python = ">=3.11"
 dependencies = [
     "numpy>=1.26,<3",
+    "scipy>=1.13,<2",
     "faiss-cpu>=1.9,<2",
     "matplotlib>=3.8,<4",
     "sentence-transformers>=5.3,<7",
