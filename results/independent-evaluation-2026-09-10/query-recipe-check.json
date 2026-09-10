@@ -1,0 +1,12 @@
+{
+  "query_ids": [
+    "1101668",
+    "77034",
+    "698719"
+  ],
+  "maximum_absolute_error": 0.0,
+  "atol": 2e-06,
+  "rtol": 2e-05,
+  "passed": true,
+  "scope": "Re-encoded original cached query texts using the fresh-query recipe; no evaluation settings were changed."
+}
