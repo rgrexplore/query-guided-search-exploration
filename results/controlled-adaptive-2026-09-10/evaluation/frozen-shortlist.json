@@ -1,0 +1,1222 @@
+[
+  {
+    "setting_id": "s0066",
+    "uses": [
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-256-seed73",
+      "router_kind": "ivf",
+      "clusters": 256,
+      "probes": 218,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "keys",
+      "key_bits": 4,
+      "key_offset": 0,
+      "candidate_target": 0,
+      "key_limit": 262144
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 66,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0088",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-256-seed73",
+      "router_kind": "ivf",
+      "clusters": 256,
+      "probes": 189,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "keys",
+      "key_bits": 4,
+      "key_offset": 0,
+      "candidate_target": 0,
+      "key_limit": 262144
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 88,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0105",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "branch",
+      "node_budget": 0,
+      "leaf_size": 128
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 105,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0166",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/direct-256-seed73",
+      "router_kind": "direct",
+      "clusters": 256,
+      "probes": 136,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "keys",
+      "key_bits": 4,
+      "key_offset": 8,
+      "candidate_target": 0,
+      "key_limit": 262144
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 166,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0243",
+    "uses": [
+      {
+        "target": 0.99,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/direct-256-seed73",
+      "router_kind": "direct",
+      "clusters": 256,
+      "probes": 247,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 243,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0287",
+    "uses": [
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000/routers/ivf-16-seed73",
+      "router_kind": "ivf",
+      "clusters": 16,
+      "probes": 15,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 287,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0315",
+    "uses": [
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-256-seed73",
+      "router_kind": "ivf",
+      "clusters": 256,
+      "probes": 218,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 315,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0325",
+    "uses": [
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-16-seed73",
+      "router_kind": "ivf",
+      "clusters": 16,
+      "probes": 15,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 325,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0361",
+    "uses": [
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000/routers/ivf-4096-seed73",
+      "router_kind": "ivf",
+      "clusters": 4096,
+      "probes": 3010,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 361,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0367",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "branch",
+      "node_budget": 0,
+      "leaf_size": 128
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 367,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0385",
+    "uses": [
+      {
+        "target": 0.99,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000/routers/ivf-4096-seed73",
+      "router_kind": "ivf",
+      "clusters": 4096,
+      "probes": 3734,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 385,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0393",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000/routers/ivf-8192-seed73",
+      "router_kind": "ivf",
+      "clusters": 8192,
+      "probes": 4920,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 393,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0404",
+    "uses": [
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-16-seed73",
+      "router_kind": "ivf",
+      "clusters": 16,
+      "probes": 15,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "keys",
+      "key_bits": 4,
+      "key_offset": 0,
+      "candidate_target": 0,
+      "key_limit": 262144
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 404,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0520",
+    "uses": [
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000/routers/ivf-256-seed73",
+      "router_kind": "ivf",
+      "clusters": 256,
+      "probes": 255,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 520,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0593",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-4096-seed73",
+      "router_kind": "ivf",
+      "clusters": 4096,
+      "probes": 2361,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 593,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0725",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/ivf-4096-seed73",
+      "router_kind": "ivf",
+      "clusters": 4096,
+      "probes": 1671,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 725,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0727",
+    "uses": [
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "keys",
+      "key_bits": 8,
+      "key_offset": 0,
+      "candidate_target": 0,
+      "key_limit": 262144
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 727,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0747",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "keys",
+      "key_bits": 12,
+      "key_offset": 0,
+      "candidate_target": 0,
+      "key_limit": 262144
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 747,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0773",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n1000000/routers/ivf-8192-seed73",
+      "router_kind": "ivf",
+      "clusters": 8192,
+      "probes": 3514,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 773,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0926",
+    "uses": [
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-adaptive-2026-09-10/n100000/routers/direct-16-seed73",
+      "router_kind": "direct",
+      "clusters": 16,
+      "probes": 16,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-adaptive-2026-09-10/tuning",
+        "case_id": 926,
+        "seed": 0
+      }
+    ]
+  }
+]

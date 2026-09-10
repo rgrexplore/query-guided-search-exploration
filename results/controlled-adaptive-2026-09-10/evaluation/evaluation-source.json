@@ -1,0 +1,26 @@
+{
+  "shortlist_sha256": "48ce4f7d953431b00566e12474c585c57993c11111ba076bbd22045aa012a158",
+  "query_ids": [
+    "adaptive-q20",
+    "adaptive-q21",
+    "adaptive-q22",
+    "adaptive-q23",
+    "adaptive-q24",
+    "adaptive-q25",
+    "adaptive-q26",
+    "adaptive-q27",
+    "adaptive-q28",
+    "adaptive-q29",
+    "adaptive-q30",
+    "adaptive-q31",
+    "adaptive-q32",
+    "adaptive-q33",
+    "adaptive-q34",
+    "adaptive-q35",
+    "adaptive-q36",
+    "adaptive-q37",
+    "adaptive-q38",
+    "adaptive-q39"
+  ],
+  "scope": "Disjoint generated queries; same documents. Parameters frozen using the first subset only."
+}

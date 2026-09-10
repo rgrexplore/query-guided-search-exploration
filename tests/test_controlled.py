@@ -2,6 +2,7 @@ import numpy as np
 import bitplane_index
 
 from experiments.components import pack_signs, reference_rows
+from experiments.check_controlled import predicted_work, key_shell_work
 from experiments.controlled import predict_one_path
 from experiments.controlled_study import controlled_cases, evaluation_cases
 
@@ -64,3 +65,24 @@ def test_one_path_formula_matches_native_work_and_memory():
     np.testing.assert_array_equal(result['rows'], reference_rows(signs, query, 4))
     truncated = index.search(query, buckets, candidate_limit=4, node_budget=1, leaf_size=64)
     assert truncated['counts'][0] == 0
+
+
+def test_work_prediction_does_not_apply_fixed_key_assumption_to_adaptive_weights():
+    setup = dict(dimensions=8, strong_bits=3, weak_weight=.0001, support='fixed')
+    metadata = {'identity': setup}
+    case = dict(method='keys', router=None, key_bits=2, key_offset=0, top_k=4, dimensions=8,
+                candidate_target=0, key_limit=0)
+    prediction = predicted_work(case, metadata, [256,128,64,32])
+    assert prediction == dict(keys_generated=1, key_attempts=1, documents_scored=64,
+                              score_terms=128, recall=1.0)
+    assert predicted_work(case, {'identity':dict(setup,support='adaptive')}, [256,128,64,32]) is None
+    assert predicted_work(case, metadata, [256,128,64,3]) is None
+
+
+def test_complete_strong_key_prediction_counts_empty_patterns_in_the_shell():
+    # One exact match, one document in the first error layer, four in the next.
+    # Both one-error keys must be tried even though only one contains a document.
+    assert key_shell_work([1, 1, 4], 2, 2) == dict(
+        keys_generated=3, key_attempts=3, documents_scored=2)
+    assert key_shell_work([1, 1, 4], 3, 2) == dict(
+        keys_generated=4, key_attempts=4, documents_scored=6)

@@ -1,0 +1,2217 @@
+{
+  "checked": 92,
+  "outside_stated_conditions": 19928,
+  "failed_cases": [],
+  "mismatches": [],
+  "checks": [
+    {
+      "case_id": 105,
+      "query": 0,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 111,
+        "score_terms": 7104,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 111,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 7104
+      }
+    },
+    {
+      "case_id": 105,
+      "query": 1,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 127,
+        "score_terms": 8128,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 127,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 8128
+      }
+    },
+    {
+      "case_id": 105,
+      "query": 4,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 127,
+        "score_terms": 8128,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 127,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 8128
+      }
+    },
+    {
+      "case_id": 105,
+      "query": 5,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 119,
+        "score_terms": 7616,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 119,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 7616
+      }
+    },
+    {
+      "case_id": 105,
+      "query": 6,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 107,
+        "score_terms": 6848,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 107,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 6848
+      }
+    },
+    {
+      "case_id": 105,
+      "query": 8,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 128,
+        "score_terms": 8192,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 128,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 8192
+      }
+    },
+    {
+      "case_id": 105,
+      "query": 10,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 112,
+        "score_terms": 7168,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 112,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 7168
+      }
+    },
+    {
+      "case_id": 105,
+      "query": 13,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 110,
+        "score_terms": 7040,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 110,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 7040
+      }
+    },
+    {
+      "case_id": 105,
+      "query": 14,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 113,
+        "score_terms": 7232,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 113,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 7232
+      }
+    },
+    {
+      "case_id": 105,
+      "query": 16,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 112,
+        "score_terms": 7168,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 112,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 7168
+      }
+    },
+    {
+      "case_id": 105,
+      "query": 17,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 126,
+        "score_terms": 8064,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 126,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 8064
+      }
+    },
+    {
+      "case_id": 105,
+      "query": 18,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 101,
+        "score_terms": 6464,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 101,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 6464
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 0,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 975,
+        "score_terms": 62400,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 975,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 62400
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 1,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 988,
+        "score_terms": 63232,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 988,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 63232
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 2,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 999,
+        "score_terms": 63936,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 999,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 63936
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 3,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1024,
+        "score_terms": 65536,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1024,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 65536
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 4,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 935,
+        "score_terms": 59840,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 935,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 59840
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 5,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 941,
+        "score_terms": 60224,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 941,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 60224
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 6,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 946,
+        "score_terms": 60544,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 946,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 60544
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 7,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1002,
+        "score_terms": 64128,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1002,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 64128
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 8,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 992,
+        "score_terms": 63488,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 992,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 63488
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 9,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 973,
+        "score_terms": 62272,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 973,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 62272
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 10,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 958,
+        "score_terms": 61312,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 958,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 61312
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 11,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 989,
+        "score_terms": 63296,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 989,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 63296
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 12,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 971,
+        "score_terms": 62144,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 971,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 62144
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 13,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 945,
+        "score_terms": 60480,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 945,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 60480
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 14,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 971,
+        "score_terms": 62144,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 971,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 62144
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 15,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1001,
+        "score_terms": 64064,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1001,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 64064
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 16,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 909,
+        "score_terms": 58176,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 909,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 58176
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 17,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 983,
+        "score_terms": 62912,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 983,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 62912
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 18,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1002,
+        "score_terms": 64128,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1002,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 64128
+      }
+    },
+    {
+      "case_id": 208,
+      "query": 19,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 978,
+        "score_terms": 62592,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 978,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 62592
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 0,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1960,
+        "score_terms": 125440,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1960,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 125440
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 1,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 2011,
+        "score_terms": 128704,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 2011,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 128704
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 2,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1935,
+        "score_terms": 123840,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1935,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 123840
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 3,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1988,
+        "score_terms": 127232,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1988,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 127232
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 4,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1885,
+        "score_terms": 120640,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1885,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 120640
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 5,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1962,
+        "score_terms": 125568,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1962,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 125568
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 6,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1845,
+        "score_terms": 118080,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1845,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 118080
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 7,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1979,
+        "score_terms": 126656,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1979,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 126656
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 8,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1961,
+        "score_terms": 125504,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1961,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 125504
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 9,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1919,
+        "score_terms": 122816,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1919,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 122816
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 10,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1977,
+        "score_terms": 126528,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1977,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 126528
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 11,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1973,
+        "score_terms": 126272,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1973,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 126272
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 12,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1981,
+        "score_terms": 126784,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1981,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 126784
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 13,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1950,
+        "score_terms": 124800,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1950,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 124800
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 14,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1959,
+        "score_terms": 125376,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1959,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 125376
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 15,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 2031,
+        "score_terms": 129984,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 2031,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 129984
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 16,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1863,
+        "score_terms": 119232,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1863,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 119232
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 17,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1934,
+        "score_terms": 123776,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1934,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 123776
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 18,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1931,
+        "score_terms": 123584,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1931,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 123584
+      }
+    },
+    {
+      "case_id": 310,
+      "query": 19,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1965,
+        "score_terms": 125760,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1965,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 125760
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 0,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 503,
+        "score_terms": 32192,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 503,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 32192
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 1,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 502,
+        "score_terms": 32128,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 502,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 32128
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 2,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 498,
+        "score_terms": 31872,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 498,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 31872
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 3,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 13,
+        "bitplane_words": 187500,
+        "leaf_words": 15625,
+        "documents_scored": 270,
+        "score_terms": 17280,
+        "peak_mask_bytes": 1750000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 13,
+        "bitplane_words": 187500,
+        "leaf_words": 15625,
+        "documents_scored": 270,
+        "peak_mask_bytes": 1750000,
+        "recall": 1.0,
+        "score_terms": 17280
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 4,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 486,
+        "score_terms": 31104,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 486,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 31104
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 5,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 458,
+        "score_terms": 29312,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 458,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 29312
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 6,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 479,
+        "score_terms": 30656,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 479,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 30656
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 7,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 508,
+        "score_terms": 32512,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 508,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 32512
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 8,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 495,
+        "score_terms": 31680,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 495,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 31680
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 9,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 485,
+        "score_terms": 31040,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 485,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 31040
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 10,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 464,
+        "score_terms": 29696,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 464,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 29696
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 11,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 13,
+        "bitplane_words": 187500,
+        "leaf_words": 15625,
+        "documents_scored": 279,
+        "score_terms": 17856,
+        "peak_mask_bytes": 1750000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 13,
+        "bitplane_words": 187500,
+        "leaf_words": 15625,
+        "documents_scored": 279,
+        "peak_mask_bytes": 1750000,
+        "recall": 1.0,
+        "score_terms": 17856
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 12,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 13,
+        "bitplane_words": 187500,
+        "leaf_words": 15625,
+        "documents_scored": 250,
+        "score_terms": 16000,
+        "peak_mask_bytes": 1750000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 13,
+        "bitplane_words": 187500,
+        "leaf_words": 15625,
+        "documents_scored": 250,
+        "peak_mask_bytes": 1750000,
+        "recall": 1.0,
+        "score_terms": 16000
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 13,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 455,
+        "score_terms": 29120,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 455,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 29120
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 14,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 493,
+        "score_terms": 31552,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 493,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 31552
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 15,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 497,
+        "score_terms": 31808,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 497,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 31808
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 16,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 471,
+        "score_terms": 30144,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 471,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 30144
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 17,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 488,
+        "score_terms": 31232,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 488,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 31232
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 18,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 498,
+        "score_terms": 31872,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 498,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 31872
+      }
+    },
+    {
+      "case_id": 501,
+      "query": 19,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 488,
+        "score_terms": 31232,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 488,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 31232
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 0,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3860,
+        "score_terms": 247040,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3860,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 247040
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 1,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3936,
+        "score_terms": 251904,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3936,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 251904
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 2,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3873,
+        "score_terms": 247872,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3873,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 247872
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 3,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3990,
+        "score_terms": 255360,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3990,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 255360
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 4,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3868,
+        "score_terms": 247552,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3868,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 247552
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 5,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3938,
+        "score_terms": 252032,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3938,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 252032
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 6,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3800,
+        "score_terms": 243200,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3800,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 243200
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 7,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3978,
+        "score_terms": 254592,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3978,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 254592
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 8,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3982,
+        "score_terms": 254848,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3982,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 254848
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 9,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3873,
+        "score_terms": 247872,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3873,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 247872
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 10,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3932,
+        "score_terms": 251648,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3932,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 251648
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 11,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3989,
+        "score_terms": 255296,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3989,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 255296
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 12,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3987,
+        "score_terms": 255168,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3987,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 255168
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 13,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3938,
+        "score_terms": 252032,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3938,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 252032
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 14,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3940,
+        "score_terms": 252160,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3940,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 252160
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 15,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3960,
+        "score_terms": 253440,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3960,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 253440
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 16,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3843,
+        "score_terms": 245952,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3843,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 245952
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 17,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3903,
+        "score_terms": 249792,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3903,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 249792
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 18,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3857,
+        "score_terms": 246848,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3857,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 246848
+      }
+    },
+    {
+      "case_id": 602,
+      "query": 19,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3869,
+        "score_terms": 247616,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3869,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 247616
+      }
+    }
+  ],
+  "scope": "First repetition per query. Exact counts under stated dominance/enough-match conditions; no latency fit and no deletion of other queries from the study."
+}
