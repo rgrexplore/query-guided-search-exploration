@@ -80,9 +80,8 @@ def prepare_pool(folder, documents, dimensions, queries, supports, support):
     return folder
 
 
-def run(output):
+def run(output, sizes):
     output=output.resolve(); output.mkdir(parents=True,exist_ok=False)
-    sizes=[1000000,2000000,4000000]
     config=dict(sizes=sizes,dimensions=256,queries=8,query_seed=197,top_k=100,strong_bits=13,
                 repetitions=2,limits=dict(worker_stop_bytes=34359738368,case_seconds=180))
     (output/'configuration.json').write_text(json.dumps(config,indent=2)+'\n')
@@ -111,4 +110,6 @@ def math_leaf(documents):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',required=True,type=Path)
-    run(parser.parse_args().output)
+    parser.add_argument('--sizes', nargs='+', type=int, default=[1000000,2000000,4000000])
+    args=parser.parse_args()
+    run(args.output,args.sizes)
