@@ -1,0 +1,33 @@
+{
+  "cases": 5,
+  "files": 25,
+  "archive_sha256": "71adeccda5166af1a697dd47657f13e713a746c3a6e912ffdff650e21e31ccab",
+  "source_file_sha256": {
+    "cases/0000/case.json": "b762bcbc8170c921c7f772a0e390aee703155a2f60e0850429c50e63da589924",
+    "cases/0000/process.json": "767fde2fe9a568503ca77dc71b142cbe179d9f216e61e7bee6c971ebd7bb8b2c",
+    "cases/0000/run/queries.jsonl": "0b5ffe98b54b85316d9292c50a1c1d382e33be5a74f2d97fb139e662e3eacb1d",
+    "cases/0000/run/result.json": "32ec7e0e27b2888206bb9269bad0a2a914aaa999373619e3a39a3e49c0f03607",
+    "cases/0000/worker.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases/0001/case.json": "db74ed91fb471cb0ffbe1a7506e567f0861c6d8025812bbd3746ed6c0c385ef7",
+    "cases/0001/process.json": "a38f0bc0c925883d908adcc113708d60544dff446bb1eaf9b9c5fc8f17120adc",
+    "cases/0001/run/queries.jsonl": "f13f1a4384c867c5e2c72d87552d9f2bef1baf82d58936e494e0381bcd6113d2",
+    "cases/0001/run/result.json": "a30ea523252a975bb3665306db3490f7502bb95963442ec5203dc6fa8e79abe8",
+    "cases/0001/worker.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases/0002/case.json": "07255d608ed186fe8c2b73bad7d95c39d851dd8e1e3580cc7e88b94d59e26217",
+    "cases/0002/process.json": "5cea75c670f33f4f8a296b036c1f296851f3ffd187371f179fd04b070d0e7060",
+    "cases/0002/run/queries.jsonl": "f6e20f7c83dd5b8400737fa9f6abea022f9e0ce1a2cccb9146eed6521291313b",
+    "cases/0002/run/result.json": "a215e2c767010353650e876c489520ec9f3110921b9c484c462ba444de7bc054",
+    "cases/0002/worker.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases/0003/case.json": "28573acba89b4e23d2b9c131116665b48dc7cee13417fa32fcbae5c59e8870b8",
+    "cases/0003/process.json": "0f1c16e4fa7444298557b678c538af62447b897a8647dcbae03c57b130194637",
+    "cases/0003/run/queries.jsonl": "07201ddb4a66b8a9343ff3921f9899edc0acfddfaf24a71a1599750873f13d8d",
+    "cases/0003/run/result.json": "e2a8710fafda95828bbe4215cc38f831cf7f9a76609965b920e5c965efc4c8c1",
+    "cases/0003/worker.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases/0004/case.json": "7da5d9b5778f3822ac98cc72f0a905bcedf88cece5513421fafa3216aadfb079",
+    "cases/0004/process.json": "0a256d7d435ab6d54b58b70b354dd1d71595363252b24218e203f2cf651131b4",
+    "cases/0004/run/queries.jsonl": "d6fcff852613515d051cbbdbf88ec9501493e340bffb478884429e9d2e8719f7",
+    "cases/0004/run/result.json": "6bc36739248ea395eba4f6a3c1676e13b979f49917a9b7e8ed5065f665a3be59",
+    "cases/0004/worker.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "restore": "Extract cases.zip in this directory, then run the normal analysis command."
+}

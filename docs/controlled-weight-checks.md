@@ -84,3 +84,33 @@ This also explains why a fixed leaf size does not scale automatically. At 1B doc
 13 balanced bits still leaves about 122k documents. A leaf size of 128 would keep splitting
 weak coordinates, repeatedly processing billion-document-wide masks. A larger leaf threshold
 may be much faster. The experiment must vary that threshold rather than assume more cuts help.
+
+## Runnable study
+
+`experiments/configs/controlled-fixed.toml` and `controlled-adaptive.toml` declare the
+same parameter grid. Each has 40 queries: the first 20 choose settings; the remaining
+20 test the frozen choices. There are three independent process blocks and three timing
+repeats in the final check. No query is removed for having fewer than 100 strong matches.
+
+The grid includes one cluster and sign, centroid and direct-key routing with 16, 256,
+4096 and 8192 clusters. Probe counts come from the tuning neighbors' cluster ranks at
+80%, 90%, 95%, 99% and 100% routing recall. Faiss boundary ties are completed; direct
+routing uses its stable score/ID ordering, checked against partial searches. All three
+methods receive these same layouts and probes. B varies leaf size from 128 to 4096
+with no node limit. C varies key width from 4 to 16, with no candidate quota and a
+262144-lookup limit. These are best-tested comparisons within this declared grid,
+not proof of a global optimum over every possible index or parameter.
+
+Start with `controlled-small.toml` for a complete small run. The same driver writes
+`tuning/`, `frozen/` and `evaluation/`. Each folder keeps exact settings and measurements;
+`evaluation/report/` keeps paired query/process-block uncertainty and target misses.
+
+The direct-key control reuses the sign router's document assignments. Its native key
+index ranks occupied cluster prefixes; its allocations and query time are charged to
+every method that uses it. It does not retain a float centroid matrix at query time.
+
+The explicit eight-bit work check in `tests/test_controlled.py` follows two cuts through
+256 documents. It predicts and observes 3 visited nodes, 8 split-word visits, 4 leaf-word
+visits, 64 full scores, and a 128-byte peak for live masks. A one-node limit returns no
+candidates in the neighboring truncated control. This checks the stated one-path case;
+it does not claim every real query follows only one path.

@@ -14,6 +14,8 @@ from experiments.analysis import load_cases, write_csv
 def effective_probes(case, result):
     if case['router_kind']=='none':
         return 1
+    if 'routing_label_count' in result['memory']:
+        return min(case['probes'], result['memory']['routing_label_count'])
     dimensions = int(math.log2(case['clusters'])) if case['router_kind']=='sign' else case['dimensions']
     # A route stores one float32 centroid and one int64 label. This recovers the
     # available label count from saved metadata without needing the vector cache.

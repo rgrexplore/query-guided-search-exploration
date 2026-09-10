@@ -1,0 +1,93 @@
+{
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-small-2026-09-10/n1024": {
+    "identity": {
+      "documents": 1024,
+      "dimensions": 16,
+      "queries": 8,
+      "seed": 73,
+      "support": "fixed",
+      "strong_bits": 4,
+      "weak_weight": 0.0001,
+      "top_k": 10
+    },
+    "hashes": {
+      "codes.npy": "130e931cbc9bf8d2959babafad8e1393e3e704966ef499ca7eeefa679061aded",
+      "queries.npy": "9114650172e4a74a4e737d7c546f018dd55446fb5a0b0fc0af2cf882451f6e57",
+      "documents.npy": "821207fa495989c73873c44974e577326ea001a0ef580ca237229b2f42d81140",
+      "reference.npy": "74aa3552aeab3f5502d67dfda229002f512c45aab52f1048a26fce23680099d1",
+      "preferred_counts.npy": "15c5f0f6362fcbc0c9856b3b8f06fa5c078df74dddb30079b36264e84588bea4"
+    },
+    "supports": [
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ]
+    ],
+    "query_ids": [
+      "fixed-q0",
+      "fixed-q1",
+      "fixed-q2",
+      "fixed-q3",
+      "fixed-q4",
+      "fixed-q5",
+      "fixed-q6",
+      "fixed-q7"
+    ],
+    "strong_match_counts": [
+      68,
+      63,
+      68,
+      63,
+      75,
+      81,
+      63,
+      59
+    ],
+    "expected_strong_matches": 64.0,
+    "scope": "Constructed query-weight distribution, not Nomic embeddings. No insufficient-match query was removed."
+  }
+}

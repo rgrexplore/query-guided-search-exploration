@@ -5,6 +5,7 @@ import tomllib
 from pathlib import Path
 
 from experiments.components import run_components
+from experiments.controlled_study import run_controlled
 from experiments.isolated import run_isolated
 from experiments.real_study import run_real_study, run_refinement
 from experiments.exploration import run_exploration
@@ -19,7 +20,9 @@ def main():
     args=parser.parse_args()
     config=tomllib.loads(args.config.read_text())
     stage = config.get('experiment', {}).get('stage', 'components')
-    if stage == 'probe_cutoffs':
+    if stage == 'controlled':
+        run_controlled(config, args.output)
+    elif stage == 'probe_cutoffs':
         run_probe_cutoffs(config,args.output)
     elif stage == 'evaluate':
         run_evaluation(config, args.output)

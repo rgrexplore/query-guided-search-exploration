@@ -1,0 +1,10 @@
+{
+  "shortlist_sha256": "b65408f65ccf565b56ff5a9370b06e0d5d2ccf6ea4035042ce97098842d22206",
+  "query_ids": [
+    "fixed-q4",
+    "fixed-q5",
+    "fixed-q6",
+    "fixed-q7"
+  ],
+  "scope": "Disjoint generated queries; same documents. Parameters frozen using the first subset only."
+}

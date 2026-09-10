@@ -61,3 +61,29 @@ def test_parent_preserves_configuration_and_each_worker_result(tmp_path):
     assert len(results) == 3
     assert len({result['pid'] for result in results}) == 3
     assert all(result['status']=='complete' and result['exact_checks']==2 for result in results)
+
+
+def test_direct_prefix_control_does_not_claim_unprobed_clusters_are_exact(tmp_path):
+    signs=np.array([[a,b,c] for a in (0,1) for b in (0,1) for c in (0,1)],dtype=np.uint8)
+    queries=np.array([[1,1,.1]],dtype=np.float32)
+    pool=tmp_path/'pool'; pool.mkdir()
+    np.save(pool/'codes.npy',pack_signs(signs))
+    np.save(pool/'queries.npy',queries)
+    np.save(pool/'reference.npy',reference_rows(signs,queries,3))
+    router=tmp_path/'router'; router.mkdir()
+    labels=np.arange(4,dtype=np.int64)
+    np.save(router/'labels.npy',labels)
+    np.save(router/'assignments.npy',(signs[:,0]+2*signs[:,1]).astype(np.int64))
+    np.save(router/'centroids.npy',np.array([[2*(code>>bit&1)-1 for bit in range(2)] for code in labels],dtype=np.float32))
+    (router/'router.json').write_text(json.dumps({'kind':'direct','routing_bits':2}))
+    case=dict(method='scan',pool=str(pool),router=str(router),router_kind='direct',clusters=4,
+              documents=8,dimensions=3,top_k=3,probes=1,query_rows=[0],repetitions=1,
+              ram_budget_bytes=32_000_000_000)
+    spec=tmp_path/'case.json'; spec.write_text(json.dumps(case))
+    output=tmp_path/'out'
+    run=subprocess.run([sys.executable,'-m','experiments.worker',str(spec),str(output)],capture_output=True,text=True)
+    assert run.returncode==0,run.stdout+run.stderr
+    result=json.loads((output/'result.json').read_text())
+    row=json.loads((output/'queries.jsonl').read_text())
+    assert result['exact_checks']==0 and row['returned']==2
+    assert row['recall']==2/3

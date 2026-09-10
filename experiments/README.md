@@ -202,3 +202,22 @@ From a fresh checkout, extract the ZIP inside its containing directory before ru
 normal comparison or analysis command. For example, extract the refinement's `search/cases.zip`
 inside `search/`. `python -m experiments.archive_cases PATH` creates an archive only after every
 scheduled case has a terminal process result; it does not delete local observations.
+
+
+## Constructed query-weight examples
+
+These runs test the score assumptions in `../docs/controlled-weight-checks.md`. They do
+not represent measured Nomic distributions. Start with the small complete example:
+
+```bash
+python -m experiments.run --config experiments/configs/controlled-small.toml --output results/my-controlled-small
+```
+
+Use `controlled-fixed.toml` or `controlled-adaptive.toml` for the larger comparisons.
+`controlled.py` creates the documents and queries; `controlled_study.py` prepares shared
+routers, tunes settings, freezes choices and evaluates different queries. The native
+scorer and worker are shared with the real-data study. `tests/test_controlled.py` checks
+the split/leaf work formula against a complete eight-bit example.
+
+The final report is written under `<output>/evaluation/report/`. The independent
+real-data results are in `../results/independent-evaluation-2026-09-10/report/`.

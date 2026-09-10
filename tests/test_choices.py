@@ -48,3 +48,9 @@ def test_default_and_explicit_zero_exploration_are_the_same_setting():
               router_kind='none',clusters=1,probes=1,node_budget=512,leaf_size=32)
     assert setting_key(case,1)==setting_key(dict(case,exploration=0.0),1)
     assert setting_key(case,1)!=setting_key(dict(case,exploration=.1),1)
+
+
+def test_direct_router_uses_explicit_label_count_not_centroid_size():
+    case = dict(router_kind='direct', clusters=16, probes=16, dimensions=256)
+    result = {'memory': {'routing_payload_bytes': 512, 'routing_label_count': 7}}
+    assert effective_probes(case, result) == 7

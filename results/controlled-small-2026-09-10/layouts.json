@@ -1,0 +1,13 @@
+{
+  "1024": [
+    {
+      "path": null,
+      "kind": "none",
+      "clusters": 1,
+      "routing_bits": 0,
+      "probes": [
+        1
+      ]
+    }
+  ]
+}

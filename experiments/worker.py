@@ -22,6 +22,8 @@ import psutil
 from threadpoolctl import threadpool_limits
 import bitplane_index
 
+from experiments.direct_routing import DirectPrefixRouter
+
 
 def power_state():
     if sys.platform != 'darwin':
@@ -61,6 +63,7 @@ def run_case(case, output):
     queries = np.ascontiguousarray(np.load(pool/'queries.npy', mmap_mode='r')[query_rows], dtype=np.float32)
     reference = np.load(pool/'reference.npy', mmap_mode='r')[query_rows]
     quantizer = None
+    direct_router = None
     labels = None
     routing_kind = 'none'
     route_bytes = 0
@@ -71,12 +74,16 @@ def run_case(case, output):
         route_config = json.loads((router_dir/'router.json').read_text())
         routing_kind = route_config['kind']
         assignments = np.load(router_dir/'assignments.npy', mmap_mode='r')
-        centroids = np.load(router_dir/'centroids.npy')
         labels = np.load(router_dir/'labels.npy')
-        quantizer = faiss.IndexFlatIP(centroids.shape[1])
-        quantizer.add(centroids)
-        route_bytes = centroids.nbytes + labels.nbytes
-        del centroids
+        if routing_kind == 'direct':
+            direct_router = DirectPrefixRouter(labels, route_config['routing_bits'])
+            route_bytes = direct_router.payload_bytes
+        else:
+            centroids = np.load(router_dir/'centroids.npy')
+            quantizer = faiss.IndexFlatIP(centroids.shape[1])
+            quantizer.add(centroids)
+            route_bytes = centroids.nbytes + labels.nbytes
+            del centroids
     faiss.omp_set_num_threads(1)
 
     build_start = perf_counter()
@@ -95,6 +102,8 @@ def run_case(case, output):
     build_peak = lifetime_peak_bytes()
 
     def route(query):
+        if direct_router is not None:
+            return direct_router.select(query, case['probes'])
         if quantizer is None:
             return np.zeros((1, 1), dtype=np.int64)
         routing_query = query[:, :quantizer.d] if routing_kind == 'sign' else query
@@ -127,7 +136,7 @@ def run_case(case, output):
                 exact_local = (case['method']=='scan'
                                or (case['method']=='branch' and case['node_budget']==0)
                                or (case['method']=='keys' and case['candidate_target']==case['key_limit']==0))
-                all_clusters = quantizer is None or case['probes'] >= len(labels)
+                all_clusters = case['router'] is None or case['probes'] >= len(labels)
                 if exact_local and all_clusters:
                     np.testing.assert_array_equal(returned, truth)
                     exact_checks += 1
@@ -147,6 +156,7 @@ def run_case(case, output):
     memory = dict(rss_at_start=rss_at_start, build_lifetime_peak=build_peak,
                   rss_before_queries=rss_before_queries, sampled_query_peak=sampled_query_peak,
                   lifetime_peak_bytes=peak, routing_payload_bytes=route_bytes,
+                  routing_label_count=1 if labels is None else len(labels),
                   budget_bytes=budget, budget_status=budget_status,
                   scope='RSS includes runtime and evaluation arrays. Lifetime peak includes build and is a conservative query bound. Sampled query peak is not a guaranteed maximum.')
     binary = Path(bitplane_index.__file__)

@@ -1,0 +1,169 @@
+{
+  "s0000": {
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-small-2026-09-10/n1024",
+      "documents": 1024,
+      "dimensions": 16,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 10,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "keys",
+      "key_bits": 8,
+      "key_offset": 0,
+      "candidate_target": 0,
+      "key_limit": 1024
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-small-2026-09-10/tuning",
+        "case_id": 0,
+        "seed": 0
+      }
+    ]
+  },
+  "s0001": {
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-small-2026-09-10/n1024",
+      "documents": 1024,
+      "dimensions": 16,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 10,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "branch",
+      "node_budget": 0,
+      "leaf_size": 128
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-small-2026-09-10/tuning",
+        "case_id": 1,
+        "seed": 0
+      }
+    ]
+  },
+  "s0002": {
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-small-2026-09-10/n1024",
+      "documents": 1024,
+      "dimensions": 16,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 10,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "keys",
+      "key_bits": 4,
+      "key_offset": 0,
+      "candidate_target": 0,
+      "key_limit": 1024
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-small-2026-09-10/tuning",
+        "case_id": 2,
+        "seed": 0
+      }
+    ]
+  },
+  "s0003": {
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-small-2026-09-10/n1024",
+      "documents": 1024,
+      "dimensions": 16,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 10,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "branch",
+      "node_budget": 0,
+      "leaf_size": 64
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-small-2026-09-10/tuning",
+        "case_id": 3,
+        "seed": 0
+      }
+    ]
+  },
+  "s0004": {
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-small-2026-09-10/n1024",
+      "documents": 1024,
+      "dimensions": 16,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 10,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-small-2026-09-10/tuning",
+        "case_id": 4,
+        "seed": 0
+      }
+    ]
+  }
+}
