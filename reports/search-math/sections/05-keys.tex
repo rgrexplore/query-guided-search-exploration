@@ -92,6 +92,10 @@ For a dense offset directory instead of a hash table,
 \[
 M_{\rm dense-dir}=\sum_j(2^{h_j}+1)b_o.
 \]
+The implemented C++ index uses the contiguous-code alternative and a separately chained
+hash table. Section~\ref{sec:implemented-study} gives its allocation formula and measured
+payload fields; the reference slot formula above is not substituted for actual process RAM.
+
 Exponential key space makes dense directories expensive. Sparse directories avoid storing
 empty keys, but do not make probing empty keys free.
 

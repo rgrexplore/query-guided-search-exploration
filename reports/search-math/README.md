@@ -35,8 +35,9 @@ npx -p @mermaid-js/mermaid-cli mmdc \
 ```
 
 Mermaid CLI needs its supported browser runtime. This build used Mermaid CLI with a temporary
-headless Chrome process; no personal browser profile is needed. Three additional figures use Matplotlib: `recall-validation.pdf` shows the earlier quality
-study; `nearest-distance.pdf` and `recall-model-checks.pdf` show the new derivation checks.
+headless Chrome process; no personal browser profile is needed. Four additional figures use Matplotlib: `recall-validation.pdf` shows the earlier quality
+study; `nearest-distance.pdf` and `recall-model-checks.pdf` show the derivation checks;
+`measured-cases.pdf` compares independently evaluated settings on three data distributions.
 
 ## Arithmetic and evidence checks
 
@@ -68,8 +69,9 @@ report's arithmetic do not.
 
 ## Scope
 
-This is the math-first deliverable. It does not certify a billion-document recall prediction,
-implement a new hash enumerator, or complete the previously edited frontend. The source
+The report now includes native implementations, timing calibration, independent real-query
+evaluation and constructed query-weight experiments. It does not certify a billion-document
+latency/recall prediction or complete the previously edited frontend. The source
 calculator's mixed float/binary recall references and omitted work are discussed as modeling
 limits. Full-key exactness is kept distinct from short-key candidate recall.
 
@@ -99,5 +101,32 @@ previously inspected check queries with the fitted correlation held fixed. They 
 real-data test or a bound on total model error.
 
 Version checkpoints: `67bdfc7` preserves the report before this extension; `0fd1ae3` saves the
-expanded derivations and checked distributions. The rebuilt report has 55 pages, nine figures,
-and fourteen pseudocode listings.
+expanded derivations and checked distributions. That edition has 55 pages, nine figures and fourteen pseudocode listings. The current
+measured-study edition has 65 pages, ten figures and fifteen listings.
+
+
+## Implemented study
+
+Sections 8 and 9 connect the formulas to native work, measured timing and independently
+evaluated choices. `verify_math.py` checks the saved comparison rows, 447 applicable work
+predictions and the ideal-key recall example. These are additional checks, not a replacement
+for the earlier distribution tests. The native implementations and full raw-case archives
+are in the project checkout, outside the report source ZIP.
+
+From the project root:
+
+```bash
+python examples/small_search.py
+python -m experiments.run --config experiments/configs/controlled-small.toml --output results/my-small-check
+python -m experiments.check_controlled results/controlled-fixed-2026-09-10/tuning
+python reports/search-math/plot-measured-cases.py
+```
+
+The last two commands use completed results. Extract a run's `cases.zip` inside that run
+folder before checking its native counters on a fresh checkout. The plotting script reads
+saved independent-evaluation tables. The full dataset runs are documented in
+`experiments/README.md`; ordinary PDF compilation still needs no dataset or native extension.
+
+The current edition preserves the original report and adds evidence. Further parameter-boundary
+checks and larger-working-set cost measurements are needed before stronger optimum or
+billion-document timing claims. The calculator remains separate from this evidence update.

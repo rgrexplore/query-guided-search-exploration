@@ -1,0 +1,4241 @@
+{
+  "checked": 193,
+  "outside_stated_conditions": 13887,
+  "failed_cases": [],
+  "mismatches": [],
+  "checks": [
+    {
+      "case_id": 19,
+      "query": 0,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1944,
+        "score_terms": 124416,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1944,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 124416
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 1,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1875,
+        "score_terms": 120000,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1875,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 120000
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 2,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1969,
+        "score_terms": 126016,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1969,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 126016
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 3,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1934,
+        "score_terms": 123776,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1934,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 123776
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 4,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1924,
+        "score_terms": 123136,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1924,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 123136
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 5,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1886,
+        "score_terms": 120704,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1886,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 120704
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 6,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1938,
+        "score_terms": 124032,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1938,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 124032
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 7,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1074,
+        "score_terms": 68736,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1074,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 68736
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 8,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1963,
+        "score_terms": 125632,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1963,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 125632
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 9,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1946,
+        "score_terms": 124544,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1946,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 124544
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 10,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1843,
+        "score_terms": 117952,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1843,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 117952
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 11,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1980,
+        "score_terms": 126720,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1980,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 126720
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 12,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1906,
+        "score_terms": 121984,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1906,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 121984
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 13,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1980,
+        "score_terms": 126720,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1980,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 126720
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 14,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1963,
+        "score_terms": 125632,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1963,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 125632
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 15,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1984,
+        "score_terms": 126976,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1984,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 126976
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 16,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1982,
+        "score_terms": 126848,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1982,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 126848
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 17,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1976,
+        "score_terms": 126464,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1976,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 126464
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 18,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1959,
+        "score_terms": 125376,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1959,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 125376
+      }
+    },
+    {
+      "case_id": 19,
+      "query": 19,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1957,
+        "score_terms": 125248,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 10,
+        "bitplane_words": 140625,
+        "leaf_words": 15625,
+        "documents_scored": 1957,
+        "peak_mask_bytes": 1375000,
+        "recall": 1.0,
+        "score_terms": 125248
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 0,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3921,
+        "score_terms": 250944,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3921,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 250944
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 1,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3837,
+        "score_terms": 245568,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3837,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 245568
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 2,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3944,
+        "score_terms": 252416,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3944,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 252416
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 3,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3919,
+        "score_terms": 250816,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3919,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 250816
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 4,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3905,
+        "score_terms": 249920,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3905,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 249920
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 5,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3844,
+        "score_terms": 246016,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3844,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 246016
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 6,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3869,
+        "score_terms": 247616,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3869,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 247616
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 7,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 4085,
+        "score_terms": 261440,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 4085,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 261440
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 8,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3899,
+        "score_terms": 249536,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3899,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 249536
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 9,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3962,
+        "score_terms": 253568,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3962,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 253568
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 10,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3826,
+        "score_terms": 244864,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3826,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 244864
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 11,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3992,
+        "score_terms": 255488,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3992,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 255488
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 12,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3817,
+        "score_terms": 244288,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3817,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 244288
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 13,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3930,
+        "score_terms": 251520,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3930,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 251520
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 14,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3995,
+        "score_terms": 255680,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3995,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 255680
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 15,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3910,
+        "score_terms": 250240,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3910,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 250240
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 16,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3975,
+        "score_terms": 254400,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3975,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 254400
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 17,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3916,
+        "score_terms": 250624,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3916,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 250624
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 18,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3908,
+        "score_terms": 250112,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3908,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 250112
+      }
+    },
+    {
+      "case_id": 31,
+      "query": 19,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3921,
+        "score_terms": 250944,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 9,
+        "bitplane_words": 125000,
+        "leaf_words": 15625,
+        "documents_scored": 3921,
+        "peak_mask_bytes": 1250000,
+        "recall": 1.0,
+        "score_terms": 250944
+      }
+    },
+    {
+      "case_id": 104,
+      "query": 0,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 107,
+        "score_terms": 6848,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 107,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 6848
+      }
+    },
+    {
+      "case_id": 104,
+      "query": 1,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 127,
+        "score_terms": 8128,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 127,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 8128
+      }
+    },
+    {
+      "case_id": 104,
+      "query": 2,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 128,
+        "score_terms": 8192,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 128,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 8192
+      }
+    },
+    {
+      "case_id": 104,
+      "query": 4,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 111,
+        "score_terms": 7104,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 111,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 7104
+      }
+    },
+    {
+      "case_id": 104,
+      "query": 5,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 117,
+        "score_terms": 7488,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 117,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 7488
+      }
+    },
+    {
+      "case_id": 104,
+      "query": 8,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 111,
+        "score_terms": 7104,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 111,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 7104
+      }
+    },
+    {
+      "case_id": 104,
+      "query": 9,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 117,
+        "score_terms": 7488,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 117,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 7488
+      }
+    },
+    {
+      "case_id": 104,
+      "query": 11,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 123,
+        "score_terms": 7872,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 123,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 7872
+      }
+    },
+    {
+      "case_id": 104,
+      "query": 14,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 117,
+        "score_terms": 7488,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 117,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 7488
+      }
+    },
+    {
+      "case_id": 104,
+      "query": 15,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 122,
+        "score_terms": 7808,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 122,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 7808
+      }
+    },
+    {
+      "case_id": 104,
+      "query": 16,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 117,
+        "score_terms": 7488,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 117,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 7488
+      }
+    },
+    {
+      "case_id": 104,
+      "query": 17,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 116,
+        "score_terms": 7424,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 116,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 7424
+      }
+    },
+    {
+      "case_id": 104,
+      "query": 18,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 121,
+        "score_terms": 7744,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 14,
+        "bitplane_words": 203125,
+        "leaf_words": 15625,
+        "documents_scored": 121,
+        "peak_mask_bytes": 1875000,
+        "recall": 1.0,
+        "score_terms": 7744
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 0,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 988,
+        "score_terms": 63232,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 988,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 63232
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 1,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 963,
+        "score_terms": 61632,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 963,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 61632
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 2,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 975,
+        "score_terms": 62400,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 975,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 62400
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 3,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 960,
+        "score_terms": 61440,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 960,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 61440
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 4,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 966,
+        "score_terms": 61824,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 966,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 61824
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 5,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 964,
+        "score_terms": 61696,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 964,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 61696
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 6,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 958,
+        "score_terms": 61312,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 958,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 61312
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 7,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 539,
+        "score_terms": 34496,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 539,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 34496
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 8,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 977,
+        "score_terms": 62528,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 977,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 62528
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 9,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 948,
+        "score_terms": 60672,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 948,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 60672
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 10,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 936,
+        "score_terms": 59904,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 936,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 59904
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 11,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1010,
+        "score_terms": 64640,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1010,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 64640
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 12,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 976,
+        "score_terms": 62464,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 976,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 62464
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 13,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1022,
+        "score_terms": 65408,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1022,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 65408
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 14,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1000,
+        "score_terms": 64000,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1000,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 64000
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 15,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1011,
+        "score_terms": 64704,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1011,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 64704
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 16,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1006,
+        "score_terms": 64384,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 1006,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 64384
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 17,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 955,
+        "score_terms": 61120,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 955,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 61120
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 18,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 976,
+        "score_terms": 62464,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 976,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 62464
+      }
+    },
+    {
+      "case_id": 226,
+      "query": 19,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 996,
+        "score_terms": 63744,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 11,
+        "bitplane_words": 156250,
+        "leaf_words": 15625,
+        "documents_scored": 996,
+        "peak_mask_bytes": 1500000,
+        "recall": 1.0,
+        "score_terms": 63744
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 0,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 484,
+        "score_terms": 30976,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 484,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 30976
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 1,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 480,
+        "score_terms": 30720,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 480,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 30720
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 2,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 486,
+        "score_terms": 31104,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 486,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 31104
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 3,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 473,
+        "score_terms": 30272,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 473,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 30272
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 4,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 484,
+        "score_terms": 30976,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 484,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 30976
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 5,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 477,
+        "score_terms": 30528,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 477,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 30528
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 6,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 13,
+        "bitplane_words": 187500,
+        "leaf_words": 15625,
+        "documents_scored": 259,
+        "score_terms": 16576,
+        "peak_mask_bytes": 1750000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 13,
+        "bitplane_words": 187500,
+        "leaf_words": 15625,
+        "documents_scored": 259,
+        "peak_mask_bytes": 1750000,
+        "recall": 1.0,
+        "score_terms": 16576
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 7,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 13,
+        "bitplane_words": 187500,
+        "leaf_words": 15625,
+        "documents_scored": 273,
+        "score_terms": 17472,
+        "peak_mask_bytes": 1750000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 13,
+        "bitplane_words": 187500,
+        "leaf_words": 15625,
+        "documents_scored": 273,
+        "peak_mask_bytes": 1750000,
+        "recall": 1.0,
+        "score_terms": 17472
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 8,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 486,
+        "score_terms": 31104,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 486,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 31104
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 9,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 483,
+        "score_terms": 30912,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 483,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 30912
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 10,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 468,
+        "score_terms": 29952,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 468,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 29952
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 11,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 472,
+        "score_terms": 30208,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 472,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 30208
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 12,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 511,
+        "score_terms": 32704,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 511,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 32704
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 13,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 13,
+        "bitplane_words": 187500,
+        "leaf_words": 15625,
+        "documents_scored": 264,
+        "score_terms": 16896,
+        "peak_mask_bytes": 1750000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 13,
+        "bitplane_words": 187500,
+        "leaf_words": 15625,
+        "documents_scored": 264,
+        "peak_mask_bytes": 1750000,
+        "recall": 1.0,
+        "score_terms": 16896
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 14,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 492,
+        "score_terms": 31488,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 492,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 31488
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 15,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 13,
+        "bitplane_words": 187500,
+        "leaf_words": 15625,
+        "documents_scored": 240,
+        "score_terms": 15360,
+        "peak_mask_bytes": 1750000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 13,
+        "bitplane_words": 187500,
+        "leaf_words": 15625,
+        "documents_scored": 240,
+        "peak_mask_bytes": 1750000,
+        "recall": 1.0,
+        "score_terms": 15360
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 16,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 504,
+        "score_terms": 32256,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 504,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 32256
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 17,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 485,
+        "score_terms": 31040,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 485,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 31040
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 18,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 496,
+        "score_terms": 31744,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 496,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 31744
+      }
+    },
+    {
+      "case_id": 284,
+      "query": 19,
+      "method": "branch",
+      "documents": 1000000,
+      "predicted": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 501,
+        "score_terms": 32064,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0
+      },
+      "measured": {
+        "nodes": 12,
+        "bitplane_words": 171875,
+        "leaf_words": 15625,
+        "documents_scored": 501,
+        "peak_mask_bytes": 1625000,
+        "recall": 1.0,
+        "score_terms": 32064
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 0,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 165,
+        "score_terms": 10560,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 165,
+        "recall": 1.0,
+        "score_terms": 10560
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 1,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 155,
+        "score_terms": 9920,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 155,
+        "recall": 1.0,
+        "score_terms": 9920
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 2,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 179,
+        "score_terms": 11456,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 179,
+        "recall": 1.0,
+        "score_terms": 11456
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 3,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 162,
+        "score_terms": 10368,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 162,
+        "recall": 1.0,
+        "score_terms": 10368
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 4,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 149,
+        "score_terms": 9536,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 149,
+        "recall": 1.0,
+        "score_terms": 9536
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 5,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 187,
+        "score_terms": 11968,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 187,
+        "recall": 1.0,
+        "score_terms": 11968
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 6,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 166,
+        "score_terms": 10624,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 166,
+        "recall": 1.0,
+        "score_terms": 10624
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 7,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 173,
+        "score_terms": 11072,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 173,
+        "recall": 1.0,
+        "score_terms": 11072
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 8,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 168,
+        "score_terms": 10752,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 168,
+        "recall": 1.0,
+        "score_terms": 10752
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 9,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 183,
+        "score_terms": 11712,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 183,
+        "recall": 1.0,
+        "score_terms": 11712
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 10,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 176,
+        "score_terms": 11264,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 176,
+        "recall": 1.0,
+        "score_terms": 11264
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 11,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 162,
+        "score_terms": 10368,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 162,
+        "recall": 1.0,
+        "score_terms": 10368
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 12,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 180,
+        "score_terms": 11520,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 180,
+        "recall": 1.0,
+        "score_terms": 11520
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 13,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 160,
+        "score_terms": 10240,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 160,
+        "recall": 1.0,
+        "score_terms": 10240
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 14,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 166,
+        "score_terms": 10624,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 166,
+        "recall": 1.0,
+        "score_terms": 10624
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 15,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 174,
+        "score_terms": 11136,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 174,
+        "recall": 1.0,
+        "score_terms": 11136
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 16,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 178,
+        "score_terms": 11392,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 178,
+        "recall": 1.0,
+        "score_terms": 11392
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 17,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 142,
+        "score_terms": 9088,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 142,
+        "recall": 1.0,
+        "score_terms": 9088
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 18,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 175,
+        "score_terms": 11200,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 175,
+        "recall": 1.0,
+        "score_terms": 11200
+      }
+    },
+    {
+      "case_id": 339,
+      "query": 19,
+      "method": "keys",
+      "documents": 100000,
+      "predicted": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 169,
+        "score_terms": 10816,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 14,
+        "key_attempts": 14,
+        "documents_scored": 169,
+        "recall": 1.0,
+        "score_terms": 10816
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 0,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 107,
+        "score_terms": 6848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 107,
+        "recall": 1.0,
+        "score_terms": 6848
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 1,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 127,
+        "score_terms": 8128,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 127,
+        "recall": 1.0,
+        "score_terms": 8128
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 2,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 128,
+        "score_terms": 8192,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 128,
+        "recall": 1.0,
+        "score_terms": 8192
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 3,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 135,
+        "score_terms": 8640,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 135,
+        "recall": 1.0,
+        "score_terms": 8640
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 4,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 111,
+        "score_terms": 7104,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 111,
+        "recall": 1.0,
+        "score_terms": 7104
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 5,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 117,
+        "score_terms": 7488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 117,
+        "recall": 1.0,
+        "score_terms": 7488
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 6,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 136,
+        "score_terms": 8704,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 136,
+        "recall": 1.0,
+        "score_terms": 8704
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 7,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 130,
+        "score_terms": 8320,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 130,
+        "recall": 1.0,
+        "score_terms": 8320
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 8,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 111,
+        "score_terms": 7104,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 111,
+        "recall": 1.0,
+        "score_terms": 7104
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 9,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 117,
+        "score_terms": 7488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 117,
+        "recall": 1.0,
+        "score_terms": 7488
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 10,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 134,
+        "score_terms": 8576,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 134,
+        "recall": 1.0,
+        "score_terms": 8576
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 11,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 123,
+        "score_terms": 7872,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 123,
+        "recall": 1.0,
+        "score_terms": 7872
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 12,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 142,
+        "score_terms": 9088,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 142,
+        "recall": 1.0,
+        "score_terms": 9088
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 13,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 131,
+        "score_terms": 8384,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 131,
+        "recall": 1.0,
+        "score_terms": 8384
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 14,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 117,
+        "score_terms": 7488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 117,
+        "recall": 1.0,
+        "score_terms": 7488
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 15,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 122,
+        "score_terms": 7808,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 122,
+        "recall": 1.0,
+        "score_terms": 7808
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 16,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 117,
+        "score_terms": 7488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 117,
+        "recall": 1.0,
+        "score_terms": 7488
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 17,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 116,
+        "score_terms": 7424,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 116,
+        "recall": 1.0,
+        "score_terms": 7424
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 18,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 121,
+        "score_terms": 7744,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 121,
+        "recall": 1.0,
+        "score_terms": 7744
+      }
+    },
+    {
+      "case_id": 370,
+      "query": 19,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 132,
+        "score_terms": 8448,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 132,
+        "recall": 1.0,
+        "score_terms": 8448
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 0,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 227,
+        "score_terms": 14528,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 227,
+        "recall": 1.0,
+        "score_terms": 14528
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 1,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 248,
+        "score_terms": 15872,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 248,
+        "recall": 1.0,
+        "score_terms": 15872
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 2,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 241,
+        "score_terms": 15424,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 241,
+        "recall": 1.0,
+        "score_terms": 15424
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 3,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 4,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "score_terms": 15104,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "recall": 1.0,
+        "score_terms": 15104
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 5,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 246,
+        "score_terms": 15744,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 246,
+        "recall": 1.0,
+        "score_terms": 15744
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 6,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 259,
+        "score_terms": 16576,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 259,
+        "recall": 1.0,
+        "score_terms": 16576
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 7,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 273,
+        "score_terms": 17472,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 273,
+        "recall": 1.0,
+        "score_terms": 17472
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 8,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "score_terms": 15104,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "recall": 1.0,
+        "score_terms": 15104
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 9,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 226,
+        "score_terms": 14464,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 226,
+        "recall": 1.0,
+        "score_terms": 14464
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 10,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 237,
+        "score_terms": 15168,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 237,
+        "recall": 1.0,
+        "score_terms": 15168
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 11,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 12,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 258,
+        "score_terms": 16512,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 258,
+        "recall": 1.0,
+        "score_terms": 16512
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 13,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 264,
+        "score_terms": 16896,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 264,
+        "recall": 1.0,
+        "score_terms": 16896
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 14,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 15,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 240,
+        "score_terms": 15360,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 240,
+        "recall": 1.0,
+        "score_terms": 15360
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 16,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "score_terms": 16000,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "recall": 1.0,
+        "score_terms": 16000
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 17,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 222,
+        "score_terms": 14208,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 222,
+        "recall": 1.0,
+        "score_terms": 14208
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 18,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 256,
+        "score_terms": 16384,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 256,
+        "recall": 1.0,
+        "score_terms": 16384
+      }
+    },
+    {
+      "case_id": 455,
+      "query": 19,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 260,
+        "score_terms": 16640,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 260,
+        "recall": 1.0,
+        "score_terms": 16640
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 0,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62387,
+        "score_terms": 3992768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62387,
+        "recall": 1.0,
+        "score_terms": 3992768
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 1,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62342,
+        "score_terms": 3989888,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62342,
+        "recall": 1.0,
+        "score_terms": 3989888
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 2,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62387,
+        "score_terms": 3992768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62387,
+        "recall": 1.0,
+        "score_terms": 3992768
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 3,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62391,
+        "score_terms": 3993024,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62391,
+        "recall": 1.0,
+        "score_terms": 3993024
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 4,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 63040,
+        "score_terms": 4034560,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 63040,
+        "recall": 1.0,
+        "score_terms": 4034560
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 5,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62402,
+        "score_terms": 3993728,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62402,
+        "recall": 1.0,
+        "score_terms": 3993728
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 6,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62387,
+        "score_terms": 3992768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62387,
+        "recall": 1.0,
+        "score_terms": 3992768
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 7,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62533,
+        "score_terms": 4002112,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62533,
+        "recall": 1.0,
+        "score_terms": 4002112
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 8,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62699,
+        "score_terms": 4012736,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62699,
+        "recall": 1.0,
+        "score_terms": 4012736
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 9,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 63040,
+        "score_terms": 4034560,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 63040,
+        "recall": 1.0,
+        "score_terms": 4034560
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 10,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62540,
+        "score_terms": 4002560,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62540,
+        "recall": 1.0,
+        "score_terms": 4002560
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 11,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62540,
+        "score_terms": 4002560,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62540,
+        "recall": 1.0,
+        "score_terms": 4002560
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 12,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62695,
+        "score_terms": 4012480,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62695,
+        "recall": 1.0,
+        "score_terms": 4012480
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 13,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62577,
+        "score_terms": 4004928,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62577,
+        "recall": 1.0,
+        "score_terms": 4004928
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 14,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62402,
+        "score_terms": 3993728,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62402,
+        "recall": 1.0,
+        "score_terms": 3993728
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 15,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62387,
+        "score_terms": 3992768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62387,
+        "recall": 1.0,
+        "score_terms": 3992768
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 16,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62577,
+        "score_terms": 4004928,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62577,
+        "recall": 1.0,
+        "score_terms": 4004928
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 17,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62577,
+        "score_terms": 4004928,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62577,
+        "recall": 1.0,
+        "score_terms": 4004928
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 18,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62695,
+        "score_terms": 4012480,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62695,
+        "recall": 1.0,
+        "score_terms": 4012480
+      }
+    },
+    {
+      "case_id": 614,
+      "query": 19,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62833,
+        "score_terms": 4021312,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 62833,
+        "recall": 1.0,
+        "score_terms": 4021312
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 0,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3921,
+        "score_terms": 250944,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3921,
+        "recall": 1.0,
+        "score_terms": 250944
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 1,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3837,
+        "score_terms": 245568,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3837,
+        "recall": 1.0,
+        "score_terms": 245568
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 2,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3944,
+        "score_terms": 252416,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3944,
+        "recall": 1.0,
+        "score_terms": 252416
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 3,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3919,
+        "score_terms": 250816,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3919,
+        "recall": 1.0,
+        "score_terms": 250816
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 4,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3905,
+        "score_terms": 249920,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3905,
+        "recall": 1.0,
+        "score_terms": 249920
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 5,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3844,
+        "score_terms": 246016,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3844,
+        "recall": 1.0,
+        "score_terms": 246016
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 6,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3869,
+        "score_terms": 247616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3869,
+        "recall": 1.0,
+        "score_terms": 247616
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 7,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 4085,
+        "score_terms": 261440,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 4085,
+        "recall": 1.0,
+        "score_terms": 261440
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 8,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3899,
+        "score_terms": 249536,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3899,
+        "recall": 1.0,
+        "score_terms": 249536
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 9,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3962,
+        "score_terms": 253568,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3962,
+        "recall": 1.0,
+        "score_terms": 253568
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 10,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3826,
+        "score_terms": 244864,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3826,
+        "recall": 1.0,
+        "score_terms": 244864
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 11,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3992,
+        "score_terms": 255488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3992,
+        "recall": 1.0,
+        "score_terms": 255488
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 12,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3817,
+        "score_terms": 244288,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3817,
+        "recall": 1.0,
+        "score_terms": 244288
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 13,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3930,
+        "score_terms": 251520,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3930,
+        "recall": 1.0,
+        "score_terms": 251520
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 14,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3995,
+        "score_terms": 255680,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3995,
+        "recall": 1.0,
+        "score_terms": 255680
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 15,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3910,
+        "score_terms": 250240,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3910,
+        "recall": 1.0,
+        "score_terms": 250240
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 16,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3975,
+        "score_terms": 254400,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3975,
+        "recall": 1.0,
+        "score_terms": 254400
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 17,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3916,
+        "score_terms": 250624,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3916,
+        "recall": 1.0,
+        "score_terms": 250624
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 18,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3908,
+        "score_terms": 250112,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3908,
+        "recall": 1.0,
+        "score_terms": 250112
+      }
+    },
+    {
+      "case_id": 697,
+      "query": 19,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3921,
+        "score_terms": 250944,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 3921,
+        "recall": 1.0,
+        "score_terms": 250944
+      }
+    }
+  ],
+  "scope": "First repetition per query. Exact counts under stated dominance/enough-match conditions; no latency fit and no deletion of other queries from the study."
+}

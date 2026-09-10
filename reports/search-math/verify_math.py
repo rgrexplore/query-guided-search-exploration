@@ -221,13 +221,76 @@ def check_memory_and_evidence():
             'recall_study_sha256': hashlib.sha256(study_path.read_bytes()).hexdigest()}
 
 
+def check_implemented_study():
+    """Check quoted rows and conditional work against the frozen evidence copies."""
+    tables = {}
+    hashes = {}
+    for kind in ('real', 'fixed', 'adaptive'):
+        for name in ('targets', 'comparisons'):
+            path = HERE / 'evidence' / f'{kind}-{name}.csv'
+            with path.open() as file:
+                tables[(kind, name)] = list(csv.DictReader(file))
+            hashes[path.name] = hashlib.sha256(path.read_bytes()).hexdigest()
+    real = tables[('real', 'targets')]
+    for selection, expected_passes in [('mean', 7), ('conservative', 36)]:
+        rows = [r for r in real if r['selection'] == selection]
+        assert len(rows) == 36
+        assert sum(r['met_target'] == 'True' for r in rows) == expected_passes
+    assert not any(r['supported_speedup'] == 'True' for r in tables[('real', 'comparisons')])
+
+    # These are the N=1M, 99% conservative choices plotted in the report.
+    expected_times = {'real': [9.5796, 9.9645, 11.0127],
+                      'fixed': [.0145, .0156, .0127],
+                      'adaptive': [24.9377, .1496, 26.8429]}
+    for kind, times in expected_times.items():
+        rows = {r['method']: r for r in tables[(kind, 'targets')]
+                if r['documents'] == '1000000' and r['target'] == '0.99'
+                and r['selection'] == 'conservative'}
+        for method, expected in zip(('scan', 'branch', 'keys'), times):
+            assert abs(float(rows[method]['p50_ms']) - expected) < .00005
+            assert rows[method]['met_target'] == rows[method]['qualified_environment'] == 'True'
+    for kind in ('real', 'fixed', 'adaptive'):
+        for row in tables[(kind, 'comparisons')]:
+            expected = row['both_qualified'] == 'True' and float(row['speedup_low']) > 1
+            assert (row['supported_speedup'] == 'True') == expected
+
+    checked = 0
+    for kind in ('fixed', 'adaptive'):
+        for phase in ('tuning', 'evaluation'):
+            path = HERE / 'evidence' / f'{kind}-{phase}-work.json'
+            work = json.loads(path.read_text())
+            assert work['mismatches'] == []
+            assert all(r['predicted'] == r['measured'] for r in work['checks'])
+            assert work['checked'] == len(work['checks'])
+            checked += work['checked']
+            hashes[path.name] = hashlib.sha256(path.read_bytes()).hexdigest()
+    assert checked == 447
+    example = json.loads((HERE / 'evidence' / 'ideal-key-example.json').read_text())
+    top_k = example['top_k']
+    recall = sum(min(z, top_k) for z in example['counts']) / (len(example['counts']) * top_k)
+    assert recall == .9995
+    assert float(next(r for r in tables[('fixed', 'targets')]
+                      if r['method']=='scan' and r['documents']=='1000000')['recall']) == recall
+
+    # The binomial tail-sum identity and direct clipped-count sum agree.
+    for n in (1, 4, 8):
+        for bits in (1, 2):
+            p = 2**-bits
+            for k in {1, n}:
+                tail_sum = sum(sum(math.comb(n, z) * p**z * (1-p)**(n-z)
+                                   for z in range(i, n+1)) for i in range(1, k+1))
+                assert math.isclose(tail_sum, expected_clipped_count(n, p, k), abs_tol=1e-12)
+    return dict(work_predictions=checked, ideal_key_recall=recall, source_sha256=hashes)
+
+
 if __name__ == '__main__':
     check_scores()
     check_subsets()
     check_binomial()
     finite_recall = check_finite_recall()
     evidence = check_memory_and_evidence()
+    implemented = check_implemented_study()
     result = {'score_identity_and_lookup': 'passed', 'complete_weighted_subset_order': 'passed',
-              'finite_binary_recall_example': 'passed', 'finite_top_k_recall': finite_recall, 'memory_and_archived_numbers': 'passed', **evidence}
+              'finite_binary_recall_example': 'passed', 'finite_top_k_recall': finite_recall, 'memory_and_archived_numbers': 'passed', 'implemented_study': implemented, **evidence}
     (HERE/'evidence/math-checks.json').write_text(json.dumps(result, indent=2)+'\n')
     print(json.dumps(result, indent=2))

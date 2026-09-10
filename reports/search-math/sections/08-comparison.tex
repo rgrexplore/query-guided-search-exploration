@@ -84,6 +84,11 @@ exceeds RAM does not prove that a tighter implementation cannot fit. An observed
 the limit does not prove that every possible query fits. These are different claims.
 
 \Needspace{12\baselineskip}
+The native measurements use the allocation choices in Equation~\eqref{eq:native-key-storage}:
+C reorders codes and IDs together, so its extra posting permutation is absent. Its directory
+uses allocated nodes and bucket pointers. Use that layout when connecting the general formulas
+to the measured results.
+
 \subsection{A compact comparison table}
 \small
 \begin{longtable}{@{}P{.16\linewidth}P{.25\linewidth}P{.25\linewidth}P{.25\linewidth}@{}}

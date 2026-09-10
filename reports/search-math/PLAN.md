@@ -31,8 +31,8 @@ The primary third method starts with clusters; a global hash is the C=1 special 
 - [x] Inspect rendered pages, including every diagram and long table.
 - [x] Save sources, PDF, reproduction instructions and a memory pointer.
 
-No new retrieval implementation, optimizer calibration, embedding run or billion-document
-benchmark is part of this deliverable. The report explicitly identifies what remains empirical.
+The original math-first edition did not include a new retrieval implementation, optimizer
+calibration, embedding run or billion-document benchmark. The report explicitly identifies what remains empirical.
 
 Original edition: 43 pages, six figures, twelve pseudocode blocks; preserved at `67bdfc7`.
 
@@ -50,3 +50,16 @@ The extension has 55 pages, nine figures and fourteen pseudocode listings. A new
 predictor is not claimed: the saved normal approximation fails the proposed two-point error
 criterion on the shown Nomic cases. A fresh calibration/test study remains future work, with
 its own query provenance required; previously inspected queries are not relabeled as fresh.
+
+
+## Implemented comparison extension
+
+- [x] Add the implemented directory layout and global key-enumeration policy.
+- [x] Report isolated calibration and its remaining prediction errors.
+- [x] Report frozen choices on 200 independent real queries, keeping target misses.
+- [x] Run fixed and changing strong-coordinate cases with direct-routing scan controls.
+- [x] Compare 447 applicable work predictions with native counters.
+- [x] Add a small runnable query and a paper-to-code map.
+- [x] Compile and inspect the expanded 65-page report.
+- [ ] Check relevant parameter boundaries and larger working-set costs before extending timing claims.
+- [ ] Update larger-corpus numerical projections and finish repository integration.

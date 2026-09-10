@@ -1,8 +1,48 @@
-# Bitplane search
+# Search binary embeddings
 
-This compares two ways to search binary document embeddings: scan the rows, or walk through
-bitplanes and score smaller groups. Both use float queries and the same binary documents.
-Faiss supplies the coarse buckets and a separate float-IVF baseline.
+Compare three methods under the same binary score, recall requirement and memory limit:
+cluster then scan, cluster then bitplane branching, and cluster then weighted key lookup.
+
+Start with the [paper](output/pdf/search-methods-mathematics.pdf), then follow the
+[paper-to-code map and experiment commands](experiments/README.md). The
+[small example](examples/small_search.py) runs all three methods on six documents and prints
+what each one checks. It needs the installed native extension but no downloaded dataset.
+
+```bash
+.venv/bin/python examples/small_search.py
+.venv/bin/python -m experiments.run --config experiments/configs/controlled-small.toml --output results/my-small-check
+```
+
+Installation is below under **Run it**. A complete study keeps its settings, per-query
+measurements, machine details and result tables together in one output folder.
+
+## Current measured results
+
+At one million documents and a 99% binary-recall requirement:
+
+| Data | Scan median | Bitplanes median | Key lookup median |
+|---|---:|---:|---:|
+| Cached Nomic embeddings | 9.5796 ms | 9.9645 ms | 11.0127 ms |
+| Constructed fixed strong coordinates | 0.0145 ms | 0.0156 ms | 0.0127 ms |
+| Constructed changing strong coordinates | 24.9377 ms | 0.1496 ms | 26.8429 ms |
+
+These are independently evaluated choices from a declared parameter grid, with a 32 GB
+memory constraint, one CPU thread and cached queries. All listed settings met the target;
+their achieved recalls differ. Constructed query weights test specific conditions and do not
+describe typical Matryoshka embeddings. The fixed-coordinate scan also uses direct-key routing,
+so its candidate selection largely overlaps with key lookup.
+
+Read the full [real-data evaluation](results/independent-evaluation-2026-09-10/report/README.md),
+[fixed-coordinate evaluation](results/controlled-fixed-2026-09-10/evaluation/report/README.md),
+and [changing-coordinate evaluation](results/controlled-adaptive-2026-09-10/evaluation/report/README.md)
+for exact settings, achieved recall, uncertainty and target misses. The paper explains the
+formulas and their limits. Billion-document projections remain a separate modeling question.
+
+## Earlier studies
+
+The original FiQA pipeline compares scan and bitplane search with a float reranking step.
+Faiss supplies coarse buckets and a separate float-IVF reference. These studies use different
+quality references and should be read separately from the current binary-score comparison.
 
 [Million-passage scaling results](results/scaling-msmarco-1m/README.md): the existing bitplane
 search did not beat scan at the tested recall targets. The report keeps the full parameter grid
