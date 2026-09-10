@@ -63,7 +63,7 @@ its own query provenance required; previously inspected queries are not relabele
 - [x] Compile and inspect the expanded 65-page report.
 - [x] Check relevant parameter boundaries and larger working-set costs before extending timing claims.
 - [x] Update conditional larger-corpus numerical projections.
-- [ ] Finish repository integration and final reproduction audit.
+- [x] Finish repository integration and final reproduction audit.
 
 
 Final evidence edition:72pages,11figures,15listings. It includes the explicit limits of the1B
