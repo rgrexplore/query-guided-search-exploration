@@ -1,6 +1,6 @@
 [experiment]
 stage = "exploration"
-sources = ["results/real-refinement-2026-09-10/search", "results/real-boundary-2026-09-10/search", "results/real-scale-2026-09-10/search"]
+sources = ["results/real-refinement-2026-09-10/search", "results/real-boundary-2026-09-10/search", "results/real-scale-2026-09-10/search", "results/million-boundary-2026-09-10/search", "results/probe-cutoffs-2026-09-10"]
 
 [search]
 recall_targets = [0.8, 0.9, 0.95, 0.99]

@@ -56,7 +56,7 @@ def prepare_real_pool(config, documents):
         np.save(pool/f'{name}.npy', values)
     hashes = {name: file_hash(pool/name) for name in ['codes.npy','queries.npy','reference.npy','documents.npy']}
     (pool/'pool.json').write_text(json.dumps(dict(identity=identity, hashes=hashes, query_ids=query_ids), indent=2)+'\n')
-    print(f'Prepared {documents} documents and {len(queries)} tuning queries', flush=True)
+    print(f'Prepared {documents} documents and {len(queries)} query vectors', flush=True)
     return pool
 
 

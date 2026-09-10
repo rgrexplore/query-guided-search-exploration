@@ -9,6 +9,7 @@ from experiments.isolated import run_isolated
 from experiments.real_study import run_real_study, run_refinement
 from experiments.exploration import run_exploration
 from experiments.evaluate import run_evaluation
+from experiments.probe_cutoffs import run_probe_cutoffs
 
 
 def main():
@@ -18,7 +19,9 @@ def main():
     args=parser.parse_args()
     config=tomllib.loads(args.config.read_text())
     stage = config.get('experiment', {}).get('stage', 'components')
-    if stage == 'evaluate':
+    if stage == 'probe_cutoffs':
+        run_probe_cutoffs(config,args.output)
+    elif stage == 'evaluate':
         run_evaluation(config, args.output)
     elif stage == 'exploration':
         run_exploration(config, args.output)
