@@ -1,0 +1,119 @@
+[
+  {
+    "run": "probe-cutoffs-2026-09-10",
+    "case_id": "0171",
+    "target": 0.99,
+    "old_mean": 0.9899999999999999,
+    "hits": 9900,
+    "total": 10000,
+    "corrected_mean": 0.99
+  },
+  {
+    "run": "probe-cutoffs-2026-09-10",
+    "case_id": "0066",
+    "target": 0.99,
+    "old_mean": 0.9899999999999999,
+    "hits": 9900,
+    "total": 10000,
+    "corrected_mean": 0.99
+  },
+  {
+    "run": "probe-cutoffs-2026-09-10",
+    "case_id": "0004",
+    "target": 0.99,
+    "old_mean": 0.9899999999999999,
+    "hits": 9900,
+    "total": 10000,
+    "corrected_mean": 0.99
+  },
+  {
+    "run": "probe-cutoffs-2026-09-10",
+    "case_id": "0544",
+    "target": 0.99,
+    "old_mean": 0.9899999999999999,
+    "hits": 9900,
+    "total": 10000,
+    "corrected_mean": 0.99
+  },
+  {
+    "run": "probe-cutoffs-2026-09-10",
+    "case_id": "0377",
+    "target": 0.99,
+    "old_mean": 0.9899999999999999,
+    "hits": 9900,
+    "total": 10000,
+    "corrected_mean": 0.99
+  },
+  {
+    "run": "probe-cutoffs-2026-09-10",
+    "case_id": "0038",
+    "target": 0.99,
+    "old_mean": 0.9899999999999999,
+    "hits": 9900,
+    "total": 10000,
+    "corrected_mean": 0.99
+  },
+  {
+    "run": "probe-cutoffs-2026-09-10",
+    "case_id": "0602",
+    "target": 0.99,
+    "old_mean": 0.9899999999999999,
+    "hits": 9900,
+    "total": 10000,
+    "corrected_mean": 0.99
+  },
+  {
+    "run": "probe-cutoffs-2026-09-10",
+    "case_id": "0430",
+    "target": 0.99,
+    "old_mean": 0.9899999999999999,
+    "hits": 9900,
+    "total": 10000,
+    "corrected_mean": 0.99
+  },
+  {
+    "run": "probe-cutoffs-2026-09-10",
+    "case_id": "0274",
+    "target": 0.99,
+    "old_mean": 0.9899999999999999,
+    "hits": 9900,
+    "total": 10000,
+    "corrected_mean": 0.99
+  },
+  {
+    "run": "probe-cutoffs-2026-09-10",
+    "case_id": "0015",
+    "target": 0.99,
+    "old_mean": 0.9899999999999999,
+    "hits": 9900,
+    "total": 10000,
+    "corrected_mean": 0.99
+  },
+  {
+    "run": "probe-cutoffs-2026-09-10",
+    "case_id": "0071",
+    "target": 0.99,
+    "old_mean": 0.9899999999999999,
+    "hits": 9900,
+    "total": 10000,
+    "corrected_mean": 0.99
+  },
+  {
+    "run": "probe-cutoffs-2026-09-10",
+    "case_id": "0567",
+    "target": 0.99,
+    "old_mean": 0.9899999999999999,
+    "hits": 9900,
+    "total": 10000,
+    "corrected_mean": 0.99
+  },
+  {
+    "run": "probe-cutoffs-2026-09-10",
+    "case_id": "0306",
+    "target": 0.99,
+    "old_mean": 0.9899999999999999,
+    "hits": 9900,
+    "total": 10000,
+    "corrected_mean": 0.99
+  }
+]

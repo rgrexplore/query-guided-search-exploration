@@ -107,11 +107,12 @@ def combine(folders, output, targets, bootstrap_samples=1000, seed=51):
         query_numbers = sorted({key[0] for key in group['quality']})
         seeds = sorted(group['seeds'])
         assert len(group['quality'])==len(query_numbers)*len(seeds), 'unequal seed coverage'
-        quality = np.array([np.mean([group['quality'][(q,s)] for s in seeds]) for q in query_numbers])
-        mean = float(quality.mean())
+        hits = np.array([sum(round(group['quality'][(q,s)]*case['top_k']) for s in seeds) for q in query_numbers])
+        denominator = len(query_numbers)*len(seeds)*case['top_k']
+        mean = float(hits.sum()/denominator)
         lower = None
         if mean >= min(targets):
-            samples = rng.choice(quality, size=(bootstrap_samples,len(quality)), replace=True).mean(axis=1)
+            samples = rng.choice(hits, size=(bootstrap_samples,len(hits)), replace=True).sum(axis=1)/denominator
             lower = float(np.quantile(samples,.025))
         setting_id = f's{number:04d}'
         row = dict(setting_id=setting_id, documents=case['documents'], method=case['method'],

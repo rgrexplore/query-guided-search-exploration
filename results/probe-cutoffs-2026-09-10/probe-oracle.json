@@ -1,0 +1,1402 @@
+[
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 64,
+    "target": 0.8,
+    "rank_cutoff": 9,
+    "tie_safe_probes": 9,
+    "predicted_recall": 0.8089,
+    "verified_router_recall": 0.8089
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 64,
+    "target": 0.9,
+    "rank_cutoff": 14,
+    "tie_safe_probes": 14,
+    "predicted_recall": 0.9104,
+    "verified_router_recall": 0.9104
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 64,
+    "target": 0.95,
+    "rank_cutoff": 18,
+    "tie_safe_probes": 18,
+    "predicted_recall": 0.9521,
+    "verified_router_recall": 0.9521
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 64,
+    "target": 0.99,
+    "rank_cutoff": 27,
+    "tie_safe_probes": 27,
+    "predicted_recall": 0.992,
+    "verified_router_recall": 0.992
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 256,
+    "target": 0.8,
+    "rank_cutoff": 22,
+    "tie_safe_probes": 22,
+    "predicted_recall": 0.8048,
+    "verified_router_recall": 0.8048
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 256,
+    "target": 0.9,
+    "rank_cutoff": 45,
+    "tie_safe_probes": 45,
+    "predicted_recall": 0.9008,
+    "verified_router_recall": 0.9008
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 256,
+    "target": 0.95,
+    "rank_cutoff": 77,
+    "tie_safe_probes": 77,
+    "predicted_recall": 0.9504,
+    "verified_router_recall": 0.9504
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 256,
+    "target": 0.99,
+    "rank_cutoff": 147,
+    "tie_safe_probes": 147,
+    "predicted_recall": 0.9903,
+    "verified_router_recall": 0.9903
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 16,
+    "target": 0.8,
+    "rank_cutoff": 3,
+    "tie_safe_probes": 3,
+    "predicted_recall": 0.8333,
+    "verified_router_recall": 0.8333
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 16,
+    "target": 0.9,
+    "rank_cutoff": 4,
+    "tie_safe_probes": 4,
+    "predicted_recall": 0.9138,
+    "verified_router_recall": 0.9138
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 16,
+    "target": 0.95,
+    "rank_cutoff": 6,
+    "tie_safe_probes": 6,
+    "predicted_recall": 0.971,
+    "verified_router_recall": 0.971
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 16,
+    "target": 0.99,
+    "rank_cutoff": 8,
+    "tie_safe_probes": 8,
+    "predicted_recall": 1.0,
+    "verified_router_recall": 1.0
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 256,
+    "target": 0.8,
+    "rank_cutoff": 32,
+    "tie_safe_probes": 32,
+    "predicted_recall": 0.804,
+    "verified_router_recall": 0.804
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 256,
+    "target": 0.9,
+    "rank_cutoff": 49,
+    "tie_safe_probes": 49,
+    "predicted_recall": 0.9018,
+    "verified_router_recall": 0.9018
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 256,
+    "target": 0.95,
+    "rank_cutoff": 67,
+    "tie_safe_probes": 67,
+    "predicted_recall": 0.9519,
+    "verified_router_recall": 0.9519
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 256,
+    "target": 0.99,
+    "rank_cutoff": 100,
+    "tie_safe_probes": 100,
+    "predicted_recall": 0.9902,
+    "verified_router_recall": 0.9902
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 1024,
+    "target": 0.8,
+    "rank_cutoff": 61,
+    "tie_safe_probes": 61,
+    "predicted_recall": 0.8025,
+    "verified_router_recall": 0.8025
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 1024,
+    "target": 0.9,
+    "rank_cutoff": 138,
+    "tie_safe_probes": 138,
+    "predicted_recall": 0.9001,
+    "verified_router_recall": 0.9001
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 1024,
+    "target": 0.95,
+    "rank_cutoff": 248,
+    "tie_safe_probes": 248,
+    "predicted_recall": 0.9501,
+    "verified_router_recall": 0.9501
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 1024,
+    "target": 0.99,
+    "rank_cutoff": 499,
+    "tie_safe_probes": 499,
+    "predicted_recall": 0.99,
+    "verified_router_recall": 0.99
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 64,
+    "target": 0.8,
+    "rank_cutoff": 7,
+    "tie_safe_probes": 7,
+    "predicted_recall": 0.803,
+    "verified_router_recall": 0.803
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 64,
+    "target": 0.9,
+    "rank_cutoff": 16,
+    "tie_safe_probes": 16,
+    "predicted_recall": 0.9051,
+    "verified_router_recall": 0.9051
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 64,
+    "target": 0.95,
+    "rank_cutoff": 26,
+    "tie_safe_probes": 26,
+    "predicted_recall": 0.9526,
+    "verified_router_recall": 0.9526
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 64,
+    "target": 0.99,
+    "rank_cutoff": 46,
+    "tie_safe_probes": 46,
+    "predicted_recall": 0.9913,
+    "verified_router_recall": 0.9913
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 16,
+    "target": 0.8,
+    "rank_cutoff": 4,
+    "tie_safe_probes": 4,
+    "predicted_recall": 0.8462,
+    "verified_router_recall": 0.8462
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 16,
+    "target": 0.9,
+    "rank_cutoff": 6,
+    "tie_safe_probes": 6,
+    "predicted_recall": 0.9143,
+    "verified_router_recall": 0.9143
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 16,
+    "target": 0.95,
+    "rank_cutoff": 8,
+    "tie_safe_probes": 8,
+    "predicted_recall": 0.9532,
+    "verified_router_recall": 0.9532
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 16,
+    "target": 0.99,
+    "rank_cutoff": 13,
+    "tie_safe_probes": 13,
+    "predicted_recall": 0.9928,
+    "verified_router_recall": 0.9928
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 1024,
+    "target": 0.8,
+    "rank_cutoff": 108,
+    "tie_safe_probes": 108,
+    "predicted_recall": 0.8019,
+    "verified_router_recall": 0.8019
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 1024,
+    "target": 0.9,
+    "rank_cutoff": 183,
+    "tie_safe_probes": 183,
+    "predicted_recall": 0.9006,
+    "verified_router_recall": 0.9006
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 1024,
+    "target": 0.95,
+    "rank_cutoff": 251,
+    "tie_safe_probes": 251,
+    "predicted_recall": 0.9504,
+    "verified_router_recall": 0.9504
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 1024,
+    "target": 0.99,
+    "rank_cutoff": 390,
+    "tie_safe_probes": 390,
+    "predicted_recall": 0.99,
+    "verified_router_recall": 0.99
+  },
+  {
+    "documents": 100000,
+    "router": "none",
+    "clusters": 1,
+    "target": 0.8,
+    "rank_cutoff": 1,
+    "tie_safe_probes": 1,
+    "predicted_recall": 1.0,
+    "verified_router_recall": 1.0
+  },
+  {
+    "documents": 100000,
+    "router": "none",
+    "clusters": 1,
+    "target": 0.9,
+    "rank_cutoff": 1,
+    "tie_safe_probes": 1,
+    "predicted_recall": 1.0,
+    "verified_router_recall": 1.0
+  },
+  {
+    "documents": 100000,
+    "router": "none",
+    "clusters": 1,
+    "target": 0.95,
+    "rank_cutoff": 1,
+    "tie_safe_probes": 1,
+    "predicted_recall": 1.0,
+    "verified_router_recall": 1.0
+  },
+  {
+    "documents": 100000,
+    "router": "none",
+    "clusters": 1,
+    "target": 0.99,
+    "rank_cutoff": 1,
+    "tie_safe_probes": 1,
+    "predicted_recall": 1.0,
+    "verified_router_recall": 1.0
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 2048,
+    "target": 0.8,
+    "rank_cutoff": 182,
+    "tie_safe_probes": 182,
+    "predicted_recall": 0.8005,
+    "verified_router_recall": 0.8005
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 2048,
+    "target": 0.9,
+    "rank_cutoff": 308,
+    "tie_safe_probes": 308,
+    "predicted_recall": 0.9005,
+    "verified_router_recall": 0.9005
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 2048,
+    "target": 0.95,
+    "rank_cutoff": 448,
+    "tie_safe_probes": 448,
+    "predicted_recall": 0.9502,
+    "verified_router_recall": 0.9502
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 2048,
+    "target": 0.99,
+    "rank_cutoff": 706,
+    "tie_safe_probes": 706,
+    "predicted_recall": 0.9902,
+    "verified_router_recall": 0.9902
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 512,
+    "target": 0.8,
+    "rank_cutoff": 36,
+    "tie_safe_probes": 36,
+    "predicted_recall": 0.8045,
+    "verified_router_recall": 0.8045
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 512,
+    "target": 0.9,
+    "rank_cutoff": 82,
+    "tie_safe_probes": 82,
+    "predicted_recall": 0.9,
+    "verified_router_recall": 0.9
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 512,
+    "target": 0.95,
+    "rank_cutoff": 141,
+    "tie_safe_probes": 141,
+    "predicted_recall": 0.9502,
+    "verified_router_recall": 0.9502
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 512,
+    "target": 0.99,
+    "rank_cutoff": 273,
+    "tie_safe_probes": 273,
+    "predicted_recall": 0.99,
+    "verified_router_recall": 0.99
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 512,
+    "target": 0.8,
+    "rank_cutoff": 59,
+    "tie_safe_probes": 59,
+    "predicted_recall": 0.8021,
+    "verified_router_recall": 0.8021
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 512,
+    "target": 0.9,
+    "rank_cutoff": 93,
+    "tie_safe_probes": 93,
+    "predicted_recall": 0.9009,
+    "verified_router_recall": 0.9009
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 512,
+    "target": 0.95,
+    "rank_cutoff": 128,
+    "tie_safe_probes": 128,
+    "predicted_recall": 0.9506,
+    "verified_router_recall": 0.9506
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 512,
+    "target": 0.99,
+    "rank_cutoff": 198,
+    "tie_safe_probes": 198,
+    "predicted_recall": 0.9902,
+    "verified_router_recall": 0.9902
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 4096,
+    "target": 0.8,
+    "rank_cutoff": 178,
+    "tie_safe_probes": 178,
+    "predicted_recall": 0.8001,
+    "verified_router_recall": 0.8001
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 4096,
+    "target": 0.9,
+    "rank_cutoff": 404,
+    "tie_safe_probes": 404,
+    "predicted_recall": 0.9,
+    "verified_router_recall": 0.9
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 4096,
+    "target": 0.95,
+    "rank_cutoff": 763,
+    "tie_safe_probes": 763,
+    "predicted_recall": 0.95,
+    "verified_router_recall": 0.95
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 4096,
+    "target": 0.99,
+    "rank_cutoff": 1684,
+    "tie_safe_probes": 1684,
+    "predicted_recall": 0.9901,
+    "verified_router_recall": 0.9901
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 4096,
+    "target": 0.8,
+    "rank_cutoff": 299,
+    "tie_safe_probes": 299,
+    "predicted_recall": 0.8003,
+    "verified_router_recall": 0.8003
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 4096,
+    "target": 0.9,
+    "rank_cutoff": 535,
+    "tie_safe_probes": 535,
+    "predicted_recall": 0.9002,
+    "verified_router_recall": 0.9002
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 4096,
+    "target": 0.95,
+    "rank_cutoff": 787,
+    "tie_safe_probes": 787,
+    "predicted_recall": 0.9502,
+    "verified_router_recall": 0.9502
+  },
+  {
+    "documents": 100000,
+    "router": "sign",
+    "clusters": 4096,
+    "target": 0.99,
+    "rank_cutoff": 1246,
+    "tie_safe_probes": 1246,
+    "predicted_recall": 0.99,
+    "verified_router_recall": 0.99
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 2048,
+    "target": 0.8,
+    "rank_cutoff": 106,
+    "tie_safe_probes": 106,
+    "predicted_recall": 0.8003,
+    "verified_router_recall": 0.8003
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 2048,
+    "target": 0.9,
+    "rank_cutoff": 252,
+    "tie_safe_probes": 252,
+    "predicted_recall": 0.9,
+    "verified_router_recall": 0.9
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 2048,
+    "target": 0.95,
+    "rank_cutoff": 447,
+    "tie_safe_probes": 447,
+    "predicted_recall": 0.9502,
+    "verified_router_recall": 0.9502
+  },
+  {
+    "documents": 100000,
+    "router": "ivf",
+    "clusters": 2048,
+    "target": 0.99,
+    "rank_cutoff": 983,
+    "tie_safe_probes": 983,
+    "predicted_recall": 0.9901,
+    "verified_router_recall": 0.9901
+  },
+  {
+    "documents": 10000,
+    "router": "sign",
+    "clusters": 256,
+    "target": 0.8,
+    "rank_cutoff": 41,
+    "tie_safe_probes": 41,
+    "predicted_recall": 0.8041,
+    "verified_router_recall": 0.8041
+  },
+  {
+    "documents": 10000,
+    "router": "sign",
+    "clusters": 256,
+    "target": 0.9,
+    "rank_cutoff": 61,
+    "tie_safe_probes": 61,
+    "predicted_recall": 0.9042,
+    "verified_router_recall": 0.9042
+  },
+  {
+    "documents": 10000,
+    "router": "sign",
+    "clusters": 256,
+    "target": 0.95,
+    "rank_cutoff": 78,
+    "tie_safe_probes": 78,
+    "predicted_recall": 0.9505,
+    "verified_router_recall": 0.9505
+  },
+  {
+    "documents": 10000,
+    "router": "sign",
+    "clusters": 256,
+    "target": 0.99,
+    "rank_cutoff": 107,
+    "tie_safe_probes": 107,
+    "predicted_recall": 0.9903,
+    "verified_router_recall": 0.9903
+  },
+  {
+    "documents": 10000,
+    "router": "ivf",
+    "clusters": 1024,
+    "target": 0.8,
+    "rank_cutoff": 139,
+    "tie_safe_probes": 139,
+    "predicted_recall": 0.8006,
+    "verified_router_recall": 0.8006
+  },
+  {
+    "documents": 10000,
+    "router": "ivf",
+    "clusters": 1024,
+    "target": 0.9,
+    "rank_cutoff": 246,
+    "tie_safe_probes": 246,
+    "predicted_recall": 0.9,
+    "verified_router_recall": 0.9
+  },
+  {
+    "documents": 10000,
+    "router": "ivf",
+    "clusters": 1024,
+    "target": 0.95,
+    "rank_cutoff": 356,
+    "tie_safe_probes": 356,
+    "predicted_recall": 0.9501,
+    "verified_router_recall": 0.9501
+  },
+  {
+    "documents": 10000,
+    "router": "ivf",
+    "clusters": 1024,
+    "target": 0.99,
+    "rank_cutoff": 568,
+    "tie_safe_probes": 568,
+    "predicted_recall": 0.99,
+    "verified_router_recall": 0.99
+  },
+  {
+    "documents": 10000,
+    "router": "sign",
+    "clusters": 64,
+    "target": 0.8,
+    "rank_cutoff": 11,
+    "tie_safe_probes": 11,
+    "predicted_recall": 0.8051,
+    "verified_router_recall": 0.8051
+  },
+  {
+    "documents": 10000,
+    "router": "sign",
+    "clusters": 64,
+    "target": 0.9,
+    "rank_cutoff": 16,
+    "tie_safe_probes": 16,
+    "predicted_recall": 0.9081,
+    "verified_router_recall": 0.9081
+  },
+  {
+    "documents": 10000,
+    "router": "sign",
+    "clusters": 64,
+    "target": 0.95,
+    "rank_cutoff": 21,
+    "tie_safe_probes": 21,
+    "predicted_recall": 0.9545,
+    "verified_router_recall": 0.9545
+  },
+  {
+    "documents": 10000,
+    "router": "sign",
+    "clusters": 64,
+    "target": 0.99,
+    "rank_cutoff": 28,
+    "tie_safe_probes": 28,
+    "predicted_recall": 0.9918,
+    "verified_router_recall": 0.9918
+  },
+  {
+    "documents": 10000,
+    "router": "sign",
+    "clusters": 1024,
+    "target": 0.8,
+    "rank_cutoff": 138,
+    "tie_safe_probes": 138,
+    "predicted_recall": 0.8015,
+    "verified_router_recall": 0.8015
+  },
+  {
+    "documents": 10000,
+    "router": "sign",
+    "clusters": 1024,
+    "target": 0.9,
+    "rank_cutoff": 207,
+    "tie_safe_probes": 207,
+    "predicted_recall": 0.9007,
+    "verified_router_recall": 0.9007
+  },
+  {
+    "documents": 10000,
+    "router": "sign",
+    "clusters": 1024,
+    "target": 0.95,
+    "rank_cutoff": 267,
+    "tie_safe_probes": 267,
+    "predicted_recall": 0.9505,
+    "verified_router_recall": 0.9505
+  },
+  {
+    "documents": 10000,
+    "router": "sign",
+    "clusters": 1024,
+    "target": 0.99,
+    "rank_cutoff": 365,
+    "tie_safe_probes": 365,
+    "predicted_recall": 0.9902,
+    "verified_router_recall": 0.9902
+  },
+  {
+    "documents": 10000,
+    "router": "ivf",
+    "clusters": 4096,
+    "target": 0.8,
+    "rank_cutoff": 268,
+    "tie_safe_probes": 268,
+    "predicted_recall": 0.8002,
+    "verified_router_recall": 0.8002
+  },
+  {
+    "documents": 10000,
+    "router": "ivf",
+    "clusters": 4096,
+    "target": 0.9,
+    "rank_cutoff": 480,
+    "tie_safe_probes": 480,
+    "predicted_recall": 0.9,
+    "verified_router_recall": 0.9
+  },
+  {
+    "documents": 10000,
+    "router": "ivf",
+    "clusters": 4096,
+    "target": 0.95,
+    "rank_cutoff": 760,
+    "tie_safe_probes": 760,
+    "predicted_recall": 0.9502,
+    "verified_router_recall": 0.9502
+  },
+  {
+    "documents": 10000,
+    "router": "ivf",
+    "clusters": 4096,
+    "target": 0.99,
+    "rank_cutoff": 1435,
+    "tie_safe_probes": 1435,
+    "predicted_recall": 0.99,
+    "verified_router_recall": 0.99
+  },
+  {
+    "documents": 10000,
+    "router": "ivf",
+    "clusters": 256,
+    "target": 0.8,
+    "rank_cutoff": 49,
+    "tie_safe_probes": 49,
+    "predicted_recall": 0.8017,
+    "verified_router_recall": 0.8017
+  },
+  {
+    "documents": 10000,
+    "router": "ivf",
+    "clusters": 256,
+    "target": 0.9,
+    "rank_cutoff": 85,
+    "tie_safe_probes": 85,
+    "predicted_recall": 0.9007,
+    "verified_router_recall": 0.9007
+  },
+  {
+    "documents": 10000,
+    "router": "ivf",
+    "clusters": 256,
+    "target": 0.95,
+    "rank_cutoff": 119,
+    "tie_safe_probes": 119,
+    "predicted_recall": 0.9501,
+    "verified_router_recall": 0.9501
+  },
+  {
+    "documents": 10000,
+    "router": "ivf",
+    "clusters": 256,
+    "target": 0.99,
+    "rank_cutoff": 186,
+    "tie_safe_probes": 186,
+    "predicted_recall": 0.9902,
+    "verified_router_recall": 0.9902
+  },
+  {
+    "documents": 10000,
+    "router": "ivf",
+    "clusters": 64,
+    "target": 0.8,
+    "rank_cutoff": 16,
+    "tie_safe_probes": 16,
+    "predicted_recall": 0.8062,
+    "verified_router_recall": 0.8062
+  },
+  {
+    "documents": 10000,
+    "router": "ivf",
+    "clusters": 64,
+    "target": 0.9,
+    "rank_cutoff": 26,
+    "tie_safe_probes": 26,
+    "predicted_recall": 0.9016,
+    "verified_router_recall": 0.9016
+  },
+  {
+    "documents": 10000,
+    "router": "ivf",
+    "clusters": 64,
+    "target": 0.95,
+    "rank_cutoff": 36,
+    "tie_safe_probes": 36,
+    "predicted_recall": 0.9542,
+    "verified_router_recall": 0.9542
+  },
+  {
+    "documents": 10000,
+    "router": "ivf",
+    "clusters": 64,
+    "target": 0.99,
+    "rank_cutoff": 51,
+    "tie_safe_probes": 51,
+    "predicted_recall": 0.9903,
+    "verified_router_recall": 0.9903
+  },
+  {
+    "documents": 10000,
+    "router": "sign",
+    "clusters": 4096,
+    "target": 0.8,
+    "rank_cutoff": 350,
+    "tie_safe_probes": 350,
+    "predicted_recall": 0.8002,
+    "verified_router_recall": 0.8002
+  },
+  {
+    "documents": 10000,
+    "router": "sign",
+    "clusters": 4096,
+    "target": 0.9,
+    "rank_cutoff": 532,
+    "tie_safe_probes": 532,
+    "predicted_recall": 0.9,
+    "verified_router_recall": 0.9
+  },
+  {
+    "documents": 10000,
+    "router": "sign",
+    "clusters": 4096,
+    "target": 0.95,
+    "rank_cutoff": 695,
+    "tie_safe_probes": 695,
+    "predicted_recall": 0.95,
+    "verified_router_recall": 0.95
+  },
+  {
+    "documents": 10000,
+    "router": "sign",
+    "clusters": 4096,
+    "target": 0.99,
+    "rank_cutoff": 963,
+    "tie_safe_probes": 963,
+    "predicted_recall": 0.9902,
+    "verified_router_recall": 0.9902
+  },
+  {
+    "documents": 10000,
+    "router": "none",
+    "clusters": 1,
+    "target": 0.8,
+    "rank_cutoff": 1,
+    "tie_safe_probes": 1,
+    "predicted_recall": 1.0,
+    "verified_router_recall": 1.0
+  },
+  {
+    "documents": 10000,
+    "router": "none",
+    "clusters": 1,
+    "target": 0.9,
+    "rank_cutoff": 1,
+    "tie_safe_probes": 1,
+    "predicted_recall": 1.0,
+    "verified_router_recall": 1.0
+  },
+  {
+    "documents": 10000,
+    "router": "none",
+    "clusters": 1,
+    "target": 0.95,
+    "rank_cutoff": 1,
+    "tie_safe_probes": 1,
+    "predicted_recall": 1.0,
+    "verified_router_recall": 1.0
+  },
+  {
+    "documents": 10000,
+    "router": "none",
+    "clusters": 1,
+    "target": 0.99,
+    "rank_cutoff": 1,
+    "tie_safe_probes": 1,
+    "predicted_recall": 1.0,
+    "verified_router_recall": 1.0
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 256,
+    "target": 0.8,
+    "rank_cutoff": 24,
+    "tie_safe_probes": 24,
+    "predicted_recall": 0.8071,
+    "verified_router_recall": 0.8071
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 256,
+    "target": 0.9,
+    "rank_cutoff": 39,
+    "tie_safe_probes": 39,
+    "predicted_recall": 0.9055,
+    "verified_router_recall": 0.9055
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 256,
+    "target": 0.95,
+    "rank_cutoff": 55,
+    "tie_safe_probes": 55,
+    "predicted_recall": 0.952,
+    "verified_router_recall": 0.952
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 256,
+    "target": 0.99,
+    "rank_cutoff": 88,
+    "tie_safe_probes": 88,
+    "predicted_recall": 0.9905,
+    "verified_router_recall": 0.9905
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 1024,
+    "target": 0.8,
+    "rank_cutoff": 26,
+    "tie_safe_probes": 26,
+    "predicted_recall": 0.8032,
+    "verified_router_recall": 0.8032
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 1024,
+    "target": 0.9,
+    "rank_cutoff": 68,
+    "tie_safe_probes": 68,
+    "predicted_recall": 0.9009,
+    "verified_router_recall": 0.9009
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 1024,
+    "target": 0.95,
+    "rank_cutoff": 136,
+    "tie_safe_probes": 136,
+    "predicted_recall": 0.9501,
+    "verified_router_recall": 0.9501
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 1024,
+    "target": 0.99,
+    "rank_cutoff": 364,
+    "tie_safe_probes": 364,
+    "predicted_recall": 0.99,
+    "verified_router_recall": 0.99
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 256,
+    "target": 0.8,
+    "rank_cutoff": 11,
+    "tie_safe_probes": 11,
+    "predicted_recall": 0.8155,
+    "verified_router_recall": 0.8155
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 256,
+    "target": 0.9,
+    "rank_cutoff": 24,
+    "tie_safe_probes": 24,
+    "predicted_recall": 0.903,
+    "verified_router_recall": 0.903
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 256,
+    "target": 0.95,
+    "rank_cutoff": 45,
+    "tie_safe_probes": 45,
+    "predicted_recall": 0.9512,
+    "verified_router_recall": 0.9512
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 256,
+    "target": 0.99,
+    "rank_cutoff": 109,
+    "tie_safe_probes": 109,
+    "predicted_recall": 0.99,
+    "verified_router_recall": 0.99
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 64,
+    "target": 0.8,
+    "rank_cutoff": 7,
+    "tie_safe_probes": 7,
+    "predicted_recall": 0.8083,
+    "verified_router_recall": 0.8083
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 64,
+    "target": 0.9,
+    "rank_cutoff": 12,
+    "tie_safe_probes": 12,
+    "predicted_recall": 0.9168,
+    "verified_router_recall": 0.9168
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 64,
+    "target": 0.95,
+    "rank_cutoff": 15,
+    "tie_safe_probes": 15,
+    "predicted_recall": 0.9505,
+    "verified_router_recall": 0.9505
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 64,
+    "target": 0.99,
+    "rank_cutoff": 24,
+    "tie_safe_probes": 24,
+    "predicted_recall": 0.9906,
+    "verified_router_recall": 0.9906
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 1024,
+    "target": 0.8,
+    "rank_cutoff": 79,
+    "tie_safe_probes": 79,
+    "predicted_recall": 0.8034,
+    "verified_router_recall": 0.8034
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 1024,
+    "target": 0.9,
+    "rank_cutoff": 137,
+    "tie_safe_probes": 137,
+    "predicted_recall": 0.9008,
+    "verified_router_recall": 0.9008
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 1024,
+    "target": 0.95,
+    "rank_cutoff": 207,
+    "tie_safe_probes": 207,
+    "predicted_recall": 0.95,
+    "verified_router_recall": 0.95
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 1024,
+    "target": 0.99,
+    "rank_cutoff": 343,
+    "tie_safe_probes": 343,
+    "predicted_recall": 0.9901,
+    "verified_router_recall": 0.9901
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 4096,
+    "target": 0.8,
+    "rank_cutoff": 64,
+    "tie_safe_probes": 64,
+    "predicted_recall": 0.8,
+    "verified_router_recall": 0.8
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 4096,
+    "target": 0.9,
+    "rank_cutoff": 191,
+    "tie_safe_probes": 191,
+    "predicted_recall": 0.9001,
+    "verified_router_recall": 0.9001
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 4096,
+    "target": 0.95,
+    "rank_cutoff": 408,
+    "tie_safe_probes": 408,
+    "predicted_recall": 0.95,
+    "verified_router_recall": 0.95
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 4096,
+    "target": 0.99,
+    "rank_cutoff": 1224,
+    "tie_safe_probes": 1224,
+    "predicted_recall": 0.99,
+    "verified_router_recall": 0.99
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 64,
+    "target": 0.8,
+    "rank_cutoff": 5,
+    "tie_safe_probes": 5,
+    "predicted_recall": 0.8194,
+    "verified_router_recall": 0.8194
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 64,
+    "target": 0.9,
+    "rank_cutoff": 10,
+    "tie_safe_probes": 10,
+    "predicted_recall": 0.9087,
+    "verified_router_recall": 0.9087
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 64,
+    "target": 0.95,
+    "rank_cutoff": 17,
+    "tie_safe_probes": 17,
+    "predicted_recall": 0.9527,
+    "verified_router_recall": 0.9527
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 64,
+    "target": 0.99,
+    "rank_cutoff": 36,
+    "tie_safe_probes": 36,
+    "predicted_recall": 0.99,
+    "verified_router_recall": 0.99
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 4096,
+    "target": 0.8,
+    "rank_cutoff": 204,
+    "tie_safe_probes": 204,
+    "predicted_recall": 0.8002,
+    "verified_router_recall": 0.8002
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 4096,
+    "target": 0.9,
+    "rank_cutoff": 398,
+    "tie_safe_probes": 398,
+    "predicted_recall": 0.9004,
+    "verified_router_recall": 0.9004
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 4096,
+    "target": 0.95,
+    "rank_cutoff": 612,
+    "tie_safe_probes": 612,
+    "predicted_recall": 0.95,
+    "verified_router_recall": 0.95
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 4096,
+    "target": 0.99,
+    "rank_cutoff": 1201,
+    "tie_safe_probes": 1201,
+    "predicted_recall": 0.99,
+    "verified_router_recall": 0.99
+  },
+  {
+    "documents": 1000000,
+    "router": "none",
+    "clusters": 1,
+    "target": 0.8,
+    "rank_cutoff": 1,
+    "tie_safe_probes": 1,
+    "predicted_recall": 1.0,
+    "verified_router_recall": 1.0
+  },
+  {
+    "documents": 1000000,
+    "router": "none",
+    "clusters": 1,
+    "target": 0.9,
+    "rank_cutoff": 1,
+    "tie_safe_probes": 1,
+    "predicted_recall": 1.0,
+    "verified_router_recall": 1.0
+  },
+  {
+    "documents": 1000000,
+    "router": "none",
+    "clusters": 1,
+    "target": 0.95,
+    "rank_cutoff": 1,
+    "tie_safe_probes": 1,
+    "predicted_recall": 1.0,
+    "verified_router_recall": 1.0
+  },
+  {
+    "documents": 1000000,
+    "router": "none",
+    "clusters": 1,
+    "target": 0.99,
+    "rank_cutoff": 1,
+    "tie_safe_probes": 1,
+    "predicted_recall": 1.0,
+    "verified_router_recall": 1.0
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 8192,
+    "target": 0.8,
+    "rank_cutoff": 264,
+    "tie_safe_probes": 264,
+    "predicted_recall": 0.8006,
+    "verified_router_recall": 0.8006
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 8192,
+    "target": 0.9,
+    "rank_cutoff": 505,
+    "tie_safe_probes": 505,
+    "predicted_recall": 0.9002,
+    "verified_router_recall": 0.9002
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 8192,
+    "target": 0.95,
+    "rank_cutoff": 859,
+    "tie_safe_probes": 859,
+    "predicted_recall": 0.9501,
+    "verified_router_recall": 0.9501
+  },
+  {
+    "documents": 1000000,
+    "router": "sign",
+    "clusters": 8192,
+    "target": 0.99,
+    "rank_cutoff": 1790,
+    "tie_safe_probes": 1790,
+    "predicted_recall": 0.99,
+    "verified_router_recall": 0.99
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 8192,
+    "target": 0.8,
+    "rank_cutoff": 112,
+    "tie_safe_probes": 112,
+    "predicted_recall": 0.8003,
+    "verified_router_recall": 0.8003
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 8192,
+    "target": 0.9,
+    "rank_cutoff": 313,
+    "tie_safe_probes": 313,
+    "predicted_recall": 0.9001,
+    "verified_router_recall": 0.9001
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 8192,
+    "target": 0.95,
+    "rank_cutoff": 679,
+    "tie_safe_probes": 679,
+    "predicted_recall": 0.9501,
+    "verified_router_recall": 0.9501
+  },
+  {
+    "documents": 1000000,
+    "router": "ivf",
+    "clusters": 8192,
+    "target": 0.99,
+    "rank_cutoff": 2097,
+    "tie_safe_probes": 2097,
+    "predicted_recall": 0.99,
+    "verified_router_recall": 0.99
+  }
+]

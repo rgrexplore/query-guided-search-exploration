@@ -25,13 +25,15 @@ def summarize_setting(items, seeds, query_draws, block_draws):
     queries = sorted({q for _,q,_ in timings})
     blocks = sorted({b for b,_,_ in timings})
     assert len(quality)==len(queries)*len(seeds), 'evaluation seed coverage is incomplete'
-    recall = np.array([np.mean([quality[(q,s)] for s in seeds]) for q in queries])
+    top_k=items[0]['case']['top_k']
+    hits=np.array([sum(round(quality[(q,s)]*top_k) for s in seeds) for q in queries])
+    denominator=len(queries)*len(seeds)*top_k
     times = np.array([[[t for s in seeds for t in timings[(b,q,s)]] for q in queries] for b in blocks])
-    sampled_recall = recall[query_draws].mean(axis=1)
+    sampled_recall = hits[query_draws].sum(axis=1)/denominator
     # Resample whole process blocks and the same queries for every method.
     medians = np.array([np.median(times[bs][:,qs,:])
                         for bs,qs in zip(block_draws,query_draws,strict=True)])
-    summary = dict(recall=float(recall.mean()), recall_low=float(np.quantile(sampled_recall,.025)),
+    summary = dict(recall=float(hits.sum()/denominator), recall_low=float(np.quantile(sampled_recall,.025)),
                    recall_high=float(np.quantile(sampled_recall,.975)),
                    p50_ms=float(np.median(times)), p95_ms=float(np.percentile(times,95)),
                    p50_low=float(np.quantile(medians,.025)), p50_high=float(np.quantile(medians,.975)),

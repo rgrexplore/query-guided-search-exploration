@@ -9,6 +9,7 @@ import numpy as np
 from threadpoolctl import threadpool_limits
 
 from experiments.components import pack_signs, reference_rows
+from experiments.models import mean_recall
 from experiments.isolated import ROOT, execute_cases
 from routing import build_router
 
@@ -169,7 +170,7 @@ def run_refinement(config, output):
         if process['status'] != 'complete':
             continue
         rows = [json.loads(line) for line in (folder/'run/queries.jsonl').read_text().splitlines()]
-        recall = np.mean([row['recall'] for row in rows if row['repetition']==0])
+        recall = mean_recall([row['recall'] for row in rows if row['repetition']==0],case['top_k'])
         if recall >= minimum_target:
             qualifying.add((case['pool'], case['router'], case['probes']))
     selected = [case for case in all_cases if (case['pool'], case['router'], case['probes']) in qualifying]

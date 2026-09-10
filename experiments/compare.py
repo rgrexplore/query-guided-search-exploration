@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from experiments.analysis import load_cases, write_csv
-from experiments.models import predict_search_ms
+from experiments.models import predict_search_ms, mean_recall
 
 
 def best_settings(rows, targets):
@@ -60,8 +60,8 @@ def compare(folder, models_path=None):
                    node_budget=case.get('node_budget', 0), leaf_size=case.get('leaf_size', 0),
                    key_bits=case.get('key_bits', 0), key_offset=case.get('key_offset', 0),
                    candidate_target=case.get('candidate_target', 0), key_limit=case.get('key_limit', 0),
-                   recall=float(np.mean([r['recall'] for r in first])),
-                   routing_recall=float(np.mean(list(route_recall.values()))),
+                   recall=mean_recall([r['recall'] for r in first],case['top_k']),
+                   routing_recall=mean_recall(list(route_recall.values()),case['top_k']),
                    p50_ms=float(p50), p95_ms=float(p95),
                    mean_routing_ms=float(np.mean([r['routing_ms'] for r in queries])),
                    mean_scored=float(np.mean([r['documents_scored'] for r in first])),
@@ -85,7 +85,10 @@ def compare(folder, models_path=None):
     choices = selected_inputs(selected, cases)
     (output/'selected.json').write_text(json.dumps(choices, indent=2)+'\n')
     (output/'failures.json').write_text(json.dumps(failures, indent=2)+'\n')
-    draw_frontiers(rows, output/'recall-latency.png', config['search']['top_k'])
+    top_k_values={item['case']['top_k'] for item in cases}
+    if len(top_k_values)!=1:
+        raise ValueError('do not combine different top-K tasks in one comparison')
+    draw_frontiers(rows, output/'recall-latency.png', next(iter(top_k_values)))
     lines = ['# Real-data tuning', '',
              f'{len(cases)} complete cases; {len(failures)} failed or limited cases.',
              'Choices below use tuning-query mean recall and measured p50 latency. They are not a final independent result.',

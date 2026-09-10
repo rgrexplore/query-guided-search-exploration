@@ -7,6 +7,7 @@ import numpy as np
 from experiments.analysis import load_cases
 from experiments.choices import effective_probes, setting_key
 from experiments.isolated import ROOT, execute_cases
+from experiments.models import mean_recall
 
 
 def select_bases(rows, targets):
@@ -60,7 +61,7 @@ def run_exploration(config, output):
     for key, group in groups.items():
         case = group['case']
         signature = (case['pool'],case['router'],case['probes'])
-        rows.append(dict(key=key,documents=case['documents'],recall=np.mean(list(group['quality'].values())),
+        rows.append(dict(key=key,documents=case['documents'],recall=mean_recall(list(group['quality'].values()),case['top_k']),
                          p50_ms=np.median(group['times']),scored=np.mean([v[0] for v in group['work'].values()]),
                          splits=np.mean([v[1] for v in group['work'].values()]),routed=scan_work[signature]))
     chosen = select_bases(rows,config['search']['recall_targets'])

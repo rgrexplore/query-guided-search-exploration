@@ -71,3 +71,12 @@ def fit_cost_model(rows, method, loss='relative'):
 def predict_search_ms(model, row):
     features = cost_features(row, model['method'])
     return sum(model['coefficients'][name]*value for name, value in features.items())
+
+
+def mean_recall(values, top_k):
+    """Aggregate individual query/seed recalls through their integer hit counts.
+
+    Each input is recovered_neighbors / top_k. Dividing once at the end avoids
+    turning an exact 99% total into 0.9899999999999999 during averaging.
+    """
+    return sum(round(float(value)*top_k) for value in values)/(len(values)*top_k)

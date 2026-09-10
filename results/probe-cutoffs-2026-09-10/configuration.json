@@ -1,0 +1,28 @@
+{
+  "experiment": {
+    "stage": "probe_cutoffs",
+    "sources": [
+      "results/real-refinement-2026-09-10/search",
+      "results/real-boundary-2026-09-10/search",
+      "results/real-scale-2026-09-10/search",
+      "results/million-boundary-2026-09-10/search"
+    ]
+  },
+  "search": {
+    "recall_targets": [
+      0.8,
+      0.9,
+      0.95,
+      0.99
+    ]
+  },
+  "measurement": {
+    "repetitions": 1,
+    "schedule_seed": 54
+  },
+  "limits": {
+    "ram_budget_bytes": 32000000000,
+    "worker_stop_bytes": 34359738368,
+    "case_seconds": 180
+  }
+}

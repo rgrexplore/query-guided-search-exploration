@@ -9,7 +9,7 @@ def test_summary_keeps_query_quality_and_process_blocks_separate():
     for block,time in [(0,1.0),(1,2.0)]:
         rows=[dict(query=q,repetition=r,recall=recall,query_ms=time)
               for r in range(2) for q,recall in [(0,.8),(1,1.0)]]
-        items.append({'case':{'seed':0,'block':block},'queries':rows})
+        items.append({'case':{'seed':0,'block':block,'top_k':100},'queries':rows})
     qdraw=np.array([[0,1],[0,0],[1,1]])
     bdraw=np.array([[0,1],[0,0],[1,1]])
     summary,samples=summarize_setting(items,[0],qdraw,bdraw)
