@@ -26,12 +26,14 @@ def select_fresh(ids, texts, excluded, count):
     return [query_id for query_id, _ in chosen], [text for _, text in chosen]
 
 
-def prepare_queries(embedding_dir, archive_path, output, count, seed, dimensions, device):
+def prepare_queries(embedding_dir, archive_path, output, count, seed, dimensions, device, extra_manifests=()):
     if output.exists():
         raise FileExistsError('choose a new output directory; evaluation inputs are preserved')
     source = json.loads((embedding_dir/'manifest.json').read_text())
     old_queries = json.loads((embedding_dir/'derived'/str(dimensions)/'manifest.json').read_text())
     excluded = set(old_queries['query_ids'])
+    for manifest in extra_manifests:
+        excluded.update(json.loads(Path(manifest).read_text())['query_ids'])
     with archive_path.open('rb') as file:
         archive_hash = hashlib.file_digest(file, 'sha256').hexdigest()
     if archive_hash != EXPECTED_ARCHIVE_SHA256:
@@ -70,7 +72,7 @@ def prepare_queries(embedding_dir, archive_path, output, count, seed, dimensions
                     queries_sha256=hashlib.sha256((output/'queries.npy').read_bytes()).hexdigest(),
                     scope='Disjoint from the original cached query IDs. Prepared without searching or evaluating index configurations. Batch encoding time is not single-query latency.')
     (output/'manifest.json').write_text(json.dumps(manifest, indent=2)+'\n')
-    print(f'Encoded {count} queries, with no overlap with the {len(excluded)} original query IDs.', flush=True)
+    print(f'Encoded {count} queries, with no overlap with the {len(excluded)} previously used query IDs.', flush=True)
 
 
 def main():
@@ -81,11 +83,12 @@ def main():
     parser.add_argument('--count', type=int, default=200)
     parser.add_argument('--seed', type=int, default=20260911)
     parser.add_argument('--device', default='mps')
+    parser.add_argument('--exclude-manifest', action='append', type=Path, default=[])
     args = parser.parse_args()
     config = tomllib.loads(args.config.read_text())
     embedding_dir = (ROOT/config['data']['embedding_dir']).resolve()
     prepare_queries(embedding_dir, args.archive, args.output, args.count,
-                    args.seed, config['data']['dimensions'], args.device)
+                    args.seed, config['data']['dimensions'], args.device, args.exclude_manifest)
 
 
 if __name__ == '__main__':
