@@ -134,3 +134,47 @@ def run_real_study(config, output):
                                 routing_bits=metadata['routing_bits']))
         cases.extend(study_cases(config, pool, documents, layouts))
     execute_cases(config, output, cases, 'Coarse tuning on cached MS MARCO embeddings; these queries are not a fresh final test.')
+
+
+def run_refinement(config, output):
+    """Check routing densely, then expand local search only above its recall ceiling.
+
+    A local candidate search cannot recover a true neighbor excluded by routing.
+    This removes impossible settings using the exact scan on the same tuning queries.
+    It does not limit B/C to the fastest routing choice made by A.
+    """
+    output.mkdir(parents=True, exist_ok=False)
+    (output/'configuration.json').write_text(json.dumps(config, indent=2)+'\n')
+    all_cases = []
+    for documents in config['data']['sizes']:
+        pool = prepare_real_pool(config, documents)
+        layouts = [dict(path=None, kind='none', clusters=1, routing_bits=0)]
+        for kind, clusters in itertools.product(config['sweep']['routers'], config['sweep']['clusters']):
+            with threadpool_limits(limits=1):
+                folder = prepare_router(pool, kind, clusters, config['sweep']['router_seed'])
+            meta = json.loads((folder/'router.json').read_text())
+            layouts.append(dict(path=str(folder), kind=kind, clusters=clusters,
+                                routing_bits=meta['routing_bits']))
+        all_cases.extend(study_cases(config, pool, documents, layouts))
+    routing_cases = [case for case in all_cases if case['method']=='scan']
+    routing_output = output/'routing'
+    routing_output.mkdir()
+    (routing_output/'configuration.json').write_text(json.dumps(config, indent=2)+'\n')
+    execute_cases(config, routing_output, routing_cases, 'Dense routing screen on tuning queries, using exact local scan.')
+    qualifying = set()
+    minimum_target = min(config['search']['recall_targets'])
+    for number, case in enumerate(routing_cases):
+        folder = routing_output/'cases'/f'{number:04d}'
+        process = json.loads((folder/'process.json').read_text())
+        if process['status'] != 'complete':
+            continue
+        rows = [json.loads(line) for line in (folder/'run/queries.jsonl').read_text().splitlines()]
+        recall = np.mean([row['recall'] for row in rows if row['repetition']==0])
+        if recall >= minimum_target:
+            qualifying.add((case['pool'], case['router'], case['probes']))
+    selected = [case for case in all_cases if (case['pool'], case['router'], case['probes']) in qualifying]
+    search_output = output/'search'
+    search_output.mkdir()
+    (search_output/'configuration.json').write_text(json.dumps(config, indent=2)+'\n')
+    print(f'{len(qualifying)} routing choices meet the lowest target; running {len(selected)} local configurations', flush=True)
+    execute_cases(config, search_output, selected, 'Refined local search on tuning queries; fresh final evaluation is still required.')
