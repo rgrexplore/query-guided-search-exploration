@@ -1,0 +1,494 @@
+{
+  "models": [
+    {
+      "support": "fixed",
+      "method": "scan",
+      "fixed_ms": 0.0,
+      "per_million_ms": 25.377016654194488,
+      "check_documents": 4000000,
+      "measured_ms": 98.7853747792542,
+      "predicted_ms": 101.50806661677795,
+      "error_percent": 2.7561689608485818,
+      "training_sizes": [
+        1000000,
+        2000000
+      ],
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "support": "fixed",
+      "method": "branch",
+      "fixed_ms": 0.03020861186087143,
+      "per_million_ms": 0.10677101090550416,
+      "check_documents": 4000000,
+      "measured_ms": 0.4198544193059206,
+      "predicted_ms": 0.45729265548288806,
+      "error_percent": 8.916956558146572,
+      "training_sizes": [
+        1000000,
+        2000000
+      ],
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "support": "fixed",
+      "method": "keys",
+      "fixed_ms": 0.005999580025672911,
+      "per_million_ms": 0.0080624595284462,
+      "check_documents": 4000000,
+      "measured_ms": 0.03129150718450546,
+      "predicted_ms": 0.03824941813945771,
+      "error_percent": 22.23578082681035,
+      "training_sizes": [
+        1000000,
+        2000000
+      ],
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "support": "adaptive",
+      "method": "scan",
+      "fixed_ms": 0.0,
+      "per_million_ms": 24.72694316010617,
+      "check_documents": 4000000,
+      "measured_ms": 105.59962503612041,
+      "predicted_ms": 98.90777264042468,
+      "error_percent": -6.33700393671548,
+      "training_sizes": [
+        1000000,
+        2000000
+      ],
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "support": "adaptive",
+      "method": "branch",
+      "fixed_ms": 0.04679081030189988,
+      "per_million_ms": 0.10154210031032562,
+      "check_documents": 4000000,
+      "measured_ms": 0.4518544301390648,
+      "predicted_ms": 0.4529592115432024,
+      "error_percent": 0.24449940743029863,
+      "training_sizes": [
+        1000000,
+        2000000
+      ],
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "support": "adaptive",
+      "method": "keys",
+      "fixed_ms": 1.6304997261613714,
+      "per_million_ms": 25.681896135210984,
+      "check_documents": 4000000,
+      "measured_ms": 111.44004226662219,
+      "predicted_ms": 104.35808426700531,
+      "error_percent": -6.35494913280199,
+      "training_sizes": [
+        1000000,
+        2000000
+      ],
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  ],
+  "measurements": [
+    {
+      "support": "fixed",
+      "method": "scan",
+      "documents": 2000000,
+      "all_query_p50_ms": 52.72587528452277,
+      "applicable_p50_ms": 52.72587528452277,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 258408448
+    },
+    {
+      "support": "fixed",
+      "method": "scan",
+      "documents": 4000000,
+      "all_query_p50_ms": 98.7853747792542,
+      "applicable_p50_ms": 98.7853747792542,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 469893120
+    },
+    {
+      "support": "fixed",
+      "method": "scan",
+      "documents": 1000000,
+      "all_query_p50_ms": 24.523853790014982,
+      "applicable_p50_ms": 24.523853790014982,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 152797184
+    },
+    {
+      "support": "fixed",
+      "method": "branch",
+      "documents": 4000000,
+      "all_query_p50_ms": 0.4198544193059206,
+      "applicable_p50_ms": 0.4198544193059206,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 597573632
+    },
+    {
+      "support": "fixed",
+      "method": "branch",
+      "documents": 2000000,
+      "all_query_p50_ms": 0.24375063367187977,
+      "applicable_p50_ms": 0.24375063367187977,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 322568192
+    },
+    {
+      "support": "fixed",
+      "method": "branch",
+      "documents": 1000000,
+      "all_query_p50_ms": 0.13697962276637554,
+      "applicable_p50_ms": 0.13697962276637554,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 185040896
+    },
+    {
+      "support": "fixed",
+      "method": "keys",
+      "documents": 1000000,
+      "all_query_p50_ms": 0.01406203955411911,
+      "applicable_p50_ms": 0.01406203955411911,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 135987200
+    },
+    {
+      "support": "fixed",
+      "method": "keys",
+      "documents": 2000000,
+      "all_query_p50_ms": 0.022124499082565308,
+      "applicable_p50_ms": 0.022124499082565308,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 224624640
+    },
+    {
+      "support": "fixed",
+      "method": "keys",
+      "documents": 4000000,
+      "all_query_p50_ms": 0.03129150718450546,
+      "applicable_p50_ms": 0.03129150718450546,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 401326080
+    },
+    {
+      "support": "adaptive",
+      "method": "scan",
+      "documents": 4000000,
+      "all_query_p50_ms": 105.59962503612041,
+      "applicable_p50_ms": 105.59962503612041,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 469696512
+    },
+    {
+      "support": "adaptive",
+      "method": "scan",
+      "documents": 2000000,
+      "all_query_p50_ms": 49.52927050180733,
+      "applicable_p50_ms": 49.52927050180733,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 258441216
+    },
+    {
+      "support": "adaptive",
+      "method": "scan",
+      "documents": 1000000,
+      "all_query_p50_ms": 24.689479498192668,
+      "applicable_p50_ms": 24.689479498192668,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 152829952
+    },
+    {
+      "support": "adaptive",
+      "method": "branch",
+      "documents": 4000000,
+      "all_query_p50_ms": 0.4518544301390648,
+      "applicable_p50_ms": 0.4518544301390648,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 597557248
+    },
+    {
+      "support": "adaptive",
+      "method": "branch",
+      "documents": 1000000,
+      "all_query_p50_ms": 0.14833291061222553,
+      "applicable_p50_ms": 0.14833291061222553,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 185171968
+    },
+    {
+      "support": "adaptive",
+      "method": "branch",
+      "documents": 2000000,
+      "all_query_p50_ms": 0.24987501092255116,
+      "applicable_p50_ms": 0.24987501092255116,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 322732032
+    },
+    {
+      "support": "adaptive",
+      "method": "keys",
+      "documents": 1000000,
+      "all_query_p50_ms": 27.31239586137235,
+      "applicable_p50_ms": 27.31239586137235,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 136282112
+    },
+    {
+      "support": "adaptive",
+      "method": "keys",
+      "documents": 2000000,
+      "all_query_p50_ms": 52.99429199658334,
+      "applicable_p50_ms": 52.99429199658334,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 224772096
+    },
+    {
+      "support": "adaptive",
+      "method": "keys",
+      "documents": 4000000,
+      "all_query_p50_ms": 111.44004226662219,
+      "applicable_p50_ms": 111.44004226662219,
+      "applicable_queries": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_queries": 8,
+      "lifetime_peak_bytes": 401719296
+    }
+  ],
+  "revision": "Median-target correction. Prior query-weighted fit retained in analysis-query-weighted.json; this revised4M check is diagnostic, not newly independent.",
+  "scope": "Conditional fixed-depth paths, fitted on1M/2M only and checked at4M. All queries remain in measurements. Applicability depends on strong-match counts and native work, not latency. This is not proof of linear transfer to1B or of optimal routing at4M."
+}
