@@ -1,0 +1,21 @@
+{
+  "created_at": "2026-09-10T14:55:13.077817+00:00",
+  "sources": [
+    "results/real-refinement-2026-09-10/search",
+    "results/real-boundary-2026-09-10/search",
+    "results/real-scale-2026-09-10/search",
+    "results/million-boundary-2026-09-10/search",
+    "results/probe-cutoffs-2026-09-10",
+    "results/exploration-2026-09-10"
+  ],
+  "targets": [
+    0.8,
+    0.9,
+    0.95,
+    0.99
+  ],
+  "bootstrap_samples": 1000,
+  "seed": 51,
+  "failures": [],
+  "scope": "Frozen from tuning data. Duplicate timings pooled; seeds averaged per query. The conservative choice uses a training bootstrap percentile, not a population guarantee."
+}

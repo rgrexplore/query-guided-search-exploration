@@ -27,7 +27,7 @@ def setting_key(case, probes):
     shared['probes'] = probes
     if case['method']=='branch':
         shared.update(node_budget=case['node_budget'], leaf_size=case['leaf_size'],
-                      exploration=case.get('exploration',0))
+                      exploration=float(case.get('exploration',0)))
     elif case['method']=='keys':
         shared.update({name:case[name] for name in ('key_bits','key_offset','candidate_target','key_limit')})
     return json.dumps(shared, sort_keys=True)

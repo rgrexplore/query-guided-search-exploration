@@ -41,3 +41,10 @@ def test_duplicate_runs_pool_timings_instead_of_selecting_the_fastest(tmp_path, 
     rows, shortlist = choices.combine([tmp_path/'first',tmp_path/'second'],tmp_path/'combined',[.8],100)
     assert len(rows)==1 and rows[0]['p50_ms']==2.5
     assert rows[0]['sources']==2 and shortlist[0]['evaluation_seeds']==[0]
+
+
+def test_default_and_explicit_zero_exploration_are_the_same_setting():
+    case=dict(method='branch',documents=1000,dimensions=256,top_k=100,pool='/pool',router=None,
+              router_kind='none',clusters=1,probes=1,node_budget=512,leaf_size=32)
+    assert setting_key(case,1)==setting_key(dict(case,exploration=0.0),1)
+    assert setting_key(case,1)!=setting_key(dict(case,exploration=.1),1)
