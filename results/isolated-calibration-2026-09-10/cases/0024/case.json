@@ -1,0 +1,25 @@
+{
+  "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/component-calibration-2026-09-10/n131072",
+  "documents": 131072,
+  "dimensions": 256,
+  "query_rows": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "router": null,
+  "probes": 1,
+  "top_k": 100,
+  "repetitions": 3,
+  "ram_budget_bytes": 32000000000,
+  "method": "keys",
+  "key_bits": 4,
+  "key_offset": 0,
+  "candidate_target": 1000,
+  "key_limit": 0
+}

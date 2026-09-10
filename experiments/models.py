@@ -45,16 +45,24 @@ def cost_features(row, method):
     return features
 
 
-def fit_cost_model(rows, method):
+def fit_cost_model(rows, method, loss='relative'):
     """Fit nonnegative combined costs on calibration rows only, in milliseconds."""
     names = list(cost_features(rows[0], method))
     values = np.array([list(cost_features(row, method).values()) for row in rows], dtype=float)
     observed = np.array([row['search_ms'] for row in rows])
-    scales = np.maximum(np.linalg.norm(values, axis=0), 1)
+    # The acceptance criterion is percentage error. Weight each residual by
+    # 1/time so a 100 ms case does not overwhelm a 0.1 ms case solely by scale.
+    if loss == 'relative':
+        row_weights = 1/observed
+    elif loss == 'absolute':
+        row_weights = np.ones(len(observed))
+    else:
+        raise ValueError('loss must be relative or absolute')
+    scales = np.maximum(np.linalg.norm(values*row_weights[:, None], axis=0), 1)
     normalized = values/scales
-    weights, _ = nnls(normalized, observed)
+    weights, _ = nnls(normalized*row_weights[:, None], observed*row_weights)
     rank = int(np.linalg.matrix_rank(normalized))
-    return {'method': method, 'coefficients': dict(zip(names, (weights/scales).tolist())),
+    return {'method': method, 'loss': loss, 'coefficients': dict(zip(names, (weights/scales).tolist())),
             'training_rows': len(rows), 'matrix_rank': rank, 'identifiable': rank == len(names),
             'target': 'search_ms',
             'scope': 'API time estimated from measured work; coefficients combine compute, memory and selection costs.'}

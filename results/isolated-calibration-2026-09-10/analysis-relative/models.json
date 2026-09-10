@@ -1,0 +1,48 @@
+{
+  "scan": {
+    "method": "scan",
+    "loss": "relative",
+    "coefficients": {
+      "fixed": 0.016881621671403117,
+      "score_terms": 4.011245047846786e-07
+    },
+    "training_rows": 120,
+    "matrix_rank": 2,
+    "identifiable": true,
+    "target": "search_ms",
+    "scope": "API time estimated from measured work; coefficients combine compute, memory and selection costs.",
+    "composition_gap_ms": 0.0001257285475730896
+  },
+  "branch": {
+    "method": "branch",
+    "loss": "relative",
+    "coefficients": {
+      "fixed": 0.010906490249137023,
+      "score_terms": 5.193252018042011e-07,
+      "bitmap_words": 8.815193477819511e-07,
+      "nodes": 6.594984402958238e-05
+    },
+    "training_rows": 720,
+    "matrix_rank": 4,
+    "identifiable": true,
+    "target": "search_ms",
+    "scope": "API time estimated from measured work; coefficients combine compute, memory and selection costs.",
+    "composition_gap_ms": 0.00016577541828155518
+  },
+  "keys": {
+    "method": "keys",
+    "loss": "relative",
+    "coefficients": {
+      "fixed": 0.01792518475406997,
+      "score_terms": 4.2018917703835353e-07,
+      "key_attempts": 3.895509685830584e-05,
+      "key_queue_work": 2.3759085709465242e-07
+    },
+    "training_rows": 720,
+    "matrix_rank": 4,
+    "identifiable": true,
+    "target": "search_ms",
+    "scope": "API time estimated from measured work; coefficients combine compute, memory and selection costs.",
+    "composition_gap_ms": 0.00012526288628578186
+  }
+}
