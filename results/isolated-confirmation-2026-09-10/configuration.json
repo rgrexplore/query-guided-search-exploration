@@ -1,0 +1,60 @@
+{
+  "experiment": {
+    "stage": "isolated"
+  },
+  "data": {
+    "kind": "random_signs",
+    "cache_dir": "data/component-confirmation-2026-09-10",
+    "sizes": [
+      3072,
+      12288,
+      49152,
+      196608
+    ],
+    "dimensions": 256,
+    "queries": 8,
+    "seed": 20260910
+  },
+  "search": {
+    "top_k": 100
+  },
+  "sweep": {
+    "node_budgets": [
+      0,
+      512
+    ],
+    "leaf_sizes": [
+      8,
+      32,
+      128
+    ],
+    "key_bits": [
+      4,
+      8,
+      12
+    ],
+    "candidate_targets": [
+      0,
+      1000
+    ],
+    "key_limit": 0
+  },
+  "measurement": {
+    "repetitions": 3,
+    "schedule_seed": 9
+  },
+  "timing_model": {
+    "fit_sizes": [],
+    "check_sizes": [
+      3072,
+      12288,
+      49152,
+      196608
+    ]
+  },
+  "limits": {
+    "ram_budget_bytes": 32000000000,
+    "worker_stop_bytes": 34359738368,
+    "case_seconds": 180
+  }
+}

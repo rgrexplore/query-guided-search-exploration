@@ -1,0 +1,73 @@
+{
+  "status": "complete",
+  "pid": 27397,
+  "case": {
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/component-confirmation-2026-09-10/n3072",
+    "documents": 3072,
+    "dimensions": 256,
+    "query_rows": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "router": null,
+    "probes": 1,
+    "top_k": 100,
+    "repetitions": 3,
+    "ram_budget_bytes": 32000000000,
+    "method": "keys",
+    "key_bits": 4,
+    "key_offset": 0,
+    "candidate_target": 0,
+    "key_limit": 0
+  },
+  "storage": {
+    "documents": 3072,
+    "dimensions": 256,
+    "buckets": 1,
+    "codes_bytes": 98304,
+    "bitplanes_bytes": 0,
+    "row_ids_bytes": 24576,
+    "array_capacity_bytes": 131072,
+    "key_directory_payload_bytes": 320,
+    "occupied_keys": 16,
+    "directory_slots": 23,
+    "logical_bytes": 123200
+  },
+  "memory": {
+    "rss_at_start": 48349184,
+    "build_lifetime_peak": 48611328,
+    "rss_before_queries": 48513024,
+    "sampled_query_peak": 51953664,
+    "lifetime_peak_bytes": 51953664,
+    "routing_payload_bytes": 0,
+    "budget_bytes": 32000000000,
+    "budget_status": "fits_by_lifetime_peak",
+    "scope": "RSS includes runtime and evaluation arrays. Lifetime peak includes build and is a conservative query bound. Sampled query peak is not a guaranteed maximum."
+  },
+  "build_ms": 0.3497921861708164,
+  "query_loop_seconds": 0.02381854224950075,
+  "measurements": 24,
+  "exact_checks": 24,
+  "source_commit": "f7d01ab86f98fdcf0e69cf1724a6419bd516c93e",
+  "worker_sha256": "bb5c44f503d35b7a04c908d51c2e2c00b99191246bb53a6db5fa1023c543da5d",
+  "native_sha256": "bac37b00866725bff5ef4904b763c9685f3d6d2142126e5f047a2d897e6ffc1f",
+  "native_module": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/build/component/bitplane_index.cpython-312-darwin.so",
+  "python": "3.12.11 (main, Aug 18 2025, 19:02:39) [Clang 20.1.4 ]",
+  "platform": "macOS-26.3.2-arm64-arm-64bit",
+  "power_before": {
+    "available": true,
+    "source": "AC Power",
+    "settings": "Battery Power:\n Sleep On Power Button 1\n powermode            1\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         2\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            10\nAC Power:\n Sleep On Power Button 1\n powermode            2\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 1\n networkoversleep     0\n sleep                1\n tcpkeepalive         1\n disksleep            10"
+  },
+  "power_after": {
+    "available": true,
+    "source": "AC Power",
+    "settings": "Battery Power:\n Sleep On Power Button 1\n powermode            1\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         2\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            10\nAC Power:\n Sleep On Power Button 1\n powermode            2\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 1\n networkoversleep     0\n sleep                1\n tcpkeepalive         1\n disksleep            10"
+  }
+}
