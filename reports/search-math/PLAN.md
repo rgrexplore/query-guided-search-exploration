@@ -34,4 +34,19 @@ The primary third method starts with clusters; a global hash is the C=1 special 
 No new retrieval implementation, optimizer calibration, embedding run or billion-document
 benchmark is part of this deliverable. The report explicitly identifies what remains empirical.
 
-Completed: 43-page PDF, six figures, twelve complete pseudocode blocks. All arithmetic checks pass; final compilation has no warnings or unresolved references. Every page was visually reviewed.
+Original edition: 43 pages, six figures, twelve pseudocode blocks; preserved at `67bdfc7`.
+
+## Recall extension
+
+- [x] Derive the nearest-distance distribution and conditional prefix survival.
+- [x] Derive finite top-K recall, including score ties and duplicate codes.
+- [x] Explain how routing, branching and key stopping rules change the candidate event.
+- [x] Check weighted and dependent-bit distributions with 10,000 corpora per case.
+- [x] Compare native exact scan and unlimited branching against independent references.
+- [x] Reanalyse saved prediction errors with query-level intervals.
+- [x] Rewrite dense prose, add examples, and render the updated report.
+
+The extension has 55 pages, nine figures and fourteen pseudocode listings. A new real-data
+predictor is not claimed: the saved normal approximation fails the proposed two-point error
+criterion on the shown Nomic cases. A fresh calibration/test study remains future work, with
+its own query provenance required; previously inspected queries are not relabeled as fresh.

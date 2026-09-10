@@ -25,7 +25,7 @@ The supplied source ZIP preserves the `reports/search-math/` directory structure
 
 ## Diagrams and plot
 
-Five diagrams are authored in Mermaid (`figures/*.mmd`). The rendered PDFs are included.
+Six diagrams are authored in Mermaid (`figures/*.mmd`). The rendered PDFs are included.
 To change a diagram, use Mermaid CLI with `figures/mermaid.json`, for example:
 
 ```bash
@@ -35,8 +35,8 @@ npx -p @mermaid-js/mermaid-cli mmdc \
 ```
 
 Mermaid CLI needs its supported browser runtime. This build used Mermaid CLI with a temporary
-headless Chrome process; no personal browser profile is needed. The sixth figure,
-`recall-validation.pdf`, is a standard Matplotlib plot of the saved quality-study observations.
+headless Chrome process; no personal browser profile is needed. Three additional figures use Matplotlib: `recall-validation.pdf` shows the earlier quality
+study; `nearest-distance.pdf` and `recall-model-checks.pdf` show the new derivation checks.
 
 ## Arithmetic and evidence checks
 
@@ -50,7 +50,8 @@ It checks:
 
 - the score identity, lookup example, bitplane transpose and routed top-two example;
 - complete weighted subset ordering, including equal and zero weights;
-- the six-bit binomial conditional-recall example by exhaustive counting;
+- the six-bit conditional-recall example and twenty finite top-K settings by exhaustive counting;
+- the 256-document, 16-bit example, including its nearest-distance mixture;
 - code bytes, bitmap widths, split/leaf word counts and quoted archived timings;
 - FiQA summary counts and the quoted branch example;
 - the three quality-study candidate-recall examples and 96 exact reference checks.
@@ -71,3 +72,32 @@ This is the math-first deliverable. It does not certify a billion-document recal
 implement a new hash enumerator, or complete the previously edited frontend. The source
 calculator's mixed float/binary recall references and omitted work are discussed as modeling
 limits. Full-key exactness is kept distinct from short-key candidate recall.
+
+## Recall derivation checks
+
+Section 6 starts with a random-bit example and derives nearest-distance probabilities,
+prefix survival, finite top-K recall, and the weighted version. Section 7 checks the
+assumptions against independent corpora and the previously saved real-data observations.
+Appendix A gives the stable binomial calculation.
+
+From the project root, reproduce the controlled checks and their two plots with:
+
+```bash
+MPLCONFIGDIR=/private/tmp/search-math-mpl .venv/bin/python reports/search-math/check_recall_models.py \
+  --trials 10000 --seed 20260910 --bootstrap-samples 10000
+```
+
+This optional study needs NumPy, SciPy, Matplotlib, threadpoolctl, and the project's compiled
+`bitplane_index` module. Compiling the PDF and running `verify_math.py` do not need that module.
+The source ZIP includes the report scripts and saved evidence; it does not include the native
+extension, corpus, or embedding cache. Run the optional study from the full project checkout.
+
+The four eight-bit cases are explicit teaching setups in the script. Each uses 64 documents,
+top five, three lookup bits, and one allowed prefix error. The simulation reports recall,
+not index latency. Results are in `evidence/recall-model-checks.json`. Bootstrap intervals use
+previously inspected check queries with the fitted correlation held fixed. They are not a fresh
+real-data test or a bound on total model error.
+
+Version checkpoints: `67bdfc7` preserves the report before this extension; `0fd1ae3` saves the
+expanded derivations and checked distributions. The rebuilt report has 55 pages, nine figures,
+and fourteen pseudocode listings.

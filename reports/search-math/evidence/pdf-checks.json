@@ -1,44 +1,25 @@
 {
-  "pages": 43,
+  "pages": 55,
   "listing_start_pages": {
-    "BuildCommonIndex(": 7,
-    "PrepareQuery(": 8,
-    "Route(q_route,": 8,
-    "BuildScoreTable(": 10,
-    "ScanSelectedClusters(": 13,
-    "BuildBitplanes(": 16,
-    "SearchBitplanes(": 17,
-    "BuildKeyIndex(": 21,
-    "SortedFlipSets(": 22,
-    "SearchShortKeys(": 23,
-    "SearchByRelaxingPrefix(": 25,
-    "ChooseConfiguration(": 39
+    "1": 7,
+    "2": 8,
+    "3": 8,
+    "4": 10,
+    "5": 13,
+    "6": 16,
+    "7": 17,
+    "8": 21,
+    "9": 22,
+    "10": 23,
+    "11": 25,
+    "12": 31,
+    "13": 49,
+    "14": 51
   },
   "unresolved_references": 0,
   "out_of_page_text": [],
-  "diagram_fonts": [
-    {
-      "page": 4,
-      "minimum_points": 10.21
-    },
-    {
-      "page": 12,
-      "minimum_points": 11.59
-    },
-    {
-      "page": 15,
-      "minimum_points": 8.69
-    },
-    {
-      "page": 20,
-      "minimum_points": 10.81
-    },
-    {
-      "page": 37,
-      "minimum_points": 9.41
-    }
-  ],
-  "pdf_sha256": "06ff2abd1405001d19a66ac3818b7a6a31ecfaf3e87e2319ad1e2c511fed3f96",
-  "visual_review": "All 43 rendered pages inspected; no clipping, broken code blocks or unreadable diagrams found.",
-  "latex_warnings": 0
+  "pdf_sha256": "0c922cc020a8c30acbddb4365bc6616b37ca21d7c0457903bc7fca69e701305f",
+  "visual_review": "Inspected all affected pages 26-55, contents, and final equation edits. Earlier method pages retain their previously reviewed layout. All 55 pages checked for text outside page bounds.",
+  "latex_warnings": 0,
+  "figures": 9
 }

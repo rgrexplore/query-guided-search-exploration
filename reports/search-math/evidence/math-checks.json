@@ -32,6 +32,7 @@
     ]
   },
   "memory_and_archived_numbers": "passed",
+  "model_checks_sha256": "cb7762e25ec5d704070380c496e5cc6e0d4f4c83d5d0f132b5852745d17586f3",
   "fiqa_csv_sha256": "1fa8dbcdbae365d2562696c92d14a7eec2bed8f9ccac0c26b1bb26c0cb3443c1",
   "scaling_csv_sha256": "cfeeed179a4363abd892c5412813bc2e0acfc25b2cb476bb4ec03e57797543bc",
   "recall_study_sha256": "89fef2537d3a43e50efa5004706400f638a7695fe85a8a343756dd6baf22f677"

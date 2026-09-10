@@ -209,7 +209,15 @@ def check_memory_and_evidence():
     example = next(r for r in fiqa if r['method']=='sign/branch' and r['probes']=='32' and r['node_budget']=='2048' and float(r['explore_probability'])==0)
     assert abs(float(example['float_recall'])-.7006) < .00005
     assert abs(float(example['retrieval_p50_ms'])-.6256) < .00005
-    return {'fiqa_csv_sha256': hashlib.sha256(fiqa_path.read_bytes()).hexdigest(), 'scaling_csv_sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+    model_path = HERE/'evidence/recall-model-checks.json'
+    model = json.loads(model_path.read_text())
+    assert len(model['controlled']) == 4
+    for case in model['controlled']:
+        assert case['observed']['samples'] == 10000
+        exact_runs = [row for row in case['native_queries'] if row['budget'] == 0]
+        assert len(exact_runs) == 12 and all(row['recall'] == 1 for row in exact_runs)
+    assert model['archived']['source_sha256'] == hashlib.sha256(study_path.read_bytes()).hexdigest()
+    return {'model_checks_sha256': hashlib.sha256(model_path.read_bytes()).hexdigest(), 'fiqa_csv_sha256': hashlib.sha256(fiqa_path.read_bytes()).hexdigest(), 'scaling_csv_sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
             'recall_study_sha256': hashlib.sha256(study_path.read_bytes()).hexdigest()}
 
 

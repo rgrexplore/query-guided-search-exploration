@@ -94,7 +94,7 @@ and $m-a$ from the other bits. Divide by all possible placements of the $m$ erro
 \label{eq:prefix-error-placements}
 \end{equation}
 This is a hypergeometric distribution. It counts positions drawn from a fixed number of errors.
-The error count is already fixed here, so treating these positions as independent coin flips
+The error count is already fixed here, so treating these positions as independent trials
 would change the model. A binomial coefficient is zero when its lower argument is negative or
 larger than its upper argument.
 
@@ -201,7 +201,7 @@ the index itself, and an expected candidate count is not a peak-RAM guarantee.
 
 \Needspace{12\baselineskip}
 \subsection{What changes when we ask for ten or one hundred results?}
-The nearest distance now becomes a set of distances. Some top-$K$ rows may have zero errors,
+For top $K$, we need the distances of all $K$ selected rows. Some may have zero errors,
 some one, and others more. We need the expected number of selected rows at each distance.
 Assume $1\le K\le N$.
 
