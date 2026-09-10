@@ -1,9 +1,9 @@
 \section{Deriving recall without assuming the answer}
 \label{sec:recall}
-The work formulas require counts such as visited nodes, retrieved postings and scored rows.
-They do not, by themselves, give recall. Recall depends on \emph{which} rows survive and on the
-reference ranking. This section starts with an exact definition, then adds assumptions one at
-a time so their consequences can be checked.
+Suppose a search returns 80 documents from a database of 256. That tells us how much scoring
+work remains. To calculate recall, we need to know how many of the nearest documents are among
+those 80. We will start with a small random-bit model where both quantities can be derived,
+then examine what changes with query weights and clusters.
 
 \Needspace{12\baselineskip}
 \subsection{The exact measured definition}
@@ -26,6 +26,216 @@ true top-$K$ document in that set survives into the final top $K$. Therefore
 \end{equation}
 A different reranking score breaks that identity. In particular, exact binary candidates may
 still miss the true float-vector top $K$ or the documents relevant to a human question.
+
+\fig{recall-flow}{Follow the same true neighbors through every stage. The denominator stays K throughout the recall calculation.}{.76}
+
+\Needspace{12\baselineskip}
+\subsection{A small model we can calculate all the way through}
+Suppose a document has $d$ bits. We sample $N$ documents independently, and each bit is
+independently zero or one with probability $1/2$. Duplicate codes are allowed: two different
+documents can have the same bits. Their row IDs settle score ties, and those IDs are assigned
+independently of the sampled codes.
+
+For now, every query coordinate has the same magnitude. A document's score therefore depends
+only on how many bits disagree with the query. We can write the query's desired pattern as all
+zeros without changing any probabilities. The number of mismatches is called the
+\emph{Hamming distance}. A smaller distance means a better score.
+
+The search checks $h$ fixed coordinates and accepts a document if at most $t$ of them disagree.
+It then scores every accepted document using all $d$ bits. For example, with $h=4$ and $t=1$,
+it opens the keys $0000$, $0001$, $0010$, $0100$, and $1000$. This is a precise candidate rule.
+It does not stop halfway through a key's documents when a quota is reached.
+
+These assumptions describe a teaching model. Equal weights make counting possible by hand;
+independent bits make every pattern equally likely. We will remove those assumptions later.
+There are no clusters or eligibility filters in this first calculation.
+
+\Needspace{12\baselineskip}
+\subsection{Start with one document, then find the nearest of many}
+Let $Z$ be one random document's distance from the query. To have exactly $m$ errors, choose
+which $m$ of the $d$ positions are wrong. There are $\binom{d}{m}$ choices, out of $2^d$
+equally likely codes. Thus
+\begin{equation}
+\Pr(Z=m)=\frac{\binom{d}{m}}{2^d},\qquad
+F_d(m)=\Pr(Z\le m)=\frac{1}{2^d}\sum_{j=0}^{m}\binom{d}{j}.
+\label{eq:one-document-distance}
+\end{equation}
+This is the binomial distribution with parameters $d$ and $1/2$. The function $F_d$ adds up the
+probability of every distance through $m$. Such a running probability is called a cumulative
+distribution function, or CDF. Define $F_d(-1)=0$.
+
+Now let $M$ be the distance of the nearest document among all $N$. If one document has
+probability $1-F_d(m)$ of being farther than $m$, independence gives probability
+$[1-F_d(m)]^N$ that \emph{all} documents are farther away. Subtracting from one gives
+\begin{equation}
+\Pr(M\le m)=1-[1-F_d(m)]^N.
+\label{eq:nearest-distance-cdf}
+\end{equation}
+To get exactly distance $m$, subtract the probability of a smaller distance:
+\begin{equation}
+\Pr(M=m)=[1-F_d(m-1)]^N-[1-F_d(m)]^N.
+\label{eq:nearest-distance-mass}
+\end{equation}
+The distinction matters. One random document usually has many wrong bits. The nearest of
+hundreds of documents is selected precisely because it has unusually few. We must use its
+selected distribution when calculating recall.
+
+\fig{nearest-distance}{With 256 random 16-bit documents, the nearest distance is usually two or three. Assuming it is always two changes the recall calculation.}{.88}
+
+\Needspace{12\baselineskip}
+\subsection{Which error positions survive a short-key search?}
+Suppose the nearest document has exactly $m$ wrong bits. Under our uniform model, every set of
+$m$ error positions is equally likely. Let $A$ count how many of those errors fall in the $h$
+lookup positions. To have exactly $a$ lookup errors, choose $a$ positions from the lookup bits
+and $m-a$ from the other bits. Divide by all possible placements of the $m$ errors:
+\begin{equation}
+\Pr(A=a\mid M=m)=
+\frac{\binom{h}{a}\binom{d-h}{m-a}}{\binom{d}{m}}.
+\label{eq:prefix-error-placements}
+\end{equation}
+This is a hypergeometric distribution. It counts positions drawn from a fixed number of errors.
+The error count is already fixed here, so treating these positions as independent coin flips
+would change the model. A binomial coefficient is zero when its lower argument is negative or
+larger than its upper argument.
+
+The search accepts at most $t$ lookup errors. Add the allowed placements:
+\begin{equation}
+g_{h,t}(m)=\Pr(A\le t\mid M=m)
+=\frac{\displaystyle\sum_{a=0}^{\min(h,t)}
+          \binom{h}{a}\binom{d-h}{m-a}}{\binom{d}{m}}.
+\label{eq:prefix-survival}
+\end{equation}
+Conditioning on the nearest distance leaves its error positions uniform because the score
+uses only the total number of errors and the ID tie rule does not favor a particular pattern.
+This is one place where the equal-weight assumption does real work.
+
+\begin{examplebox}{Two wrong bits in a 16-bit document}
+Take $d=16$, $h=4$, and suppose $m=2$. There are $\binom{16}{2}=120$ ways to place the errors.
+If the first four bits must match perfectly, both errors must be in the other twelve bits:
+$\binom{12}{2}=66$ placements survive. The conditional recall is $66/120=55\%$.
+
+Allow one error in the first four bits. Another $4\times12=48$ placements now survive, giving
+$(66+48)/120=95\%$. That 95\% answer is correct \emph{given two total errors}. It has not yet
+accounted for the possibility that the nearest document has a different distance.
+\end{examplebox}
+
+\Needspace{12\baselineskip}
+\subsection{Combine the two probabilities to obtain recall}
+For top one, recall is one if the true nearest document is accepted and zero otherwise.
+Its expected value is therefore its probability of being accepted. For each possible nearest
+distance, multiply the probability of that distance by the probability of passing the prefix
+check. Add the results:
+\begin{equation}
+\boxed{\E[\operatorname{Recall@1}]
+=\sum_{m=0}^{d}\Pr(M=m)\,g_{h,t}(m).}
+\label{eq:finite-top-one}
+\end{equation}
+For $N=256$, $d=16$, and $h=4$, this produces the table below. The candidate counts are derived
+in the next subsection.
+
+\begin{center}
+\begin{tabular}{@{}rrrr@{}}
+\toprule
+Allowed errors $t$ & Keys opened & Expected documents & Expected Recall@1\\\midrule
+0 & 1 & 16 & 46.40\%\\
+1 & 5 & 80 & 89.60\%\\
+2 & 11 & 176 & 99.45\%\\
+4 & 16 & 256 & 100.00\%\\\bottomrule
+\end{tabular}
+\end{center}
+For one allowed lookup error, the result is 89.60\%, rather than the conditional 95\% above.
+In this example, the nearest distance is two about 35.05\% of the time and three about
+52.05\% of the time. A three-error neighbor is more likely to put too many errors in the
+lookup bits. Equation~\eqref{eq:finite-top-one} includes both cases, along with every other
+possible distance.
+
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={Calculate expected top-one recall under the random-bit assumptions.}]
+ExpectedRecall(N, d, h, allowed_errors):
+    recall = 0
+    for m in 0 .. d:
+        nearest_probability = (1 - F_d(m-1))^N - (1 - F_d(m))^N
+        passing_placements = 0
+        for a in 0 .. min(h, allowed_errors):
+            passing_placements += choose(h, a) * choose(d-h, m-a)
+        survival = passing_placements / choose(d, m)
+        recall += nearest_probability * survival
+    return recall
+\end{lstlisting}
+\end{minipage}\par
+
+\Needspace{12\baselineskip}
+\subsection{Count the work separately from the recall}
+To open all $h$-bit keys through radius $t$, we try
+\begin{equation}
+H(h,t)=\sum_{a=0}^{t}\binom{h}{a},\qquad 0\le t\le h.
+\label{eq:teaching-keys}
+\end{equation}
+Each random document has probability $p_{\rm pass}=H(h,t)/2^h$ of belonging to one of those keys.
+If $F$ counts accepted documents, then
+\begin{equation}
+F\sim\operatorname{Binomial}(N,p_{\rm pass}),\qquad
+\E[F]=Np_{\rm pass},\qquad
+\Var(F)=Np_{\rm pass}(1-p_{\rm pass}).
+\label{eq:teaching-candidates}
+\end{equation}
+For $t=1$, five of sixteen keys are opened. The expected candidate count is
+$256\times5/16=80$, with standard deviation $\sqrt{55}\approx7.42$ documents. A particular
+corpus need not return exactly 80. The 31.25\% candidate fraction also differs from the 89.60\%
+recall: good documents are more likely than arbitrary documents to pass this filter.
+
+For C, $H$ counts lookup attempts, including attempts that return nothing. The documents in
+those keys supply the posting and scoring work. A short-key query that scores all accepted
+rows might have expected time
+\[
+\E[T_C]=T_{\rm prepare}+Hc_{\rm lookup}
+       +\E[F](c_{\rm post}+c_{\rm score})+\E[T_{\rm select}],
+\]
+with enumeration and routing added when the implementation performs them. Selection time can
+depend nonlinearly on the returned rows; substituting $\E[F]$ into every time term is another
+approximation. Use the full cost model in Equation~\eqref{eq:final-C} for the actual layout.
+
+Storing every candidate ID at once takes $F b_{\rm id}$ bytes. Streaming postings through a
+bounded top-$K$ heap can avoid that particular full candidate array. Neither choice removes
+the index itself, and an expected candidate count is not a peak-RAM guarantee.
+
+\Needspace{12\baselineskip}
+\subsection{What changes when we ask for ten or one hundred results?}
+The nearest distance now becomes a set of distances. Some top-$K$ rows may have zero errors,
+some one, and others more. We need the expected number of selected rows at each distance.
+Assume $1\le K\le N$.
+
+Let $X_m$ count corpus documents whose distance is at most $m$. Since every document independently
+has probability $F_d(m)$ of meeting that condition,
+\[
+X_m\sim\operatorname{Binomial}(N,F_d(m)).
+\]
+Exactly $\min(K,X_m)$ of the true top-$K$ rows lie within that radius. There cannot be more
+than $K$, and when fewer than $K$ documents qualify, every qualifying document belongs to the
+top $K$. Define
+\begin{equation}
+G_K(p)=\E[\min(K,X)],\quad X\sim\operatorname{Binomial}(N,p).
+\label{eq:clipped-binomial}
+\end{equation}
+Then the expected number of top-$K$ rows at exactly distance $m$ is
+\[
+w_m=G_K(F_d(m))-G_K(F_d(m-1)).
+\]
+The same placement calculation applies to each row at that distance. Therefore
+\begin{equation}
+\boxed{\E[\operatorname{Recall@}K]
+=\frac{1}{K}\sum_{m=0}^{d}w_m g_{h,t}(m).}
+\label{eq:finite-top-k}
+\end{equation}
+This includes tied distances and duplicate codes under our ID rule. For $K=1$, $G_1(p)$ is
+$1-(1-p)^N$, so it reduces to Equation~\eqref{eq:finite-top-one}. For $K=N$, every document is
+in the reference set and recall becomes the candidate fraction. Opening every key gives
+recall one for every $K$.
+
+The appendix gives a numerically useful way to evaluate $G_K$. Notice what this formula does
+not assume: it never replaces the changing $K$-th distance with one fixed guessed radius.
+It does assume a fixed prefix acceptance rule. Stopping after the first $R$ postings is a
+different rule whose boundary depends on the sampled corpus.
 
 \Needspace{12\baselineskip}
 \subsection{Separate routing loss from candidate-search loss}
@@ -56,6 +266,75 @@ For full-key C with complete weighted ordering, it is exact. Their global recall
 be limited by routing. Finite node budgets and short-key quotas add a second possible loss.
 
 \Needspace{12\baselineskip}
+\subsection{Apply the candidate rule to the three search methods}
+The probability calculation describes a set of documents. Several algorithms can reach that
+same set. If they score those documents with the same full score and use the same tie rule,
+they have the same recall. Their time and memory costs can still be very different.
+
+\textbf{A: open clusters and scan their documents.} For the random-bit example, use the first
+$h$ bits as the cluster key. There are $C=2^h$ possible clusters. Probing all keys through
+radius $t$ gives $P=H(h,t)$ clusters and exactly the candidate rule we just calculated. With
+$h=4$ and $t=1$, scanning five clusters returns an expected 80 documents and has expected
+top-one recall 89.60\%. The ratio $P/C=5/16$ describes the expected fraction of documents read;
+it is not the nearest-document recall.
+
+A k-means router uses distances to learned centroids instead of counting prefix errors. For
+each true neighbor, let $J$ be the rank of its assigned cluster in the query's routing order.
+Probing the first $P$ clusters retains that neighbor when $J\le P$. Routing recall is therefore
+\[
+r_{\rm route}(P)=\Pr(J\le P),
+\]
+where the probability averages over queries and a uniformly selected member of each query's
+true top $K$. This identity defines what to measure. Cluster count and average cluster size
+alone do not supply the distribution of $J$.
+
+\textbf{B: follow bitplane branches.} Consider a four-level tree where a path specifies the
+first four bits. Keep every path with at most one disagreement with the query. It reaches the
+same five keys as the example above, so its recall is also 89.60\%. If every allowed path is
+represented, the tree has $1+2+3+4+5=15$ nodes, including the root and five leaves. Some nodes
+may have no documents and can be skipped.
+
+This example counts a particular complete set of paths. The actual best-first algorithm has
+a different stopping rule. It chooses a pending node using its score bound, splits on a query
+coordinate, and may stop when the node budget is used. Its candidate set depends on the weights,
+occupied leaves, leaf threshold, current result threshold, and visit order. A budget of 15
+nodes does not mean that it reaches the five prefix keys above. To estimate its recall, run
+that selection process on sampled data or derive its visited paths for a small explicit tree.
+
+A random exploration probability changes which pending node is chosen. At a fixed budget it
+can recover a missed neighbor or spend work on an unhelpful path. Its effect must be checked
+with the same queries and budget. Complete traversal with valid bounds is the exact control.
+
+\textbf{C: try keys near the query's desired pattern.} With equal weights, opening every short
+key through a Hamming radius gives Equations~\eqref{eq:finite-top-one} and
+\eqref{eq:finite-top-k}. With unequal weights, keys must be ordered by the sum of the weights
+of their wrong bits. A large number of cheap mistakes can come before one expensive mistake.
+The weighted distribution in the next subsections replaces the simple mismatch count.
+
+For full keys, an exact weighted order and a valid stopping rule give exact local binary
+results. Short keys omit part of the score, so stopping after enough postings have arrived can
+lose neighbors. It can also work well when the prefix strongly predicts the full ranking.
+The calculation must account for both possibilities.
+
+Literal prefix relaxation is another concrete rule. For query key $0000$, replacing the last
+constraint by a wildcard accepts both $0000$ and $0001$. A prefix trie can retrieve that parent
+range, or only the new sibling range if the first key was already read. Flipping the last bit
+instead visits only $0001$. Relaxing arbitrary query-selected coordinates is not a single
+ordinary prefix-trie parent step. The candidate sets and data access costs must follow the
+chosen structure.
+
+\begin{examplebox}{Routing and lookup losses are conditional}
+Keep $d=16$ and condition on the nearest document having two errors. A router that demands the
+first two bits match retains it with probability $\binom{14}{2}/\binom{16}{2}=91/120$.
+Given that it passed, demanding the next two bits match has probability
+$\binom{12}{2}/\binom{14}{2}=66/91$. Their product is $66/120=55\%$.
+
+Multiplying $91/120$ by itself would give a different answer. Once the first two bits are known
+to match, the two errors must lie among the remaining fourteen positions. Conditioning changes
+the second calculation. The same issue arises when routing and lookup use overlapping bits.
+\end{examplebox}
+
+\Needspace{12\baselineskip}
 \subsection{A deterministic error bound for a short prefix}
 Split the full score into retained and omitted coordinates:
 \begin{equation}
@@ -84,6 +363,53 @@ For float truncation, the analogous score error obeys Cauchy--Schwarz:
 Truncation and binary quantization are separate approximations. Matryoshka training can improve
 the usefulness of prefixes, but it does not set either bound to zero or supply a universal
 recall percentage.
+
+\Needspace{12\baselineskip}
+\subsection{Derive a weighted model before approximating it}
+Let $E_i$ be one when document bit $i$ disagrees with the query and zero otherwise. With
+$a_i=|q_i|$, the penalty is $L=\sum_i a_i E_i$. The score is $\sum_i a_i-2L$, so ranking by
+largest score is the same as ranking by smallest $L$.
+
+For query magnitudes $[4,3,2,1]$, one error in the first coordinate costs 4. Errors in the
+last two cost $2+1=3$. The two-error document ranks higher. Counting wrong bits alone would
+reverse that order.
+
+Under independent mismatch probabilities $p_i$, a particular error pattern $e$ has probability
+\begin{equation}
+\Pr(E=e)=\prod_{i=1}^{d}p_i^{e_i}(1-p_i)^{1-e_i}.
+\label{eq:error-pattern-probability}
+\end{equation}
+For a small dimension, list the $2^d$ patterns, calculate each full penalty and prefix penalty,
+and add their probabilities into the corresponding score groups. That directly constructs the
+joint distribution needed for recall. It also works with dependent bits if we supply their
+actual joint pattern probabilities instead of the product above.
+
+To handle a finite top $K$, group patterns by each distinct full penalty $\ell$. Let
+$p_{\le\ell}=\Pr(L\le\ell)$ and $p_{<\ell}=\Pr(L<\ell)$. For a fixed candidate acceptance event
+$A$, the same reasoning as the equal-weight case gives
+\begin{equation}
+\E[\operatorname{Recall@}K]
+=\frac1K\sum_{\ell}
+ \left[G_K(p_{\le\ell})-G_K(p_{<\ell})\right]\Pr(A\mid L=\ell).
+\label{eq:weighted-finite-recall}
+\end{equation}
+Each bracket counts expected top-$K$ rows at that penalty. The conditional probability says
+which of them pass. This is exact for independently sampled documents from the stated pattern
+distribution, with an ID tie rule independent of the sampled patterns. It does not require
+independence \emph{between bits}. It does require the joint distribution to be known.
+
+\begin{examplebox}{Balanced bits can still be dependent}
+Make eight-bit documents by sampling four balanced bits and repeating them in the last four
+positions. Every individual bit is still zero or one half the time. However, only sixteen
+of the possible 256 codes can occur. The independent-bit model assigns probability to 240
+impossible codes. A correction to the arithmetic cannot repair that assumption; the pattern
+probabilities must change. Section~\ref{sec:recall-checks} checks this example explicitly.
+\end{examplebox}
+
+At hundreds of dimensions, listing every pattern is impractical. We can sample from a stated
+model, use a suitable dynamic program, or make an approximation to the score distribution.
+The choice should follow the calculation we need. The small exact model remains useful for
+checking whether a faster calculation is answering the same question.
 
 \Needspace{12\baselineskip}
 \subsection{Random documents: what the independence assumption actually gives}
@@ -122,7 +448,7 @@ Equation~\eqref{eq:rho-independent}. The expectation of a ratio need not equal t
 expectations.
 
 \Needspace{12\baselineskip}
-\subsection{Real documents need a covariance model, not just a label}
+\subsection{When document bits vary together}
 A covariance matrix records how coordinates vary together. Its diagonal entries are individual variances. An off-diagonal entry describes whether two coordinates tend to move together or in opposite directions. Independent, balanced signs have unit diagonal entries and zero off-diagonal entries.
 
 For a general binary document vector with mean $\mu$ and covariance matrix $\Sigma$, let
@@ -142,7 +468,7 @@ still fail to identify the extreme nearest neighbors. Estimating covariance also
 prove a normal distribution in the tails.
 
 \Needspace{12\baselineskip}
-\subsection{Equal-weight mistakes lead to a binomial model}
+\subsection{Changing the probability of a wrong bit}
 Let $X_i=\ind[b_i\ne t_i]$. If the $X_i$ are independent with the same disagreement probability
 $p$, and all relevant weights equal $a$, then a mismatch count over $h$ coordinates satisfies
 \begin{equation}
@@ -245,13 +571,17 @@ Otherwise candidates near the boundary need exact scoring or a safe expanded bou
 
 \Needspace{12\baselineskip}
 \subsection{The conditional-normal approximation}
-For many small independent contributions, a joint-normal approximation for full and prefix
-scores can be convenient. Subtract each score's mean and divide by its standard deviation. This standardizes them to $(Z,Y)$ with correlation $\rho$. For a true
+When a score adds many small independent contributions, a normal distribution can sometimes
+approximate its shape. Here we need a joint distribution: how the full score and prefix score
+vary together. This is an additional assumption, not a consequence of knowing their correlation. Subtract each score's mean and divide by its standard deviation. This standardizes them to $(Z,Y)$ with correlation $\rho$. For a true
 fraction $a=K/N_*$ and selected candidate fraction $f$, set
 \[
 z_K=\Phi^{-1}(1-a),\qquad y_f=\Phi^{-1}(1-f),
 \]
-where $\Phi$ and $\phi$ are the standard normal CDF and density. The implied recall is
+where $\Phi$ and $\phi$ are the standard normal CDF and density. Under the joint-normal assumption, $Y$ conditional on $Z=z$ has mean $\rho z$ and variance
+$1-\rho^2$. Its probability of exceeding the prefix threshold is therefore
+$\Phi((\rho z-y_f)/\sqrt{1-\rho^2})$. Multiply by the full-score density $\phi(z)$,
+integrate over the true-neighbor tail, then divide by its probability $a$. The implied recall is
 \begin{equation}
 \widehat r=
 \frac{1}{a}\int_{z_K}^{\infty}
@@ -285,5 +615,6 @@ be accurate when their ranking preserves true neighbors and the candidate budget
 That possibility should be measured, not dismissed. Their enumeration and posting costs remain
 separate from the recall benefit.
 \end{itemize}
-The exact empirical definition is always available. Distribution models explain mechanisms;
-validation determines where their numerical estimates are useful.
+A useful estimate needs a stated candidate rule and a distribution that fits the relevant
+neighbors. The checks below show both a case where the exact calculation works and a case
+where a plausible assumption gives the wrong answer.

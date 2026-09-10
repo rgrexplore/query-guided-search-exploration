@@ -2,6 +2,35 @@
   "score_identity_and_lookup": "passed",
   "complete_weighted_subset_order": "passed",
   "finite_binary_recall_example": "passed",
+  "finite_top_k_recall": {
+    "enumerated_settings": 20,
+    "worked_example": [
+      {
+        "radius": 0,
+        "keys": 1,
+        "expected_candidates": 16.0,
+        "recall": 0.4640275066122157
+      },
+      {
+        "radius": 1,
+        "keys": 5,
+        "expected_candidates": 80.0,
+        "recall": 0.8959991329718403
+      },
+      {
+        "radius": 2,
+        "keys": 11,
+        "expected_candidates": 176.0,
+        "recall": 0.9945372911136707
+      },
+      {
+        "radius": 4,
+        "keys": 16,
+        "expected_candidates": 256.0,
+        "recall": 1.0
+      }
+    ]
+  },
   "memory_and_archived_numbers": "passed",
   "fiqa_csv_sha256": "1fa8dbcdbae365d2562696c92d14a7eec2bed8f9ccac0c26b1bb26c0cb3443c1",
   "scaling_csv_sha256": "cfeeed179a4363abd892c5412813bc2e0acfc25b2cb476bb4ec03e57797543bc",

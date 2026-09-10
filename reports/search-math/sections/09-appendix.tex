@@ -1,3 +1,49 @@
+\section{Computing the expected top-K count at each distance}
+\label{sec:finite-distance-details}
+The count $G_K(p)$ in Equation~\eqref{eq:clipped-binomial} can be evaluated directly as
+\[
+G_K(p)=\sum_{x=0}^{N}\min(K,x)\binom Nx p^x(1-p)^{N-x}.
+\]
+For large $N$, computing the binomial coefficients and powers separately can overflow or lose
+small probabilities. A shorter expression follows from a counting identity. For an integer
+$x\ge0$, $\min(K,x)$ counts how many thresholds $1,2,\ldots,K$ it reaches:
+\[
+\min(K,x)=\sum_{j=1}^{K}\ind[x\ge j].
+\]
+Taking expectations on both sides gives
+\begin{equation}
+G_K(p)=\sum_{j=1}^{K}\Pr(X\ge j),\qquad X\sim\operatorname{Binomial}(N,p).
+\label{eq:clipped-survival}
+\end{equation}
+Use a numerically stable binomial survival function for these probabilities. The ordinary
+small-example checker uses the direct sum; the simulation checker uses this alternative.
+Their agreement supplies a check across two different calculations.
+
+For the distance model, $\sum_m w_m=G_K(1)-G_K(0)=K$. Thus the weights in
+Equation~\eqref{eq:finite-top-k}, divided by $K$, form a probability distribution over the
+distance of a uniformly chosen true top-$K$ row. Given that row's distance, symmetry makes
+its error positions uniform. The ID rule chooses among tied rows without favoring one set of
+error positions. This justifies multiplying $w_m$ by the hypergeometric survival probability.
+
+The argument would change if ties deliberately favored matching prefixes. It would also change
+if we stopped candidate collection after a corpus-dependent quota. These are changes to the
+selection policy, not numerical errors in the fixed-radius formula.
+
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={Expected top-K recall for a fixed prefix radius.}]
+ExpectedTopKRecall(N, d, h, radius, K):
+    previous_slots = 0
+    expected_found = 0
+    for distance in 0 .. d:
+        p = F_d(distance)
+        slots = sum(Pr(Binomial(N, p) >= j) for j in 1 .. K)
+        rows_at_distance = slots - previous_slots
+        expected_found += rows_at_distance * g_h_radius(distance)
+        previous_slots = slots
+    return expected_found / K
+\end{lstlisting}
+\end{minipage}\par
+
 \section{A finite-sample view of prefix recall}
 The population-tail approximation is not the only mathematical definition available. This
 appendix shows what an exact finite-$N_*$ calculation would require, under independent,

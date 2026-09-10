@@ -2,7 +2,7 @@
 \label{sec:comparison}
 The three methods share query embedding, preparation, routing, filtering, and the optional
 final reranker. Their difference is the work used to obtain candidates from the selected pool.
-This is the right boundary for comparing the index algorithms without hiding common costs.
+Keeping those shared costs visible lets us compare both the index work and the complete query.
 
 \Needspace{12\baselineskip}
 \subsection{Latency, one method at a time}
@@ -160,19 +160,30 @@ ChooseConfiguration(corpus, queries, fixed_reference, RAM_limit, targets):
 \end{lstlisting}
 \end{minipage}\par
 
-A mathematical model can reduce the grid and explain its results. It cannot manufacture the
-unknown query/document distribution or the true hardware coefficients. A ``best estimated
-point'' from a model is a proposed experiment, not a verified engineering choice.
+The parameters are often integers: cluster count, probes, lookup bits, and visited nodes. A
+small declared grid handles these choices directly. Differentiation can simplify a smooth
+part of the cost model, but it does not determine whether the recall constraint is satisfied.
+For example, a model $T(C)=aC+bNP/C$ has a stationary point at
+$C=\sqrt{bNP/a}$ when $a,b>0$ and $P$ is held fixed. Check neighboring feasible integers and
+memory use. If the probes required for the recall target change with $C$, that derivative no
+longer solves the complete problem.
+
+Choose a setting using calibration and tuning queries, then check the frozen choice on
+separate queries. Optimizing an inaccurate recall model can select the configuration where
+that model makes its most optimistic error. At 99\% recall, a predicted 99\% is insufficient;
+report actual query-level quality and its uncertainty. The existing normal prediction's
+real-data errors are too large to establish such a winner.
 
 If $d$ is also varied, keep the quality reference fixed across choices, for example the same
 long-vector top $K$ or the same relevance labels. Recomputing a different binary ground truth
 for every $d$ makes a tiny representation look perfectly accurate against its own changed task.
 
-\begin{resultbox}{Final interpretation}
+\begin{resultbox}{What the comparison tells us}
 A pays to score the selected pool. B pays to discover which scores can be avoided, and dense
 bitmaps can make that discovery expensive. C pays to discover which keys contain useful
 candidates, including empty keys and queue work. Each can be exact under a suitable stopping
 rule. Which is fastest at a recall target is determined by the data, the representation,
-the visited work, the memory layout and the hardware---not by one operation count or one
-assumed normal distribution.
+the visited work, the memory layout and the hardware. The exact small examples explain how
+recall can be calculated. The measured prediction errors show where the assumptions need more
+evidence before they can guide a real configuration choice.
 \end{resultbox}

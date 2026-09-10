@@ -92,6 +92,89 @@ def check_binomial():
     assert math.isclose(numerator/denominator, actual)
 
 
+def binomial_cdf(bits, radius):
+    """Fraction of all bit patterns with at most radius mismatches."""
+    return sum(math.comb(bits, errors) for errors in range(radius + 1)) / 2**bits
+
+
+def expected_clipped_count(documents, probability, top_k):
+    """Expected number of top-K slots filled by an event with this probability.
+
+    This direct sum is for the report's small examples. Larger experiments use
+    SciPy's stable binomial survival function instead of powers and factorials.
+    """
+    return sum(
+        min(top_k, count) * math.comb(documents, count)
+        * probability**count * (1 - probability)**(documents - count)
+        for count in range(documents + 1)
+    )
+
+
+def prefix_survival(bits, prefix_bits, radius, full_errors):
+    """Given the total errors, count which placements pass the prefix filter."""
+    accepted = 0
+    for prefix_errors in range(min(prefix_bits, radius) + 1):
+        tail_errors = full_errors - prefix_errors
+        if 0 <= tail_errors <= bits - prefix_bits:
+            accepted += (math.comb(prefix_bits, prefix_errors)
+                         * math.comb(bits - prefix_bits, tail_errors))
+    return accepted / math.comb(bits, full_errors)
+
+
+def expected_prefix_recall(documents, bits, prefix_bits, radius, top_k):
+    """Exact expectation for fixed-radius lookup in the iid balanced-bit model."""
+    expected_hits = 0.0
+    previous_slots = 0.0
+    for errors in range(bits + 1):
+        slots = expected_clipped_count(
+            documents, binomial_cdf(bits, errors), top_k
+        )
+        # The difference counts top-K rows at this distance, including tied rows.
+        rows_at_distance = slots - previous_slots
+        expected_hits += rows_at_distance * prefix_survival(
+            bits, prefix_bits, radius, errors
+        )
+        previous_slots = slots
+    return expected_hits / top_k
+
+
+def check_finite_recall():
+    """Compare probability formulas with actual sorted tiny corpora.
+
+    Enumerating ordered corpora includes repeated codes. Row IDs break ties;
+    they are assigned by position, independently of the sampled code.
+    """
+    checked = 0
+    for documents, bits in [(1, 3), (3, 3)]:
+        for prefix_bits in (0, 1, bits):
+            for radius in sorted({0, prefix_bits}):
+                for top_k in sorted({1, min(2, documents), documents}):
+                    observed_sum = 0.0
+                    for codes in itertools.product(range(2**bits), repeat=documents):
+                        truth = sorted(range(documents),
+                                       key=lambda row: (bin(codes[row]).count('1'), row))[:top_k]
+                        prefix_mask = (1 << prefix_bits) - 1
+                        found = sum(bin(codes[row] & prefix_mask).count('1') <= radius
+                                    for row in truth)
+                        observed_sum += found / top_k
+                    observed = observed_sum / (2**bits)**documents
+                    predicted = expected_prefix_recall(
+                        documents, bits, prefix_bits, radius, top_k
+                    )
+                    assert math.isclose(predicted, observed, abs_tol=1e-12)
+                    checked += 1
+    examples = []
+    for radius in (0, 1, 2, 4):
+        keys = sum(math.comb(4, errors) for errors in range(radius + 1))
+        recall = expected_prefix_recall(256, 16, 4, radius, 1)
+        examples.append(dict(radius=radius, keys=keys,
+                             expected_candidates=256*keys/16, recall=recall))
+    assert math.isclose(prefix_survival(16, 4, 1, 2), .95)
+    assert math.isclose(examples[1]['recall'], .8959991329718401, abs_tol=1e-12)
+    assert math.isclose(examples[-1]['recall'], 1, abs_tol=1e-12)
+    return {'enumerated_settings': checked, 'worked_example': examples}
+
+
 def check_memory_and_evidence():
     assert 10**9 * 256 // 8 == 32 * 10**9
     assert 10**10 * 256 // 8 == 320 * 10**9
@@ -134,8 +217,9 @@ if __name__ == '__main__':
     check_scores()
     check_subsets()
     check_binomial()
+    finite_recall = check_finite_recall()
     evidence = check_memory_and_evidence()
     result = {'score_identity_and_lookup': 'passed', 'complete_weighted_subset_order': 'passed',
-              'finite_binary_recall_example': 'passed', 'memory_and_archived_numbers': 'passed', **evidence}
+              'finite_binary_recall_example': 'passed', 'finite_top_k_recall': finite_recall, 'memory_and_archived_numbers': 'passed', **evidence}
     (HERE/'evidence/math-checks.json').write_text(json.dumps(result, indent=2)+'\n')
     print(json.dumps(result, indent=2))

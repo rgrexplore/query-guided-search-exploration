@@ -1,0 +1,1602 @@
+{
+  "seed": 20260910,
+  "trials": 10000,
+  "bootstrap_samples": 10000,
+  "controlled": [
+    {
+      "name": "Equal weights",
+      "documents": 64,
+      "dimensions": 8,
+      "top_k": 5,
+      "prefix_bits": 3,
+      "radius": 1,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "exact_model_recall": 0.9384697269741157,
+      "independent_model_recall": 0.9384697269741157,
+      "observed": {
+        "mean": 0.93784,
+        "low": 0.9242589848425938,
+        "high": 0.9514210151574062,
+        "standard_error": 0.0011042351984687651,
+        "samples": 10000,
+        "interval": "95% Hoeffding bound across independent corpora; recall in [0,1]"
+      },
+      "native_queries": [
+        {
+          "query": 0,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 0,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 0.8,
+          "scored": 12
+        },
+        {
+          "query": 0,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.8,
+          "scored": 12
+        },
+        {
+          "query": 0,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 33
+        },
+        {
+          "query": 1,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 1,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 0.8,
+          "scored": 9
+        },
+        {
+          "query": 1,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.8,
+          "scored": 9
+        },
+        {
+          "query": 1,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 36
+        },
+        {
+          "query": 2,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 2,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 0.8,
+          "scored": 15
+        },
+        {
+          "query": 2,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.6,
+          "scored": 8
+        },
+        {
+          "query": 2,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 39
+        },
+        {
+          "query": 3,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 3,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 0.6,
+          "scored": 12
+        },
+        {
+          "query": 3,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.6,
+          "scored": 12
+        },
+        {
+          "query": 3,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 42
+        },
+        {
+          "query": 4,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 4,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 20
+        },
+        {
+          "query": 4,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 20
+        },
+        {
+          "query": 4,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 38
+        },
+        {
+          "query": 5,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 5,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 0.4,
+          "scored": 7
+        },
+        {
+          "query": 5,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.4,
+          "scored": 6
+        },
+        {
+          "query": 5,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 39
+        },
+        {
+          "query": 6,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 6,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 14
+        },
+        {
+          "query": 6,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.6,
+          "scored": 11
+        },
+        {
+          "query": 6,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 33
+        },
+        {
+          "query": 7,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 7,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 7,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 7,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 33
+        },
+        {
+          "query": 8,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.2,
+          "scored": 4
+        },
+        {
+          "query": 8,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 0.8,
+          "scored": 15
+        },
+        {
+          "query": 8,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.8,
+          "scored": 15
+        },
+        {
+          "query": 8,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 39
+        },
+        {
+          "query": 9,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 9,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 0.8,
+          "scored": 14
+        },
+        {
+          "query": 9,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.8,
+          "scored": 14
+        },
+        {
+          "query": 9,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 40
+        },
+        {
+          "query": 10,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 10,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 0.8,
+          "scored": 11
+        },
+        {
+          "query": 10,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.8,
+          "scored": 11
+        },
+        {
+          "query": 10,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 42
+        },
+        {
+          "query": 11,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 11,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 0.8,
+          "scored": 11
+        },
+        {
+          "query": 11,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.8,
+          "scored": 11
+        },
+        {
+          "query": 11,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 38
+        }
+      ],
+      "expected_candidates": 32.0
+    },
+    {
+      "name": "Strong prefix",
+      "documents": 64,
+      "dimensions": 8,
+      "top_k": 5,
+      "prefix_bits": 3,
+      "radius": 1,
+      "weights": [
+        4,
+        3,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "exact_model_recall": 0.9999896746214757,
+      "independent_model_recall": 0.9999896746214757,
+      "observed": {
+        "mean": 1.0,
+        "low": 0.9864189848425938,
+        "high": 1.0,
+        "standard_error": 0.0,
+        "samples": 10000,
+        "interval": "95% Hoeffding bound across independent corpora; recall in [0,1]"
+      },
+      "native_queries": [
+        {
+          "query": 0,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.4,
+          "scored": 4
+        },
+        {
+          "query": 0,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 14
+        },
+        {
+          "query": 0,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 12
+        },
+        {
+          "query": 0,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 14
+        },
+        {
+          "query": 1,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 1,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 13
+        },
+        {
+          "query": 1,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 13
+        },
+        {
+          "query": 1,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 13
+        },
+        {
+          "query": 2,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 2,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 2,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 2,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 3,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.8,
+          "scored": 4
+        },
+        {
+          "query": 3,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 18
+        },
+        {
+          "query": 3,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 18
+        },
+        {
+          "query": 3,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 18
+        },
+        {
+          "query": 4,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 4,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 4,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 4,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 5,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 5,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 17
+        },
+        {
+          "query": 5,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 14
+        },
+        {
+          "query": 5,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 17
+        },
+        {
+          "query": 6,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 6,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 19
+        },
+        {
+          "query": 6,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 19
+        },
+        {
+          "query": 6,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 19
+        },
+        {
+          "query": 7,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.4,
+          "scored": 4
+        },
+        {
+          "query": 7,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 16
+        },
+        {
+          "query": 7,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 16
+        },
+        {
+          "query": 7,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 16
+        },
+        {
+          "query": 8,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 8,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 12
+        },
+        {
+          "query": 8,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 12
+        },
+        {
+          "query": 8,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 9,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 9,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 0.8,
+          "scored": 16
+        },
+        {
+          "query": 9,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.8,
+          "scored": 16
+        },
+        {
+          "query": 9,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 19
+        },
+        {
+          "query": 10,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 10,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 14
+        },
+        {
+          "query": 10,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 14
+        },
+        {
+          "query": 10,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 14
+        },
+        {
+          "query": 11,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.8,
+          "scored": 4
+        },
+        {
+          "query": 11,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 11,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 11,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 15
+        }
+      ],
+      "expected_candidates": 32.0
+    },
+    {
+      "name": "Weak prefix",
+      "documents": 64,
+      "dimensions": 8,
+      "top_k": 5,
+      "prefix_bits": 3,
+      "radius": 1,
+      "weights": [
+        1,
+        1,
+        1,
+        4,
+        3,
+        2,
+        2,
+        2
+      ],
+      "exact_model_recall": 0.7424799502272739,
+      "independent_model_recall": 0.7424799502272739,
+      "observed": {
+        "mean": 0.7443,
+        "low": 0.7307189848425938,
+        "high": 0.7578810151574061,
+        "standard_error": 0.002015181653278327,
+        "samples": 10000,
+        "interval": "95% Hoeffding bound across independent corpora; recall in [0,1]"
+      },
+      "native_queries": [
+        {
+          "query": 0,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 0,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 17
+        },
+        {
+          "query": 0,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 17
+        },
+        {
+          "query": 0,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 17
+        },
+        {
+          "query": 1,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 1,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 11
+        },
+        {
+          "query": 1,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 11
+        },
+        {
+          "query": 1,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 11
+        },
+        {
+          "query": 2,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 2,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 17
+        },
+        {
+          "query": 2,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 17
+        },
+        {
+          "query": 2,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 19
+        },
+        {
+          "query": 3,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 3,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 3,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 3,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 19
+        },
+        {
+          "query": 4,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 4,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 10
+        },
+        {
+          "query": 4,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 10
+        },
+        {
+          "query": 4,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 10
+        },
+        {
+          "query": 5,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 5,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 13
+        },
+        {
+          "query": 5,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 10
+        },
+        {
+          "query": 5,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 16
+        },
+        {
+          "query": 6,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.4,
+          "scored": 4
+        },
+        {
+          "query": 6,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 14
+        },
+        {
+          "query": 6,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 16
+        },
+        {
+          "query": 6,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 14
+        },
+        {
+          "query": 7,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 7,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 14
+        },
+        {
+          "query": 7,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 14
+        },
+        {
+          "query": 7,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 14
+        },
+        {
+          "query": 8,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 8,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 12
+        },
+        {
+          "query": 8,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 12
+        },
+        {
+          "query": 8,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 12
+        },
+        {
+          "query": 9,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 9,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 6
+        },
+        {
+          "query": 9,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 6
+        },
+        {
+          "query": 9,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 6
+        },
+        {
+          "query": 10,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 10,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 10,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 10,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 19
+        },
+        {
+          "query": 11,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 11,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 12
+        },
+        {
+          "query": 11,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 11,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 12
+        }
+      ],
+      "expected_candidates": 32.0
+    },
+    {
+      "name": "Paired bits",
+      "documents": 64,
+      "dimensions": 8,
+      "top_k": 5,
+      "prefix_bits": 3,
+      "radius": 1,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "exact_model_recall": 0.9999998601712996,
+      "independent_model_recall": 0.9384697269741157,
+      "observed": {
+        "mean": 1.0,
+        "low": 0.9864189848425938,
+        "high": 1.0,
+        "standard_error": 0.0,
+        "samples": 10000,
+        "interval": "95% Hoeffding bound across independent corpora; recall in [0,1]"
+      },
+      "native_queries": [
+        {
+          "query": 0,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 0,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 0.6,
+          "scored": 6
+        },
+        {
+          "query": 0,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.6,
+          "scored": 6
+        },
+        {
+          "query": 0,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 36
+        },
+        {
+          "query": 1,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 1,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 8
+        },
+        {
+          "query": 1,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 11
+        },
+        {
+          "query": 1,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 8
+        },
+        {
+          "query": 2,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 2,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 13
+        },
+        {
+          "query": 2,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 15
+        },
+        {
+          "query": 2,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 29
+        },
+        {
+          "query": 3,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 3,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 6
+        },
+        {
+          "query": 3,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 6
+        },
+        {
+          "query": 3,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 6
+        },
+        {
+          "query": 4,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 4,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 0.8,
+          "scored": 9
+        },
+        {
+          "query": 4,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.8,
+          "scored": 9
+        },
+        {
+          "query": 4,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 31
+        },
+        {
+          "query": 5,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 5,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 6
+        },
+        {
+          "query": 5,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 6
+        },
+        {
+          "query": 5,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 6
+        },
+        {
+          "query": 6,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 6,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 0.6,
+          "scored": 7
+        },
+        {
+          "query": 6,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.6,
+          "scored": 7
+        },
+        {
+          "query": 6,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 31
+        },
+        {
+          "query": 7,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 7,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 0.6,
+          "scored": 3
+        },
+        {
+          "query": 7,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.6,
+          "scored": 3
+        },
+        {
+          "query": 7,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 41
+        },
+        {
+          "query": 8,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 8,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 5
+        },
+        {
+          "query": 8,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 5
+        },
+        {
+          "query": 8,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 5
+        },
+        {
+          "query": 9,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.4,
+          "scored": 2
+        },
+        {
+          "query": 9,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 13
+        },
+        {
+          "query": 9,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 1.0,
+          "scored": 9
+        },
+        {
+          "query": 9,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 17
+        },
+        {
+          "query": 10,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 10,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 0.8,
+          "scored": 10
+        },
+        {
+          "query": 10,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.8,
+          "scored": 10
+        },
+        {
+          "query": 10,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 24
+        },
+        {
+          "query": 11,
+          "budget": 4,
+          "exploration": 0,
+          "recall": 0.0,
+          "scored": 0
+        },
+        {
+          "query": 11,
+          "budget": 16,
+          "exploration": 0,
+          "recall": 0.8,
+          "scored": 10
+        },
+        {
+          "query": 11,
+          "budget": 16,
+          "exploration": 0.1,
+          "recall": 0.8,
+          "scored": 10
+        },
+        {
+          "query": 11,
+          "budget": 0,
+          "exploration": 0,
+          "recall": 1.0,
+          "scored": 33
+        }
+      ],
+      "expected_candidates": 32.0
+    }
+  ],
+  "archived": {
+    "source_sha256": "89fef2537d3a43e50efa5004706400f638a7695fe85a8a343756dd6baf22f677",
+    "rows": [
+      {
+        "case": "Random independent signs",
+        "target": 100,
+        "queries": 16,
+        "error_points": 0.7974608539823513,
+        "low": -0.0775391460176487,
+        "high": 1.7349608539823513,
+        "within_two_points": true,
+        "interval_within_two_points": true
+      },
+      {
+        "case": "Random independent signs",
+        "target": 1000,
+        "queries": 16,
+        "error_points": -1.1564296461781667,
+        "low": -3.7189296461781667,
+        "high": 1.406070353821833,
+        "within_two_points": true,
+        "interval_within_two_points": false
+      },
+      {
+        "case": "Random independent signs",
+        "target": 5000,
+        "queries": 16,
+        "error_points": -0.23473154284223274,
+        "low": -4.297231542842233,
+        "high": 3.702768457157768,
+        "within_two_points": true,
+        "interval_within_two_points": false
+      },
+      {
+        "case": "Random independent signs",
+        "target": 10000,
+        "queries": 16,
+        "error_points": 0.42187042668899655,
+        "low": -2.3281295733110046,
+        "high": 3.3593704266889968,
+        "within_two_points": true,
+        "interval_within_two_points": false
+      },
+      {
+        "case": "Random signs; 80% expected score variance in first 24 dims",
+        "target": 100,
+        "queries": 16,
+        "error_points": 7.385714160750977,
+        "low": 3.260714160750977,
+        "high": 11.510714160750977,
+        "within_two_points": false,
+        "interval_within_two_points": false
+      },
+      {
+        "case": "Random signs; 80% expected score variance in first 24 dims",
+        "target": 1000,
+        "queries": 16,
+        "error_points": 2.0149715896655227,
+        "low": 0.0774715896655232,
+        "high": 4.139971589665523,
+        "within_two_points": false,
+        "interval_within_two_points": false
+      },
+      {
+        "case": "Random signs; 80% expected score variance in first 24 dims",
+        "target": 5000,
+        "queries": 16,
+        "error_points": -0.003935622412587492,
+        "low": -0.003935622412587492,
+        "high": -0.003935622412587492,
+        "within_two_points": true,
+        "interval_within_two_points": true
+      },
+      {
+        "case": "Random signs; 80% expected score variance in first 24 dims",
+        "target": 10000,
+        "queries": 16,
+        "error_points": -3.1912172349102264e-06,
+        "low": -3.1912172349102264e-06,
+        "high": -3.1912172349102264e-06,
+        "within_two_points": true,
+        "interval_within_two_points": true
+      },
+      {
+        "case": "Cached Nomic / MS MARCO binary scores",
+        "target": 100,
+        "queries": 16,
+        "error_points": -2.208402231599379,
+        "low": -4.779243522157492,
+        "high": 0.07125337731537064,
+        "within_two_points": false,
+        "interval_within_two_points": false
+      },
+      {
+        "case": "Cached Nomic / MS MARCO binary scores",
+        "target": 1000,
+        "queries": 16,
+        "error_points": -7.842670779402181,
+        "low": -14.47301407917986,
+        "high": -1.5407405650272945,
+        "within_two_points": false,
+        "interval_within_two_points": false
+      },
+      {
+        "case": "Cached Nomic / MS MARCO binary scores",
+        "target": 5000,
+        "queries": 16,
+        "error_points": -9.557349117371295,
+        "low": -18.249671862438543,
+        "high": -0.8117886385233993,
+        "within_two_points": false,
+        "interval_within_two_points": false
+      },
+      {
+        "case": "Cached Nomic / MS MARCO binary scores",
+        "target": 10000,
+        "queries": 16,
+        "error_points": -7.7284283017617135,
+        "low": -16.165817135667066,
+        "high": 0.6432161302968945,
+        "within_two_points": false,
+        "interval_within_two_points": false
+      }
+    ],
+    "scope": "Paired bootstrap over 16 previously inspected check queries. Correlation fit held fixed; not total model uncertainty or a fresh test."
+  },
+  "script_sha256": "bb1822a84deec1c7ae974df756ab12df025ddf6e7dee2bc03b31c0e3a3f07597"
+}
