@@ -1,0 +1,25 @@
+{
+  "model": "nomic-ai/nomic-embed-text-v1.5",
+  "revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+  "recipe": "nomic-v1.5-st-layernorm-eps1e-5-prefix-l2-v1",
+  "device": "mps",
+  "versions": {
+    "numpy": "2.5.3",
+    "sentence-transformers": "6.0.1",
+    "torch": "2.14.0"
+  },
+  "power_before": {
+    "available": true,
+    "source": "AC Power",
+    "settings": "Battery Power:\n Sleep On Power Button 1\n powermode            1\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         2\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            10\nAC Power:\n Sleep On Power Button 1\n powermode            2\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 1\n networkoversleep     0\n sleep                1\n tcpkeepalive         1\n disksleep            10"
+  },
+  "power_after": {
+    "available": true,
+    "source": "AC Power",
+    "settings": "Battery Power:\n Sleep On Power Button 1\n powermode            1\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         2\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            10\nAC Power:\n Sleep On Power Button 1\n powermode            2\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 1\n networkoversleep     0\n sleep                1\n tcpkeepalive         1\n disksleep            10"
+  },
+  "process_lifetime_peak_bytes": 3666542592,
+  "mps_driver_allocated_bytes": 1084948480,
+  "source_sha256": "3aa1e093db4c1bf2cf9fb41ffbabe28bd8f5e0471310ef106ae17042184a5152",
+  "scope": "20 existing independent-query IDs; frozen conservative99% settings. Actual single-query encoding and search timed together; reference computed afterward from actual vectors. No retuning or speedup significance claim. RSS peak includes reference construction; MPS allocation may overlap RSS."
+}

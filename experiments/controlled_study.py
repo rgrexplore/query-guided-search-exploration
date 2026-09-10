@@ -7,11 +7,11 @@ from pathlib import Path
 import numpy as np
 from threadpoolctl import threadpool_limits
 
-from experiments.choices import combine
+from experiments.choices import combine, setting_key
 from experiments.controlled import prepare_controlled_pool
 from experiments.direct_routing import DirectPrefixRouter
 from experiments.evaluation_report import report
-from experiments.isolated import execute_cases
+from experiments.isolated import ROOT, execute_cases
 from experiments.probe_cutoffs import routing_ranks, probe_cutoff, cover_boundary_ties
 from experiments.real_study import prepare_router
 
@@ -88,6 +88,32 @@ def controlled_cases(config, pool, documents, layouts):
     return cases
 
 
+def previous_choices(config, pools):
+    """Remeasure prior choices alongside new neighbors on the expanded tuning set."""
+    source = config.get('experiment', {}).get('prior_shortlist')
+    if source is None:
+        return []
+    cases = []
+    for choice in json.loads((ROOT / source).read_text()):
+        old = choice['case']
+        if old['documents'] not in pools:
+            continue
+        pool = Path(pools[old['documents']])
+        prior_pool = Path(old['pool'])
+        before = json.loads((prior_pool / 'pool.json').read_text())
+        after = json.loads((pool / 'pool.json').read_text())
+        for name in ('codes.npy', 'documents.npy'):
+            assert before['hashes'][name] == after['hashes'][name], 'follow-up changed documents'
+        for name in ('queries.npy', 'reference.npy'):
+            prior = np.load(prior_pool / name)
+            np.testing.assert_array_equal(prior, np.load(pool / name)[:len(prior)])
+        assert before['query_ids'] == after['query_ids'][:len(before['query_ids'])]
+        assert old['dimensions'] == config['data']['dimensions'] and old['top_k'] == config['search']['top_k']
+        cases.append(dict(old, pool=str(pool), query_rows=list(range(config['data']['tuning_queries'])),
+                          repetitions=config['measurement']['repetitions']))
+    return cases
+
+
 def evaluation_cases(config, shortlist):
     cases = []
     held_out = list(range(config['data']['tuning_queries'], config['data']['queries']))
@@ -123,6 +149,9 @@ def run_controlled(config, output):
                 print(f"N={documents} {kind} C={clusters}: probes={probes}", flush=True)
         layouts_by_size[documents] = layouts
         cases.extend(controlled_cases(config, pool, documents, layouts))
+    cases.extend(previous_choices(config, pools))
+    # A prior setting can also occur in the new grid. Measure it once per run.
+    cases = list({setting_key(case, case['probes']): case for case in cases}.values())
     (output / 'layouts.json').write_text(json.dumps(layouts_by_size, indent=2) + '\n')
     tuning = output / 'tuning'
     tuning.mkdir()

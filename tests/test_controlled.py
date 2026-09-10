@@ -1,10 +1,13 @@
+import json
+
 import numpy as np
+import pytest
 import bitplane_index
 
 from experiments.components import pack_signs, reference_rows
 from experiments.check_controlled import predicted_work, key_shell_work
 from experiments.controlled import predict_one_path
-from experiments.controlled_study import controlled_cases, evaluation_cases
+from experiments.controlled_study import controlled_cases, evaluation_cases, previous_choices
 
 
 def test_one_path_prediction_keeps_full_width_leaf_work():
@@ -86,3 +89,29 @@ def test_complete_strong_key_prediction_counts_empty_patterns_in_the_shell():
         keys_generated=3, key_attempts=3, documents_scored=2)
     assert key_shell_work([1, 1, 4], 3, 2) == dict(
         keys_generated=4, key_attempts=4, documents_scored=6)
+
+
+def test_followup_preserves_documents_and_excludes_new_queries_from_tuning(tmp_path):
+    prior = tmp_path / 'prior'; prior.mkdir()
+    new = tmp_path / 'new'; new.mkdir()
+    for folder, count in [(prior, 2), (new, 3)]:
+        np.save(folder / 'queries.npy', np.arange(count)[:, None])
+        np.save(folder / 'reference.npy', np.zeros((count, 1), dtype=np.int64))
+        (folder / 'pool.json').write_text(json.dumps(dict(
+            hashes={'codes.npy':'same codes', 'documents.npy':'same documents'},
+            query_ids=[str(i) for i in range(count)])))
+    case = dict(pool=str(prior), documents=8, dimensions=4, top_k=1,
+                method='scan', probes=1, query_rows=[0], repetitions=1)
+    source = tmp_path / 'shortlist.json'
+    source.write_text(json.dumps([{'case':case}]))
+    config = dict(experiment={'prior_shortlist':str(source)},
+                  data={'dimensions':4,'tuning_queries':2},search={'top_k':1},
+                  measurement={'repetitions':2})
+    result = previous_choices(config, {8:new})
+    assert result[0]['query_rows'] == [0, 1]
+    assert result[0]['pool'] == str(new)
+    assert result[0]['probes'] == case['probes'] and case['query_rows'] == [0]
+
+    np.save(new / 'queries.npy', np.full((3, 1), 999))
+    with pytest.raises(AssertionError):
+        previous_choices(config, {8:new})
