@@ -90,10 +90,10 @@ def compare(folder, models_path=None):
              f'{len(cases)} complete cases; {len(failures)} failed or limited cases.',
              'Choices below use tuning-query mean recall and measured p50 latency. They are not a final independent result.',
              'Every local search recall was checked against scan under the same routing choice.', '',
-             '| Target | Method | Router | Clusters / probes | Recall | p50 ms | Case |',
-             '|---:|---|---|---|---:|---:|---:|']
+             '| Documents | Target | Method | Router | Clusters / probes | Recall | p50 ms | Case |',
+             '|---:|---:|---|---|---|---:|---:|---:|']
     for row in selected:
-        lines.append(f"| {row['target']:.0%} | {row['method']} | {row['router']} | {row['clusters']} / {row['probes']} | {row['recall']:.2%} | {row['p50_ms']:.4f} | {row['case_id']} |")
+        lines.append(f"| {row['documents']:,} | {row['target']:.0%} | {row['method']} | {row['router']} | {row['clusters']} / {row['probes']} | {row['recall']:.2%} | {row['p50_ms']:.4f} | {row['case_id']} |")
     lines += ['', 'The complete settings table retains losing configurations. Each selected case links back through selected.json to its exact input and raw query observations.',
               'Selection is limited to the declared settings and tuning queries. No universal best method or billion-document result is claimed.']
     (output/'README.md').write_text('\n'.join(lines)+'\n')
@@ -102,25 +102,28 @@ def compare(folder, models_path=None):
 
 
 def draw_frontiers(rows, path, top_k):
-    fig, ax = plt.subplots(figsize=(8, 4.8), constrained_layout=True)
-    for method, color in [('scan','#235e91'), ('branch','#d17624'), ('keys','#7a52a2')]:
-        own = sorted([r for r in rows if r['method']==method and r['power_unchanged']
-                      and r['budget_status']=='fits_by_lifetime_peak'], key=lambda r:r['p50_ms'])
-        frontier = []
-        best_recall = -1
-        for row in own:
-            if row['recall'] > best_recall:
-                frontier.append(row)
-                best_recall = row['recall']
-        ax.scatter([r['p50_ms'] for r in own], [r['recall'] for r in own], color=color, alpha=.12, s=16)
-        ax.plot([r['p50_ms'] for r in frontier], [r['recall'] for r in frontier], 'o-', color=color, label=method, markersize=4)
     counts = sorted({r['documents'] for r in rows})
-    ax.set(xscale='log', xlabel='Measured median query latency (ms; embedding cached)',
-           ylabel=f'Binary-score Recall@{top_k}', title='Tuning observations: '+', '.join(f'{n:,} documents' for n in counts))
-    ax.legend()
-    ax.grid(alpha=.15)
-    fig.savefig(path, dpi=150)
-    plt.close(fig)
+    for documents in counts:
+        fig, ax = plt.subplots(figsize=(8, 4.8), constrained_layout=True)
+        for method, color in [('scan','#235e91'), ('branch','#d17624'), ('keys','#7a52a2')]:
+            own = sorted([r for r in rows if r['documents']==documents and r['method']==method
+                          and r['power_unchanged'] and r['budget_status']=='fits_by_lifetime_peak'],
+                         key=lambda r:r['p50_ms'])
+            frontier = []
+            best_recall = -1
+            for row in own:
+                if row['recall'] > best_recall:
+                    frontier.append(row)
+                    best_recall = row['recall']
+            ax.scatter([r['p50_ms'] for r in own], [r['recall'] for r in own], color=color, alpha=.12, s=16)
+            ax.plot([r['p50_ms'] for r in frontier], [r['recall'] for r in frontier], 'o-', color=color, label=method, markersize=4)
+        ax.set(xscale='log', xlabel='Measured median query latency (ms; embedding cached)',
+               ylabel=f'Binary-score Recall@{top_k}', title=f'Tuning observations: {documents:,} documents')
+        ax.legend()
+        ax.grid(alpha=.15)
+        destination = path if len(counts)==1 else path.with_name(f'{path.stem}-n{documents}{path.suffix}')
+        fig.savefig(destination, dpi=150)
+        plt.close(fig)
 
 
 def main():
