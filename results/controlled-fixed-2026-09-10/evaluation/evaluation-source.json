@@ -1,0 +1,26 @@
+{
+  "shortlist_sha256": "313401d90c4f51db58d5fa5b3cb6e5834993475ef76321cdef383e7f73b56a65",
+  "query_ids": [
+    "fixed-q20",
+    "fixed-q21",
+    "fixed-q22",
+    "fixed-q23",
+    "fixed-q24",
+    "fixed-q25",
+    "fixed-q26",
+    "fixed-q27",
+    "fixed-q28",
+    "fixed-q29",
+    "fixed-q30",
+    "fixed-q31",
+    "fixed-q32",
+    "fixed-q33",
+    "fixed-q34",
+    "fixed-q35",
+    "fixed-q36",
+    "fixed-q37",
+    "fixed-q38",
+    "fixed-q39"
+  ],
+  "scope": "Disjoint generated queries; same documents. Parameters frozen using the first subset only."
+}

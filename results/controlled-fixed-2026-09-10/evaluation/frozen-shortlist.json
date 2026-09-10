@@ -1,0 +1,660 @@
+[
+  {
+    "setting_id": "s0100",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000/routers/direct-8192-seed73",
+      "router_kind": "direct",
+      "clusters": 8192,
+      "probes": 1,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-fixed-2026-09-10/tuning",
+        "case_id": 100,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0216",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/direct-8192-seed73",
+      "router_kind": "direct",
+      "clusters": 8192,
+      "probes": 12,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-fixed-2026-09-10/tuning",
+        "case_id": 216,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0219",
+    "uses": [
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/direct-8192-seed73",
+      "router_kind": "direct",
+      "clusters": 8192,
+      "probes": 14,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-fixed-2026-09-10/tuning",
+        "case_id": 219,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0221",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000/routers/direct-8192-seed73",
+      "router_kind": "direct",
+      "clusters": 8192,
+      "probes": 1,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "branch",
+      "node_budget": 0,
+      "leaf_size": 1024
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-fixed-2026-09-10/tuning",
+        "case_id": 221,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0273",
+    "uses": [
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/direct-8192-seed73",
+      "router_kind": "direct",
+      "clusters": 8192,
+      "probes": 13,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "branch",
+      "node_budget": 0,
+      "leaf_size": 1024
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-fixed-2026-09-10/tuning",
+        "case_id": 273,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0339",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "keys",
+      "key_bits": 13,
+      "key_offset": 0,
+      "candidate_target": 0,
+      "key_limit": 262144
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-fixed-2026-09-10/tuning",
+        "case_id": 339,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0370",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "keys",
+      "key_bits": 13,
+      "key_offset": 0,
+      "candidate_target": 0,
+      "key_limit": 262144
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-fixed-2026-09-10/tuning",
+        "case_id": 370,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0422",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/direct-8192-seed73",
+      "router_kind": "direct",
+      "clusters": 8192,
+      "probes": 12,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "branch",
+      "node_budget": 0,
+      "leaf_size": 512
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-fixed-2026-09-10/tuning",
+        "case_id": 422,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0545",
+    "uses": [
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000",
+      "documents": 100000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/direct-8192-seed73",
+      "router_kind": "direct",
+      "clusters": 8192,
+      "probes": 14,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "branch",
+      "node_budget": 0,
+      "leaf_size": 2048
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/results/controlled-fixed-2026-09-10/tuning",
+        "case_id": 545,
+        "seed": 0
+      }
+    ]
+  }
+]

@@ -1,0 +1,278 @@
+{
+  "100000": [
+    {
+      "path": null,
+      "kind": "none",
+      "clusters": 1,
+      "routing_bits": 0,
+      "probes": [
+        1
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/sign-16-seed73",
+      "kind": "sign",
+      "clusters": 16,
+      "routing_bits": 4,
+      "probes": [
+        5
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/sign-256-seed73",
+      "kind": "sign",
+      "clusters": 256,
+      "routing_bits": 8,
+      "probes": [
+        9
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/sign-4096-seed73",
+      "kind": "sign",
+      "clusters": 4096,
+      "routing_bits": 12,
+      "probes": [
+        13
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/sign-8192-seed73",
+      "kind": "sign",
+      "clusters": 8192,
+      "routing_bits": 13,
+      "probes": [
+        14
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/ivf-16-seed73",
+      "kind": "ivf",
+      "clusters": 16,
+      "routing_bits": 0,
+      "probes": [
+        12,
+        14,
+        15,
+        16
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/ivf-256-seed73",
+      "kind": "ivf",
+      "clusters": 256,
+      "routing_bits": 0,
+      "probes": [
+        143,
+        185,
+        209,
+        240,
+        256
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/ivf-4096-seed73",
+      "kind": "ivf",
+      "clusters": 4096,
+      "routing_bits": 0,
+      "probes": [
+        1806,
+        2481,
+        2986,
+        3642,
+        4076
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/ivf-8192-seed73",
+      "kind": "ivf",
+      "clusters": 8192,
+      "routing_bits": 0,
+      "probes": [
+        2796,
+        3943,
+        5203,
+        6965,
+        8122
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/direct-16-seed73",
+      "kind": "direct",
+      "clusters": 16,
+      "routing_bits": 4,
+      "probes": [
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/direct-256-seed73",
+      "kind": "direct",
+      "clusters": 256,
+      "routing_bits": 8,
+      "probes": [
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/direct-4096-seed73",
+      "kind": "direct",
+      "clusters": 4096,
+      "routing_bits": 12,
+      "probes": [
+        10,
+        12,
+        13
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n100000/routers/direct-8192-seed73",
+      "kind": "direct",
+      "clusters": 8192,
+      "routing_bits": 13,
+      "probes": [
+        12,
+        13,
+        14
+      ]
+    }
+  ],
+  "1000000": [
+    {
+      "path": null,
+      "kind": "none",
+      "clusters": 1,
+      "routing_bits": 0,
+      "probes": [
+        1
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000/routers/sign-16-seed73",
+      "kind": "sign",
+      "clusters": 16,
+      "routing_bits": 4,
+      "probes": [
+        1
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000/routers/sign-256-seed73",
+      "kind": "sign",
+      "clusters": 256,
+      "routing_bits": 8,
+      "probes": [
+        1
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000/routers/sign-4096-seed73",
+      "kind": "sign",
+      "clusters": 4096,
+      "routing_bits": 12,
+      "probes": [
+        1
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000/routers/sign-8192-seed73",
+      "kind": "sign",
+      "clusters": 8192,
+      "routing_bits": 13,
+      "probes": [
+        1
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000/routers/ivf-16-seed73",
+      "kind": "ivf",
+      "clusters": 16,
+      "routing_bits": 0,
+      "probes": [
+        11,
+        13,
+        15,
+        16
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000/routers/ivf-256-seed73",
+      "kind": "ivf",
+      "clusters": 256,
+      "routing_bits": 0,
+      "probes": [
+        142,
+        181,
+        209,
+        238,
+        250
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000/routers/ivf-4096-seed73",
+      "kind": "ivf",
+      "clusters": 4096,
+      "routing_bits": 0,
+      "probes": [
+        1952,
+        2579,
+        3064,
+        3684,
+        4057
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000/routers/ivf-8192-seed73",
+      "kind": "ivf",
+      "clusters": 8192,
+      "routing_bits": 0,
+      "probes": [
+        3498,
+        4766,
+        5688,
+        7186,
+        8124
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000/routers/direct-16-seed73",
+      "kind": "direct",
+      "clusters": 16,
+      "routing_bits": 4,
+      "probes": [
+        1
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000/routers/direct-256-seed73",
+      "kind": "direct",
+      "clusters": 256,
+      "routing_bits": 8,
+      "probes": [
+        1
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000/routers/direct-4096-seed73",
+      "kind": "direct",
+      "clusters": 4096,
+      "routing_bits": 12,
+      "probes": [
+        1
+      ]
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/controlled-fixed-2026-09-10/n1000000/routers/direct-8192-seed73",
+      "kind": "direct",
+      "clusters": 8192,
+      "routing_bits": 13,
+      "probes": [
+        1
+      ]
+    }
+  ]
+}
