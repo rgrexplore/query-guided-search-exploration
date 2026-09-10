@@ -48,8 +48,8 @@ Original edition: 43 pages, six figures, twelve pseudocode blocks; preserved at 
 
 The extension has 55 pages, nine figures and fourteen pseudocode listings. A new real-data
 predictor is not claimed: the saved normal approximation fails the proposed two-point error
-criterion on the shown Nomic cases. A fresh calibration/test study remains future work, with
-its own query provenance required; previously inspected queries are not relabeled as fresh.
+criterion on the shown Nomic cases. Further real-data recall modeling remains future research. That failed approximation is retained,
+and the final parameter comparisons use measured recall; previously inspected queries are not relabeled as fresh.
 
 
 ## Implemented comparison extension
