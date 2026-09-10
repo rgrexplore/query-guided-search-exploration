@@ -1,0 +1,40 @@
+{
+  "config": {
+    "words": [
+      16
+    ],
+    "depth": 3,
+    "rows": [
+      128
+    ],
+    "dimensions": [
+      256
+    ],
+    "top_k": 100,
+    "repeats": 2,
+    "seed": 79
+  },
+  "compile_command": [
+    "clang++",
+    "-std=c++20",
+    "-O3",
+    "-DNDEBUG",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Icpp",
+    "experiments/cost_kernels.cpp",
+    "-o",
+    "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/component-validation/build/cost-kernels"
+  ],
+  "source_sha256": {
+    "experiments/cost_kernels.cpp": "9d364df3b874e72358ec30dffaea02e0c9cf89a1bbc9bf0ebcea684e2dc2e51d",
+    "experiments/buffer_costs.py": "3e216b63e8dc7228749b8c1ddc86f176f852143609abc50090d657eedf028740",
+    "cpp/score.hpp": "d1ad2090a548a8d140d25dbb545ff6332031a39db4c4c450037620fe0761032a",
+    "cpp/index.hpp": "c8a270c4ac0155b56092d36bdbd800c732784f9486c1a2c7b91d458a4a54b72e"
+  },
+  "binary_sha256": "6bab9df0ab07fc6758f859b888692cbfb437de7c29fd665f1f73e1b8d75bde3b",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.1.1.101)\nTarget: arm64-apple-darwin25.3.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin\n",
+  "hardware": "Apple M5 Max\n137438953472\n",
+  "scope": "Kernel-only costs. Timed path retains alternative masks and includes parent release. Leaf measures enumeration/checksum only. Scorer includes table preparation, full scores and top-K selection. Input generation and partition verification are untimed. Warmup path omitted; independent process confidence intervals are not claimed."
+}
