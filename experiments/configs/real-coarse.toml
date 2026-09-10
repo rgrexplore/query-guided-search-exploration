@@ -1,0 +1,35 @@
+[experiment]
+stage = "real"
+
+[data]
+kind = "cached_vectors"
+embedding_dir = "data/scaling/1be0393b70430821be5a67e569bcc2df11106c0e17afdeb574350f4930bea7d3/embeddings/e867d7419fedbd667eaea8e1febe56b2fe16881be9570f6ae11c6bef51bff273"
+cache_dir = "data/real-comparison-2026-09-10"
+sizes = [100000]
+dimensions = 256
+queries = 25
+query_start = 0
+
+[search]
+top_k = 100
+recall_targets = [0.8, 0.9, 0.95, 0.99]
+
+[sweep]
+routers = ["sign", "ivf"]
+clusters = [16, 64, 256]
+probes = [1, 4, 16, 64]
+router_seed = 42
+node_budgets = [512, 2048, 8192]
+leaf_sizes = [32, 128, 512]
+key_bits = [8, 12, 16]
+candidate_targets = [0, 1000, 10000]
+key_limit = 32768
+
+[measurement]
+repetitions = 1
+schedule_seed = 49
+
+[limits]
+ram_budget_bytes = 32000000000
+worker_stop_bytes = 34359738368
+case_seconds = 180

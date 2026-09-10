@@ -6,6 +6,7 @@ from pathlib import Path
 
 from experiments.components import run_components
 from experiments.isolated import run_isolated
+from experiments.real_study import run_real_study
 
 
 def main():
@@ -15,7 +16,9 @@ def main():
     args=parser.parse_args()
     config=tomllib.loads(args.config.read_text())
     stage = config.get('experiment', {}).get('stage', 'components')
-    if stage == 'isolated':
+    if stage == 'real':
+        run_real_study(config, args.output)
+    elif stage == 'isolated':
         run_isolated(config, args.output)
     elif stage == 'components':
         run_components(config, args.output)

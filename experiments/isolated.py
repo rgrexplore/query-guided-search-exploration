@@ -101,12 +101,16 @@ def run_isolated(config, output):
     (output/'configuration.json').write_text(json.dumps(config, indent=2)+'\n')
     pools = {n: prepare_pool(config, n) for n in config['data']['sizes']}
     cases = calibration_cases(config, pools)
+    execute_cases(config, output, cases, 'Isolated single-thread calibration on random signs; check sizes excluded from fitting.')
+
+
+def execute_cases(config, output, cases, scope):
     (output/'schedule.json').write_text(json.dumps(cases, indent=2)+'\n')
     hardware = subprocess.run(['sysctl', '-n', 'machdep.cpu.brand_string', 'hw.memsize'],
                               capture_output=True, text=True) if sys.platform=='darwin' else None
     environment = dict(platform=platform.platform(), python=sys.version, power_before=power_state(),
                        hardware=hardware.stdout.strip() if hardware else platform.machine(),
-                       scope='Isolated single-thread calibration on random signs; check sizes excluded from fitting.')
+                       scope=scope)
     (output/'environment.json').write_text(json.dumps(environment, indent=2)+'\n')
     for number, case in enumerate(cases):
         folder = output/'cases'/f'{number:04d}'
