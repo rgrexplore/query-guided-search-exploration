@@ -7,6 +7,8 @@ from pathlib import Path
 from experiments.components import run_components
 from experiments.isolated import run_isolated
 from experiments.real_study import run_real_study, run_refinement
+from experiments.exploration import run_exploration
+from experiments.evaluate import run_evaluation
 
 
 def main():
@@ -16,7 +18,11 @@ def main():
     args=parser.parse_args()
     config=tomllib.loads(args.config.read_text())
     stage = config.get('experiment', {}).get('stage', 'components')
-    if stage == 'refine':
+    if stage == 'evaluate':
+        run_evaluation(config, args.output)
+    elif stage == 'exploration':
+        run_exploration(config, args.output)
+    elif stage == 'refine':
         run_refinement(config, args.output)
     elif stage == 'real':
         run_real_study(config, args.output)

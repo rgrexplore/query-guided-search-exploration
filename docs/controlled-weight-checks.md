@@ -48,3 +48,39 @@ Measure both latency and RAM, and compare only settings that meet the same recal
 This experiment can establish behavior under its stated weight distribution. It cannot establish
 that Matryoshka embeddings have that distribution, that one method always wins, or that a
 billion-document projection has been measured.
+
+## How to choose when branching should stop
+
+Under the strong-match condition, stop after j of the m strong coordinates and score the
+remaining documents. Every document matching all m strong coordinates is still in this region.
+After those full scores establish the top K, the bound can discard branches that missed one of
+the j strong coordinates. This argument requires enough all-m matches; otherwise additional
+branches must be searched and their work must be counted.
+
+With balanced independent signs, expected remaining rows are N / 2^j. Let W = ceil(N / w)
+be the original bitmap width in words. A simplified time estimate for this one-path case is
+
+$$T_B(j) \approx j W c_{split} + W c_{leaf} + N 2^{-j} c_{score} + T_{prepare} + T_{queue}(j).$$
+
+The full-width leaf loop is included even after the candidate set becomes small. Root bitmap
+initialization belongs to preparation. The next cut helps only when
+
+$$N 2^{-(j+1)}c_{score} > W c_{split} + T_{queue}(j+1)-T_{queue}(j).$$
+
+Ignoring the smaller queue term for a first estimate, the continuous stationary point is
+
+$$j_c = \log_2\!\left(\frac{N c_{score}\ln 2}{W c_{split}}\right).$$
+
+Check neighboring integers and the boundaries 0 and m. A leaf threshold around N / 2^j then
+implements the candidate size, with sampling variation around that mean. The constants must
+be measured for the relevant working-set sizes; this is not an instruction to reuse one
+small-array cost at a billion documents.
+
+For nonempty alternative children, the last split can have about (j + 2) full bitmap allocations
+live: the queued alternatives, the current parent and its two children. The parent/child lifetime
+and the leaf loop must not disappear from the memory or time calculation.
+
+This also explains why a fixed leaf size does not scale automatically. At 1B documents, matching
+13 balanced bits still leaves about 122k documents. A leaf size of 128 would keep splitting
+weak coordinates, repeatedly processing billion-document-wide masks. A larger leaf threshold
+may be much faster. The experiment must vary that threshold rather than assume more cuts help.
