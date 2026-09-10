@@ -138,3 +138,56 @@ Recorded confirmation: `../results/isolated-confirmation-2026-09-10/README.md`. 
 52 completed settings on new sizes and a new seed. All scan and key settings met the 20% p50
 criterion; 21 of 24 branch settings did. The remaining branch errors are retained. Both
 calibration and confirmation use one cluster, so they do not calibrate a learned router.
+
+## Real-data tuning
+
+The real-data stage reuses the document codes, normalized queries and full document vectors
+from the existing Nomic/MS MARCO cache. The source folder is explicit in the TOML configuration.
+The native reference ranking is checked independently from the original float vectors' signs.
+
+```bash
+.venv/bin/python -m experiments.run \
+  --config experiments/configs/real-coarse.toml \
+  --output results/my-real-coarse
+.venv/bin/python -m experiments.compare results/my-real-coarse
+```
+
+The first coarse grid uses 100k passages and 25 tuning queries. All methods receive the same
+routing choices. Scan covers the declared routing grid; B and C also vary their local search
+parameters. Results retain the query-level recall ceiling supplied by scan on the same selected
+clusters. Local search cannot recover neighbors excluded by routing.
+
+The denser refinement uses 100 tuning queries:
+
+```bash
+.venv/bin/python -m experiments.run \
+  --config experiments/configs/real-refinement.toml \
+  --output results/my-real-refinement
+.venv/bin/python -m experiments.compare results/my-real-refinement/search
+```
+
+Its `routing/` stage measures exact local scan at denser probe counts and larger cluster counts.
+The `search/` stage tests all three methods on every routing choice that can meet the lowest
+recall target. This uses a quality ceiling, not a guessed latency estimate, to omit impossible
+configurations. It does not force B/C to use only A's fastest layout.
+
+`comparison/settings.csv` contains every measured setting, while `selected.json` points to the
+fastest tested eligible setting for each target. These are tuning choices. In particular, an
+apparent winner caused by a gap in the baseline's probe grid needs refinement before it becomes
+a conclusion. The final independent query set must not be used to choose those parameters.
+
+## Prepare independent evaluation queries
+
+After the tuning choices are frozen, the query preparation command can select IDs disjoint
+from the original 300 cached queries and encode them with the same model and normalization:
+
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 .venv/bin/python -m experiments.fresh_queries \
+  --config experiments/configs/real-coarse.toml \
+  --output data/fresh-evaluation-queries --count 200 --seed 20260911 --device mps
+```
+
+This requires the already downloaded official archive and model cache. It encodes only queries;
+it does not search the documents or evaluate any index settings. Model revision, source hashes,
+selected IDs, exclusions and encoding details are saved with the vectors. Batched encoding time
+is preparation throughput, not single-query latency.

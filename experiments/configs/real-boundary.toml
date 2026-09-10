@@ -1,0 +1,36 @@
+# Check the missing middle and the larger cluster counts before freezing choices.
+[experiment]
+stage = "refine"
+
+[data]
+kind = "cached_vectors"
+embedding_dir = "data/scaling/1be0393b70430821be5a67e569bcc2df11106c0e17afdeb574350f4930bea7d3/embeddings/e867d7419fedbd667eaea8e1febe56b2fe16881be9570f6ae11c6bef51bff273"
+cache_dir = "data/real-refinement-2026-09-10"
+sizes = [100000]
+dimensions = 256
+queries = 100
+query_start = 0
+
+[search]
+top_k = 100
+recall_targets = [0.8, 0.9, 0.95, 0.99]
+
+[sweep]
+routers = ["sign", "ivf"]
+clusters = [512, 2048, 4096]
+probes = [1, 4, 16, 32, 48, 64, 80, 96, 128, 160, 192, 224, 256, 320, 384, 448, 512, 640, 768, 1024, 1536, 2048, 3072, 4096]
+router_seed = 42
+node_budgets = [256, 512, 1024, 2048, 4096]
+leaf_sizes = [128, 512, 1024]
+key_bits = [4, 8, 12]
+candidate_targets = [0, 10000, 50000]
+key_limit = 524288
+
+[measurement]
+repetitions = 1
+schedule_seed = 49
+
+[limits]
+ram_budget_bytes = 32000000000
+worker_stop_bytes = 34359738368
+case_seconds = 180
