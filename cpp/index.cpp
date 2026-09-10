@@ -1,4 +1,5 @@
 #include "index.hpp"
+#include "score.hpp"
 
 #include <algorithm>
 #include <array>
@@ -9,101 +10,21 @@
 #include <numeric>
 #include <queue>
 #include <random>
+#include <stdexcept>
 #include <utility>
 
 namespace bitplane {
 namespace {
+
+using detail::ScoreTable;
+using detail::TopCandidates;
+using detail::cannot_improve;
 
 using Clock = std::chrono::steady_clock;
 
 double milliseconds_since(Clock::time_point start) {
     return std::chrono::duration<double, std::milli>(Clock::now() - start).count();
 }
-
-// Score four signs at a time. Queries stay floating point throughout.
-class ScoreTable {
-public:
-    ScoreTable(const float* query, std::size_t dimensions)
-        : entries_((dimensions + 3) / 4) {
-        for (std::size_t group = 0; group < entries_.size(); ++group) {
-            for (std::size_t pattern = 0; pattern < 16; ++pattern) {
-                double sum = 0;
-                for (std::size_t bit = 0; bit < 4; ++bit) {
-                    const auto dimension = group * 4 + bit;
-                    if (dimension < dimensions) {
-                        const bool positive = (pattern >> bit) & 1;
-                        const double query_value = query[dimension];
-                        sum += positive ? query_value : -query_value;
-                    }
-                }
-                entries_[group][pattern] = sum;
-            }
-        }
-    }
-
-    double score(const std::uint64_t* code) const {
-        double total = 0;
-        for (std::size_t group = 0; group < entries_.size(); ++group) {
-            // A 64-bit word holds sixteen groups of four signs.
-            const auto word = code[group / 16];
-            const auto shift = (group % 16) * 4;
-            const auto pattern = (word >> shift) & 15;
-            total += entries_[group][pattern];
-        }
-        return total;
-    }
-
-private:
-    std::vector<std::array<double, 16>> entries_;
-};
-
-struct Candidate {
-    std::int64_t row;
-    double score;
-};
-
-struct BetterCandidate {
-    bool operator()(const Candidate& left, const Candidate& right) const {
-        return left.score > right.score || (left.score == right.score && left.row < right.row);
-    }
-};
-
-class TopCandidates {
-public:
-    explicit TopCandidates(std::size_t limit) : limit_(limit) {}
-
-    void offer(std::int64_t row, double score) {
-        Candidate candidate{row, score};
-        if (heap_.size() < limit_) {
-            heap_.push(candidate);
-        } else if (BetterCandidate{}(candidate, heap_.top())) {
-            heap_.pop();
-            heap_.push(candidate);
-        }
-    }
-
-    bool full() const { return heap_.size() == limit_; }
-    double worst_score() const { return heap_.top().score; }
-
-    void write_to(QueryResult& result) {
-        std::vector<Candidate> ranked;
-        ranked.reserve(heap_.size());
-        while (!heap_.empty()) {
-            ranked.push_back(heap_.top());
-            heap_.pop();
-        }
-        std::sort(ranked.begin(), ranked.end(), BetterCandidate{});
-        for (const auto& candidate : ranked) {
-            result.rows.push_back(candidate.row);
-            result.scores.push_back(candidate.score);
-        }
-    }
-
-private:
-    std::size_t limit_;
-    // The worst kept result stays on top, so replacing it is cheap.
-    std::priority_queue<Candidate, std::vector<Candidate>, BetterCandidate> heap_;
-};
 
 struct Node {
     std::size_t bucket;
@@ -123,12 +44,14 @@ bool better_node(const Node& left, const Node& right) {
 class Frontier {
 public:
     void push(Node node) {
+        mask_bytes_ += node.active.capacity() * sizeof(std::uint64_t);
         nodes_.push_back(std::move(node));
         sift_up(nodes_.size() - 1);
     }
 
     Node take(std::size_t index) {
         Node result = std::move(nodes_[index]);
+        mask_bytes_ -= result.active.capacity() * sizeof(std::uint64_t);
         if (index == nodes_.size() - 1) {
             nodes_.pop_back();
             return result;
@@ -145,6 +68,7 @@ public:
 
     bool empty() const { return nodes_.empty(); }
     std::size_t size() const { return nodes_.size(); }
+    std::size_t mask_bytes() const { return mask_bytes_; }
     double best_penalty() const { return nodes_.front().penalty; }
 
 private:
@@ -174,29 +98,18 @@ private:
     }
 
     std::vector<Node> nodes_;
+    std::size_t mask_bytes_ = 0;
 };
 
-bool cannot_improve(double best_penalty, double query_l1, std::size_t dimensions,
-                    const TopCandidates& candidates) {
-    if (!candidates.full()) {
-        return false;
-    }
-    // A wrong sign changes +|q[j]| to -|q[j]|, so it costs twice the penalty.
-    const double upper_bound = query_l1 - 2 * best_penalty;
-    // Rounding can differ between the bound and the lookup-table score.
-    const double guard = 32 * std::numeric_limits<double>::epsilon() *
-                         (dimensions + 1) * (query_l1 + std::abs(candidates.worst_score()) + 1);
-    // Keep ties alive: another branch may contain a smaller row ID.
-    return upper_bound + guard < candidates.worst_score();
-}
 
 } // namespace
 
 // ----- Build the two document layouts -----
 
 Index::Index(const std::uint64_t* codes, const std::int64_t* assignments,
-             std::size_t documents, std::size_t dimensions)
-    : documents_(documents), dimensions_(dimensions), code_words_((dimensions + 63) / 64) {
+             std::size_t documents, std::size_t dimensions, bool build_bitplanes)
+    : documents_(documents), dimensions_(dimensions), code_words_((dimensions + 63) / 64),
+      has_bitplanes_(build_bitplanes) {
     for (std::size_t row = 0; row < documents_; ++row) {
         auto entry = bucket_lookup_.find(assignments[row]);
         if (entry == bucket_lookup_.end()) {
@@ -208,6 +121,10 @@ Index::Index(const std::uint64_t* codes, const std::int64_t* assignments,
         bucket.rows.push_back(static_cast<std::int64_t>(row));
         const auto* row_start = codes + row * code_words_;
         bucket.codes.insert(bucket.codes.end(), row_start, row_start + code_words_);
+    }
+
+    if (!build_bitplanes) {
+        return;
     }
 
     // Turn the rows sideways: each plane marks the rows with a 1 at one dimension.
@@ -260,6 +177,9 @@ std::vector<QueryResult> Index::scan(const float* queries, std::size_t query_cou
 std::vector<QueryResult> Index::search(const float* queries, std::size_t query_count,
                                        const std::int64_t* selected_buckets,
                                        std::size_t probes, const SearchOptions& options) const {
+    if (!has_bitplanes_) {
+        throw std::runtime_error("this index was built without bitplanes; use scan");
+    }
     std::vector<QueryResult> results(query_count);
     for (std::size_t query_id = 0; query_id < query_count; ++query_id) {
         const auto start = Clock::now();
@@ -298,6 +218,8 @@ std::vector<QueryResult> Index::search(const float* queries, std::size_t query_c
             frontier.push({entry->second, 0, bucket.rows.size(), 0, next_order++, std::move(active)});
         }
 
+        result.stats.peak_mask_bytes = frontier.mask_bytes();
+
         // A batch uses the same seeds as separate calls with seed + row.
         std::mt19937_64 random(options.seed + query_id);
         std::bernoulli_distribution explore(options.explore_probability);
@@ -331,6 +253,7 @@ std::vector<QueryResult> Index::search(const float* queries, std::size_t query_c
             }
 
             if (score_now) {
+                result.stats.leaf_words += node.active.size();
                 // Visit just the set bits, then use the same scorer as a full scan.
                 for (std::size_t word = 0; word < node.active.size(); ++word) {
                     auto remaining = node.active[word];
@@ -351,6 +274,11 @@ std::vector<QueryResult> Index::search(const float* queries, std::size_t query_c
             const bool prefer_one = query[dimension] >= 0;
             std::vector<std::uint64_t> matching(bucket.bitmap_words);
             std::vector<std::uint64_t> opposite(bucket.bitmap_words);
+            // The parent and both children coexist before the children enter the queue.
+            const auto live_masks = frontier.mask_bytes()
+                + (node.active.capacity() + matching.capacity() + opposite.capacity())
+                  * sizeof(std::uint64_t);
+            result.stats.peak_mask_bytes = std::max(result.stats.peak_mask_bytes, live_masks);
             std::size_t matching_count = 0;
             for (std::size_t word = 0; word < bucket.bitmap_words; ++word) {
                 const auto preferred = prefer_one ? plane[word] : ~plane[word];
@@ -384,6 +312,9 @@ StorageInfo Index::info() const {
         result.codes_bytes += bucket.codes.size() * sizeof(std::uint64_t);
         result.bitplanes_bytes += bucket.planes.size() * sizeof(std::uint64_t);
         result.row_ids_bytes += bucket.rows.size() * sizeof(std::int64_t);
+        result.array_capacity_bytes += (bucket.codes.capacity() + bucket.planes.capacity())
+                                       * sizeof(std::uint64_t)
+                                       + bucket.rows.capacity() * sizeof(std::int64_t);
     }
     return result;
 }

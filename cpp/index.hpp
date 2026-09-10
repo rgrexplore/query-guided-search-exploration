@@ -33,6 +33,11 @@ struct SearchStats {
     std::size_t random_nodes = 0;
     std::size_t bitplane_words = 0;
     std::size_t documents_scored = 0;
+    std::size_t leaf_words = 0; // Separate from the existing split-word counter.
+    std::size_t peak_mask_bytes = 0; // Live bitmap allocations, excluding queue metadata.
+    std::size_t key_attempts = 0; // Includes lookups with no matching documents.
+    std::size_t keys_generated = 0;
+    std::size_t peak_key_queue_bytes = 0;
     std::string stop_reason = "exhausted";
     bool trace_enabled = false;
     std::vector<TraceStep> trace;
@@ -51,6 +56,10 @@ struct StorageInfo {
     std::size_t codes_bytes = 0;
     std::size_t bitplanes_bytes = 0;
     std::size_t row_ids_bytes = 0;
+    std::size_t array_capacity_bytes = 0; // Allocated vector storage; not whole-process RAM.
+    std::size_t key_directory_payload_bytes = 0;
+    std::size_t occupied_keys = 0;
+    std::size_t directory_slots = 0; // Hash bucket counts, not an allocator byte estimate.
 };
 
 // Bit j lives at word j / 64, offset j % 64. A 1 scores as +1; a 0 scores as -1.
@@ -58,7 +67,7 @@ struct StorageInfo {
 class Index {
 public:
     Index(const std::uint64_t* codes, const std::int64_t* assignments,
-          std::size_t documents, std::size_t dimensions);
+          std::size_t documents, std::size_t dimensions, bool build_bitplanes = true);
 
     std::vector<QueryResult> scan(const float* queries, std::size_t query_count,
                                   const std::int64_t* selected_buckets,
@@ -82,6 +91,7 @@ private:
     std::size_t documents_;
     std::size_t dimensions_;
     std::size_t code_words_;
+    bool has_bitplanes_;
     std::vector<Bucket> buckets_;
     std::unordered_map<std::int64_t, std::size_t> bucket_lookup_;
 };
