@@ -136,6 +136,14 @@ def run_controlled(config, output):
         with threadpool_limits(limits=1):
             pool = prepare_controlled_pool(config, documents)
             pools[documents] = pool
+            shared_cache = config['data'].get('router_source_cache')
+            if shared_cache:
+                source_pool = ROOT / shared_cache / f'n{documents}'
+                original = json.loads((source_pool / 'pool.json').read_text())
+                current = json.loads((pool / 'pool.json').read_text())
+                assert original['hashes']['documents.npy'] == current['hashes']['documents.npy']
+                if not (pool / 'routers').exists():
+                    (pool / 'routers').symlink_to((source_pool / 'routers').resolve(), target_is_directory=True)
             layouts = [dict(path=None, kind='none', clusters=1, routing_bits=0, probes=[1])]
             for kind, clusters in itertools.product(config['sweep']['routers'], config['sweep']['clusters']):
                 folder = prepare_layout(pool, kind, clusters, config['data']['seed'])
