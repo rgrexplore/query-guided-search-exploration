@@ -85,8 +85,8 @@ def compare(folder, models_path=None):
     choices = selected_inputs(selected, cases)
     (output/'selected.json').write_text(json.dumps(choices, indent=2)+'\n')
     (output/'failures.json').write_text(json.dumps(failures, indent=2)+'\n')
-    draw_frontiers(rows, output/'recall-latency.png')
-    lines = ['# Coarse real-data tuning', '',
+    draw_frontiers(rows, output/'recall-latency.png', config['search']['top_k'])
+    lines = ['# Real-data tuning', '',
              f'{len(cases)} complete cases; {len(failures)} failed or limited cases.',
              'Choices below use tuning-query mean recall and measured p50 latency. They are not a final independent result.',
              'Every local search recall was checked against scan under the same routing choice.', '',
@@ -95,13 +95,13 @@ def compare(folder, models_path=None):
     for row in selected:
         lines.append(f"| {row['target']:.0%} | {row['method']} | {row['router']} | {row['clusters']} / {row['probes']} | {row['recall']:.2%} | {row['p50_ms']:.4f} | {row['case_id']} |")
     lines += ['', 'The complete settings table retains losing configurations. Each selected case links back through selected.json to its exact input and raw query observations.',
-              'This coarse grid needs refinement where useful settings lie at its boundaries. No universal best method or billion-document result is claimed.']
+              'Selection is limited to the declared settings and tuning queries. No universal best method or billion-document result is claimed.']
     (output/'README.md').write_text('\n'.join(lines)+'\n')
     print('\n'.join(lines))
     return rows, selected
 
 
-def draw_frontiers(rows, path):
+def draw_frontiers(rows, path, top_k):
     fig, ax = plt.subplots(figsize=(8, 4.8), constrained_layout=True)
     for method, color in [('scan','#235e91'), ('branch','#d17624'), ('keys','#7a52a2')]:
         own = sorted([r for r in rows if r['method']==method and r['power_unchanged']
@@ -116,7 +116,7 @@ def draw_frontiers(rows, path):
         ax.plot([r['p50_ms'] for r in frontier], [r['recall'] for r in frontier], 'o-', color=color, label=method, markersize=4)
     counts = sorted({r['documents'] for r in rows})
     ax.set(xscale='log', xlabel='Measured median query latency (ms; embedding cached)',
-           ylabel='Binary-score Recall@100', title='Tuning observations: '+', '.join(f'{n:,} documents' for n in counts))
+           ylabel=f'Binary-score Recall@{top_k}', title='Tuning observations: '+', '.join(f'{n:,} documents' for n in counts))
     ax.legend()
     ax.grid(alpha=.15)
     fig.savefig(path, dpi=150)

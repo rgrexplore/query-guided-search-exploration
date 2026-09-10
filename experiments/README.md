@@ -191,3 +191,14 @@ This requires the already downloaded official archive and model cache. It encode
 it does not search the documents or evaluate any index settings. Model revision, source hashes,
 selected IDs, exclusions and encoding details are saved with the vectors. Batched encoding time
 is preparation throughput, not single-query latency.
+
+## Raw-result archives
+
+Large completed studies keep their raw case trees in `cases.zip`, with per-file SHA-256 hashes
+in `archive.json`. The archives preserve original bytes, including failed cases. Local case
+folders are retained and ignored by Git after verification.
+
+From a fresh checkout, extract the ZIP inside its containing directory before running the
+normal comparison or analysis command. For example, extract the refinement's `search/cases.zip`
+inside `search/`. `python -m experiments.archive_cases PATH` creates an archive only after every
+scheduled case has a terminal process result; it does not delete local observations.
