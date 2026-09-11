@@ -1,0 +1,107 @@
+\subsection{Billion-document estimates}
+\label{sec:billion}
+The C++ cost models were checked through 8M rows. The bitmap test reaches the full width
+of a 1B-row mask, but no complete 1B index was built or searched. The numbers below are
+estimates under the same 256-bit score, top 100, one CPU thread and stated distribution of
+strong coordinates. A different machine or pattern of memory reads can change the costs.
+
+Memory requirements can rule out a configuration before latency is estimated.
+For the current layout at $N=10^9$ and $d=256$,
+\[
+M_{\rm codes}=32\ \mathrm{GB},\qquad M_{\rm IDs}=8\ \mathrm{GB}.
+\]
+A and C need at least 40 GB before directories, containers and query buffers. B retains a
+second transposed copy, adding at least 32 GB. Therefore all three fail a 32 GB limit, and B
+also fails a 64 GB limit. Changing probes does not remove stored documents. These rejections
+apply to the current in-memory layouts; they are not claims about every compressed or disk-based design.
+
+The planning figures below allow room for up to twice the stored row-ID count, a small
+allowance for directories and containers, and a configurable 1 GB reserve for running queries.
+That reserve is assumed, not measured. Payload counts exclude overhead: if even those bytes
+exceed the budget, rejection is certain for this layout. A configuration that fits the planned budget still requires memory validation. Building an index from full input copies can require more RAM than serving it.
+
+\begin{center}\small
+\begin{tabular}{@{}lrrr@{}}\toprule
+1B-row path & Payload lower bound & Planned query RAM & 64 GB budget\\\midrule
+A, known strong-prefix routing & 40 GB & about 49 GB & Modeled fit\\
+C, global 13-bit key & 40 GB & about 49 GB & Modeled fit\\
+B, one global cluster & 72 GB & about 83 GB & Rejected\\
+B, same prefix route, scan-like leaf & 72 GB & about 81 GB & Rejected\\\bottomrule
+\end{tabular}\normalsize\end{center}
+All these planning figures fit a 1 TB budget. The model does not claim that a 1 TB machine has
+the M5 Max's exact memory behavior. The measured row buffers were much smaller than a 40 GB store.
+
+\subsection{Fixed strong prefix}
+With thirteen fixed strong coordinates, the ideal group contains an expected
+$10^9/2^{13}\approx122{,}070$ rows. Under the independent-bit assumption, a binomial calculation
+describes the chance of having fewer than 100. A Chernoff bound puts that probability below
+$10^{-26464}$ in this example. This extremely small bound belongs to the stated distribution;
+it is not an embedding-accuracy guarantee.
+
+A can route directly to that group and scan it. C can look up the same key and score its posting
+range. Their modeled costs are both roughly 3 ms. The data being read after routing is only a
+small part of the corpus, although all codes and IDs are still stored.
+
+The comparison gives B access to the same prefix routing and a leaf large enough
+to scan the selected group. An all-ones leaf-mask profile shows a similar scoring cost. Thus
+B's scan fallback is also estimated at roughly 3 ms, while storing a much larger index. Requiring B to
+traverse the entire billion-row bitmap would deny it this candidate-selection option.
+The model is not precise enough to distinguish a timing gap of a few percent here.
+A or C needs less memory, but the estimate does not prove one method is always faster.
+
+\subsection{Changing strong coordinates}
+A fixed prefix no longer supplies the same filter. The measured B path can select its columns
+from the actual query. Keeping thirteen cuts and scaling the leaf threshold to 160,000 gives
+an expected final set of about 122,070 rows. Its mask payload at the last split is
+\[
+(13+2)\ceil{10^9/64}\times8=1.875\ \mathrm{GB}.
+\]
+The model fitted to C++ runs estimates about 0.10 s for this global B path. Doubling
+the part of its cost that grows with corpus size raises the estimate to about 0.20 s. This
+checks the effect of a higher assumed cost; it is not a confidence interval or promised
+bound. The model estimates about 25 s for a global scan.
+
+That comparison does not establish that B beats every possible IVF configuration. Let $f$ be
+the fraction of the corpus A actually scores, and let $T_{\rm route}$ be the time needed to
+obtain those candidates. A's approximate cost is
+\[
+T_A\approx T_{\rm route}+fN c_{\rm scan}.
+\]
+Ignoring routing time gives A the most favorable comparison. At the current cost estimates, its
+scanned fraction must be below about 0.41\% to undercut the 0.10 s B point, or below about
+0.82\% if B's variable cost doubles. It must still meet the recall target at that fraction.
+Scanning can be faster if routing produces a sufficiently small, accurate candidate pool at low cost.
+Otherwise, a global or less heavily clustered B path warrants evaluation.
+
+\fig{billion-break-even}{A conditional break-even calculation at 1B rows with sufficient RAM. The scan line excludes routing time, favoring A. B is one fixed global operating point, not a retuned curve. Routing recall and the concentrated-query assumption must be checked separately.}{.94}
+
+B can also use a router. Its cost then uses the physical cluster widths and visited
+work in the earlier sum over clusters. The graph does not solve that larger optimization
+problem or assume a relevant document is always in the probed clusters.
+
+For C, the number of strong coordinates actually captured by its key matters. Under
+Equation~\eqref{eq:captured-strong} and the stated bound conditions, a query capturing none
+can still require scoring nearly all rows; capturing one leaves roughly half. A fixed short
+key can therefore remain expensive even when it has many occupied entries and few empty
+lookups. A low cost for finding a nonempty key does not establish low total search cost.
+
+\subsection{Scope of the findings}
+The completed tests establish three outcomes within their stated experimental scope:
+\begin{itemize}
+\item On the real Nomic sample, no alternative speedup was established. Even a one-bit key
+control did not improve latency. Recall targets must retain their sampling uncertainty.
+\item With a fixed strong prefix, direct routing and integrated key lookup are closely related
+and both avoid most scoring. C had a small measured implementation advantage in the controlled runs.
+\item With changing strong coordinates, B's query-dependent column order produced a large,
+independently checked advantage in the constructed data. Increasing the leaf size with corpus
+size preserved a useful path; keeping a tiny fixed leaf would not.
+\end{itemize}
+At a billion rows, the minimum memory counts are exact for this layout. Query times and
+the best routing settings remain estimates under stated assumptions. The formulas give
+settings to test and the conditions under which costs would be equal. A finite parameter
+grid, or an embedding model name, cannot identify the best setting for every workload.
+
+The current calculation is implemented in \path{experiments/project_costs.py}; its inputs and all scenarios
+are saved in \path{results/projected-cases-2026-09-11/}. The earlier
+\path{reports/search-math/numerical-cases/calculate.py} is preserved as a historical assumed-cost
+model. Its extra-posting and hash-slot layout must not be substituted for the measured native C layout.

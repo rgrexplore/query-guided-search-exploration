@@ -1,0 +1,237 @@
+{
+  "assumptions": {
+    "RAM": 32000000000,
+    "RESERVE": 3200000000.0,
+    "K": 100,
+    "WORD_BITS": 64,
+    "GROUP_BITS": 4,
+    "SETUP_NS": 20000,
+    "CENTROID_NS": 130,
+    "SCORE_TERM_NS": 0.4,
+    "BITMAP_WORD_NS": 0.5,
+    "NODE_NS": 100,
+    "SORT_COMPARE_NS": 2,
+    "HASH_NS": 100,
+    "POSTING_NS": 2,
+    "GATHER_EXTRA_NS": 100,
+    "QUERY_BYTES": 65536,
+    "ID_BYTES": 8,
+    "POSTING_BYTES": 8,
+    "ROUTE_DIMS": 256,
+    "SLOT_BYTES": 32,
+    "HASH_LOAD": 0.7
+  },
+  "cases": [
+    {
+      "name": "No useful pruning",
+      "N": 1000000,
+      "D": 256,
+      "baseline": {
+        "clusters": 2510,
+        "probes": 32,
+        "documents_scored": 12749.003984063746,
+        "ms": 0.6726745019920319,
+        "index_bytes": 42590328,
+        "scratch_bytes": 105696,
+        "budgeted_ram_bytes": 3242696024.0,
+        "continuous_optimum": 2510.286529768756
+      },
+      "branch": {
+        "clusters": 2510,
+        "probes": 32,
+        "leaf_size": 512,
+        "nodes": 32,
+        "documents_scored": 12749.003984063746,
+        "ms": 0.6800825019920319,
+        "index_bytes": 78573688,
+        "scratch_bytes": 113376,
+        "budgeted_ram_bytes": 3278687064.0
+      },
+      "key": "Uninformative prefix: best fallback is the same scan; no justified key-search gain."
+    },
+    {
+      "name": "Query-adaptive selective bits",
+      "N": 1000000,
+      "D": 768,
+      "baseline_optimistic_one_probe": {
+        "clusters": 769,
+        "probes": 1,
+        "documents_scored": 1300.3901170351105,
+        "ms": 0.21983996098829647,
+        "index_bytes": 104793616,
+        "scratch_bytes": 77840,
+        "budgeted_ram_bytes": 3304871456.0,
+        "continuous_optimum": 768.6151382644183
+      },
+      "branch": {
+        "clusters": 1,
+        "probes": 1,
+        "leaf_size": 128,
+        "split_nodes": 13,
+        "leaf_nodes": 1,
+        "nodes": 14,
+        "documents_scored": 123,
+        "bitmap_words": 218750,
+        "ms": 0.16724390240110767,
+        "index_bytes": 200000016,
+        "scratch_bytes": 3692200,
+        "budgeted_ram_bytes": 3403692216.0,
+        "fits": true,
+        "centroid_cost_threshold_ns": 70.57541274188452,
+        "order_ns": 14722.502401107697,
+        "bitmap_word_threshold_ns": 0.740439124970006
+      },
+      "key": "Important coordinates are outside the fixed short prefix; its best useful fallback is scan."
+    },
+    {
+      "name": "Useful fixed 12-bit prefix",
+      "N": 1000000,
+      "D": 256,
+      "baseline_optimistic_one_probe": {
+        "clusters": 444,
+        "probes": 1,
+        "documents_scored": 2252.252252252252,
+        "ms": 0.13537765765765766,
+        "index_bytes": 40458216,
+        "scratch_bytes": 72640,
+        "budgeted_ram_bytes": 3240530856.0,
+        "continuous_optimum": 443.7601569801833
+      },
+      "branch": {
+        "clusters": 1,
+        "probes": 1,
+        "leaf_size": 256,
+        "split_nodes": 12,
+        "leaf_nodes": 1,
+        "nodes": 13,
+        "documents_scored": 245,
+        "bitmap_words": 203125,
+        "ms": 0.1577305,
+        "index_bytes": 72000016,
+        "scratch_bytes": 3442072,
+        "budgeted_ram_bytes": 3275442088.0,
+        "fits": true,
+        "centroid_cost_threshold_ns": 185.25088506103515,
+        "order_ns": 4096.0,
+        "bitmap_word_threshold_ns": 0.38995523769923773
+      },
+      "key": {
+        "clusters": 1,
+        "probes": 1,
+        "prefix_bits": 12,
+        "keys_tried": 1,
+        "documents_scored": 245,
+        "tail_score_groups": 61,
+        "ms": 0.05115403910001731,
+        "index_bytes": 48187280,
+        "scratch_bytes": 65632,
+        "budgeted_ram_bytes": 3248252912.0,
+        "fits": true
+      }
+    },
+    {
+      "name": "Useful fixed 16-bit prefix",
+      "N": 100000000,
+      "D": 256,
+      "baseline_optimistic_one_probe": {
+        "clusters": 4438,
+        "probes": 1,
+        "documents_scored": 22532.672374943668,
+        "ms": 1.173776412798558,
+        "index_bytes": 4004580024,
+        "scratch_bytes": 136544,
+        "budgeted_ram_bytes": 7204716568.0,
+        "continuous_optimum": 4437.601569801833
+      },
+      "branch": {
+        "clusters": 1,
+        "probes": 1,
+        "leaf_size": 2048,
+        "split_nodes": 16,
+        "leaf_nodes": 1,
+        "nodes": 17,
+        "documents_scored": 1526,
+        "bitmap_words": 26562500,
+        "ms": 13.4987116,
+        "index_bytes": 7200000016,
+        "scratch_bytes": 437567584,
+        "budgeted_ram_bytes": 10837567600.0,
+        "fits": true,
+        "centroid_cost_threshold_ns": 17741.76429648189,
+        "order_ns": 4096.0,
+        "bitmap_word_threshold_ns": 0.036002440011239825
+      },
+      "key": {
+        "clusters": 1,
+        "probes": 1,
+        "prefix_bits": 16,
+        "keys_tried": 1,
+        "documents_scored": 1526,
+        "tail_score_groups": 60,
+        "ms": 0.212504,
+        "index_bytes": 4802995952,
+        "scratch_bytes": 65632,
+        "budgeted_ram_bytes": 8003061584.0,
+        "fits": true
+      }
+    },
+    {
+      "name": "Useful fixed 20-bit prefix",
+      "N": 500000000,
+      "D": 256,
+      "baseline_optimistic_one_probe": {
+        "clusters": 9923,
+        "probes": 1,
+        "documents_scored": 50387.9875037791,
+        "ms": 2.5999224800967453,
+        "index_bytes": 20010240544,
+        "scratch_bytes": 224304,
+        "budgeted_ram_bytes": 23210464848.0,
+        "continuous_optimum": 9922.778767136677
+      },
+      "branch": {
+        "clusters": 1,
+        "probes": 1,
+        "leaf_size": 512,
+        "split_nodes": 20,
+        "leaf_nodes": 1,
+        "nodes": 21,
+        "documents_scored": 477,
+        "bitmap_words": 164062500,
+        "ms": 82.1173572,
+        "index_bytes": 36000000016,
+        "scratch_bytes": 2687568096,
+        "budgeted_ram_bytes": 41887568112.0,
+        "fits": false,
+        "centroid_cost_threshold_ns": 131640.15740672642,
+        "order_ns": 4096.0,
+        "bitmap_word_threshold_ns": 0.015322302659637304
+      },
+      "key": {
+        "clusters": 1,
+        "probes": 1,
+        "prefix_bits": 20,
+        "keys_tried": 1,
+        "documents_scored": 477,
+        "tail_score_groups": 59,
+        "ms": 0.0801840771237955,
+        "index_bytes": 24047934928,
+        "scratch_bytes": 65632,
+        "budgeted_ram_bytes": 27248000560.0,
+        "fits": true
+      }
+    }
+  ],
+  "one_billion_256bit_minimum": {
+    "codes": 32000000000.0,
+    "ids": 8000000000.0,
+    "index_minimum": 40000000000.0,
+    "ram": 32000000000,
+    "feasible": false
+  },
+  "approximate_document_limits": {
+    "A": 720000000,
+    "B": 400000000,
+    "C": 600000000
+  }
+}

@@ -1,0 +1,217 @@
+\section{Experiments}
+\label{sec:experiments}
+The formulas count the work. We then measure the complete search to check whether skipping
+scores actually makes the query faster. We compare real embeddings first,
+then use constructed inputs to isolate how much the query's strong coordinates matter.
+The saved source record identifies the runs behind these comparisons~\cite{local}.
+
+\subsection{Experimental setup}
+A, B and C receive the same documents and floating-point queries, use the same C++
+weighted binary scorer, and return the top 100 with score ties broken by document ID.
+When we measure recall here, we measure recovery of that exact binary ranking; these
+comparisons use neither a float reranker nor human relevance judgments.
+
+The machine is an Apple M5 Max with 128 GiB of physical memory, while each worker runs
+under a separate 32 GB decimal memory budget using one CPU thread and one query at a time.
+A fresh process builds each configuration, runs it before timing to warm it, and then measures routing plus search.
+The outer timer includes the call from Python into C++, but cached-vector measurements
+exclude text encoding. Repeating these build-and-measure runs helps expose timing variation;
+the recorded power settings do not prove that CPU frequency remained fixed.
+
+We tune parameters on one set of query IDs, keep the choices unchanged, and evaluate them on different
+IDs, allowing each method its own fastest tested setting that meets the recall requirement.
+For A, the tested options include intermediate probe counts and direct routing by sign keys.
+For B, they include large leaves, so it can score a selected cluster without unnecessary
+splits. If we left these options out, a poor baseline or a forced traversal could decide
+the result before the timing begins.
+
+The real study uses two rules for selecting settings. The first accepts a setting when its
+average tuning recall reaches the target. The more cautious rule repeatedly draws samples
+from the tuning queries and requires a lower recall estimate to reach the target. This leaves
+more margin, but cannot promise recall on future queries. To establish a speedup, both methods
+must meet the target, and the full 95\% interval for A's time divided by B's or C's time must
+exceed one. A ratio above one means A took longer. We keep each query's method timings paired
+when resampling queries and whole process blocks; repeats are not extra independent queries.
+
+\subsection{Real-data results}
+For the real study, the documents are 256-bit codes from Nomic embeddings of MS MARCO passages~\cite{nomic,msmarco}.
+After combining 6,821 tuning settings, the selected choices were evaluated on 200 query IDs
+excluded from the earlier 300-query collection. On this sample, all 36 cases chosen by the more cautious
+rule met their requested recall, compared with only 7 of 36 chosen by average tuning recall.
+
+In the results from the more cautious rule at one million documents below, each row sets a common minimum
+recall requirement and shows each method's median routing-plus-search time. If we compare
+methods within a row, their achieved recall also happens to be equal.
+
+\begin{center}
+\begin{tabular}{@{}rrrrr@{}}
+\toprule
+Target & A (ms) & B (ms) & C (ms) & Recall (\%)\\
+\midrule
+80\% & 0.675 & 0.699 & 0.751 & 82.53\\
+90\% & 1.634 & 1.686 & 1.880 & 91.73\\
+95\% & 3.360 & 3.430 & 3.706 & 95.47\\
+99\% & 9.580 & 9.965 & 11.013 & 99.25\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\fig{real-tradeoff}{Four frozen recall-target choices on one million real passage embeddings and 200 independent query IDs. Lines connect the tested settings for readability; they do not predict intermediate settings. At each shown recall, A has the smallest median.}{.9}
+
+Across the real study, none of the 48 evaluated comparisons established a B or C speedup
+under the stated rule. Although fewer documents received full scores, that saving did not
+produce a supported reduction in complete retrieval time. This conclusion applies to this
+data, score, implementation and tested parameter range.
+
+A later control gives C a one-bit key, A's routing layout, and unlimited candidate and lookup
+budgets, while A and B keep their previously selected settings. This control uses 100 further query IDs,
+excluding all 500 previously used IDs. A, B and C measured 9.541, 9.855 and 10.545 ms,
+respectively, and all three achieved 98.95\% recall, below the requested 99\%. That remains
+a miss; we do not round it into a pass. The sample is separate from the earlier successful
+200-query evaluation, and no parameter was changed in response to its outcome.
+
+\subsection{Controlled-data results}
+With constructed inputs, we can isolate the effect of keeping the strong coordinates fixed
+or changing them with each query. Document signs are independent and balanced across 256
+coordinates. Each query has 13 strong coordinates of magnitude one, with magnitude 0.0001
+on the remaining coordinates. A document matching every strong sign therefore beats any
+that mismatches one, regardless of the weak signs. The fixed case keeps the strong positions
+the same; in the changing case, each query chooses different strong positions uniformly
+without replacement. These vectors are constructed, not measured text embeddings.
+
+The final follow-up uses 40 tuning queries and 20 separate evaluation queries, with three
+process blocks and three timing repeats. It adds neighboring key widths, cluster counts and
+leaf sizes, and then remeasures earlier choices. At one million documents and the 99\%
+requirement, the results below show that all methods reach 100\% recall except A in the
+changing case, at 99.95\%.
+
+\begin{center}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Strong positions & A (ms) & B (ms) & C (ms)\\
+\midrule
+Fixed & 0.0140 & 0.0160 & 0.0128\\
+Changing & 24.9235 & 0.1446 & 14.6301\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+With fixed positions, A selects two of 16,384 clusters by direct routing, while C uses one
+physical cluster and a 13-bit key. The estimated ratio of A's time to C's is 1.098, with a paired 95\% interval
+of 1.066--1.147, and the time difference is about 1.25 microseconds. Both methods select
+documents through the same strong signs, but C generates keys and scores their documents in one
+C++ call, whereas A routes and scans through separate calls. The small measured advantage
+therefore concerns this implementation of closely related candidate selection.
+
+If the strong positions change, a fixed key cannot consistently select them. B can follow
+them because it orders coordinates using each query's magnitudes; its selected setting uses
+one cluster, unlimited traversal and a leaf size of 160. A opens 255 of 256 centroid clusters,
+and the estimated ratio of A's time to B's is 172.3, with a paired 95\% interval of 169.1--177.2. C uses a
+14-bit key and has a lower median than A, but the paired interval for A's time divided by C's includes one,
+so that median alone does not establish an advantage.
+
+We can see why this leaf size helps by calculating the number of documents in the group: at one million rows,
+the ideal 13-bit group has mean size about 122 and standard deviation about 11. A threshold
+of 128 can force another split on a weak coordinate, whereas a threshold of 160 leaves more
+room to score that group. The experiment checks this suggestion from the distribution;
+it does not establish that 160 is best for arbitrary embeddings, sizes or machines.
+
+\subsection{Checking the estimates}
+Before checking work or timing predictions, we need an independently calculated answer.
+The checks calculate scores directly from document signs and sort by score and ID; larger
+runs count strong and weak mismatches from packed bits to avoid a huge expanded matrix.
+Every complete C++ search call in the scaling check returned the independent reference ranking.
+
+To check the predicted work, we compare it with counts recorded by the C++ search. Across the earlier
+controlled tuning and evaluation runs, 447 applicable per-query predictions matched exactly,
+including word visits during full-width splits and leaf scans, scored rows, attempted keys
+including empty lookups, and the highest tracked mask memory use where applicable. Queries outside the formulas' stated
+conditions remain in the measurements, but do not count as successful predictions.
+
+Even with correct counts, we cannot assign every row the same time cost. In a
+16-million-document buffer, scoring about 1,958 scattered rows took 0.159 ms with reused
+candidates and 0.455 ms with changing candidates. Candidate generation stayed outside the
+timer, but still changed which memory had been accessed recently. Time models fitted to one- and
+four-million-row buffers underestimated a 16-million-row check by as much as 45.2\% for
+reused candidates and 27.6\% for changing candidates. Both failed models remain saved.
+The largest row store was about 640 MB, so these checks do not validate access costs for
+a 40 GB store.
+
+The later model predicts the whole search call using one median time per collection size.
+The earlier fit gave fast individual queries too much weight when predicting a median. The
+revised model also includes the work of selecting results from C's small lists of document IDs.
+For B, the leaf threshold grows as $L=160N/10^6$, so a larger collection still stops splitting
+after the intended strong coordinates instead of forcing more cuts.
+
+The revised four-million-row result had already been inspected, so it helps diagnose the
+model rather than independently test it. The model's fitted values were fixed before the
+separate eight-million-row run below. A positive error means the predicted time was too high.
+
+\begin{center}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Positions & Method & Measured (ms) & Predicted (ms) & Error\\
+\midrule
+Fixed & A & 197.029 & 203.016 & $+3.0\%$\\
+Fixed & B & 0.854 & 0.884 & $+3.6\%$\\
+Fixed & C & 0.0481 & 0.0518 & $+7.7\%$\\
+Changing & A & 196.664 & 197.816 & $+0.6\%$\\
+Changing & B & 0.900 & 0.859 & $-4.5\%$\\
+Changing & C & 202.767 & 207.086 & $+2.1\%$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+All six checks met the earlier 20\% criterion: the model predicted times at a larger
+collection size under the same specified workload and existing query IDs. These model-check configurations are
+separate from the tuned comparisons in the preceding table. Although the largest
+observed error was 7.7\%, that does not give us a guaranteed bound for future queries or
+a billion documents.
+
+\subsection{End-to-end timing}
+When a user supplies text, retrieval covers only part of the wait. The final check therefore
+runs 20 existing independent-query texts through the cached local Nomic model using Apple's
+MPS GPU backend, normalizes each vector, routes it and calls C++ search, with a batch size of one.
+Three blocks and two repeats give 120 requests per method, or 360 requests in total. Each
+sequence shape is warmed, and the request timer excludes model loading, index building
+and reference creation.
+
+Using the earlier unchanged settings, all three methods achieve 99.45\% binary recall on this
+sample. The table gives the stage medians alongside the separately measured request total.
+
+\begin{center}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+ & Encode (ms) & Retrieve (ms) & Total (ms) & Total p95 (ms)\\
+\midrule
+A & 6.488 & 9.406 & 16.313 & 19.201\\
+B & 6.500 & 9.651 & 16.303 & 19.217\\
+C & 7.543 & 11.201 & 18.912 & 21.898\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The median is the middle time; p95 is the time at or below which 95\% of requests finish. The tiny difference
+between the A/B totals does not establish a speedup. If we add the stage medians, we need
+not get the total median, because the request with the middle encoding time need not have
+the middle retrieval time. We must measure each request's total before taking its median.
+
+These timings apply to real Nomic text queries. Since the constructed strong-coordinate
+vectors do not come from this encoder, adding its time to their search measurements would
+not give us a measured text-to-results pipeline.
+
+% Source map (paths relative to repository root; final boundary results supersede 07c timings):
+% Fairness and real study: reports/search-math/sections/07b-implemented-study.tex;
+% results/independent-evaluation-2026-09-10/report/{targets,comparisons}.csv.
+% Real numeric table: reports/search-math/evidence/independent-results-table.tex.
+% Final selected evidence: reports/search-math/evidence/final-study.json; all source hashes checked.
+% Later real control: results/one-bit-evaluation-2026-09-11/report/targets.csv.
+% Constructed distribution: results/controlled-boundary-adaptive-2026-09-11/config.toml.
+% Final controlled timings/settings: results/controlled-boundary-{fixed,adaptive}-2026-09-11/
+% evaluation/report/{targets,comparisons}.csv. Fixed C interval checked directly in comparisons.csv.
+% Conditional counts: results/controlled-{fixed,adaptive}-2026-09-10/{tuning,evaluation}/work-checks.json;
+% checked totals 193+120+92+42=447; zero saved mismatches.
+% Failed fits: results/{buffer-analysis,buffer-fresh-analysis}-2026-09-11/leaf-model.json.
+% Model check: results/native-scale-confirmation-2026-09-11/frozen-model-check.json;
+% explanation: reports/search-math/sections/07d-cost-validation.tex.
+% Text scope and values: results/text-queries-2026-09-11/{configuration,summary}.json.

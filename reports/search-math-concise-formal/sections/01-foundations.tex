@@ -1,0 +1,104 @@
+\section{Introduction}
+This study evaluates alternatives to document scanning within selected clusters. The baseline
+uses the compact representation and scoring approach described in Exa's public vector-database
+article~\cite{exa}. A complete scan scores every selected document and returns the best results.
+The alternatives use information in the query to select candidates before full scoring. Their
+potential benefit depends on whether candidate selection costs less than the scoring it avoids,
+while retaining the required results.
+
+Three methods are compared on the same binary document embeddings. Method A scans the documents
+in selected clusters. Method B searches those clusters through bitplane splits. Method C looks
+up bit patterns in increasing mismatch cost, beginning with the pattern preferred by the query.
+C is referred to as \emph{weighted key lookup}; it implements the earlier proposal to start
+with the ideal sign pattern and consider progressively less favorable patterns.
+
+The objective is to minimize query latency for a fixed document count, RAM budget, and recall
+requirement. Recall is the fraction of correct reference results recovered by a method. The
+comparison accounts for both computational work and memory access, since avoiding a document
+score can introduce work elsewhere in the query.
+
+The results depend on the query and document distribution. Neither alternative established a
+reliable speed advantage over a tuned scan on the evaluated real embeddings. Controlled queries
+with fixed important coordinates produced a small key-lookup advantage over a closely related
+directly routed scan. When the important coordinates varied by query, bitplane search showed
+a large advantage in the constructed case. These findings identify conditions under which
+each method is useful; they do not establish a universal winner.
+
+The analysis begins with one query and six documents, followed by the work and storage costs
+of each method. Subsequent sections derive recall under explicit assumptions, examine parameter
+selection, and report measurements. The final section considers a billion-document collection.
+Those latency estimates are forecasts; complete C++ indexes were tested through eight million
+documents.
+
+\subsection{A query example}
+We use the binary document representation and floating-point query described in Exa's
+post~\cite{exa}. In our examples, a stored bit of 1 means $+1$, and a bit of 0 means $-1$. We will use five coordinates so we can follow
+the calculation on the page. Let the query be
+\[
+q=[0.7,\ 0.5,\ -0.4,\ -0.6,\ 0.3].
+\]
+With that same dot-product score, signs \texttt{11001} make every contribution positive, giving
+$0.7+0.5+0.4+0.6+0.3=2.5$. This is the pattern the query would prefer. The following example compares this pattern with the stored documents.
+
+\begin{center}
+\begin{tabular}{@{}rcrr@{}}\toprule
+Document ID & Stored signs & First-bit cluster & Full score\\\midrule
+0 & \texttt{01001} & 0 & 1.1\\
+1 & \texttt{00100} & 0 & $-1.3$\\
+2 & \texttt{10100} & 1 & 0.1\\
+3 & \texttt{11001} & 1 & 2.5\\
+4 & \texttt{11000} & 1 & 1.9\\
+5 & \texttt{00011} & 0 & $-1.1$\\\bottomrule
+\end{tabular}
+\end{center}
+Here the correct top two are documents 3 and 4. If scores tie, we put the smaller document ID
+first, and then use that same rule when checking every method. We can also run this example
+against the C++ implementations with \path{examples/small_search.py}.
+
+At coordinate 1, a matching sign contributes $+0.7$ and a mismatch contributes $-0.7$,
+reducing the score by $1.4$. At coordinate 5, the reduction is only $0.6$. Query magnitude
+therefore determines the cost of an incorrect sign and provides a basis for ordering the search.
+For $d$ coordinates, the ideal score is $Q=\sum_{i=1}^{d}|q_i|$. Let $b_i$ denote the decoded
+sign ($+1$ or $-1$). If mismatching coordinates have total magnitude $p$, then
+\begin{equation}
+S(q,b)=Q-2p,
+\qquad p=\sum_{i:\,b_i\ne\operatorname{sign}(q_i)}|q_i|.
+\label{eq:score}
+\end{equation}
+Document 4 mismatches only coordinate 5 and therefore has score $S=2.5-2(0.3)=1.9$.
+Ranking by decreasing score is equivalent to ranking by increasing mismatch penalty.
+Ordinary Hamming distance counts all mismatches equally; the score used here weights them
+by the query magnitudes.
+
+\subsection{Shared pipeline}
+Suppose the collection contains $N$ documents. Before any queries arrive, we embed the text,
+choose a representation width $d$, pack the document signs, and build the index. We also assign
+each document to one cluster. A cluster is a stored subset of the collection, and we can form
+those subsets by learning from the vectors or by using a fixed sign prefix.
+
+For shortening embeddings, we also refer to Exa's use of Matryoshka training~\cite{exa,mrl}.
+The representation is held fixed in this study. One distinction matters for the proposed search:
+a useful prefix is not the same thing as the largest query coordinates. Matryoshka does not
+sort each query by magnitude, and it does not guarantee that its first 24 sign bits preserve
+its nearest neighbors. Shortening the vector and taking its signs are two separate changes;
+we hold the resulting representation fixed across the methods we compare.
+
+Once a query arrives, we embed and normalize it, select clusters, and search their documents.
+Opening one cluster is one \emph{probe}. With $C$ clusters and $P$ probes, balanced clusters
+would give us about $NP/C$ selected documents. If the clusters are not balanced, we need to
+add their actual sizes instead. If the objective is to search the whole collection, we can set
+$C=P=1$.
+
+\fig{shared}{The common query flow. The three local search methods share the same query and selected clusters when we isolate their work. Longer-vector reranking is optional; it is excluded from the primary binary-score comparison.}{.68}
+
+A production pipeline can also filter documents or rerank candidates with longer vectors or
+another model. If those stages are enabled, they belong in the complete request measurement.
+For the primary index comparison here, we use cached query embeddings, the same binary score,
+and no float reranker. The later text-query evaluation measures complete request time.
+
+The baseline therefore follows Exa's public description of compact scoring inside selected
+clusters~\cite{exa}. The measurements here are of our local implementation, not Exa's production
+system. We also try two ways of forming clusters: learning groups from similar vectors,
+known as IVF, and assigning documents by their first few sign bits. With a $k$-bit prefix,
+there are up to $2^k$ possible patterns, not $k$ clusters. B and C change how we search the
+selected documents; they do not introduce the shared embedding or quantization techniques.

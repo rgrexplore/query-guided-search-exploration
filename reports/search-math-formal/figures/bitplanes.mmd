@@ -1,0 +1,8 @@
+flowchart TB
+  R[Eligible root masks from selected clusters] --> B{Stop condition?}
+  B -->|Empty frontier, safe bound, or budget| O[Return current candidates]
+  B -->|Continue| P[Take the best pending node]
+  P -->|Leaf| L[Read leaf mask and score its rows]
+  P -->|Split| S[Read bitplane and queue both nonempty children]
+  L --> B
+  S --> B

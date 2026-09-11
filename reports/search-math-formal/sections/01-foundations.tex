@@ -1,0 +1,150 @@
+\section{Scoring}
+\label{sec:foundations}
+Consider a database containing $N$ documents and a query that requires $K$
+results. The objective is to minimize search latency subject to the available RAM and a
+specified recall target. Comparing algorithms requires a common definition of the reference
+$K$ documents.
+
+The initial reference ranking consists of the top $K$ documents under the same
+\textbf{float-query, binary-document inner product}. This definition permits comparison of the search indexes under a common score. A later
+reranking step may use longer float embeddings, but that is a different score and a different
+reference ranking. An exact search under the binary score can return a different order from float scoring.
+Neither score necessarily matches a human relevance ranking.
+
+\Needspace{12\baselineskip}
+\subsection{Storage, memory, and work}
+\begin{enumerate}
+\item \textbf{Index storage:} data built in advance and kept between queries. Examples are
+packed document codes, cluster offsets, centroids, bitplanes, and key directories.
+\item \textbf{Query RAM:} temporary live data needed by one query. Examples are a query vector,
+score tables, the best $R$ results (stored in a heap), masks for pending branches, and states used to
+list keys in score order.
+\item \textbf{Query work:} operations and data accesses over time. Reading the same array a
+thousand times does not require a thousand stored copies, but it can cost a thousand reads.
+\end{enumerate}
+The number of scored documents alone does not measure work. A method can score fewer documents
+and still read more memory or manage a much larger queue.
+
+\Needspace{12\baselineskip}
+\subsection{Search pipeline}
+All three main methods begin with clusters, or groups of documents. The no-clustering experiment is the special
+case $C=P=1$, not a different definition of the task.
+\fig{shared}{The common query pipeline. Only the candidate-search stage changes between A, B and C.}{1}
+An embedding model converts query text to a float vector. A short part of the vector selects the
+clusters to search. Optional filters select eligible documents. The index produces
+up to $R$ binary-score candidates, with $R\geq K$. An optional final stage fetches longer
+vectors and scores the candidates again with those vectors, then returns $K$ results.
+
+An index-only experiment uses a cached query embedding and omits the optional
+reranker. An end-to-end latency measurement includes these stages. The formulas distinguish
+both measurement scopes.
+
+\Needspace{12\baselineskip}
+\subsection{Four-bit example}
+Let
+\[
+q=(0.7,-0.4,0.2,-0.1),\qquad t=\sgn(q)=(+1,-1,+1,-1).
+\]
+A stored $+1$ is represented by bit 1 and $-1$ by bit 0. The ideal bit pattern is therefore
+\texttt{1010}. Define $a_i=|q_i|$ and $A=\sum_i a_i=1.4$. A document bit that agrees with the
+query contributes $+a_i$; a disagreement contributes $-a_i$.
+
+\begin{equation}
+S(q,b)=\sum_{i=1}^{d}q_i b_i
+       =A-2\underbrace{\sum_{i=1}^{d}a_i\ind[b_i\ne t_i]}_{\pi_q(b)}.
+\label{eq:score}
+\end{equation}
+The quantity $\pi_q(b)$ is the \textbf{weighted mismatch penalty}: the sum of query
+magnitudes at coordinates where the document has the opposite sign. The highest score has the lowest penalty. The factor two comes from replacing a
+contribution $+a_i$ by $-a_i$, which changes the score by $2a_i$.
+
+\begin{center}
+\begin{tabular}{@{}clcr@{}}\toprule
+Document & Code & Mismatching coordinates & Score\\\midrule
+1 & \texttt{1010} & none & $1.4$\\
+2 & \texttt{1011} & $4$ & $1.2$\\
+3 & \texttt{1000} & $3$ & $1.0$\\
+4 & \texttt{0010} & $1$ & $0.0$\\
+5 & \texttt{1110} & $2$ & $0.6$\\
+6 & \texttt{0101} & $1,2,3,4$ & $-1.4$\\
+7 & \texttt{1001} & $3,4$ & $0.8$\\
+8 & \texttt{0011} & $1,4$ & $-0.2$\\\bottomrule
+\end{tabular}
+\end{center}
+For example, document 7 has penalty $0.2+0.1=0.3$, so its score is $1.4-2(0.3)=0.8$.
+The exact global top two are documents 1 and 2. Equal scores are resolved by a stable numeric document ID throughout. This is the internal ID used by the index; an external identifier or URL can be recovered through metadata.
+
+The query defines a preferred sign and a mismatch cost at each coordinate. It does
+\emph{not} determine whether a preferred pattern exists in the database. This distinction is relevant to
+both branching and key enumeration.
+
+\Needspace{12\baselineskip}
+\subsection{Matryoshka prefixes}
+Exa uses Matryoshka prefixes in its public vector database design \cite{exa}.
+A Matryoshka model is trained so that selected prefixes---the first coordinates of an
+embedding---remain useful representations \cite{mrl}. It does not impose
+$|q_1|\geq |q_2|\geq\cdots\geq |q_D|$ for every query. A later coordinate may have a larger
+magnitude than an earlier one. The training method alone also does not determine the numerical
+recall of the first $h$ binary signs.
+
+There are three distinct choices:
+\begin{itemize}
+\item The first $h$ coordinates form a fixed prefix that can be indexed in advance.
+\item Sorting all coordinates by $|q_i|$ produces a query-dependent traversal order suitable for bitplanes.
+\item A longer representation for final scoring can change the ranking after retrieval.
+\end{itemize}
+A hash table built for one fixed prefix does not become a table for the query's largest-magnitude
+coordinates when the query is sorted. Such a change would require different lookup coordinates.
+
+\Needspace{12\baselineskip}
+\subsection{Parameters and units}
+The formulas below are not tied to a particular code length, cluster count, word width, or
+SIMD implementation. Table~\ref{tab:parameters} defines the common notation. Additional symbols are
+introduced where their algorithm first needs them.
+
+\small
+\begin{longtable}{@{}P{.17\linewidth}P{.64\linewidth}P{.13\linewidth}@{}}
+\caption{Shared parameters. Counts and byte sizes are different types of quantity.}\label{tab:parameters}\\
+\toprule Symbol & Meaning & Units\\\midrule\endfirsthead
+\toprule Symbol & Meaning & Units\\\midrule\endhead
+$N$ & Number of stored documents & documents\\
+$D$ & Full embedding dimension & coordinates\\
+$d$ & Dimension of the binary score in Equation~\eqref{eq:score} & bits / doc\\
+$d_r,d_f$ & Routing and optional final-reranking dimensions & coordinates\\
+$C$ & Number of disjoint clusters & clusters\\
+$n_j$ & Physical number of document rows in cluster $j$; $\sum_j n_j=N$ & documents\\
+$\mathcal P(q),P$ & Probed cluster set and its size & set, count\\
+$e_j$ & Eligible rows in probed cluster $j$, after filters; $e_j\leq n_j$ & documents\\
+$\Nsel,\Nelig$ & $\sum_{j\in\mathcal P}n_j$ and $\sum_{j\in\mathcal P}e_j$ & documents\\
+$K,R$ & Final result count and binary candidate-heap capacity, $K\leq R$ & documents\\
+$w,b_w$ & Bits and bytes per bitmap word; $b_w=w/8$ & bits, bytes\\
+$g,G$ & Bits per score-table group and $G=\ceil{d/g}$ groups & bits, groups\\
+$b_s,b_q$ & Bytes per stored table score and query float & bytes\\
+$b_{\rm id},b_o$ & Bytes per document ID and offset & bytes\\
+$b_c,b_f$ & Bytes per routing-centroid and final-vector coordinate & bytes\\
+$M_{\rm RAM}$ & Available physical RAM budget & bytes\\
+$J$ & Number of simultaneously active queries & queries\\
+$c_x$ & Effective time for a named unit of work $x$ & seconds/unit\\
+$T_{\rm emb},Q_{\rm emb}$ & Query-embedding latency and its peak scratch RAM & seconds, bytes\\
+\bottomrule
+\end{longtable}
+\normalsize
+Assume positive integer dimensions and counts, $1\leq P\leq C$, $1\leq K\leq R$, and a word width $w$ divisible by eight. A selected pool may contain fewer than $R$ eligible rows, in which case fewer candidates are returned.
+
+The following widths recur in the storage and work formulas:
+\begin{equation}
+s_{\rm code}=b_w\ceil{d/w},\qquad
+W_j=\ceil{n_j/w},\qquad s_{\rm mask,j}=b_w W_j.
+\label{eq:widths}
+\end{equation}
+The first describes one packed \emph{document}; the second describes one bitplane across a
+\emph{cluster}. One stores bits for a document; the other stores a bit for each document in a cluster. If a filter leaves only a few eligible rows,
+$W_j$ does not shrink unless the data is physically rebuilt or represented differently.
+
+\Needspace{12\baselineskip}
+\subsection{Claims and evidence}
+An algebraic identity, such as Equation~\eqref{eq:score}, is exact under its stated score.
+An operation count is exact for the stated pseudocode or layout, but can change with the
+implementation. A latency or statistical estimate also needs hardware or distribution
+assumptions. Measured tables report a particular experiment. These categories distinguish formulas and estimates from
+measured results.

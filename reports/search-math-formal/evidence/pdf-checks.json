@@ -1,0 +1,27 @@
+{
+  "pages": 72,
+  "listing_start_pages": {
+    "1": 7,
+    "2": 8,
+    "3": 8,
+    "4": 10,
+    "5": 13,
+    "6": 16,
+    "7": 17,
+    "8": 21,
+    "9": 22,
+    "10": 23,
+    "11": 25,
+    "12": 31,
+    "13": 47,
+    "14": 64,
+    "15": 68
+  },
+  "unresolved_references": 0,
+  "out_of_page_text": [],
+  "pdf_sha256": "52a4782daba955b928864df1297f242bfbac3b198614783fe5b53b80df0d2719",
+  "visual_review": "Inspected new study/cost pages46-67, final storage/scratch equations, tables, stacked chart, break-even plot and references. Existing method pages retain prior reviewed content. All72pages checked for out-of-page text.",
+  "latex_warnings": 0,
+  "overfull_boxes": 0,
+  "figures": 11
+}

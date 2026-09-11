@@ -1,0 +1,126 @@
+\section{Full scan}
+\label{sec:scan}
+Approach A is the reference candidate-search method. Once clusters and eligible rows are chosen,
+it scores every eligible row. There is no approximation \emph{inside} that selected pool.
+The loop repeats the same operations and can read packed codes in order when filtering does
+not leave scattered rows.
+
+\fig{scan}{Approach A. The selected pool is smaller than the corpus only because of routing or filters.}{1}
+
+\Needspace{12\baselineskip}
+\subsection{Data layout}
+The common index from Equation~\eqref{eq:base} is sufficient. Cluster $j$ occupies the row
+range between offsets $j$ and $j+1$. A row contains its packed code, and the corresponding ID
+array maps the row back to the original document.
+
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={Candidate search for Approach A.}]
+ScanSelectedClusters(q, selected_clusters, eligible, table, R):
+    best = empty top-R heap
+    for cluster j in selected_clusters:
+        for row in eligible rows of j:
+            score = ScoreDocument(code[row], table)
+            best.offer(score, document_id[row])
+    return best in descending score, breaking ties by ID
+\end{lstlisting}
+\end{minipage}\par
+
+The loop is over $\Nelig$ rows, not necessarily $NP/C$. If all clusters are searched and no
+filter removes documents, $\Nelig=N$. Empty filtered clusters require no document scoring,
+although finding that they are empty can still have a cost.
+
+\Needspace{12\baselineskip}
+\subsection{Work count}
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}P{.25\linewidth}YP{.23\linewidth}@{}}\toprule
+Step & Work & Live temporary data\\\midrule
+Locate cluster ranges & $P$ offset/range accesses & selected cluster IDs\\
+Visit eligible rows & $\Nelig$ row iterations & current row/iterator\\
+Score rows & $\Nelig G$ lookup terms & shared score table, accumulator\\
+Keep best $R$ & $H_s(\Nelig,R)$ selection operations & top-$R$ heap\\
+Return candidates & sort at most $R$ results if needed & result array or heap storage\\\bottomrule
+\end{tabularx}\normalsize\end{center}
+
+Let $c_{\rm range}$ denote range setup and $T_{\rm rank}(R)$ denote final candidate ordering. Then
+\begin{equation}
+T_{A,\rm candidates}=P c_{\rm range}+\Nelig G c_{\rm lut}
+                    +H_s(\Nelig,R)c_{\rm heap}+T_{\rm rank}(R).
+\label{eq:scan-time}
+\end{equation}
+The general end-to-end latency is
+\begin{equation}
+\boxed{T_A=\Tcommon+T_{A,\rm candidates}+\Tfinish(R').}
+\label{eq:scan-total}
+\end{equation}
+For the stated heap implementation, the candidate-stage time complexity is
+\[
+O\!\left(P+\Nelig\ceil{d/g}+\Nelig\log(R+1)+R\log(R+1)\right).
+\]
+The lookup term count is not a claim that each term is exactly one CPU instruction.
+
+\Needspace{12\baselineskip}
+\subsection{Data reads and memory}
+The number of packed-code data bytes read for scoring is
+\begin{equation}
+V_{A,\rm codes}=\Nelig\,s_{\rm code}.
+\end{equation}
+ID reads, filter data, table accesses and result-heap accesses are additional traffic. A cache
+may satisfy many of them. This formula therefore counts only code data; it does not measure all reads from main memory.
+Sequential and scattered rows may have different effective $c_{\rm lut}$ or $c_{\rm row}$.
+
+Index storage and temporary memory during candidate search are
+\begin{align}
+M_{A,\rm index}&=\Mbase,\\
+Q_{A,\rm search}&=\Qbase+Q_{\rm row\ iterator}+Q_{\rm scan\ workspace}.
+\label{eq:scan-memory}
+\end{align}
+A streaming scan does not need an $N$-element score array. A matrix-based batch implementation
+may choose to allocate such an array; then that allocation must be added. Two implementations can therefore return the same ranking while using different amounts of
+peak RAM.
+
+\Needspace{12\baselineskip}
+\subsection{Routing example}
+The eight documents from Section 1 are partitioned into
+\[
+\mathcal C_0=\{1,3,4,6\},\qquad \mathcal C_1=\{2,5,7,8\}.
+\]
+This is an illustrative fixed partition, not a claim about the output of a particular
+clustering run. Suppose the router opens only $\mathcal C_1$. A computes scores
+$1.2,0.6,0.8,-0.2$ and returns documents 2 and 7. The global top two are 1 and 2, so recall is
+$1/2$. The scan is exact within the opened cluster; document 1 is excluded by routing.
+
+Opening both clusters returns documents 1 and 2. A scan can therefore be exact within its selected
+pool while its global recall remains below one.
+
+\Needspace{12\baselineskip}
+\subsection{SIMD}
+SIMD means one instruction operates on several values at once. It can accelerate code extraction,
+lookup accumulation, and selection. It does not by itself change the number of stored bits.
+There are two useful ways to model its effect.
+
+\textbf{Calibrated model.} The scoring routine's time per work unit,
+$c_{\rm lut}$, is measured for the relevant dimensions and access pattern. If that rate already includes
+selection, a combined $T_{\rm score+select}$ excludes a separate heap-cost term to avoid double counting.
+
+\textbf{Resource model.} If a scoring routine performs $U_{\rm op}$ compute units and causes $V_{\rm DRAM}$ bytes of DRAM
+traffic, compute throughput $\Gamma$ and memory bandwidth $\beta$ give the lower bound
+\begin{equation}
+T_{\rm kernel}\geq\max\{U_{\rm op}/\Gamma,\ V_{\rm DRAM}/\beta\}.
+\label{eq:resource}
+\end{equation}
+An effective SIMD factor $s_{\rm simd}$ can change $\Gamma$ to $s_{\rm simd}\Gamma_0$.
+It cannot make the bandwidth term disappear. Random access, synchronization and fixed overhead
+can put actual time above the bound. This resource estimate is not added to a fitted
+coefficient that already includes the same work.
+
+For multiple queries, a float score matrix can be written as $QB^\top$, where rows of $B$ are
+expanded binary codes. Matrix operations can compute this product, but code expansion, batch formation, device
+transfers and score-buffer storage incur costs. Fast GPU batch processing does not necessarily imply low
+single-query latency.
+
+\begin{resultbox}{Accuracy}
+For a fixed eligible pool, A returns its exact binary top $R$ under the stated tie rule.
+With every eligible cluster searched, it has 100\% binary recall. With partial routing,
+its global binary recall is limited by which true neighbors reach the selected pool.
+The scan cannot restore documents missed by routing, quantization or an earlier filter.
+\end{resultbox}

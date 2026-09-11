@@ -1,0 +1,6 @@
+flowchart TD
+    A["State the document distribution and query weights"] --> B["Rank all documents with the reference score"]
+    B --> C["Which true neighbors enter the probed clusters?"]
+    C --> D["Which survive the scan, branches, or key lookup?"]
+    D --> E["Score candidates with the same reference score"]
+    E --> F["Recall = true neighbors returned / K"]

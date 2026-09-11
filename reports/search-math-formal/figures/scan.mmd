@@ -1,0 +1,8 @@
+flowchart TB
+  I[Stored cluster offsets, codes and IDs] --> J[Open selected cluster ranges]
+  Q[Prepared query and score table] --> S[Score each eligible document]
+  J --> S
+  S --> H[Update the top-R heap]
+  H --> N{More eligible rows?}
+  N -->|Yes| S
+  N -->|No| F[Order candidates and rerank if requested]

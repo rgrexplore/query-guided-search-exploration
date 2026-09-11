@@ -1,0 +1,62 @@
+{
+  "score_identity_and_lookup": "passed",
+  "complete_weighted_subset_order": "passed",
+  "finite_binary_recall_example": "passed",
+  "finite_top_k_recall": {
+    "enumerated_settings": 20,
+    "worked_example": [
+      {
+        "radius": 0,
+        "keys": 1,
+        "expected_candidates": 16.0,
+        "recall": 0.4640275066122157
+      },
+      {
+        "radius": 1,
+        "keys": 5,
+        "expected_candidates": 80.0,
+        "recall": 0.8959991329718403
+      },
+      {
+        "radius": 2,
+        "keys": 11,
+        "expected_candidates": 176.0,
+        "recall": 0.9945372911136707
+      },
+      {
+        "radius": 4,
+        "keys": 16,
+        "expected_candidates": 256.0,
+        "recall": 1.0
+      }
+    ]
+  },
+  "memory_and_archived_numbers": "passed",
+  "implemented_study": {
+    "work_predictions": 447,
+    "ideal_key_recall": 0.9995,
+    "source_sha256": {
+      "real-targets.csv": "2389dfab5120a2f0e6bb6862b3f50091137deae0f3fb6edc891677fec48c9bef",
+      "real-comparisons.csv": "f1e2a936391ee1973d01bab0eeee1b9d15db4179bc88116946415401f56020e1",
+      "fixed-targets.csv": "81256d0da45a23575184d5d497079a8fa951df1261b32d4661fadea8b678a0c0",
+      "fixed-comparisons.csv": "820b356cca6185443bc83b0f84dd29264c6057b125dd7a077fd51fc31a05fddf",
+      "adaptive-targets.csv": "1f25043771477ed22ff295e18877fd7fd0b41690545f28f346884066eade3f74",
+      "adaptive-comparisons.csv": "febe1c613897ad275047d8b57562dd14cf65b0011d5b98000a374ab69b4673fb",
+      "fixed-tuning-work.json": "b3c3fb3cda7f819069d74318ead0e9f9c3af5c4e95c9367f51fb37dc12117a24",
+      "fixed-evaluation-work.json": "9eb8d45da92e13e7d433885b6fdb2453c453a8318773a51823e42bba6a4095dc",
+      "adaptive-tuning-work.json": "71b6c951b1ef57d82ad9a5d0ef78a4eeea6c4ab111a5bae4af41d9064c858ae5",
+      "adaptive-evaluation-work.json": "6f1c83466fb6eda448aa0c0ef035cdc2679832f014c23610852c95d737b007d1"
+    }
+  },
+  "final_study": {
+    "native_confirmation_cases": 6,
+    "largest_native_error_percent": 7.706659522087023,
+    "text_requests": 360,
+    "one_bit_recall": 0.9895,
+    "billion_ram_checks": "passed"
+  },
+  "model_checks_sha256": "cb7762e25ec5d704070380c496e5cc6e0d4f4c83d5d0f132b5852745d17586f3",
+  "fiqa_csv_sha256": "1fa8dbcdbae365d2562696c92d14a7eec2bed8f9ccac0c26b1bb26c0cb3443c1",
+  "scaling_csv_sha256": "cfeeed179a4363abd892c5412813bc2e0acfc25b2cb476bb4ec03e57797543bc",
+  "recall_study_sha256": "89fef2537d3a43e50efa5004706400f638a7695fe85a8a343756dd6baf22f677"
+}

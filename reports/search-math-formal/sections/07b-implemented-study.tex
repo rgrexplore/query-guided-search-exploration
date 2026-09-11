@@ -1,0 +1,239 @@
+\section{C++ comparison}
+\label{sec:implemented-study}
+The earlier studies had two limitations: the branch counter omitted leaf-mask reads, and the
+short-key recall experiment did not measure a C++ key index. This study implements all
+three methods with the same score and checks their components before timing complete requests.
+These results are distinct from the historical results reported earlier. In this study, native
+refers to the C++ implementation called by the Python driver.
+
+\subsection{Shared setup}
+A, B and C use the same C++ lookup-table scorer and the same top-$K$ heap. Each query remains
+floating point; each document stores one sign bit per coordinate. The final score is the full
+weighted binary score from Section~\ref{sec:foundations}, with smaller document IDs first when
+scores tie. There is no float reranker in this comparison. Thus recall means recovery of the
+exact binary-score top 100, not relevance to a person reading the documents.
+
+The Python driver supplies cached query vectors and selected cluster IDs. A fresh process
+builds one configuration, releases the mapped input files, runs a warmup query, then measures
+routing and search together. The C++ search also records its own time. The outer timer includes
+the work of calling C++ from Python; the C++ timer alone would leave that out.
+
+The machine is an Apple M5 Max with 128 GiB of physical memory. Each worker uses one CPU
+thread and handles one query at a time. The comparison budget is 32 GB, in decimal bytes.
+The machine's physical capacity and the experiment's memory constraint are different numbers.
+Power configuration is recorded before and after each worker. Equal settings do not establish
+fixed CPU frequency or a completely idle machine, so timings are repeated in separate processes.
+
+\subsection{Key storage}
+The C++ key-index build sorts rows by key inside each cluster and stores their full codes in that
+same order. Its existing document IDs are the postings. There is no extra $N$-element array of
+posting references. This is the layout alternative described after Equation~\eqref{eq:keys-storage}.
+
+The directory is a C++ \texttt{unordered\_map}. It uses separate chaining: each stored entry has its own node in memory, and an array of
+pointers leads to those nodes. Equation~\eqref{eq:hash-storage}
+describes a different, open-addressed layout and must not be used as its measured allocation.
+Let $L_j$ be the number of hash buckets, $b_{\rm node}$ the allocated node size including fields
+and alignment, and $b_{\rm ptr}$ a bucket-pointer size. Then the implemented allocation is
+\begin{align}
+M_{C,\rm allocated}={}&M_{\rm codes,capacity}+M_{\rm IDs,capacity}
+ +\sum_j\left(U_j b_{\rm node}+L_j b_{\rm ptr}\right)\notag\\
+ &+M_{\rm containers}+M_{\rm allocator}.
+\label{eq:native-key-storage}
+\end{align}
+The last two terms cover the objects that hold the data and the records used to manage memory.
+Their sizes depend on the standard library and build. Payload counts only the stored fields,
+excluding that overhead and unused capacity. For the directory, each occupied entry holds a
+key, the start of its row range, and the number of rows:
+\[
+M_{\rm directory,payload}=\sum_j U_j\left(b_k+2b_o\right).
+\]
+In this build those fields occupy 4, 8 and 8 bytes respectively. Their 20-byte sum is a payload
+count, not a claim that an allocated hash node occupies only 20 bytes.
+
+B retains packed document rows and a second, transposed bitplane representation. A is built
+without bitplanes, so its memory count excludes that allocation.
+All three retain the IDs required to return original document rows.
+
+\subsection{Key search}
+The implementation has the same free key coordinates in every selected cluster. It enumerates
+one weighted sequence of keys and looks up each key in every selected cluster. This differs
+from the per-cluster target example earlier in the report.
+
+\Needspace{29\baselineskip}
+\begin{lstlisting}[caption={The native key-search policy used in the measured study.}]
+SearchKeys(query, selected_clusters, K, candidate_target, lookup_limit):
+    build the shared full-score lookup table
+    order the key coordinates by increasing absolute query weight
+    queue = [the ideal key, with mismatch penalty zero]
+    best = empty top-K heap
+    while queue is not empty:
+        if best is full and the best remaining score bound cannot improve it:
+            stop
+        state = remove the lowest-penalty flip set
+        key = ideal key XOR state.flip_mask
+        for cluster in selected_clusters:
+            if the lookup limit is reached: return best
+            count one lookup, including an empty lookup
+            for document in directory[cluster][key]:
+                score all document coordinates; offer the score and ID to best
+        if a nonzero candidate target is reached: return best
+        add the next flip sets to the queue
+    return best in score/ID order
+\end{lstlisting}
+The score bound is the full ideal score minus twice the key's mismatch penalty. Coordinates
+outside the key are allowed their best possible contribution. This remains a safe upper bound
+when routing fixes some of those coordinates, although it may be loose. The implementation
+does not yet tighten it separately for each cluster.
+
+The candidate target is checked after finishing a key in all selected clusters. A lookup limit
+can stop in the middle of that cluster loop. Both limits are approximations; zero disables a
+limit. The exact score bound remains available in either case. Equal-score candidates require
+the shared ID rule, so the bound includes a small allowance for floating-point rounding.
+
+Because every cluster uses the same key order, one queue serves the search, rather than $P$
+separate queues. The work counts include queue preparation and generated states once, and each cluster lookup separately. Every returned candidate still receives all
+$G$ score-table terms. The tail-only and full-key score reuse discussed earlier are possible
+alternatives, but they are not credited to the measured implementation.
+
+\subsection{Work counts}
+Independent Python formulas check the bytes required for code, ID, plane and key-directory data.
+The report also records C++ array capacity: an array may reserve space for more entries than
+it currently holds. Separate tests compare returned IDs against an independent full-score sort.
+The reference calculation starts from document signs, not from the C++ packed-code scorer.
+
+B reports split-word visits and leaf-word visits separately. C reports generated keys, directory
+lookups including misses, and fully scored documents. Both report their largest tracked queue
+or mask allocation. These counts explain a timing result; a low document-score count alone does
+not establish that the whole query performed little work.
+
+\begin{examplebox}{Two bitmap cuts}
+The corpus contains every possible eight-bit document once, so $N=256$ and $W=\ceil{256/64}=4$ words.
+The first three query coordinates have magnitude one; the remaining five have magnitude
+$0.0001$. The search requests four results and stops splitting when 64 documents remain.
+
+Two matching cuts leave $256/2^2=64$ documents. The search visits the root, its preferred child,
+and the leaf: three nodes. It reads $2\times4=8$ split words and another four words to enumerate
+the leaf. It then fully scores 64 documents. At the second split, one queued alternative,
+the parent and both new children occupy four masks, or $4\times4\times8=128$ bytes.
+
+The native measurement matches each count and returns the independently calculated top four.
+With a one-node budget it returns no candidates; this truncated control confirms that
+the test detects missing results. This example establishes the stated path, not a universal
+bound of two cuts for arbitrary query weights.
+\end{examplebox}
+
+\subsection{Timing model}
+Operation counts do not have a fixed conversion to time. A lookup can reuse data
+in the CPU cache or fetch data from a new memory page, with different costs.
+The first timing model therefore fits a nonnegative cost to each of a few measured work counts. Its search-time inputs are:
+\begin{itemize}
+\item A: a fixed term and the number of full score-table terms.
+\item B: the same terms, split plus leaf word visits, and visited nodes.
+\item C: the same score terms, directory lookups, and a queue-work estimate.
+\end{itemize}
+Each fitted cost includes arithmetic, memory reads and result selection together. It does
+not measure the time of one CPU instruction. Measured routing time is added per query before taking
+a median; summing the medians of separate stages would not give the median complete request.
+
+There were 117 calibration configurations on random sign data with one cluster. An initial
+fit minimized squared errors in milliseconds. The slowest queries had the most influence on that fit, leaving large percentage errors
+for some fast branch queries. Fitting squared percentage errors on the same data improved
+that check. The original fit remains saved.
+
+The revised coefficients were then frozen and checked on 52 configurations at different sizes
+and a new seed. All four scan settings and all 24 key settings had median prediction error
+within 20\%. For B, 21 of 24 settings met that criterion; its worst error was 27.2\%.
+The tables retain the failures. These fitted costs apply to the checked sizes of data used during a query; they do not
+establish timing accuracy at a billion documents.
+
+This model also uses \emph{observed} work counts. Predicting how many branches or empty keys a
+new query will visit is a different problem, governed by the document and query distribution.
+A fit that converts measured work into milliseconds does not validate a forecast of recall or
+candidate count. The later tuning comparisons use measured latency, rather than allowing a
+poorly transferred model to choose a winner.
+
+\subsection{Baseline settings}
+The real-data study reuses 256-bit Nomic/MS MARCO document codes at $N=10{,}000$, $100{,}000$
+and $1{,}000{,}000$. All methods have access to the same candidate router families and cluster layouts;
+each may select its own fastest tested configuration at a target recall.
+
+A coarse 100,000-document run initially suggested a B advantage near 95\% recall. The scan
+baseline's next available probe setting jumped from 92.76\% recall to a full scan. Adding
+intermediate probe counts removed that apparent advantage, showing that it resulted from the
+tested probe counts rather than faster traversal by B.
+
+The later probe choices use the actual ranks of the correct neighbors' clusters. Let
+$r_{qi}$ be the rank of the cluster containing correct neighbor $i$ for tuning query $q$.
+For $Q$ queries and top $K$, the exact local-scan recall after probing $P$ clusters is
+\begin{equation}
+\widehat{R}_{\rm route}(P)=\frac{1}{QK}
+       \sum_{q=1}^{Q}\sum_{i=1}^{K}\ind[r_{qi}\le P].
+\label{eq:empirical-route-rank}
+\end{equation}
+Sorting these $QK$ ranks gives the smallest empirical cutoff for any requested target.
+The actual router checks the proposed cutoff; tied cluster scores are handled explicitly.
+This addresses the observed gap in the tested probe counts; it does not imply that $P/C$ determines recall.
+
+\subsection{New-query checks}
+The refined runs were combined into 6,821 distinct settings. Timing observations from equivalent configurations are combined. Random exploration uses a fixed set of seeds, averaged per query;
+the fastest lucky seed is not selected as the method's result. The chosen parameters were
+frozen before evaluating 200 query IDs excluded from the original 300-query collection.
+
+Two selection rules were retained. The \emph{mean} rule picks the fastest measured setting whose
+tuning recall reaches the target. The \emph{conservative} rule repeatedly draws samples from the existing tuning observations
+and requires a lower percentile of the resulting recall values to reach it. This is bootstrap
+resampling; it does not create new independent queries. This second rule leaves more margin, but it is still
+a rule fitted to a finite sample, not a guarantee about all future queries.
+
+There are 72 distinct frozen settings. Their predeclared seeds, three process blocks and three
+timing repeats produced 258 workers and 154,800 query observations. All workers completed and
+kept the same recorded power configuration. The largest process lifetime peak was 231,129,088
+bytes, below the 32 GB constraint for these measured runs. It includes construction and runtime
+memory, so it is more conservative than the logical index payload alone.
+
+Only 7 of 36 mean-selected target points reached their requested recall on the new queries.
+All 36 conservative points did. Re-encoding three old query texts with the fresh-query recipe
+exactly reproduced their cached vectors; no parameters were changed in response to the misses.
+A tuning average of 99\% does not guarantee 99\% recall on another finite query sample.
+
+\input{evidence/independent-results-table}
+The table reports the conservative choices. Each method can choose different cluster counts,
+probe counts and local settings. ``Target'' is the common minimum requirement; their achieved
+recalls need not be numerically identical. Exact settings and all mean-rule target misses are
+saved alongside the measurements.
+
+To estimate uncertainty, we repeatedly sample the recorded queries and whole process blocks,
+using the same draws for both methods in a pair. These draws reuse existing observations;
+they do not add new independent queries. Repeated timings also do not count as independent
+recall observations.
+A supported alternative speedup requires both settings to meet the target and memory/power
+checks, and the paired 95\% interval for $t_A/t_{\rm alternative}$ to lie above one. None of the
+48 evaluated comparisons meets that rule. These intervals describe individual comparisons;
+they are not simultaneous guarantees across every setting.
+
+The result applies to this comparison: for this cached binary score, data,
+single-thread implementation and tested parameter space, the independent evaluation did not
+establish a B or C speedup over the tuned scan baseline. It does not exclude different query
+weight distributions, other data layouts, hardware kernels or larger corpora.
+
+\subsection{Reproduction}
+Reproduction instructions are provided in \path{experiments/README.md}. The small configuration checks components without a
+dataset download. The isolated calibration and confirmation configurations check the timing
+model. The frozen real selection is stored in \path{results/frozen-real-2026-09-10/}; its independent
+measurements and uncertainty are in \path{results/independent-evaluation-2026-09-10/}.
+Each run saves its settings, hashes identifying the source and C++ build, environment,
+per-query observations and process status. Before archiving a ZIP of a case, every file is
+checked against the original.
+
+The following files implement the corresponding parts of the study:
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
+Paper topic & Code to inspect\\\midrule
+Shared binary score & \path{cpp/score.hpp}\\
+Full scan and bitplane traversal & \path{cpp/index.cpp}\\
+Weighted key enumeration & \path{cpp/key_index.cpp}\\
+One complete measured query & \path{experiments/worker.py}\\
+Independent storage/work formulas & \path{experiments/models.py}\\
+Pooled tuning choices & \path{experiments/choices.py}\\
+Frozen-query replay and comparison & \path{experiments/evaluate.py}, \path{experiments/evaluation_report.py}\\\bottomrule
+\end{tabularx}\normalsize\end{center}

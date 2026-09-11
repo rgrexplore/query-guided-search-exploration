@@ -1,0 +1,304 @@
+\section{Methods}
+\subsection{Full scan}
+The full scan provides a reference for the example. Coordinate 1 defines two clusters.
+Visiting cluster 1 followed by cluster 0 examines documents 2, 3, 4, then 0, 1, 5.
+Each document receives a full score, and the highest two are retained. The final ranking
+does not depend on the visit order.
+
+We keep a list of the best $K$ documents found so far. In the implementation this list is a
+\emph{heap}, which makes the worst retained result quick to find and replace. For $K=2$,
+documents 2 and 3 give scores 0.1 and 2.5. Document 4 then scores 1.9, so it replaces document 2.
+None of the remaining documents improves the pair. This is all the result-selection code
+needs to do: keep the current best results as new scores arrive.
+
+\begin{lstlisting}[caption={Full scan. Every selected document receives a full score.}]
+scan(query, selected_clusters, K):
+    table = prepare_score_table(query)
+    best = empty_top_k(K)
+    for cluster in selected_clusters:
+        for document in cluster.documents:
+            score = full_score(table, document.code)
+            best.offer(score, document.id)
+    return best.sorted_by_score_then_id()
+\end{lstlisting}
+
+For \texttt{full\_score}, we use the lookup-table idea described in Exa's dot-product
+optimization~\cite{exa}. Each group of four binary document coordinates has 16 possible sign
+patterns, so we calculate their contributions once per query and reuse them. A 256-bit document
+then needs 64 table terms. We include this detail because it determines the baseline's cost:
+a term still needs bit extraction, a lookup, and an addition. It is not one CPU instruction.
+
+With $g$ coordinates per group, the same idea gives $G=\ceil{d/g}$ groups and $G2^g$ stored
+table values, allowing padding in the last group. We prepare the table for each query, and
+all three methods use it. If we increase $g$, we trade a larger table for fewer terms per
+document. The measured implementation uses $g=4$.
+
+Let $\mathcal P$ be the selected clusters and $n_c$ the size of cluster $c$. A scores
+\[
+F_A=\sum_{c\in\mathcal P}n_c
+\]
+documents and evaluates $G F_A$ table terms. A useful local time model is
+\begin{equation}
+T_A^{\rm local}\approx T_{\rm table}+F_Ac_{\rm scan}+T_{\rm select}(F_A,K).
+\label{eq:scan-time}
+\end{equation}
+This equation adds three pieces of time: prepare the score table, score the selected documents,
+and keep the best results. The value $c_{\rm scan}$ is the measured time to read and score
+one document when the rows are next to each other in memory. If that measured value already
+includes result selection, we must not add selection again. The heap has a worst-case cost
+of $O(F_A\log K)$, although many scores are simply rejected without changing the heap.
+
+\subsection{Scan memory}
+A packed word with $w$ bits occupies $u=w/8$ bytes, and a code needs $u\ceil{d/w}$ bytes. We also need the document ID; call its width $b_{\rm id}$.
+Adding those two parts for every document gives
+\begin{equation}
+M_{\rm rows}=N\left(u\ceil{d/w}+b_{\rm id}\right).
+\label{eq:rows}
+\end{equation}
+For $d=256$, $w=64$, and eight-byte IDs, that is $32+8=40$ bytes per row, or 40 MB for one
+million rows in decimal units. We still need to account for cluster directories, spare vector
+capacity, and the memory manager's own records; the row data does not include them.
+
+For example, six eight-byte IDs contain 48 bytes of data. If their array reserves space for
+eight IDs, the array uses 64 bytes even while only six entries are filled. That is the difference
+between data size (often called payload) and allocated memory. Total process RAM also includes
+the rest of the running program.
+
+Choosing clusters takes memory and time too. A learned cluster has a representative vector,
+called its \emph{centroid}, which the query can be compared with. If we store $C$ float
+centroids of width $d_r$, their coordinates take $4Cd_r$ bytes. Comparing the query with all
+of them examines $Cd_r$ coordinates, and then we choose the best $P$ clusters. A router based
+on sign bits does different work, so its cost must be measured separately.
+
+During a query, we also store the query vector, score table, selected cluster IDs, and current
+results. Call this temporary memory $Q_0$; its main terms grow as $O(d+G2^g+P+K)$. If Python
+and C++ result arrays exist at the same time, count both. Adding $Q_0$ to the stored index
+and its supporting structures gives the memory needed while serving a query. Building the
+index can need more because the input arrays and new index can exist together.
+
+The scan reads consecutive document rows. This lets the CPU prepare later memory reads while
+working on the current ones; SIMD instructions can also process several values together.
+These are the kinds of hardware optimizations discussed in Exa's post~\cite{exa}. They do not
+change the number of documents scored, but they can change how long each score takes.
+That is why a method with fewer arithmetic operations is not automatically faster.
+
+\subsection{Bitplanes}
+The preferred sign at each query coordinate can be used to select candidate documents before
+full scoring. Method B stores a \emph{bitplane}: one coordinate across all documents in a
+cluster, with the sign data arranged as columns. Packed document rows are retained as well,
+since selected candidates must receive the same full score as in A.
+
+Consider cluster 1 in the example, where the local document order is [2, 3, 4] and the codes
+are \texttt{10100}, \texttt{11001}, and \texttt{11000}. If we read coordinate 2 down those
+rows, we get plane \texttt{011}: documents 3 and 4 have that bit set. Coordinate 3 gives
+\texttt{100}. The query prefers 1 at coordinate 2 and 0 at coordinate 3, so either selection
+keeps documents 3 and 4.
+
+We can record the remaining local positions in a candidate mask. Starting with parent mask
+$A$ and plane $B_i$, a positive-query split keeps the matching positions in one child and the
+others in another:
+\[
+A_{\rm match}=A\mathbin{\&}B_i,
+\qquad A_{\rm other}=A\mathbin{\&}\neg B_i.
+\]
+If the query coordinate is negative, we swap which child is the match. Both results are
+intersected with the parent, so padding positions cannot become real documents.
+
+\fig{masks}{Membership shrinks, but a dense mask keeps its physical width. Each child still has 6,400 positions, or 100 words. This larger illustration counts storage; the six-document example explains the returned IDs.}{.94}
+
+\subsection{Branch search}
+If we order the query coordinates by magnitude, we get 1, 4, 2, 3, 5. In cluster 1,
+coordinate 1 is already fixed, and all three documents match the query at coordinate 4.
+The split on coordinate 2 then gives [3, 4] in one child and [2] in the other. Matching adds
+no penalty, while the other child adds 0.5, so we try the matching child first.
+
+The alternative child must remain available. A document that matches the current bit may
+mismatch several later bits, so the first child visited need not contain the best result.
+Unexplored branches are stored in a queue ordered by their potential to improve the current
+results. Each branch records the mismatch cost established by its earlier splits.
+
+Equation~\ref{eq:score} lets us calculate the best score a branch could possibly contain.
+If its known penalty is $p$, that score is at most $Q-2p$, even if every remaining coordinate
+matches. This maximum is called an \emph{upper bound}. If it is strictly below the worst
+score in our current top-$K$ results, we can skip the branch. For example, with ideal score
+2.5 and known penalty 0.5, the branch cannot score above 1.5. If our current second-best score
+is 1.9, that branch cannot replace it. Equal scores still need the ID tie rule; the C++ check
+also allows for small floating-point rounding differences.
+
+
+\Needspace{26\baselineskip}
+\begin{lstlisting}[caption={Bitplane search. The queue preserves alternatives to the preferred path.}]
+branch(query, clusters, K, leaf_size, node_budget):
+    table = prepare_score_table(query)
+    order = coordinates_by_decreasing_abs(query)
+    queue = one full candidate mask per selected cluster
+    best = empty_top_k(K)
+    while queue is not empty:
+        node = remove_lowest_penalty(queue)
+        if cannot_improve(node, query, best): continue
+        if node_budget_is_reached(): return best
+        if node.count <= leaf_size or no_bits_remain(node):
+            score_each_set_document(table, node.mask, best)
+        else:
+            matching, other = split_on_next_bit(node, order)
+            queue_nonempty_children(queue, matching, other)
+    return best.sorted_by_score_then_id()
+\end{lstlisting}
+
+In the listing, a \texttt{node} is one group of remaining candidates. When a group is small
+enough, we stop splitting and score its documents; this final group is called a \emph{leaf}.
+The leaf size $L$ sets that threshold. For example, with a threshold of two, a group containing
+only documents 3 and 4 can be scored immediately. The C++ source also records work counts,
+manages memory, and handles small rounding differences.
+
+A node budget limits how many groups we visit. It can stop the search before we have ruled
+out every better result, so it may lose recall. With no work limit and safe score bounds,
+we can finish exactly within the selected clusters. This still says nothing about a document
+whose cluster was never opened.
+
+The exploration probability gives us another setting to try. Sometimes the search chooses
+a different waiting branch instead of the one with the best possible score. The score itself
+does not change, only the visit order. With a fixed amount of work this can help or hurt,
+so we repeat the test with different random seeds. The real-data tests did not show a
+consistent benefit from this random exploration.
+
+\subsection{Branch costs}
+For cluster $c$, each dense mask spans $W_c=\ceil{n_c/w}$ words. Let $J_c$ count its splits
+and $E_c$ the leaf masks whose set bits are enumerated. The full-width visits are
+\begin{equation}
+V_{\rm split}=\sum_{c\in\mathcal P}J_cW_c,
+\qquad V_{\rm leaf}=\sum_{c\in\mathcal P}E_cW_c.
+\label{eq:visits}
+\end{equation}
+Even at a leaf, the loop checks zero words to find out that they are empty, and then the set
+bits tell us which documents to score. If we count only the surviving documents, we miss that
+first part of the work. An early cost estimate was too optimistic for exactly this reason:
+it omitted the leaf-word visits.
+
+In the larger mask example, the initial cluster contains 6,400 documents. Reducing the
+candidate set to 80 does not change the 100-word mask size. If we make ten more dense splits, those loops
+visit 1,000 words even if only a few bits remain set. Each visit reads the parent and plane,
+constructs children, and writes results; we also spend time allocating masks and maintaining
+the queue. These costs remain even when the candidate count looks small.
+
+If $F_B$ documents are eventually scored, we add the following time costs:
+\begin{equation}
+\begin{split}
+T_B^{\rm local}\approx{}&T_{\rm table}+T_{\rm order}
+ +V_{\rm split}c_{\rm split}+V_{\rm leaf}c_{\rm leaf}\\
+ &+F_Bc_{\rm gather}+T_{\rm queue}+T_{\rm select}(F_B,K).
+\end{split}
+\label{eq:branch-time}
+\end{equation}
+To use this equation, we need to know what each measured price includes. The split price
+should cover the chosen mask allocation policy, and scattered row reads may cost more than
+contiguous scan reads. If a leaf timer already covers finding set bits, fetching the rows,
+and scoring them, we can use that combined measurement. Adding those same stages separately
+would count them twice.
+
+The additional memory for B's stored bitplanes is
+\begin{equation}
+M_{\rm planes}=du\sum_{c=1}^{C}\ceil{n_c/w}.
+\label{eq:planes}
+\end{equation}
+For one large cluster, these extra stored bits take approximately $Nd/8$ bytes. Many small
+clusters need additional padding because each cluster uses whole words. During a query we
+also keep masks for waiting branches. If $A_c(t)$ masks for cluster $c$ exist at time $t$,
+the largest amount of mask data held at once is $u\max_t\sum_c A_c(t)W_c$. In words: count
+the live masks, multiply by their full widths, and take the largest total during the search.
+Then add the memory used to track those branches and the shared temporary data. Counting only
+the mask currently being searched would miss the waiting masks.
+
+\subsection{Key lookup}
+C uses a fixed set of $h$ coordinates as a short bit pattern, or \emph{key}. Within each
+cluster, we store documents with the same key together. A lookup table, called the directory
+in the code, tells us where that group starts and how many documents it contains. These
+matching documents are sometimes called a posting list; here we will simply refer to the
+documents for a key. Their existing document IDs are enough, so we do not add another ID array.
+
+Using coordinates 2 and 3 as the key, the preferred query pattern is \texttt{10}.
+If we flip coordinate 3, the penalty is 0.4; flipping coordinate 2 costs 0.5, and flipping
+both costs 0.9. That gives us the weighted order \texttt{10}, \texttt{11}, \texttt{00},
+\texttt{01} to try in the directory.
+
+\fig{keys}{One shared key sequence is looked up in both selected clusters. The ideal key already finds the top two, but that fact alone is not a safe stopping rule. Empty lookups still cost work.}{.98}
+
+The first key returns document 0 from cluster 0 and documents 3 and 4 from cluster 1. Their
+full scores are 1.1, 2.5, and 1.9, giving the retained pair [3, 4]. The next key has known
+penalty 0.4 and therefore a full-score upper bound of $2.5-2(0.4)=1.7$, below the retained
+score 1.9. The bound permits stopping before the empty \texttt{11} lookups.
+Figure~\ref{fig:keys} includes the remaining sequence to show the directory and empty keys;
+a search without a bound or work limit would inspect them.
+
+Finding $K$ documents is insufficient to justify stopping because the short key does not
+account for the remaining coordinates. A document matching the key may have a lower full
+score than a document under another key. The method therefore scores the full code and
+maintains an upper bound for unvisited keys before declaring the local search complete.
+
+\Needspace{25\baselineskip}
+\begin{lstlisting}[caption={Weighted key lookup. Generate the key sequence once; charge every cluster lookup.}]
+keys(query, clusters, K, candidate_target, lookup_limit):
+    table = prepare_score_table(query)
+    ideal = signs_of_fixed_key_coordinates(query)
+    queue = [empty_flip_set_with_zero_penalty]
+    best = empty_top_k(K)
+    while queue is not empty:
+        if remaining_bound_cannot_improve(queue, query, best): break
+        state = remove_lowest_penalty(queue)
+        key = ideal XOR state.flip_mask
+        for cluster in clusters:
+            if lookup_limit_is_reached(): return best
+            count_one_lookup_including_misses()
+            for document in cluster.directory.get(key, []):
+                best.offer(full_score(table, document.code), document.id)
+        if candidate_target_is_reached(): return best
+        add_next_unique_flip_sets(queue, state)
+    return best.sorted_by_score_then_id()
+\end{lstlisting}
+
+The search tries keys in increasing total mismatch cost. This is not just a count of flipped
+bits: two cheap flips can cost less than one expensive flip. The C++ code generates each
+combination once. For an unvisited key, $Q-2p_{\rm key}$ gives its best possible full score
+by assuming that all coordinates outside the key match. This is safe, but it may overestimate
+what the stored documents can actually achieve, causing extra searching.
+
+We can limit the work with a positive candidate target or lookup limit; zero disables a limit
+in the C++ API. Either limit can stop early and lose recall. The target is checked after a
+key has been processed across all selected clusters, while the lookup limit can stop during
+that loop. To finish exactly within the selected clusters, we must instead exhaust potentially
+improving keys or prove that none remain, with score ties handled consistently.
+
+\subsection{Key-lookup costs}
+Let $H$ count actual directory lookups and $F_C$ the full scores. With $E$ generated keys and
+no limit cutting a cluster loop, $H=PE$. An empty key contributes to $H$ but not $F_C$. A time
+model for the implemented policy is
+\begin{equation}
+\begin{split}
+T_C^{\rm local}\approx{}&T_{\rm table}+T_{\rm key\ order}+T_{\rm key\ queue}
+ +Hc_{\rm lookup}\\
+ &+F_Cc_{\rm posting}+T_{\rm select}(F_C,K).
+\end{split}
+\label{eq:key-time}
+\end{equation}
+The documents for one key are stored next to each other. Reading many small groups may still
+cost more per row than reading one long group. There is also work to manage the waiting keys.
+The implementation generates one sequence of keys and uses it across clusters, so we count
+that work once, not $P$ times.
+
+Let $U_c$ be the number of keys that have documents in cluster $c$. Each directory entry stores
+the key, a starting position, and a count. Those fields occupy
+$\sum_c U_c(b_k+2b_o)$ bytes: four bytes for the key and eight for each range field in this build.
+The fields therefore add up to 20 bytes per entry, but that is not the full memory allocation.
+
+The C++ hash table stores entries in separate memory blocks, reached through an array of
+pointers. This implementation is known as \emph{separate chaining}. If there are $B_c$ pointer
+slots, it needs $\sum_c(U_cb_{\rm node}+B_cb_{\rm ptr})$ bytes for the entry blocks and pointer
+array, plus the container and memory manager's own records. The formula counts the actual
+stored pieces. We cannot use the 20-byte field total as though it included all of them.
+
+
+If we widen the key, the groups of matching documents may get smaller, but useful keys may also take more work
+to reach. A very short key has the opposite problem: it finds documents easily while leaving
+nearly all the scoring work. Finding a nonempty key is not the same as finding the best
+documents. If the objective is to relax a pattern to something like \texttt{1*0}, we need a different
+operation; an exact-key hash table does not answer that wildcard request in one lookup.

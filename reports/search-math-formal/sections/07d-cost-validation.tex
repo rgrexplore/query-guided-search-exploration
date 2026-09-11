@@ -1,0 +1,200 @@
+\section{Complete cost checks}
+\label{sec:cost-validation}
+Correct work counts are necessary, but they do not make a latency prediction exact. Two loops
+can visit the same number of rows while reading very different memory locations. A small
+candidate set reused repeatedly can stay in cache; different candidates may require fresh
+memory reads. The following checks distinguish these effects and evaluate complete C++ calls.
+
+\subsection{Buffer sizes}
+The standalone profile uses the shared C++ score table and top-$K$ code. Its path operation
+allocates a root bitmap, makes both children at each split, keeps the alternatives alive,
+releases each parent, enumerates the final leaf and releases the remaining masks. The check confirms that the surviving path and alternatives together contain every original
+document exactly once.
+
+Widths range from 512 bytes to 125 MB. The largest width is one bit over a billion document
+positions. Thirteen stored planes and the live masks reached about 3.50 GB of process memory.
+This measurement covers the specified buffers rather than the full 256-plane index.
+Whole-index memory includes every stored plane, packed document and ID.
+
+The larger buffers showed median split costs of roughly 0.34--0.37 ns per physical word in this
+standalone loop. At 256 dimensions, contiguous scoring took about 27 ns per document at one
+and four million rows. Small posting lists cost more per row because fewer rows share the work of preparation and
+result selection. Compilation and the rest of the query still affect timing; these measured
+costs do not apply to every CPU instruction or workload.
+
+\subsection{Row access cost}
+A second operation reproduces the leaf-scoring loop: read a bitmap word, find its set bits,
+fetch those document codes and IDs, score them, and maintain top $K$. It uses the same scorer
+as the sequential loop. One run reuses a candidate bitmap after warmup. Another prepares a
+different bitmap before each measured trial.
+
+\begin{center}\small
+\begin{tabular}{@{}lrr@{}}\toprule
+16M-document buffer & Reused candidates & Changing candidates\\\midrule
+About 1,958 scored rows & 0.159 ms & 0.455 ms\\
+About 62,500 scored rows & 4.400 ms & 8.271 ms\\\bottomrule
+\end{tabular}\normalsize\end{center}
+Both runs select the same fraction of rows, but select different IDs. Generating candidates
+happens outside the timer, although it still changes which data the cache already holds. The difference shows why the scan's cost per row should
+not be used directly for B's scattered leaf scores. It does not directly measure cache-miss
+counters or establish fixed CPU frequency.
+
+A three-term fit used a fixed cost, physical bitmap words and scored rows. It was fitted on
+1M and 4M pools and checked on a 16M pool. The reused-candidate model underestimated one check
+by 45.2\%. With changing candidates, the worst error was still an underestimate of 27.6\%.
+Both fits remain saved. The largest row pool was about 640 MB; it was not a 40 GB row-store test.
+
+The timer for fetching and scoring leaf rows already includes finding their set bits.
+Adding the separate timer for finding those bits would count that work twice. Also, a fitted
+fixed cost of zero does not mean score-table preparation is free: the fit may include its
+cost in other terms.
+
+\subsection{Larger C++ runs}
+The native check uses 1M, 2M and 4M binary documents, then a separate 8M run. It uses the same
+constructed distribution of strong and weak query coordinates. Packed codes are generated in small chunks and
+the first million rows are checked against the earlier document pool.
+
+An independent reference avoids expanding these rows into a large float matrix. For each query,
+it counts strong and weak mismatches directly from the packed bits. With magnitudes $a$ and
+$\epsilon$, the score is
+\[
+S=a(m-2e_{\rm strong})+\epsilon(d-m-2e_{\rm weak}).
+\]
+The reference sorts documents by this score and then ID. Small tests compare that calculation with the earlier direct
+float sum, including a dimension count that does not fill the final packed word. All complete
+C++ calls in the scaling check matched the independent reference.
+
+For B, the leaf threshold grows with the corpus: $L=160N/10^6$. This preserves the intended
+13 strong-coordinate cuts. With fixed depth and density, split words, leaf words and scored
+rows all grow approximately in proportion to $N$. A simple complete-call model is then
+\[
+\widehat T(N)=a_0+b_0N.
+\]
+The fixed term covers work that stays the same as the corpus grows; the slope combines
+work that grows with it. This model assumes the specified path and growing leaf threshold.
+It does not justify keeping $L=128$ while increasing $N$ indefinitely.
+
+\subsection{Model corrections}
+The first fit minimized percentage error over individual queries but was used to predict a
+median. Fast queries received more weight, which did not match the intended median prediction. For example, workloads
+with times $[1,10,10]$ and $[2,20,20]$ have medians 10 and 20. Weighting each query by inverse
+time favors the fast minority and predicts the wrong median. The corrected fit uses one median
+per corpus size. A test fails for the mixed workload under the old calculation and stays correct
+for a uniform workload. The original fit is preserved.
+
+A linear row term was also insufficient for C's small postings. The shared result heap contributes
+measurable selection cost when only a few hundred documents are scored. Under independently
+ordered continuous scores, document $i$ enters the current top $K$ with probability $K/i$.
+The expected number of replacements after the first $K$ rows is
+\[
+\sum_{i=K+1}^{F}\frac{K}{i}\approx K\ln(F/K).
+\]
+For fixed $K$, a useful approximation is
+\begin{equation}
+\widehat T_C(F)=a_C+b_CF+c_C\ln\!\bigl(\max(1,F/K)\bigr).
+\label{eq:small-posting-time}
+\end{equation}
+Binary ties and key ordering change the exact replacement count, so the logarithm is a model
+term, not an exact counter. A large contiguous run supplies the per-row cost; the native 1M/2M
+measurements fit the remaining terms. This corrected the small-posting prediction without
+changing the reference ranking or search implementation.
+
+The revised 4M check helps diagnose the model, but its results had already been seen.
+The fitted costs were fixed before the 8M run, which checks predictions on a larger corpus
+with the same prescribed queries. It does not check performance on new queries.
+
+\begin{center}\small
+\begin{tabular}{@{}llrrr@{}}\toprule
+Strong coordinates & Method & Measured ms & Predicted ms & Error\\\midrule
+Fixed & A & 197.029 & 203.016 & $+3.0\%$\\
+Fixed & B & 0.854 & 0.884 & $+3.6\%$\\
+Fixed & C & 0.0481 & 0.0518 & $+7.7\%$\\
+Changing & A & 196.664 & 197.816 & $+0.6\%$\\
+Changing & B & 0.900 & 0.859 & $-4.5\%$\\
+Changing & C & 202.767 & 207.086 & $+2.1\%$\\\bottomrule
+\end{tabular}\normalsize\end{center}
+All six checks met the earlier 20\% criterion, supporting the stated model over the checked
+sizes. The largest observed error does not provide a guaranteed error bound at a billion
+rows. The earlier failed fits remain part of the evidence.
+
+\subsection{Leaf-size follow-up}
+At one million rows, the ideal 13-bit group has mean $\lambda\approx122$ and standard deviation
+about 11. A leaf size of 128 can force another cut when the strong-matching group is slightly
+larger than average. A rough upper margin $\lambda+3\sqrt{\lambda}$ is about 155; choosing 160
+avoids many unnecessary weak-coordinate cuts. The preceding 12-bit group has mean about 244,
+so it will usually still be split. These are distribution-based settings to check, not universal
+thresholds or a guarantee from a normal approximation.
+
+The follow-up adds 16,384 clusters, neighboring key widths and leaf sizes, including
+160 for the changing-coordinate case. It remeasures prior choices rather than comparing fresh
+timings against old ones. The first 40 generated queries become the tuning set; query IDs
+40--59 are used only after the new choices are frozen. Before a router is reused, the document and reference prefixes are checked against the earlier data.
+
+At 1M rows and the 99\% target, the changing-coordinate follow-up selected B with one cluster
+and $L=160$. It measured 0.1446 ms at 100\% binary recall. A measured 24.9235 ms at 99.95\%:
+a paired speedup estimate of 172.3, with 95\% interval 169.1--177.2. C chose a 14-bit key and
+measured 14.6301 ms at 100\%, but its paired speedup interval against A included one. That
+point estimate alone does not establish a C advantage.
+
+The fixed-coordinate follow-up selected a 16,384-cluster, two-probe scan and a global 13-bit
+key index. Both reached 100\% recall: A measured 0.0140 ms and C 0.0128 ms. Their small timing gap again compares closely related ways to select candidates; it does
+not prove that one method is always faster.
+
+\subsection{Key width and median time}
+When strong coordinates change with each query, a fixed $h$-coordinate key contains a random
+number $S_h$ of the $m$ strong coordinates. The hypergeometric distribution describes this
+count when coordinates are selected without repetition:
+\begin{equation}
+\Pr(S_h=s)=\frac{\binom ms\binom{d-m}{h-s}}{\binom dh}.
+\label{eq:captured-strong}
+\end{equation}
+For $d=256$, $m=13$, the probability of capturing none is 52.75\% at $h=12$, 49.94\% at $h=13$,
+and 47.27\% at $h=14$. A small width change can move a sample across the halfway point between
+queries that score nearly all rows and queries that can discard about half.
+
+Assuming the stated gap between strong and weak scores, and also that bounds from weak key
+coordinates cannot rule out individual weak patterns, the work for a query capturing $s$ strong coordinates is approximately
+\[
+H=2^{h-s},\qquad F=N2^{-s}.
+\]
+The expected scored fraction is $\sum_s\Pr(S_h=s)2^{-s}$: about 71.30\% at $h=13$ and 69.44\%
+at $h=14$. The mean work changes smoothly even when a small sample's median changes sharply.
+The analysis therefore requires retaining uncertainty across queries and the full range of query times.
+The condition is about the stated constructed distribution, not arbitrary embeddings or IVF.
+
+\subsection{One-bit control}
+The original real-data parameter grid started with four-bit keys. A final control gives C a one-bit key and
+A's routing layout, with no candidate or lookup limit. It keeps A and B's frozen settings and
+uses 100 further query IDs, excluding all 500 previously used IDs. No parameter is changed
+based on this control's outcomes.
+
+A measured 9.541 ms, B 9.855 ms and C 10.545 ms. All three reached 98.95\% binary recall,
+narrowly below the requested 99\%. The report retains this miss without adding a tolerance
+to classify it as a pass. There is no supported alternative speedup in this check. The original 200-query
+evaluation remains a separate result, where its conservative choices met their sample targets.
+A finite-sample selection rule does not guarantee the same mean recall on every later query sample.
+
+\subsection{Text-query timing}
+The final check runs actual text through the cached local Nomic model using Apple's MPS
+backend, then applies
+the same normalization, routes the resulting vector and calls the C++ search. Batch size is
+one. Each sequence shape is warmed first; model loading, index building and reference creation
+are outside the request timer. References are computed afterward from the actual encoded vectors.
+
+\begin{center}\small
+\begin{tabular}{@{}lrrrr@{}}\toprule
+Method & Encode median & Retrieve median & Total median & Total p95\\\midrule
+A & 6.488 ms & 9.406 ms & 16.313 ms & 19.201 ms\\
+B & 6.500 ms & 9.651 ms & 16.303 ms & 19.217 ms\\
+C & 7.543 ms & 11.201 ms & 18.912 ms & 21.898 ms\\\bottomrule
+\end{tabular}\normalsize\end{center}
+These are 20 existing independent-query IDs, three blocks and two repeats, with the earlier
+frozen settings. All reached 99.45\% binary recall on this sample. The small A/B difference does
+not establish a speedup. Each total is measured per request: its median is not the sum of the
+two stage medians. The process lifetime peak was about 3.67 GB including reference construction.
+The MPS driver reported about 1.08 GB allocated. Some of that may already be included in
+the process memory figure (RSS), so adding the two values may double-count memory.
+
+This text check applies to the real Nomic queries. The constructed strong-coordinate vectors
+do not come from this encoder, so adding its time to those examples would not constitute a
+measured end-to-end sparse-embedding pipeline.

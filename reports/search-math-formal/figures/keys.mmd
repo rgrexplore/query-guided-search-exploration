@@ -1,0 +1,8 @@
+flowchart TB
+  R[Selected clusters and key streams] --> K[Take the next weighted key]
+  K --> H[Look up its posting range]
+  H -->|Empty key| N{Stopping rule satisfied?}
+  H -->|Occupied key| F[Filter rows and update candidates]
+  F --> N
+  N -->|No| K
+  N -->|Yes| O[Return candidates]
