@@ -69,3 +69,14 @@ and the final parameter comparisons use measured recall; previously inspected qu
 Final evidence edition: 72 pages, 11 figures, 15 listings. It includes the explicit limits of the 1B
 forecasts rather than claiming a measured 1B run or a global optimum. Original and intermediate
 PDF/source versions remain available in Git.
+
+## Plain-English rewrite
+
+- [x] Review every section for short headings, plain language, and explained terms.
+- [x] Attribute Exa's representation and scoring choices where they are used.
+- [x] Preserve equations, algorithm listings, experimental results, and qualifications.
+- [x] Render the revised 74-page reference and inspect all pages.
+- [x] Keep the complete key-search listing on one page.
+
+The original 72-page reference remains in earlier Git checkpoints. This pass changes the
+explanation, not the search implementations or the experiments.

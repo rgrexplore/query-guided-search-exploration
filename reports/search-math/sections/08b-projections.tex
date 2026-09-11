@@ -1,9 +1,9 @@
-\subsection{What can be calculated at a billion documents?}
+\subsection{Billion-document estimates}
 \label{sec:billion}
-The native cost models were checked through 8M rows. The bitmap profile reaches the physical
-width of a 1B-row mask, but no complete 1B index was built or queried. The following numbers
-are conditional forecasts using the same 256-bit score, top 100, one CPU thread and the stated
-strong-coordinate distribution. A different machine or access pattern can change the prices.
+The C++ cost models were checked through 8M rows. The bitmap test reaches the full width
+of a 1B-row mask, but no complete 1B index was built or searched. The numbers below are
+estimates under the same 256-bit score, top 100, one CPU thread and stated distribution of
+strong coordinates. A different machine or pattern of memory reads can change the costs.
 
 Start with memory, because it can reject a configuration without estimating its latency.
 For the current layout at $N=10^9$ and $d=256$,
@@ -15,10 +15,10 @@ second transposed copy, adding at least 32 GB. Therefore all three fail a 32 GB 
 also fails a 64 GB limit. Changing probes does not remove stored documents. These rejections
 apply to the current in-memory layouts; they are not claims about every compressed or disk-based design.
 
-The planning figures below allow up to twice the logical row-ID capacity, a small directory
-and container allowance, and a configurable 1 GB runtime reserve. The reserve is an allowance,
-not measured runtime memory. Estimated fits are different from the payload lower bounds that
-prove rejection. Building an index from full input copies can require more RAM than serving it.
+The planning figures below allow room for up to twice the stored row-ID count, a small
+allowance for directories and containers, and a configurable 1 GB reserve for running queries.
+That reserve is assumed, not measured. Payload counts exclude overhead: if even those bytes
+exceed the budget, rejection is certain for this layout. A planned fit is only an estimate. Building an index from full input copies can require more RAM than serving it.
 
 \begin{center}\small
 \begin{tabular}{@{}lrrr@{}}\toprule
@@ -31,10 +31,10 @@ B, same prefix route, scan-like leaf & 72 GB & about 81 GB & Rejected\\\bottomru
 All these planning figures fit a 1 TB budget. The model does not claim that a 1 TB machine has
 the M5 Max's exact memory behavior. The measured row buffers were much smaller than a 40 GB store.
 
-\subsection{When the important coordinates stay in one prefix}
+\subsection{Fixed strong prefix}
 With thirteen fixed strong coordinates, the ideal group contains an expected
 $10^9/2^{13}\approx122{,}070$ rows. Under the independent-bit assumption, a binomial calculation
-controls the chance of having fewer than 100. A Chernoff bound gives a probability below
+describes the chance of having fewer than 100. A Chernoff bound puts that probability below
 $10^{-26464}$ in this example. This extremely small bound belongs to the stated distribution;
 it is not an embedding-accuracy guarantee.
 
@@ -44,21 +44,22 @@ small part of the corpus, although all codes and IDs are still stored.
 
 B must get the same opportunity: it can use that prefix routing and choose a leaf large enough
 to scan the selected group. An all-ones leaf-mask profile shows a similar scoring cost. Thus
-B's fallback also models at roughly 3 ms, with substantially more index storage. Forcing B to
+B's scan fallback is also estimated at roughly 3 ms, while storing a much larger index. Forcing B to
 traverse the entire billion-row bitmap would be an unfair parameter choice in this case.
-The model cannot distinguish a few-percent timing difference here. A or C is the simpler
-memory choice; this is not a proof that one API name is always faster.
+The model is not precise enough to distinguish a timing gap of a few percent here.
+A or C needs less memory, but the estimate does not prove one method is always faster.
 
-\subsection{When the important coordinates change with the query}
+\subsection{Changing strong coordinates}
 A fixed prefix no longer supplies the same filter. The measured B path can select its columns
 from the actual query. Keeping thirteen cuts and scaling the leaf threshold to 160,000 gives
 an expected final set of about 122,070 rows. Its mask payload at the last split is
 \[
 (13+2)\ceil{10^9/64}\times8=1.875\ \mathrm{GB}.
 \]
-The native size model estimates about 0.10 s for this global B path. Doubling its variable
-cost gives about 0.20 s. This doubling is a sensitivity scenario, not a confidence interval
-or a promised bound. The global scan model is about 25 s.
+The model fitted to C++ runs estimates about 0.10 s for this global B path. If we double
+the part of its cost that grows with corpus size, the estimate becomes about 0.20 s. This
+checks the effect of a higher assumed cost; it is not a confidence interval or promised
+bound. The model estimates about 25 s for a global scan.
 
 That comparison does not establish that B beats every possible IVF configuration. Let $f$ be
 the fraction of the corpus A actually scores, and let $T_{\rm route}$ be the time needed to
@@ -84,7 +85,7 @@ can still require scoring nearly all rows; capturing one leaves roughly half. A 
 key can therefore remain expensive even when it has many occupied entries and few empty
 lookups. It is not enough to argue that finding a nonempty key is cheap.
 
-\subsection{The usable conclusion}
+\subsection{What the tests support}
 The completed tests establish three different outcomes within their declared spaces:
 \begin{itemize}
 \item On the real Nomic sample, no alternative speedup was established. Even a one-bit key
@@ -95,10 +96,10 @@ and both avoid most scoring. C had a small measured implementation advantage in 
 independently checked advantage in the constructed data. Increasing the leaf size with corpus
 size preserved a useful path; keeping a tiny fixed leaf would not.
 \end{itemize}
-At a billion rows, memory lower bounds remain exact for the layout, while latency and the best
-routing parameters remain conditional forecasts. The formulas give operating points and
-break-even requirements to test. They do not turn a finite grid, or the name of an embedding
-model, into a universal optimum.
+At a billion rows, the minimum memory counts are exact for this layout. Query times and
+the best routing settings remain estimates under stated assumptions. The formulas give
+settings to test and the conditions under which costs would be equal. A finite parameter
+grid, or an embedding model name, cannot identify the best setting for every workload.
 
 The current calculation is \path{experiments/project_costs.py}; its inputs and all scenarios
 are saved in \path{results/projected-cases-2026-09-11/}. The earlier

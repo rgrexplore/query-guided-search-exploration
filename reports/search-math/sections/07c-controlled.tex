@@ -1,13 +1,13 @@
-\section{A distribution where the important coordinates are known}
+\section{Known strong coordinates}
 \label{sec:controlled}
-Real embeddings did not establish an advantage for B or C in the independent comparison.
-To understand the mechanism, we can construct a distribution in which the score tells us
-exactly which coordinates matter most. This is an experiment about the algorithms, not a
+The independent test on real embeddings did not establish an advantage for B or C.
+We can investigate when they help by constructing data where we know exactly which
+coordinates contribute most to the score. This is an experiment about the algorithms, not a
 claim that a trained Matryoshka embedding has this distribution.
 
-\subsection{State the assumptions before calculating recall}
-Let document signs be independent and balanced: each coordinate is independently $+1$ or
-$-1$ with probability $1/2$. A query has $m$ strong coordinates of magnitude $a$, and
+\subsection{Assumptions}
+Let each document coordinate independently have sign $+1$ or
+$-1$ with probability $1/2$. This makes the signs independent and balanced. A query has $m$ strong coordinates of magnitude $a$, and
 $d-m$ weak coordinates of magnitude $\epsilon>0$. Its signs are independently random.
 Scaling the whole query to unit length does not change any ranking or the following inequality:
 \begin{equation}
@@ -26,7 +26,7 @@ The other chooses a different set of 13 coordinates for each query. Neither chan
 distribution. All 40 generated queries are retained, with the first 20 used for tuning and the
 remaining 20 for checking frozen choices.
 
-\subsection{Recall from opening only the ideal strong key}
+\subsection{One-key recall}
 Let $Z$ count documents matching all $m$ strong signs. Under the stated independent distribution,
 \[
 p=2^{-m},\qquad Z\sim\operatorname{Binomial}(N,p),\qquad \E[Z]=N2^{-m}.
@@ -47,7 +47,7 @@ threshold $i\in\{1,\ldots,K\}$ that $Z$ reaches. Taking expectations gives
 This is a finite binomial calculation. It does not replace $Z$ by its average and then assume
 that every query has that many matching documents.
 
-\begin{examplebox}{Why a million documents can make a short key more useful}
+\begin{examplebox}{Corpus size and matches}
 At $m=13$, a 100,000-document corpus has about 12.2 ideal matches on average. Opening only
 that key cannot usually return the top 100. At one million documents, the average is about
 122.1, so one key often contains enough results.
@@ -61,19 +61,19 @@ If the strong coordinates move between queries, a fixed first-$m$ key may contai
 of them. Equation~\eqref{eq:ideal-key-recall} then does not describe that key's recall. The
 assumption is about the coordinates actually indexed, not simply the number of indexed bits.
 
-\subsection{How many keys must exact lookup try?}
+\subsection{Exact key work}
 For a key containing exactly the $m$ strong coordinates, equal strong magnitudes make all keys
 with $r$ mismatches share a prefix penalty. Let $Z_r$ be the number of documents whose strong
 key has exactly $r$ mismatches. For a fixed query,
 \[
 \Pr(\text{one document has }r\text{ strong mismatches})=\binom mr2^{-m}.
 \]
-The vector of counts follows a multinomial distribution; the counts at different radii are
-not independent. Let $r_*$ be the first radius with at least $K$ documents in total:
+Together, these counts follow a multinomial distribution: it describes how the documents
+fall into the different mismatch counts. Counts at different radii are not independent. Let $r_*$ be the first radius with at least $K$ documents in total:
 \[
 r_* = \min\left\{r:\sum_{i=0}^{r}Z_i\ge K\right\}.
 \]
-The measured exact key search finishes the tied key layer at that radius. Under
+The measured exact key search finishes every key with the same penalty at that radius. Under
 Equation~\eqref{eq:strong-dominance}, it can then reject all larger radii. Its work is
 \begin{equation}
 H=\sum_{i=0}^{r_*}\binom mi,\qquad F=\sum_{i=0}^{r_*}Z_i.
@@ -88,10 +88,10 @@ The probability that radius $r$ contains enough documents is another binomial ta
 \[
 \Pr(r_*\le r)=\Pr\!\left(\operatorname{Binomial}\!\left(N,\,2^{-m}\sum_{i=0}^{r}\binom mi\right)\ge K\right).
 \]
-This supplies a distribution over work, rather than declaring that the expected occupancy is
-an exact count for every query. No independence assumption between the different radii is needed.
+This gives probabilities for different amounts of work. An average number of documents
+in a key would not tell us the exact count for every query. No independence assumption between the different radii is needed.
 
-\subsection{Choose how far bitplanes should split}
+\subsection{Split depth}
 B orders the coordinates using the actual query magnitudes, so it can follow the strong signs
 even when their positions change. Suppose at least $K$ documents match all $m$ strong signs.
 After following $j\le m$ preferred splits, those $K$ correct results are still present. Score the
@@ -120,27 +120,27 @@ Ignoring the smaller queue term gives a first estimate from the derivative:
 \qquad
 j_c=\log_2\!\left(\frac{Nc_{\rm score}\ln 2}{Wc_{\rm split}}\right).
 \]
-The second derivative of the score term is positive. Check the neighboring integers and
-boundaries $0$ and $m$, then check real leaf sizes near $N2^{-j}$. This optimizes one stated
-model. It does not optimize arbitrary clustering, discrete query paths and hardware behavior
-with one derivative.
+The positive second derivative tells us that the score term curves upward. Check the
+neighboring integer depths and boundaries $0$ and $m$, then test actual leaf sizes near
+$N2^{-j}$. This finds a choice for the stated model; the derivative alone cannot choose the
+best clustering, query path and hardware behavior.
 
 When $N$ is large, $N/W$ is about the fixed word width $w$. Thus $j_c$ need not grow with $N$.
 A fixed leaf size can be a poor scaling choice: it forces extra cuts as the corpus grows,
 even when another full-width mask pass costs more than the document scores it removes.
-Both global dense-bitplane traversal and fixed-dimension scan still have at least linear
-work in $N$ in this model. B can improve the constant; the first full-width pass does not
-become a logarithmic document lookup.
+In this model, both a global dense-bitplane search and a scan with fixed dimensions still
+do work that grows at least linearly with $N$. B can reduce the work per document, but it
+still has to make that first pass over the full mask.
 
 For $j\ge1$ with nonempty alternatives, the last split can hold $j+2$ full masks: queued
-alternatives, the parent and both children. The corresponding mask payload is
+alternatives, the parent and both children. Counting just the mask data, without overhead, the peak is
 \[
 M_{\rm masks,peak}=(j+2)Wb_w.
 \]
 With no split, only the root mask is needed. Queue metadata, score tables, outputs and the
 persistent index are additional memory.
 
-\subsection{What happened when the strong coordinates stayed fixed}
+\subsection{Fixed coordinates}
 All methods could use direct-key routing as well as the centroid and sign-prefix scans.
 There were 704 tuning configurations and 27 independent evaluation workers. The fastest tested
 key configuration used one physical cluster and a 13-bit key. The scan baseline chose direct
@@ -153,15 +153,14 @@ At 100,000 documents and the 99\% target, both reached 100\% recall: C measured 
 and A 0.0186 ms, a paired estimate of 1.227 with interval about 1.144 to 1.364.
 
 The difference is a few microseconds, and the methods largely overlap in candidate selection.
-C's key enumeration and scoring share one native call. A first ranks cluster keys through a
-native call, then scans their rows through another. The measurements establish an implementation
-advantage for this integrated lookup, not a theorem that key lookup dominates a scan baseline
-that incorporates the same candidate-selection rule. Larger cluster and key grids may also
+C enumerates keys and scores their rows in one C++ call. A ranks cluster keys in one C++
+call, then scans their rows in another. The measurements show an advantage for this implementation, which combines lookup and scoring.
+They do not prove that it beats a scan using the same rule to select candidates. Larger cluster and key grids may also
 change the fastest tested setting.
 
-\subsection{What changed when the strong coordinates moved}
+\subsection{Changing coordinates}
 The second setup uses the same document signs, but chooses each query's strong coordinates
-uniformly without replacement. Fixed-prefix keys cannot follow those changing positions.
+with every set equally likely and no coordinate repeated. Fixed-prefix keys cannot follow those changing positions.
 B can, because its coordinate order comes from the query itself.
 
 This run measured 1,001 tuning settings and 60 independent evaluation workers. At one million
@@ -173,28 +172,28 @@ The scan configuration used 256 centroid clusters and 255 probes, reaching 99.95
 
 At 100,000 documents, the 99\% target comparison reached 100\% recall for all three:
 A measured 2.5438 ms, B 0.1375 ms, and C 2.7170 ms. B's paired speedup over A was about
-18.5, with a 95\% interval of 18.1 to 19.0. These are selected-settings comparisons within
-the declared grid, with query and process-block uncertainty. They are not proofs of a global
-optimum over every cluster count, leaf size, routing algorithm or implementation.
+18.5, with a 95\% interval of 18.1 to 19.0. These comparisons use settings selected from the stated grid. Their intervals reflect
+variation across recorded queries and process blocks. They do not prove that the selected
+settings are best across every cluster count, leaf size, router or implementation.
 
 \fig{measured-cases}{Independent measurements at one million documents, a 99\% binary-recall requirement and a 32 GB memory limit. Labels show median time and achieved recall. The vertical axis is logarithmic: adjacent major ticks differ by a factor of ten. The real-data evaluation has 200 queries; each constructed case has 20.}{1}
 
-\subsection{Compare predicted work with the saved native counters}
+\subsection{Predicted work}
 The count checker uses document signs recorded during preparation, independently of native
-index traversal. It checks the B's single-path formula only when at least $K$ documents match all strong
+index traversal. It checks B's single-path formula only when at least $K$ documents match all strong
 coordinates and a leaf is reached before splitting weak coordinates. For C, it checks the
 single-key bound case and Equation~\eqref{eq:strong-key-work} when the key contains all strong
 coordinates. Empty keys are counted, including keys in the final tied layer.
 
 Across the completed tuning and evaluation runs, 447 applicable per-query predictions matched
-the native counters exactly. This includes split words, leaf words, full scores, key attempts
+the C++ work counters exactly. This includes split words, leaf words, full scores, key attempts
 and the tracked B mask peak where applicable. Other queries and clustered configurations remain
 in the benchmark; the checker reports them as outside these specific prediction conditions.
 It does not silently treat them as successful predictions.
 
-There are two different results here. The component and conditional-work checks support the
-stated formulas. The timed experiment establishes how the implemented methods performed on
-these data. Neither alone establishes a universal latency forecast. In particular, if a new
+The count checks support the formulas under their stated conditions. The timers tell us
+how these implementations performed on these data. Neither result alone tells us the time
+for every future workload. In particular, if a new
 machine changes the relative cost of a bitmap pass and a full score, Equation~\eqref{eq:one-more-cut}
 can favor a different leaf size.
 

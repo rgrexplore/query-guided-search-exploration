@@ -1,14 +1,14 @@
-\section{What the existing measurements support}
+\section{What the measurements show}
 \label{sec:evidence}
 The purpose of these measurements is to check the reasoning, not to fit every equation until
-one method appears to win. The experiments have different scopes, so their numbers must not be
-merged into one unqualified performance claim.
+one method appears to win. The experiments measure different parts of the search, so we must explain those differences
+when comparing their numbers.
 
 \Needspace{12\baselineskip}
-\subsection{The one-million-passage scaling study}
+\subsection{The one-million-passage study}
 The archived study used one flat cluster, a fixed 256-bit score, 100 binary candidates,
 leaf size 32, deterministic branching, cached query embeddings, and one CPU thread.
-There were 100 validation queries for selecting configurations and 200 held-out test queries,
+There were 100 validation queries for selecting configurations and 200 separate test queries,
 with three timing repeats. It covered pools from 1,000 to one million real MS MARCO passages.
 
 \begin{center}
@@ -20,23 +20,23 @@ Unlimited branch & 1,068.84 ms & 100\% & about 999,961\\\bottomrule
 \end{tabular}
 \end{center}
 The branch reduced scoring at the finite budget, but did not win at matched target recall.
-The whole study found no median or p95 crossover among the tested 95\% and 99\% target settings.
-This conclusion belongs to that implementation, dataset, hardware and grid. It is not a theorem
+The whole study found no point where branching became faster at the median or p95 among the tested 95\% and 99\% target settings.
+This conclusion belongs to that implementation, dataset, hardware and tested settings. It is not a theorem
 that every bitplane representation loses.
 
 The original implementation uses dense active masks for every node. Its measured split-word
 counter omits leaf reads, which must be derived from the visited-node counts and cluster widths.
-The physical mask size at one million rows is $15{,}625\times8=125{,}000$ bytes. A frontier with
+The physical mask size at one million rows is $15{,}625\times8=125{,}000$ bytes. A queue with
 20,000 such masks would contain 2.5 GB of masks alone. This example explains how query RAM can
-be much larger than the packed-code payload; it is not a claimed observed frontier count.
+be much larger than the bytes used to store the packed codes; it is not a claimed observed queue size.
 
 The source summary is
-\path{results/scaling-msmarco-1m/analysis/settings.csv}. Full run metadata and the validation
-protocol live beside it. The report's verification script checks the numerical rows quoted here.
+\path{results/scaling-msmarco-1m/analysis/settings.csv}. Full run details and the checking
+procedure are stored beside it. The report's verification script checks the numerical rows quoted here.
 
 \Needspace{12\baselineskip}
-\subsection{The FiQA study asked a broader pipeline question}
-The denser FiQA run used 57,638 documents and 648 queries, with 583 settings including random
+\subsection{The FiQA search study}
+The FiQA run with more settings used 57,638 documents and 648 queries, with 583 settings including random
 seeds. Its timings include routing, binary candidate search and float reranking, with embeddings
 cached. Its quality measures include float Recall@10 and nDCG@10, rather than the scaling study's
 binary Recall@100.
@@ -50,7 +50,7 @@ Sign-route branch & 64 & 2,048 & 0.6466 & 0.7062\\
 Float IVF reference & 8 & -- & 0.1661 & 0.9127\\\bottomrule
 \end{tabular}\normalsize\end{center}
 These selected examples show that probing more clusters with limited work inside them can be
-a useful combined tradeoff. They do not isolate traversal efficiency: the selected pools differ.
+a useful combined tradeoff. They do not measure the effect of branching alone: the selected pools differ.
 Within the same selected buckets, unlimited branching was slower than scanning. The float IVF
 row uses a different scorer and was a strong practical reference in that experiment.
 
@@ -60,7 +60,7 @@ FiQA report retains losing configurations, empty returns, and the relevant measu
 Its source is \path{results/fiqa-2026-09-09-dense/README.md} and the accompanying data.
 
 \Needspace{12\baselineskip}
-\subsection{A new controlled check of the 24-bit prefix}
+\subsection{Checking the 24-bit prefix}
 The small quality study used the same full weighted-binary score and row-ID tie rule for all
 methods. There was no outer routing: $C=P=1$. Two synthetic datasets had 20,000 random binary
 documents. The real-data case used the first 100,000 rows of the cached Nomic/MS MARCO sample.
@@ -71,7 +71,7 @@ first 24 coordinates so that they held 80\% of \emph{expected} full-score varian
 controlled favorable case for a prefix, not a model of what Matryoshka always does.
 
 For each case, 16 queries estimated a score correlation and 16 different queries checked the
-normal-model prediction. The native full scan agreed with an independent exact score sort on
+normal-model prediction. The native full scan, which runs the compiled search code, agreed with an independent exact score sort on
 all 96 query references. The short-key candidate set included all documents in keys tied at
 the final prefix threshold, then used the exact full score to keep the top 100.
 
@@ -89,16 +89,15 @@ per-query evidence. The identical synthetic key counts are expected: the strong-
 scales all first-24 query weights by the same factor, which changes neither their key order nor
 the prefix candidate sets. It changes their importance in the \emph{full} score.
 
-These results support two different conclusions. First, a short prefix is not inherently
+These results support two different conclusions. First, a short prefix is not always
 inaccurate: the constructed favorable case reaches 95\% recall with 1,000 candidates.
 Second, a simple statistical prediction can still miss real recall by several points. An
-error of that size is unacceptable as a certificate of a 99\% recall target.
+error of that size is unacceptable as proof that a 99\% recall target is met.
 
-\fig{recall-validation}{Measured short-key recall versus the checked normal approximation. Each panel has its own explicitly stated document population.}{1}
+\fig{recall-validation}{Measured short-key recall versus the checked normal approximation. Each panel states which document set it uses.}{1}
 
-The key counts were calculated from the actual query weights by meet-in-the-middle counting,
-including empty keys. The candidate set was constructed using an exhaustive prefix-score
-calculation for quality evaluation. \textbf{That computation is not an implemented hash-search
+The key counts were calculated from the actual query weights by splitting the weights in two, listing each half's subset sums, and counting qualifying pairs,
+including empty keys. The candidate set was constructed by calculating every document's prefix score for quality evaluation. \textbf{That computation is not an implemented hash-search
 latency benchmark.} Its wall time must not be plotted as the latency of Approach C.
 
 In the same favorable synthetic case, native B at budget 512 recovered about 99.38\% of the
@@ -108,9 +107,9 @@ and work observations for a flat pool with a 1,000-candidate heap. They do not e
 latency ranking between an implemented native B and a hypothetical C.
 
 \Needspace{12\baselineskip}
-\subsection{Check the new derivation against independently sampled corpora}
+\subsection{Checking the recall formulas}
 \label{sec:recall-checks}
-The small arithmetic checker enumerates ordered corpora and sorts their documents directly.
+The small arithmetic checker lists every ordered document set and sorts its documents directly.
 This includes duplicate codes, score ties, empty prefixes, full prefixes, $K=1$, and $K=N$.
 All twenty settings agree with Equation~\eqref{eq:finite-top-k} to numerical precision. The
 16-bit worked example is then calculated from the formula rather than by enumerating every
@@ -142,7 +141,7 @@ Paired bits & $\approx100\%$ & 100.000\% & 93.847\%\\\bottomrule
 \end{tabular}\normalsize
 \end{center}
 The candidate rule is identical in every row. It returns an expected 32 of the 64 documents,
-but its recall changes with the score weights and document distribution. The last row isolates
+but its recall changes with the score weights and document distribution. The last row shows
 the failed assumption: individual bits remain balanced, yet assuming they are independent
 underestimates recall by about 6.15 percentage points.
 
@@ -174,10 +173,10 @@ shared-set argument; it does not claim that budgeted best-first traversal visits
 leaves. No latency ranking is inferred from these quality checks.
 
 \Needspace{12\baselineskip}
-\subsection{Put an uncertainty interval around the saved prediction errors}
+\subsection{How much prediction errors vary}
 The earlier study already showed that the normal approximation could miss real recall.
-To see how variable that gap is across queries, resample its sixteen check queries with
-replacement 10,000 times. For each resample, average the paired difference
+To see how that gap varies across queries, make 10,000 new sets by drawing sixteen queries from its sixteen check queries each time,
+allowing the same query to be drawn more than once in a set. For each resample, average the paired difference
 $\widehat r(q)-r(q)$. The middle 95\% of those averages gives the bootstrap interval below.
 A percentage point is an absolute difference: predicting 30\% when the observation is 25\%
 is an error of $+5$ points.
@@ -193,7 +192,7 @@ Cached Nomic & 5,000 & $-9.56$ & $[-18.25,\ -0.81]$\\
 Cached Nomic & 10,000 & $-7.73$ & $[-16.17,\ 0.64]$\\\bottomrule
 \end{tabular}\normalsize
 \end{center}
-This is a reanalysis of previously examined queries, not a fresh test set. The fitted score
+This is a reanalysis of previously examined queries, not a fresh test set. The estimated score
 correlation is held fixed, so the intervals do not include uncertainty from estimating that
 correlation. They also do not cover corpus changes, model changes, or selection among many
 configurations. When every checked query gives the same outcome, bootstrap variation can
@@ -205,19 +204,19 @@ extends beyond that tolerance. We should therefore retain this normal model as a
 of a possible mechanism, rather than use it to certify real 99\% recall.
 
 Improving the prediction requires new evidence about the relevant score distribution. For
-example, estimate the joint full and prefix penalties on calibration queries, freeze the
-candidate policy, and check it on separate queries. If an empirical distribution is used, its
-resolution in the nearest-score tail must be reported. A small sample can miss rare but
+example, estimate how full and prefix penalties vary together on queries used to fit the model, fix the
+candidate rule, and check it on separate queries. If the distribution comes from samples, report
+how much detail those samples provide about the rare nearest scores. A small sample can miss rare but
 important patterns; moving from 100,000 to a billion documents makes that issue more severe.
 The current extension does not claim a newly validated real-data predictor.
 
 \Needspace{12\baselineskip}
-\subsection{What was not validated}
-The study does not validate:
+\subsection{Limits of the checks}
+The study does not establish:
 \begin{itemize}
 \item real recall at a billion documents;
 \item a routing-recall model across arbitrary cluster counts;
-\item a normal tail for every query or a fixed percentage of Matryoshka prefix information;
+\item a normal distribution of the highest scores for every query or a fixed percentage of Matryoshka prefix information;
 \item a concrete hash enumerator's timing, peak queue size, or SIMD speed;
 \item float-vector recall, human relevance, or final answer accuracy from binary recall alone.
 \end{itemize}
@@ -226,15 +225,15 @@ This report keeps their comparisons separate. A method that searches binary scor
 can still miss neighbors under the original float-vector score.
 
 \Needspace{12\baselineskip}
-\subsection{How to extend the checks fairly}
+\subsection{Planning further checks}
 Freeze the representation, query set, filtering task and reference score first. Tune on one
 query set; check selected configurations on a different one. For every method, retain failures
 and empty returns, and record counts as well as times. For C, implement the actual enumerator
 before claiming its measured latency. For B, record split words, leaf words, documents scored
-and peak frontier memory separately.
+and peak memory for pending nodes separately.
 
-At each target recall, compare measured latency quantiles using configurations that actually
+At each target recall, compare measured latency percentiles using configurations that actually
 reach that target. Use the same query population and report the uncertainty of quality estimates.
 Query-level resampling is appropriate; counting repeated timings as independent quality samples
-is not. A few measured cases are useful evidence about mechanisms, not a complete characterization
+is not. A few measured cases are useful evidence about mechanisms, not a complete account
 of every data distribution.

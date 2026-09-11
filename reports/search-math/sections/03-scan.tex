@@ -1,13 +1,14 @@
-\section{Approach A: cluster, then full scan}
+\section{Full scan}
 \label{sec:scan}
 This is the reference candidate-search method. Once clusters and eligible rows are chosen,
 it scores every eligible row. There is no approximation \emph{inside} that selected pool.
-The work is regular and can read packed codes sequentially when filtering does not scatter them.
+The loop repeats the same operations and can read packed codes in order when filtering does
+not leave scattered rows.
 
 \fig{scan}{Approach A. The selected pool is smaller than the corpus only because of routing or filters.}{1}
 
 \Needspace{12\baselineskip}
-\subsection{Data layout and preprocessing}
+\subsection{Data layout}
 The common index from Equation~\eqref{eq:base} is sufficient. Cluster $j$ occupies the row
 range between offsets $j$ and $j+1$. A row contains its packed code, and the corresponding ID
 array maps the row back to the original document.
@@ -29,7 +30,7 @@ filter removes documents, $\Nelig=N$. Empty filtered clusters require no documen
 although finding that they are empty can still have a cost.
 
 \Needspace{12\baselineskip}
-\subsection{Step-by-step cost}
+\subsection{Work count}
 \begin{center}\small
 \begin{tabularx}{\linewidth}{@{}P{.25\linewidth}YP{.23\linewidth}@{}}\toprule
 Step & Work & Live temporary data\\\midrule
@@ -58,33 +59,33 @@ O\!\left(P+\Nelig\ceil{d/g}+\Nelig\log(R+1)+R\log(R+1)\right).
 The lookup term count is not a claim that each term is exactly one CPU instruction.
 
 \Needspace{12\baselineskip}
-\subsection{What is read, and what must remain in RAM?}
-The packed-code payload read for scoring is
+\subsection{Data reads and memory}
+The number of packed-code data bytes read for scoring is
 \begin{equation}
 V_{A,\rm codes}=\Nelig\,s_{\rm code}.
 \end{equation}
 ID reads, filter data, table accesses and result-heap accesses are additional traffic. A cache
-may satisfy many of them. Thus this is a named payload count, not a complete DRAM measurement.
+may satisfy many of them. This formula therefore counts only code data; it does not measure all reads from main memory.
 Sequential and scattered rows may have different effective $c_{\rm lut}$ or $c_{\rm row}$.
 
-Index storage and candidate-stage scratch are
+Index storage and temporary memory during candidate search are
 \begin{align}
 M_{A,\rm index}&=\Mbase,\\
 Q_{A,\rm search}&=\Qbase+Q_{\rm row\ iterator}+Q_{\rm scan\ workspace}.
 \label{eq:scan-memory}
 \end{align}
 A streaming scan does not need an $N$-element score array. A matrix-based batch implementation
-may choose to allocate such an array; then that allocation must be added. The same algorithmic
-ranking can therefore have different peak RAM under different implementations.
+may choose to allocate such an array; then that allocation must be added. Two implementations can therefore return the same ranking while using different amounts of
+peak RAM.
 
 \Needspace{12\baselineskip}
-\subsection{A routing miss in the four-bit example}
+\subsection{Routing example}
 Partition the eight documents from Section 1 into
 \[
 \mathcal C_0=\{1,3,4,6\},\qquad \mathcal C_1=\{2,5,7,8\}.
 \]
 This is an illustrative fixed partition, not a claim about the output of a particular
-clustering run. Suppose the router opens only $\mathcal C_1$. A scans scores
+clustering run. Suppose the router opens only $\mathcal C_1$. A computes scores
 $1.2,0.6,0.8,-0.2$ and returns documents 2 and 7. The global top two are 1 and 2, so recall is
 $1/2$. The scan did nothing wrong inside the opened cluster: document 1 was never considered.
 
@@ -92,16 +93,16 @@ Opening both clusters returns documents 1 and 2. This is why a scan can be exact
 pool and still have imperfect global recall.
 
 \Needspace{12\baselineskip}
-\subsection{SIMD changes a coefficient, not the score}
-SIMD means one instruction operates on several data lanes. It can accelerate code extraction,
+\subsection{SIMD}
+SIMD means one instruction operates on several values at once. It can accelerate code extraction,
 lookup accumulation, and selection. It does not by itself change the number of stored bits.
 There are two useful ways to model its effect.
 
-\textbf{Calibrated model.} Measure the implemented kernel's effective time per work unit,
+\textbf{Calibrated model.} Measure the scoring routine's time per work unit,
 $c_{\rm lut}$, for the relevant dimensions and access pattern. If that rate already includes
 selection, use a combined $T_{\rm score+select}$ and do not add the heap cost a second time.
 
-\textbf{Resource model.} If a kernel performs $U_{\rm op}$ compute units and causes $V_{\rm DRAM}$ bytes of DRAM
+\textbf{Resource model.} If a scoring routine performs $U_{\rm op}$ compute units and causes $V_{\rm DRAM}$ bytes of DRAM
 traffic, compute throughput $\Gamma$ and memory bandwidth $\beta$ give the lower bound
 \begin{equation}
 T_{\rm kernel}\geq\max\{U_{\rm op}/\Gamma,\ V_{\rm DRAM}/\beta\}.
@@ -113,13 +114,13 @@ can put actual time above the bound. Do not add this resource estimate on top of
 coefficient that already includes the same work.
 
 For multiple queries, a float score matrix can be written as $QB^\top$, where rows of $B$ are
-expanded binary codes. That exposes matrix operations, but expansion, batching delay, device
+expanded binary codes. We can compute this with matrix operations, but expansion, waiting to form a batch, device
 transfers and score-buffer storage have costs. A fast GPU batch is not automatically a fast
 single-query request.
 
-\begin{resultbox}{What Approach A guarantees}
+\begin{resultbox}{Accuracy}
 For a fixed eligible pool, A returns its exact binary top $R$ under the stated tie rule.
 With every eligible cluster searched, it has 100\% binary recall. With partial routing,
 its global binary recall is limited by which true neighbors reach the selected pool.
-No property of the scan restores documents missed by routing, quantization or an earlier filter.
+The scan cannot restore documents missed by routing, quantization or an earlier filter.
 \end{resultbox}

@@ -1,6 +1,6 @@
 # Three ways to search binary embeddings — concise edition
 
-This 20-page report follows a query through the shared score, scan, bitplane branching,
+This 21-page report follows a query through the shared score, scan, bitplane branching,
 weighted key lookup, recall, measured results, and conditional larger-corpus choices. It uses
 12-point body text, six figures, three inline method listings, and one reproduction listing. The full derivations and
 historical experiments remain in `../search-math/`.
@@ -60,9 +60,23 @@ This reads frozen inputs; it does not build or query a billion-document index.
 - [x] Inspect the final layout and confirm the page count.
 - [x] Rebuild from the source bundle and record final verification.
 
-## Prose revision
+## Earlier prose revision
 
 The original concise edition is preserved at commit `3d74cf4`. The revised prose keeps the
 same methods, assumptions, equations, figures, pseudocode and results. The introduction
 attributes the starting point to Exa's published description, and the explanations follow
 the examples in a more conversational voice. The layout remains 20 pages.
+
+## Plain-English edition
+
+The latest pass uses short topic headings and explains unfamiliar terms through the existing
+query and memory examples. Exa's shared representation and scoring choices are identified
+where they are used. Methods, equations, pseudocode, measurements, and conclusions are unchanged.
+The page count is allowed to grow when an example makes the explanation easier to follow.
+
+## Plain-English rewrite
+
+The latest edition uses shorter headings and explains unfamiliar terms with examples. It
+attributes the shared representation and scoring techniques to Exa's published description.
+The methods and measured results are unchanged. Earlier PDFs and sources remain in Git.
+The concise edition is 21 pages and the detailed reference is 74 pages.

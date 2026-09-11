@@ -38,11 +38,11 @@
 \begin{document}
 \begin{titlepage}
 \vspace*{14mm}
-{\sffamily\small\color{Ink} A MATHEMATICAL AND ENGINEERING REPORT}\par
+{\sffamily\small\color{Ink} SEARCH METHODS, COSTS, AND RESULTS}\par
 \vspace{9mm}
 {\Huge\bfseries\color{Ink} Three ways to search\par binary embeddings}\par
 \vspace{6mm}
-{\Large From stored data to query latency,\par memory usage, and recall}\par
+{\Large From stored data to query time,\par memory usage, and recall}\par
 \vspace{15mm}
 \begin{tabularx}{\linewidth}{@{}lY@{}}
 \textbf{A} & Cluster, then score every selected document.\\[5pt]
@@ -50,15 +50,16 @@
 \textbf{C} & Cluster, then enumerate keys from the query's ideal sign pattern.\\
 \end{tabularx}\par
 \vspace{13mm}
-This report develops the three methods from the same score and the same retrieval task.
-It explains what is built before a query, what is touched during a query, and where each
-method can lose recall. Every general cost formula uses named parameters. Small numerical
-examples make the formulas concrete; measured results are identified separately.
+We compare three ways to search the same document vectors. For each method, we follow a
+query, show the code steps, and count the time and memory it needs. Small examples explain
+the calculations. We then compare the estimates with measurements and show where they fail.
+The shared embedding and binary-scoring setup follows Exa's published description; the
+branching and key-lookup methods are the alternatives tested here.
 \vfill
-\textbf{Reading order.} Start with the four-bit example and shared pipeline. Each method then
-has its own data layout, pseudocode, operation count, latency model, and memory calculation.
-The statistical section explains what can and cannot be inferred about recall. The final
-section collects the formulas for comparison under a RAM limit.
+\textbf{Reading order.} Start with the query example and shared pipeline. The next sections
+explain full scan, bitplane search, and key lookup. The recall section asks which correct
+results each method might miss. The later sections show the experiments and compare the
+methods under a memory limit. For a shorter starting point, see the companion concise report.
 \vspace{8mm}
 \par 11 September 2026
 \end{titlepage}
@@ -99,7 +100,7 @@ section collects the formulas for comparison under a RAM limit.
 \clearpage
 \appendix
 \input{sections/09-appendix}
-\begin{thebibliography}{9}
+\begin{thebibliography}{9}\raggedright
 \bibitem{exa} Exa Team. \emph{How we built a web-scale vector database}. 17 December 2024.
 \url{https://exa.ai/blog/building-web-scale-vector-db}.
 \bibitem{mrl} A. Kusupati et al. \emph{Matryoshka Representation Learning}. 2022, revised 2024.

@@ -1,30 +1,30 @@
-\section{Approach C: cluster, then walk backwards from the ideal key}
+\section{Key lookup}
 \label{sec:keys}
 Approach C changes the lookup structure. Instead of repeatedly intersecting document masks,
 it asks: \emph{which stored documents have this particular key?} Start from the signs the query
 prefers, then consider other keys in increasing mismatch penalty.
 
-The primary method here still starts with the same selected clusters. A global hash table is
+This method still starts with the same selected clusters. A global hash table is
 the special case $C=P=1$. We do not silently switch between clustered and global formulas.
 
 \fig{keys}{Approach C. Each cluster has a key directory and postings. Empty lookups still consume work.}{1}
 
 \Needspace{12\baselineskip}
-\subsection{Full keys and short keys are different choices}
+\subsection{Full and short keys}
 Let $I_h$ be the fixed set of $h$ lookup coordinates, often the first $h$ positions. A
 \textbf{full key} has $h=d$. Its weighted penalty determines the complete binary score.
-A \textbf{short key} has $h<d$. It ranks a prefix, then the full $d$-bit score ranks the
+A \textbf{short key} has $h<d$. We use it to rank a prefix, then use the full $d$-bit score to rank the
 retrieved candidates.
 
 A full-key search can be exact if it enumerates keys in true query-weighted order and finishes
-the result-boundary tie. A short-key candidate quota does not have that guarantee. It can still
+checking all ties at the result cutoff. A short-key candidate quota does not have that guarantee. It can still
 work well, and can also be made exact with a valid full-score stopping bound. These are
 properties of the stopping rule, not of the name ``walk backwards.''
 
 \Needspace{12\baselineskip}
-\subsection{The data structure behind a key lookup}
-For each cluster, a directory maps a key to a posting range containing the local row references
-of documents with that key. There may be many documents per key. Finding a directory entry
+\subsection{Key directory}
+For each cluster, a directory maps a key to its postings: the local row references of
+documents with that key, stored as one range. There may be many documents per key. Finding a directory entry
 without finding its document rows is not enough to produce results.
 
 \par\noindent\begin{minipage}{\linewidth}
@@ -40,12 +40,12 @@ BuildKeyIndex(cluster_codes, lookup_coordinates):
 \end{minipage}\par
 
 A \textbf{dense directory} has an offset for every possible key. A \textbf{sparse hash table}
-only stores occupied keys but adds key, slot and load-factor overhead. A sorted-key array is
+only stores keys that have documents, but needs space for keys, slots, and unused capacity. A sorted-key array is
 another option: it can use less overhead, but a lookup uses comparisons or another search
 structure instead of an assumed constant-time hash access.
 
 \Needspace{12\baselineskip}
-\subsection{Do not index fixed routing bits as if they were still free}
+\subsection{Fixed routing bits}
 If sign-prefix routing fixes some lookup coordinates inside cluster $j$, those coordinates
 cannot vary within it. Let $r_j$ be the number of lookup coordinates fixed by that cluster,
 and let
@@ -53,7 +53,7 @@ and let
 h_j=h-r_j,\qquad U_j\leq\min(n_j,2^{h_j}).
 \label{eq:free-key}
 \end{equation}
-$U_j$ is the number of occupied free keys. For first-$r$-bit routing and a first-$h$-bit lookup
+$U_j$ counts the keys that actually occur on the coordinates still free to vary. For first-$r$-bit routing and a first-$h$-bit lookup
 with $h\geq r$, $h_j=h-r$. The fixed coordinates add a \emph{constant} penalty for that cluster;
 they do not create $2^r$ additional keys inside it. Ordinary k-means clusters do not generally
 fix any sign coordinate, so this simplification does not follow from their cluster ID.
@@ -67,7 +67,7 @@ The number of local possibilities is four, not sixteen.
 \end{examplebox}
 
 \Needspace{12\baselineskip}
-\subsection{Index storage: name every array}
+\subsection{Index storage}
 Use the common baseline row order and ID mapping. Let $b_{\rm ref}$ be the bytes for a local
 posting reference, $b_k(h_j)$ the bytes storing a key, and $b_{\rm slot}$ the remaining per-slot
 metadata. With a chosen hash load factor $0<\alpha<1$, a reference sparse-key layout uses
@@ -83,8 +83,8 @@ Therefore
 \boxed{M_{C,\rm index}=\Mbase+N b_{\rm ref}+M_{\rm keydir}.}
 \label{eq:keys-storage}
 \end{equation}
-This chosen layout deliberately counts both the common external-ID mapping and the extra
-row-reference permutation. If the build reorders the actual codes and IDs by key within each
+This layout counts both the common external-ID mapping and the extra
+array of row references ordered by key. If the build reorders the actual codes and IDs by key within each
 cluster, postings can become direct contiguous row ranges. Then the extra $N b_{\rm ref}$ can
 be removed. That is an explicit layout change, not permission to omit all document IDs.
 
@@ -94,13 +94,13 @@ M_{\rm dense-dir}=\sum_j(2^{h_j}+1)b_o.
 \]
 The implemented C++ index uses the contiguous-code alternative and a separately chained
 hash table. Section~\ref{sec:implemented-study} gives its allocation formula and measured
-payload fields; the reference slot formula above is not substituted for actual process RAM.
+fields for data bytes; the reference slot formula above does not stand in for actual process RAM.
 
-Exponential key space makes dense directories expensive. Sparse directories avoid storing
+The number of possible keys grows exponentially, making dense directories expensive. Sparse directories avoid storing
 empty keys, but do not make probing empty keys free.
 
 \Needspace{12\baselineskip}
-\subsection{How to enumerate all flip combinations in weighted order}
+\subsection{Flip order}
 Let the free-coordinate weights be sorted in ascending order,
 $a_{(1)}\leq\cdots\leq a_{(h_j)}$. Flipping a subset $S$ costs
 $\sum_{i\in S}a_{(i)}$. Merely flipping the first bit, then the first two, then the first three
@@ -130,12 +130,12 @@ if the coordinate before its largest coordinate is also present, remove the larg
 otherwise replace the largest coordinate by its predecessor. This explains why the construction
 visits every subset without needing a duplicate-state hash set.
 
-A state must store enough information to construct the key. A full bitmask representation costs
+Each queued state must store enough information to construct the key. A full bitmask representation costs
 $b_w\ceil{h_j/w}$ bytes per state, plus its penalty, last coordinate and queue metadata.
 Copying that mask into children is work. A persistent representation can change this cost,
 but it then needs its own traversal and memory accounting.
 
-\begin{examplebox}{The full-key order can be accurate even when a greedy branch is not}
+\begin{examplebox}{Full-key example}
 For $q=(0.6,0.5,0.4,0.3)$, the ideal code is \texttt{1111}. The first penalties include
 $0$, $0.3$, $0.4$, $0.5$, $0.6$, $0.7$, and so on. The code \texttt{0111} is found by flipping
 coordinate 1 at penalty $0.6$. The code \texttt{1000} has penalty $1.2$ and comes later.
@@ -144,7 +144,7 @@ the query's largest coordinate. It may have to check several empty keys before t
 \end{examplebox}
 
 \Needspace{12\baselineskip}
-\subsection{Lookup and stopping within selected clusters}
+\subsection{Lookup and stopping}
 For short keys, a simple implementation allocates candidate targets $m_j$ to probed clusters.
 A more flexible implementation merges their next-prefix-key scores and draws candidates from
 the best available stream. Whichever policy is used must be a parameter of the experiment;
@@ -183,16 +183,17 @@ $A_{\rm tail}=\sum_{i\notin I_h}|q_i|$. Every document in an unvisited prefix ke
 S(q,b)\leq T_h(b)+A_{\rm tail}.
 \label{eq:prefix-bound}
 \end{equation}
-If the best unvisited prefix upper bound is strictly below the current worst top-$R$ score,
-the result is certified. If not, continue even when a nominal candidate quota has been reached.
-A larger tail makes this bound less selective. Fixed routing-coordinate contributions must be
+If the best possible score of any unvisited prefix is strictly below the current worst
+top-$R$ score, we have proved that the result is exact. If not, continue even when a nominal candidate quota has been reached.
+A larger tail allows a higher best possible score, so this test rules out fewer prefixes. Fixed routing-coordinate contributions must be
 included consistently; no coordinate may be counted twice.
 
 \Needspace{12\baselineskip}
-\subsection{Do we need to rescore a document whose full key is known?}
-Not always. With a full key and the true query weights, its complete score is already
+\subsection{Reusing key scores}
+We do not always need to rescore a document. With a full key and the true query weights,
+its complete score is already
 $A-2\pi_q(\text{key})$. Every document in that key's posting range has that same binary score.
-The search can offer their IDs to the result heap without unpacking and rescoring each code.
+The search can add their IDs to the best-$R$ heap without unpacking and rescoring each code.
 For a short key, the known prefix contribution can similarly be reused while evaluating
 only the remaining coordinates.
 
@@ -201,16 +202,16 @@ actually evaluated per candidate in cluster $j$. The simple pseudocode above has
 A full-key implementation reusing its exact key score can have $G_{C,j}=0$. A tail-only scorer
 can have approximately $\ceil{d_{\rm remaining}/g}$ groups, with alignment and fixed routing
 coordinates handled explicitly. It still pays for postings, key-score arithmetic, selection,
-and any later float reranking. This optimization changes the cost; it is not a recall loss.
+and any later float reranking. Reusing the score saves work without reducing recall.
 
-The reference storage formula retains the common packed rows. A specialized full-key layout
-can also avoid a redundant per-document code copy by using its stored full keys, provided its
-ID/posting and key ownership are redesigned and counted. Equation~\eqref{eq:keys-storage} is
+The reference storage formula retains the common packed rows. A layout designed for full keys
+can also avoid a redundant per-document code copy by using its stored full keys, provided we
+redesign and count the storage for IDs, postings, and keys. Equation~\eqref{eq:keys-storage} is
 one explicit layout, not a universal lower bound on every possible key index.
 
 \Needspace{12\baselineskip}
-\subsection{If ``work upwards'' means removing a constraint}
-There is another reasonable interpretation of the idea. Instead of flipping a bit and probing
+\subsection{Prefix relaxation}
+We can also search by removing constraints. Instead of flipping a bit and probing
 one more exact key, remove a bit constraint. For example, \texttt{101*} means either
 \texttt{1010} or \texttt{1011}. That is a set of keys. A plain exact-key hash table does not
 answer this wildcard request in one ordinary lookup.
@@ -257,7 +258,7 @@ SearchByRelaxingPrefix(q, query_key, trie, table, R, candidate_target):
 \end{lstlisting}
 \end{minipage}\par
 An exact version may stop early only after bounding \emph{every} unvisited region against the
-current full-score heap. Simply finding enough IDs in a relaxed prefix is not such a proof.
+current full-score heap. Finding enough IDs in a relaxed prefix does not prove this.
 The remaining score can still change the ordering.
 
 Let $Z_j$ be the number of stored trie nodes and $b_{\rm trie}$ their record size, including
@@ -282,13 +283,13 @@ gather buffers, and common query RAM. Here $F_j$ must count repeated rows if the
 The same common pipeline and final rerank terms are added for end-to-end latency.
 
 A fixed trie can drop its last prefix coordinate cheaply. Dropping an arbitrary
-query-selected low-magnitude coordinate can produce several disjoint ranges, so it does not
+low-magnitude coordinate chosen for the query can produce several separate ranges, so it does not
 have the same constant-cost parent operation. A query-adaptive bit order requires additional
 traversal or a different index. This is the main difference between a prebuilt fixed trie and
 the query-ordered bitplane traversal.
 
 \Needspace{12\baselineskip}
-\subsection{Count keys, postings, scores and enumeration states}
+\subsection{Work count}
 Let $H_j$ be the number of keys attempted in cluster $j$, including empty keys. Let $F_j$ be
 the number of eligible posting rows retrieved and scored. Let $E_j$ be the number of
 sorted-subset heap comparisons, $C_j^{\rm copy}$ the number of key-word copies, and let
@@ -296,7 +297,7 @@ $Q_j^{\max}$ be the largest enumeration-queue size. Define $F=\sum_jF_j$.
 
 For the two-child stream, $E_j=O(H_j\log(Q_j^{\max}+1))$ comparison work, and
 $C_j^{\rm copy}=O(H_j\ceil{h_j/w})$ for full-mask copies. Hashing a key also depends on its
-length and table layout. An effective $c_{\rm lookup}(h_j,\alpha)$ should price the emitted-key iteration outside heap comparisons and child-mask copies: key construction, fixed state bookkeeping, the directory lookup, and obtaining the current key score or bound. This includes cache effects and collisions, rather than assume one CPU operation.
+length and table layout. The time $c_{\rm lookup}(h_j,\alpha)$ should cover the work for each emitted key outside heap comparisons and child-mask copies: key construction, fixed state bookkeeping, the directory lookup, and obtaining the current key score or bound. This time includes cache effects and hash collisions; a lookup is not one CPU operation.
 
 \begin{align}
 T_{C,\rm candidates}={}&T_{\rm keyprep}
@@ -317,9 +318,9 @@ The hash directory can be built before the query, but query-specific weighted or
 on $q$. Precomputing a hash table does not precompute this order for every float query.
 
 \Needspace{12\baselineskip}
-\subsection{Query RAM while enumerating}
+\subsection{Query memory}
 Let $b_{\rm enum,j}$ include a key mask, penalty and queue metadata. For simultaneously active
-streams, the candidate-search scratch is
+streams, the temporary memory for candidate search is
 \begin{equation}
 Q_{C,\rm search}=\Qbase+
  \max_t\left[\sum_j\gamma_C Q_j(t)b_{\rm enum,j}
@@ -332,12 +333,11 @@ live stream sizes by the maximum live cluster stream. A global full-score stream
 all selected streams active. These are different execution choices.
 
 Postings can be streamed into a top-$R$ heap; storing all $F$ retrieved IDs is not mandatory.
-If they are materialized for batch reranking, add $F b_{\rm ref}$ or the actual bounded batch
-size. A sparse dictionary's small stored size does not bound the size of a query's enumeration
-queue. With the two-child stream, the queue can grow by at most one per emitted state, but
+If we store them for batch reranking, add $F b_{\rm ref}$ or the actual bounded batch
+size. A small sparse dictionary does not guarantee a small queue while the query lists keys. With the two-child stream, the queue can grow by at most one per emitted state, but
 $H_j$ itself can be enormous.
 
-\begin{resultbox}{What Approach C does and does not lose}
+\begin{resultbox}{Accuracy}
 Full-key enumeration in true penalty order can have 100\% binary recall. Its difficulty can
 be time or queue memory, especially when most keys are empty. Short-key search is a different
 tradeoff: it can collect useful candidates cheaply, but a fixed quota is not a recall guarantee.

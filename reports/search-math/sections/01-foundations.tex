@@ -1,23 +1,24 @@
-\section{Start with the question a search must answer}
+\section{Scoring}
 \label{sec:foundations}
 Suppose a database contains $N$ documents. A query arrives, and the system must return $K$
-documents. We want the smallest query latency that fits the available RAM and reaches a
+documents. We want the fastest search that fits the available RAM and reaches a
 specified recall target. Before comparing algorithms, we must agree on what ``the correct
 $K$ documents'' means.
 
 This report first uses one precise target: the top $K$ documents under the same
-\textbf{float-query, binary-document inner product}. This isolates the search index. A later
+\textbf{float-query, binary-document inner product}. This lets us compare the search indexes using one score. A later
 reranking step may use longer float embeddings, but that is a different score and a different
-reference ranking. Exact binary search need not recover the exact float ranking, and neither
-ranking is automatically the same as human relevance.
+reference ranking. An exact search under the binary score can return a different order from float scoring.
+Neither score necessarily gives the order a person would consider most relevant.
 
 \Needspace{12\baselineskip}
-\subsection{Three costs that must not be confused}
+\subsection{Storage, memory, and work}
 \begin{enumerate}
 \item \textbf{Index storage:} data built in advance and kept between queries. Examples are
 packed document codes, cluster offsets, centroids, bitplanes, and key directories.
 \item \textbf{Query RAM:} temporary live data needed by one query. Examples are a query vector,
-score tables, a top-$R$ result heap, pending branch masks, and key-enumeration states.
+score tables, the best $R$ results (stored in a heap), masks for pending branches, and states used to
+list keys in score order.
 \item \textbf{Query work:} operations and data accesses over time. Reading the same array a
 thousand times does not require a thousand stored copies, but it can cost a thousand reads.
 \end{enumerate}
@@ -25,21 +26,21 @@ The number of scored documents alone does not measure work. A method can score f
 and still read more memory or manage a much larger queue.
 
 \Needspace{12\baselineskip}
-\subsection{The shared pipeline}
-All three primary methods begin with clusters. The no-clustering experiment is the special
+\subsection{Search pipeline}
+All three main methods begin with clusters, or groups of documents. The no-clustering experiment is the special
 case $C=P=1$, not a different definition of the task.
 \fig{shared}{The common query pipeline. Only the candidate-search stage changes between A, B and C.}{1}
-An embedding model converts query text to a float vector. A short representation routes the
-query to selected clusters. Optional filters select eligible documents. The index produces
+An embedding model converts query text to a float vector. A short part of the vector selects the
+clusters to search. Optional filters select eligible documents. The index produces
 up to $R$ binary-score candidates, with $R\geq K$. An optional final stage fetches longer
-vectors and reranks those candidates, then returns $K$ results.
+vectors and scores the candidates again with those vectors, then returns $K$ results.
 
 If the experiment only measures the index, cache the query embedding and omit the optional
 reranker. If the experiment claims end-to-end query latency, include them. We will keep both
 versions visible in the formulas.
 
 \Needspace{12\baselineskip}
-\subsection{A four-bit example we can calculate by hand}
+\subsection{Four-bit example}
 Let
 \[
 q=(0.7,-0.4,0.2,-0.1),\qquad t=\sgn(q)=(+1,-1,+1,-1).
@@ -53,9 +54,9 @@ S(q,b)=\sum_{i=1}^{d}q_i b_i
        =A-2\underbrace{\sum_{i=1}^{d}a_i\ind[b_i\ne t_i]}_{\pi_q(b)}.
 \label{eq:score}
 \end{equation}
-The quantity $\pi_q(b)$ is the \textbf{weighted mismatch penalty}. Maximizing score is exactly
-the same as minimizing this penalty. The factor two is not a hardware setting: replacing a
-contribution $+a_i$ by $-a_i$ changes the score by $2a_i$.
+The quantity $\pi_q(b)$ is the \textbf{weighted mismatch penalty}: we add the query
+magnitudes wherever the document has the opposite sign. The highest score has the lowest penalty. The factor two comes from replacing a
+contribution $+a_i$ by $-a_i$, which changes the score by $2a_i$.
 
 \begin{center}
 \begin{tabular}{@{}clcr@{}}\toprule
@@ -78,9 +79,10 @@ The query gives both a preferred sign and a cost for getting that sign wrong. It
 both branching and key enumeration.
 
 \Needspace{12\baselineskip}
-\subsection{Matryoshka prefixes are useful; they are not sorted magnitudes}
-A Matryoshka model trains selected prefixes of an embedding to remain useful representations
-\cite{mrl}. It does not impose
+\subsection{Matryoshka prefixes}
+Exa uses Matryoshka prefixes in its public vector database design \cite{exa}.
+A Matryoshka model is trained so that selected prefixes---the first coordinates of an
+embedding---remain useful representations \cite{mrl}. It does not impose
 $|q_1|\geq |q_2|\geq\cdots\geq |q_D|$ for every query. A later coordinate may have a larger
 magnitude than an earlier one. Nor does the name of the training method tell us the numerical
 recall of the first $h$ binary signs.
@@ -136,13 +138,13 @@ W_j=\ceil{n_j/w},\qquad s_{\rm mask,j}=b_w W_j.
 \label{eq:widths}
 \end{equation}
 The first describes one packed \emph{document}; the second describes one bitplane across a
-\emph{cluster}. They have different axes. If a filter leaves only a few eligible rows,
+\emph{cluster}. One stores bits for a document; the other stores a bit for each document in a cluster. If a filter leaves only a few eligible rows,
 $W_j$ does not shrink unless the data is physically rebuilt or represented differently.
 
 \Needspace{12\baselineskip}
-\subsection{Three kinds of statement in this report}
+\subsection{Claims and evidence}
 An algebraic identity, such as Equation~\eqref{eq:score}, is exact under its stated score.
 An operation count is exact for the stated pseudocode or layout, but can change with the
 implementation. A latency or statistical estimate also needs hardware or distribution
-assumptions. Measured tables report a particular experiment. Keeping these categories separate
-is necessary for a fair comparison.
+assumptions. Measured tables report a particular experiment. We keep these kinds of evidence separate so that a formula or estimate is not mistaken for
+a measured result.

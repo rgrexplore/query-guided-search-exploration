@@ -1,4 +1,4 @@
-\section{What are we trying to make faster?}
+\section{Starting point}
 I started this project after reading Exa's description of its vector database~\cite{exa}.
 If we look at the work inside a selected cluster, one thing we can explore is whether the
 query can help us choose documents before we score them. We can always calculate a score
@@ -19,7 +19,7 @@ calculations is only part of the job: we also need to look at the memory those c
 read. Avoiding a document score can introduce work elsewhere.
 
 The experiments give us three different outcomes to explain. On the tested real embeddings,
-neither alternative established a speed advantage over a well-tuned scan. With constructed
+we did not find reliable evidence that either alternative was faster than a well-tuned scan. With constructed
 queries whose important coordinates stayed in one prefix, key lookup had a small advantage
 over a closely related directly routed scan. When the important coordinates changed with
 each query, bitplane branching had a large advantage in the constructed case. So the useful
@@ -28,19 +28,19 @@ question is what makes those cases different, rather than which method wins ever
 Let's start with one query and six documents, follow it through each method, and then count
 the work and storage. From there, we can look at recall, choose parameters, and compare the
 measurements. At the end we'll use the calculations to consider a billion documents. Those
-larger latency numbers are forecasts; the complete native indexes were tested through eight
+larger latency numbers are forecasts; the complete C++ indexes were tested through eight
 million documents.
 
-\subsection{One query, six documents, one score}
-Consider an embedding: a vector of numbers produced from text. We'll keep the query as numbers,
-but store just the sign of each document coordinate. A stored bit of 1 means $+1$, and a bit
-of 0 means $-1$; this is \emph{binary quantization}. For our example, let
+\subsection{A query example}
+We use the binary document representation and floating-point query described in Exa's
+post~\cite{exa}. In our examples, a stored bit of 1 means $+1$, and a bit of 0 means $-1$. We'll use five coordinates so we can follow
+the calculation on the page. Let the query be
 \[
 q=[0.7,\ 0.5,\ -0.4,\ -0.6,\ 0.3].
 \]
-The score is the dot product, so we multiply corresponding coordinates and add the results.
-If we choose signs \texttt{11001}, every contribution is positive: that is the document pattern
-the query prefers, and it scores $0.7+0.5+0.4+0.6+0.3=2.5$.
+With that same dot-product score, signs \texttt{11001} make every contribution positive, giving
+$0.7+0.5+0.4+0.6+0.3=2.5$. This is the pattern the query would prefer. Next we'll compare it
+with the documents that actually exist.
 
 \begin{center}
 \begin{tabular}{@{}rcrr@{}}\toprule
@@ -55,7 +55,7 @@ Document ID & Stored signs & First-bit cluster & Full score\\\midrule
 \end{center}
 Here the correct top two are documents 3 and 4. If scores tie, we put the smaller document ID
 first, and then use that same rule when checking every method. We can also run this example
-against the native implementations with \path{examples/small_search.py}.
+against the C++ implementations with \path{examples/small_search.py}.
 
 If we look at coordinate 1, a matching sign contributes $+0.7$, while a mismatch contributes
 $-0.7$. That one change lowers the score by $1.4$. At coordinate 5, the loss is only $0.6$,
@@ -72,17 +72,18 @@ For document 4, only coordinate 5 mismatches, giving $S=2.5-2(0.3)=1.9$. From he
 by the largest score or the smallest mismatch penalty gives the same order. Ordinary Hamming
 distance counts each mismatch equally; here we use the query magnitudes as weights.
 
-\subsection{From text to an index, then back to results}
+\subsection{Shared pipeline}
 Suppose the collection contains $N$ documents. Before any queries arrive, we embed the text,
 choose a representation width $d$, pack the document signs, and build the index. We also assign
 each document to one cluster. A cluster is a stored subset of the collection, and we can form
 those subsets by learning from the vectors or by using a fixed sign prefix.
 
-Matryoshka training makes selected prefixes useful at smaller dimensions~\cite{mrl}, which is
-why a shorter representation is worth considering. But it doesn't sort each query's coordinates
-by magnitude, or guarantee that 24 sign bits preserve its nearest neighbors. If we truncate an
-embedding and then take its signs, we have made two separate changes to the representation.
-We'll hold that representation fixed across methods in the primary comparison.
+For shortening embeddings, we also refer to Exa's use of Matryoshka training~\cite{exa,mrl}.
+We'll use that representation as given. One distinction matters for the proposed search:
+a useful prefix is not the same thing as the largest query coordinates. Matryoshka doesn't
+sort each query by magnitude, and it doesn't guarantee that its first 24 sign bits preserve
+its nearest neighbors. Shortening the vector and taking its signs are two separate changes;
+we hold the resulting representation fixed across the methods we compare.
 
 Once a query arrives, we embed and normalize it, select clusters, and search their documents.
 Opening one cluster is one \emph{probe}. With $C$ clusters and $P$ probes, balanced clusters
@@ -97,8 +98,9 @@ another model. If those stages are enabled, they belong in the complete request 
 For the primary index comparison here, we use cached query embeddings, the same binary score,
 and no float reranker. Later we'll measure actual text queries so we can see the complete wait.
 
-Exa's published vector-database description is the starting point for this cluster-and-scan
-design and compact scoring~\cite{exa}. Our A follows that broad structure locally; the timings
-are not measurements of Exa's production system. We also need to distinguish two routing
-choices we'll encounter: a sign prefix and learned IVF clusters. A $k$-bit prefix defines
-up to $2^k$ patterns, not $k$ clusters.
+The baseline therefore follows Exa's public description of compact scoring inside selected
+clusters~\cite{exa}. The measurements here are of our local implementation, not Exa's production
+system. We also try two ways of forming clusters: learning groups from similar vectors,
+known as IVF, and assigning documents by their first few sign bits. With a $k$-bit prefix,
+there are up to $2^k$ possible patterns, not $k$ clusters. B and C change how we search the
+selected documents; they do not introduce the shared embedding or quantization techniques.

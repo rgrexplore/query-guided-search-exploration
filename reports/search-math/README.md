@@ -3,11 +3,15 @@
 The main deliverable is the rendered report at
 `../../output/pdf/search-methods-mathematics.pdf`.
 
-The report develops the shared pipeline, then cluster + scan, cluster + dense bitplanes,
-and cluster + weighted key lookup. It also explains literal prefix relaxation with a trie.
-It separates exact identities, implementation-dependent counts, hardware cost models,
-statistical assumptions and measured evidence. General formulas are parameterized; numbers
-appear in labeled examples or measured tables.
+Start with the concise report at `../../output/pdf/search-methods-concise.pdf` for the main
+flow and examples. This longer report keeps the complete calculations, earlier experiments,
+and details needed to check the results.
+
+Both use the same three methods: select clusters and scan, select clusters and search
+bitplanes, or select clusters and look up bit patterns. The longer report also explains a
+prefix tree, where removing a bit constraint includes more possible keys. It keeps exact
+calculations separate from estimates and measured results. The shared vector representation
+and scoring choices are attributed to Exa's public description.
 
 ## Read or rebuild
 
@@ -40,7 +44,7 @@ study; `nearest-distance.pdf` and `recall-model-checks.pdf` show the derivation 
 `measured-cases.pdf` compares independently evaluated settings on three data distributions;
 `billion-break-even.pdf` shows the conditional scan-fraction crossing.
 
-## Arithmetic and evidence checks
+## Check the calculations
 
 Run with Python 3; the report checker uses the standard library:
 
@@ -50,7 +54,7 @@ python3 verify_math.py
 
 It checks:
 
-- the score identity, lookup example, bitplane transpose and routed top-two example;
+- the score equation, lookup example, bitplane layout and top-two query example;
 - complete weighted subset ordering, including equal and zero weights;
 - the six-bit conditional-recall example and twenty finite top-K settings by exhaustive counting;
 - the 256-document, 16-bit example, including its nearest-distance mixture;
@@ -61,26 +65,26 @@ It checks:
 Results and SHA-256 hashes are saved in `evidence/math-checks.json`. The evidence directory
 contains frozen copies of the original scaling summary, FiQA summary and quality-study
 observations. Their hashes identify the exact inputs to this report. They are small summary
-and per-query files, not the corpus text or embedding arrays.
+and per-query files, not the document text or embedding arrays.
 
 The original larger studies remain in the project `results/` directory. The small study was
-run by `calculator/validate_recall.py` using cached embeddings and the native index. Re-running
+run by `calculator/validate_recall.py` using cached embeddings and the C++ index. Re-running
 that study requires its original cache and Python environment; compiling and checking this
 report's arithmetic do not.
 
 ## Scope
 
-The report now includes native implementations, timing calibration, independent real-query
-evaluation and constructed query-weight experiments. It does not certify a billion-document
+The report now includes C++ implementations, measured timing costs, tests on new real queries,
+and experiments with deliberately chosen query weights. It does not certify a billion-document
 latency/recall prediction or complete the previously edited frontend. The source
 calculator's mixed float/binary recall references and omitted work are discussed as modeling
 limits. Full-key exactness is kept distinct from short-key candidate recall.
 
-## Recall derivation checks
+## Check recall estimates
 
 Section 6 starts with a random-bit example and derives nearest-distance probabilities,
-prefix survival, finite top-K recall, and the weighted version. Section 7 checks the
-assumptions against independent corpora and the previously saved real-data observations.
+which documents pass the prefix check, top-K recall, and unequal query weights. Section 7 checks the
+assumptions against independently generated document collections and the previously saved real-data observations.
 Appendix A gives the stable binomial calculation.
 
 From the project root, reproduce the controlled checks and their two plots with:
@@ -92,8 +96,8 @@ MPLCONFIGDIR=/private/tmp/search-math-mpl .venv/bin/python reports/search-math/c
 
 This optional study needs NumPy, SciPy, Matplotlib, threadpoolctl, and the project's compiled
 `bitplane_index` module. Compiling the PDF and running `verify_math.py` do not need that module.
-The source ZIP includes the report scripts and saved evidence; it does not include the native
-extension, corpus, or embedding cache. Run the optional study from the full project checkout.
+The source ZIP includes the report scripts and saved evidence; it does not include the C++
+extension, document collection, or embedding cache. Run the optional study from the full project checkout.
 
 The four eight-bit cases are explicit teaching setups in the script. Each uses 64 documents,
 top five, three lookup bits, and one allowed prefix error. The simulation reports recall,
@@ -149,3 +153,10 @@ python -m experiments.project_costs --inputs reports/search-math/evidence/projec
 
 Ordinary PDF compilation still needs only LaTeX and the included vector figures. The full
 project checkout contains all experiment drivers and case archives.
+
+## Plain-English rewrite
+
+The latest edition uses shorter headings and explains unfamiliar terms with examples. It
+attributes the shared representation and scoring techniques to Exa's published description.
+The methods and measured results are unchanged. Earlier PDFs and sources remain in Git.
+The concise edition is 21 pages and the detailed reference is 74 pages.

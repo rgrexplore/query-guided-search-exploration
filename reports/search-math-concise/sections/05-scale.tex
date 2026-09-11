@@ -1,5 +1,5 @@
-\section{Memory limits and larger collections}
-\subsection{Put the stages back together}
+\section{Larger collections}
+\subsection{Total cost}
 To account for one complete request, let $T_{\rm shared}$ include query embedding,
 normalization, routing, and any common filtering. If $T_a^{\rm local}$ is the local cost for
 A, B, or C derived earlier, including its score table, we have
@@ -11,76 +11,76 @@ where $T_{\rm final}$ contains output work and any enabled reranking. All of the
 belong to the same request, so the equation does not justify adding unrelated stage medians
 or adding the real encoder's measured time to constructed vectors it never produced.
 
-For memory, we need to keep stored allocation separate from the scratch space live during
-a query. Write $M_0$ for allocated document rows, routing state, and common containers,
-and let $D_C$ be C's allocated directory, $Q_B$ B's extra masks and queue, and $Q_C$ C's
-extra key queue. The common query scratch remains $Q_0$.
+For memory, we count the stored index separately from the temporary memory used during
+a query. Write $M_0$ for memory allocated to document rows, routing data, and common containers.
+Let $D_C$ be C's directory allocation, $Q_B$ B's extra masks and queue, and $Q_C$ C's extra
+key queue. All methods also use the common temporary query memory $Q_0$.
 \begin{center}
 \begin{tabular}{@{}lll@{}}\toprule
-Method & Stored index allocation & Query scratch\\\midrule
+Method & Stored index memory & Temporary query memory\\\midrule
 A & $M_0$ & $Q_0$\\
 B & $M_0+M_{\rm planes,allocated}$ & $Q_0+Q_B$\\
 C & $M_0+D_C$ & $Q_0+Q_C$\\\bottomrule
 \end{tabular}
 \end{center}
-Actual common allocation can differ with container capacities. When applying a process RAM
-limit, we add the runtime and other resident data once, taking care not to add overlapping
-process and GPU accounting blindly. A build-memory limit must also include the temporary
-input and output copies.
+The common data structures can reserve different amounts of unused space, so their actual
+allocations can differ. A process RAM limit must also count memory used to run the program
+and other data still in memory. We count each allocation once, even if both process and GPU
+reports include it. A limit during index building must also include temporary input and output copies.
 
-\subsection{Start with the memory calculation at one billion rows}
+\subsection{Memory requirements}
 At $N=10^9$, $d=256$, and eight-byte IDs, packed codes occupy 32 GB and IDs occupy 8 GB,
 so these two arrays alone exceed a 32 GB budget. B also keeps a second sign representation,
-adding at least 32 GB before per-cluster padding. Even if we change the number of probes,
-that stored payload remains.
+adding at least 32 GB before per-cluster padding. Changing how many clusters we open
+does not reduce these stored bytes.
 
 \begin{center}
 \begin{tabular}{@{}lrrl@{}}\toprule
-Layout at 1B rows & Payload floor & Planned query RAM & 64 GB budget\\\midrule
-A, direct prefix route & 40 GB & about 49 GB & Modeled fit\\
-C, global 13-bit key & 40 GB & about 49 GB & Modeled fit\\
+Layout at 1B rows & Minimum data & Planned query RAM & 64 GB budget\\\midrule
+A, direct prefix route & 40 GB & about 49 GB & Predicted to fit\\
+C, global 13-bit key & 40 GB & about 49 GB & Predicted to fit\\
 B, global cluster & 72 GB & about 83 GB & Rejected\\
 B, prefix route, large leaf & 72 GB & about 81 GB & Rejected\\\bottomrule
 \end{tabular}
 \end{center}
-These planning values include capacity and container allowances and a configurable 1 GB
-runtime reserve, which is not measured runtime memory. In their current in-memory layouts,
+These estimates allow for reserved space and data structures, plus a configurable 1 GB
+reserve for running the program. That reserve is an assumption, not a memory measurement. In their current in-memory layouts,
 all three fail 32 GB. All listed planning cases fit 1 TB, but a machine with 1 TB need not
 have this machine's memory performance. If we compressed the IDs or used another storage
 architecture, we would need to calculate memory again; relabeling the same index would not
 change the result.
 
-\subsection{When a fixed prefix carries the useful information}
+\subsection{Fixed bit positions}
 If we keep thirteen strong coordinates fixed under the earlier independent strong-coordinate
 model, the expected ideal group contains $10^9/2^{13}\approx122{,}070$ rows, far more than
-the requested 100. The distributional calculation controls the small probability that the
-group is insufficient, but makes no claim about ordinary text embeddings.
+the requested 100. The earlier probability calculation accounts for the small chance that fewer than 100
+rows match, under these assumptions. It makes no claim about ordinary text embeddings.
 
 A can route directly to this group and scan it, while C can look up its key and score the
-same rows. Both cost roughly 3 ms in the calibrated conditional model. B can also take this
+same rows. Under these assumptions, the model fitted to measured times predicts roughly 3 ms for both. B can also take this
 route with a large leaf, giving a similar time with more stored data. We should not force B
 through a global billion-row bitmap just to make C appear better. In this case, A and C are closely
-related ways to obtain the same candidate set, and the model cannot resolve a few-percent gap.
+related ways to obtain the same candidate set, and the model cannot reliably distinguish a gap of a few percent.
 
-\subsection{When the important coordinates change with each query}
-If the important coordinates change with each query, a fixed prefix may contain little
-useful signal, while B can choose its split coordinates from the query. We preserve the
+\subsection{Changing bit positions}
+If the important coordinates change with each query, a fixed prefix may contain few
+of the coordinates that determine the ranking, while B can choose its split coordinates from the query. We preserve the
 constructed path by keeping thirteen useful cuts and scaling the leaf size to 160,000.
-Its last-split mask payload is approximately
+At the last split, the masks occupy approximately
 \[
 (13+2)\ceil{10^9/64}\times8=1.875\ \text{GB}.
 \]
-Here, the factor 15 counts the path and alternative masks live at the same time, including
-parent/child overlap. That count is for this prescribed path; other search histories can
-need different scratch.
+The factor 15 counts masks on this path and queued alternatives held at the same time,
+including the parent while its children are created. This count applies to the specified
+path; other sequences of splits can need different amounts of temporary memory.
 
-The complete native size model predicts about 0.10 s for this global B path and about 25 s
-for a global scan. If we double B's variable cost, we get about 0.20 s, which shows sensitivity
-to that cost rather than a confidence interval. No full billion-document query was measured.
+The model for the complete C++ search call predicts about 0.10 s for this global B path and about 25 s
+for a global scan. If we double B's variable cost, we get about 0.20 s, which shows how the prediction changes
+when that assumed cost changes; it is not a confidence interval. No full billion-document query was measured.
 
 We also need to give A the benefit of routing in this comparison. If it scores fraction $f$
 of the collection, its approximate cost is $T_{\rm route}+fNc_{\rm scan}$. Even with routing
-time ignored, A must score less than about 0.41\% of the corpus to undercut the 0.10 s B
+time ignored, A must score less than about 0.41\% of the collection to beat the 0.10 s B
 prediction, while still meeting the recall target at that fraction. Scanning can win if
 routing cheaply produces a small, accurate candidate set; if it cannot, the query-dependent
 B path is worth testing.
@@ -89,19 +89,18 @@ B path is worth testing.
 
 For C, the short key has to capture important coordinates. In the constructed changing case,
 a fixed 13-coordinate key misses all thirteen strong coordinates with probability about
-49.94\%. Even a nonempty directory lookup can therefore leave almost the entire scoring task,
-so key occupancy alone cannot establish an advantage in latency or recall.
+49.94\%. A lookup that finds documents can therefore still leave almost all the scoring work to do.
+The number of documents found by a key alone cannot establish faster search or better recall.
 
-\subsection{What we can conclude}
+\subsection{Conclusions}
 For the real embeddings measured here, the scan remains the supported practical baseline.
-The constructed comparisons show how that result depends on the workload: with a strong
-fixed-prefix condition, direct routing and key lookup both avoid most scores; with changing
+The constructed comparisons show how that result depends on the workload: when the strong coordinates
+stay in the fixed prefix, direct routing and key lookup both avoid most scores; with changing
 strong coordinates, B's query-dependent splits produced a large measured advantage. Each
 conclusion applies to its stated workload and tested parameter space.
 
 We can use the formulas to explain these outcomes and suggest settings, but they do not
 prove that every possible IVF layout loses, that Matryoshka creates the constructed
-distribution, or that a local timing coefficient remains exact at a billion rows. To test
-the favorable case on a real representation, the next useful experiment would check for the
-required score concentration and routing behavior while preserving the same recall and
-RAM constraints.
+distribution, or that a fitted cost per operation remains exact at a billion rows. To test
+the favorable case on a real representation, the next useful experiment would check whether a few coordinates determine the ranking
+and whether routing finds the right documents, under the same recall and RAM limits.
