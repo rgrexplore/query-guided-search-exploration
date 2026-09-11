@@ -1,0 +1,98 @@
+\section{Memory limits and larger collections}
+\subsection{Put the stages back together}
+We can now describe one complete request. Let $T_{\rm shared}$ include query embedding,
+normalization, routing, and any common filtering. Let $T_a^{\rm local}$ be the local cost for
+A, B, or C derived earlier, including its score table. Then
+\begin{equation}
+T_a^{\rm request}=T_{\rm shared}+T_a^{\rm local}+T_{\rm final},
+\label{eq:total}
+\end{equation}
+where $T_{\rm final}$ contains output work and any enabled reranking. This equation sums stages
+for the same request. It does not justify adding unrelated stage medians or adding the real
+encoder's measured time to constructed vectors that the encoder never produced.
+
+The corresponding memory summary separates stored allocation from live query scratch.
+Write $M_0$ for allocated document rows, routing state, and common containers. Let $D_C$ be C's
+allocated directory, $Q_B$ its counterpart B's extra masks and queue, and $Q_C$ C's extra key
+queue. The common query scratch remains $Q_0$.
+\begin{center}
+\begin{tabular}{@{}lll@{}}\toprule
+Method & Stored index allocation & Query scratch\\\midrule
+A & $M_0$ & $Q_0$\\
+B & $M_0+M_{\rm planes,allocated}$ & $Q_0+Q_B$\\
+C & $M_0+D_C$ & $Q_0+Q_C$\\\bottomrule
+\end{tabular}
+\end{center}
+Actual common allocation can differ with container capacities. Add the runtime and other
+resident data once when applying a process RAM limit. Do not add overlapping process and GPU
+accounting blindly. A build-memory limit must also include temporary input and output copies.
+
+\subsection{Start with the memory calculation at one billion rows}
+At $N=10^9$, $d=256$, and eight-byte IDs, packed codes occupy 32 GB and IDs occupy 8 GB.
+These two arrays alone exceed a 32 GB budget. B keeps a second sign representation, adding
+at least 32 GB before per-cluster padding. Changing the number of probes cannot remove this
+stored payload.
+
+\begin{center}
+\begin{tabular}{@{}lrrl@{}}\toprule
+Layout at 1B rows & Payload floor & Planned query RAM & 64 GB budget\\\midrule
+A, direct prefix route & 40 GB & about 49 GB & Modeled fit\\
+C, global 13-bit key & 40 GB & about 49 GB & Modeled fit\\
+B, global cluster & 72 GB & about 83 GB & Rejected\\
+B, prefix route, large leaf & 72 GB & about 81 GB & Rejected\\\bottomrule
+\end{tabular}
+\end{center}
+The planning values include capacity and container allowances and a configurable 1 GB runtime
+reserve; the reserve is not measured runtime memory. All three fail 32 GB in their current
+in-memory layouts. All listed planning cases fit 1 TB, but a machine with 1 TB need not have
+this machine's memory performance. Compressed IDs or another storage architecture would require
+a new calculation, not a different label on the same index.
+
+\subsection{When a fixed prefix carries the useful information}
+Under the earlier independent strong-coordinate model, thirteen fixed strong coordinates give
+an expected ideal group of $10^9/2^{13}\approx122{,}070$ rows. This is far more than the requested
+100. The distributional calculation controls the small probability of an insufficient group;
+it is not a claim about ordinary text embeddings.
+
+A can route directly to this group and scan it. C can look up its key and score the same rows.
+Both cost roughly 3 ms in the calibrated conditional model. B can also use this route and a
+large leaf, producing a similar time with more stored data. We should not force B through a
+global billion-row bitmap just to make C appear better. For this case, A and C are closely
+related ways to obtain the same candidate set, and the model cannot resolve a few-percent gap.
+
+\subsection{When the important coordinates change with each query}
+A fixed prefix may now contain little useful signal. B can choose its split coordinates from
+the query. Keeping thirteen useful cuts and scaling the leaf size to 160,000 preserves the
+constructed path. Its last-split mask payload is approximately
+\[
+(13+2)\ceil{10^9/64}\times8=1.875\ \text{GB}.
+\]
+The factor 15 counts the simultaneously live path and alternative masks for this prescribed
+path, including parent/child overlap. Other search histories can need different scratch.
+
+The complete native size model predicts about 0.10 s for this global B path and about 25 s for
+a global scan. Doubling B's variable cost gives about 0.20 s; this is a sensitivity example,
+not a confidence interval. No full billion-document query was measured.
+
+A useful comparison gives A the benefit of routing. If it scores fraction $f$ of the collection,
+its approximate cost is $T_{\rm route}+fNc_{\rm scan}$. Even ignoring routing time, A must
+score less than about 0.41\% of the corpus to undercut the 0.10 s B prediction. It must also
+meet the recall target at that fraction. If routing produces a small, accurate candidate set
+cheaply, scanning can win. If it cannot, the query-dependent B path is worth testing.
+
+For C, a short key must actually capture important coordinates. In the constructed changing
+case, a fixed 13-coordinate key misses all thirteen strong coordinates with probability about
+49.94\%. A nonempty directory lookup can therefore still leave almost the entire scoring task.
+Key occupancy alone cannot establish the latency or recall advantage.
+
+\subsection{What we can conclude}
+On the measured real embeddings, the scan remains the supported practical baseline. Under a
+strong fixed-prefix condition, direct routing and key lookup both avoid most scores. Under
+changing strong coordinates, B's query-dependent splits produced a large measured advantage
+in constructed data. Each conclusion has a stated workload and a tested parameter space.
+
+The formulas help explain those outcomes and suggest settings. They do not prove that every
+possible IVF layout loses, that Matryoshka creates the constructed distribution, or that a
+local timing coefficient remains exact at a billion rows. The next useful experiment would
+check whether a real representation has the score concentration and routing behavior required
+by the favorable case, while preserving the same recall and RAM constraints.

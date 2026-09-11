@@ -1,0 +1,46 @@
+\section{From the explanation to the code}
+The companion repository contains the complete implementations, saved measurements, and the
+longer derivations. Paths below are relative to its root. The 72-page report remains in
+\path{reports/search-math/}; this edition is in \path{reports/search-math-concise/}.
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
+Question & Start here\\\midrule
+Follow the six-document example & \path{examples/small_search.py}\\
+Inspect scan and branching & \path{cpp/index.cpp}, \path{cpp/score.hpp}\\
+Inspect key lookup & \path{cpp/key_index.cpp}\\
+Check storage and work formulas & \path{experiments/models.py}, \path{experiments/check_controlled.py}\\
+Read the final timing checks & \path{experiments/check_native_model.py}, \path{reports/search-math/evidence/final-study.json}\\
+Calculate the larger cases & \path{experiments/project_costs.py}, \path{results/projected-cases-2026-09-11/}\\
+Reproduce the study & \path{experiments/README.md}, \path{results/README.md}\\\bottomrule
+\end{tabularx}\normalsize\end{center}
+
+After installing the project as described in its root README, we can run the small native
+example without downloading a corpus. The second command checks the long report's embedded
+arithmetic and saved evidence. The third recalculates the larger scenarios from frozen inputs;
+it does not build a billion-row index.
+\begin{lstlisting}[caption={Three existing entry points, run from the repository root.}]
+.venv/bin/python examples/small_search.py
+python3 reports/search-math/verify_math.py
+.venv/bin/python -m experiments.project_costs \
+  --inputs results/projected-cases-2026-09-11/results.json \
+  --output results/my-scenarios \
+  --documents 1000000000 --ram-gb 32 64 1000
+\end{lstlisting}
+Use the reproduction README for the exact saved-input invocation and full-data runs. A full
+rerun needs the dataset, embedding cache, and documented environment. The report's tables are
+summaries of saved results, not measurements produced by recompiling the PDF.
+
+\begin{thebibliography}{9}\small
+\bibitem{exa} Exa Team. \emph{How we built a web-scale vector database}. 2024.
+\url{https://exa.ai/blog/building-web-scale-vector-db}.
+\bibitem{mrl} A. Kusupati et al. \emph{Matryoshka Representation Learning}. 2022.
+\url{https://arxiv.org/abs/2205.13147}.
+\bibitem{msmarco} Microsoft. \emph{MS MARCO}. Passage collection and benchmark resources.
+\url{https://microsoft.github.io/msmarco/}.
+\bibitem{nomic} Nomic AI. \emph{nomic-embed-text-v1.5}. Model documentation.
+\url{https://huggingface.co/nomic-ai/nomic-embed-text-v1.5}.
+\bibitem{local} Local experimental record, 10--11 September 2026. Source checkpoint
+\texttt{f16ca66}; \path{reports/search-math/evidence/} and the result files it identifies.
+The concise edition's README records the selected sources and reproduction scope.
+\end{thebibliography}

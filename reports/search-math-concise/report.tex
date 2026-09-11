@@ -1,0 +1,35 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,amsmath,amssymb,microtype}
+\usepackage[margin=24mm,headheight=15pt]{geometry}
+\usepackage{graphicx,booktabs,tabularx,array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{listings,caption,float,needspace,enumitem,fancyhdr}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,urlcolor=MidnightBlue,citecolor=MidnightBlue]{hyperref}
+\usepackage{bookmark}
+\definecolor{Ink}{HTML}{17354B}
+\definecolor{Soft}{HTML}{F3F6F8}
+\pagestyle{fancy}\fancyhf{}\lhead{\small Three ways to search binary embeddings}\rhead{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\linespread{1.04}\raggedbottom\setlength{\emergencystretch}{2em}
+\setlist{itemsep=2pt,topsep=3pt,leftmargin=1.5em}
+\captionsetup{font=small,labelfont=bf,skip=6pt}
+\lstset{basicstyle=\small\ttfamily,backgroundcolor=\color{Soft},frame=single,rulecolor=\color{gray!30},breaklines=true,columns=fullflexible,keepspaces=true,showstringspaces=false,aboveskip=7pt,belowskip=7pt}
+\newcommand{\E}{\mathbb E}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\fig}[3]{\begin{figure}[H]\centering\includegraphics[width=#3\linewidth]{figures/#1.pdf}\caption{#2}\label{fig:#1}\end{figure}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\hypersetup{pdftitle={Three ways to search binary embeddings: a concise guide},pdfsubject={Methods, costs, recall and measured comparisons}}
+\begin{document}
+{\Large\bfseries\color{Ink} Three ways to search binary embeddings}\par
+{\large A guide to the algorithms, their costs, and the evidence}\par
+{\small 11 September 2026}\par\medskip
+\input{sections/01-foundations}
+\input{sections/02-methods}
+\input{sections/03-recall}
+\input{sections/04-experiments}
+\input{sections/05-scale}
+\input{sections/06-reproduce}
+\end{document}

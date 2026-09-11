@@ -1,0 +1,127 @@
+\section{Recall and the choice of parameters}
+\subsection{Recovering the reference results}
+A fast query is useful only if it returns the results we intended to find. Let $G_K(q)$ be
+the reference top-$K$ document IDs from a complete scan, and $A_K(q)$ the IDs returned by a
+method. For $K\le N$, its recall for query $q$ is
+\begin{equation}
+R_K(q)=\frac{|G_K(q)\cap A_K(q)|}{K}.
+\label{eq:recall}
+\end{equation}
+Our six-document example has $G_2=[3,4]$. Returning [3,0] recovers one of those two IDs, so
+recall is 50\%. Returning [3,4] gives 100\%. Returning many candidates is not itself high
+recall; the candidate set must contain the reference IDs, and the final selection must keep them.
+
+This definition needs a specified reference. Our main experiments use the full binary-document
+score in Equation~\ref{eq:score}. A float-vector reference would measure the additional loss
+from quantization. Human relevance labels answer a different question: whether the text is
+useful for a query. High binary-neighbor recall does not prove high relevance or accurate
+answers from a language model.
+
+There are two places to lose a reference document: routing can exclude its cluster, and local
+search can miss it inside an opened cluster. To express this precisely, fix a query and choose
+one of its $K$ reference IDs uniformly. Let $V$ mean that its cluster is visited and $L$ mean
+that the local method returns it. Then
+\begin{equation}
+R_K(q)=\Pr(V\mid q)\Pr(L\mid V,q).
+\label{eq:survival}
+\end{equation}
+This is a conditional probability identity, not an independence assumption. Averaging it over
+queries does not generally equal the product of the two separately averaged probabilities.
+A's exact local scan has conditional survival one; it can still lose results through routing.
+B and C have the same routing limit, plus any loss caused by local work limits.
+
+\subsection{Derive one useful distributional model}
+We can calculate expected recall if we specify how documents and query weights are distributed.
+Start with independent document signs, each equally likely to be 0 or 1. Choose $m$ strong
+query coordinates of magnitude $a$; give the remaining $d-m$ coordinates magnitude $\epsilon$.
+Require
+\begin{equation}
+a>(d-m)\epsilon.
+\label{eq:dominance}
+\end{equation}
+One strong mismatch then costs more than all possible weak mismatches together. Consequently,
+every document matching all strong coordinates outranks every document with a strong mismatch.
+This is a deliberately constructed condition. Matryoshka training alone does not imply it.
+
+A random document matches those $m$ signs with probability $p=2^{-m}$. Let $Z$ count the
+matching documents among $N$ independent rows. It has a binomial distribution:
+\[
+\Pr(Z=z)=\binom Nz p^z(1-p)^{N-z},\qquad \E[Z]=Np.
+\]
+Suppose we open only this ideal strong-sign group and score every row inside it. If $Z\ge K$,
+all top-$K$ documents are present. If $Z<K$, it supplies $Z$ of them. The query recall is
+$\min(Z,K)/K$, so
+\begin{equation}
+\E[R_K]=\frac1K\sum_{z=0}^{N}\min(z,K)\binom Nz p^z(1-p)^{N-z}
+       =\frac1K\sum_{i=1}^{K}\Pr(Z\ge i).
+\label{eq:binomial-recall}
+\end{equation}
+The second form adds the probabilities of recovering at least one result, at least two, and
+so on through $K$. It avoids summing over every possible corpus count.
+
+A small calculation shows why the distribution matters. With $N=2$, $m=1$, and $K=1$, the
+ideal group is empty with probability $1/4$, contains one document with probability $1/2$,
+and contains two with probability $1/4$. Expected recall is $0(1/4)+1(1/2)+1(1/4)=3/4$.
+Although the average group size is one, treating that average as a guaranteed count would
+incorrectly predict 100\% recall.
+
+At $N=10^6$ and $m=13$, the average ideal group contains about 122 rows. With $K=100$, some
+groups may still be too small. A complete B or C search can continue into other groups;
+Equation~\ref{eq:binomial-recall} describes stopping after the ideal group, not every possible
+search policy. Increasing a work budget changes which additional groups are inspected and
+requires accounting for their scores and sizes.
+
+For general queries, a prefix's fraction of dimensions is not its fraction of useful ranking
+information. Correlated document bits, different query magnitudes, and approximate routing
+change candidate survival. A normal approximation to prefix and full scores may be useful,
+but it needs calibration and an independent check. In the earlier local Nomic check, its
+recall errors reached about 9.6 percentage points and failed the proposed two-point criterion.
+We therefore do not use that approximation to claim real-data recall at a billion rows.
+
+\subsection{Which parameters can we change?}
+Some settings change the stored index: code width $d$, cluster count $C$, routing method, and
+C's key coordinates and width $h$. Others change a query: probes $P$, B's leaf size and node
+budget, C's lookup and candidate limits, and the requested $K$. Changing $d$ also changes the
+reference ranking, so all methods must be compared again at that same representation.
+
+We do not need to sweep every possible combination blindly. A cost equation can identify a
+useful region. For B, suppose each split halves the candidate count, one promising path is
+followed, and the masks retain width $W=\ceil{N/w}$. After $j$ splits, expected scoring work
+is $N2^{-j}$ rows. Ignoring queue changes for the moment, write
+\begin{equation}
+T_B(j)\approx T_0+jWc_{\rm split}+Wc_{\rm leaf}+N2^{-j}c_{\rm score}.
+\label{eq:depth}
+\end{equation}
+One more split saves about $N2^{-(j+1)}$ scores but adds a full-width split. It is worthwhile
+in this model when the saved scoring time exceeds $Wc_{\rm split}$ and the additional queue
+cost. For example, at $N=6{,}400$ and $j=5$, another balanced cut saves about 100 scores.
+We compare the time of those 100 scores with a 100-word split; we do not equate the counts.
+
+Treating $j$ as continuous gives a starting point:
+\[
+\frac{dT_B}{dj}=Wc_{\rm split}-N\ln(2)2^{-j}c_{\rm score}=0,
+\qquad
+j^*=\log_2\!\left(\frac{N\ln(2)c_{\rm score}}{Wc_{\rm split}}\right).
+\]
+We then check valid neighboring integer depths, the score assumptions, and the required
+recall. The formula is conditional on a single useful balanced path; it does not cover arbitrary
+branch exploration. Since $W$ grows with $N$, more documents do not automatically imply a
+larger optimal depth. The dense-mask work still grows with the collection.
+
+The strong-coordinate model suggests a leaf threshold too. At one million rows, a 13-bit
+ideal group has mean about 122 and standard deviation about 11. A threshold of 128 sometimes
+forces an extra weak-coordinate split. The rough margin $122+3(11)\approx155$ suggested testing
+$L=160$. The preceding 12-bit group averages about 244 rows, so it usually still splits.
+The experiment checked this setting rather than treating the approximation as a guarantee.
+
+The complete choice for method $a$ is
+\begin{equation}
+\min_{\theta\in\Theta_a}T_a(\theta)
+\quad\text{subject to}\quad R_a(\theta)\ge r,\quad M_a(\theta)\le M_{\rm limit}.
+\label{eq:choice}
+\end{equation}
+The vector $\theta$ contains that method's settings. A derivative can help where the functions
+are known, but cluster occupancy and routing recall are not determined by $N$ and RAM alone.
+In practice, we measure promising settings, retain the feasible ones, and compare the best
+\emph{tested} choices. We must give the scan enough routing choices and let B stop splitting
+when a scan-like leaf is cheaper.
