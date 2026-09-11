@@ -3,6 +3,7 @@
 The work formulas tell us what each method must do. Measurements answer the next question:
 does the scoring it avoids pay for the search it adds? We first compare real embeddings,
 then use constructed inputs to isolate the importance of the query's strong coordinates.
+The saved source record identifies the runs behind these comparisons~\cite{local}.
 
 \subsection{Make the comparison fair}
 A, B and C receive the same documents and floating-point queries. They use the same native
@@ -31,7 +32,7 @@ queries. A supported speedup also requires both methods to meet the target and t
 resampled together; timing repeats do not count as additional independent queries.
 
 \subsection{Real embeddings did not establish an alternative speedup}
-The real study uses 256-bit document codes from Nomic embeddings of MS MARCO passages.
+The real study uses 256-bit document codes from Nomic embeddings of MS MARCO passages~\cite{nomic,msmarco}.
 After combining 6,821 tuning settings, the frozen choices were evaluated on 200 query IDs
 excluded from the earlier 300-query collection. All 36 conservative target points met their
 requested recall on this sample; only 7 of 36 points chosen by average tuning recall did.

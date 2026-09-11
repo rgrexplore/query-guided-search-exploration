@@ -112,18 +112,19 @@ floating-point comparisons.
 
 \begin{lstlisting}[caption={Bitplane search. The queue preserves alternatives to the preferred path.}]
 branch(query, clusters, K, leaf_size, node_budget):
+    table = prepare_score_table(query)
     order = coordinates_by_decreasing_abs(query)
     queue = one full candidate mask per selected cluster
     best = empty_top_k(K)
     while queue is not empty:
         node = remove_lowest_penalty(queue)
-        if node_cannot_improve(best): continue
+        if cannot_improve(node, query, best): continue
         if node_budget_is_reached(): return best
         if node.count <= leaf_size or no_bits_remain(node):
-            score_each_set_document(node.mask, best)
+            score_each_set_document(table, node.mask, best)
         else:
             matching, other = split_on_next_bit(node, order)
-            keep_nonempty_children_with_penalties(queue)
+            queue_nonempty_children(queue, matching, other)
     return best.sorted_by_score_then_id()
 \end{lstlisting}
 
@@ -204,18 +205,19 @@ document. C therefore scores the full code and keeps an upper bound for unvisite
 
 \begin{lstlisting}[caption={Weighted key lookup. Generate the key sequence once; charge every cluster lookup.}]
 keys(query, clusters, K, candidate_target, lookup_limit):
+    table = prepare_score_table(query)
     ideal = signs_of_fixed_key_coordinates(query)
     queue = [empty_flip_set_with_zero_penalty]
     best = empty_top_k(K)
     while queue is not empty:
-        if remaining_key_bound_cannot_improve(best): break
+        if remaining_bound_cannot_improve(queue, query, best): break
         state = remove_lowest_penalty(queue)
         key = ideal XOR state.flip_mask
         for cluster in clusters:
             if lookup_limit_is_reached(): return best
             count_one_lookup_including_misses()
             for document in cluster.directory.get(key, []):
-                best.offer(full_score(query, document), document.id)
+                best.offer(full_score(table, document.code), document.id)
         if candidate_target_is_reached(): return best
         add_next_unique_flip_sets(queue, state)
     return best.sorted_by_score_then_id()

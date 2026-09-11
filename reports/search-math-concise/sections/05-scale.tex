@@ -13,7 +13,7 @@ encoder's measured time to constructed vectors that the encoder never produced.
 
 The corresponding memory summary separates stored allocation from live query scratch.
 Write $M_0$ for allocated document rows, routing state, and common containers. Let $D_C$ be C's
-allocated directory, $Q_B$ its counterpart B's extra masks and queue, and $Q_C$ C's extra key
+allocated directory, $Q_B$ B's extra masks and queue, and $Q_C$ C's extra key
 queue. The common query scratch remains $Q_0$.
 \begin{center}
 \begin{tabular}{@{}lll@{}}\toprule
@@ -79,6 +79,8 @@ its approximate cost is $T_{\rm route}+fNc_{\rm scan}$. Even ignoring routing ti
 score less than about 0.41\% of the corpus to undercut the 0.10 s B prediction. It must also
 meet the recall target at that fraction. If routing produces a small, accurate candidate set
 cheaply, scanning can win. If it cannot, the query-dependent B path is worth testing.
+
+\fig{billion-comparison}{A conditional comparison with sufficient RAM. B is one prescribed operating point. A gets free routing in this line but must still attain the required recall at its scanned fraction. These are forecasts, not measured billion-document timings.}{.9}
 
 For C, a short key must actually capture important coordinates. In the constructed changing
 case, a fixed 13-coordinate key misses all thirteen strong coordinates with probability about

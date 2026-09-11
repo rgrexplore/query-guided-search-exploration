@@ -65,6 +65,8 @@ and contains two with probability $1/4$. Expected recall is $0(1/4)+1(1/2)+1(1/4
 Although the average group size is one, treating that average as a guaranteed count would
 incorrectly predict 100\% recall.
 
+\fig{recall-example}{Two independent documents and one required matching bit. Opening only the matching group succeeds with probability $3/4$. The empty-group outcome explains why the mean group size is insufficient.}{.84}
+
 At $N=10^6$ and $m=13$, the average ideal group contains about 122 rows. With $K=100$, some
 groups may still be too small. A complete B or C search can continue into other groups;
 Equation~\ref{eq:binomial-recall} describes stopping after the ideal group, not every possible

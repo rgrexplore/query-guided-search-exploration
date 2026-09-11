@@ -34,7 +34,7 @@ for x, y, label, live in [(2.8, 2.35, 'Parent: 6,400 live positions', 1),
     ax.add_patch(Rectangle((x, y), 4.3, .36, fill=False, edgecolor=INK))
     ax.text(x+2.15, y-.24, '100 words allocated', ha='center', fontsize=10)
 for x in [2.35, 7.35]:
-    ax.add_patch(FancyArrowPatch((4.95,2.23), (x,1.4), arrowstyle='->', mutation_scale=12, color=INK))
+    ax.add_patch(FancyArrowPatch((4.95,1.94), (x,1.58), arrowstyle='->', mutation_scale=12, color=INK))
 ax.text(5, .04, 'Shading shows the fraction of live positions, not their actual bit order.',
         ha='center', fontsize=9, color='#555555')
 save(fig, 'masks')
@@ -69,3 +69,38 @@ ax.grid(alpha=.2)
 ax.legend(frameon=False, loc='upper left')
 fig.tight_layout()
 save(fig, 'real-tradeoff')
+
+# All three outcomes of the tiny binomial example, not a simulation.
+fig, ax = plt.subplots(figsize=(7.5, 1.65))
+ax.axis('off')
+table=ax.table(cellText=[['0 matches', '1/4', '0'], ['1 match', '1/2', '1'], ['2 matches', '1/4', '1']],
+               colLabels=['Ideal-group size Z', 'Probability', 'Recall@1'], loc='center', cellLoc='center')
+table.auto_set_font_size(False)
+table.set_fontsize(11)
+table.scale(1,1.7)
+for (r,c),cell in table.get_celld().items():
+    cell.set_edgecolor('#ccd8df')
+    cell.set_facecolor('#edf4f7' if r==0 else 'white')
+    if r==0: cell.set_text_props(weight='bold', color=INK)
+save(fig,'recall-example')
+
+# Draw only the declared global B point and an optimistic scan line.
+# The scan line ignores routing time; its recall remains a separate requirement.
+import json
+with (ROOT / 'evidence' / 'projected-cases.json').open() as f:
+    projected=json.load(f)
+rows=[r for r in projected['rows'] if r['documents']==1000000000 and r['ram_gb']==1000 and r['branch_scale']==1]
+scan=next(r for r in rows if r['method']=='scan_all')
+branch=next(r for r in rows if r['method']=='branch')
+fraction=[i/10000 for i in range(101)]
+fig,ax=plt.subplots(figsize=(7.5,2.85))
+ax.plot([100*f for f in fraction],[f*scan['modeled_ms'] for f in fraction],color=COLORS['scan'],label='A: scan time, excluding routing')
+ax.axhline(branch['modeled_ms'],color=COLORS['branch'],label='B: global-path forecast')
+cross=100*branch['modeled_ms']/scan['modeled_ms']
+ax.axvline(cross,color='#777777',linestyle=':',linewidth=1)
+ax.text(cross+.025,10,f'{cross:.2f}% of documents',fontsize=10)
+ax.set(xlabel='Fraction of the billion documents scored by A (%)',ylabel='Predicted time (ms)',xlim=(0,1),ylim=(0,270))
+ax.legend(frameon=False,loc='upper left',fontsize=10)
+ax.grid(alpha=.2)
+fig.tight_layout()
+save(fig,'billion-comparison')

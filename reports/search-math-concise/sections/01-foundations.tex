@@ -57,7 +57,8 @@ Why should query magnitude guide a branch? At coordinate 1, matching the query c
 $+0.7$ and mismatching contributes $-0.7$. The mismatch lowers the score by $1.4$. At coordinate
 5, the corresponding loss is only $0.6$. Large magnitudes therefore make expensive mistakes.
 For a query with $d$ coordinates, write the total ideal score as $Q=\sum_{i=1}^{d}|q_i|$.
-If a document's mismatching coordinates have total magnitude $p$, then
+Writing $b_i$ for the decoded sign ($+1$ or $-1$), if the mismatching coordinates
+have total magnitude $p$, then
 \begin{equation}
 S(q,b)=Q-2p,
 \qquad p=\sum_{i:\,b_i\ne\operatorname{sign}(q_i)}|q_i|.

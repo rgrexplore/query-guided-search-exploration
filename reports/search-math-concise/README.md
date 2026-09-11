@@ -1,7 +1,8 @@
 # Three ways to search binary embeddings — concise edition
 
-A connected explanation of the shared score, scan, bitplane branching, weighted key lookup,
-recall, measured results, and conditional larger-corpus choices. The full derivations and
+This 20-page report follows a query through the shared score, scan, bitplane branching,
+weighted key lookup, recall, measured results, and conditional larger-corpus choices. It uses
+12-point body text, six figures, three inline method listings, and one reproduction listing. The full derivations and
 historical experiments remain in `../search-math/`.
 
 ## Build
@@ -13,7 +14,8 @@ bash reports/search-math-concise/build.sh
 ```
 
 The compiled report is written to `output/pdf/search-methods-concise.pdf`. Rendered figures are
-included, so building the PDF requires no Python environment or dataset. To redraw the new
+included, so building the PDF requires no Python environment or dataset. The source ZIP
+contains this report and its assets; running search experiments requires the full repository. To redraw the new
 figures, use the project environment:
 
 ```bash
@@ -21,7 +23,8 @@ figures, use the project environment:
 ```
 
 The shared flow diagram and its Mermaid source are reused from the full report. The remaining
-figures are generated from explicit example values and the saved real-target CSV. Changes to
+figures are generated from explicit example values, the saved real-target CSV, and the
+projected-case JSON. Changes to
 shared.mmd need Mermaid rendering; ordinary report builds use its included PDF.
 
 ## Reading and reproduction
@@ -54,5 +57,5 @@ This reads frozen inputs; it does not build or query a billion-document index.
 - [x] Draft the six parts from the approved 20-page plan.
 - [x] Keep method pseudocode beside its explanation.
 - [x] Verify the selected source results and basic example arithmetic.
-- [ ] Inspect the final layout and confirm the page count.
-- [ ] Rebuild from the source bundle and record final verification.
+- [x] Inspect the final layout and confirm the page count.
+- [x] Rebuild from the source bundle and record final verification.
