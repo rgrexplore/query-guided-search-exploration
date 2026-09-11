@@ -1,42 +1,46 @@
 \section{What are we trying to make faster?}
-A search index receives a query and returns a small set of documents. If we calculate a
-score for every document, finding the best results is straightforward. The difficulty is
-doing this quickly when the collection grows. We can skip documents, but then we need to
-know how much work the shortcut costs and whether it skips the results we wanted.
+I started this project after reading Exa's description of its vector database~\cite{exa}.
+If we look at the work inside a selected cluster, one thing we can explore is whether the
+query can help us choose documents before we score them. We can always calculate a score
+for every document and return the best ones, but that gets expensive as the collection grows.
+Skipping documents might help, so long as the work of choosing them costs less than the scores
+we avoid, and we still find the results we wanted.
 
-This report compares three ways to search the same binary document embeddings. Method A
-opens selected clusters and scans their documents. Method B opens clusters and splits their
-documents using bitplanes. Method C opens clusters and looks up bit patterns, beginning with
-the pattern preferred by the query. We will call C \emph{weighted key lookup}; it is the
-concrete version of the idea of starting at the ideal answer and ``walking backwards.''
+We'll compare three ways to search the same binary document embeddings. In method A, we open
+selected clusters and scan their documents. In B, we open clusters and then split the documents
+using bitplanes. In C, we open clusters and look up bit patterns, starting with the pattern
+the query prefers. We'll call C \emph{weighted key lookup}; this is the concrete version of
+starting at the ideal answer and ``walking backwards.''
 
-Our question has three constraints: a document count, a RAM budget, and a required recall.
-Recall measures how many of the correct reference results the search recovers. We want the
-lowest latency that satisfies those constraints. The number of calculations matters, but so
-does the memory each calculation reads. Avoiding a document score can introduce other work.
+If we fix the document count, RAM budget, and required recall, which method gives us the lowest
+latency? Recall tells us how many of the correct reference results we recover, so we need to
+keep it in the comparison as we change the search. And if we want to estimate latency, counting
+calculations is only part of the job: we also need to look at the memory those calculations
+read. Avoiding a document score can introduce work elsewhere.
 
-The experiments give three different outcomes. On the tested real embeddings, neither
-alternative established a speed advantage over a well-tuned scan. On constructed queries
-whose important coordinates stayed in one prefix, key lookup had a small advantage over a
-closely related directly routed scan. When the important coordinates changed with each
-query, bitplane branching had a large advantage in the constructed case. Understanding
-those conditions is more useful than declaring one method the winner everywhere.
+The experiments give us three different outcomes to explain. On the tested real embeddings,
+neither alternative established a speed advantage over a well-tuned scan. With constructed
+queries whose important coordinates stayed in one prefix, key lookup had a small advantage
+over a closely related directly routed scan. When the important coordinates changed with
+each query, bitplane branching had a large advantage in the constructed case. So the useful
+question is what makes those cases different, rather than which method wins everywhere.
 
-We begin with one query and six documents, then count the work and storage for each method.
-The second half explains recall, parameter selection, and the measurements. The final
-calculation asks what could happen at a billion documents. Those larger latency numbers are
-forecasts; the complete native indexes were tested through eight million documents.
+Let's start with one query and six documents, follow it through each method, and then count
+the work and storage. From there, we can look at recall, choose parameters, and compare the
+measurements. At the end we'll use the calculations to consider a billion documents. Those
+larger latency numbers are forecasts; the complete native indexes were tested through eight
+million documents.
 
 \subsection{One query, six documents, one score}
-An embedding is a vector of numbers produced from text. We keep the query vector as numbers,
-but replace each document coordinate with its sign. A stored bit of 1 means $+1$; a bit of 0
-means $-1$. This is \emph{binary quantization}. For the example, let
+Consider an embedding: a vector of numbers produced from text. We'll keep the query as numbers,
+but store just the sign of each document coordinate. A stored bit of 1 means $+1$, and a bit
+of 0 means $-1$; this is \emph{binary quantization}. For our example, let
 \[
 q=[0.7,\ 0.5,\ -0.4,\ -0.6,\ 0.3].
 \]
-The score is the dot product: multiply corresponding coordinates, then add. The query would
-prefer a document with signs \texttt{11001}, because every contribution would be positive.
-That document scores $0.7+0.5+0.4+0.6+0.3=2.5$.
+The score is the dot product, so we multiply corresponding coordinates and add the results.
+If we choose signs \texttt{11001}, every contribution is positive: that is the document pattern
+the query prefers, and it scores $0.7+0.5+0.4+0.6+0.3=2.5$.
 
 \begin{center}
 \begin{tabular}{@{}rcrr@{}}\toprule
@@ -49,49 +53,52 @@ Document ID & Stored signs & First-bit cluster & Full score\\\midrule
 5 & \texttt{00011} & 0 & $-1.1$\\\bottomrule
 \end{tabular}
 \end{center}
-The correct top two are documents 3 and 4. We use smaller document IDs first if scores tie.
-Every method will be checked against that same rule. The script
-\path{examples/small_search.py} runs this example against the native implementations.
+Here the correct top two are documents 3 and 4. If scores tie, we put the smaller document ID
+first, and then use that same rule when checking every method. We can also run this example
+against the native implementations with \path{examples/small_search.py}.
 
-Why should query magnitude guide a branch? At coordinate 1, matching the query contributes
-$+0.7$ and mismatching contributes $-0.7$. The mismatch lowers the score by $1.4$. At coordinate
-5, the corresponding loss is only $0.6$. Large magnitudes therefore make expensive mistakes.
-For a query with $d$ coordinates, write the total ideal score as $Q=\sum_{i=1}^{d}|q_i|$.
-Writing $b_i$ for the decoded sign ($+1$ or $-1$), if the mismatching coordinates
-have total magnitude $p$, then
+If we look at coordinate 1, a matching sign contributes $+0.7$, while a mismatch contributes
+$-0.7$. That one change lowers the score by $1.4$. At coordinate 5, the loss is only $0.6$,
+so the query magnitude tells us how expensive a wrong sign would be. We can use that observation
+to guide the search. For a query with $d$ coordinates, write its ideal score as
+$Q=\sum_{i=1}^{d}|q_i|$. Writing $b_i$ for the decoded sign ($+1$ or $-1$), if the mismatching
+coordinates have total magnitude $p$, then
 \begin{equation}
 S(q,b)=Q-2p,
 \qquad p=\sum_{i:\,b_i\ne\operatorname{sign}(q_i)}|q_i|.
 \label{eq:score}
 \end{equation}
-For document 4, only coordinate 5 mismatches: $S=2.5-2(0.3)=1.9$. We can rank by the largest
-score or the smallest mismatch penalty. They give the same order. Ordinary Hamming distance
-counts mismatches equally; our score weights them by the query magnitudes.
+For document 4, only coordinate 5 mismatches, giving $S=2.5-2(0.3)=1.9$. From here, ranking
+by the largest score or the smallest mismatch penalty gives the same order. Ordinary Hamming
+distance counts each mismatch equally; here we use the query magnitudes as weights.
 
 \subsection{From text to an index, then back to results}
-The collection contains $N$ documents. Before queries arrive, we embed the text, choose the
-representation width $d$, pack the document signs, and build the index. Each document receives
-one cluster assignment. A cluster is simply a stored subset of the collection. The index may
-learn clusters from vectors, or assign documents from a fixed sign prefix.
+Suppose the collection contains $N$ documents. Before any queries arrive, we embed the text,
+choose a representation width $d$, pack the document signs, and build the index. We also assign
+each document to one cluster. A cluster is a stored subset of the collection, and we can form
+those subsets by learning from the vectors or by using a fixed sign prefix.
 
-Matryoshka training makes selected prefixes useful at smaller dimensions \cite{mrl}. It does
-not sort the coordinates of each query by magnitude, and it does not guarantee that 24 sign
-bits preserve its nearest neighbors. Truncating an embedding and taking its signs are separate
-changes to the representation. Our primary comparison fixes the representation across methods.
+Matryoshka training makes selected prefixes useful at smaller dimensions~\cite{mrl}, which is
+why a shorter representation is worth considering. But it doesn't sort each query's coordinates
+by magnitude, or guarantee that 24 sign bits preserve its nearest neighbors. If we truncate an
+embedding and then take its signs, we have made two separate changes to the representation.
+We'll hold that representation fixed across methods in the primary comparison.
 
-At query time, we embed and normalize the query, select clusters, and search their documents.
-Opening a cluster is one \emph{probe}. With $C$ clusters and $P$ probes, balanced clusters would
-contain about $NP/C$ selected documents. Real clusters need not be balanced, so the actual
-count is the sum of the selected cluster sizes. Setting $C=P=1$ searches the whole collection.
+Once a query arrives, we embed and normalize it, select clusters, and search their documents.
+Opening one cluster is one \emph{probe}. With $C$ clusters and $P$ probes, balanced clusters
+would give us about $NP/C$ selected documents. If the clusters aren't balanced, we need to
+add their actual sizes instead. And if we want to search the whole collection, we can set
+$C=P=1$.
 
 \fig{shared}{The common query flow. The three local search methods share the same query and selected clusters when we isolate their work. Longer-vector reranking is optional; it is excluded from the primary binary-score comparison.}{.68}
 
-A production pipeline can apply document filters and rerank candidates with longer vectors or
-another model. These stages belong in a complete request measurement when enabled. In this
-study, the primary index comparisons use cached query embeddings, the same binary score, and
-no float reranker. Later we measure actual text queries as complete requests.
+A production pipeline can also filter documents or rerank candidates with longer vectors or
+another model. If those stages are enabled, they belong in the complete request measurement.
+For the primary index comparison here, we use cached query embeddings, the same binary score,
+and no float reranker. Later we'll measure actual text queries so we can see the complete wait.
 
-Exa's published vector-database description motivates the cluster-and-scan design and compact
-scoring \cite{exa}. Our A is a local baseline with that broad structure. It is not a reproduction
-or benchmark of Exa's production system. In particular, sign-prefix routing and learned IVF
-clusters are different choices; a $k$-bit prefix defines up to $2^k$ patterns, not $k$ clusters.
+Exa's published vector-database description is the starting point for this cluster-and-scan
+design and compact scoring~\cite{exa}. Our A follows that broad structure locally; the timings
+are not measurements of Exa's production system. We also need to distinguish two routing
+choices we'll encounter: a sign prefix and learned IVF clusters. A $k$-bit prefix defines
+up to $2^k$ patterns, not $k$ clusters.

@@ -59,3 +59,10 @@ This reads frozen inputs; it does not build or query a billion-document index.
 - [x] Verify the selected source results and basic example arithmetic.
 - [x] Inspect the final layout and confirm the page count.
 - [x] Rebuild from the source bundle and record final verification.
+
+## Prose revision
+
+The original concise edition is preserved at commit `3d74cf4`. The revised prose keeps the
+same methods, assumptions, equations, figures, pseudocode and results. The introduction
+attributes the starting point to Exa's published description, and the explanations follow
+the examples in a more conversational voice. The layout remains 20 pages.

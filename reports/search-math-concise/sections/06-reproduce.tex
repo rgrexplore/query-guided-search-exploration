@@ -1,7 +1,8 @@
 \section{From the explanation to the code}
-The companion repository contains the complete implementations, saved measurements, and the
-longer derivations. Paths below are relative to its root. The 72-page report remains in
-\path{reports/search-math/}; this edition is in \path{reports/search-math-concise/}.
+If we want to follow a calculation into the implementation, the table below gives the starting
+points in the companion repository. Paths are relative to its root. The full implementations,
+saved measurements, and longer derivations are there too: the 72-page report remains in
+\path{reports/search-math/}, and this edition is in \path{reports/search-math-concise/}.
 
 \begin{center}\small
 \begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
@@ -15,10 +16,10 @@ Calculate the larger cases & \path{experiments/project_costs.py}, \path{results/
 Reproduce the study & \path{experiments/README.md}, \path{results/README.md}\\\bottomrule
 \end{tabularx}\normalsize\end{center}
 
-After installing the project as described in its root README, we can run the small native
-example without downloading a corpus. The second command checks the long report's embedded
-arithmetic and saved evidence. The third recalculates the larger scenarios from frozen inputs;
-it does not build a billion-row index.
+Once the project is installed using its root README, we can run the six-document example
+without downloading a corpus. The second command checks the long report's embedded arithmetic
+and saved evidence. The third uses frozen inputs to recalculate the larger scenarios, so it
+doesn't build a billion-row index.
 \Needspace{12\baselineskip}
 \begin{lstlisting}[caption={Three existing entry points, run from the repository root.}]
 .venv/bin/python examples/small_search.py
@@ -28,9 +29,9 @@ python3 reports/search-math/verify_math.py
   --output results/my-scenarios \
   --documents 1000000000 --ram-gb 32 64 1000
 \end{lstlisting}
-Use the reproduction README for the exact saved-input invocation and full-data runs. A full
-rerun needs the dataset, embedding cache, and documented environment. The report's tables are
-summaries of saved results, not measurements produced by recompiling the PDF.
+For the exact saved-input invocation and full-data runs, use the reproduction README. A full
+rerun also needs the dataset, embedding cache, and documented environment. Compiling this PDF
+only rebuilds the explanation: its tables summarize saved results, not new measurements.
 
 \begin{thebibliography}{9}\small\raggedright
 \bibitem{exa} Exa Team. \emph{How we built a web-scale vector database}. 2024.

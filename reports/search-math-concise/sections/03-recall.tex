@@ -1,103 +1,108 @@
 \section{Recall and the choice of parameters}
 \subsection{Recovering the reference results}
-A fast query is useful only if it returns the results we intended to find. Let $G_K(q)$ be
-the reference top-$K$ document IDs from a complete scan, and $A_K(q)$ the IDs returned by a
-method. For $K\le N$, its recall for query $q$ is
+We now have ways to avoid some scores, but how do we check whether we kept the right documents?
+Let $G_K(q)$ be the reference top-$K$ IDs from a complete scan, and $A_K(q)$ the IDs returned
+by the method we're testing. For $K\le N$, recall for query $q$ counts the reference IDs we recover:
 \begin{equation}
 R_K(q)=\frac{|G_K(q)\cap A_K(q)|}{K}.
 \label{eq:recall}
 \end{equation}
-Our six-document example has $G_2=[3,4]$. Returning [3,0] recovers one of those two IDs, so
-recall is 50\%. Returning [3,4] gives 100\%. Returning many candidates is not itself high
-recall; the candidate set must contain the reference IDs, and the final selection must keep them.
+In our six-document example, $G_2=[3,4]$. If we return [3,0], we recover one of the two IDs,
+so recall is 50\%; returning [3,4] gives 100\%. A large candidate set doesn't settle this
+question by itself. It has to contain the reference IDs, and the final selection has to keep them.
 
-This definition needs a specified reference. Our main experiments use the full binary-document
-score in Equation~\ref{eq:score}. A float-vector reference would measure the additional loss
-from quantization. Human relevance labels answer a different question: whether the text is
-useful for a query. High binary-neighbor recall does not prove high relevance or accurate
-answers from a language model.
+We also need to be clear about which reference we're using. The main experiments compare
+against the full binary-document score in Equation~\ref{eq:score}. If we instead used a
+float-vector reference, we would also measure the loss from quantization. Human relevance
+labels ask another question: whether the text is useful for the query. Recovering the binary
+neighbors doesn't by itself establish either relevance or accurate language-model answers.
 
-There are two places to lose a reference document: routing can exclude its cluster, and local
-search can miss it inside an opened cluster. To express this precisely, fix a query and choose
-one of its $K$ reference IDs uniformly. Let $V$ mean that its cluster is visited and $L$ mean
-that the local method returns it. Then
+If we follow a reference document through the pipeline, we can lose it when its cluster isn't
+opened, or when local search misses it inside an opened cluster. Fix a query and choose one
+of its $K$ reference IDs uniformly. Let $V$ mean that we visit its cluster, and $L$ mean that
+the local method returns it. Then
 \begin{equation}
 R_K(q)=\Pr(V\mid q)\Pr(L\mid V,q).
 \label{eq:survival}
 \end{equation}
-This is a conditional probability identity, not an independence assumption. Averaging it over
-queries does not generally equal the product of the two separately averaged probabilities.
-A's exact local scan has conditional survival one; it can still lose results through routing.
-B and C have the same routing limit, plus any loss caused by local work limits.
+This uses conditional probability; it doesn't assume the two events are independent. And if
+we average over queries, we generally can't multiply the two separately averaged probabilities
+instead. A's local scan has conditional survival one, but routing can still remove a result.
+B and C share that routing limit, with any local work limits adding another way to miss it.
 
 \subsection{Derive one useful distributional model}
-We can calculate expected recall if we specify how documents and query weights are distributed.
-Start with independent document signs, each equally likely to be 0 or 1. Choose $m$ strong
-query coordinates of magnitude $a$; give the remaining $d-m$ coordinates magnitude $\epsilon$.
-Require
+To estimate recall mathematically, we need assumptions about both the document signs and the
+query weights. Let's start with independent document signs, each equally likely to be 0 or 1.
+Give $m$ strong query coordinates magnitude $a$, and the remaining $d-m$ coordinates magnitude
+$\epsilon$. For this example, require
 \begin{equation}
 a>(d-m)\epsilon.
 \label{eq:dominance}
 \end{equation}
-One strong mismatch then costs more than all possible weak mismatches together. Consequently,
-every document matching all strong coordinates outranks every document with a strong mismatch.
-This is a deliberately constructed condition. Matryoshka training alone does not imply it.
+Here one strong mismatch costs more than all possible weak mismatches together. So a document
+matching all the strong coordinates outranks every document that mismatches one, regardless
+of what happens on the weak coordinates. We've deliberately constructed this condition;
+Matryoshka training alone doesn't give us that guarantee.
 
-A random document matches those $m$ signs with probability $p=2^{-m}$. Let $Z$ count the
-matching documents among $N$ independent rows. It has a binomial distribution:
+If the signs are independent and balanced, a document matches those $m$ signs with probability
+$p=2^{-m}$. We can then count how many matches occur among $N$ rows. Call that count $Z$;
+it follows a binomial distribution:
 \[
 \Pr(Z=z)=\binom Nz p^z(1-p)^{N-z},\qquad \E[Z]=Np.
 \]
-Suppose we open only this ideal strong-sign group and score every row inside it. If $Z\ge K$,
-all top-$K$ documents are present. If $Z<K$, it supplies $Z$ of them. The query recall is
-$\min(Z,K)/K$, so
+Suppose we open only this ideal strong-sign group and score all its rows. If $Z\ge K$, the
+whole top-$K$ is inside it. If $Z<K$, we recover $Z$ of those results. The recall is therefore
+$\min(Z,K)/K$, and averaging over the possible counts gives
 \begin{equation}
 \E[R_K]=\frac1K\sum_{z=0}^{N}\min(z,K)\binom Nz p^z(1-p)^{N-z}
        =\frac1K\sum_{i=1}^{K}\Pr(Z\ge i).
 \label{eq:binomial-recall}
 \end{equation}
-The second form adds the probabilities of recovering at least one result, at least two, and
-so on through $K$. It avoids summing over every possible corpus count.
+We can read the second form as adding the probabilities of recovering at least one result,
+at least two, and so on through $K$. That lets us avoid a sum over every possible corpus count.
 
-A small calculation shows why the distribution matters. With $N=2$, $m=1$, and $K=1$, the
-ideal group is empty with probability $1/4$, contains one document with probability $1/2$,
-and contains two with probability $1/4$. Expected recall is $0(1/4)+1(1/2)+1(1/4)=3/4$.
-Although the average group size is one, treating that average as a guaranteed count would
-incorrectly predict 100\% recall.
+Consider $N=2$, $m=1$, and $K=1$. The ideal group is empty with probability $1/4$, contains
+one document with probability $1/2$, and contains two with probability $1/4$. We can calculate
+expected recall directly: $0(1/4)+1(1/2)+1(1/4)=3/4$. Notice that the average group size is
+one, but some groups are empty. If we substituted that average as though it were a guaranteed
+count, we would incorrectly predict 100\% recall.
 
 \fig{recall-example}{Two independent documents and one required matching bit. Opening only the matching group succeeds with probability $3/4$. The empty-group outcome explains why the mean group size is insufficient.}{.84}
 
-At $N=10^6$ and $m=13$, the average ideal group contains about 122 rows. With $K=100$, some
-groups may still be too small. A complete B or C search can continue into other groups;
-Equation~\ref{eq:binomial-recall} describes stopping after the ideal group, not every possible
-search policy. Increasing a work budget changes which additional groups are inspected and
-requires accounting for their scores and sizes.
+At $N=10^6$ and $m=13$, the ideal group averages about 122 rows. With $K=100$, some groups
+can still be too small, so a complete B or C search may need to continue into other groups.
+Equation~\ref{eq:binomial-recall} describes stopping after the ideal group; it doesn't describe
+every search policy. If we increase a work budget, we have to consider which additional groups
+we visit and the scores and sizes of those groups.
 
-For general queries, a prefix's fraction of dimensions is not its fraction of useful ranking
-information. Correlated document bits, different query magnitudes, and approximate routing
-change candidate survival. A normal approximation to prefix and full scores may be useful,
-but it needs calibration and an independent check. In the earlier local Nomic check, its
-recall errors reached about 9.6 percentage points and failed the proposed two-point criterion.
-We therefore do not use that approximation to claim real-data recall at a billion rows.
+For ordinary queries, taking a fraction of the coordinates doesn't mean we keep the same
+fraction of useful ranking information. Correlated bits, different query magnitudes, and
+approximate routing all affect which neighbors survive. We can try a normal approximation
+to the prefix and full scores, but then we need to calibrate it and check it independently.
+In the earlier local Nomic check, recall errors reached about 9.6 percentage points, missing
+the proposed two-point criterion. So that approximation cannot support a claim about real-data
+recall at a billion rows here.
 
 \subsection{Which parameters can we change?}
-Some settings change the stored index: code width $d$, cluster count $C$, routing method, and
-C's key coordinates and width $h$. Others change a query: probes $P$, B's leaf size and node
-budget, C's lookup and candidate limits, and the requested $K$. Changing $d$ also changes the
-reference ranking, so all methods must be compared again at that same representation.
+Some choices change what we build: the code width $d$, cluster count $C$, routing method,
+and C's key coordinates and width $h$. Others can change from query to query: probes $P$,
+B's leaf size and node budget, C's lookup and candidate limits, and the requested $K$. If
+we change $d$, the reference ranking changes too, so we need to compare all methods again
+using that same representation.
 
-We do not need to sweep every possible combination blindly. A cost equation can identify a
-useful region. For B, suppose each split halves the candidate count, one promising path is
-followed, and the masks retain width $W=\ceil{N/w}$. After $j$ splits, expected scoring work
-is $N2^{-j}$ rows. Ignoring queue changes for the moment, write
+We can use the cost equation to narrow the settings worth trying. Suppose B follows one
+promising path, each split halves the candidates, and the masks keep width $W=\ceil{N/w}$.
+After $j$ splits, we expect $N2^{-j}$ rows to reach the scorer. If we temporarily leave out
+changes in queue cost, this gives
 \begin{equation}
 T_B(j)\approx T_0+jWc_{\rm split}+Wc_{\rm leaf}+N2^{-j}c_{\rm score}.
 \label{eq:depth}
 \end{equation}
-One more split saves about $N2^{-(j+1)}$ scores but adds a full-width split. It is worthwhile
-in this model when the saved scoring time exceeds $Wc_{\rm split}$ and the additional queue
-cost. For example, at $N=6{,}400$ and $j=5$, another balanced cut saves about 100 scores.
-We compare the time of those 100 scores with a 100-word split; we do not equate the counts.
+If we make one more split, we save about $N2^{-(j+1)}$ scores and pay for another full-width
+split. It helps in this model when the saved scoring time exceeds $Wc_{\rm split}$ and the
+additional queue cost. For example, with $N=6{,}400$ and $j=5$, another balanced cut saves
+about 100 scores. We compare the time of those 100 scores with the time of a 100-word split;
+the two counts alone aren't comparable.
 
 Treating $j$ as continuous gives a starting point:
 \[
@@ -105,16 +110,18 @@ Treating $j$ as continuous gives a starting point:
 \qquad
 j^*=\log_2\!\left(\frac{N\ln(2)c_{\rm score}}{Wc_{\rm split}}\right).
 \]
-We then check valid neighboring integer depths, the score assumptions, and the required
-recall. The formula is conditional on a single useful balanced path; it does not cover arbitrary
-branch exploration. Since $W$ grows with $N$, more documents do not automatically imply a
-larger optimal depth. The dense-mask work still grows with the collection.
+This gives us a place to start, and then we check the neighboring valid integer depths, the
+score assumptions, and the required recall. The calculation assumes one useful balanced path;
+it doesn't cover arbitrary branch exploration. Also, since $W$ grows with $N$, a larger
+collection doesn't automatically call for a larger optimal depth. The dense masks themselves
+still take more work as the collection grows.
 
-The strong-coordinate model suggests a leaf threshold too. At one million rows, a 13-bit
-ideal group has mean about 122 and standard deviation about 11. A threshold of 128 sometimes
-forces an extra weak-coordinate split. The rough margin $122+3(11)\approx155$ suggested testing
-$L=160$. The preceding 12-bit group averages about 244 rows, so it usually still splits.
-The experiment checked this setting rather than treating the approximation as a guarantee.
+The same distribution gives us a reason to try a different leaf size. At one million rows,
+the 13-bit ideal group has mean about 122 and standard deviation about 11. If we stop at 128,
+some slightly larger groups force another split on a weak coordinate. The rough margin
+$122+3(11)\approx155$ suggested testing $L=160$. Since the preceding 12-bit group averages
+about 244 rows, it will usually still split. We checked this suggestion experimentally;
+the approximation alone doesn't guarantee that it is the right threshold.
 
 The complete choice for method $a$ is
 \begin{equation}
@@ -122,8 +129,8 @@ The complete choice for method $a$ is
 \quad\text{subject to}\quad R_a(\theta)\ge r,\quad M_a(\theta)\le M_{\rm limit}.
 \label{eq:choice}
 \end{equation}
-The vector $\theta$ contains that method's settings. A derivative can help where the functions
-are known, but cluster occupancy and routing recall are not determined by $N$ and RAM alone.
-In practice, we measure promising settings, retain the feasible ones, and compare the best
-\emph{tested} choices. We must give the scan enough routing choices and let B stop splitting
-when a scan-like leaf is cheaper.
+Here the vector $\theta$ holds the settings available to a method. A derivative is useful
+when we know the relevant functions, but $N$ and RAM alone don't tell us cluster occupancy
+or routing recall. We therefore measure promising settings, keep the feasible ones, and
+compare the best \emph{tested} choices. That includes giving A enough routing options and
+letting B stop splitting when a scan-like leaf is cheaper.

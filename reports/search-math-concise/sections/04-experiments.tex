@@ -1,45 +1,48 @@
 \section{What the experiments establish}
 \label{sec:experiments}
-The work formulas tell us what each method must do. Measurements answer the next question:
-does the scoring it avoids pay for the search it adds? We first compare real embeddings,
-then use constructed inputs to isolate the importance of the query's strong coordinates.
+The work formulas tell us what each method must do, but we need measurements to find out
+whether the scoring it avoids pays for the search it adds. We compare real embeddings first,
+then use constructed inputs to isolate how much the query's strong coordinates matter.
 The saved source record identifies the runs behind these comparisons~\cite{local}.
 
 \subsection{Make the comparison fair}
-A, B and C receive the same documents and floating-point queries. They use the same native
-weighted binary scorer, return the top 100, and break score ties by document ID. Recall is
-recovery of that exact binary ranking. There is no float reranker or human relevance judgment
-in these comparisons.
+A, B and C receive the same documents and floating-point queries, use the same native
+weighted binary scorer, and return the top 100 with score ties broken by document ID.
+When we measure recall here, we measure recovery of that exact binary ranking; these
+comparisons use neither a float reranker nor human relevance judgments.
 
-The machine is an Apple M5 Max with 128 GiB of physical memory. Each worker uses one CPU
-thread and runs one query at a time, under a separate 32 GB decimal memory budget. A fresh
-process builds a configuration, warms it, and measures routing plus search. This outer timer
-includes the call from Python into C++. Cached-vector measurements exclude text encoding.
-Repeated process blocks help expose timing variation; the recorded power settings do not
-prove that CPU frequency remained fixed.
+The machine is an Apple M5 Max with 128 GiB of physical memory, while each worker runs
+under a separate 32 GB decimal memory budget using one CPU thread and one query at a time.
+A fresh process builds a configuration, warms it, and then measures routing plus search.
+The outer timer includes the call from Python into C++, but cached-vector measurements
+exclude text encoding. Repeating whole process blocks helps expose timing variation;
+the recorded power settings do not prove that CPU frequency remained fixed.
 
 We tune parameters on one set of query IDs, freeze the choices, and evaluate them on different
-IDs. Each method may choose its own fastest tested setting that meets the recall requirement.
-A gets intermediate probe counts and direct routing by sign keys. B gets large leaves, so it
-can score a selected cluster without making unnecessary splits. Without these options, a
-poor baseline or a forced traversal could decide the result before the timing begins.
+IDs, allowing each method its own fastest tested setting that meets the recall requirement.
+For A, the tested options include intermediate probe counts and direct routing by sign keys.
+For B, they include large leaves, so it can score a selected cluster without unnecessary
+splits. If we left these options out, a poor baseline or a forced traversal could decide
+the result before the timing begins.
 
-The real study retains two selection rules. One accepts settings whose average tuning recall
-reaches the target. The conservative rule requires a lower estimate from repeated resampling
-of tuning queries to reach it. This leaves more margin, but cannot promise recall on future
-queries. A supported speedup also requires both methods to meet the target and the paired
-95\% interval for their time ratio to lie above one. Queries and whole process blocks are
-resampled together; timing repeats do not count as additional independent queries.
+The real study retains two ways to select settings: one accepts a setting when its average
+tuning recall reaches the target, while the conservative rule requires a lower estimate from
+repeated resampling of tuning queries to reach it. The conservative rule leaves more margin,
+but cannot promise recall on future queries. To establish a speedup, both methods must also
+meet the target and the paired 95\% interval for their time ratio must lie above one. Queries
+and whole process blocks are resampled together; timing repeats do not count as additional
+independent queries.
 
 \subsection{Real embeddings did not establish an alternative speedup}
-The real study uses 256-bit document codes from Nomic embeddings of MS MARCO passages~\cite{nomic,msmarco}.
+For the real study, the documents are 256-bit codes from Nomic embeddings of MS MARCO passages~\cite{nomic,msmarco}.
 After combining 6,821 tuning settings, the frozen choices were evaluated on 200 query IDs
-excluded from the earlier 300-query collection. All 36 conservative target points met their
-requested recall on this sample; only 7 of 36 points chosen by average tuning recall did.
+excluded from the earlier 300-query collection. On this sample, all 36 conservative target
+points met their requested recall, compared with only 7 of 36 points chosen by average
+tuning recall.
 
-The table shows the conservative results at one million documents. Read each row as a common
-minimum recall requirement, followed by each method's median routing-plus-search time.
-The achieved recall happens to be equal across methods in these rows.
+In the conservative results at one million documents below, each row sets a common minimum
+recall requirement and shows each method's median routing-plus-search time. If we compare
+methods within a row, their achieved recall also happens to be equal.
 
 \begin{center}
 \begin{tabular}{@{}rrrrr@{}}
@@ -56,30 +59,32 @@ Target & A (ms) & B (ms) & C (ms) & Recall (\%)\\
 
 \fig{real-tradeoff}{Four frozen recall-target choices on one million real passage embeddings and 200 independent query IDs. Lines connect the tested settings for readability; they do not predict intermediate settings. At each shown recall, A has the smallest median.}{.9}
 
-None of the 48 evaluated comparisons across the real study established a B or C speedup
-under the stated rule. The conclusion applies to this data, score, implementation and tested
-parameter range. Fewer fully scored documents did not produce a supported reduction in the
-complete retrieval time.
+Across the real study, none of the 48 evaluated comparisons established a B or C speedup
+under the stated rule. Although fewer documents received full scores, that saving did not
+produce a supported reduction in complete retrieval time. This conclusion applies to this
+data, score, implementation and tested parameter range.
 
 A later control gives C a one-bit key, A's routing layout, and unlimited candidate and lookup
-budgets. A and B keep their frozen settings. It uses 100 further query IDs, excluding all
-500 previously used IDs. A, B and C measured 9.541, 9.855 and 10.545 ms, respectively.
-All three achieved 98.95\% recall, below the requested 99\%. We retain that miss without
-rounding it into a pass. It is a separate sample from the earlier successful 200-query
-evaluation, and no parameter was changed in response to its outcome.
+budgets, while A and B keep their frozen settings. This control uses 100 further query IDs,
+excluding all 500 previously used IDs. A, B and C measured 9.541, 9.855 and 10.545 ms,
+respectively, and all three achieved 98.95\% recall, below the requested 99\%. That remains
+a miss; we do not round it into a pass. The sample is separate from the earlier successful
+200-query evaluation, and no parameter was changed in response to its outcome.
 
 \subsection{Constructed data shows when skipping scores can help}
-The controlled inputs make a specific distinction testable. Document signs are independent
-and balanced across 256 coordinates. Each query has 13 strong coordinates of magnitude one;
-the remaining coordinates have magnitude 0.0001. Matching every strong sign therefore beats
-any document that mismatches one, regardless of the weak signs. In the fixed case, the strong
-positions stay the same. In the changing case, each query chooses different strong positions
-uniformly without replacement. These are constructed vectors, not measured text embeddings.
+With constructed inputs, we can isolate the effect of keeping the strong coordinates fixed
+or changing them with each query. Document signs are independent and balanced across 256
+coordinates. Each query has 13 strong coordinates of magnitude one, with magnitude 0.0001
+on the remaining coordinates. A document matching every strong sign therefore beats any
+that mismatches one, regardless of the weak signs. The fixed case keeps the strong positions
+the same; in the changing case, each query chooses different strong positions uniformly
+without replacement. These vectors are constructed, not measured text embeddings.
 
 The final follow-up uses 40 tuning queries and 20 separate evaluation queries, with three
 process blocks and three timing repeats. It adds neighboring key widths, cluster counts and
-leaf sizes, then remeasures earlier choices. The results below use one million documents and
-the 99\% requirement. All methods reach 100\% recall except A in the changing case, at 99.95\%.
+leaf sizes, and then remeasures earlier choices. At one million documents and the 99\%
+requirement, the results below show that all methods reach 100\% recall except A in the
+changing case, at 99.95\%.
 
 \begin{center}
 \begin{tabular}{@{}lrrr@{}}
@@ -92,55 +97,56 @@ Changing & 24.9235 & 0.1446 & 14.6301\\
 \end{tabular}
 \end{center}
 
-With fixed positions, A selects two of 16,384 clusters by direct routing; C uses one physical
-cluster and a 13-bit key. C's paired speedup estimate is 1.098, with a 95\% interval of
-1.066--1.147. The time difference is about 1.25 microseconds. Both methods select documents
-through the same strong signs. C combines key enumeration and scoring in one native call;
-A routes and scans through separate calls. The small measured advantage concerns this
-implementation of closely related candidate selection.
+With fixed positions, A selects two of 16,384 clusters by direct routing, while C uses one
+physical cluster and a 13-bit key. C's paired speedup estimate is 1.098, with a 95\% interval
+of 1.066--1.147, and the time difference is about 1.25 microseconds. Both methods select
+documents through the same strong signs, but C combines key enumeration and scoring in one
+native call, whereas A routes and scans through separate calls. The small measured advantage
+therefore concerns this implementation of closely related candidate selection.
 
-Changing positions prevent a fixed key from consistently selecting the strong signs. B can
-follow them because it orders coordinates using each query's magnitudes. Its selected setting
-uses one cluster, unlimited traversal and a leaf size of 160. A opens 255 of 256 centroid
-clusters. B's paired speedup estimate is 172.3, with a 95\% interval of 169.1--177.2.
-C uses a 14-bit key, but its paired interval against A includes one; its lower median alone
-does not establish an advantage.
+If the strong positions change, a fixed key cannot consistently select them. B can follow
+them because it orders coordinates using each query's magnitudes; its selected setting uses
+one cluster, unlimited traversal and a leaf size of 160. A opens 255 of 256 centroid clusters,
+and B's paired speedup estimate is 172.3, with a 95\% interval of 169.1--177.2. C uses a
+14-bit key and has a lower median than A, but its paired interval against A includes one,
+so that median alone does not establish an advantage.
 
-The leaf choice follows the occupancy calculation. At one million rows, the ideal 13-bit
-group has mean size about 122 and standard deviation about 11. A threshold of 128 can force
-another split on a weak coordinate. A threshold of 160 leaves more room to score that group.
-The experiment checks this distribution-based suggestion. It does not establish that 160
-is best for arbitrary embeddings, sizes or machines.
+We can see the reason for the leaf choice in the occupancy calculation: at one million rows,
+the ideal 13-bit group has mean size about 122 and standard deviation about 11. A threshold
+of 128 can force another split on a weak coordinate, whereas a threshold of 160 leaves more
+room to score that group. The experiment checks this suggestion from the distribution;
+it does not establish that 160 is best for arbitrary embeddings, sizes or machines.
 
 \subsection{Check the answer, the work, then the predicted time}
-An independent answer comes first. The checks calculate scores directly from document signs
-and sort by score and ID. Larger runs count strong and weak mismatches from packed bits,
-avoiding a huge expanded matrix. Every complete native call in the scaling check returned
-the independent reference ranking.
+Before checking work or timing predictions, we need an independently calculated answer.
+The checks calculate scores directly from document signs and sort by score and ID; larger
+runs count strong and weak mismatches from packed bits to avoid a huge expanded matrix.
+Every complete native call in the scaling check returned the independent reference ranking.
 
-Next, predicted work is compared with native counters. Across the earlier controlled tuning
-and evaluation runs, 447 applicable per-query predictions matched exactly. These checks
-include full-width split and leaf visits, scored rows, key attempts including empty lookups,
-and tracked mask peaks where applicable. Queries outside the formulas' stated conditions
-remain in the measurements; they are not counted as successful predictions.
+To check the predicted work, we compare it with native counters. Across the earlier
+controlled tuning and evaluation runs, 447 applicable per-query predictions matched exactly,
+including full-width split and leaf visits, scored rows, key attempts including empty
+lookups, and tracked mask peaks where applicable. Queries outside the formulas' stated
+conditions remain in the measurements, but do not count as successful predictions.
 
-Correct counts do not give every row the same time cost. In a 16-million-document buffer,
-scoring about 1,958 scattered rows took 0.159 ms with reused candidates and 0.455 ms with
-changing candidates. Candidate generation was outside the timer, but changed which memory
-had been accessed recently. Fits trained on one- and four-million-row buffers underestimated
-a 16-million-row check by as much as 45.2\% for reused candidates and 27.6\% for changing
-candidates. Both failed fits remain saved. The largest row store was about 640 MB, so these
-checks do not validate access costs for a 40 GB store.
+Even with correct counts, we cannot assign every row the same time cost. In a
+16-million-document buffer, scoring about 1,958 scattered rows took 0.159 ms with reused
+candidates and 0.455 ms with changing candidates. Candidate generation stayed outside the
+timer, but still changed which memory had been accessed recently. Fits trained on one- and
+four-million-row buffers underestimated a 16-million-row check by as much as 45.2\% for
+reused candidates and 27.6\% for changing candidates, and both failed fits remain saved.
+The largest row store was about 640 MB, so these checks do not validate access costs for
+a 40 GB store.
 
-The later complete-call model uses one latency median per corpus size. This corrects an
-earlier fit that gave fast individual queries too much weight when predicting a median.
-For C's small postings, the revised model also accounts for result-selection work. B's leaf
-threshold grows as $L=160N/10^6$, keeping the intended strong-coordinate depth instead of
-forcing more cuts as the corpus grows.
+The later complete-call model uses one latency median per corpus size, correcting an earlier
+fit that gave fast individual queries too much weight when predicting a median. The revised
+model also accounts for result-selection work in C's small postings. For B, the leaf threshold
+grows as $L=160N/10^6$, so a larger corpus keeps the intended strong-coordinate depth
+instead of forcing more cuts.
 
-The revised four-million-row check had already been inspected, so it is diagnostic. The
-coefficients were frozen before the separate eight-million-row run below. Positive error
-means the prediction was slower than the measurement.
+Because the revised four-million-row check had already been inspected, it serves as a
+diagnostic check. The coefficients were frozen before the separate eight-million-row run
+below, where a positive error means the prediction was slower than the measurement.
 
 \begin{center}
 \begin{tabular}{@{}llrrr@{}}
@@ -157,20 +163,22 @@ Changing & C & 202.767 & 207.086 & $+2.1\%$\\
 \end{tabular}
 \end{center}
 
-All six checks met the earlier 20\% criterion. They test transfer to a larger corpus under
-the same prescribed workload and existing query IDs. These are model-check configurations,
-not the tuned comparisons in the preceding table. The largest observed error, 7.7\%, is not
-a guaranteed bound for future queries or a billion documents.
+All six checks met the earlier 20\% criterion, testing transfer to a larger corpus under
+the same prescribed workload and existing query IDs. These model-check configurations are
+separate from the tuned comparisons in the preceding table. Although the largest
+observed error was 7.7\%, that does not give us a guaranteed bound for future queries or
+a billion documents.
 
 \subsection{Measure actual text requests}
-A user supplies text, so retrieval time covers only part of the wait. The final check runs
-20 existing independent-query texts through the cached local Nomic model on MPS, normalizes
-each vector, routes it and calls native search. Batch size is one. Three blocks and two
-repeats give 120 requests per method, or 360 requests in total. Each sequence shape is warmed;
-model loading, index building and reference creation are outside the request timer.
+When a user supplies text, retrieval covers only part of the wait. The final check therefore
+runs 20 existing independent-query texts through the cached local Nomic model on MPS,
+normalizes each vector, routes it and calls native search, with a batch size of one.
+Three blocks and two repeats give 120 requests per method, or 360 requests in total. Each
+sequence shape is warmed, and the request timer excludes model loading, index building
+and reference creation.
 
-The table reports stage medians and the separately measured request total. All three methods
-use the earlier frozen settings and achieve 99.45\% binary recall on this sample.
+Using the earlier frozen settings, all three methods achieve 99.45\% binary recall on this
+sample. The table gives the stage medians alongside the separately measured request total.
 
 \begin{center}
 \begin{tabular}{@{}lrrrr@{}}
@@ -184,14 +192,14 @@ C & 7.543 & 11.201 & 18.912 & 21.898\\
 \end{tabular}
 \end{center}
 
-The median is the middle time; p95 is the 95th-percentile time. The tiny A/B total difference
-does not establish a speedup. Adding stage medians need not reproduce the total median:
-the request with the middle encoding time need not have the middle retrieval time. Each
-request's total must be measured before taking its median.
+The median is the middle time, and p95 is the 95th-percentile time. The tiny difference
+between the A/B totals does not establish a speedup. If we add the stage medians, we need
+not get the total median, because the request with the middle encoding time need not have
+the middle retrieval time. We must measure each request's total before taking its median.
 
-These timings apply to real Nomic text queries. The constructed strong-coordinate vectors
-do not come from this encoder. Adding its time to their search measurements would not create
-a measured text-to-results pipeline.
+These timings apply to real Nomic text queries. Since the constructed strong-coordinate
+vectors do not come from this encoder, adding its time to their search measurements would
+not give us a measured text-to-results pipeline.
 
 % Source map (paths relative to repository root; final boundary results supersede 07c timings):
 % Fairness and real study: reports/search-math/sections/07b-implemented-study.tex;
