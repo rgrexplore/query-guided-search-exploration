@@ -1,5 +1,5 @@
 {
-  "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024",
+  "pool": "data/prefix-study-2026-09-13/pools/qwen-quora-d1024",
   "cluster_counts": [
     1,
     64,
