@@ -1,0 +1,30 @@
+\newpage
+\section{Limitations and next steps}
+\begin{enumerate}
+\item Prefix Backward Walk is a revised method definition. Its proposed layout and arithmetic examples are not implementation or benchmark results.
+\item Candidate-target stopping is approximate. A large returned set can still omit the most relevant reference documents.
+\item Balanced independent bits give useful count examples, but real embedding prefixes can be uneven and correlated, especially inside a cluster.
+\item Matryoshka motivates testing prefixes; it does not guarantee that every shorter sign prefix preserves recall.
+\item Sorted-key lookup avoids rescoring old rows, but construction and updates still have costs. No insertion or speed advantage over HNSW has been measured.
+\end{enumerate}
+
+\section{Conclusion}
+\begin{enumerate}
+\item The common observation is unchanged: query signs define an ideal binary pattern, and mismatches have costs determined by the query values.
+\item Bitplanes uses those values to narrow a set of documents while keeping alternative branches.
+\item Backward Walk starts from the query's prefix, removes its last bit when more candidates are needed, and scores only newly exposed rows.
+\item The earlier key-enumeration experiment tested a different method. A new fixed-data comparison is required before saying where prefix Backward Walk wins or loses.
+\end{enumerate}
+
+\begin{thebibliography}{9}\small\raggedright
+\bibitem{exa} Exa Team. \emph{How we built a web-scale vector database}. 2024.
+\url{https://exa.ai/blog/building-web-scale-vector-db}.
+\bibitem{hnsw} Y. Malkov and D. Yashunin. \emph{Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs}. 2016; revised 2018.
+\url{https://arxiv.org/abs/1603.09320}.
+\bibitem{mrl} A. Kusupati et al. \emph{Matryoshka Representation Learning}. 2022.
+\url{https://arxiv.org/abs/2205.13147}.
+\bibitem{nomic} Nomic AI. \emph{nomic-embed-text-v1.5}. Model documentation.
+\url{https://huggingface.co/nomic-ai/nomic-embed-text-v1.5}.
+\bibitem{msmarco} Microsoft. \emph{MS MARCO}. Passage collection and benchmark resources.
+\url{https://microsoft.github.io/msmarco/}.
+\end{thebibliography}

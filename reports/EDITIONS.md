@@ -1,8 +1,14 @@
 # Report editions
 
-All seven PDFs are retained under `output/pdf/`.
+All eight PDFs are retained under `output/pdf/`.
 
-The current [calculations and experiments report](../output/pdf/search-methods-experiments.pdf)
+The new [prefix Backward Walk report](../output/pdf/search-methods-prefix-v2.pdf) follows the
+revised method: look up a prefix, shorten it, and score only newly exposed rows. It is a
+22-page proposal with the earlier C results explicitly labeled `C_key`. Its
+[source guide](search-math-prefix-v2/README.md) records the distinction; implementation and
+new measurements are pending.
+
+The preceding [calculations and experiments report](../output/pdf/search-methods-experiments.pdf)
 keeps both document and query vectors unchanged while varying index settings. It uses the
 requested section order, with 16 pages of diagrams, short steps and measured results. Its
 [source and run guide](search-math-experiments/README.md) describes the corrected comparison.
