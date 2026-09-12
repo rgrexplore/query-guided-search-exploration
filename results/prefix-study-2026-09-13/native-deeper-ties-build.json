@@ -1,0 +1,44 @@
+{
+  "status": "ready",
+  "completed_at_utc": "2026-09-12T21:56:57.054584+00:00",
+  "readiness_gate": {
+    "time": 1789250026.328852,
+    "note": "Original-build sweeps and selected repeats have stopped. Inspect run states before interpreting results. It is now safe to build the deeper-ties option."
+  },
+  "base_commit": "1630077929b15f17144a6503b75dab4fba7bac01",
+  "experiment_commit": "74a69c1c1ee082347f69e07b77b7a44bdd9c0f63",
+  "implementation_commit": "3591bfeb74914d6093a9cdde94c824d504145781",
+  "commit_status": "isolated experiment cherry-picked into prefix-experiments-v2",
+  "build": {
+    "status": "passed",
+    "exit_code": 0,
+    "command": "uv pip install --python ../../.venv/bin/python --no-deps -e ."
+  },
+  "tests": {
+    "status": "passed",
+    "exit_code": 0,
+    "command": "../../.venv/bin/python -m pytest -q",
+    "passed": 380,
+    "duration_seconds": 24.36,
+    "passes_run": 1
+  },
+  "native_module": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.venv/lib/python3.12/site-packages/bitplane_index.cpython-312-darwin.so",
+  "native_sha256": "3b6c6780a8eec645812d0a68b42ebcc00dfc2e0794f10ac68d7a4003d7e6b925",
+  "previous_native_sha256": "77604e7231996f0094997367a77eadb9372c18ced8c479b1baf06fb1ac81ef55",
+  "source_files_sha256": {
+    "cpp/index.hpp": "274b66b5ccadcc5a9f60d63182782fa4c97b732350baf2eaa9509235aeb65185",
+    "cpp/key_index.cpp": "52d53eb4e5777953e30302183107866146e4228a3c1836961ec2e025d86e52af",
+    "cpp/prefix_index_v2.cpp": "9328e5c2e604166d82313992c9e99d50dc699e867acdc53e6f8f0d964698c1dd",
+    "cpp/score.hpp": "d1ad2090a548a8d140d25dbb545ff6332031a39db4c4c450037620fe0761032a",
+    "cpp/prefix_index_v2.hpp": "16a4457842f72ecc9b25ff561fe62c247e07909ba3e22e2e227dd9edb6fc8ca0",
+    "cpp/bindings.cpp": "7f9170910bf9e5baff43460c7052ad8e8e3a80bbc0f8346ef215989e033b47a1",
+    "cpp/index.cpp": "9b085f31c3f48b0d3dab8d0fc9230c3fa274ba18886bae25d1ddceac5c179be6",
+    "cpp/key_index.hpp": "9ff4511bbc54fa7e4994d069eba258fbda1a37ccce56cc9bd69d91cad14e3c7c",
+    "CMakeLists.txt": "0bdd6f685635020efb286dbbd3ebaa10efcb68fdb6fc02f17ef78a8a7f3e554d",
+    "experiments/prefix_batch_worker_v2.py": "add36df3803f1c8dfcf2be70aaa3625a3113cefbe7610e194da522bb5a963a0f"
+  },
+  "timing_workers_before_build": 0,
+  "timing_workers_after_tests": [],
+  "test_cleanup": "Geometry tests now use a top-level import; no behavior change.",
+  "scope": "Optional deeper-first order for equal penalties; FIFO remains the default. No big benchmarks started."
+}

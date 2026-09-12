@@ -1,18 +1,17 @@
 """Compare sorted-prefix analysis with direct scalar bit comparisons."""
 
 import csv
-import importlib
 import json
 
 import bitplane_index
 import numpy as np
 
 from experiments.components import pack_signs, reference_rows
+from experiments import prefix_geometry_v2 as geometry
 from experiments.prefix_batch_worker_v2 import file_hash
 
 
 def test_all_depths_and_reference_sizes_match_scalar_prefix_membership(tmp_path):
-    geometry = importlib.import_module("experiments.prefix_geometry_v2")
     signs = np.random.default_rng(42).integers(0, 2, (101, 32), dtype=np.uint8)
     signs[0] = 1
     signs[1] = 0
@@ -62,7 +61,6 @@ def test_all_depths_and_reference_sizes_match_scalar_prefix_membership(tmp_path)
 
 
 def test_logical_storage_audit_uses_actual_cluster_padding():
-    geometry = importlib.import_module("experiments.prefix_geometry_v2")
     codes = np.zeros((65, 1), dtype=np.uint64)
     assignments = np.array([0, 1] + [2] * 63, dtype=np.int64)
     for method in ("scan", "branch", "prefix"):
@@ -75,7 +73,6 @@ def test_logical_storage_audit_uses_actual_cluster_padding():
 
 
 def test_optimistic_bounds_use_full_scores_strict_ties_and_all_queries(tmp_path):
-    geometry = importlib.import_module("experiments.prefix_geometry_v2")
     signs = np.zeros((100, 65), dtype=np.uint8)
     signs[0] = 1
     queries = np.array([[2, 1] + [0] * 62 + [1],
