@@ -20,6 +20,7 @@ from experiments.isolated import ROOT
 from experiments.models import mean_recall
 from experiments.probe_cutoffs import cover_boundary_ties, probe_cutoff, routing_ranks
 from experiments.real_study import prepare_router
+from routing import build_router
 
 METHODS = ("scan", "branch", "prefix")
 ROUTER_FILES = ("router.json", "assignments.npy", "centroids.npy", "labels.npy")
@@ -84,6 +85,37 @@ def build_jobs(pool, layouts, top_ks, phase, *, shape=None, repetitions=1,
     return jobs
 
 
+def prepare_binary_router(pool, clusters, seed, manifest):
+    """Train the existing spherical IVF router on normalized signs, leaving the pool untouched."""
+    folder = pool / "routers" / f"ivf-binary-{clusters}-seed{seed}"
+    if folder.exists():
+        return folder
+    codes = np.load(pool / "codes.npy", mmap_mode="r")
+    dimensions = manifest["identity"]["dimensions"]
+    scale = np.float32(1 / np.sqrt(dimensions))
+    vectors = np.empty((len(codes), dimensions), dtype=np.float32)
+    # Decode only real coordinates. Filling columns avoids a full uint64 bit matrix.
+    for bit in range(dimensions):
+        positive = (codes[:, bit // 64] >> np.uint64(bit % 64)) & np.uint64(1)
+        vectors[:, bit] = np.where(positive, scale, -scale)
+    router = build_router(vectors, method="ivf", clusters=clusters, seed=seed,
+                          threads=1, retain_float_index=False)
+    centroids = router.quantizer.reconstruct_n(0, clusters)
+    labels = np.arange(clusters, dtype=np.int64)
+    folder.mkdir(parents=True)
+    np.save(folder / "assignments.npy", router.assignments)
+    np.save(folder / "centroids.npy", centroids)
+    np.save(folder / "labels.npy", labels)
+    save_json(folder / "router.json", dict(kind="ivf", clusters=clusters, routing_bits=0, seed=seed,
+        training_representation="binary", source_codes_sha256=manifest["array_hashes"]["codes.npy"],
+        dimensions=dimensions, training_scale=float(scale),
+        cluster_sizes=np.bincount(router.assignments, minlength=clusters).tolist(),
+        build_ms=router.build_ms, routing_payload_bytes=centroids.nbytes + labels.nbytes,
+        assignments_sha256=file_hash(folder / "assignments.npy"),
+        centroids_sha256=file_hash(folder / "centroids.npy")))
+    return folder
+
+
 def prepare(config, output):
     output = Path(output); output.mkdir(parents=True, exist_ok=False)
     pool = Path(config["pool"]).resolve()
@@ -91,6 +123,9 @@ def prepare(config, output):
     if not all(1 <= k <= manifest["identity"]["top_k"] for k in config["top_ks"]):
         raise ValueError("top_ks must fit the unchanged cached reference")
     config = dict(config, pool=str(pool))
+    representation = config.get("routing_representation", "float")
+    if representation not in ("float", "binary"):
+        raise ValueError("routing_representation must be float or binary")
     source = Path(config.get("router_source") or pool).resolve()
     for name in ("codes.npy", "documents.npy"):
         if file_hash(source / name) != manifest["array_hashes"][name]:
@@ -104,19 +139,27 @@ def prepare(config, output):
                 layouts.append(dict(path=None, clusters=1, probes={str(k): [1] for k in config["top_ks"]}))
                 continue
             seed = config.get("router_seed", 42)
-            router = source / "routers" / f"ivf-{clusters}-seed{seed}"
+            cache_kind = "ivf-binary" if representation == "binary" else "ivf"
+            router = source / "routers" / f"{cache_kind}-{clusters}-seed{seed}"
             if not router.exists():
-                router = prepare_router(pool, "ivf", clusters, seed)
+                router = (prepare_binary_router(pool, clusters, seed, manifest)
+                          if representation == "binary" else prepare_router(pool, "ivf", clusters, seed))
             info = read_json(router / "router.json")
             if (info["kind"], info["clusters"], info["seed"]) != ("ivf", clusters, seed):
                 raise ValueError("cached router does not match the declared layout")
+            if info.get("training_representation", "float") != representation:
+                raise ValueError("cached router uses a different training representation")
+            if representation == "binary" and (info.get("source_codes_sha256") != manifest["array_hashes"]["codes.npy"]
+                                                or info.get("dimensions") != manifest["identity"]["dimensions"]):
+                raise ValueError("cached binary router uses different source codes or dimensions")
             hashes = {name: file_hash(router / name) for name in ROUTER_FILES}
             for name in ("assignments", "centroids"):
                 if hashes[f"{name}.npy"] != info[f"{name}_sha256"]:
                     raise ValueError(f"cached router {name} changed")
             ranks, scores, *_ = routing_ranks(dict(pool=str(pool), router=str(router),
                 query_rows=list(range(manifest["identity"]["queries"]))))
-            layout = dict(path=str(router), clusters=clusters, hashes=hashes, probes={}, cutoffs={})
+            layout = dict(path=str(router), clusters=clusters, hashes=hashes, probes={}, cutoffs={},
+                          training_representation=representation)
             for k in config["top_ks"]:
                 evidence, choices = [], {clusters} if config.get("include_all_clusters", True) else set()
                 for target in config.get("probe_targets", config["recall_targets"]):

@@ -3,11 +3,13 @@ from experiments import prefix_study_v2 as study
 import json
 from pathlib import Path
 from time import time
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
 
 from experiments.components import pack_signs, reference_rows
+from experiments import real_study
 from experiments.prefix_batch_worker_v2 import file_hash
 
 
@@ -242,3 +244,55 @@ def test_optional_all_cluster_choice_preserves_default_and_global_reference(conf
         assert layouts[1]['probes'] == {'1': expected, '2': expected}
         for job in jobs:
             assert {variant['probes'] for variant in job['variants']} == set(expected if job['clusters'] == 2 else [1])
+
+
+def test_binary_router_uses_packed_signs_without_padding_or_changing_float_inputs(config, tmp_path, monkeypatch):
+    pool = Path(config['pool'])
+    signs = np.array([[1, 0] * 32 + [0], [0, 1] * 32 + [1], [1] * 65, [0] * 65], dtype=np.uint8)
+    codes = pack_signs(signs)
+    codes[:, 1] |= np.uint64(0xffffffffffffffff ^ 1)  # Padding beyond coordinate 64 must be ignored.
+    documents = (2 * signs.astype(np.float32) - 1) * np.linspace(.1, 1, 65, dtype=np.float32)
+    documents /= np.linalg.norm(documents, axis=1, keepdims=True)
+    queries = np.array([[1] * 65, [0] * 65], dtype=np.float32)
+    for name, values in dict(codes=codes, documents=documents, queries=queries,
+                              reference=reference_rows(signs, queries, 2)).items():
+        np.save(pool/f'{name}.npy', values)
+    hashes = {name: file_hash(pool/name) for name in
+              ('codes.npy', 'documents.npy', 'queries.npy', 'reference.npy')}
+    (pool/'pool.json').write_text(json.dumps(dict(
+        identity=dict(documents=4, dimensions=65, queries=2, top_k=2), hashes=hashes)))
+    training = []
+
+    def capture_training(values, **settings):
+        training.append((values.copy(), settings))
+        return SimpleNamespace(assignments=np.array([0, 1, 0, 1], dtype=np.int64), build_ms=0.0,
+            quantizer=SimpleNamespace(reconstruct_n=lambda start, count: values[:count].copy()))
+
+    monkeypatch.setattr(real_study, 'build_router', capture_training)
+    monkeypatch.setattr(study, 'build_router', capture_training, raising=False)
+    monkeypatch.setattr(study, 'routing_ranks', lambda case:
+        (np.ones((2, 2), dtype=np.int64), np.array([[2, 1], [2, 1]], dtype=np.float32)))
+    config.update(cluster_counts=[1, 2])
+    study.prepare(config, tmp_path/'float-study')
+    float_cache = pool/'routers/ivf-2-seed42'
+    float_hashes = {name: file_hash(float_cache/name) for name in study.ROUTER_FILES}
+    binary_config = dict(config, routing_representation='binary')
+    jobs = study.prepare(binary_config, tmp_path/'binary-study')
+    assert len(training) == 2
+    np.testing.assert_array_equal(training[0][0], documents)
+    expected = (2 * signs.astype(np.float32) - 1) * np.float32(1 / np.sqrt(65))
+    np.testing.assert_array_equal(training[1][0], expected)
+    assert training[1][0].shape == (4, 65) and training[1][0].dtype == np.float32
+    assert training[1][1] == dict(method='ivf', clusters=2, seed=42, threads=1, retain_float_index=False)
+    binary_cache = pool/'routers/ivf-binary-2-seed42'
+    metadata = json.loads((binary_cache/'router.json').read_text())
+    assert metadata['kind'] == 'ivf' and metadata['training_representation'] == 'binary'
+    assert metadata['source_codes_sha256'] == hashes['codes.npy'] and metadata['dimensions'] == 65
+    assert metadata['training_scale'] == float(np.float32(1 / np.sqrt(65)))
+    assert {job['router'] for job in jobs if job['clusters'] == 2} == {str(binary_cache)}
+    assert {job['method'] for job in jobs if job['clusters'] == 2} == {'scan', 'branch', 'prefix'}
+    assert all(job['router'] is None for job in jobs if job['clusters'] == 1)
+    study.prepare(binary_config, tmp_path/'binary-reuse')
+    assert len(training) == 2
+    assert all(file_hash(pool/name) == digest for name, digest in hashes.items())
+    assert all(file_hash(float_cache/name) == digest for name, digest in float_hashes.items())
