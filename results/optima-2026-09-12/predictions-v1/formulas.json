@@ -1,0 +1,40 @@
+{
+  "fixed": {
+    "ideal_group": {
+      "mean_count": 244.140625,
+      "std_count": 15.623092534937653,
+      "probability_fewer_than_k": 3.9509263800249874e-26,
+      "expected_ideal_only_recall": 1.0,
+      "suggested_leaf_size": 292
+    },
+    "global_branch_derivative": {
+      "available": true,
+      "unconstrained_depth": null,
+      "candidate_depths": [
+        0,
+        12
+      ],
+      "scope": "Global balanced single path; fixed leaf width; F>=K. Check recall and integer choices.",
+      "equation": "W*c_split+c_node-ln(2)*c_log = ln(2)*N*2^(-j)*c_row"
+    }
+  },
+  "adaptive": {
+    "ideal_group": {
+      "mean_count": 244.140625,
+      "std_count": 15.623092534937653,
+      "probability_fewer_than_k": 3.9509263800249874e-26,
+      "expected_ideal_only_recall": 1.0,
+      "suggested_leaf_size": 292
+    },
+    "global_branch_derivative": {
+      "available": true,
+      "unconstrained_depth": null,
+      "candidate_depths": [
+        0,
+        12
+      ],
+      "scope": "Global balanced single path; fixed leaf width; F>=K. Check recall and integer choices.",
+      "equation": "W*c_split+c_node-ln(2)*c_log = ln(2)*N*2^(-j)*c_row"
+    }
+  }
+}

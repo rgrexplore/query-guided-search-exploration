@@ -1,0 +1,49 @@
+{
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/direct-16-seed73": {
+    "labels.npy": "41ab14437a68231a24825086c1458c38d7f2273fa6143b754ee58336d4df46e1",
+    "assignments.npy": "79fa55d40670daa206db577d8f8dda1d57cdfcace2e55049d0bb137f031783f4",
+    "router.json": "1d975ce926b739ac5707d3c2880476ec5c6e0bb8e01e79792ba4420eb824b3aa"
+  },
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/direct-256-seed73": {
+    "labels.npy": "21546057ab4ef0cd69aa7cf6b9e114be26c00143714d419d79c1fec3ad6565f5",
+    "assignments.npy": "a8aabd649d772a2a76d6de0612679343a8fac88395bac4c20b1f9121ec8ac649",
+    "router.json": "2ee484c80da65f061763695eded6493af7ebad55eb72c84bd084024415fddb9b"
+  },
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/direct-1024-seed73": {
+    "labels.npy": "27e2935cb98e5eb3fb0264594106564a3e83ce74e1ed36de78fe986cbd63fb9c",
+    "assignments.npy": "3b4fe6964d9926a86f2a437d6a84bc12ca88b8505ee6a2f12158429824931692",
+    "router.json": "fdc0b1f6a838013ae73dff905c87ac4c0d6e08312d66d7453cf372a921600882"
+  },
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/direct-2048-seed73": {
+    "labels.npy": "5f6937cc46ea1e02db4737e09f7f3ac8d35d8d801759c8ecd278b914907ed3c7",
+    "assignments.npy": "6244353276a67a927d68fd2076b70367b03e15fdbcf2e636d8b4b380f597fa16",
+    "router.json": "fb849213262599724a7488ba4bb5f36d6a8d8d3bc99b4bcda81798475997bc57"
+  },
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/direct-4096-seed73": {
+    "labels.npy": "d6f654147cde165cd29348ff442421bd5f7428648f32a823ae7b0744da17991c",
+    "assignments.npy": "13b758704b6f3b24a8b83a9b06f492e9dbbe1eaf0be694602b233d319f5a508c",
+    "router.json": "f8ebaa5f7fbfd543a4e01b61b94bd1ae4c05a039aa8170235fea501068fbca6a"
+  },
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/direct-8192-seed73": {
+    "labels.npy": "bafe786d30e6daa96194badfc0e797b656791f4ab8b20afe826e1267336c04ca",
+    "assignments.npy": "4d818f3f449f744a9fe829efc2c1d294d0785540fcab826cd72b2f83eb5fc98c",
+    "router.json": "73f7e3e7bc34bfdde7d370aad7f92a36e1474a3ecc6f9700af87682292fafb19"
+  },
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/direct-16384-seed73": {
+    "labels.npy": "4aeca789c5ae738675a5bb11f903356d4e0c4e216c2ea8aff3beac9e1f66d67d",
+    "assignments.npy": "51c199ea4cd058c1598491ff2820df5447be7b0a334e7dc28abb755e893d9448",
+    "router.json": "1cc47287696a8feabfe49635927385d904f9a3c2570b5be7f319ba115d3f5918"
+  },
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/ivf-256-seed73": {
+    "centroids.npy": "bcfa98bd6cc481db4cef72bcd69f5842a02f435d215a7f61ddc6c07cbdaeb9cf",
+    "labels.npy": "21546057ab4ef0cd69aa7cf6b9e114be26c00143714d419d79c1fec3ad6565f5",
+    "assignments.npy": "ef6249889f7b1f7048c20301692b2d30750a5e7ebfc86cedf3d45b7347b0259f",
+    "router.json": "526393c2e89ea05529ddc48ae0298ba31a2e8929a659dec5dae41eca5ecc4135"
+  },
+  "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/ivf-4096-seed73": {
+    "centroids.npy": "136b673ff3e32c96e7914bc7f591f6c5b0486f884762229a37cab07901fc0d3e",
+    "labels.npy": "d6f654147cde165cd29348ff442421bd5f7428648f32a823ae7b0744da17991c",
+    "assignments.npy": "6752aa052c38c1ba1f6d0df4f09d9bf8371f915edcf135d696aa41c433692e61",
+    "router.json": "28fed7a81c1615ece8c2a1e60a183725cc002584e28e492e4434dc4ab6dcc42b"
+  }
+}

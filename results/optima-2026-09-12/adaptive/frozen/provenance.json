@@ -1,0 +1,16 @@
+{
+  "created_at": "2026-09-12T09:21:50.298302+00:00",
+  "sources": [
+    "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/tuning"
+  ],
+  "targets": [
+    0.8,
+    0.9,
+    0.95,
+    0.99
+  ],
+  "bootstrap_samples": 1000,
+  "seed": 51,
+  "failures": [],
+  "scope": "Frozen from tuning data. Duplicate timings pooled; seeds averaged per query. The conservative choice uses a training bootstrap percentile, not a population guarantee."
+}

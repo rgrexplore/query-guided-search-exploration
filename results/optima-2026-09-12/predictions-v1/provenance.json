@@ -1,0 +1,23 @@
+{
+  "supports": [
+    "fixed",
+    "adaptive"
+  ],
+  "p50_error_threshold_percent": 20.0,
+  "source_hashes": {
+    "fixed/configuration.json": "9cd7a188b8708bb6c6abe567994efb2c1fc0def149fbb65b2e31a5f4938d57cf",
+    "fixed/tuning/schedule.json": "1e7426af78372bba48375816f6c80f36b44f7d48e825e0265476b3fe3717cf97",
+    "fixed/frozen/settings.csv": "04a00836945d49b16caa8f5f6bce7ca2674ad1aa46c316b6ae1204d05f40ad0e",
+    "fixed/frozen/all-settings.json": "95e29d5e4140afb18a1fc2026e922fec45058e868d37df6ba0c49f0ec29a9238",
+    "fixed/frozen/shortlist.json": "bdd229fce49915dfddfaaf9fae5cad13f988fe2328b6d1a7a287b42337ba2c6a",
+    "adaptive/configuration.json": "9cd7a188b8708bb6c6abe567994efb2c1fc0def149fbb65b2e31a5f4938d57cf",
+    "adaptive/tuning/schedule.json": "328fb8cc4593b7bb0b293d7bb1baaec22f94d3bbeb1187bf59272b9c03272293",
+    "adaptive/frozen/settings.csv": "fe73e1d95fbb1a7d60d4937a939a4b7180ed24566eed2c25bb46c62ef672808c",
+    "adaptive/frozen/all-settings.json": "1552e9c63244fe46d597c9fde7626a53cc5515e1cd58116a75066a8aa3a13ff2",
+    "adaptive/frozen/shortlist.json": "72159a8aba5ff91972d15f84e18ba6bf1763d4d92921442caded3f7df11a6132"
+  },
+  "script_sha256": "bf5c8fb76369f485f5f54d86daedbb1ed4dac4ed4200a9c01d341cd2121e65fd",
+  "math_helpers_sha256": "c0e92932d1dd90c0f770e0780bef37d0268899f7e21a6044a738396a3c995921",
+  "failures": [],
+  "scope": "Frozen before evaluation. One median observation per qualified tuning configuration. Recall and routing are empirical. Expected work is analytic only where explicitly labeled. Fit residuals are training diagnostics, not evidence of future accuracy."
+}

@@ -1,0 +1,127 @@
+[
+  {
+    "path": null,
+    "kind": "none",
+    "clusters": 1,
+    "routing_bits": 0,
+    "probes": [
+      1
+    ]
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/direct-16-seed73",
+    "kind": "direct",
+    "clusters": 16,
+    "routing_bits": 4,
+    "probes": [
+      12,
+      14,
+      15,
+      16
+    ]
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/direct-256-seed73",
+    "kind": "direct",
+    "clusters": 256,
+    "routing_bits": 8,
+    "probes": [
+      165,
+      209,
+      229,
+      250,
+      256
+    ]
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/direct-1024-seed73",
+    "kind": "direct",
+    "clusters": 1024,
+    "routing_bits": 10,
+    "probes": [
+      634,
+      810,
+      914,
+      999,
+      1024
+    ]
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/direct-2048-seed73",
+    "kind": "direct",
+    "clusters": 2048,
+    "routing_bits": 11,
+    "probes": [
+      1287,
+      1639,
+      1817,
+      1993,
+      2048
+    ]
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/direct-4096-seed73",
+    "kind": "direct",
+    "clusters": 4096,
+    "routing_bits": 12,
+    "probes": [
+      2558,
+      3243,
+      3652,
+      3987,
+      4096
+    ]
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/direct-8192-seed73",
+    "kind": "direct",
+    "clusters": 8192,
+    "routing_bits": 13,
+    "probes": [
+      4987,
+      6414,
+      7207,
+      7977,
+      8191
+    ]
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/direct-16384-seed73",
+    "kind": "direct",
+    "clusters": 16384,
+    "routing_bits": 14,
+    "probes": [
+      9494,
+      12674,
+      14444,
+      15984,
+      16382
+    ]
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/ivf-256-seed73",
+    "kind": "ivf",
+    "clusters": 256,
+    "routing_bits": 0,
+    "probes": [
+      149,
+      187,
+      213,
+      243,
+      256
+    ]
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/ivf-4096-seed73",
+    "kind": "ivf",
+    "clusters": 4096,
+    "routing_bits": 0,
+    "probes": [
+      1872,
+      2623,
+      3109,
+      3727,
+      4064
+    ]
+  }
+]
