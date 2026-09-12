@@ -63,7 +63,8 @@ def search_index(index, method, query, selected, variant):
                             prefer_deeper_ties=variant.get("prefer_deeper_ties", False))
     return index.search(query, selected, candidate_limit=variant["top_k"],
                         start_depth=variant["start_depth"],
-                        candidate_target=variant["candidate_target"])
+                        candidate_target=variant["candidate_target"],
+                        stop_when_exact=variant.get("stop_when_exact", False))
 
 
 def measure_job(job, output):

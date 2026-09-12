@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <chrono>
+#include <cmath>
 
 namespace bitplane {
 namespace {
@@ -99,6 +100,20 @@ std::vector<QueryResult> PrefixIndexV2::search(const float* queries, std::size_t
             query_key = (query_key << 1) | std::uint32_t(query[bit] >= 0);
         }
 
+        double query_l1 = 0;
+        std::vector<double> prefix_min_weights;
+        if (options.stop_when_exact && options.start_depth > 0) {
+            prefix_min_weights.resize(options.start_depth);
+            for (std::size_t dimension = 0; dimension < dimensions_; ++dimension) {
+                const auto weight = std::abs(double(query[dimension]));
+                query_l1 += weight;
+                if (dimension < options.start_depth) {
+                    prefix_min_weights[dimension] = dimension == 0 ? weight
+                        : std::min(prefix_min_weights[dimension - 1], weight);
+                }
+            }
+        }
+
         std::vector<SelectedBucket> selected;
         selected.reserve(probes);
         for (std::size_t probe = 0; probe < probes; ++probe) {
@@ -130,7 +145,15 @@ std::vector<QueryResult> PrefixIndexV2::search(const float* queries, std::size_t
                 }
                 opened.previous = range;
             }
-            // Finish every selected cluster at this depth before applying the target.
+            // All matching rows at this depth have been scored across every opened
+            // cluster. Any unseen row mismatches at least one constrained sign.
+            if (options.stop_when_exact && depth > 0
+                    && detail::cannot_improve(prefix_min_weights[depth - 1], query_l1,
+                                               dimensions_, best)) {
+                stats.stop_reason = "bound";
+                break;
+            }
+            // A positive target retains its existing approximate stopping rule.
             if (options.candidate_target && stats.documents_scored >= options.candidate_target) {
                 stats.stop_reason = "candidate_target";
                 break;

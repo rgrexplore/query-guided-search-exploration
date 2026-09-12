@@ -7,7 +7,8 @@ namespace bitplane {
 struct PrefixSearchOptionsV2 {
     std::size_t candidate_limit = 100;
     std::size_t start_depth = 16;
-    std::size_t candidate_target = 1000; // Zero visits every depth through zero.
+    std::size_t candidate_target = 1000; // Zero disables the approximate count stop.
+    bool stop_when_exact = false; // Optional bound can finish before depth zero.
 };
 
 // Static rows sorted by the first embedding signs, then original document ID.

@@ -207,3 +207,114 @@ def test_reuses_numpy_validation_and_cluster_uniqueness_checks():
     with pytest.raises(TypeError, match="queries has the wrong dtype"):
         index.search(np.ones((1, 5), dtype=np.float64),
                      np.array([[0]], dtype=np.int64), start_depth=5)
+
+
+def test_optional_exact_stop_proves_paper_top_two_without_scoring_the_third_row():
+    signs = binary_rows("10100", "11001", "11000")
+    codes = pack(signs)
+    labels = np.zeros(3, dtype=np.int64)
+    queries = np.array([[.7, .5, -.4, -.6, .3]], dtype=np.float32)
+    buckets = np.array([[0]], dtype=np.int64)
+    index = native.PrefixIndexV2(codes, labels, 5, max_prefix_bits=5)
+    options = dict(candidate_limit=2, start_depth=5, candidate_target=0)
+    original = index.search(queries, buckets, **options)
+    disabled = index.search(queries, buckets, **options, stop_when_exact=False)
+    bounded = index.search(queries, buckets, **options, stop_when_exact=True)
+    scan = native.Index(codes, labels, 5, build_bitplanes=False).scan(
+        queries, buckets, candidate_limit=2)
+    for result in (original, disabled, bounded):
+        np.testing.assert_array_equal(result["rows"], scan["rows"])
+        np.testing.assert_array_equal(result["scores"], scan["scores"])
+    assert original["stats"][0]["documents_scored"] == disabled["stats"][0]["documents_scored"] == 3
+    assert bounded["rows"][0].tolist() == [1, 2]
+    assert bounded["stats"][0]["documents_scored"] == 2
+    assert bounded["stats"][0]["final_depth"] == 4
+    assert bounded["stats"][0]["stop_reason"] == "bound"
+    # Unseen rows must mismatch one of these four signs. Their upper bound is
+    # about 1.7, strictly below the retained second score of about 1.9.
+    weights = np.abs(queries[0]).astype(np.float64)
+    assert weights.sum() - 2 * weights[:4].min() < bounded["scores"][0, -1]
+
+
+@pytest.mark.parametrize("dimensions", [5, 32, 67])
+@pytest.mark.parametrize("candidate_limit", [1, 7])
+def test_optional_exact_stop_matches_scan_with_zero_weights_ties_and_opened_clusters(
+        dimensions, candidate_limit):
+    rng = np.random.default_rng(541)
+    signs = rng.integers(0, 2, size=(47, dimensions), dtype=np.uint8)
+    signs[1] = signs[0]
+    codes = pack(signs)
+    labels = np.arange(len(signs), dtype=np.int64) % 3
+    queries = rng.integers(-3, 4, size=(8, dimensions)).astype(np.float32)
+    queries[0] = 0
+    queries[1] = 0
+    queries[1, 0] = 10
+    buckets = np.tile(np.array([2, 0], dtype=np.int64), (len(queries), 1))
+    width = min(32, dimensions)
+    result = native.PrefixIndexV2(codes, labels, dimensions, max_prefix_bits=width).search(
+        queries, buckets, candidate_limit=candidate_limit, start_depth=width,
+        candidate_target=0, stop_when_exact=True)
+    scan = native.Index(codes, labels, dimensions, build_bitplanes=False).scan(
+        queries, buckets, candidate_limit=candidate_limit)
+    np.testing.assert_array_equal(result["rows"], scan["rows"])
+    np.testing.assert_array_equal(result["scores"], scan["scores"])
+    np.testing.assert_array_equal(result["counts"], scan["counts"])
+    assert result["stats"][0]["stop_reason"] == "exhausted"
+    assert result["stats"][0]["final_depth"] == 0
+    assert all(row["documents_scored"] <= np.count_nonzero(labels != 1)
+               for row in result["stats"])
+
+
+def test_optional_exact_stop_keeps_a_tied_unseen_smaller_id_alive():
+    codes = pack(binary_rows("10", "11", "00"))
+    labels = np.zeros(3, dtype=np.int64)
+    queries = np.array([[1, 0]], dtype=np.float32)
+    result = native.PrefixIndexV2(codes, labels, 2, max_prefix_bits=2).search(
+        queries, np.array([[0]], dtype=np.int64), candidate_limit=1,
+        start_depth=2, candidate_target=0, stop_when_exact=True)
+    # Depth two first sees row1 at score1. The zero-weight second sign leaves
+    # unseen row0 tied at score1; stopping there would return the wrong ID.
+    assert result["rows"][0].tolist() == [0]
+    assert result["stats"][0]["documents_scored"] == 2
+    assert result["stats"][0]["final_depth"] == 1
+    assert result["stats"][0]["stop_reason"] == "bound"
+
+
+def test_optional_exact_stop_checks_after_all_opened_clusters_finish_the_depth():
+    codes = pack(binary_rows("11", "11", "00"))
+    labels = np.array([2, 8, 8], dtype=np.int64)
+    result = native.PrefixIndexV2(codes, labels, 2, max_prefix_bits=2).search(
+        np.array([[2, 1]], dtype=np.float32), np.array([[8, 2]], dtype=np.int64),
+        candidate_limit=1, start_depth=2, candidate_target=0, stop_when_exact=True)
+    # The first cluster alone has score3, above the outside-prefix bound1,
+    # but row0 in the second cluster matches the prefix and wins the ID tie.
+    assert result["rows"][0].tolist() == [0]
+    assert result["stats"][0]["documents_scored"] == 2
+    assert result["stats"][0]["final_depth"] == 2
+    assert result["stats"][0]["stop_reason"] == "bound"
+
+
+@pytest.mark.parametrize("candidate_target", [1, 2, 100])
+def test_optional_exact_stop_preserves_positive_target_or_returns_proven_exact_result(candidate_target):
+    codes = pack(binary_rows("1100", "1011", "0000"))
+    labels = np.zeros(3, dtype=np.int64)
+    queries = np.array([[.6, .5, .4, .3]], dtype=np.float32)
+    buckets = np.array([[0]], dtype=np.int64)
+    index = native.PrefixIndexV2(codes, labels, 4, max_prefix_bits=4)
+    options = dict(candidate_limit=1, start_depth=4, candidate_target=candidate_target)
+    original = index.search(queries, buckets, **options)
+    bounded = index.search(queries, buckets, **options, stop_when_exact=True)
+    scan = native.Index(codes, labels, 4, build_bitplanes=False).scan(
+        queries, buckets, candidate_limit=1)
+    expected = scan if bounded["stats"][0]["stop_reason"] == "bound" else original
+    np.testing.assert_array_equal(bounded["rows"], expected["rows"])
+    np.testing.assert_array_equal(bounded["scores"], expected["scores"])
+    assert bounded["stats"][0]["documents_scored"] <= original["stats"][0]["documents_scored"]
+    if candidate_target == 1:
+        # One candidate is available, but its score0.4 cannot beat the bound0.8.
+        # The requested approximate stop remains approximate, not "bound".
+        assert bounded["rows"][0].tolist() == [0]
+        assert scan["rows"][0].tolist() == [1]
+        assert bounded["stats"][0]["stop_reason"] == "candidate_target"
+    else:
+        assert bounded["stats"][0]["stop_reason"] == "bound"

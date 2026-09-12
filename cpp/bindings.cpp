@@ -297,7 +297,8 @@ py::dict prefix_index_v2_info(const bitplane::PrefixIndexV2& index) {
 
 py::dict search_prefix_v2(const bitplane::PrefixIndexV2& index, const py::array& queries,
                           const py::array& buckets, py::ssize_t candidate_limit,
-                          py::ssize_t start_depth, py::ssize_t candidate_target) {
+                          py::ssize_t start_depth, py::ssize_t candidate_target,
+                          bool stop_when_exact) {
     check_queries(index, queries, buckets);
     if (candidate_limit <= 0) {
         throw py::value_error("candidate_limit must be positive");
@@ -312,6 +313,7 @@ py::dict search_prefix_v2(const bitplane::PrefixIndexV2& index, const py::array&
     options.candidate_limit = candidate_limit;
     options.start_depth = start_depth;
     options.candidate_target = candidate_target;
+    options.stop_when_exact = stop_when_exact;
     const auto* query_data = static_cast<const float*>(queries.data());
     const auto* bucket_data = static_cast<const std::int64_t*>(buckets.data());
     std::vector<bitplane::QueryResult> results;
@@ -409,7 +411,8 @@ PYBIND11_MODULE(bitplane_index, module) {
         py::arg("queries").noconvert(), py::arg("buckets").noconvert(),
         py::arg("candidate_limit") = 100,
         py::arg("start_depth") = 16,
-        py::arg("candidate_target") = 1000
+        py::arg("candidate_target") = 1000,
+        py::arg("stop_when_exact") = false
     );
     prefix_type.def("info", &prefix_index_v2_info);
 }
