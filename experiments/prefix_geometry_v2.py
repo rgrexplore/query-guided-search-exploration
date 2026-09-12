@@ -94,6 +94,60 @@ def storage_audit(method, info, cluster_sizes):
                 scope="Native logical fields only; router, unused capacity and process RAM are separate.")
 
 
+def analyze_bounds(pool, output, chunk_size=32):
+    """Find the earliest possible strict score-bound pruning depth for each query."""
+    pool, output = Path(pool).resolve(), Path(output)
+    manifest = verify_pool(pool)
+    output.mkdir(parents=True, exist_ok=False)
+    codes = np.load(pool / "codes.npy", mmap_mode="r")
+    queries = np.load(pool / "queries.npy", mmap_mode="r")
+    reference = np.load(pool / "reference.npy", mmap_mode="r")
+    dimensions = queries.shape[1]
+    top_ks = [k for k in (1, 10, 100) if k <= reference.shape[1]]
+    positions = np.arange(dimensions, dtype=np.uint64)
+    records = []
+    for start in range(0, len(queries), chunk_size):
+        query = queries[start:start + chunk_size].astype(np.float64)
+        kth_rows = reference[start:start + len(query)][:, np.array(top_ks) - 1]
+        packed = codes[kth_rows]
+        signs = ((packed[..., positions // 64] >> (positions % 64)) & 1).astype(bool)
+        # Full stored dimensions, including the final partly used packed word.
+        kth_scores = np.where(signs, query[:, None, :], -query[:, None, :]).sum(axis=2)
+        absolute = np.abs(query)
+        query_l1 = absolute.sum(axis=1)
+        bounds = query_l1[:, None] - 2 * np.cumsum(np.sort(absolute, axis=1)[:, ::-1], axis=1)
+        for column, k in enumerate(top_ks):
+            strict = bounds < kth_scores[:, column, None]
+            depths = np.where(strict.any(axis=1), strict.argmax(axis=1) + 1, dimensions + 1)
+            for local in range(len(query)):
+                records.append(dict(query=start + local, top_k=k, query_l1=float(query_l1[local]),
+                    kth_score=float(kth_scores[local, column]),
+                    gap=float(query_l1[local] - kth_scores[local, column]),
+                    optimistic_min_depth=int(depths[local])))
+    summary = []
+    for k in top_ks:
+        own = [row for row in records if row["top_k"] == k]
+        row = dict(top_k=k, queries=len(own),
+                   no_strict_prune_queries=sum(value["optimistic_min_depth"] == dimensions + 1 for value in own))
+        for name in ("query_l1", "kth_score", "gap", "optimistic_min_depth"):
+            values = [value[name] for value in own]
+            row[f"median_{name}"] = float(np.median(values))
+            row[f"p95_{name}"] = float(np.percentile(values, 95))
+        summary.append(row)
+    report = dict(inputs=manifest, top_ks=top_ks, queries=records, summary=summary,
+        no_strict_prune_depth=dimensions + 1,
+        scope="Q is sum(abs(query)); gap is Q minus the final exact Kth full score. "
+              "The minimum depth is the first j with Q - 2*cumsum(descending weights)[j-1] < Kth score. "
+              "It assumes the final score is already known and every tested sign mismatches the query, "
+              "giving the largest possible penalty at each depth. This is an optimistic lower bound, "
+              "not a prediction of visited nodes. Equality does not prune. The native rounding guard "
+              "can postpone pruning further; scores here are direct float64 sums of stored query/sign products.")
+    save_json(output / "bounds.json", report)
+    write_csv(output / "queries.csv", records)
+    write_csv(output / "summary.csv", summary)
+    return report
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("pool", type=Path)

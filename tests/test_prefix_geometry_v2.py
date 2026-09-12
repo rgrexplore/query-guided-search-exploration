@@ -72,3 +72,51 @@ def test_logical_storage_audit_uses_actual_cluster_padding():
         audit = geometry.storage_audit(method, index.info(), [1, 1, 63])
         assert audit["matches"] is True
         assert audit["expected"]["logical_bytes"] == 65 * 16 + {"scan": 0, "branch": 120, "prefix": 260}[method]
+
+
+def test_optimistic_bounds_use_full_scores_strict_ties_and_all_queries(tmp_path):
+    geometry = importlib.import_module("experiments.prefix_geometry_v2")
+    signs = np.zeros((100, 65), dtype=np.uint8)
+    signs[0] = 1
+    queries = np.array([[2, 1] + [0] * 62 + [1],
+                        [-2, 1] + [0] * 62 + [1], [0] * 65], dtype=np.float32)
+    truth = reference_rows(signs, queries, 100)
+    pool = tmp_path / "pool"; pool.mkdir()
+    for name, values in dict(codes=pack_signs(signs), queries=queries, reference=truth,
+                              documents=2 * signs.astype(np.float32) - 1).items():
+        np.save(pool / f"{name}.npy", values)
+    (pool / "pool.json").write_text(json.dumps(dict(
+        identity=dict(documents=100, dimensions=65, queries=3, top_k=100),
+        hashes={name: file_hash(pool / name) for name in
+                ("codes.npy", "queries.npy", "reference.npy", "documents.npy")})))
+    output = tmp_path / "bounds"
+    report = geometry.analyze_bounds(pool, output, chunk_size=1)
+    assert report["top_ks"] == [1, 10, 100] and len(report["queries"]) == 9
+    for row in report["queries"]:
+        qi, k = row["query"], row["top_k"]
+        query = queries[qi]
+        score = sum(float(query[bit]) * (1 if signs[truth[qi, k - 1], bit] else -1)
+                    for bit in range(65))
+        q = sum(abs(float(value)) for value in query)
+        penalty, expected = 0, 66
+        for depth, weight in enumerate(sorted(map(lambda value: abs(float(value)), query), reverse=True), 1):
+            penalty += weight
+            if q - 2 * penalty < score:
+                expected = depth
+                break
+        assert row["query_l1"] == q and row["kth_score"] == score
+        assert row["gap"] == q - score and row["optimistic_min_depth"] == expected
+    by_pair = {(row["query"], row["top_k"]): row for row in report["queries"]}
+    assert by_pair[0, 1]["optimistic_min_depth"] == 1
+    assert by_pair[0, 100]["optimistic_min_depth"] == 66  # Equality at full depth cannot prune.
+    assert by_pair[1, 1]["optimistic_min_depth"] == 2  # At depth one the bound equals the score.
+    assert by_pair[2, 1]["optimistic_min_depth"] == 66  # Every zero-weight bound is tied.
+    for summary in report["summary"]:
+        own = [row for row in report["queries"] if row["top_k"] == summary["top_k"]]
+        for name in ("query_l1", "kth_score", "gap", "optimistic_min_depth"):
+            values = [row[name] for row in own]
+            assert summary[f"median_{name}"] == np.median(values)
+            assert summary[f"p95_{name}"] == np.percentile(values, 95)
+    assert json.loads((output / "bounds.json").read_text()) == report
+    with (output / "queries.csv").open() as source:
+        assert len(list(csv.DictReader(source))) == 9
