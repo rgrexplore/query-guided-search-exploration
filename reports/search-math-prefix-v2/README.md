@@ -37,5 +37,5 @@ bash reports/search-math-prefix-v2/build.sh
 1. HNSW is a graph with layers, not a root-to-leaf tree, and its distinction from prefix lookup is not restricted to float versus binary data.
 2. Matryoshka supports useful trained float-prefix lengths. It does not guarantee that every earlier coordinate is larger, or that every shortened sign prefix preserves recall.
 3. Prefix counts can stay unchanged when a sibling is empty. New ranges must exclude rows already scored.
-4. Stopping at a candidate count is approximate. The first proposed version completes each depth across all opened clusters before checking that count.
+4. Stopping at a candidate count is approximate. The first proposed version completes each depth across all opened clusters before checking that count. A target of zero means continue to depth zero.
 5. Sorted arrays may require row movement or rebuilding on insertion. Cheap online updates remain a hypothesis, outside the first static experiment.

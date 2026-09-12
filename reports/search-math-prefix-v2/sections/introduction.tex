@@ -299,12 +299,12 @@ for depth in starting_depth, ..., 0:
         fully score only new_slices; update best
         scored += number of rows in new_slices
         previous_range[cluster] = current
-    if scored >= candidate_target:
+    if candidate_target > 0 and scored >= candidate_target:
         break
 return best
 \end{lstlisting}
 \begin{enumerate}[start=4]
-\item This proposed stopping rule completes a whole depth across all opened clusters before checking the candidate target. It can return more candidates than the target.
+\item This proposed stopping rule completes a whole depth across all opened clusters before checking the candidate target. It can return more candidates than the target. A target of zero disables early stopping and continues to depth zero.
 \item Stopping simply because we have collected, for example, 100 candidates is an approximate stopping rule. It does not mathematically prove that a better document does not exist outside the current prefix.
 \item Therefore, recall still needs to be measured against the same exact reference results. An exact early-stop version would require a valid bound on the documents outside the visited prefixes.
 \item Reaching depth zero scores every document in the opened clusters, once. That matches the original scan's local result, though not necessarily its time.
