@@ -12,7 +12,7 @@ bash reports/search-math-prefix-v2/build.sh
 ```
 
 1. Output: `output/pdf/search-methods-prefix-v2.pdf`.
-2. The source archive includes the complete LaTeX source and the historical results table. Diagrams are drawn by LaTeX; no corpus or Python environment is needed to build the PDF.
+2. The source archive includes the complete LaTeX source and the historical results table. Diagrams are drawn by LaTeX, and the prefix-growth chart is included as a PDF asset; no corpus or Python environment is needed to build the report.
 3. Earlier PDFs remain under `output/pdf/`. Their contents are unchanged.
 
 ## Method versions

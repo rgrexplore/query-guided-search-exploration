@@ -222,26 +222,16 @@ At query time, we directly look up this prefix. If it contains enough useful doc
 \end{tikzpicture}
 \caption{Illustrative counts: $12+19+35+70=136$ distinct rows scored, not $12+31+66+136$.}
 \end{figure}
-Every step moves to a larger candidate set, or the same set if the added sibling range is empty. This is why I call the method Backward Walk: instead of progressively adding constraints to a large candidate set, we begin from a very specific location and progressively walk backward toward more general prefixes.
+Note that the expected document count already grows exponentially as we remove prefix bits.
+If the bits are independent and equally likely to be 0 or 1, each removed bit doubles that count.
 
-Only the newly exposed documents are scored. The previous range is contained inside the parent range, so we do not rescore the rows already found.
+\begin{figure}[H]\centering
+\includegraphics[width=.92\linewidth]{figures/prefix-growth.pdf}
+\caption{Expected counts for one global cluster; labels are rounded. This estimates rows, not recall.}
+\end{figure}
 
-\newpage
-\textbf{Why one bit at a time is already an exponential expansion.}\par
-Under a simple model where binary bits are independent and balanced, an $x$-bit prefix occurs with probability $2^{-x}$. Therefore, for one global cluster with $N$ documents,
-
-\[
-F_x\sim\operatorname{Binomial}(N,2^{-x}),\qquad \E[F_x]=N/2^x.
-\]
-\begin{center}
-\begin{tabular}{@{}cr@{}}\toprule
-Prefix length & Expected rows for $N=1{,}000{,}000$\\\midrule
-16&15.26\\15&30.52\\14&61.04\\13&122.07\\12&244.14\\\bottomrule
-\end{tabular}
-\end{center}
-So we do not necessarily need to jump from 16 bits to 8 bits. Simply removing one bit at a time already doubles the expected candidate count under this model. This binomial calculation is useful for building intuition and choosing an initial prefix depth, although real embedding bits are not guaranteed to be independent or balanced, so the actual distribution must be measured.
-
-For search inside one selected cluster, use that cluster's size in place of $N$. A cluster formed from embeddings may have strongly uneven prefix counts. This is a fixed-depth row-count model. It does not calculate recall, or the expected count after an adaptive stopping rule.
+So we can widen one bit at a time and score only the newly exposed documents, as in Figure 6.
+Real prefix counts can differ from this simple model.
 
 \newpage
 \textbf{Lookup and widening.}\par
