@@ -1,0 +1,42 @@
+{
+  "status": "ready",
+  "completed_at_utc": "2026-09-12T23:41:39.172429+00:00",
+  "readiness_gate": {
+    "status": "finished",
+    "stages": 24
+  },
+  "base_commit": "f14be130198956594924d49d4aa6a561cb57dbee",
+  "experiment_commit": "d5157f474057e134b2bcfbcfb96468f6d9dd1055",
+  "implementation_commit": "eaaff9a38f888599bb6f35e1679f3b458f2719f1",
+  "commit_status": "isolated exact-stop patch cherry-picked into prefix-experiments-v2",
+  "build": {
+    "status": "passed",
+    "exit_code": 0,
+    "command": "uv pip install --python ../../.venv/bin/python --no-deps -e ."
+  },
+  "tests": {
+    "status": "passed",
+    "exit_code": 0,
+    "passed": 147,
+    "duration_seconds": 3.17,
+    "passes_run": 1,
+    "command": "../../.venv/bin/python -m pytest tests/test_prefix_index_v2.py tests/test_prefix_batch_worker_v2.py tests/test_index.py tests/test_key_index.py tests/test_deeper_ties.py tests/test_isolated_study.py -q"
+  },
+  "native_module": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.venv/lib/python3.12/site-packages/bitplane_index.cpython-312-darwin.so",
+  "native_sha256": "0cb844dce540b8f8e6794e89b8a6ec6fe8e382e223ba80a9a9268e6c25f56068",
+  "source_files_sha256": {
+    "cpp/index.hpp": "274b66b5ccadcc5a9f60d63182782fa4c97b732350baf2eaa9509235aeb65185",
+    "cpp/key_index.cpp": "52d53eb4e5777953e30302183107866146e4228a3c1836961ec2e025d86e52af",
+    "cpp/prefix_index_v2.cpp": "107a20f3796e0d0f2e78554f5d11076804431e13fb786b277d12dd15e6299b34",
+    "cpp/score.hpp": "d1ad2090a548a8d140d25dbb545ff6332031a39db4c4c450037620fe0761032a",
+    "cpp/prefix_index_v2.hpp": "7ad70db5176f9e6f675529435322bfdac6683954e52758a231d74154de56bcbd",
+    "cpp/bindings.cpp": "458587c1218e548bf6e9787bf2bb1a9c77d9b7d987afba97050c2cc56b1d773f",
+    "cpp/index.cpp": "9b085f31c3f48b0d3dab8d0fc9230c3fa274ba18886bae25d1ddceac5c179be6",
+    "cpp/key_index.hpp": "9ff4511bbc54fa7e4994d069eba258fbda1a37ccce56cc9bd69d91cad14e3c7c",
+    "CMakeLists.txt": "0bdd6f685635020efb286dbbd3ebaa10efcb68fdb6fc02f17ef78a8a7f3e554d",
+    "experiments/prefix_batch_worker_v2.py": "464a153ec59d5850b7be075f6db9d8af78e3a76631b54fcdc6274c628566c00a"
+  },
+  "timing_workers_before_build": 0,
+  "timing_workers_after_tests": [],
+  "scope": "Optional stop_when_exact=False API preserves default behavior. Focused checks include exact agreement with scan. No large benchmarks or extra cleanup were performed."
+}
