@@ -245,6 +245,7 @@ def select_fastest(rows):
 def check_formulas(rows, facts_by_clusters):
     """Compare what Section 2 predicts with what the code recorded."""
     checks = []
+    words_by_clusters = {}
     for r in rows:
         if r["status"] != "complete":
             continue
@@ -267,9 +268,11 @@ def check_formulas(rows, facts_by_clusters):
             if r["clusters"] == 1:
                 total_words = (DOCUMENTS + WORD_BITS - 1) // WORD_BITS
             else:
-                folder = ROUTERS / f"ivf-{r['clusters']}-seed42"
-                sizes = np.bincount(np.load(folder / "assignments.npy"), minlength=r["clusters"])
-                total_words = int(((sizes + WORD_BITS - 1) // WORD_BITS).sum())
+                if r["clusters"] not in words_by_clusters:
+                    folder = ROUTERS / f"ivf-{r['clusters']}-seed42"
+                    sizes = np.bincount(np.load(folder / "assignments.npy"), minlength=r["clusters"])
+                    words_by_clusters[r["clusters"]] = int(((sizes + WORD_BITS - 1) // WORD_BITS).sum())
+                total_words = words_by_clusters[r["clusters"]]
             entry["bitplanes_bytes"] = dict(predicted=DIMENSIONS * 8 * total_words, measured=r["bitplanes_bytes"])
         checks.append(entry)
     return checks

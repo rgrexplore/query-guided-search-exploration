@@ -1,0 +1,28 @@
+{
+  "documents": 1000000,
+  "dimensions": 256,
+  "queries": 200,
+  "top_k": 100,
+  "targets": [
+    0.8,
+    0.9,
+    0.95,
+    0.99
+  ],
+  "cluster_counts": [
+    64,
+    256,
+    1024,
+    4096,
+    8192
+  ],
+  "repetitions": 2,
+  "schedule_seed": 20260912,
+  "smoke": false,
+  "limits": {
+    "ram_budget_bytes": 32000000000,
+    "worker_stop_bytes": 34359738368,
+    "case_seconds": 2400
+  },
+  "scope": "Only index parameters vary. Every method is measured on the same (clusters, opened) pairs."
+}

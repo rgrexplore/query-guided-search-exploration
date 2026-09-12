@@ -1,6 +1,12 @@
 # Report editions
 
-All six PDFs are retained under `output/pdf/`.
+All PDFs are retained under `output/pdf/`.
+
+The [15-page fixed-dataset report](../output/pdf/search-methods-fixed-data.pdf) follows the
+requested outline (pipeline, idea, two methods with index diagrams and pseudocode; time, memory
+and recall calculations; per-method optima; one experiment on unchanged documents and queries
+with only index parameters varied). Its [source and reproduction guide](search-fixed-data/README.md)
+lists the commands. The earlier editions below are unchanged.
 
 The [13-page derivation and experiment paper](../output/pdf/search-methods-optima.pdf) adds a
 fresh parameter study, diagram-led methods, revised time estimates and separate-query checks.

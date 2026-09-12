@@ -1,0 +1,298 @@
+\begin{abstract}
+Exa stores document embeddings as short binary codes, groups them into clusters, and scores
+the documents of a few clusters with a lookup table. This report asks whether two extra
+index structures can reduce that scoring work: \emph{Bitplanes}, which split a cluster by
+one sign bit at a time, and \emph{Backward Walk}, which looks up documents by a short key.
+We derive the time, memory and recall of all three methods, use the formulas to choose each
+method's best settings, and then measure every setting on one fixed dataset: one million
+MS~MARCO passages and 200 queries. Only the index parameters change between runs. The
+formulas predict the recorded operation counts exactly and the measured search times within
+a few percent. On this dataset the original method is fastest at every recall target, and
+the calculations show why: on real embeddings, one sign bit removes only about 15\% of the
+documents, while a cluster boundary removes about 98\%. The same formulas also state the
+conditions under which Bitplanes or Backward Walk would win.
+\end{abstract}
+
+\section{Introduction}
+\subsection{Exa's method, end to end}
+We build on the search pipeline that Exa describes in its engineering blog~\cite{exa}. That
+post explains each technique in detail, so we only name the steps here and refer the reader
+to it. A document is embedded, the embedding is shortened by keeping its first values, which Matryoshka training makes possible~\cite{mrl}, and each
+of the remaining $d$ values is replaced by one bit: 1 if the value is positive, 0 if it is
+negative. This is Exa's \emph{binary quantization}. The binary codes are grouped into $C$
+clusters. When a query arrives, the system keeps the query in floating point, selects the $P$
+clusters whose centres are closest, and scores every document in those clusters with a lookup
+table that handles four bits at a time. The best documents can then be reranked with full
+vectors. Figure~\ref{fig:pipeline} shows the sequence; the blue box is the step that this
+report studies.
+
+\begin{figure}[H]\centering
+\begin{tikzpicture}[node distance=5mm and 5mm]
+\node[box,text width=24mm] (text) {Document text};
+\node[box,text width=30mm,right=of text] (embed) {Embed, keep the first $d$ values};
+\node[box,text width=26mm,right=of embed] (bits) {Keep only the signs: $d$ bits};
+\node[box,text width=28mm,right=of bits] (store) {Group into $C$ clusters};
+\draw[arr] (text)--(embed);\draw[arr] (embed)--(bits);\draw[arr] (bits)--(store);
+\node[box,text width=24mm,below=9mm of text] (q) {Query vector\\(floating point)};
+\node[box,text width=30mm,right=of q] (route) {Pick the $P$ closest clusters};
+\node[scan,text width=26mm,right=of route] (local) {Score the documents in those clusters};
+\node[box,text width=28mm,right=of local] (out) {Return the top $K$;\\rerank if wanted};
+\draw[arr] (q)--(route);\draw[arr] (route)--(local);\draw[arr] (local)--(out);
+\node[font=\footnotesize\itshape,text=Muted] at ($(text.south)!0.5!(q.north)$) {index time above, query time below};
+\end{tikzpicture}
+\caption{Exa's pipeline as described in~\cite{exa}. The top row happens once, when documents
+are indexed. The bottom row happens for every query. The blue box, scoring the documents of
+the opened clusters, is the step that the two new methods try to shorten. We call the
+unchanged pipeline \textbf{method A}, the original method.}
+\label{fig:pipeline}
+\end{figure}
+
+Two numbers describe the scoring step. With $N$ documents in $C$ clusters of roughly equal
+size, opening $P$ clusters means scoring about $NP/C$ documents. For one million documents,
+4096 clusters and one opened cluster, that is about 244 documents. Opening more clusters finds
+more of the true answers but scores more documents. The rest of this report is about that
+trade.
+
+\subsection{Idea background}
+The query tells us exactly which document code would score best. Take a small query with
+five values,
+\[
+ q=[\,0.7,\ 0.5,\ -0.4,\ -0.6,\ 0.3\,].
+\]
+A document bit of 1 stands for $+1$ and a bit of 0 stands for $-1$; the score is the sum of
+$q_i$ times the document's $\pm1$ at each position. At the first position the query value is
+$0.7$, so a document bit of 1 contributes $+0.7$ and a bit of 0 contributes $-0.7$. At the
+third position the query value is $-0.4$, so now a bit of 0 is better. Following this rule at
+every position gives the pattern \texttt{11001}, and its score is
+$0.7+0.5+0.4+0.6+0.3=2.5$. No document can score higher.
+
+Every other code loses some of that score. A document whose bit disagrees with the query
+sign at position $i$ loses $2|q_i|$: instead of gaining $|q_i|$ it pays $|q_i|$. If we call
+the sum of the query weights at the disagreeing positions the \emph{penalty} $p$, then
+\begin{equation}
+ S(q,b)=Q-2p,\qquad Q=\sum_i|q_i|,\qquad p=\sum_{i:\ b_i\ne\operatorname{sign}(q_i)}|q_i|.
+ \label{eq:score}
+\end{equation}
+The code \texttt{11000} disagrees only at the last position, so its penalty is $0.3$ and its
+score is $2.5-0.6=1.9$. The code \texttt{01001} disagrees only at the first position, which
+carries the largest weight; its score is $2.5-1.4=1.1$. Position matters: a mismatch on a
+large query value costs more than a mismatch on a small one.
+
+This suggests a question. Method A scores every document in the opened clusters, even the
+ones that disagree with the query on its largest weights. \emph{What if the index let us go
+straight to the documents whose codes are close to the preferred pattern, and skip the
+rest?} Two structures do this in different ways. Bitplanes split the documents by one sign
+bit at a time, largest query weight first. Backward Walk stores documents under a short key
+and visits the keys in order of increasing penalty. Both keep Exa's scoring rule and its
+clusters; they change only the blue box of Figure~\ref{fig:pipeline}.
+
+We use the six documents in Table~\ref{tab:toy} as a running example, together with the
+query above and $K=2$ results wanted. Scoring all six documents is what method A does. The
+best two are documents 0 and 1, with scores 2.5 and 1.9.
+
+\begin{table}[H]\centering\small
+\caption{Six example documents with five sign bits each, scored against
+$q=[0.7,0.5,-0.4,-0.6,0.3]$. The penalty adds the query weights at the positions where the
+document disagrees with the query sign.}
+\label{tab:toy}
+\begin{tabular}{@{}clcc@{}}\toprule
+ID & Code & Disagreeing positions (weights) & Score $=2.5-2p$\\\midrule
+0 & \texttt{11001} & none & 2.5\\
+1 & \texttt{11000} & 5 (0.3) & 1.9\\
+2 & \texttt{10100} & 2, 3, 5 (0.5, 0.4, 0.3) & 0.1\\
+3 & \texttt{01001} & 1 (0.7) & 1.1\\
+4 & \texttt{11101} & 3 (0.4) & 1.7\\
+5 & \texttt{00110} & all five (2.5) & $-2.5$\\\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Two new methods: Bitplanes and Backward Walk}
+\subsubsection{Bitplanes}
+Method A stores each document as one row of bits. Bitplanes, which we call \textbf{method B},
+additionally store the same bits sideways: one row per bit position, one column per document,
+inside each cluster. Figure~\ref{fig:bitplane-index} shows both layouts for the example. The
+sideways row for position 1 is \texttt{111010}; it says that documents 0, 1, 2 and 4 have a 1
+there. Such a row is called a \emph{bitplane}. With 64-bit words, one bitplane for a cluster
+of $n$ documents occupies $\lceil n/64\rceil$ words, and the cluster needs $d$ of them.
+
+\begin{figure}[H]\centering
+\begin{tikzpicture}
+\node[anchor=west,font=\small\bfseries,text=Ink] at (0,3.2) {Method A stores rows (one document per row)};
+\matrix (rows) at (1.9,0.9) [matrix of nodes,nodes={cell},column sep=-\pgflinewidth,row sep=-\pgflinewidth]{
+ 1&1&0&0&1\\ 1&1&0&0&0\\ 1&0&1&0&0\\ 0&1&0&0&1\\ 1&1&1&0&1\\ 0&0&1&1&0\\};
+\foreach \i/\l in {1/0,2/1,3/2,4/3,5/4,6/5}{\node[font=\footnotesize,text=Muted,anchor=east] at (rows-\i-1.west) {ID \l\ };}
+\node[font=\footnotesize,text=Muted] at (rows-1-1.north) [above=1pt] {b1};
+\node[font=\footnotesize,text=Muted] at (rows-1-2.north) [above=1pt] {b2};
+\node[font=\footnotesize,text=Muted] at (rows-1-3.north) [above=1pt] {b3};
+\node[font=\footnotesize,text=Muted] at (rows-1-4.north) [above=1pt] {b4};
+\node[font=\footnotesize,text=Muted] at (rows-1-5.north) [above=1pt] {b5};
+\node[anchor=west,font=\small\bfseries,text=Branch] at (7.2,3.2) {Method B adds bitplanes (one bit position per row)};
+\matrix (planes) at (10.4,1.2) [matrix of nodes,nodes={cell},column sep=-\pgflinewidth,row sep=-\pgflinewidth]{
+ |[hot]|1&|[hot]|1&|[hot]|1&|[hot]|0&|[hot]|1&|[hot]|0\\ 1&1&0&1&1&0\\ 0&0&1&0&1&1\\ 0&0&0&0&0&1\\ 1&0&0&1&1&0\\};
+\foreach \i/\l in {1/b1,2/b2,3/b3,4/b4,5/b5}{\node[font=\footnotesize,text=Muted,anchor=east] at (planes-\i-1.west) {\l\ };}
+\foreach \j/\l in {1/0,2/1,3/2,4/3,5/4,6/5}{\node[font=\footnotesize,text=Muted] at (planes-1-\j.north) [above=1pt] {\l};}
+\node[font=\footnotesize,text=Muted] at (10.4,2.65) {document ID};
+\node[font=\footnotesize,text=Branch] at (10.4,-0.75) {highlighted row: the bitplane for position 1};
+\draw[arr,Branch] (5.2,0.9) -- node[above,font=\footnotesize,text=Branch]{same bits,} node[below,font=\footnotesize,text=Branch]{turned sideways} (7.3,0.9);
+\end{tikzpicture}
+\caption{The two layouts of the same six codes. Method A keeps only the rows on the left.
+Method B keeps the rows for scoring and adds the bitplanes on the right for splitting. The
+highlighted bitplane belongs to position 1, which has the largest query weight.}
+\label{fig:bitplane-index}
+\end{figure}
+
+Searching uses the bitplanes to narrow down the candidates before scoring
+(Figure~\ref{fig:bitplane-search}). We start with a \emph{mask} that marks every document
+in the cluster as a candidate: \texttt{111111}. We take the position with the largest query
+weight, position 1 with $0.7$, where the query prefers a 1. One AND between the mask and the
+bitplane for position 1 gives the documents that agree, \texttt{111010}, which are documents
+0, 1, 2 and 4. The remaining documents, 3 and 5, disagree at a position of weight $0.7$, so
+every document in that group carries a penalty of at least $0.7$. We keep that group aside
+in a queue, labelled with its penalty, and continue with the agreeing group.
+
+The next largest weight is position 4 ($0.6$, prefers 0). All four remaining documents have
+a 0 there, so nothing is removed. Position 2 ($0.5$, prefers 1) separates document 2 from
+documents 0, 1 and 4. When a group is small enough, which we call the \emph{leaf size}, we
+stop splitting and score its documents with the same lookup table as method A. Scoring
+documents 0, 1 and 4 gives $2.5$, $1.9$ and $1.7$; the best two are 2.5 and 1.9.
+
+Now the queue decides whether any stored group needs attention. Equation~\ref{eq:score} gives
+each group a ceiling: a group with penalty $p$ cannot contain a score above $Q-2p$. The group
+$\{2\}$ has penalty $0.5$ and ceiling $1.5$, and the group $\{3,5\}$ has penalty $0.7$ and
+ceiling $1.1$. Both ceilings are below $1.9$, the worse of the two scores we already hold, so
+neither group can change the answer. The search ends having scored three documents instead
+of six, with exactly the answer that method A returns.
+
+\begin{figure}[H]\centering
+\begin{tikzpicture}[node distance=4mm]
+\node[box,text width=30mm] (route) at (0,0) {Pick the $P$ closest clusters (as in A)};
+\node[branch,text width=44mm] (split) at (5.2,0) {Split the candidate mask by one bitplane at a time, largest query weight first};
+\node[box,text width=32mm] (score) at (10.6,0) {Score only the documents left in small groups};
+\draw[arr] (route)--(split);\draw[arr] (split)--(score);
+\node[branch,text width=34mm] (m0) at (5.2,-1.9) {all six: \texttt{111111}};
+\node[branch,text width=34mm] (m1) at (2.2,-3.3) {agree at b1: \texttt{111010}\\IDs 0,1,2,4; penalty 0};
+\node[box,text width=30mm] (m1x) at (8.4,-3.3) {disagree: \texttt{000101}\\IDs 3,5; penalty 0.7};
+\node[branch,text width=34mm] (m2) at (2.2,-4.7) {agree at b4: same four\\penalty 0};
+\node[branch,text width=34mm] (m3) at (2.2,-6.1) {agree at b2: \texttt{110010}\\IDs 0,1,4 $\rightarrow$ score};
+\node[box,text width=30mm] (m3x) at (8.4,-6.1) {disagree: \texttt{001000}\\ID 2; penalty 0.5};
+\draw[arr] (m0)--(m1);\draw[arr] (m0)--(m1x);\draw[arr] (m1)--(m2);\draw[arr] (m2)--(m3);\draw[arr] (m2)--(m3x);
+\node[font=\footnotesize,text=Muted,align=left,anchor=west] at (10.3,-4.7) {ceilings $Q-2p$:\\$\{2\}$: $2.5-1.0=1.5$\\$\{3,5\}$: $2.5-1.4=1.1$\\both below 1.9, so skipped};
+\end{tikzpicture}
+\caption{Method B on the example. Orange marks the changed step and the groups that the
+search follows. Each split keeps the disagreeing group in a queue with its penalty. After
+scoring the small group, the queued groups are dropped because their ceilings are below the
+second-best score already found.}
+\label{fig:bitplane-search}
+\end{figure}
+
+\begin{lstlisting}
+bitplanes(query, opened_clusters, K, leaf_size, node_budget):
+    table = score_table(query); best = top_k(K)
+    order = positions sorted by |query value|, largest first
+    queue = one full mask per opened cluster, penalty 0
+    while queue is not empty:
+        group = pop the group with the smallest penalty
+        if Q - 2*group.penalty < best.worst_score(): break  # no group can win
+        if visited groups == node_budget: break              # optional limit
+        if group.count <= leaf_size or no positions remain:
+            score every document in group.mask with table; offer to best
+        else:
+            agree, disagree = split group.mask by the bitplane of the next position
+            push agree (same penalty); push disagree (penalty + |query value|)
+    return best
+\end{lstlisting}
+
+Two settings control method B. The \emph{leaf size} decides when a group is small enough to
+score. The \emph{node budget} caps how many groups the search may visit; with no budget, the
+ceiling rule alone stops the search, and the answer is then the same as method A's within the
+opened clusters. Both children of a split are as wide as the whole cluster: a mask of
+$\lceil n/64\rceil$ words stays that wide even when only a few bits remain set. This is the
+main cost of method B, and Section~2 counts it.
+
+\subsubsection{Backward Walk}
+The second structure, which we call \textbf{method C}, makes the ``go straight to the
+preferred pattern'' idea literal. Choose $h$ fixed bit positions and read a document's bits
+at those positions as a short \emph{key}. Inside each cluster, sort the documents by key so
+that documents with the same key sit next to each other, and keep a small \emph{directory}
+that maps each key to the start and length of its row range. Figure~\ref{fig:key-index}
+shows this for the example with positions 2 and 3 as the key.
+
+\begin{figure}[H]\centering
+\begin{tikzpicture}
+\node[anchor=west,font=\small\bfseries,text=Keys] at (0,3.3) {Method C sorts the rows by key and adds a directory};
+\matrix (rows) at (2.6,1.0) [matrix of nodes,nodes={cell},column sep=-\pgflinewidth,row sep=-\pgflinewidth]{
+ 1&|[hot]|0&|[hot]|1&0&0\\ 0&|[hot]|0&|[hot]|1&1&0\\ 1&|[hot]|1&|[hot]|0&0&1\\ 1&|[hot]|1&|[hot]|0&0&0\\ 0&|[hot]|1&|[hot]|0&0&1\\ 1&|[hot]|1&|[hot]|1&0&1\\};
+\foreach \i/\l in {1/2,2/5,3/0,4/1,5/3,6/4}{\node[font=\footnotesize,text=Muted,anchor=east] at (rows-\i-1.west) {ID \l\ };}
+\foreach \j/\l in {1/b1,2/b2,3/b3,4/b4,5/b5}{\node[font=\footnotesize,text=Muted] at (rows-1-\j.north) [above=1pt] {\l};}
+\draw[decorate,decoration={brace,amplitude=3pt},Keys] (rows-2-5.east) ++(2pt,-2.5pt) -- ++(0,5.6mm+5.6mm+5pt) node[midway,right=4pt,font=\footnotesize,text=Keys] {key \texttt{01}};
+\draw[decorate,decoration={brace,amplitude=3pt},Keys] (rows-5-5.east) ++(2pt,-2.5pt) -- ++(0,3*5.6mm+5pt) node[midway,right=4pt,font=\footnotesize,text=Keys] {key \texttt{10}};
+\draw[decorate,decoration={brace,amplitude=3pt},Keys] (rows-6-5.east) ++(2pt,-2.5pt) -- ++(0,5.6mm+5pt) node[midway,right=4pt,font=\footnotesize,text=Keys] {key \texttt{11}};
+\node[align=center,font=\small] at (10.3,1.0) {\begin{tabular}{ccc}\toprule
+key & start & count\\\midrule
+\texttt{01} & 0 & 2\\
+\texttt{10} & 2 & 3\\
+\texttt{11} & 5 & 1\\\bottomrule
+\end{tabular}};
+\node[font=\footnotesize,text=Muted] at (10.3,2.35) {directory (key \texttt{00} is absent: no document has it)};
+\end{tikzpicture}
+\caption{The index of method C for the example, with bit positions 2 and 3 as the key
+(highlighted). Rows are stored in key order, so the documents of one key form one contiguous
+range. The directory holds one entry per key that occurs. The row IDs double as the list of
+documents, so no separate posting list is needed.}
+\label{fig:key-index}
+\end{figure}
+
+At query time we form the query's preferred key from the same positions. The query prefers
+a 1 at position 2 and a 0 at position 3, so its key is \texttt{10}. A directory lookup returns
+documents 0, 1 and 3, and we score them: $2.5$, $1.9$ and $1.1$. If this were enough we would
+stop; but the best documents may have a different key, so the search must be able to move on.
+It does so by walking away from the preferred key one flipped position at a time, cheapest
+flip first, which is why we call it a backward walk (Figure~\ref{fig:key-walk}). Flipping
+position 3 (weight $0.4$) gives key \texttt{11} with penalty $0.4$; flipping position 2
+(weight $0.5$) gives \texttt{00} with penalty $0.5$; flipping both gives \texttt{01} with
+penalty $0.9$. As in method B, a key with penalty $p$ has ceiling $Q-2p$. The next key,
+\texttt{11}, has ceiling $2.5-0.8=1.7$, which is below the second-best score $1.9$ that we
+already hold. The walk stops after scoring three documents, again with method A's answer.
+
+\begin{figure}[H]\centering
+\begin{tikzpicture}[node distance=4mm]
+\node[box,text width=30mm] (route) at (0,0) {Pick the $P$ closest clusters (as in A)};
+\node[keys,text width=44mm] (walk) at (5.2,0) {Look up keys in order of penalty, starting at the query's own key};
+\node[box,text width=32mm] (score) at (10.6,0) {Score only the rows those keys list};
+\draw[arr] (route)--(walk);\draw[arr] (walk)--(score);
+\node[keys,text width=26mm] (k0) at (0.6,-2.2) {\texttt{10}, penalty 0\\rows 0,1,3 $\rightarrow$ score};
+\node[box,text width=26mm] (k1) at (3.9,-2.2) {\texttt{11}, penalty 0.4\\ceiling 1.7};
+\node[box,text width=26mm] (k2) at (7.2,-2.2) {\texttt{00}, penalty 0.5\\ceiling 1.5};
+\node[box,text width=26mm] (k3) at (10.5,-2.2) {\texttt{01}, penalty 0.9\\ceiling 0.7};
+\draw[arr] (k0)--(k1);\draw[arr] (k1)--(k2);\draw[arr] (k2)--(k3);
+\node[font=\footnotesize,text=Muted,align=center] at (5.5,-3.4) {best two so far: 2.5 and 1.9. The ceiling 1.7 of the next key is already below 1.9, so the walk stops here.};
+\end{tikzpicture}
+\caption{Method C on the example. Green marks the changed step. Keys are visited in
+increasing penalty; each visit is one directory lookup per opened cluster. The walk stops as
+soon as the next key's ceiling cannot beat the $K$th best score.}
+\label{fig:key-walk}
+\end{figure}
+
+\begin{lstlisting}
+backward_walk(query, opened_clusters, K, key_positions):
+    table = score_table(query); best = top_k(K)
+    keys = every key, ordered by penalty against the query's preferred key
+    for key, penalty in keys:
+        if Q - 2*penalty < best.worst_score(): break  # no key can win
+        for cluster in opened_clusters:
+            rows = cluster.directory.lookup(key)        # may be empty
+            score each row with table; offer to best
+    return best
+\end{lstlisting}
+
+Method C has one main setting, the key width $h$. There are $2^h$ possible keys. A wide key
+makes each key's row range small but multiplies the number of keys the walk may have to
+visit; a narrow key does the opposite. The key positions are fixed when the index is built,
+so they cannot follow each query's largest weights the way method B's split order does. The
+positions the enumeration visits are ordered by the query weights at those $h$ positions only.
+
+Both new methods return exactly method A's answer within the opened clusters when they run to
+completion, because the ceiling rule never drops a group or key that could still hold a
+top-$K$ document. They can be faster only if the ceilings let them skip enough documents to
+pay for the extra reads. Section~2 counts that work, Section~3 uses the counts to choose each
+method's settings on the dataset, and Section~4 measures the result.

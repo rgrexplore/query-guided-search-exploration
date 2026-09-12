@@ -1,0 +1,207 @@
+\section{Preliminary calculations}
+This section counts what each method does for one query. The counts use the quantities in
+Table~\ref{tab:symbols}. Section~4 records the same counts from the running code, so every
+formula here is checked against the implementation.
+
+\begin{table}[H]\centering\small
+\caption{Quantities used in the calculations, with the values of the experiment where fixed.}
+\label{tab:symbols}
+\begin{tabularx}{\linewidth}{@{}lYl@{}}\toprule
+Symbol & Meaning & In the experiment\\\midrule
+$N$ & documents in the collection & 1,000,000\\
+$d$ & bits per document code & 256\\
+$K$ & results returned per query & 100\\
+$C$, $P$ & clusters in the index; clusters opened for a query & chosen per method\\
+$n_c$ & documents in cluster $c$ & from the data\\
+$W_c=\lceil n_c/64\rceil$ & 64-bit words in one mask or bitplane of cluster $c$ & from the data\\
+$L$ & leaf size of method B: a group this small is scored & chosen\\
+$h$ & key width of method C, in bits & chosen\\
+$Q=\sum_i|q_i|$ & total query weight; the best possible score & per query\\
+$g$ & gap: the penalty of the $K$th best document, $(Q-S_K)/2$ & per query\\
+$c_{\cdot}$ & milliseconds per counted operation (measured in Section~4) & measured\\\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Time complexity}
+Every method first selects $P$ clusters, which costs $T_{\rm route}$ and is the same for all
+three at the same $C$ and $P$. We therefore concentrate on what happens inside the opened
+clusters.
+
+\subsubsection{Original method}
+Method A scores every document in the opened clusters. Writing $F_A$ for that number,
+\[
+ F_A=\sum_{c\ \text{opened}}n_c\approx\frac{NP}{C},\qquad
+ T_A=T_{\rm route}+c_{\rm call}+c_{\rm score}F_A.
+\]
+One score reads $d/4=64$ table entries and offers the result to a heap that keeps the best
+$K$. The constant $c_{\rm score}$ covers both. $c_{\rm call}$ is the fixed cost of one call:
+building the $64\times16$ lookup table and returning the sorted result. For one million
+documents in 4096 clusters, opening one cluster scores about 244 documents; opening 1330
+clusters, which Section~3 shows is needed for 99\% recall, scores about 322,000.
+
+\subsubsection{Bitplanes}
+Method B replaces some scoring by mask work. A split of a group in cluster $c$ reads
+$W_c$ words of one bitplane and writes two child masks of $W_c$ words each. If the search
+performs $J_c$ splits in cluster $c$ and scores $E_c$ groups there, it visits
+\[
+ V_s=\sum_c J_cW_c\ \text{split words},\qquad
+ V_l=\sum_c E_cW_c\ \text{leaf words}.
+\]
+The leaf words are read to find which bits are still set before scoring those documents.
+Both counts use the full width $W_c$: a group that has shrunk to 80 documents inside a
+cluster of 6,400 still has a mask of $100$ words, and the next split reads all 100.
+With $F_B$ documents scored and $G$ groups taken from the queue,
+\[
+ T_B=T_{\rm route}+c_{\rm call}+c_{\rm score}F_B+c_{\rm split}V_s+c_{\rm leaf}V_l+c_{\rm group}G.
+\]
+$c_{\rm group}$ prices the queue operations and the allocation of the two child masks. When
+$L\ge n_c$ for every opened cluster, no split happens: $V_s=0$, $V_l=\sum_c W_c$,
+$G=P$, and $F_B=F_A$. Method B then does method A's work plus one pass over the masks.
+
+\subsubsection{Backward Walk}
+Method C replaces scoring by directory lookups. Each key it visits costs one lookup in each
+opened cluster, and an absent key still costs the lookup. With $E$ keys visited,
+\[
+ H=EP\ \text{lookups},\qquad
+ T_C=T_{\rm route}+c_{\rm call}+c_{\rm score}F_C+c_{\rm lookup}H+c_{\rm key}E.
+\]
+$c_{\rm key}$ prices generating the next key in penalty order. If the ceiling rule never
+stops the walk, it visits every key: $E=2^h$ and $F_C=F_A$. With $h=8$ and 1330 opened
+clusters that is $256\times1330\approx340{,}000$ lookups on top of method A's scoring.
+
+\subsection{Memory complexity}
+We separate the index, which is held permanently, from the working memory of one query.
+
+\subsubsection{Original method}
+Each code occupies $d/8=32$ bytes and each document ID 8 bytes:
+\[
+ M_A=N(32+8)\ \text{bytes}=40\ \text{MB at }N=10^6,
+\]
+plus the cluster centres, $4Cd$ bytes ($4$~MB for $C=4096$). A query needs the lookup
+table ($64\times16$ doubles, 8~KB) and the heap of $K$ results.
+
+\subsubsection{Bitplanes}
+Method B keeps method A's rows and adds $d$ bitplanes per cluster:
+\[
+ M_B=M_A+8d\sum_{c=1}^{C}W_c\ \text{bytes}.
+\]
+For one cluster of one million documents, $\sum_c W_c=15{,}625$ and the planes add
+$8\times256\times15{,}625=32$~MB, making 72~MB. With 4096 clusters of about 238 documents
+each mask is padded to whole words, so $\sum_c W_c$ rises to about 16,400 and the planes to
+about 33.6~MB. During a query, every group waiting in the queue holds a mask of $W_c$
+words; the peak is the largest number of masks alive at one time, times their widths, times
+8 bytes.
+
+\subsubsection{Backward Walk}
+Method C reorders the rows within each cluster and keeps their IDs, so it stores the same
+40~MB as method A. It adds a directory entry of 20 bytes (a 4-byte key, an 8-byte start and
+an 8-byte count) for each key that actually occurs:
+\[
+ M_C=M_A+20U\ \text{bytes},\qquad U\le\min\!\left(N,\ C\,2^h\right).
+\]
+With $h=8$ and 4096 clusters, $U$ is at most about one million entries, or 20~MB; the hash
+table that holds them adds its own overhead. The query's working memory is the queue of keys
+still to visit. Figure~\ref{fig:memory} compares the three.
+
+\begin{figure}[H]\centering
+\begin{tikzpicture}
+\foreach \y/\l in {1.5/A,0.75/B,0/C}{\node[anchor=east,font=\small] at (-.15,\y+.25) {\l};}
+\draw[fill=Scan!15,draw=Scan](0,1.5)rectangle(5,2);\node[font=\small] at(2.5,1.75){40 MB: codes and IDs};
+\draw[fill=Scan!15,draw=Scan](0,.75)rectangle(5,1.25);\node[font=\small] at(2.5,1){40 MB: codes and IDs};
+\draw[fill=Branch!25,draw=Branch](5,.75)rectangle(9,1.25);\node[font=\small] at(7,1){32 MB: bitplanes};
+\draw[fill=Scan!15,draw=Scan](0,0)rectangle(5,.5);\node[font=\small] at(2.5,.25){40 MB: codes and IDs};
+\draw[fill=Keys!25,draw=Keys](5,0)rectangle(5.65,.5);\node[font=\small,anchor=west] at(5.75,.25){directory, 20 bytes per occurring key};
+\draw[Muted] (0,-.3)--(10.5,-.3);\foreach \x/\l in {0/0,2.5/20,5/40,7.5/60,10/80}{\draw[Muted](\x,-.3)--(\x,-.4);\node[font=\footnotesize,text=Muted,below] at (\x,-.4){\l};}
+\node[font=\footnotesize,text=Muted] at (11.2,-.55){MB};
+\end{tikzpicture}
+\caption{Index memory for one million 256-bit codes. Cluster centres, the hash table
+overhead of C, and the working memory of a query are additional. The bitplane bar is for one
+cluster; many small clusters add a little padding.}
+\label{fig:memory}
+\end{figure}
+
+\subsection{Recall estimation}
+The reference answer for a query is the top $K$ when every document is scored. Recall is
+the share of those $K$ IDs that a method returns:
+\[
+ R=\frac{\text{reference IDs returned}}{K}.
+\]
+Returning 99 of the 100 reference documents is a recall of 99\%. This measures agreement
+with the exact binary score, not whether a passage is a good answer to the question.
+
+\subsubsection{Original method}
+Method A scores every document in the opened clusters, so it can miss a reference document
+only if that document's cluster was not opened. Let $r_{\rm route}(C,P)$ be the share of
+reference documents that lie in the $P$ opened clusters, averaged over queries. Then
+\[
+ R_A=r_{\rm route}(C,P).
+\]
+This is a property of the clustering and the data, and Section~3 measures it directly.
+
+\subsubsection{Bitplanes}
+Method B can lose a document in a second way: by never scoring the group that holds it.
+Writing $r_B$ for the share of reference documents inside the opened clusters that method B
+actually returns,
+\[
+ R_B=r_{\rm route}(C,P)\times r_B.
+\]
+Without a node budget, $r_B=1$: the ceiling rule drops a group only when its ceiling
+$Q-2p$ is below the $K$th best score already found, and such a group cannot contain a
+top-$K$ document. In terms of the gap $g$ of Table~\ref{tab:symbols}, a group is skipped
+exactly when its penalty exceeds $g$. In the running example the second-best score is
+$1.9$, so $g=(2.5-1.9)/2=0.3$, and the group $\{2\}$ with penalty $0.5$ is skipped.
+With a node budget, $r_B$ falls below one, and by how much depends on where the reference
+documents sit in the split tree. That has no closed form; Section~4 measures it.
+
+\subsubsection{Backward Walk}
+The same reasoning gives
+\[
+ R_C=r_{\rm route}(C,P)\times r_C.
+\]
+$r_C=1$ when the walk runs until the ceiling rule stops it, because a key is skipped only
+when its penalty exceeds $g$. A limit on lookups or on scored documents makes $r_C<1$.
+
+The gap $g$ is the quantity that decides whether the new methods can skip anything. If no
+reachable group or key has a penalty above $g$, both methods score every document that
+method A scores and add their own work on top. Section~3 measures $g$ on the dataset and
+compares it with the query weights that a split or a key flip can accumulate.
+
+\subsection{Summary}
+Tables~\ref{tab:time}, \ref{tab:memory} and \ref{tab:recall} collect the formulas. The
+routing cost $T_{\rm route}$ and the constants $c_{\cdot}$ are measured in Section~4.
+
+\begin{table}[H]\centering\small
+\caption{Time for one query. $F$ counts scored documents; $V_s,V_l$ count 64-bit words
+read while splitting and while collecting a group's documents; $G$ counts groups taken from
+the queue; $H$ counts directory lookups and $E$ the keys visited.}
+\label{tab:time}
+\begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
+Method & Time formula\\\midrule
+A: original & $T_A=T_{\rm route}+c_{\rm call}+c_{\rm score}F_A$, with $F_A=\sum_{\rm opened}n_c\approx NP/C$\\[3pt]
+B: bitplanes & $T_B=T_{\rm route}+c_{\rm call}+c_{\rm score}F_B+c_{\rm split}V_s+c_{\rm leaf}V_l+c_{\rm group}G$, with $V_s=\sum_cJ_cW_c$, $V_l=\sum_cE_cW_c$\\[3pt]
+C: backward walk & $T_C=T_{\rm route}+c_{\rm call}+c_{\rm score}F_C+c_{\rm lookup}H+c_{\rm key}E$, with $H=EP$ and $E\le2^h$\\\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]\centering\small
+\caption{Index memory, for $d=256$. $U$ is the number of keys that occur in the data.}
+\label{tab:memory}
+\begin{tabularx}{\linewidth}{@{}lYY@{}}\toprule
+Method & Index memory & Working memory per query\\\midrule
+A: original & $M_A=40N$ bytes, plus $4Cd$ for cluster centres & lookup table and heap of $K$\\
+B: bitplanes & $M_A+8d\sum_cW_c$ & table, heap, and one $8W_c$-byte mask per queued group\\
+C: backward walk & $M_A+20U$, plus hash-table overhead & table, heap, and the queue of pending keys\\\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]\centering\small
+\caption{Recall. $r_{\rm route}$ is the share of reference documents inside the opened
+clusters; $r_B$ and $r_C$ are the shares of those that the local search returns.}
+\label{tab:recall}
+\begin{tabularx}{\linewidth}{@{}lYY@{}}\toprule
+Method & Recall & When the local search loses nothing ($r=1$)\\\midrule
+A: original & $r_{\rm route}(C,P)$ & always: every opened document is scored\\
+B: bitplanes & $r_{\rm route}(C,P)\,r_B$ & no node budget; groups are dropped only when penalty $>g$\\
+C: backward walk & $r_{\rm route}(C,P)\,r_C$ & no lookup or candidate limit; keys are dropped only when penalty $>g$\\\bottomrule
+\end{tabularx}
+\end{table}

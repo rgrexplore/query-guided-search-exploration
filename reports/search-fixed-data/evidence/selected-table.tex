@@ -1,0 +1,19 @@
+\begin{tabularx}{\linewidth}{@{}llYrrr@{}}\toprule
+Target & Method & Setting & Recall & Median ms & Docs scored\\\midrule
+80\% & A: original & $C=4,096$, $P=72$ & 80.01\% & 0.569 & 18,107\\
+ & B: bitplanes & $C=4,096$, $P=72$; no splits & 80.01\% & 0.576 & 18,107\\
+ & C: backward walk & $C=4,096$, $P=72$; $h=4$ & 80.01\% & 0.621 & 18,107\\
+\addlinespace[2pt]
+90\% & A: original & $C=8,192$, $P=353$ & 90.02\% & 1.442 & 42,847\\
+ & B: bitplanes & $C=8,192$, $P=353$; no splits & 90.02\% & 1.496 & 42,847\\
+ & C: backward walk & $C=8,192$, $P=353$; $h=4$ & 90.02\% & 1.741 & 42,847\\
+\addlinespace[2pt]
+95\% & A: original & $C=8,192$, $P=778$ & 95.00\% & 2.872 & 93,930\\
+ & B: bitplanes & $C=8,192$, $P=778$; no splits & 95.00\% & 3.022 & 93,930\\
+ & C: backward walk & $C=8,192$, $P=778$; $h=4$ & 95.00\% & 3.693 & 93,930\\
+\addlinespace[2pt]
+99\% & A: original & $C=4,096$, $P=1,330$ & 99.00\% & 8.702 & 325,353\\
+ & B: bitplanes & $C=8,192$, $P=2,440$; no splits & 99.00\% & 9.023 & 295,858\\
+ & C: backward walk & $C=8,192$, $P=2,440$; $h=4$ & 99.00\% & 11.130 & 295,858\\
+\addlinespace[2pt]
+\bottomrule\end{tabularx}
