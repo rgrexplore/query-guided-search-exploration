@@ -94,13 +94,15 @@ def routing_facts(clusters, query_rows):
     """
     folder = ROUTERS / f"ivf-{clusters}-seed42"
     case = dict(pool=str(POOL), router=str(folder), query_rows=query_rows)
-    ranks, scores, _, _, (labels, _) = routing_ranks(case)
+    ranks, _, quantizer, route_queries, (labels, _) = routing_ranks(case)
     sizes = np.bincount(np.load(folder / "assignments.npy"), minlength=clusters)
-    order = np.argsort(-scores, axis=1, kind="stable")
-    opened_docs = np.cumsum(sizes[labels[order]], axis=1)  # documents in the first P clusters
+    # The same router call the worker makes, asking for every cluster, best first.
+    _, positions = quantizer.search(route_queries, clusters)
+    opened_sizes = sizes[labels[positions]]
+    opened_docs = np.cumsum(opened_sizes, axis=1)  # documents in the first P clusters
     histogram = np.bincount(ranks.ravel(), minlength=clusters + 1)
     recall_curve = np.cumsum(histogram)[1:] / ranks.size
-    words = np.cumsum(((sizes[labels[order]] + WORD_BITS - 1) // WORD_BITS), axis=1)
+    words = np.cumsum((opened_sizes + WORD_BITS - 1) // WORD_BITS, axis=1)
     probes = {}
     for target in TARGETS:
         probe = int(np.searchsorted(recall_curve, target) + 1)
