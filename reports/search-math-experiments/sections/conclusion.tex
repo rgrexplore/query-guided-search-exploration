@@ -1,0 +1,32 @@
+\newpage
+\section{Limitations and Next steps}
+This experiment compares the declared index settings on one unchanged document collection
+and query set. All methods use the same score, reference answers, RAM budget and CPU thread
+count. The selected settings are the fastest observed successful choices in that comparison;
+they are not a proof of the best possible implementation.
+
+The formulas count document scores, mask reads and key lookups. Their time cost depends on
+memory access, code organization and the machine. Knowing the ideal binary pattern does not
+by itself tell us how many branches or keys must be visited to recover the reference answers.
+Those data-dependent counts must be checked rather than assumed.
+
+A useful next step is to expand the parameter range or improve a demonstrated expensive
+operation while retaining this same benchmark. Any later comparison using a different
+embedding model, document collection or query set should be reported separately.
+
+\section{Conclusion}
+\input{evidence/conclusion.tex}
+The comparison must keep the inputs unchanged while giving every method its own parameter
+choices. The practical test is whether the extra work used to avoid scores costs less than
+the scores it removes, at the same recall requirement and within the memory budget.
+
+\begin{thebibliography}{9}\small\raggedright
+\bibitem{exa} Exa Team. \emph{How we built a web-scale vector database}. 2024.
+\url{https://exa.ai/blog/building-web-scale-vector-db}.
+\bibitem{mrl} A. Kusupati et al. \emph{Matryoshka Representation Learning}. 2022.
+\url{https://arxiv.org/abs/2205.13147}.
+\bibitem{msmarco} Microsoft. \emph{MS MARCO}. Passage collection and benchmark resources.
+\url{https://microsoft.github.io/msmarco/}.
+\bibitem{nomic} Nomic AI. \emph{nomic-embed-text-v1.5}. Model documentation.
+\url{https://huggingface.co/nomic-ai/nomic-embed-text-v1.5}.
+\end{thebibliography}

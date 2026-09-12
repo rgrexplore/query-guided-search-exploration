@@ -1,8 +1,12 @@
 # Reproduce the component checks
 
-For the current parameter-selection study, start with
+For the current unchanged-input parameter comparison, start with
+[`reports/search-math-experiments/README.md`](../reports/search-math-experiments/README.md).
+It keeps all document and query embeddings constant across settings.
+
+The preceding study is documented in
 [`reports/search-math-optima/README.md`](../reports/search-math-optima/README.md). It connects
-the formulas to a fresh controlled experiment, a real-data replication, and the revised paper.
+the formulas to constructed-query experiments and a real-data replication.
 The component and earlier study commands below remain available.
 
 Start with the paper in `../reports/search-math/`, then use this small run to check its storage

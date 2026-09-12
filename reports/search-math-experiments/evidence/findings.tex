@@ -1,0 +1,11 @@
+At 99\% recall, all three selected settings open 2440 of 8192 clusters and score the same
+295,858 documents per query on average. B performs no splits and checks 5820 mask words.
+C uses a one-bit key and makes $2440\times2=4880$ lookups. Their median times are 8.74,
+8.99 and 9.73 ms for A, B and C respectively. The extra index work avoids no full scores
+at these successful settings.
+
+The smaller leaves and larger branch budgets were also tried. They did not produce a
+faster setting that met the same recall requirement. Wider C keys reduced some work but
+introduced another tradeoff: the best 24-bit result reached only 73.8\% recall within the
+lookup limits tested. A 20-bit setting reached 95.315\%, but took 29.71 ms, compared with
+2.97 ms for A at the 95\% requirement.

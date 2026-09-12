@@ -1,0 +1,9 @@
+After allowing each method to choose its own cluster count and search settings, the original
+scan had the lowest measured time at the 80\%, 90\%, 95\% and 99\% recall targets
+on this unchanged dataset. No tested B or C setting beat A's best setting while meeting the same target.
+At lower targets, A and B were close; this is a measured comparison, not a claim that A is
+always best.
+
+The result has a concrete explanation: the successful B and C settings still scored the
+same documents as A. More selective settings either cost more or missed too many reference
+results. The comparison uses one document collection and one query set throughout.

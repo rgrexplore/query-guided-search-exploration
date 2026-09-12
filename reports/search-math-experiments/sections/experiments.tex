@@ -1,0 +1,85 @@
+\newpage
+\section{Experiments}
+\subsection{Setup}
+Every run uses the same one million MS MARCO document embeddings~\cite{msmarco}, the same 200 query
+embeddings, and the same reference answers. The embeddings were already produced with
+Nomic~\cite{nomic}. We do not regenerate them, change their values, shorten them, or select different
+queries for different methods.
+
+The documents contain 256 sign bits; queries retain 256 floating-point values. The reference
+answer is the best 100 document IDs from a full scoring calculation. A recall of 99\% means
+returning 99 of those same 100 IDs on average. All methods use that identical reference.
+
+Only the index parameters listed in Section 3 change: clusters, probes, B's leaf size and
+branch budget, and C's key width and lookup limit. The complete score still uses all 256 bits.
+
+For each cluster count, the code finds probe counts reaching 80\%, 90\%, 95\%, and 99\% recall
+with the original scan. It also includes opening every cluster. These probe choices are
+available to A, B and C. This avoids giving A an unnecessarily expensive probe count when
+comparing it with a more selective method.
+
+We measured 256 parameter settings in total.
+
+The machine is an Apple M5 Max with 128 GiB of physical memory. Each process has a 32 GB
+memory budget and uses one CPU thread. Every setting searches all 200 queries twice. The
+fastest successful settings are then repeated in three processes, still using those same
+queries. Reported time is the middle measurement, or median.
+
+Retrieval time includes choosing clusters and searching their documents. It excludes
+building the index and generating embeddings. File hashes for the document, query and
+reference arrays are checked before and after the measurements.
+
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{figures/recall-time.pdf}
+\caption{Time required at each recall target. All points use the same document and query
+arrays. Lower time is better; every plotted setting meets the recall requirement.}
+\end{figure}
+
+\newpage
+\subsection{Results and calculation}
+\begin{table}[H]\centering\small
+\caption{Repeated measurements at the same recall requirements.}
+\input{evidence/fixed-results-table.tex}
+\end{table}
+
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{figures/cluster-time.pdf}
+\caption{Initial measurements at each cluster count for 99\% recall. Table 1 uses repeated runs
+of the selected settings, so small timing differences are expected. All inputs remain unchanged.}
+\end{figure}
+
+\begin{table}[H]\centering\small
+\caption{Settings for 99\% recall. $L$ is leaf size and $h$ is key width. Budget counts visited candidate groups for B and key lookups for C; zero means unlimited.}
+\input{evidence/fixed-settings-table.tex}
+\end{table}
+The following page connects those settings to their actual work. A name such as
+``Bitplanes'' does not tell us whether the chosen setting split any candidates; a large
+leaf can make it score an opened cluster immediately.
+
+\newpage
+\subsection{What the numbers mean}
+\begin{table}[H]\centering\small
+\caption{Average work per query for the selected 99\% settings.}
+\input{evidence/fixed-work-table.tex}
+\end{table}
+\input{evidence/findings.tex}
+
+The code checks stored index data against the memory calculation: packed codes and IDs,
+padded bitplanes for B, and occupied directory entries for C. The measured process memory
+also includes allocation capacity, temporary arrays and the running program.
+\begin{table}[H]\centering\small
+\caption{Index data calculated from the layout and reported by the implementation.}
+\input{evidence/fixed-memory-table.tex}
+\end{table}
+The parameter sweep answers which tested settings were fastest on this unchanged dataset.
+For A, increasing the recall requirement from 90\% to 99\% increases the opened clusters
+from 353 to 2440, out of 8192. Its median time rises from 1.43 to 8.74 ms. The query vectors stay
+the same; the extra work comes from opening more clusters.
+These results concern this dataset and the tested parameter ranges.
+
+\subsection{Code references}
+Run \texttt{experiments.fixed\_data\_comparison} with its \texttt{sweep}, \texttt{extend} and \texttt{repeat}
+commands. All three read the same arrays; the README gives the full commands and input paths.
+The search implementations are \path{cpp/index.cpp} and \path{cpp/key_index.cpp}.
+Results, parameter choices, input hashes and raw observations are saved under
+\path{results/fixed-data-comparison-2026-09-12/}.

@@ -1,0 +1,118 @@
+\newpage
+\section{Deriving Optima}
+The objective is minimum measured retrieval time at a required batch recall and a 32 GB
+RAM limit. Only index and search parameters change. Document codes, query vectors and
+reference answers remain identical. Each method chooses its own cluster count and local settings.
+
+\subsection{Original method}
+For a given layout, the reference answers show exactly how many clusters A must open.
+Suppose a reference document belongs to the fifth cluster in the query's routing order.
+A includes it when $P\ge5$. Record this rank for every reference document and query.
+
+Let $s_{qi}^{(C)}$ be the cluster rank of reference result $i$ for query $q$. At recall
+requirement $\rho$, the smallest qualifying probe count is
+\[
+ P_A(C,\rho)=\min\left\{P:
+ \frac{1}{n_qK}\sum_{q=1}^{n_q}\sum_{i=1}^{K}
+ \mathbf 1[s_{qi}^{(C)}\le P]\ge\rho\right\}.
+\]
+The indicator contributes one when the document's cluster is opened. With 200 queries
+and 100 reference IDs each, 99\% recall requires at least 19,800 recovered IDs across the
+batch. These ranks are calculated before timing the searches.
+
+The experiment uses one global cluster and learned layouts with 256, 4096 and 8192 clusters.
+For each layout it computes probe cutoffs for 80\%, 90\%, 95\% and 99\% recall, and also opens
+all clusters. Query time and selected-row counts are then measured. These cutoffs describe
+this query batch; they do not guarantee the same recall on future queries.
+
+A derivative explains the competing costs. Suppose clusters are balanced, routing costs
+$\alpha C$, each row costs approximately $\beta$, and $P$ stays constant. Then
+\[
+ T_A(C)\approx\alpha C+\beta NP/C,\qquad
+ \frac{dT_A}{dC}=\alpha-\frac{\beta NP}{C^2},\qquad
+ C^*=\sqrt{\frac{\beta NP}{\alpha}}.
+\]
+This balances routing more clusters against scanning fewer rows. Under a recall requirement,
+$P_A(C,\rho)$ can change with $C$. The measured comparison uses that probe count and actual
+cluster sizes; the fixed-$P$ derivative is not a complete solution.
+
+\newpage
+\subsection{Bitplanes}
+Consider a mask covering 6400 documents, or 100 words. If 200 candidates remain and a split
+removes 100, it saves 100 complete scores. It also adds 100 split-word visits and branch
+work. For $\Delta F$ avoided scores, the local comparison is
+\[
+ \Delta F\,c_s>
+ Wc_b+c_l\Delta V_l+\Delta T_{\rm branches}
+       +\Delta T_{\rm row\ starts}+\Delta T_{\rm top}.
+\]
+The right side includes the changes caused by the extra split. Those changes need not all
+be positive. The complete search must also retain the required recall; scoring fewer rows
+by ending too early is insufficient.
+
+If each split halves one candidate set, after $j$ cuts it contains approximately $n2^{-j}$
+rows. Ignoring changes in queue and row-start costs gives the guide
+\[
+ T_B(j)\approx T_0+jWc_b+Wc_l+n2^{-j}c_s,\qquad
+ j^*=\log_2\!\left(\frac{n\ln(2)c_s}{Wc_b}\right).
+\]
+This is an illustrative cost balance, not a recall estimate for these embeddings. If two
+bitplanes are identical, splitting on the second after the first removes no additional rows.
+Alternative branches also add paths. The experiment measures these effects rather than
+assuming repeated halving.
+
+B uses every cluster and probe option above, then varies local search: leaf size 128 with
+node budgets 256 and 1024; leaf size 512 with unlimited work; and leaf size $N$, which permits
+scoring an opened cluster without splitting. A node budget counts visited candidate sets,
+including leaves. Leaf sizes 32 and 128 are also compared at budget 4096. Actual splits, final-mask reads and scored rows explain the resulting time.
+
+The probe cutoff computed for A is a necessary routing condition for B using the same
+layout. It may not suffice when local limits lose more results. Returned IDs determine
+whether each complete setting qualifies.
+
+\newpage
+\subsection{Backward Walk}
+The key must be wide enough to rule out some patterns. For the first saved query, the
+ideal full score is 12.361. Even if all eight key bits mismatch, the remaining full-score
+upper bound is 11.373. The 100th reference score is only 9.994. Thus even the least promising
+eight-bit key cannot be discarded using this bound. All 200 queries have this problem at
+key widths 1, 4, and 8.
+
+At the same routing settings, changing key width from $h$ to $h'$ helps when
+\[
+ T_{\rm score}(F_h)-T_{\rm score}(F_{h'})>
+ c_h(H_{h'}-H_h)+c_p(H_{+,h'}-H_{+,h})
+       +T_{{\rm keys},h'}-T_{{\rm keys},h}.
+\]
+A smaller first range does not determine the answer. Search may need many additional keys,
+including empty ones, before finding enough high-scoring documents or proving that remaining
+keys cannot improve the result.
+
+The experiment tries keys of 1, 4, 8, 16, 20, and 24 bits. For all 200 queries, the short
+1-, 4-, and 8-bit keys cannot be discarded using the score bound, so their complete key spaces
+are searched. Longer keys are compared with lookup limits of 4096 and 65,536.
+The full 256-bit score remains unchanged. Directory memory is measured for
+each index, and returned IDs establish recall. No $N/2^h$ occupancy assumption is used to
+assign recall or declare a winning key width.
+
+\subsection{Comparison}
+Let $\Theta_a$ contain method $a$'s tested settings. Its final choice is
+\[
+ \theta_a^*=\underset{\theta\in\Theta_a}{\operatorname{argmin}}\;
+ T_{a,\rm measured}(\theta)
+ \quad\text{subject to}\quad
+ \overline R_a(\theta)\ge\rho,\qquad
+ M_{a,\rm process}(\theta)\le32\times10^9\text{ bytes}.
+\]
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}lYY@{}}\toprule
+Method & Adjustable settings & Work that may be reduced\\\midrule
+Original method & Cluster count $C$ and probes $P$ & Documents reaching the scorer\\
+Bitplanes & $C$, $P$, leaf size and node budget & Scores, at the cost of mask and branch work\\
+Backward Walk & $C$, $P$, key width $h$ and lookup limit & Scores, at the cost of lookups and range starts\\\bottomrule
+\end{tabularx}\normalsize
+\end{center}
+The methods are compared after each has selected its own qualifying settings. Results below
+the recall target remain visible, but cannot establish a speedup at that target. This finds
+the best measured choices within the tested ranges on the unchanged query batch. It does not
+prove that every possible index configuration has been exhausted.

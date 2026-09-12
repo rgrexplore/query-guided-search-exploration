@@ -1,0 +1,194 @@
+\newpage
+\section{Preliminary calculations}
+The collection contains $N=1{,}000{,}000$ documents. The same 200 query vectors, 256-bit
+codes and reference answers are used throughout. Each method may choose its own cluster
+count $C$, probe count $P$ and local settings. A probe opens one cluster. The result count
+is $K=100$; $d$ denotes the number of document bits.
+
+\subsection{Time complexity}
+The formulas count the work for one query. Converting it to milliseconds requires measured
+operation costs or direct stage timings. The final comparison uses measured query time,
+including cluster selection and local search.
+
+\subsubsection{Original method}
+If the opened clusters contain 200, 350 and 150 documents, A computes 700 complete scores.
+For cluster sizes $n_c$, the count is
+\[
+ F_A=\sum_{c\text{ opened}}n_c.
+\]
+The approximation $NP/C$ is useful only when the opened clusters are close to equal in size.
+The experiment counts their actual documents.
+
+The scorer follows Exa's four-coordinate lookup-table approach~\cite{exa}. A 256-bit
+code requires 64 table terms. Each term extracts four signs, reads an entry and adds it
+to the score. Storing a document in four machine words does not reduce scoring to four
+operations. For group width $g$, let $G=\ceil{d/g}$. Preparing the query table creates
+$G2^g$ entries; scoring $F$ documents evaluates $FG$ terms.
+
+Define
+\[
+ T_0=T_{\rm route}+T_{\rm table},\qquad
+ T_{\rm score}(F)=Fc_s+T_{\rm top}(F,K).
+\]
+Here $c_s$ prices the work within a complete score; row-access costs can differ between methods. $T_{\rm top}$ covers retaining the best
+$K$ results and ordering the output. Its worst-case work is $O(F\log K)$; not every score
+replaces a retained result. A's total is $T_A=T_0+T_{\rm score}(F_A)$.
+
+\subsubsection{Bitplanes}
+A cluster of 6400 documents needs 100 words in each mask when a word holds 64 bits. If a
+split leaves only 80 candidates, its mask still has 100 words. The next split reads all
+100 positions again.
+
+Let $W_c=\ceil{n_c/w}$, with word width $w=64$ here. If a query performs $J_c$ splits and
+scores $E_c$ final masks in cluster $c$, the word visits are
+\[
+ V_s=\sum_c J_cW_c,\qquad V_l=\sum_c E_cW_c.
+\]
+A split reads a parent and a bitplane and writes children. One word visit therefore includes
+several bit operations and memory accesses. Ordering query coordinates costs $O(d\log d)$;
+the branch queue adds work when candidate sets are inserted or removed.
+
+A zero word in a final mask skips scoring. A nonzero word starts a sequence of row reads;
+let $V_+$ count these words. Reading 100 mostly empty words and reading 100 words containing
+many candidates have different costs. With $F_B$ scored documents,
+\[
+ T_B=T_0+T_{\rm order}+c_bV_s+c_lV_l+c_rV_+
+       +T_{\rm score}(F_B)+T_{\rm branches}.
+\]
+The coefficients price split-word work, final-mask checks and the additional cost of
+starting row reads. Actual splits and survivors depend on the query and stored signs.
+They cannot be obtained from $N$ and RAM alone.
+
+\subsubsection{Backward Walk}
+Trying three keys in two clusters requires six lookups, including empty results. If four
+lookups find document ranges, there are four range starts. All rows in those ranges still
+receive complete scores.
+
+For $E$ fully processed keys, $H=PE$. Let $H_+$ count successful lookups and $F_C$ count
+scored rows. Then
+\[
+ T_C=T_0+T_{\rm keys}+c_hH+c_pH_++T_{\rm score}(F_C).
+\]
+There is one shared key queue. $T_{\rm keys}$ includes ordering the $h$ key coordinates
+and generating alternatives. Priority-queue enumeration has an $O(E\log(E+1))$ upper
+bound. An empty lookup pays the lookup cost; a successful one also starts a document range.
+The experiment records lookup and score counts rather than assuming equal key occupancy.
+
+\subsection{Memory complexity}
+Stored index data and temporary query memory are separate. The running program, unused
+array capacity and allocation overhead also consume RAM. Construction may have a higher
+peak because input arrays and the new index coexist.
+
+\subsubsection{Original method}
+A 256-bit code occupies 32 bytes. An eight-byte ID brings the total to 40 bytes per row,
+or 40 MB for one million rows. With $u=w/8$ bytes per packed word,
+\[
+ M_{\rm rows}=N\left(u\ceil{d/w}+b_{\rm id}\right).
+\]
+Cluster storage is additional. For example, $C$ floating-point centroids of width $d_R$
+require $4Cd_R$ bytes for coordinates, plus labels and row ranges.
+
+A query also needs its vector, score table, selected cluster IDs and top-$K$ results.
+The current query vector occupies 1024 bytes; its 64 groups of 16 double-precision table
+entries occupy 8192 bytes. These are data sizes, not the complete process footprint.
+
+\subsubsection{Bitplanes}
+B retains the rows and adds one bitplane per coordinate:
+\[
+ M_{\rm planes}=du\sum_{c=1}^{C}\ceil{n_c/w}.
+\]
+One global cluster adds 32 MB of planes to the 40 MB of rows and IDs. Separate clusters
+introduce padding because each plane ends on a whole-word boundary.
+
+Waiting branches retain masks. If $A_c(t)$ masks for cluster $c$ exist at time $t$, their
+peak data size is
+\[
+ M_{\rm masks}=u\max_t\sum_c A_c(t)W_c.
+\]
+This includes a parent while both children are created. Queue entries and unused capacity
+are additional. Counting only the mask currently being processed is insufficient.
+
+\subsubsection{Backward Walk}
+C stores rows consecutively within each key range. Their existing IDs serve as the document
+lists, so a second $N$-element ID array is unnecessary. Each occupied entry stores a key,
+a start position and a row count. For $U$ entries,
+\[
+ M_{\rm entries}=U(b_{\rm key}+2b_{\rm offset}).
+\]
+A four-byte key and two eight-byte positions require 20 bytes of field data per entry.
+Hash-table pointers and allocation overhead are additional. Query memory includes the key
+queue. More key bits can increase directory size without reducing the final scoring work.
+
+\subsection{Recall estimation}
+Returning 99 of the reference top 100 IDs gives 99\% recall. The reference is the exact
+ranking under the unchanged full binary-vector score, with the same ID rule for ties.
+This measures agreement with that ranking, not whether the text answers a person's question.
+
+Let $G_q$ be the reference IDs and $O_{a,q}$ the IDs returned by method $a$. Batch recall is
+\[
+ \overline R_a=\frac{1}{n_qK}\sum_{q=1}^{n_q}|G_q\cap O_{a,q}|,
+ \qquad n_q=200.
+\]
+This uses the saved IDs directly. It requires no assumption that document signs or embedding
+coordinates are independent.
+
+\subsubsection{Original method}
+Let $D_q$ contain the documents in the opened clusters and $g_q=|G_q\cap D_q|$. A scores
+all of $D_q$, so its per-query recall is exactly $R_{A,q}=g_q/K$. Opening clusters containing
+95 reference IDs gives 95\% recall; scoring their other documents cannot recover the five
+reference IDs in unopened clusters.
+
+\subsubsection{Bitplanes}
+Among the $g_q$ reference IDs that reached the clusters, let $r_{B,q}$ be the fraction
+returned. Then $R_{B,q}=(g_q/K)r_{B,q}$. For example, if eight of ten reference documents
+reach the clusters and six of those eight are returned, recall is $(8/10)(6/8)=60\%$.
+Unlimited search with safe bounds makes $r_{B,q}=1$. A finite node budget must be checked
+against the returned IDs. If $g_q=0$, recall is zero.
+
+\subsubsection{Backward Walk}
+Similarly, $R_{C,q}=(g_q/K)r_{C,q}$. Visiting all necessary keys, or safely ruling out the
+remaining keys, makes the local fraction one. Candidate or lookup limits can reduce it.
+The batch value averages these per-query products; multiplying separately averaged fractions
+is generally incorrect. A key returning many rows establishes no recall level unless the
+required reference IDs are among them.
+
+\newpage
+\subsection{Summary}
+Each formula uses its method's own opened clusters and local work. Let $M_0$ be allocated
+row and router storage, $Q_0$ common query memory, $D_C$ allocated directory memory, and
+$Q_B,Q_C$ extra masks and queues. Allocation overhead is included in these memory terms.
+
+\subsubsection*{Time complexity}
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
+Method & Query-time formula\\\midrule
+Original method & $T_0+T_{\rm score}(F_A)$\\
+Bitplanes & $T_0+T_{\rm order}+c_bV_s+c_lV_l+c_rV_++T_{\rm score}(F_B)+T_{\rm branches}$\\
+Backward Walk & $T_0+T_{\rm keys}+c_hH+c_pH_++T_{\rm score}(F_C)$\\\bottomrule
+\end{tabularx}\normalsize
+\end{center}
+$T_0$ includes routing and table preparation. Costs already included in a measured stage
+must not be added a second time. Query encoding and later reranking are outside this timer.
+
+\subsubsection*{Memory complexity}
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}\toprule
+Method & Stored index & Temporary query memory\\\midrule
+Original method & $M_0$ & $Q_0$\\
+Bitplanes & $M_0+M_{\rm planes,allocated}$ & $Q_0+Q_B$\\
+Backward Walk & $M_0+D_C$ & $Q_0+Q_C$\\\bottomrule
+\end{tabular}\normalsize
+\end{center}
+The process, including these arrays and the running program, must fit 32 GB. A peak that
+includes construction is reported as such, not as index size.
+
+\subsubsection*{Recall estimation}
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}lYY@{}}\toprule
+Method & Per-query recall & Local exactness condition\\\midrule
+Original method & $g_q/K$ & Score all opened documents\\
+Bitplanes & $(g_q/K)r_{B,q}$ & Complete search with safe bounds\\
+Backward Walk & $(g_q/K)r_{C,q}$ & Visit or safely rule out remaining keys\\\bottomrule
+\end{tabularx}\normalsize
+\end{center}
+The reported batch value averages the same 200 reference answers.
