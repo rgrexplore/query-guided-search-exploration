@@ -17,6 +17,12 @@ from pathlib import Path
 import random
 import re
 
+import numpy as np
+from threadpoolctl import threadpool_limits
+
+from experiments import prefix_study_v2 as study
+from experiments.prefix_study_v2 import choose_settings
+
 
 def setting_key(row):
     return (row["router"], row["method"], row["top_k"], row["probes"],
@@ -53,8 +59,6 @@ def apparent_advantages(rows, minimum=.03):
 def build_followups(rows, source_jobs, layouts, config, resolve_probes, *,
                    minimum_advantage=.03, id_prefix="followup"):
     """Select and deduplicate controls; routing is supplied by the caller."""
-    from experiments.prefix_study_v2 import choose_settings
-
     valid = [row for row in rows if row.get("complete") and row.get("qualified")]
     existing = {setting_key(row): row["setting_id"] for row in valid}
     proposed, skipped, routing_evidence = {}, [], []
@@ -130,10 +134,6 @@ def build_followups(rows, source_jobs, layouts, config, resolve_probes, *,
 
 
 def prepare(source, output, *, seconds=900, minimum_advantage=.03):
-    from experiments import prefix_study_v2 as study
-    from threadpoolctl import threadpool_limits
-    import numpy as np
-
     source, output = Path(source).resolve(), Path(output).resolve()
     if output.exists():
         raise FileExistsError("Use a new follow-up output directory")
@@ -207,7 +207,6 @@ def main():
         print(json.dumps(prepare(args.path, args.output, seconds=args.seconds,
                                   minimum_advantage=args.minimum_advantage)), flush=True)
     else:
-        from experiments import prefix_study_v2 as study
         {"run": study.run, "summarize": study.summarize, "repeat": study.repeat}[args.stage](args.path)
 
 
