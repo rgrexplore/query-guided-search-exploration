@@ -6,7 +6,7 @@ import json
 import numpy as np
 import pytest
 
-from experiments.fixed_data_comparison import build_cases, choose_settings, repeat_cases, verify_arrays, derive_probes
+from experiments.fixed_data_comparison import build_cases, choose_settings, repeat_cases, verify_arrays, derive_probes, extended_cases
 
 
 def test_grid_uses_one_pool_and_all_query_rows_for_every_method():
@@ -87,3 +87,22 @@ def test_probe_cutoffs_use_all_unchanged_queries(monkeypatch):
     np.testing.assert_array_equal(saved_ranks, ranks)
     assert [row["probes"] for row in evidence["cutoffs"]] == [2, 4, 4]
     assert evidence["rank_cdf"] == [.25, .5, .75, 1.0]
+
+
+def test_extension_preserves_inputs_and_can_be_repeated_with_initial_choices():
+    layouts = [dict(path=None, kind="none", clusters=1, probes=[1]),
+               dict(path="/ivf", kind="ivf", clusters=256, probes=[64, 256])]
+    original = build_cases("/same-pool", layouts)
+    extra = extended_cases("/same-pool", layouts)
+    assert len(extra) == 24
+    assert all(case["pool"] == "/same-pool" and case["query_rows"] == list(range(200)) for case in extra)
+    assert {case["method"] for case in extra} == {"branch", "keys"}
+    assert all(case["node_budget"] == 4096 for case in extra if case["method"] == "branch")
+    assert {(case["key_bits"], case["key_limit"]) for case in extra if case["method"] == "keys"} == {
+        (bits, limit) for bits in (16, 20, 24) for limit in (4096, 65536)}
+    assert not {case["setting_id"] for case in original} & {case["setting_id"] for case in extra}
+    selected = [dict(setting_id=original[0]["setting_id"], target=.99),
+                dict(setting_id=extra[0]["setting_id"], target=.99)]
+    repeated = repeat_cases(original + extra, selected)
+    assert len(repeated) == 6
+    assert {case["setting_id"] for case in repeated} == {row["setting_id"] for row in selected}

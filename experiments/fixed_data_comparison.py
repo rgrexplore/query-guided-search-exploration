@@ -128,6 +128,39 @@ def repeat_cases(originals, selected, blocks=3):
             for case in originals if case["setting_id"] in chosen]
 
 
+def extended_cases(pool, layouts):
+    # Reuse the same inputs and routing choices already supplied to scan.
+    templates = [case for case in build_cases(pool, layouts) if case["method"] == "scan"]
+    cases = []
+    for common in templates:
+        for leaf in (32, 128):
+            cases.append(dict(common, method="branch", leaf_size=leaf, node_budget=4096))
+        for bits in (16, 20, 24):
+            for limit in (4096, 65536):
+                cases.append(dict(common, method="keys", key_bits=bits, key_offset=0,
+                                  key_limit=limit, candidate_target=0))
+    for number, case in enumerate(cases):
+        case["setting_id"] = f"extra-{number:03d}"
+    return cases
+
+
+def key_bound_diagnostic(pool):
+    queries = np.load(pool / "queries.npy")
+    reference = np.load(pool / "reference.npy")
+    codes = np.load(pool / "codes.npy", mmap_mode="r")
+    positions = np.arange(queries.shape[1])
+    last_rows = np.asarray(codes[reference[:, -1]])
+    signs = (last_rows[:, positions // 64] >> (positions % 64).astype(np.uint64)) & np.uint64(1)
+    penalties = np.sum((signs != (queries >= 0)) * np.abs(queries).astype(np.float64), axis=1)
+    records = []
+    for width in (1, 4, 8, 12, 16, 20, 24):
+        maximum = np.abs(queries[:, :width]).astype(np.float64).sum(axis=1)
+        records.append(dict(key_bits=width, queries_where_all_keys_remain_possible=int(np.sum(maximum < penalties)),
+                            queries=len(queries), maximum_key_penalties=maximum.tolist()))
+    return dict(widths=records, global_kth_penalties=penalties.tolist(),
+                scope="If every key penalty is below the independent global K-th penalty, this bound cannot skip any key. The opposite inequality only permits pruning; it does not establish recall or speed.")
+
+
 def summarize(folder, expected_blocks):
     completed, failures = load_cases(folder)
     schedule = json.loads((folder / "schedule.json").read_text())
@@ -151,6 +184,7 @@ def summarize(folder, expected_blocks):
         record = dict(setting_id=identifier, method=case["method"], router=case["router_kind"],
                       clusters=case["clusters"], probes=case["probes"], leaf_size=case.get("leaf_size", 0),
                       node_budget=case.get("node_budget", 0), key_bits=case.get("key_bits", 0),
+                      key_limit=case.get("key_limit", 0),
                       recall=mean_recall([row["recall"] for row in first], 100) if first else None,
                       p50_ms=float(np.median([row["query_ms"] for row in observations])) if observations else None,
                       process_p50_min_ms=min(process_medians) if items else None,
@@ -218,6 +252,41 @@ def sweep(output):
     print(f"Completed {len(cases)} settings; selected {len(selected)} method/recall-target rows.")
 
 
+def extend(output):
+    config = json.loads((output / "configuration.json").read_text())
+    manifest = json.loads((output / "inputs-manifest.json").read_text())
+    pool, source = Path(manifest["pool"]), Path(manifest["router_source"])
+    if verify_inputs(pool, source) != manifest:
+        raise ValueError("benchmark inputs changed before the extension")
+    previous = json.loads((output / "sweep" / "summary.json").read_text())
+    folder = output / "extra"
+    folder.mkdir(exist_ok=False)
+    (output / "initial-selected-settings.json").write_bytes((output / "selected-settings.json").read_bytes())
+    save_json(folder / "configuration.json", dict(config, extension=dict(
+        key_bits=[16, 20, 24], key_limits=[4096, 65536], leaf_sizes=[32, 128], node_budget=4096)))
+    save_json(folder / "key-bound-diagnostic.json", key_bound_diagnostic(pool))
+    record_source(folder)
+    layouts = json.loads((output / "layouts.json").read_text())
+    cases = extended_cases(pool, layouts)
+    order = np.random.default_rng(config["schedule_seed"] + 2).permutation(len(cases))
+    execute_cases(config, folder, [cases[int(index)] for index in order],
+                  "Longer keys and larger branch budgets; identical documents, queries, references and routing options.")
+    after = verify_inputs(pool, source)
+    save_json(folder / "inputs-after.json", after)
+    if after != manifest:
+        raise ValueError("benchmark inputs changed during the extension")
+    rows, _, _ = summarize(folder, 1)
+    # The first run may predate the displayed key-limit column; its case record
+    # still contains the exact value. Preserve that value when combining rows.
+    initial_rows = [{name: row.get(name, row["case"].get(name, 0)) for name in rows[0]}
+                    for row in previous["settings"]]
+    selected = choose_settings(initial_rows + rows, config["recall_targets"])
+    save_json(output / "selected-settings.json", selected)
+    if selected:
+        write_csv(output / "selected-settings.csv", selected)
+    print(f"Added {len(cases)} settings; selection now includes the initial and extended parameter sets.")
+
+
 def repeat(output):
     config = json.loads((output / "configuration.json").read_text())
     manifest = json.loads((output / "inputs-manifest.json").read_text())
@@ -226,6 +295,10 @@ def repeat(output):
     if before != manifest:
         raise ValueError("benchmark inputs changed since the sweep")
     originals = json.loads((output / "sweep" / "schedule.json").read_text())
+    extra = output / "extra" / "schedule.json"
+    if extra.exists():
+        originals.extend(json.loads(extra.read_text()))
+    assert len({case["setting_id"] for case in originals}) == len(originals)
     selected = json.loads((output / "selected-settings.json").read_text())
     cases = repeat_cases(originals, selected, config["repeat_processes"])
     folder = output / "repeats"
@@ -251,16 +324,18 @@ def repeat(output):
     save_json(output / "summary.json", dict(targets=targets, settings=details, failures=failures,
         inputs_manifest_sha256=file_hash(output / "inputs-manifest.json"),
         inputs_unchanged=after == manifest,
-        scope="Best observed sweep choices, remeasured on the same fixed benchmark. This is not an unseen-query test or a claim of a global optimum."))
+        scope="Best observed parameter choices, remeasured on the same fixed benchmark. This is not an unseen-query test or a claim of a global optimum."))
     print(f"Repeated {len(rows)} distinct settings in three processes; input hashes unchanged.")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("stage", choices=("sweep", "repeat"))
+    parser.add_argument("stage", choices=("sweep", "extend", "repeat"))
     parser.add_argument("--output", type=Path, required=True)
     arguments = parser.parse_args()
     if arguments.stage == "sweep":
         sweep(arguments.output.resolve())
+    elif arguments.stage == "extend":
+        extend(arguments.output.resolve())
     else:
         repeat(arguments.output.resolve())
