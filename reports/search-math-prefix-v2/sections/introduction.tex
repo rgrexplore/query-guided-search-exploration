@@ -294,4 +294,3 @@ In particular, inserting into a sorted array can move many rows or require a reb
 A Matryoshka model is trained so that shorter prefixes of the embedding remain useful representations at its trained lengths~\cite{mrl}. This gives us a reason to investigate shorter prefixes. It does not mean that the first coordinate is always more important than the second, or that the nearest neighbor under 16 dimensions must remain the nearest neighbor under 15 dimensions.
 
 The actual recall of each prefix still has to be measured. Binary sign agreement is also different from similarity under the original float prefix. The Nomic model card reports float-prefix results at 64, 128, 256, 512 and 768 dimensions~\cite{nomic}. It does not establish high recall for every 16-to-15-bit sign-prefix relaxation.
-

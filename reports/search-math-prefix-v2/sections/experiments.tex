@@ -15,4 +15,3 @@ At 99\% recall, the selected A, B and $C_{\rm key}$ settings all scored about 29
 Implement the proposed prefix range lookup and widen one bit per level. Check that each document is scored at most once. Keep the document codes, query vectors and reference IDs byte-identical to the earlier benchmark. Build different index layouts from these same inputs. Measure prefix depths, distinct rows scored, range lookups, recall, latency and memory. Do not convert an expected prefix count into assumed recall.
 
 Vary clusters and probes for A, B and C. Vary B's branch settings and C's starting depth and candidate target. Include the missing larger-cluster cases. Compare each method's best qualifying setting at the same recall and RAM limits. Repeat timing measurements before drawing a conclusion.
-
