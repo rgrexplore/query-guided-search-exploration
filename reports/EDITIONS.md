@@ -4,7 +4,7 @@ All seven PDFs are retained under `output/pdf/`.
 
 The current [calculations and experiments report](../output/pdf/search-methods-experiments.pdf)
 keeps both document and query vectors unchanged while varying index settings. It uses the
-requested section order and plain setup/result explanations. Its
+requested section order, with 16 pages of diagrams, short steps and measured results. Its
 [source and run guide](search-math-experiments/README.md) describes the corrected comparison.
 Earlier editions below remain available as historical reports.
 

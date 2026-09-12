@@ -5,9 +5,9 @@ This report uses one unchanged benchmark: one million 256-bit MS MARCO document 
 The source follows the introduction, per-method calculations, per-method optima, summary,
 experiments, limitations and conclusion in that order.
 
-Section 2.1 gives each method's loop, a document-count equation and a numerical example.
-The equal-cluster and equal-rows-per-key assumptions are stated beside the estimates;
-the experimental tables still use the original measured counts and times.
+Sections 2.1 and 2.2 use one query and the same three teaching documents for all methods.
+Each method has numbered steps, short bullets, diagrams, loop counts and byte counts.
+The small example is separate from the unchanged million-document benchmark.
 
 ## Build the PDF
 
@@ -86,3 +86,15 @@ qualifying result.
 
 The historical query-shape examples are separate experiments and are not used as evidence
 in this report. No conclusion here relies on changing query values between methods or cases.
+
+## Check the illustrations
+
+```bash
+.venv/bin/python reports/search-math-experiments/check_example.py
+```
+
+This compares direct five-value scores with all three C++ searches. It checks the returned
+IDs, B's split trace and mask peak, C's lookups and key queue, and each index's stored fields.
+The saved record is `evidence/three-document-example.json`. Single-query times are omitted;
+these teaching rows do not provide performance evidence. Memory totals count named fields
+and buffers, not full process RAM.

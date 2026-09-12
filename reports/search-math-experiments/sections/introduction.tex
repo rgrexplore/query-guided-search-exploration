@@ -73,10 +73,10 @@ three documents with the query from Section 1.2. A candidate mask records which 
 \node[branch,text width=43mm] (branch) at (4.8,0) {Read bitplanes\\and split candidates};
 \node[box,text width=35mm] (score) at (9.6,0) {Score surviving rows\\same full score};
 \draw[arr] (route)--(branch);\draw[arr] (branch)--(score);
-\node[align=left,font=\small] at (1.25,-2.1) {Packed rows\\ID 2: \texttt{10100}\\ID 3: \texttt{11001}\\ID 4: \texttt{11000}};
+\node[align=left,font=\small] at (1.25,-2.1) {Packed rows\\ID 0: \texttt{10100}\\ID 1: \texttt{11001}\\ID 2: \texttt{11000}};
 \draw[arr] (3,-2.1)--node[above,font=\small]{store columns}(4.25,-2.1);
 \node[align=center,font=\small] at (7,-2.1) {\begin{tabular}{c|ccc}
- & ID 2 & ID 3 & ID 4\\\hline
+ & ID 0 & ID 1 & ID 2\\\hline
 Bit 1 &1&1&1\\
 \color{Branch}Bit 2 &\color{Branch}0&\color{Branch}1&\color{Branch}1\\
 Bit 3 &1&0&0\\
@@ -84,8 +84,8 @@ Bit 4 &0&0&0\\
 Bit 5 &0&1&0
 \end{tabular}};
 \node[branch,text width=38mm] (parent) at (5,-4.1) {Parent mask \texttt{111}};
-\node[branch,text width=37mm] (yes) at (2.3,-5.3) {Match bit 2: \texttt{011}\\IDs 3,4; penalty 0};
-\node[box,text width=37mm] (no) at (7.7,-5.3) {Other: \texttt{100}\\ID 2; penalty 0.5};
+\node[branch,text width=37mm] (yes) at (2.3,-5.3) {Match bit 2: \texttt{011}\\IDs 1,2; penalty 0};
+\node[box,text width=37mm] (no) at (7.7,-5.3) {Other: \texttt{100}\\ID 0; penalty 0.5};
 \draw[arr] (parent)--(yes);\draw[arr] (parent)--(no);
 \end{tikzpicture}
 \caption{Orange marks the changed stage and the selected plane. Both child masks retain all
@@ -100,7 +100,7 @@ Negative query values reverse the roles. Alternatives remain in a priority queue
 ordered by known penalty, because a preferred early bit does not determine the final ranking.
 
 Equation~\ref{eq:score} gives a safe upper bound: a branch with known penalty $p$ can score at
-most $Q-2p$. If IDs 3 and 4 score 2.5 and 1.9, the alternative with penalty 0.5 has bound 1.5 and
+most $Q-2p$. If IDs 1 and 2 score 2.5 and 1.9, the alternative with penalty 0.5 has bound 1.5 and
 cannot improve the top two. Equal-score cases retain the common document-ID tie rule.
 
 \begin{lstlisting}
@@ -136,22 +136,22 @@ alternatives in increasing weighted mismatch penalty.
 \draw[arr](route)--(walk);\draw[arr](walk)--(score);
 \node[keys,text width=25mm] (query) at (-.3,-2.2) {Query key\\\texttt{10}\\bits 2,3};
 \node[align=center,font=\small] (directory) at (4.8,-2.2) {
-\begin{tabular}{cccl}\toprule
-Key&Penalty&Cluster 0&Cluster 1\\\midrule
-\texttt{10}&0&[0]&[3,4]\\
-\texttt{11}&0.4&[]&[]\\
-\texttt{00}&0.5&[5]&[]\\
-\texttt{01}&0.9&[1]&[2]\\\bottomrule
+\begin{tabular}{ccl}\toprule
+Key&Penalty&Cluster 0\\\midrule
+\texttt{10}&0&[1,2]\\
+\texttt{11}&0.4&[]\\
+\texttt{00}&0.5&[]\\
+\texttt{01}&0.9&[0]\\\bottomrule
 \end{tabular}};
 \draw[arr](query)--(directory);
 \node[keys,text width=28mm] at (10.5,-2.2) {Stored entry:\\key, start, count\\$\downarrow$\\contiguous rows};
-\node[keys,text width=24mm] (first) at (0,-4.1) {\texttt{10}\\score 3 rows};
+\node[keys,text width=24mm] (first) at (0,-4.1) {\texttt{10}\\score 2 rows};
 \node[box,text width=25mm] (second) at (3.5,-4.1) {\texttt{11}\\bound 1.7};
 \node[box,text width=25mm] (third) at (7,-4.1) {\texttt{00}\\bound 1.5};
 \node[box,text width=25mm] (fourth) at (10.5,-4.1) {\texttt{01}\\bound 0.7};
 \draw[arr](first)--(second);\draw[arr](second)--(third);\draw[arr](third)--(fourth);
 \end{tikzpicture}
-\caption{Purple marks the changed stage. Here the first key returns IDs 0,3,4. Their top two
+\caption{Purple marks the changed stage. Here the first key returns IDs 1,2. Their
 scores are 2.5 and 1.9, so the next key's bound 1.7 already permits stopping. The remaining
 entries show the order that a query requiring more work would follow.}
 \label{fig:keys}

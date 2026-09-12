@@ -1,0 +1,137 @@
+{
+  "query": [
+    0.699999988079071,
+    0.5,
+    -0.4000000059604645,
+    -0.6000000238418579,
+    0.30000001192092896
+  ],
+  "documents": [
+    [
+      1,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      1,
+      0,
+      0,
+      0
+    ]
+  ],
+  "methods": {
+    "A": {
+      "rows": [
+        1,
+        2
+      ],
+      "scores": [
+        2.5000000298023224,
+        1.9000000059604645
+      ],
+      "counts": {
+        "documents_scored": 3
+      },
+      "storage": {
+        "documents": 3,
+        "dimensions": 5,
+        "buckets": 1,
+        "codes_bytes": 24,
+        "bitplanes_bytes": 0,
+        "row_ids_bytes": 24,
+        "array_capacity_bytes": 64,
+        "key_directory_payload_bytes": 0,
+        "occupied_keys": 0,
+        "directory_slots": 0,
+        "logical_bytes": 48
+      }
+    },
+    "B": {
+      "rows": [
+        1,
+        2
+      ],
+      "scores": [
+        2.5000000298023224,
+        1.9000000059604645
+      ],
+      "counts": {
+        "documents_scored": 2,
+        "bitplane_words": 3,
+        "leaf_words": 1,
+        "nodes": 4,
+        "peak_mask_bytes": 24
+      },
+      "storage": {
+        "documents": 3,
+        "dimensions": 5,
+        "buckets": 1,
+        "codes_bytes": 24,
+        "bitplanes_bytes": 40,
+        "row_ids_bytes": 24,
+        "array_capacity_bytes": 104,
+        "key_directory_payload_bytes": 0,
+        "occupied_keys": 0,
+        "directory_slots": 0,
+        "logical_bytes": 88
+      }
+    },
+    "C": {
+      "rows": [
+        1,
+        2
+      ],
+      "scores": [
+        2.5000000298023224,
+        1.9000000059604645
+      ],
+      "counts": {
+        "documents_scored": 2,
+        "key_attempts": 1,
+        "keys_generated": 1,
+        "peak_key_queue_bytes": 16
+      },
+      "storage": {
+        "documents": 3,
+        "dimensions": 5,
+        "buckets": 1,
+        "codes_bytes": 24,
+        "bitplanes_bytes": 0,
+        "row_ids_bytes": 24,
+        "array_capacity_bytes": 56,
+        "key_directory_payload_bytes": 40,
+        "occupied_keys": 2,
+        "directory_slots": 2,
+        "logical_bytes": 88
+      }
+    }
+  },
+  "table_entries": 32,
+  "table_slot_visits": 128,
+  "score_table_terms": {
+    "A": 6,
+    "B": 4,
+    "C": 4
+  },
+  "counted_query_fields_bytes": {
+    "A": 308,
+    "B": 372,
+    "C": 340
+  },
+  "counted_index_plus_query_bytes": {
+    "A": 356,
+    "B": 460,
+    "C": 428
+  },
+  "scope": "Named fields only; not total allocated process RAM. Teaching example, not benchmark data."
+}
