@@ -27,6 +27,11 @@ def test_identity_ids_selection_storage_and_missing_repeat(tmp_path):
         for filename, data in [("configuration.json", config), ("inputs-manifest.json", manifest),
                                ("main/settings.json", [row, scan])]:
             (folder / filename).write_text(json.dumps(data))
+        run = folder / "main/cases/scan-job/run"
+        run.mkdir(parents=True)
+        (run / "result.json").write_text(json.dumps({
+            "job": {"router": str(router)}, "memory": {"routing_payload_bytes": 128}
+        }))
         if repeated:
             (folder / "repeat").mkdir()
             (folder / "repeat/settings.json").write_text(json.dumps([dict(row, p50_ms=1.1)]))
@@ -46,6 +51,12 @@ def test_identity_ids_selection_storage_and_missing_repeat(tmp_path):
     repeats = json.loads((group / "repeat/settings.json").read_text())
     assert repeats[0]["setting_id"] == "first::s1"
     assert result["excluded_sources"][0]["source"] == str(probability.resolve())
+    # Replaying saved metadata must also work without the ignored data cache.
+    (router / "router.json").unlink()
+    router.rmdir()
+    comparison.prepare([first, second], tmp_path / "without-cache")
+    replay = json.loads((tmp_path / "without-cache/example-pool/comparison-table.json").read_text())
+    assert all(row["stored_fields_with_router_bytes"] == 1128 for row in replay)
     changed = dict(manifest, array_hashes={"codes.npy": "different", "queries.npy": "same-queries"})
     (second / "inputs-manifest.json").write_text(json.dumps(changed))
     with pytest.raises(ValueError, match="identical"):

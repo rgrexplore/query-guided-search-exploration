@@ -35,16 +35,14 @@ def qualified(row):
             and row.get("p50_ms") is not None and row["p50_ms"] > 0)
 
 
-def combine_settings(sources):
+def combine_settings(sources, router_bytes):
     """Keep source IDs and attach storage and opened-row counts to each setting."""
     merged = {"main": [], "repeat": []}
-    router_bytes = {None: 0}
+    router_bytes = {None: 0, **router_bytes}
     for source in sources:
         for phase in merged:
             for original in source[phase]:
                 router = original["router"]
-                if router not in router_bytes:
-                    router_bytes[router] = read_json(Path(router) / "router.json")["routing_payload_bytes"]
                 logical = original.get("logical_index_bytes")
                 merged[phase].append(dict(original,
                     setting_id=f"{source['name']}::{original['setting_id']}",
@@ -123,7 +121,16 @@ def prepare(source_folders, output, *, plots=False):
         files = ["configuration.json", "inputs-manifest.json", "main/settings.json"]
         if repeat_file.exists():
             files.append("repeat/settings.json")
+        # The original data cache may be absent after cloning. Its router path
+        # remains an ID; the saved worker metadata contains the stored-byte count.
+        router_bytes = {}
+        for result_path in sorted(folder.glob("main/cases/*/run/result.json")):
+            result = read_json(result_path)
+            if "routing_payload_bytes" in result["memory"]:
+                router_bytes[result["job"]["router"]] = result["memory"]["routing_payload_bytes"]
+                files.append(str(result_path.relative_to(folder)))
         groups[pool].append(dict(name=folder.name, folder=folder, config=config, manifest=manifest,
+            router_bytes=router_bytes,
             main=read_json(folder / "main/settings.json"), repeat=read_json(repeat_file) if repeat_file.exists() else [],
             file_hashes={name: file_hash(folder / name) for name in files}))
 
@@ -133,12 +140,14 @@ def prepare(source_folders, output, *, plots=False):
         folder = output / pool
         (folder / "main").mkdir(parents=True)
         (folder / "repeat").mkdir()
-        merged = combine_settings(sources)
+        router_bytes = {router: count for source in sources
+                        for router, count in source["router_bytes"].items()}
+        merged = combine_settings(sources, router_bytes)
         top_ks = sorted({k for source in sources for k in source["config"]["top_ks"]})
         targets = sorted({target for source in sources for target in source["config"]["recall_targets"]})
         config = dict(pool=sources[0]["manifest"]["pool"], top_ks=top_ks, recall_targets=targets,
                       scope="Derived tables from saved summaries; no new search measurements.",
-                      storage_scope="Stored fields with router = native logical_index_bytes plus router.json routing_payload_bytes. This excludes unused allocation capacity, original float vectors, runtime and query workspace.")
+                      storage_scope="Stored fields with router = native logical_index_bytes plus routing_payload_bytes recorded in saved worker metadata. This excludes unused allocation capacity, original float vectors, runtime and query workspace.")
         save_json(folder / "configuration.json", config)
         save_json(folder / "inputs-manifest.json", sources[0]["manifest"])
         save_json(folder / "source-studies.json", [dict(name=source["name"], folder=str(source["folder"]),
