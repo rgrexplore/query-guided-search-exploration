@@ -1,0 +1,71 @@
+{
+  "first12": [
+    {
+      "path": null,
+      "kind": "none",
+      "clusters": 1,
+      "routing_bits": 0,
+      "probes": 1
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/simple-comparison-2026-09-12/documents/routers/direct-4096-seed73",
+      "kind": "direct",
+      "clusters": 4096,
+      "routing_bits": 12,
+      "probes": 1
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/simple-comparison-2026-09-12/documents/routers/direct-8192-seed73",
+      "kind": "direct",
+      "clusters": 8192,
+      "routing_bits": 13,
+      "probes": 2
+    }
+  ],
+  "spread12": [
+    {
+      "path": null,
+      "kind": "none",
+      "clusters": 1,
+      "routing_bits": 0,
+      "probes": 1
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/simple-comparison-2026-09-12/documents/routers/ivf-256-seed73",
+      "kind": "ivf",
+      "clusters": 256,
+      "routing_bits": 0,
+      "probes": 256
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/simple-comparison-2026-09-12/documents/routers/direct-16-seed73",
+      "kind": "direct",
+      "clusters": 16,
+      "routing_bits": 4,
+      "probes": 16
+    }
+  ],
+  "equal": [
+    {
+      "path": null,
+      "kind": "none",
+      "clusters": 1,
+      "routing_bits": 0,
+      "probes": 1
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/simple-comparison-2026-09-12/documents/routers/ivf-256-seed73",
+      "kind": "ivf",
+      "clusters": 256,
+      "routing_bits": 0,
+      "probes": 256
+    },
+    {
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/simple-comparison-2026-09-12/documents/routers/direct-16-seed73",
+      "kind": "direct",
+      "clusters": 16,
+      "routing_bits": 4,
+      "probes": 16
+    }
+  ]
+}

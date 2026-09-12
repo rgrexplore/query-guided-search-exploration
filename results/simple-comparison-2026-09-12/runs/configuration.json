@@ -1,0 +1,19 @@
+{
+  "documents": 1000000,
+  "dimensions": 256,
+  "document_seed": 73,
+  "query_seed": 20260913,
+  "queries": 32,
+  "large_coordinates": 12,
+  "small_coordinate_weight": 0.0001,
+  "top_k": 100,
+  "recall_target": 0.99,
+  "process_repeats": 3,
+  "query_repetitions": 2,
+  "schedule_seed": 20260914,
+  "limits": {
+    "ram_budget_bytes": 32000000000,
+    "worker_stop_bytes": 34359738368,
+    "case_seconds": 180
+  }
+}
