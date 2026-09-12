@@ -1,0 +1,105 @@
+{
+  "fixed": {
+    "ideal_group": {
+      "mean_count": 244.140625,
+      "std_count": 15.623092534937653,
+      "probability_fewer_than_k": 3.9509263800249874e-26,
+      "expected_ideal_only_recall": 1.0,
+      "suggested_leaf_size": 292
+    },
+    "global_branch_derivative": {
+      "available": true,
+      "candidate_depths": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "initial_unconstrained_depth": 13.506020632135446,
+      "initial_candidate_depths": [
+        0,
+        12
+      ],
+      "predicted_search_ms": [
+        26.5039434144468,
+        14.39091700934087,
+        8.335125577645004,
+        5.307529076411473,
+        3.76012525410431,
+        2.7542901191827194,
+        1.8684581295645684,
+        1.1578827774220875,
+        0.6882653240739358,
+        0.4162708169605355,
+        0.27009810977357307,
+        0.1948110230460748,
+        0.15713245140908152
+      ],
+      "preferred_depth": 12,
+      "scope": "Global balanced single path; F>=K. All valid integer depths evaluated with the revised model.",
+      "initial_guide_equation": "W*c_split+c_node-ln(2)*c_log = ln(2)*N*2^(-j)*c_row",
+      "initial_guide_limitation": "The closed form omits the added nonempty-leaf-word term."
+    }
+  },
+  "adaptive": {
+    "ideal_group": {
+      "mean_count": 244.140625,
+      "std_count": 15.623092534937653,
+      "probability_fewer_than_k": 3.9509263800249874e-26,
+      "expected_ideal_only_recall": 1.0,
+      "suggested_leaf_size": 292
+    },
+    "global_branch_derivative": {
+      "available": true,
+      "candidate_depths": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "initial_unconstrained_depth": 11.516171155677753,
+      "initial_candidate_depths": [
+        0,
+        11,
+        12
+      ],
+      "predicted_search_ms": [
+        26.115952659081945,
+        14.239797549216648,
+        8.304531832871046,
+        5.339263801742755,
+        3.823127598861322,
+        2.8215399372088696,
+        1.9177189368469052,
+        1.1847066799066512,
+        0.6993022723967433,
+        0.41931046920334614,
+        0.2705985085193597,
+        0.19596272384180535,
+        0.16065607146565108
+      ],
+      "preferred_depth": 12,
+      "scope": "Global balanced single path; F>=K. All valid integer depths evaluated with the revised model.",
+      "initial_guide_equation": "W*c_split+c_node-ln(2)*c_log = ln(2)*N*2^(-j)*c_row",
+      "initial_guide_limitation": "The closed form omits the added nonempty-leaf-word term."
+    }
+  }
+}
