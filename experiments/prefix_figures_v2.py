@@ -72,28 +72,33 @@ def draw_study(folder):
     plt.rcParams.update({"font.size": 10, "axes.spines.top": False,
                          "axes.spines.right": False, "savefig.dpi": 180})
     counts = f"{identity['documents']:,} documents · {identity['queries']:,} queries · {identity['dimensions']} bits"
+    minimum_recall = min(config["recall_targets"])
     for k in config["top_ks"]:
         fig, axis = plt.subplots(figsize=(8.2, 4.4), layout="constrained")
         for method, (label, color) in METHODS.items():
-            targets = sorted({.5, 1.0} | {row["recall"] for row in rows
+            targets = sorted({minimum_recall, 1.0} | {row["recall"] for row in rows
                              if row["qualified"] and row["method"] == method
-                             and row["top_k"] == k and row["recall"] >= .5})
+                             and row["top_k"] == k and row["recall"] >= minimum_recall})
             chosen = [best_at_recall(rows, method, k, target) for target in targets]
             times = [row["p50_ms"] if row else np.nan for row in chosen]
             # These are measured qualifying choices, not an interpolated speed model.
             # A setting at90% remains eligible through90%, but not above it.
             axis.step(np.asarray(targets) * 100, times, where="pre", label=label, color=color, linewidth=2)
         axis.set(xlabel=f"Required average recall@{k} (%)", ylabel="Median query time (ms)",
-                 title=f"Fastest tested settings\n{counts}", xlim=(50, 100), yscale="log")
+                 title=f"Fastest tested settings\n{counts}",
+                 xlim=(100 * minimum_recall, 100), yscale="log")
         axis.grid(alpha=.2)
         axis.legend(frameon=False)
         for extension in ("png", "pdf"):
             fig.savefig(output / f"recall-latency-k{k}.{extension}")
         plt.close(fig)
 
-        fig, axes = plt.subplots(1, 3, figsize=(11, 3.7), layout="constrained", sharey=True)
+        cluster_targets = [target for target in [.8, .95, .99] if target >= minimum_recall]
+        fig, axes = plt.subplots(1, len(cluster_targets), figsize=(3.7 * len(cluster_targets), 3.7),
+                                 layout="constrained", sharey=True, squeeze=False)
+        axes = axes[0]
         clusters = sorted({row["clusters"] for row in rows})
-        for axis, target in zip(axes, [.8, .95, .99]):
+        for axis, target in zip(axes, cluster_targets):
             for method, (label, color) in METHODS.items():
                 choices = [best_at_recall([row for row in rows if row["clusters"] == count],
                                           method, k, target) for count in clusters]
