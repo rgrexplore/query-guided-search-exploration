@@ -9,40 +9,40 @@
 
 ## 1. Restore and protect Section 1
 
-- [ ] Restore the supplied wording from attachment `91b13429-39e0-4962-af98-a9f40ec08eef/pasted-text.txt`.
-- [ ] Choose the complete draft where the attachment contains duplicates; remove only duplicate pasted equations and editorial directions.
-- [ ] Keep the supplied paragraph structure and personal voice. Do not turn it into bullets or rewrite surrounding sentences.
-- [ ] Apply only the specifically requested local edits in Section 1:
+- [x] Restore the supplied wording from attachment `91b13429-39e0-4962-af98-a9f40ec08eef/pasted-text.txt`.
+- [x] Choose the complete draft where the attachment contains duplicates; remove only duplicate pasted equations and editorial directions.
+- [x] Keep the supplied paragraph structure and personal voice. Do not turn it into bullets or rewrite surrounding sentences.
+- [x] Apply only the specifically requested local edits in Section 1:
   - The short “Note that…” explanation and growth graph after Figure 6.
   - Python versions of the algorithm listings; no unrelated prose changes during that conversion.
   - Three short bold labels after Figure 5, with the paragraph wording preserved.
-- [ ] Save the restored Section 1 and record its hash. Later tasks must leave it unchanged unless a new request names a specific edit.
+- [x] Save the restored Section 1 and record its hash. Later tasks must leave it unchanged unless a new request names a specific edit.
 
 ## 2. Research the experiment before choosing the grid
 
-- [ ] Collect primary papers and documentation relevant to prefix relaxation, bitplane pruning, and clustered scans.
-- [ ] Check existing query/reference geometry to identify promising settings and reasons a method may fail.
+- [x] Collect primary papers and documentation relevant to prefix relaxation, bitplane pruning, and clustered scans.
+- [x] Check existing query/reference geometry to identify promising settings and reasons a method may fail.
 - [ ] Declare the recall targets, cluster counts, result counts K, prefix settings and branch settings before the full run.
-- [ ] Keep the same document arrays and all 200 query vectors for every method in a comparison.
+- [ ] Keep the same document arrays and every selected query vector for every method in a comparison.
 - [ ] If K changes, compare all methods at that same K using the first K IDs from the unchanged exact reference array.
 - [ ] Treat RAM as a common feasibility limit. Do not claim a speed improvement merely by giving methods different hardware or memory limits.
 
 ## 3. Implement the intended Backward Walk
 
-- [ ] Add a direct Python reference calculation and meaningful small-case tests. (Started.)
-- [ ] Implement a separate `PrefixIndexV2` in C++ with Python bindings. (In progress.)
-- [ ] Start at the query's own prefix, remove one trailing bit per level, and score only newly added rows.
-- [ ] Finish each depth across all selected clusters before checking the candidate target.
-- [ ] Keep the full score and document-ID tie rule unchanged.
-- [ ] Check empty prefixes, no rescoring, whole-depth stopping, and target zero matching a full scan over opened clusters.
-- [ ] Record prefix depths, binary boundary searches, rows scored, stored bytes and peak process RAM.
-- [ ] Run the appropriate tests and save a dated implementation checkpoint.
+- [x] Add a direct Python reference calculation and meaningful small-case tests.
+- [x] Implement a separate `PrefixIndexV2` in C++ with Python bindings.
+- [x] Start at the query's own prefix, remove one trailing bit per level, and score only newly added rows.
+- [x] Finish each depth across all selected clusters before checking the candidate target.
+- [x] Keep the full score and document-ID tie rule unchanged.
+- [x] Check empty prefixes, no rescoring, whole-depth stopping, and target zero matching a full scan over opened clusters.
+- [x] Record prefix depths, binary boundary searches, rows scored, stored bytes and peak process RAM.
+- [x] Run the appropriate tests and save a dated implementation checkpoint.
 
 ## 4. Run fair, extensive experiments
 
-- [ ] Connect the new method to the existing isolated runner.
+- [x] Connect the new method to the existing isolated runner.
 - [ ] Verify document/query/reference hashes before and after every stage.
-- [ ] Run a small set of configurations on all 200 queries to check the complete run path.
+- [x] Run a small set of configurations on all 200 original queries to check the complete run path. Saved in `results/prefix-study-pilot-2026-09-13/`.
 - [ ] Run the declared parameter grid, including previously missing cluster sizes and useful branch budgets/leaf sizes.
 - [ ] Include deterministic branching and a bounded probability/seed comparison where relevant.
 - [ ] Let A, B and C each choose their fastest tested settings that meet the same recall target and RAM limit.
@@ -82,8 +82,23 @@
 - [ ] Rebuild from the source archive independently.
 - [ ] Commit with a date, preserve previous PDFs/results, and update memory.
 
+## Expanded experiment: 2026-09-13
+
+- [x] Confirm the first eight pilot settings finish in about43seconds, including process and index preparation.
+- [x] Locate the cached one-million-document Nomic embeddings at all768 dimensions.
+- [ ] Prepare1,000 fixed MS MARCO queries, then derive256- and768-dimensional pools from the same full embeddings.
+- [ ] Measure Qwen3-Embedding-0.6B encoding on representative Quora questions before choosing a full run.
+- [ ] Use the measured encoding, exact-reference and search costs to allocate an eight-hour run budget.
+- [ ] If the measured budget fits, encode the official Quora corpus and1,000 test queries, then compare256 and1024 dimensions.
+- [ ] Save each dataset/model combination separately. Within that comparison, A/B/C receive identical arrays and exact references.
+- [ ] Save progress after encoding chunks, completed parameter settings and experiment stages. Record any timeout or memory stop.
+
 ## Scope boundary
 
-Build the intended prefix index, tests, experiment results and paper. Do not add a new UI,
-embedding model, GPU path, online-update system or generic indexing framework. Any code repair
-must address an observed failure or a required behavior in the current experiment.
+Build the intended prefix index, a small experiment runner, real-data results and the paper.
+New models and datasets are now authorized as separate comparisons. Reuse the existing full
+Nomic document cache. Choose added work using measured time rather than model size alone.
+Do not add a new UI, GPU search implementation, online-update system or generic indexing
+framework. Repairs must address a demonstrated failure or required current behavior.
+
+Section1 is protected by `docs/section-one.sha256`. Update the abstract and later sections only.
