@@ -74,10 +74,10 @@ The path through the code is:
 
 The calculator is an earlier exploratory model. The paper contains the current checked results.
 
-[Three ways to search](calculator/README.md) compares scan, bitplane branching and walking
-backwards from a query key. Four shared controls, small query examples and the saved measurements
-show where the work goes. It runs in a browser with
-no build step. Estimated costs and measured results are shown separately.
+[Recall, latency and RAM](calculator/OPTIMIZER.md) compares scan, bitplane branching and
+global short-key search. Adjust the corpus and RAM limit, inspect operation and memory costs,
+and search configurations for 80%, 90%, 95% and 99% modeled recall. The page uses the supplied
+calculator layout; predictions and verified measurements remain separate. No build step.
 
 ```bash
 python3 -m http.server 8767 --bind 127.0.0.1

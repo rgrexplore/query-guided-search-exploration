@@ -1,3 +1,11 @@
+# Current calculator
+
+The current page is the configurable recall–latency–RAM calculator. Read
+[OPTIMIZER.md](OPTIMIZER.md) for its formulas, assumptions, configuration grid and checks.
+The guide below describes the earlier four-control version preserved at `f3de964`.
+
+---
+
 # Three ways to search
 
 Four inputs: total documents, number of groups, groups opened per search, and bits per document.

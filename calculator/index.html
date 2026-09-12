@@ -1,258 +1,392 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Three ways to search · Bitplane</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Recall, latency and RAM · Search cost calculator</title>
+    <link rel="stylesheet" href="optimizer-v2.css" />
   </head>
   <body>
-    <header>
-      <a href="../README.md">▥ BITPLANE</a><span>Search experiments</span>
-    </header>
-    <main>
-      <div class="intro">
-        <p class="eyebrow">ONE QUESTION, THREE METHODS</p>
-        <h1>How much work does a search do?</h1>
-        <p>
-          Each method opens the same groups. What happens inside them is
-          different.
+    <div class="wrap">
+      <header>
+        <p class="eyebrow">
+          Search cost calculator · CPU estimates
         </p>
+        <h1>Recall, latency and RAM</h1>
+        <p class="sub">
+          Fix the document count and RAM budget. Compare the three methods, then
+          find the lowest estimated latency at 80%, 90%, 95% or 99% recall
+          within the configurations searched.
+        </p>
+        <div class="actions" style="margin-top: 14px">
+          <button id="theme">Light theme</button
+          ><button id="reset">Reset</button
+          ><button id="download">Save sweep CSV</button>
+        </div>
+      </header>
+      <div class="notice">
+        <strong>Estimates, not a benchmark at this scale.</strong> Timing uses
+        saved CPU work where available. Recall uses a hypothetical
+        score-distribution model. The imported recall checks use different
+        ground truths, so they do not validate a shared binary-recall curve. A
+        modeled 99% result still needs a real benchmark.
       </div>
-      <section class="settings" aria-label="Search settings">
-        <label
-          >Documents in total<input
-            id="documents"
-            type="number"
-            min="1000"
-            max="10000000000"
-            step="1000"
-            value="1000000"
-          /><small>The whole database.</small></label
-        >
-        <label
-          >Number of groups<input
-            id="groups"
-            type="number"
-            min="1"
-            max="1000000"
-            step="1"
-            value="100"
-          /><small>Use 1 to skip grouping.</small></label
-        >
-        <label
-          >Groups opened per search<input
-            id="opened"
-            type="number"
-            min="1"
-            max="1000000"
-            step="1"
-            value="1"
-          /><small>More groups means more documents.</small></label
-        >
-        <label
-          >Bits per document<select id="bits">
-            <option>128</option>
-            <option selected>256</option>
-            <option>512</option>
-            <option>1024</option></select
-          ><small>More bits means a longer code to check.</small></label
-        >
-      </section>
-      <div class="pool-example">
-        <div id="pool-flow" class="pool-flow"></div>
-        <p id="pool-sentence"></p>
+      <div class="grid">
+        <aside class="rail" aria-label="Search parameters">
+          <div class="panel">
+            <div class="panel-h"><p class="eyebrow">Corpus and RAM</p></div>
+            <div class="panel-b">
+              <div class="ctl">
+                <label for="N"
+                  ><span class="nm">Documents N</span
+                  ><output class="vl mono" id="vN"></output></label
+                ><input
+                  type="range"
+                  id="N"
+                  min="4"
+                  max="12"
+                  step=".05"
+                  value="9"
+                />
+                <p class="why">
+                  1 billion is the starting example. The saved scaling run
+                  reaches 1 million.
+                </p>
+              </div>
+              <div class="ctl">
+                <label for="D"
+                  ><span class="nm">Code length D</span
+                  ><output class="vl mono" id="vD"></output></label
+                ><select id="D">
+                  <option>64</option>
+                  <option>128</option>
+                  <option selected>256</option>
+                  <option>512</option>
+                  <option>768</option>
+                  <option>1024</option>
+                </select>
+                <p class="why">
+                  One sign bit per dimension. Example:
+                  <code>[0.7, −0.5, 0.9]</code> becomes <code>101</code>. The
+                  query stays float for scoring.
+                </p>
+              </div>
+              <div class="ctl">
+                <label for="RAM"
+                  ><span class="nm">RAM budget</span
+                  ><output class="vl mono" id="vRAM"></output></label
+                ><input
+                  type="range"
+                  id="RAM"
+                  min="9"
+                  max="14"
+                  step=".1"
+                  value="12"
+                />
+                <p class="why">
+                  Includes the index and search memory. Reserve 10% for runtime
+                  overhead. GB and TB use decimal bytes.
+                </p>
+              </div>
+              <div class="ctl">
+                <label for="Q"><span class="nm">Concurrent queries</span></label
+                ><select id="Q">
+                  <option>1</option>
+                  <option>4</option>
+                  <option>16</option>
+                </select>
+                <p class="why">
+                  Multiplies query memory. The timing remains an isolated
+                  single-thread query estimate, not loaded-service latency.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-h">
+              <p class="eyebrow">Clustering · methods A and B</p>
+            </div>
+            <div class="panel-b">
+              <div class="ctl">
+                <label for="k"
+                  ><span class="nm">Clusters</span
+                  ><output class="vl mono" id="vk"></output></label
+                ><input
+                  type="range"
+                  id="k"
+                  min="0"
+                  max="24"
+                  step="1"
+                  value="12"
+                />
+                <p class="why" id="kWhy"></p>
+              </div>
+              <div class="ctl">
+                <label for="P"
+                  ><span class="nm">Probes</span
+                  ><output class="vl mono" id="vP"></output></label
+                ><input
+                  type="range"
+                  id="P"
+                  min="0"
+                  max="24"
+                  step="1"
+                  value="5"
+                />
+                <p class="why">
+                  Clusters searched per query. More probes usually improve
+                  recall but read more documents. At all clusters, routing can
+                  be skipped.
+                </p>
+              </div>
+              <div class="ctl">
+                <label><span class="nm">Partition method</span></label>
+                <div class="seg" id="rt">
+                  <button type="button" data-v="bits" aria-pressed="true">
+                    Sign-bit prefix</button
+                  ><button type="button" data-v="km" aria-pressed="false">
+                    k-means
+                  </button>
+                </div>
+                <p class="why" id="rtHint"></p>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-h">
+              <p class="eyebrow">Bitplane branching · method B</p>
+            </div>
+            <div class="panel-b">
+              <div class="ctl">
+                <label for="L"
+                  ><span class="nm">Leaf size</span
+                  ><output class="vl mono" id="vL"></output></label
+                ><input
+                  type="range"
+                  id="L"
+                  min="5"
+                  max="12"
+                  step="1"
+                  value="5"
+                />
+                <p class="why">
+                  Score a node's documents once this many remain. Example: leaf
+                  size 32 stops splitting a set of 25 documents. Only leaf size
+                  32 has archived scaling data; other sizes are modeled.
+                </p>
+              </div>
+              <div class="ctl">
+                <label for="B"
+                  ><span class="nm">Node budget</span
+                  ><output class="vl mono" id="vB"></output></label
+                ><input
+                  type="range"
+                  id="B"
+                  min="5"
+                  max="21"
+                  step="1"
+                  value="15"
+                />
+                <p class="why">
+                  Total visited nodes across all probes. A smaller budget can
+                  return sooner and miss results. “No limit” has a much larger
+                  possible frontier.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-h">
+              <p class="eyebrow">Walk backwards · method C</p>
+            </div>
+            <div class="panel-b">
+              <div class="ctl"><label for="keyMode"><span class="nm">Walk-backwards variant</span></label><select id="keyMode"><option value="full">Full-key exact search</option><option value="short">Short-key candidate search</option></select><p class="why">All D bits with complete weighted ordering gives exact binary top 100. A short prefix plus a candidate limit needs a recall measurement.</p></div><div class="ctl">
+                <label for="Dl"
+                  ><span class="nm">Lookup key bits</span
+                  ><output class="vl mono" id="vDl"></output></label
+                ><input
+                  type="range"
+                  id="Dl"
+                  min="8"
+                  max="64"
+                  step="1"
+                  value="24"
+                />
+                <p class="why">
+                  A global short-key hash table. Clusters and probes above do
+                  not apply. Longer keys can reject more documents but require
+                  more key attempts.
+                </p>
+              </div>
+              <div class="ctl">
+                <label for="T"
+                  ><span class="nm">Candidates wanted</span
+                  ><output class="vl mono" id="vT"></output></label
+                ><input
+                  type="range"
+                  id="T"
+                  min="2"
+                  max="12"
+                  step=".25"
+                  value="3"
+                />
+                <p class="why">
+                  Find this many candidates, then score them with all D bits.
+                  All keys at the final penalty are included, so the candidate
+                  count can overshoot.
+                </p>
+              </div>
+              <div class="ctl">
+                <label for="H"
+                  ><span class="nm">Hash lookup cost</span
+                  ><output class="vl mono" id="vH"></output></label
+                ><input
+                  type="range"
+                  id="H"
+                  min="5"
+                  max="200"
+                  step="5"
+                  value="100"
+                />
+                <p class="why">
+                  Unmeasured ns per lookup. Key access, flip-set enumeration,
+                  postings and candidate scoring are charged separately.
+                </p>
+              </div>
+            </div>
+          </div>
+        </aside>
+        <div class="cards" id="cards"></div>
       </div>
-      <p class="model-note">
-        Time estimates use our CPU measurements where available. Group sizes are
-        assumed equal. These estimates do not guarantee equal recall—finding the
-        same good results.
-      </p>
-
-      <section class="methods" aria-label="Three search methods">
-        <article class="method scan">
-          <div class="method-label"><span>A</span> BASELINE</div>
-          <h2>Cluster, then full scan</h2>
-          <p>Open the groups. Score every document in them.</p>
-          <div class="result">
-            <strong id="scan-time"></strong><span>estimated search time</span>
-          </div>
-          <div class="mini-flow">
-            <span>Open groups</span><b>→</b><span>Check every document</span>
-          </div>
-          <div class="example-box">
-            <h3>Example: 16 documents in one group</h3>
-            <div id="scan-dots" class="dots"></div>
-            <p>All 16 are checked. There is no branch to choose.</p>
-          </div>
-          <div id="scan-work" class="work-list"></div>
-          <details>
-            <summary>How this is calculated</summary>
-            <div id="scan-math" class="math"></div>
-          </details>
-        </article>
-        <article class="method branch">
-          <div class="method-label"><span>B</span> SPLIT BY BITS</div>
-          <h2>Cluster, then bitplane branching</h2>
-          <p>Split by a bit. Visit the better-looking side first.</p>
-          <div class="result">
-            <strong id="branch-time"></strong><span>estimated search time</span>
-          </div>
-          <div class="mini-flow">
-            <span>Open groups</span><b>→</b><span>Split → split → score</span>
-          </div>
-          <div class="example-box">
-            <h3>Example: follow one query</h3>
-            <p class="query">
-              Query starts: <code>+0.7, +0.5, −0.4, −0.6</code>
-            </p>
-            <p id="branch-step"></p>
-            <div id="branch-dots" class="dots"></div>
-            <button id="branch-next">Next step →</button>
-            <p>
-              Filled squares are still active. The other side stays available
-              for later.
-            </p>
-          </div>
-          <div id="branch-work" class="work-list"></div>
-          <p id="split-price" class="important"></p>
-          <details>
-            <summary>How this is calculated</summary>
-            <div id="branch-math" class="math"></div>
-          </details>
-        </article>
-        <article class="method backwards">
-          <div class="method-label">
-            <span>C</span> START FROM THE IDEAL KEY
-          </div>
-          <h2>Cluster, then walk backwards</h2>
-          <p>
-            Try the query’s sign pattern. Then try cheap combinations of bit
-            flips.
-          </p>
-          <div class="result">
-            <strong id="backwards-time"></strong
-            ><span id="backwards-status"></span>
-          </div>
-          <div class="mini-flow">
-            <span>Open groups</span><b>→</b><span>Try key → widen</span>
-          </div>
-          <div class="example-box">
-            <h3>Example: a short 8-bit key</h3>
-            <div id="key-bits" class="key-bits"></div>
-            <p id="key-step"></p>
-            <button id="key-next">Try next key →</button>
-            <p>
-              Query values closest to zero are cheapest to flip. A different
-              combination may lead to the next document.
-            </p>
-          </div>
-          <div id="backwards-work" class="work-list"></div>
-          <p class="important">
-            A key lookup can find nothing. Trying many empty keys can be more
-            work than a scan.
-          </p>
-          <details>
-            <summary>How this is calculated</summary>
-            <div id="backwards-math" class="math"></div>
-          </details>
-        </article>
-      </section>
-
-      <section class="chart-section">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">TRY DIFFERENT GROUP SIZES</p>
-            <h2>What happens when each group gets bigger?</h2>
-          </div>
-          <button id="save-chart">Save graph</button>
-        </div>
-        <p>
-          Lines A and B estimate search time. The dashed C line shows time spent
-          trying keys, <strong>not time to finish finding results</strong>.
+      <section class="sec">
+        <h2>
+          Choose a configuration <span class="flag neu">Modeled recall</span>
+        </h2>
+        <p class="lede">
+          N, D and RAM stay fixed. The search varies clusters, probes, leaf
+          size, node budget, short-key bits and candidates. The line keeps
+          configurations that are not beaten on both estimated recall and
+          latency.
         </p>
-        <div class="legend">
-          <span class="blue">A · Full scan</span
-          ><span class="red">B · Bitplane branching</span
-          ><span class="ochre">C · Walk backwards, limited attempts</span>
+        <div class="panel">
+          <div id="pareto" style="padding: 16px"></div>
+          <div class="tw">
+            <table id="targets">
+              <thead>
+                <tr>
+                  <th>Recall target</th>
+                  <th>Full scan</th>
+                  <th>Bitplane branching</th>
+                  <th>Walk backwards</th>
+                  <th>Lowest estimate</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="why" style="padding: 12px 16px" id="sweepNote"></p>
+          <details>
+            <summary>Search grid and what “best” means</summary>
+            <div class="vproof">
+              <p>
+                Clusters: 1 and 2⁶, 2⁸, …, 2²⁰; probes: powers of two up to all
+                clusters. B: leaf sizes 32, 128, 512 and node budgets 128,
+                2,048, 32,768 or unlimited. C: 8, 12, 16, 24, 32, 48, 64-bit
+                keys and seven candidate targets up to the whole corpus.
+              </p>
+              <p>
+                These are the best <strong>estimated</strong> settings in this
+                finite grid. A missing result means no grid configuration meets
+                the modeled target and memory check; it does not prove the
+                method cannot reach that recall. All configurations are retained
+                in the CSV, including RAM rejections.
+              </p>
+              <p>
+                Normal score correlations and cluster loads are assumptions
+                transferred from a small, reported experiment. A change in those
+                assumptions can change the winner. The graph is a way to choose
+                experiments, not evidence for a production SLA.
+              </p>
+            </div>
+          </details>
         </div>
-        <div id="chart"></div>
-        <p class="small">
-          Points use the group sizes from our saved runs. The other settings
-          stay the same. A branch setting is chosen from the measured work at
-          each size; new clusters can behave differently.
-        </p>
       </section>
-
-      <section class="evidence">
-        <div>
-          <p class="eyebrow">CHECK AGAINST A REAL RUN</p>
-          <h2>One million documents, one group, 256 bits.</h2>
-          <p>
-            These are recorded timings from our local implementation, not
-            estimates and not Exa’s service.
-          </p>
+      <section class="sec">
+        <h2>Memory during a query</h2>
+        <p class="lede">
+          Index memory persists between queries. Scratch memory is used while
+          searching. A conservative frontier bound and the runtime reserve are
+          included in the RAM check—not just the stored codes.
+        </p>
+        <div class="panel"><div id="mem" style="padding: 16px"></div></div>
+      </section>
+      <section class="sec">
+        <h2>Why a dense lookup table grows so quickly</h2>
+        <p class="lede">
+          A sparse hash table stores occupied keys plus postings. A dense table
+          allocates an offset for every possible key, including empty ones.
+        </p>
+        <div class="panel">
+          <div id="dense-memory" style="padding: 16px"></div>
         </div>
-        <div class="measured">
-          <div>
-            <span>A · Full scan</span><strong>25.14 ms</strong
-            ><small>Exact binary top 100</small>
+      </section>
+      <section class="sec"><h2>Recall checked on the same ground truth</h2><p class="lede">Controlled random data and cached Nomic embeddings. Ground truth is exact full 256-bit scoring for every method. Correlation is estimated on 16 queries and checked on 16 different queries. C's measured recall does not imply a measured hash-search latency.</p><div class="panel"><div class="vproof" id="recall-study"></div></div><details class="panel" style="margin-top:16px"><summary>The recall formulas, with their assumptions</summary><div class="vproof"><p><strong>Binary score:</strong> S(q,b) = Σ qᵢbᵢ = Σ |qᵢ| − 2Σ |qᵢ|·1[bᵢ ≠ sign(qᵢ)]. Full-key search in increasing total penalty is exact if it finishes the top-100 boundary tie.</p><p><strong>Measured recall@100:</strong> exact top-100 documents found ÷ 100. Use the same full score and row-ID tie order for every method.</p><p><strong>Prefix score:</strong> T = Σᵢ≤h qᵢbᵢ. For independent equally likely binary documents, Var(S) = Σqᵢ² and correlation(T,S) = √(Σᵢ≤h qᵢ² / Σqᵢ²). This is a variance statement, not a guarantee about trained embeddings.</p><p><strong>Population recall:</strong> P(full score is in its top-100 tail AND prefix passes) / P(full score is in its top-100 tail). The normal approximation estimates this using score correlation; the table shows its error on actual recall.</p><p><strong>Empty-key count:</strong> V(τ) counts flip sets with total |query| penalty ≤ τ. Under uniform independent keys, expected candidates = N·V(τ)/2ʰ. For real correlated bits this can fail badly. The study measures candidates and counts V separately.</p><p><strong>Matryoshka:</strong> useful prefixes are learned; coordinates are not sorted by query magnitude. The 80% prefix-variance case is constructed, not a claim about Nomic. <a href="https://arxiv.org/abs/2205.13147">Original paper</a>.</p><p><a href="STATISTICS.md">Full derivation, time and memory formulas, and validation limits</a> · <a href="recall-validation.json">Per-query observations</a></p></div></details></section><section class="sec">
+        <h2>Calculations and evidence</h2>
+        <p class="lede">
+          Checked against the source code and archived measurements.
+          Source-reported recall observations are not relabeled as verified
+          binary-recall measurements.
+        </p>
+        <div class="evidence-grid">
+          <div class="panel vproof">
+            <h3>Timing check · same saved work</h3>
+            <div id="timing-check"></div>
+            <p class="why">
+              The timing fit used validation rows. These test rows use their
+              actual node and document counts. New cluster layouts and changed
+              leaf sizes have not been measured.
+            </p>
           </div>
-          <div>
-            <span>B · Bitplane branching</span><strong>244.98 ms</strong
-            ><small>99.26% of the exact top 100 found</small>
+          <div class="panel vproof">
+            <h3>What the original recall checks measured</h3>
+            <p class="why">
+              The supplied <code>router256.py</code> uses top-100
+              <strong>float scores at 256 dimensions</strong>.
+              <code>shortcode.py</code> uses
+              <strong>float cosine at 768 dimensions</strong>. Our scaling CSV
+              uses <strong>weighted binary top 100</strong>. These are different
+              ground truths.
+            </p>
+            <p class="why">
+              The new recall model consistently describes a hypothetical
+              full-score distribution. It averages over the entire top-100 score
+              tail. It does not claim that the imported observations validate
+              it.
+            </p>
+            <p class="why">
+              For C, flip sets are counted by quantized weighted penalty. A
+              Hamming-radius formula would count all bit mistakes equally and
+              would be a different algorithm.
+            </p>
           </div>
         </div>
-        <p class="small" id="calibration-check"></p>
-        <details>
-          <summary>Where the estimates come from</summary>
-          <div class="source-notes">
-            <p>
-              <strong>A:</strong> fitted to our scan timings.
-              <strong>B:</strong> uses saved counts of documents scored and
-              bitmap words visited. Changing group size scales the closest saved
-              work example; changing bits reuses its branch counts. These are
-              assumptions, not new benchmark results.
-            </p>
-            <p>
-              <strong>C:</strong> assumes equally likely, independent document
-              bits and allows 65,536 key attempts per opened group. The lookup
-              and queue costs are unmeasured. This tells us about empty-key
-              work; it cannot predict actual recall.
-            </p>
-            <p>
-              Grouping adds an assumed 0.05 ms. All methods use cached queries,
-              one CPU thread, and target 100 candidates. Embedding, building the
-              index, final float reranking and network time are outside the
-              calculation.
-            </p>
-            <p>
-              “Extra stored data” excludes queues and temporary memory. B can
-              queue many full-group masks. These are not process memory
-              measurements.
-            </p>
-            <p>
-              <a href="../results/scaling-msmarco-1m/analysis/settings.csv"
-                >Original measurements</a
-              >
-              · <a href="README.md">Formulas and source guide</a> ·
-              <a href="https://exa.ai/blog/building-web-scale-vector-db"
-                >Exa’s published approach</a
-              >
-            </p>
-            <p>
-              Exa describes groups based on similarity, not groups formed from
-              the first few sign bits. Its optimized production scanner is not
-              reproduced by this calculator.
-            </p>
-          </div>
+        <details class="panel" style="margin-top: 16px">
+          <summary>Constants, memory assumptions and corrections</summary>
+          <div class="vproof" id="assumptions"></div>
         </details>
       </section>
-      <footer>
-        <span>CPU estimates · Apple M5 Max · 128 GiB RAM</span
-        ><button id="reset">Reset example</button>
+      <footer style="margin-top: 24px" class="why">
+        <a href="README.md">Model guide</a> ·
+        <a href="../results/scaling-msmarco-1m/analysis/settings.csv"
+          >Archived measurements</a
+        >
+        ·
+        <a href="archive/claude-original.html">Unmodified source snapshot</a> ·
+        <a href="https://exa.ai/blog/building-web-scale-vector-db"
+          >Exa’s published approach</a
+        >
       </footer>
-    </main>
-    <script type="module" src="app.mjs"></script>
+    </div>
+    <script type="module" src="optimizer-v2-ui.mjs"></script>
   </body>
 </html>

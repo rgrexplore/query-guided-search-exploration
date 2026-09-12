@@ -1,0 +1,242 @@
+\section{What is built once, and what every query pays}
+\label{sec:shared}
+\Needspace{12\baselineskip}
+\subsection{The public Exa-style starting point}
+Exa's public description combines Matryoshka prefixes, binary document codes, float-query
+scoring through small lookup tables, similarity-based clustering, filtering, and final
+reranking \cite{exa}. Its published example uses particular dimensions and cluster counts;
+our formulas replace those choices with parameters. The pseudocode here is an explicit
+reference design, not a claim to reproduce Exa's private implementation or production latency.
+
+\Needspace{12\baselineskip}
+\subsection{Preprocessing and the common index}
+A document is encoded before queries arrive. Its code and document ID are placed in its
+cluster's contiguous row range. The baseline ownership convention is simple: each document
+has one packed code and one ID. Cluster offsets identify the ranges. Bitplanes or hash-key
+postings are additional structures described later.
+
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={Common preprocessing; executed before serving queries.}]
+BuildCommonIndex(documents, model, d, routing_configuration):
+    vectors = encode documents with model
+    routing = train or choose the cluster assignment rule
+    for each document x:
+        b = signs of the first d coordinates of vectors[x]
+        j = assign x to one cluster
+        append (document_id[x], packed(b)) to cluster j
+    concatenate cluster rows and record C + 1 offsets
+    save centroids if centroid routing is used
+    save filter metadata and optional final vectors
+    return common index
+\end{lstlisting}
+\end{minipage}\par
+
+Offline encoding, clustering and sorting are build costs. They are not charged as query
+latency. Their outputs \emph{are} charged as index storage. Build-time temporary arrays can be
+large; the serving-RAM formulas below deliberately do not describe the construction peak.
+
+For centroid routing, define
+\begin{equation}
+\Mbase=N s_{\rm code}+N b_{\rm id}+(C+1)b_o+C d_r b_c+M_{\rm filter}+M_{\rm extra}.
+\label{eq:base}
+\end{equation}
+$M_{\rm extra}$ includes explicitly chosen common metadata and optional stored final vectors.
+For example, fully resident reranking vectors contribute $N d_f b_f$. If they are on disk,
+they still consume storage, but only the resident portion belongs in serving RAM. For
+sign-prefix routing, omit the centroid term. Do not silently count a second ID array in one
+method and omit the only ID array in another.
+
+\begin{examplebox}{Stored bytes versus touched bytes}
+Suppose an illustrative database has $N=10^9$ documents and $d=256$ bits. Packed code payload
+without extra padding is $10^9\cdot256/8=32$ GB. With eight-byte IDs, the codes and IDs together
+need 40 GB before centroids or metadata. Here GB means $10^9$ bytes. These are example choices
+for $N,d,b_{\rm id}$, not constants in Equation~\eqref{eq:base}.
+\end{examplebox}
+
+\Needspace{12\baselineskip}
+\subsection{Step 1: encode and prepare the query}
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={Query preparation shared by all methods.}]
+PrepareQuery(text, model, D, d, d_r):
+    full_query = model.encode(text, D)
+    q = prepare prefix full_query[0:d] for the chosen score
+    routing_query = prepare prefix full_query[0:d_r]
+    t[i] = +1 if q[i] >= 0 else -1
+    a[i] = abs(q[i])
+    return full_query, q, routing_query, t, a
+\end{lstlisting}
+\end{minipage}\par
+The model's tokenization, neural-network computation and output processing cost
+$T_{\rm emb}(\ell_q,D)$ for query length $\ell_q$. This is a measured function, not a universal
+linear formula in $D$. Truncation, optional normalization, signs and magnitudes add
+$T_{\rm prep}=O(D+d+d_r)$ elementary work. Their coefficient can be measured separately.
+A norm or layer-normalization rule must be the same rule used when preparing the documents.
+
+Query-vector storage is $O(D+d+d_r)$ floats, with possible views instead of copies. Record the
+chosen ownership. We denote the actual retained query buffers by $Q_{\rm vec}$ and the
+embedding model's own scratch peak by $Q_{\rm emb}$.
+
+\Needspace{12\baselineskip}
+\subsection{Step 2: select clusters}
+With a flat centroid router, score all $C$ centroids, then retain the best $P$. This is distinct
+from scoring binary documents: centroids are normally floats.
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={A simple flat centroid router with bounded selection memory.}]
+Route(q_route, centroids, P):
+    nearest = heap with capacity P
+    for j in all C clusters:
+        route_score = dot(q_route, centroid[j])
+        offer (route_score, j) to nearest
+    return the P selected cluster IDs
+\end{lstlisting}
+\end{minipage}\par
+Let $c_{\rm fma}$ price one centroid coordinate's multiply-add contribution, and let
+$H_r$ be the number of heap comparisons or equivalent selection operations. Then
+\begin{equation}
+T_{\rm route}=C d_r c_{\rm fma}+H_r c_{\rm sel},\qquad
+H_r=O(C\log(P+1)).
+\label{eq:route}
+\end{equation}
+A streaming heap needs $O(P)$ records; materializing all centroid scores needs $O(C)$ scores
+instead. Either is valid, but their RAM formulas differ. Hierarchical or approximate routing
+has its own measured visited-centroid count; replace $C$ by that count only when the algorithm
+actually avoids the other centroids. Its routing recall also needs evaluation.
+
+A sign-prefix router uses $r$ fixed sign coordinates and at most $2^r$ addresses. It is not the
+same as similarity-based centroid clustering. Assigning a document is cheap, but ranking many
+possible query buckets is not free. One reference router scores all $C$ bucket keys using
+$\ceil{r/g}$ lookup terms each and selects $P$, giving
+\[
+T_{\rm route,sign}=T_{\rm table,r}+C\ceil{r/g}c_{\rm lut}+H_r c_{\rm sel}.
+\]
+A direct or multi-probe address generator can replace that router, but must count its own
+key-generation and queue work. When every cluster is probed, routing can simply return all
+cluster IDs and skip distance-based selection.
+
+\Needspace{12\baselineskip}
+\subsection{Cluster count does not determine the selected document count}
+Exactly,
+\begin{equation}
+\Nsel(q)=\sum_{j\in\mathcal P(q)}n_j.
+\label{eq:selected}
+\end{equation}
+Only under balanced clusters is this approximately $NP/C$. An optional load factor
+$\lambda(q)=\Nsel/(NP/C)$ summarizes deviation for a \emph{given query}; it is not automatically
+constant as $P$ changes. For bitplanes, the individual $n_j$ matter because wider clusters
+make each node more expensive. A mean load factor does not identify the largest cluster or
+peak frontier memory.
+
+\Needspace{12\baselineskip}
+\subsection{Step 3: apply optional filters}
+A filter can return eligible row IDs or a bitmap. Denote its time by $T_{\rm filter}$ and
+its scratch by $Q_{\rm filter}$. For a bitmap intersection over the probed clusters, a reference
+work count is $\sum_{j\in\mathcal P}W_j$ word visits per input mask. For sorted ID lists, cost
+depends on list lengths and the intersection method instead.
+
+After filtering, $e_j$ rows are eligible in cluster $j$, so a scan scores
+$\Nelig=\sum_j e_j$ documents. A dense bitplane still has physical width $W_j$. A filter that
+removes most rows therefore helps scoring immediately, but does not automatically make each
+bitplane intersection short.
+
+The reference set for recall must obey the \emph{same filter}. Otherwise a correct filtered
+search is unfairly penalized for not returning ineligible documents.
+
+\Needspace{12\baselineskip}
+\subsection{Step 4: build the float-query score tables}
+Split the $d$ document signs into groups of $g$. A group has at most $2^g$ sign patterns.
+For each query group, precompute its dot product with every possible pattern.
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={The score table. Padding contributes zero in the last group.}]
+BuildScoreTable(q, g):
+    for group in ceil(len(q) / g) groups:
+        for pattern in all g-bit patterns:
+            table[group, pattern] = 0
+            for coordinate in this group:
+                add q[coordinate] * sign(pattern, coordinate)
+    return table
+
+ScoreDocument(packed_code, table):
+    score = 0
+    for group in all groups:
+        pattern = extract this group's bits from packed_code
+        score += table[group, pattern]
+    return score
+\end{lstlisting}
+\end{minipage}\par
+For this straightforward build,
+\begin{align}
+G&=\ceil{d/g}, & U_{\rm build}&\leq G2^g g,\\
+T_{\rm table}&=U_{\rm build}c_{\rm build}, & Q_{\rm table}&=G2^g b_s,\\
+T_{\rm score}(F)&=F G c_{\rm lut}.&&
+\label{eq:lut}
+\end{align}
+$c_{\rm lut}$ includes extracting the pattern, the lookup and accumulation in the chosen
+kernel. Faster table construction is possible, but it must replace $U_{\rm build}$ explicitly.
+Larger $g$ reduces the number of lookup terms and increases the table exponentially. Register
+capacity and cache behavior therefore matter.
+
+\begin{examplebox}{Two query values and a four-entry table}
+For the first two values $(0.7,-0.4)$, the contributions for patterns
+\texttt{00}, \texttt{01}, \texttt{10}, \texttt{11} are respectively
+$-0.3,-1.1,1.1,0.3$. With $g=2$, document \texttt{1011} uses the first-group entry
+$1.1$ and the second-group entry $0.1$, giving $1.2$.
+\end{examplebox}
+
+Plain XOR followed by a population count computes \emph{unweighted} Hamming distance. It
+matches Equation~\eqref{eq:score} only when all query magnitudes are equal up to a common
+scale. Replacing weighted scoring by that operation changes the task.
+
+\Needspace{12\baselineskip}
+\subsection{Step 5: retain candidates and optionally rerank}
+A top-$R$ heap stores the worst retained candidate at its root. Every scored document needs
+at least a comparison with that root once the heap is full. Let $H_s(F,R)$ be the actual
+selection-operation count. A simple worst-case bound is $O(F\log(R+1))$, not zero.
+\begin{equation}
+T_{\rm select}=H_s(F,R)c_{\rm heap},\qquad
+Q_{\rm results}\approx R(b_{\rm id}+b_s)+Q_{\rm heap,overhead}.
+\label{eq:selection}
+\end{equation}
+For an optional rerank of $R'$ returned candidates, $K\leq R'\leq R$, let
+\begin{equation}
+\Tfinish(R')=T_{\rm fetch}(R',d_f)+R'd_f c_{\rm fine}
+              +H_f(R',K)c_{\rm fine,sel}+T_{\rm output}(K).
+\label{eq:finish}
+\end{equation}
+$T_{\rm fetch}$ depends on whether vectors are already resident, on SSD, or remote. If $u_f$
+vectors are fetched in a batch, the temporary float-vector buffer is $u_f d_f b_f$, not
+necessarily $R'd_f b_f$. The candidate IDs must remain live until fetching and scoring finish.
+
+\Needspace{12\baselineskip}
+\subsection{Shared latency and peak RAM}
+For sequential stages, define
+\begin{equation}
+\Tcommon=T_{\rm emb}+T_{\rm prep}+T_{\rm route}+T_{\rm filter}+T_{\rm table}.
+\label{eq:common-time}
+\end{equation}
+The method-specific candidate work and Equation~\eqref{eq:finish} are added later. For an
+index-only measurement, explicitly set the embedding and final-stage terms to zero.
+
+Peak scratch RAM is a maximum of simultaneously live buffers, not a sum of every temporary
+array ever allocated. If embedding, search and reranking do not overlap,
+\begin{equation}
+Q_{\rm peak}=\max\{Q_{\rm emb,stage},Q_{\rm search,stage},Q_{\rm finish,stage}\}.
+\label{eq:peak}
+\end{equation}
+Each stage term includes buffers retained from previous stages. We use $\Qbase$ for common
+buffers live during candidate search, including query vectors, score tables, filter masks,
+routing output, and the candidate heap.
+
+For $J$ concurrent queries sharing one resident index,
+\begin{equation}
+\begin{aligned}
+M_{\rm serving}&=M_{\rm resident}+M_{\rm model}+M_{\rm runtime}
+                 +\max_t\sum_{u\in\mathcal A(t)}Q_u(t)\\
+&\leq M_{\rm resident}+M_{\rm model}+M_{\rm runtime}+JQ_{\rm peak,max}.
+\end{aligned}
+\label{eq:serving}
+\end{equation}
+$M_{\rm model}$ counts shared resident embedding-model weights when inference is local. An external embedding service contributes latency but no local model-weight allocation. $M_{\rm runtime}$ is a chosen reserve or measured runtime overhead. It is not another stored
+copy of the index. Separate process replicas or device copies must be counted if the actual
+system has them.
+
+For separate CPU and GPU memories, apply the residency and peak formulas to each memory pool. Count additional device copies if they exist. A throughput speedup does not by itself establish a feasible memory layout.

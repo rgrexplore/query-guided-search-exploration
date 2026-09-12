@@ -1,0 +1,104 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,amsmath,amssymb,mathtools,microtype}
+\usepackage[margin=25mm,headheight=15pt]{geometry}
+\usepackage{graphicx,booktabs,longtable,tabularx,array,multirow}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem,listings,caption,float,needspace}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,urlcolor=MidnightBlue,citecolor=MidnightBlue]{hyperref}
+\usepackage{bookmark,placeins}
+\hypersetup{pdftitle={Three ways to search binary embeddings},pdfsubject={Latency, storage, query RAM and recall},bookmarksdepth=2}
+\definecolor{Ink}{HTML}{17354B}
+\definecolor{Soft}{HTML}{F3F6F8}
+\definecolor{Rule}{HTML}{BACBD5}
+\pagestyle{fancy}\fancyhf{}\lhead{\small Three ways to search binary embeddings}\rhead{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\parindent}{0pt}\setlength{\parskip}{0.45em}
+\linespread{1.10}\raggedbottom\setlength{\emergencystretch}{2em}
+\setlist[itemize]{topsep=3pt,itemsep=2pt,leftmargin=1.4em}
+\setlist[enumerate]{topsep=3pt,itemsep=3pt,leftmargin=1.8em}
+\captionsetup{font=small,labelfont=bf,skip=7pt}
+\lstset{basicstyle=\small\ttfamily,backgroundcolor=\color{Soft},frame=single,rulecolor=\color{Rule},breaklines=true,columns=fullflexible,keepspaces=true,showstringspaces=false,xleftmargin=3pt,xrightmargin=3pt,aboveskip=8pt,belowskip=8pt}
+\newtcolorbox{examplebox}[1]{title={Example: #1},colback=Soft,colframe=Rule,coltitle=Ink,colbacktitle=Soft,fonttitle=\bfseries,boxrule=.5pt,arc=1mm}
+\newtcolorbox{resultbox}[1]{title={#1},colback=white,colframe=Ink,coltitle=white,colbacktitle=Ink,fonttitle=\bfseries,boxrule=.5pt,arc=1mm}
+\newcommand{\E}{\mathbb E}\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}\newcommand{\Corr}{\operatorname{Corr}}
+\newcommand{\sgn}{\operatorname{sign}}\newcommand{\Top}{\operatorname{Top}}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\ind}{\mathbf 1}\newcommand{\bytes}{\operatorname{bytes}}
+\newcommand{\Mbase}{M_{\mathrm{base}}}\newcommand{\Qbase}{Q_{\mathrm{base}}}
+\newcommand{\Tcommon}{T_{\mathrm{common}}}\newcommand{\Tfinish}{T_{\mathrm{finish}}}
+\newcommand{\Nsel}{N_{\mathrm{sel}}}\newcommand{\Nelig}{N_{\mathrm{elig}}}
+\newcommand{\fig}[3]{\begin{figure}[H]\centering\includegraphics[width=#3\linewidth,height=.72\textheight,keepaspectratio]{figures/#1.pdf}\caption{#2}\end{figure}}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\begin{document}
+\begin{titlepage}
+\vspace*{14mm}
+{\sffamily\small\color{Ink} A MATHEMATICAL AND ENGINEERING REPORT}\par
+\vspace{9mm}
+{\Huge\bfseries\color{Ink} Three ways to search\par binary embeddings}\par
+\vspace{6mm}
+{\Large From stored data to query latency,\par memory usage, and recall}\par
+\vspace{15mm}
+\begin{tabularx}{\linewidth}{@{}lY@{}}
+\textbf{A} & Cluster, then score every selected document.\\[5pt]
+\textbf{B} & Cluster, then traverse an inverted bitplane index.\\[5pt]
+\textbf{C} & Cluster, then enumerate keys from the query's ideal sign pattern.\\
+\end{tabularx}\par
+\vspace{13mm}
+This report develops the three methods from the same score and the same retrieval task.
+It explains what is built before a query, what is touched during a query, and where each
+method can lose recall. Every general cost formula uses named parameters. Small numerical
+examples make the formulas concrete; measured results are identified separately.
+\vfill
+\textbf{Reading order.} Start with the four-bit example and shared pipeline. Each method then
+has its own data layout, pseudocode, operation count, latency model, and memory calculation.
+The statistical section explains what can and cannot be inferred about recall. The final
+section collects the formulas for comparison under a RAM limit.
+\vspace{8mm}
+\par 10 September 2026
+\end{titlepage}
+\setcounter{tocdepth}{1}
+\tableofcontents
+\clearpage
+\input{sections/01-foundations}
+\FloatBarrier
+\Needspace{7\baselineskip}
+\input{sections/02-shared}
+\FloatBarrier
+\Needspace{7\baselineskip}
+\input{sections/03-scan}
+\FloatBarrier
+\Needspace{7\baselineskip}
+\input{sections/04-bitplanes}
+\FloatBarrier
+\Needspace{7\baselineskip}
+\input{sections/05-keys}
+\FloatBarrier
+\Needspace{7\baselineskip}
+\input{sections/06-recall}
+\FloatBarrier
+\Needspace{7\baselineskip}
+\input{sections/07-evidence}
+\FloatBarrier
+\Needspace{7\baselineskip}
+\input{sections/08-comparison}
+\clearpage
+\appendix
+\input{sections/09-appendix}
+\begin{thebibliography}{9}
+\bibitem{exa} Exa Team. \emph{How we built a web-scale vector database}. 17 December 2024.
+\url{https://exa.ai/blog/building-web-scale-vector-db}.
+\bibitem{mrl} A. Kusupati et al. \emph{Matryoshka Representation Learning}. 2022, revised 2024.
+\url{https://arxiv.org/abs/2205.13147}.
+\bibitem{mih} M. Norouzi, A. Punjani, D. J. Fleet. \emph{Fast Exact Search in Hamming Space with Multi-Index Hashing}. 2013, revised 2014.
+\url{https://arxiv.org/abs/1307.2982}. This concerns Hamming search; it is not a weighted-search guarantee for the methods here.
+\bibitem{local} Local project evidence. \texttt{cpp/index.cpp}, \texttt{cpp/index.hpp},
+\texttt{results/scaling-msmarco-1m/}, \texttt{results/fiqa-2026-09-09-dense/}, and
+\texttt{calculator/recall-validation.json}. Reproduction and source hashes are described in Section~\ref{sec:evidence}.
+\end{thebibliography}
+\end{document}

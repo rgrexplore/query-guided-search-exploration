@@ -1,0 +1,788 @@
+<title>Nanoseconds Per Query</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --ground:#FAFBFC; --surface:#FFFFFF; --sunk:#F0F3F6;
+  --ink:#0F171C; --muted:#5C6B77; --faint:#8B99A5;
+  --rule:#DDE4EA; --rule2:#EDF1F4;
+  --a:#1D6FE0; --b:#C2591B; --c:#6A4CB8;
+  --crit:#C4382B; --ok:#1B7F52; --aw:#1D6FE0;
+  --shadow:0 1px 2px rgba(15,23,28,.06),0 4px 14px rgba(15,23,28,.05);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0D1317; --surface:#151E24; --sunk:#111A1F;
+  --ink:#E6EDF2; --muted:#94A5B2; --faint:#697C8A;
+  --rule:#243039; --rule2:#1B252C;
+  --a:#5A9BFF; --b:#E8843F; --c:#9C82E0;
+  --crit:#F0705F; --ok:#48C08A; --aw:#5A9BFF;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+  --ground:#0D1317; --surface:#151E24; --sunk:#111A1F;
+  --ink:#E6EDF2; --muted:#94A5B2; --faint:#697C8A;
+  --rule:#243039; --rule2:#1B252C;
+  --a:#5A9BFF; --b:#E8843F; --c:#9C82E0;
+  --crit:#F0705F; --ok:#48C08A; --aw:#5A9BFF;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 16px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+.wrap{max-width:1360px;margin:0 auto;padding:28px 24px 80px}
+header{border-bottom:1px solid var(--rule);padding-bottom:20px;margin-bottom:24px}
+h1{font-size:24px;font-weight:600;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance}
+.sub{color:var(--muted);font-size:13.5px;max-width:78ch;margin:0}
+.eyebrow{font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:0 0 8px}
+.grid{display:grid;grid-template-columns:326px minmax(0,1fr);gap:26px;align-items:start}
+@media(max-width:980px){.grid{grid-template-columns:1fr}.rail{position:static}}
+.rail{position:sticky;top:20px;display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - 40px);overflow-y:auto}
+.panel{background:var(--surface);border:1px solid var(--rule);border-radius:6px;box-shadow:var(--shadow)}
+.panel-h{padding:11px 14px;border-bottom:1px solid var(--rule2)}
+.panel-h .eyebrow{margin:0}
+.panel-b{padding:13px 14px;display:flex;flex-direction:column;gap:14px}
+.ctl label{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;margin-bottom:5px;gap:8px}
+.ctl .nm{color:var(--muted)}
+.ctl .vl{font-weight:600;font-size:12.5px}
+input[type=range]{width:100%;height:16px;-webkit-appearance:none;appearance:none;background:transparent;margin:0;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:3px;background:var(--rule);border-radius:2px}
+input[type=range]::-moz-range-track{height:3px;background:var(--rule);border-radius:2px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--aw);margin-top:-5px;border:2px solid var(--surface)}
+input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:var(--aw);border:2px solid var(--surface)}
+input[type=range]:focus-visible{outline:2px solid var(--aw);outline-offset:3px;border-radius:3px}
+select{width:100%;padding:6px 8px;font:inherit;font-size:12.5px;background:var(--sunk);color:var(--ink);border:1px solid var(--rule);border-radius:4px}
+select:focus-visible{outline:2px solid var(--aw);outline-offset:1px}
+.seg{display:flex;border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+.seg button{flex:1;padding:6px 4px;font:inherit;font-size:11.5px;font-weight:500;background:var(--sunk);color:var(--muted);border:0;border-right:1px solid var(--rule);cursor:pointer}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed=true]{background:var(--aw);color:#FFFFFF}
+.seg button:focus-visible{outline:2px solid var(--aw);outline-offset:-2px}
+.why{font-size:11.5px;color:var(--faint);line-height:1.5;margin:6px 0 0}
+.why b{color:var(--muted);font-weight:600}
+.cards{display:flex;flex-direction:column;gap:18px}
+.card{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--k);border-radius:6px;box-shadow:var(--shadow);overflow:hidden}
+.card.A{--k:var(--a)} .card.B{--k:var(--b)} .card.C{--k:var(--c)}
+.card-h{padding:15px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.card-t{font-size:15.5px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.card-d{font-size:12.5px;color:var(--muted);margin:0;max-width:62ch}
+.big{text-align:right;flex-shrink:0}
+.big .n{font-size:27px;font-weight:600;letter-spacing:-.02em;line-height:1.05;color:var(--k)}
+.big .u{font-size:11px;color:var(--faint);margin-top:2px}
+.big .rc{font-size:11.5px;color:var(--muted);margin-top:5px}
+.dia{padding:4px 16px 14px}
+.dia svg{width:100%;height:auto;max-width:640px;display:block}
+.bar{display:flex;height:9px;background:var(--sunk);margin:0 16px;border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--k)}
+.legend{display:flex;flex-wrap:wrap;gap:12px;padding:9px 16px 0;font-size:11px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:5px}
+.dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;background:var(--k)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+.tw{overflow-x:auto;padding:12px 16px 16px}
+th{text-align:left;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);font-weight:600;padding:0 10px 7px 0;white-space:nowrap;border-bottom:1px solid var(--rule2)}
+td{padding:7px 10px 7px 0;border-bottom:1px solid var(--rule2);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right;padding-right:0}
+.form{color:var(--faint);font-size:11px}
+.tot td{font-weight:600;border-top:1px solid var(--rule);border-bottom:0;padding-top:9px}
+.step{color:var(--faint);font-weight:600;font-size:11px;white-space:nowrap}
+.ex{color:var(--muted);font-size:11.5px}
+.ex code{background:var(--sunk);padding:1px 5px;border-radius:3px;font-family:"IBM Plex Mono",monospace;font-size:11px}
+.flag{display:inline-flex;align-items:center;padding:1px 7px;border-radius:3px;font-size:10.5px;font-weight:600;border:1px solid currentColor;letter-spacing:.02em}
+.flag.bad{color:var(--crit)} .flag.good{color:var(--ok)} .flag.neu{color:var(--faint)}
+.note{margin:0 16px 15px;padding:10px 12px;background:var(--sunk);border-radius:4px;font-size:12px;color:var(--muted);line-height:1.6}
+.note b{color:var(--ink);font-weight:600}
+details{border-top:1px solid var(--rule2)}
+summary{padding:10px 16px;cursor:pointer;font-size:11.5px;color:var(--muted);font-weight:500;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+ ";color:var(--faint)}
+details[open] summary::before{content:"\2212 "}
+summary:focus-visible{outline:2px solid var(--aw);outline-offset:-2px}
+.sec{margin-top:32px}
+.sec h2{font-size:16px;font-weight:600;margin:0 0 5px;letter-spacing:-.01em}
+.sec p.lede{color:var(--muted);font-size:12.5px;margin:0 0 14px;max-width:82ch}
+.err-ok{color:var(--ok);font-weight:600}
+.err-hi{color:var(--crit);font-weight:600}
+.memrow{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--rule2)}
+.memrow:last-child{border-bottom:0}
+.memlab{flex:0 0 190px;font-size:12.5px}
+.membar{flex:1;height:7px;background:var(--sunk);border-radius:2px;overflow:hidden;min-width:60px}
+.membar i{display:block;height:100%;background:var(--aw)}
+.memval{flex:0 0 auto;font-size:12px;text-align:right;min-width:78px}
+.imposs .membar i{background:var(--crit)}
+.imposs .memval{color:var(--crit);font-weight:600}
+</style>
+<div class="wrap">
+<header>
+  <p class="eyebrow">Search cost calculator &middot; numbers fitted to real measured runs</p>
+  <h1>Nanoseconds per query</h1>
+  <p class="sub">Documents are binary-quantised to D sign bits. A query has to return the top 100 by score against those codes. Three ways to do that, priced in operations, milliseconds and index memory. Every constant is fitted to measured runs and shown at the bottom; change anything on the left and the numbers update.</p>
+</header>
+
+<div class="grid">
+  <div class="rail">
+    <div class="panel">
+      <div class="panel-h"><p class="eyebrow">Corpus</p></div>
+      <div class="panel-b">
+        <div class="ctl">
+          <label><span class="nm">Documents N</span><span class="vl mono" id="vN"></span></label>
+          <input type="range" id="N" min="4" max="12" step="0.05" value="6">
+          <p class="why">Corpus size. 1M matches the scaling study; the slider runs to 1 trillion.</p>
+        </div>
+        <div class="ctl">
+          <label><span class="nm">Code length D</span><span class="vl mono" id="vD"></span></label>
+          <select id="D"><option>64</option><option>128</option><option selected>256</option><option>512</option><option>768</option><option>1024</option></select>
+          <p class="why">Binary quantisation: one sign bit per dimension. <b>Example:</b> <code>[0.7, -0.5, 0.9]</code> becomes <code>101</code>.</p>
+        </div>
+        <div class="ctl">
+          <label><span class="nm">Memory budget</span><span class="vl mono" id="vRAM"></span></label>
+          <input type="range" id="RAM" min="9" max="15" step="0.1" value="12">
+          <p class="why">RAM available for the index. Any configuration needing more is marked over budget and excluded from the sweep below.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-h"><p class="eyebrow" id="rtTitle">Clustering &mdash; shared by all three</p></div>
+      <div class="panel-b">
+        <div class="ctl">
+          <label><span class="nm" id="kLab">Cluster bits k</span><span class="vl mono" id="vk"></span></label>
+          <input type="range" id="k" min="0" max="24" step="1" value="12">
+          <p class="why" id="kWhy"></p>
+        </div>
+        <div class="ctl">
+          <label><span class="nm">Probes</span><span class="vl mono" id="vP"></span></label>
+          <input type="range" id="P" min="0" max="14" step="1" value="5">
+          <p class="why">How many clusters each query visits (<b>nprobe</b> in FAISS). More probes means higher recall but more documents read. The true nearest neighbour often sits in a cluster you did not probe &mdash; that is the missed-cluster error.</p>
+        </div>
+        <div class="ctl">
+          <label><span class="nm">Partition method</span></label>
+          <div class="seg" id="rt">
+            <button type="button" data-v="bits" aria-pressed="true">Sign-bit prefix</button>
+            <button type="button" data-v="km" aria-pressed="false">k-means</button>
+          </div>
+          <p class="why" id="rtHint"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-h"><p class="eyebrow">Bitplane branching only</p></div>
+      <div class="panel-b">
+        <div class="ctl">
+          <label><span class="nm">Leaf size</span><span class="vl mono" id="vL"></span></label>
+          <input type="range" id="L" min="5" max="14" step="1" value="5">
+          <p class="why">A node stops splitting once it holds this many documents or fewer; those documents are then scored one by one. <b>Example:</b> at 32, a cluster of 1,000 splits until each node holds 32 or fewer. <b>Smaller leaf size = more splits (more bitplane work). Larger = more documents scored.</b></p>
+        </div>
+        <div class="ctl">
+          <label><span class="nm">Node budget</span><span class="vl mono" id="vB"></span></label>
+          <input type="range" id="B" min="5" max="21" step="1" value="21">
+          <p class="why">Hard cap on how many nodes the search expands before it stops and returns what it has. This is the <code>node_budget</code> option in the C++ index. Lower is faster but costs recall.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-h"><p class="eyebrow">Walk backwards only</p></div>
+      <div class="panel-b">
+        <div class="ctl">
+          <label><span class="nm">Lookup key bits</span><span class="vl mono" id="vDl"></span></label>
+          <input type="range" id="Dl" min="8" max="64" step="1" value="24">
+          <p class="why">Documents are indexed in a hash table by this many of their sign bits. <b>More bits ranks better but there are exponentially more keys to enumerate.</b></p>
+        </div>
+        <div class="ctl">
+          <label><span class="nm">Candidates wanted</span><span class="vl mono" id="vT"></span></label>
+          <input type="range" id="T" min="2" max="6" step="0.25" value="3">
+          <p class="why">Enumerate keys until this many candidates are found, then score them exactly and keep the top 100.</p>
+        </div>
+        <div class="ctl">
+          <label><span class="nm">Hash probe cost</span><span class="vl mono" id="vH"></span></label>
+          <input type="range" id="H" min="1" max="120" step="1" value="10">
+          <p class="why">A hash probe that misses cache costs roughly 80&ndash;100 ns; one that hits costs a few ns. 10 ns assumes most probes hit cache.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards" id="cards"></div>
+</div>
+
+<div class="sec">
+  <h2>Choosing a configuration</h2>
+  <p class="lede">Fix the corpus size, code length and memory budget, then sweep every combination of partition method, cluster count, probes, leaf size, node budget and key length. Each memory-feasible configuration is one point. What an engineer actually picks is the lowest point on their recall line.</p>
+  <div class="panel">
+    <div style="padding:14px 16px 4px" id="pareto"></div>
+    <div class="tw"><table id="targets">
+      <thead><tr><th>Recall target</th><th>Cluster, then full scan</th><th>Cluster, then bitplane branching</th><th>Cluster, then walk backwards</th><th>Best</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <p class="why" style="padding:0 16px 15px" id="sweepNote"></p>
+  </div>
+</div>
+
+<div class="sec">
+  <h2>Index memory</h2>
+  <p class="lede">Latency is only half the story. Bitplane branching stores a transposed second copy of the codes, and walk backwards stores a hash table. Sizes at your current settings.</p>
+  <div class="panel"><div style="padding:14px 16px" id="mem"></div></div>
+</div>
+
+<div class="sec">
+  <h2>Why a full lookup table cannot exist</h2>
+  <p class="lede">The tempting idea is to precompute an answer for every possible query code and look it up in O(1). Here is what that table costs at each key length.</p>
+  <div class="panel"><div style="padding:14px 16px" id="imposs"></div></div>
+</div>
+
+<div class="sec">
+  <h2>Constants and where they came from</h2>
+  <p class="lede">Two timing constants carry the model, both measured on this project&rsquo;s own C++ index. Everything else is operation counting.</p>
+  <div class="panel"><div class="tw"><table>
+    <thead><tr><th>Name</th><th class="r">Value</th><th>What it is</th><th>Where it came from</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">t_scan</td><td class="mono r">0.423 ns</td><td>Time to add up 4 bits worth of score for one document while reading straight through memory. A 256-bit document needs 64 of these, so 27.1 ns per document.</td><td>measured directly</td></tr>
+      <tr><td class="mono">t_leaf</td><td class="mono r">0.509 ns</td><td>The same operation, but inside method B. 20% slower, because method B&rsquo;s other work keeps pushing the lookup table out of fast memory.</td><td>fitted</td></tr>
+      <tr><td class="mono">t_word</td><td class="mono r">1.149 ns</td><td>Time to process 64 documents&rsquo; worth of one bit position: two loads, three logic operations, a bit count, two stores.</td><td>fitted</td></tr>
+      <tr><td class="mono">C_node</td><td class="mono r">2.635</td><td>Nodes expanded = 2.635 &times; documents scored &divide; leaf size. Splits are exactly half the nodes, and each split walks <span class="mono">B/64</span> words.</td><td>fitted, under 5% error</td></tr>
+      <tr><td class="mono">p</td><td class="mono r">0.365 &ndash; 0.393</td><td>Probability a document bit disagrees with the corresponding bit of <span class="mono">sign(q)</span>. This sets the binomial that decides how far out the first hit sits in walk backwards. Measured at eight key lengths and interpolated &mdash; it is not one flat number.</td><td>measured</td></tr>
+      <tr><td class="mono">imbalance</td><td class="mono r">18.03 &middot; P<sup>&minus;0.231</sup><br>0.149 &middot; P<sup>+0.223</sup></td><td>Clusters are not equally full, so probing P of C clusters does not read P/C of the corpus. Sign-bit clusters run <b>17.4&times;</b> their even share at 1 probe, falling to <b>4.7&times;</b> at 256. k-means runs the other way, 0.15&times; rising to 0.53&times;. Two curves, one per partition method.</td><td>fitted to 12 points</td></tr>
+      <tr><td class="mono">&rho;</td><td class="mono r">0.348 / 0.808</td><td>Correlation between the routing key and the true score, which sets recall. Measured at k=12 it came out ~0.35 for <b>both</b> D=256 and D=768, so it does not scale with code length; the model anchors it on the 768-dim embedding. k=12 is the only cluster-bit count measured, so the curve away from it is an assumption.</td><td>fitted, &plusmn;2.8 / &plusmn;8.8 pts</td></tr>
+    </tbody>
+  </table></div></div>
+</div>
+
+<div class="sec">
+  <h2>Validation against measured runs</h2>
+  <p class="lede">Every row is a real measurement from this project. The first seven were used to fit the timing constants. The last two are held out &mdash; 10&times; larger, never used in the fit.</p>
+  <div class="panel"><div class="tw"><table id="sanity">
+    <thead><tr><th>Measured run</th><th class="r">Nodes</th><th class="r">Bitplane words</th><th class="r">Measured</th><th class="r">Model</th><th class="r">Error</th></tr></thead>
+    <tbody></tbody>
+  </table></div></div>
+  <div class="panel" style="margin-top:14px"><div class="tw"><table id="router">
+    <thead><tr><th>Clustering recall &mdash; measured vs model</th>
+      <th class="r">Sign-bit, measured</th><th class="r">model</th>
+      <th class="r">k-means, measured</th><th class="r">model</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+  <p class="why" style="padding:0 16px 14px">From one experiment: 300,000 real MS MARCO passages, 4,096 clusters, D=256, both partition methods. The cluster-imbalance curve and the correlation were fitted to these points, so this is a fit, not an independent test. Everything was measured at k=12, so estimates get less reliable the further you move from 4,096 clusters.</p></div>
+  <div class="panel" style="margin-top:14px"><div class="tw"><table id="recheck">
+    <thead><tr><th>Other checks</th><th class="r">Measured</th><th class="r">Model</th></tr></thead>
+    <tbody></tbody>
+  </table></div></div>
+</div>
+</div>
+<script>
+const $=s=>document.querySelector(s), NF=new Intl.NumberFormat('en-US');
+const T_SCAN=0.4234, T_LEAF=0.5088, T_WORD=1.149, C_NODE=2.635;
+/* How often a document's bit disagrees with the query's bit, measured on the real
+   MS MARCO embeddings at eight different key lengths. It is not one flat number. */
+const P_MEAS=[[16,.3769],[24,.3857],[32,.3912],[48,.3933],[64,.3774],[128,.3674],[256,.3653],[768,.3696]];
+function pFor(d){
+  if(d<=P_MEAS[0][0])return P_MEAS[0][1];
+  for(let i=1;i<P_MEAS.length;i++){
+    if(d<=P_MEAS[i][0]){const[a,pa]=P_MEAS[i-1],[b,pb]=P_MEAS[i];
+      return pa+(pb-pa)*(d-a)/(b-a);}}
+  return P_MEAS[P_MEAS.length-1][1];}
+
+/* ---------- math ---------- */
+function erf(x){const s=x<0?-1:1;x=Math.abs(x);
+  const a1=.254829592,a2=-.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,pp=.3275911;
+  const t=1/(1+pp*x);return s*(1-((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t*Math.exp(-x*x));}
+const Phi=z=>.5*(1+erf(z/Math.SQRT2));
+const phi=z=>Math.exp(-z*z/2)/Math.sqrt(2*Math.PI);
+function Phinv(p){if(p<=0)return -9;if(p>=1)return 9;let lo=-9,hi=9;
+  for(let i=0;i<95;i++){const m=(lo+hi)/2;Phi(m)<p?lo=m:hi=m;}return (lo+hi)/2;}
+function varfrac(f){if(f>=1)return 1;if(f<=0)return 0;const c=Phinv(1-f/2);
+  return Math.max(0,Math.min(1,2*(c*phi(c)+(1-Phi(c)))));}
+function lgamma(x){const g=[76.18009172947146,-86.50532032941677,24.01409824083091,
+  -1.231739572450155,.1208650973866179e-2,-.5395239384953e-5];
+  let y=x,t=x+5.5;t-=(x+.5)*Math.log(t);let s=1.000000000190015;
+  for(let j=0;j<6;j++)s+=g[j]/++y;return -t+Math.log(2.5066282746310005*s/x);}
+const lchoose=(n,k)=>(k<0||k>n)?-Infinity:lgamma(n+1)-lgamma(k+1)-lgamma(n-k+1);
+function logaddexp(a,b){if(a===-Infinity)return b;if(b===-Infinity)return a;
+  const m=Math.max(a,b);return m+Math.log(Math.exp(a-m)+Math.exp(b-m));}
+function recallOf(rho,zm,f){if(f>=1)return 1;if(f<=0)return 0;
+  const zf=Phinv(1-Math.max(1e-12,Math.min(1-1e-12,f)));
+  return Math.max(0,Math.min(1,Phi((rho*zm-zf)/Math.sqrt(Math.max(1e-9,1-rho*rho)))));}
+
+/* CORRECTED model for method C.
+   Documents are NOT spread evenly over key values - they cluster near the query's own key.
+   The chance a document differs in exactly r of the Dl key bits follows Binomial(Dl, p).
+   Verified against real embeddings: predicted first-hit radius 2/5/8 vs measured 2/5/8. */
+function keysNeeded(Bsz,Dl,p,target){
+  const lp=Math.log(p), lq=Math.log(1-p);
+  let logCdf=-Infinity, logV=-Infinity;
+  for(let r=0;r<=Dl;r++){
+    const lc=lchoose(Dl,r);
+    logCdf=logaddexp(logCdf, lc+r*lp+(Dl-r)*lq);
+    logV=logaddexp(logV, lc);
+    const found=Bsz*Math.exp(logCdf);
+    if(found>=target||r===Dl)
+      return {radius:r, logKeys:logV, keys:Math.exp(Math.min(700,logV)),
+              found:Math.max(1,Math.min(found,Bsz))};
+  }
+}
+
+/* ---------- formatting ---------- */
+function eng(x,d=2){if(!isFinite(x))return'∞';if(x===0)return'0';const a=Math.abs(x);
+  if(a<1e-3||a>=1e15)return x.toExponential(d).replace('e+','e');
+  if(a>=1e12)return (x/1e12).toFixed(d)+'T';if(a>=1e9)return (x/1e9).toFixed(d)+'B';
+  if(a>=1e6)return (x/1e6).toFixed(d)+'M';if(a>=1e3)return (x/1e3).toFixed(d)+'k';
+  return a<10?x.toFixed(1):Math.round(x).toString();}
+function pow10(log10){const e=Math.floor(log10),m=Math.pow(10,log10-e);
+  return m.toFixed(1)+' × 10<sup>'+e+'</sup>';}
+function bigKeys(o){return (o.logKeys/Math.LN10)>15?pow10(o.logKeys/Math.LN10):eng(o.keys,1);}
+function ms(x){if(!isFinite(x))return'∞';
+  if(x>=3.15e10)return (x/3.15e10).toExponential(1)+' yr';
+  if(x>=8.64e7)return (x/8.64e7).toFixed(1)+' d';
+  if(x>=1e6)return (x/3.6e6).toFixed(1)+' h';
+  if(x>=1000)return (x/1000).toFixed(2)+' s';
+  if(x>=1)return x.toFixed(2)+' ms';
+  if(x>=.001)return (x*1000).toFixed(1)+' µs';return (x*1e6).toFixed(0)+' ns';}
+const BU=['B','KB','MB','GB','TB','PB','EB','ZB','YB'];
+function bytes(v){if(!isFinite(v))return'∞';if(v<1)return'0 B';
+  let i=Math.floor(Math.log10(v)/3);
+  if(i>=BU.length)return pow10(Math.log10(v))+' B';
+  return (v/Math.pow(1000,i)).toFixed(i?1:0)+' '+BU[i];}
+function bytesLog2(log2v){if(log2v<80)return bytes(Math.pow(2,log2v));
+  const l10=log2v*Math.LN2/Math.LN10;return pow10(l10)+' B';}
+function pct(f){const v=100*f;if(v>=10)return v.toFixed(1)+'%';
+  if(v>=1)return v.toFixed(2)+'%';if(v>=.01)return v.toFixed(3)+'%';
+  if(v<=0)return '0%';return v.toExponential(1)+'%';}
+function small(x){return x>=10?Math.round(x).toString():x.toFixed(1);}
+
+/* ---------- state ---------- */
+let router='bits'; const S={};
+/* The sweep evaluates thousands of configurations through this same read()+calc().
+   OV lets it override individual controls without touching the DOM. */
+let OV=null;
+const V=id=>(OV&&(id in OV))?OV[id]:+$('#'+id).value;
+function read(){
+  S.N=Math.round(Math.pow(10,V('N'))); S.D=V('D'); S.k=V('k');
+  S.P=Math.pow(2,V('P')); S.leaf=Math.pow(2,V('L'));
+  S.budget=(V('B')>=21)?0:Math.pow(2,V('B'));
+  S.Dl=V('Dl'); S.thash=V('H');
+  S.clusters=Math.pow(2,S.k);
+  S.P=Math.min(S.P,S.clusters);                    // cannot open more groups than exist
+  /* Cluster imbalance. Probing P of C clusters does NOT read P/C of the corpus.
+     Measured at 4,096 clusters, D=256: 1 probe read 17.4x its even share, 256 probes read 4.7x.
+     k-means runs the other way - the clusters you probe are smaller than average.
+     Both fitted to six measured probe counts each; see the validation table below. */
+  S.crowd=(router==='bits')?18.034*Math.pow(S.P,-0.231):0.149*Math.pow(S.P,0.223);
+  S.B=Math.max(1,S.N/S.clusters);
+  S.target=Math.max(1,Math.min(Math.round(Math.pow(10,V('T'))),Math.floor(S.B)));
+  S.frac=Math.min(1,(S.P/S.clusters)*S.crowd);
+  S.docs=Math.max(1,S.N*S.frac);
+  S.zm=Phinv(1-100/S.N);
+  S.vk=varfrac(Math.min(1,S.k/S.D));
+  /* Correlation between the k routing bits and the true score. Measured at k=12 it came out
+     ~0.35 for BOTH D=256 and D=768, so it does NOT scale with D the way varfrac(k/D) would
+     (that gives 0.52 at D=256, which overstated recall badly). Anchor it on the embedding's
+     native 768 dimensions instead, which reproduces both measurements. k=12 is the only
+     cluster-bit count measured, so the shape away from it is an assumption. */
+  S.vkR=varfrac(Math.min(1,S.k/768));
+  S.rhoR=Math.min(.995,Math.sqrt(S.vkR)*(router==='km'?2.32:1));
+  S.recallR=(S.clusters===1)?1:recallOf(S.rhoR,S.zm,S.frac);
+  S.routerOps=(S.clusters===1)?0:S.clusters;
+  S.routerNs=S.routerOps*((router==='km')?S.D/4*T_SCAN:1.0);
+  S.perScan=S.D/4*T_SCAN; S.perLeaf=S.D/4*T_LEAF;
+  S.ram=Math.pow(10,V('RAM'));
+  S.memCodes=S.N*S.D/8;
+  S.memPost=(S.clusters>1)?S.N*8+S.clusters*8:0;
+  S.memCent=(router==='km'&&S.clusters>1)?S.clusters*S.D*4:0;
+  S.memPlanes=S.N*S.D/8;
+  S.memHash=Math.min(S.N,Math.pow(2,Math.min(S.Dl,53)))*16;
+  S.memBase=S.memCodes+S.memPost+S.memCent;
+  // bits available INSIDE a group: the k routing bits are identical for everyone in it
+  S.restVar=Math.max(1e-6,1-S.vk);
+}
+function condRho(extraBits){                       // extra bits used on top of the k routing bits
+  const v2=varfrac(Math.min(1,(S.k+extraBits)/S.D));
+  return Math.min(.995,Math.sqrt(Math.max(0,(v2-S.vk))/S.restVar));
+}
+
+function calc(){
+  const o={};
+  /* ---- A ---- */
+  o.A={rows:[
+    ['Route to clusters',S.routerOps,S.routerNs],
+    ['Score documents',S.docs*S.D/4,S.docs*S.perScan]
+  ],docs:S.docs,recall:S.recallR,mem:S.memBase};
+  o.A.ns=o.A.rows.reduce((s,r)=>s+r[2],0);
+
+  /* ---- B ---- */
+  const bmw=Math.ceil(S.B/64);
+  let ds=S.docs, pieces=C_NODE*ds/S.leaf, capped=false;
+  if(S.budget&&pieces>S.budget){pieces=S.budget;ds=pieces*S.leaf/C_NODE;capped=true;}
+  const cuts=pieces/2, words=cuts*bmw, depth=Math.max(1,Math.log2(Math.max(2,pieces)));
+  o.B={rows:[
+    ['Route to clusters',S.routerOps,S.routerNs],
+    ['Bitplane splits',words,words*T_WORD],
+    ['Score leaf documents',ds*S.D/4,ds*S.perLeaf]
+  ],docs:ds,pieces,cuts,bmw,words,capped,mem:S.memBase+S.memPlanes,
+    cutCost:(bmw*T_WORD)/S.perLeaf};
+  o.B.ns=o.B.rows.reduce((s,r)=>s+r[2],0);
+  o.B.recall=S.recallR*(capped?recallOf(condRho(depth),S.zm,ds/S.docs):1);
+
+  /* ---- C ---- : the hash key IS the routing, so there is no separate clustering step.
+     One global table over all N documents. Enumerating outward from sign(q) reaches
+     documents anywhere in the corpus, so probing clusters would be redundant work.
+     rho validated against seven measured points (16-64 bits within 2.7 points). */
+  const kn=keysNeeded(S.N,S.Dl,pFor(S.Dl),S.target);
+  const cFound=kn.found;
+  o.C={rows:[
+    ['Build the lookup key',S.D,S.D*0.3],
+    ['Enumerate keys outward',kn.keys,kn.keys*S.thash],
+    ['Score candidates',cFound*S.D/4,cFound*S.perLeaf]
+  ],kn,found:cFound,docs:cFound,mem:S.memCodes+S.memHash,
+    cannotRun:(kn.logKeys/Math.LN10)>15};
+  o.C.ns=o.C.rows.reduce((s,r)=>s+r[2],0);
+  o.C.recall=recallOf(Math.sqrt(varfrac(Math.min(1,S.Dl/768))),S.zm,Math.min(1,cFound/S.N));
+  return o;
+}
+/* ---------- diagrams ---------- */
+const TXT='fill="var(--faint)" font-size="10" font-family="IBM Plex Mono,monospace"';
+const TXM='fill="var(--muted)" font-size="10.5" font-family="IBM Plex Sans,sans-serif"';
+function diaA(){
+  let g='';for(let i=0;i<14;i++){const on=(i===4||i===5);
+    g+=`<rect x="${i*30}" y="0" width="24" height="20" rx="2" fill="${on?'var(--k)':'var(--sunk)'}" stroke="var(--rule)"/>`;}
+  let d='';for(let i=0;i<26;i++)d+=`<circle cx="${118+i*11}" cy="76" r="3.4" fill="var(--k)"/>`;
+  return `<svg viewBox="0 0 420 100" role="img" aria-label="Two groups are opened, then every document inside them is checked">
+    <g transform="translate(0,8)">${g}</g>
+    <text x="0" y="44" ${TXM}>${NF.format(Math.min(S.P,S.clusters))} of ${eng(S.clusters,0)} clusters probed</text>
+    <path d="M140 48 L140 62" stroke="var(--rule)" stroke-width="1.4" marker-end="url(#ar)"/>
+    <defs><marker id="ar" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="var(--rule)"/></marker></defs>
+    <text x="0" y="80" ${TXM}>every row scored</text>${d}
+  </svg>`;}
+function diaB(){
+  const n=(x,y,w)=>`<rect x="${x}" y="${y}" width="34" height="15" rx="2" fill="var(--sunk)" stroke="var(--k)"/>`+
+    `<rect x="${x}" y="${y+17}" width="${w}" height="4" rx="1" fill="var(--k)" opacity=".55"/>`;
+  const ln=(a,b,c,d)=>`<path d="M${a} ${b} L${c} ${d}" stroke="var(--rule)" stroke-width="1.2"/>`;
+  return `<svg viewBox="0 0 420 130" role="img" aria-label="A group is cut in half repeatedly; every piece still carries a full-width row of bits">
+    ${n(190,4,110)} ${ln(207,25,120,42)} ${ln(207,25,300,42)}
+    ${n(103,42,110)} ${n(283,42,110)}
+    ${ln(120,63,70,84)} ${ln(120,63,168,84)} ${ln(300,63,252,84)} ${ln(300,63,348,84)}
+    ${n(53,84,110)} ${n(151,84,110)} ${n(235,84,110)} ${n(331,84,110)}
+    <text x="306" y="16" ${TXM}>active set shrinks each level</text>
+    <text x="306" y="30" ${TXT}>the bitmap below stays full width</text>
+    <text x="0" y="122" ${TXM}>every node costs ${eng(Math.ceil(S.B/64),1)} word ops, however few rows are alive</text>
+  </svg>`;}
+function diaC(o){
+  const rr=[26,46,66,86], lab=['0','1','2','3+'];
+  let rings=rr.map((r,i)=>`<circle cx="105" cy="62" r="${r}" fill="none" stroke="var(--rule)" stroke-dasharray="${i?'3 3':'0'}"/>`).join('');
+  let dots='';const found=o.kn.radius;
+  for(let i=0;i<12;i++){const a=i/12*Math.PI*2, rad=rr[Math.min(3,found)]-4;
+    dots+=`<circle cx="${105+Math.cos(a)*rad}" cy="${62+Math.sin(a)*rad}" r="3" fill="var(--k)"/>`;}
+  const labs=rr.map((r,i)=>`<text x="${105+r-6}" y="58" ${TXT}>${lab[i]}</text>`).join('');
+  return `<svg viewBox="0 0 420 128" role="img" aria-label="Start at the query's own key and try keys further and further away until documents appear">
+    ${rings}${labs}
+    <circle cx="105" cy="62" r="4" fill="var(--k)"/>${dots}
+    <text x="200" y="34" ${TXM}>start at t = sign(q)</text>
+    <text x="200" y="50" ${TXT}>then Hamming radius 1, 2, 3&hellip;</text>
+    <text x="200" y="76" ${TXM}>first hit at radius ${o.kn.radius}</text>
+    <text x="200" y="92" ${TXT}>after ${bigKeys(o.kn)} probes</text>
+  </svg>`;}
+
+/* ---------- step-by-step ---------- */
+function steps(which,o){
+  const t=(S.D>=8)?'1011'+'&hellip;':'1011';
+  const km=(router==='km');
+  const common=[
+    ['1','Binary-quantise the query: t = sign(q), one bit per dimension.',
+     `<code>[0.7, -0.5, 0.9, -0.2]</code> &rarr; <code>1010</code>`,`${S.D} sign tests`,0],
+    ['2', S.clusters===1?'Single flat cluster, so there is nothing to route.'
+        : km?`Score the query against all ${eng(S.clusters,0)} centroids, keep the ${NF.format(S.P)} nearest.`
+            :`Rank all ${eng(S.clusters,0)} cluster keys by weighted Hamming distance to t, keep the best ${NF.format(S.P)}.`,
+     S.clusters===1?'&mdash;'
+        : km?`each is a ${S.D}-dim dot product against a stored centroid`
+            :`cluster <code>${t}</code> ranks first, probe it and its nearest neighbours`,
+     S.clusters===1?'none'
+        : km?`${eng(S.routerOps*S.D/4,1)} lookups`:`${eng(S.routerOps,1)} operations`,
+     o.rows[0][2]]
+  ];
+  let rest;
+  if(which==='A') rest=[
+    ['3',`Score every one of the ${eng(o.docs,1)} documents in the probed clusters.`,
+     `${S.D/4} lookup-table contributions per document, ${small(S.perScan)} ns each`,
+     `${eng(o.docs*S.D/4,1)} lookups`,o.rows[1][2]],
+    ['4','Maintain a top-100 heap over the scores.','replace the worst entry when a better score arrives','negligible',0]];
+  else if(which==='B') rest=[
+    ['3',`Initialise the active bitmap: all ${eng(S.B,1)} documents in the cluster alive, packed into ${eng(o.bmw,1)} 64-bit words.`,
+     `1 bit per document, 64 documents per word`,`${eng(o.bmw,1)} words`,0],
+    ['4','Split the node on the highest-|q| dimension not yet used.',
+     `<code>match = alive AND column</code>, <code>rest = alive AND NOT column</code>`,
+     `${eng(o.bmw,1)} word ops <b>per split</b>`,0],
+    ['5',`Expand the lowest-penalty node from the frontier and repeat. ${eng(o.cuts,1)} splits in total.`,
+     `the dominant cost &mdash; every split re-reads all ${eng(o.bmw,1)} words`,
+     `${eng(o.words,1)} word ops`,o.rows[1][2]],
+    ['6',`A node holding ${NF.format(S.leaf)} documents or fewer becomes a leaf; score its rows individually.`,
+     `${eng(o.docs,1)} documents scored`,`${eng(o.docs*S.D/4,1)} lookups`,o.rows[2][2]]];
+  else rest=[
+    ['3',`Form the ${S.Dl}-bit lookup key from t = sign(q).`,
+     `key = <code>${'1011001'.slice(0,Math.min(7,S.Dl))}${S.Dl>7?'&hellip;':''}</code> (${S.Dl} bits)`,'1 lookup',0],
+    ['4','Probe the hash table for that exact key. If too few candidates, flip the lowest-|q| bit and probe again.',
+     `<code>&hellip;0010</code> &rarr; <code>&hellip;0011</code> &rarr; <code>&hellip;0001</code> &hellip;`,
+     `${S.Dl} keys at Hamming radius 1`,0],
+    ['5',`Widen the radius. First hit lands at Hamming radius ${o.kn.radius}.`,
+     `sum of C(${S.Dl}, 0..${o.kn.radius}) = ${bigKeys(o.kn)} keys`,
+     `${bigKeys(o.kn)} probes`,o.rows[1][2]],
+    ['6',`That yields ${eng(o.found,1)} candidates. Score them exactly and keep the top 100.`,
+     `scattered rows, so ${small(S.perLeaf)} ns each rather than ${small(S.perScan)} ns sequential`,
+     `${eng(o.found*S.D/4,1)} lookups`,o.rows[2][2]]];
+  const all=common.concat(rest), tot=o.ns||1;
+  return `<details><summary>Step by step, with your numbers</summary><div class="tw"><table>
+    <thead><tr><th>Step</th><th>What happens</th><th>Detail</th><th class="r">Operations</th><th class="r">Time</th><th class="r">Share</th></tr></thead>
+    <tbody>${all.map(r=>`<tr><td class="step">${r[0]}</td><td>${r[1]}</td><td class="ex">${r[2]}</td>
+      <td class="mono r">${r[3]}</td><td class="mono r">${r[4]?ms(r[4]/1e6):'&mdash;'}</td>
+      <td class="mono r">${r[4]?pct(r[4]/tot):'&mdash;'}</td></tr>`).join('')}
+    <tr class="tot"><td></td><td>Total</td><td></td><td></td><td class="mono r">${ms(tot/1e6)}</td><td class="mono r">100%</td></tr>
+    </tbody></table></div></details>`;}
+
+/* ---------- memory ---------- */
+function memory(){
+  const docBits=S.N*S.D/8, ids=(S.clusters>1)?S.N*8:0, offs=(S.clusters>1)?S.clusters*8:0,
+        cent=(router==='km'&&S.clusters>1)?S.clusters*S.D*4:0,
+        cols=S.N*S.D/8, table=Math.min(S.N,Math.pow(2,Math.min(S.Dl,53)))*16;
+  const base=docBits+ids+offs+cent;
+  const rows=[
+    ['Document codes',docBits,`${NF.format(S.N)} × ${S.D} bits`],
+    ['Cluster posting lists',ids+offs,S.clusters>1?`${NF.format(S.N)} ids + ${eng(S.clusters,0)} offsets`:'not used'],
+    ['Centroids (k-means only)',cent,cent?`${eng(S.clusters,0)} × ${S.D} floats`:'not used'],
+    ['Bitplanes (branching only)',cols,`transposed second copy of the codes`],
+    ['Hash table (walk backwards only)',table,`${eng(Math.min(S.N,Math.pow(2,Math.min(S.Dl,53))),1)} entries × 16 B`]
+  ];
+  const mx=Math.max(...rows.map(r=>r[1]),1);
+  const totals=[['Full scan total',base],['Bitplane branching total',base+cols],['Walk backwards total',base+table]];
+  return rows.map(r=>`<div class="memrow"><div class="memlab">${r[0]}<br><span class="why" style="margin:0">${r[2]}</span></div>
+      <div class="membar"><i style="width:${(100*r[1]/mx).toFixed(2)}%"></i></div>
+      <div class="memval mono">${bytes(r[1])}</div></div>`).join('')
+    +`<div style="margin-top:12px;padding-top:11px;border-top:1px solid var(--rule)">`
+    +totals.map(t=>`<div class="memrow"><div class="memlab"><b>${t[0]} total</b></div>
+      <div class="membar"><i style="width:${(100*t[1]/Math.max(...totals.map(x=>x[1]))).toFixed(2)}%"></i></div>
+      <div class="memval mono"><b>${bytes(t[1])}</b></div></div>`).join('')+`</div>`;}
+
+function impossible(){
+  const HUMAN=1e23;
+  const marks=[[16,'fits in a phone'],[24,'fits in a phone'],[32,'fits on one server'],
+    [40,'a rack of servers'],[48,'a large data centre'],[64,'more than all cloud storage'],
+    [128,'more than every byte humanity has stored'],[256,'no']];
+  const mx=256*Math.log2(2);
+  return marks.map(([d,verdict])=>{
+    const log2v=d+3;                                   // 2^d entries × 8 bytes
+    const impossible=Math.pow(2,Math.min(log2v,1023))>HUMAN||d>=128;
+    return `<div class="memrow ${impossible?'imposs':''}">
+      <div class="memlab"><span class="mono">${d}</span>-bit key<br><span class="why" style="margin:0">${verdict}</span></div>
+      <div class="membar"><i style="width:${(100*(d+3)/259).toFixed(1)}%"></i></div>
+      <div class="memval mono">${bytesLog2(log2v)}</div></div>`;}).join('')
+   +`<p class="why" style="margin-top:12px">A dense table addressed by a ${S.D}-bit code needs 2<sup>${S.D}</sup> slots. All the storage humanity has ever manufactured is roughly 10<sup>23</sup> bytes, so a dense table stops being buildable somewhere past a 64-bit key. That is precisely why walk backwards is forced onto a short key &mdash; and a short key is the one that cannot rank well. The hash table in the memory panel above avoids this by storing only occupied keys, but that does not help the enumeration cost, which still scales with the code space.</p>`;}
+
+/* ---------- configuration sweep: recall vs latency at fixed N, D and memory budget ---------- */
+const MNAME={A:'full scan',B:'bitplane branching',C:'walk backwards'};
+const MCOL={A:'var(--a)',B:'var(--b)',C:'var(--c)'};
+let sweepKey='', sweepCache=null;
+function sweep(){
+  const key=[V('N'),V('D'),V('RAM'),V('T'),V('H')].join('|');
+  if(key===sweepKey&&sweepCache) return sweepCache;
+  const saved=router, out=[];
+  for(const rt of ['bits','km']){
+    router=rt;
+    for(let k=6;k<=26;k+=2)
+     for(let p=0;p<=Math.min(k,20);p++)
+      for(const Dl of [12,16,20,24,28,32,40])
+       for(const L of [5,9,12])
+        for(const B of [0,13,17,21]){
+          OV={k,P:p,L,B,Dl}; read(); const o=calc();
+          for(const m of ['A','B','C']){
+            const r=o[m];
+            if(r.mem>S.ram||!isFinite(r.ns)) continue;
+            out.push({m,rt,k,P:S.P,leaf:S.leaf,nb:S.budget,Dl,
+                      ms:r.ns/1e6, rec:r.recall, mem:r.mem});
+          }
+        }
+  }
+  OV=null; router=saved; read();
+  /* Pareto frontier: keep a point only if nothing else is both faster and at least as accurate */
+  const byRec=out.slice().sort((a,b)=>b.rec-a.rec||a.ms-b.ms);
+  const front=[]; let lo=Infinity;
+  for(const p of byRec) if(p.ms<lo){front.push(p);lo=p.ms;}
+  front.reverse();
+  sweepKey=key; sweepCache={all:out,front};
+  return sweepCache;
+}
+
+function paretoChart(sw){
+  const W=680,H=330,L=52,R=14,T=14,Bm=44;
+  if(!sw.all.length) return '<p class="why">No configuration fits this memory budget. Raise the budget or shorten the code.</p>';
+  const lo=Math.log10(Math.max(1e-4,Math.min(...sw.all.map(p=>p.ms))));
+  const hi=Math.log10(Math.max(...sw.all.map(p=>p.ms)));
+  const x=r=>L+(W-L-R)*r, y=ms=>T+(H-T-Bm)*(1-(Math.log10(Math.max(1e-4,ms))-lo)/Math.max(.001,hi-lo));
+  /* One point per configuration would be ~88,000 circles and several MB of DOM, which
+     janks the page. Bin to a pixel grid instead and draw one marker per occupied cell,
+     keeping whichever method is fastest there. Same shape, ~30x fewer nodes. */
+  const bins=new Map();
+  for(const p of sw.all){
+    const bx=Math.round(x(p.rec)), by=Math.round(y(p.ms));
+    const key=bx+','+by, cur=bins.get(key);
+    if(!cur||p.ms<cur.ms) bins.set(key,{bx,by,m:p.m,ms:p.ms});
+  }
+  const pts=[...bins.values()].map(b=>`<circle cx="${b.bx}" cy="${b.by}" r="1.8" fill="${MCOL[b.m]}" opacity=".33"/>`).join('');
+  const fr=sw.front.map((p,i)=>`${i?'L':'M'}${x(p.rec).toFixed(1)} ${y(p.ms).toFixed(1)}`).join(' ');
+  const fdot=sw.front.map(p=>`<circle cx="${x(p.rec).toFixed(1)}" cy="${y(p.ms).toFixed(1)}" r="3" fill="${MCOL[p.m]}" stroke="var(--surface)" stroke-width="1.2"/>`).join('');
+  let yt='';
+  for(let e=Math.floor(lo);e<=Math.ceil(hi);e++){const v=Math.pow(10,e);if(y(v)<T-2||y(v)>H-Bm+2)continue;
+    yt+=`<line x1="${L}" y1="${y(v).toFixed(1)}" x2="${W-R}" y2="${y(v).toFixed(1)}" stroke="var(--rule2)"/>`+
+        `<text x="${L-7}" y="${(y(v)+3.5).toFixed(1)}" text-anchor="end" ${TXT}>${ms(v)}</text>`;}
+  let xt='';
+  for(const r of [0,.2,.4,.6,.8,1]) xt+=`<text x="${x(r).toFixed(1)}" y="${H-Bm+17}" text-anchor="middle" ${TXT}>${(100*r).toFixed(0)}%</text>`;
+  let gl='';
+  for(const t of [.80,.90,.95,.99]) gl+=`<line x1="${x(t).toFixed(1)}" y1="${T}" x2="${x(t).toFixed(1)}" y2="${H-Bm}" stroke="var(--rule)" stroke-dasharray="2 3"/>`+
+    `<text x="${x(t).toFixed(1)}" y="${T+10}" text-anchor="middle" ${TXT}>${(100*t).toFixed(0)}</text>`;
+  const key=['A','B','C'].map(m=>`<span><i class="dot" style="background:${MCOL[m]}"></i>${MNAME[m]}</span>`).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Recall against latency for every memory-feasible configuration, with the best-achievable frontier drawn through the lowest points">
+    ${yt}${gl}${pts}<path d="${fr}" fill="none" stroke="var(--ink)" stroke-width="1.6" opacity=".75"/>${fdot}
+    <line x1="${L}" y1="${H-Bm}" x2="${W-R}" y2="${H-Bm}" stroke="var(--rule)"/>
+    <line x1="${L}" y1="${T}" x2="${L}" y2="${H-Bm}" stroke="var(--rule)"/>
+    <text x="${(L+W-R)/2}" y="${H-8}" text-anchor="middle" ${TXM}>recall@100</text>
+    <text x="14" y="${(T+H-Bm)/2}" text-anchor="middle" ${TXM} transform="rotate(-90 14 ${(T+H-Bm)/2})">latency per query</text>
+  </svg><div class="legend" style="padding:8px 0 0">${key}<span style="color:var(--faint)">line = best achievable</span></div>`;
+}
+
+function targetsTable(sw){
+  const rows=[.80,.90,.95,.99].map(t=>{
+    const per=['A','B','C'].map(m=>sw.all.filter(p=>p.m===m&&p.rec>=t).sort((a,b)=>a.ms-b.ms)[0]);
+    const best=per.filter(Boolean).sort((a,b)=>a.ms-b.ms)[0];
+    const cell=c=>c?`<td class="mono r">${ms(c.ms)}<br><span class="why" style="margin:0">${c.rt==='km'?'k-means':'sign-bit'} ${eng(Math.pow(2,c.k),0)} clusters, ${NF.format(c.P)} probe${c.P===1?'':'s'}${c.m==='B'?`, leaf ${NF.format(c.leaf)}`:''}${c.m==='C'?`, ${c.Dl}-bit key`:''} &middot; ${bytes(c.mem)}</span></td>`
+                 :`<td class="mono r" style="color:var(--crit)">cannot reach</td>`;
+    return `<tr><td><b>${(100*t).toFixed(0)}%</b></td>${per.map(cell).join('')}
+      <td class="mono r">${best?`<b style="color:${MCOL[best.m]}">${MNAME[best.m]}</b>`:'&mdash;'}</td></tr>`;
+  }).join('');
+  return rows;
+}
+/* ---------- render ---------- */
+const OP=[0.34,1,0.62];
+function ledger(o){
+  const tot=o.ns||1;
+  const bar=o.rows.map((r,i)=>`<i style="width:${(100*r[2]/tot).toFixed(3)}%;opacity:${OP[i]}"></i>`).join('');
+  const leg=o.rows.map((r,i)=>`<span><i class="dot" style="opacity:${OP[i]}"></i>${r[0]} &middot; ${pct(r[2]/tot)}</span>`).join('');
+  return `<div class="bar">${bar}</div><div class="legend">${leg}</div>`;}
+
+function render(){
+  read(); const o=calc(); const km=(router==='km');
+  $('#vN').textContent=NF.format(S.N);
+  $('#vD').textContent=S.D+' bits';
+  $('#vRAM').textContent=bytes(S.ram);
+  $('#vk').textContent=km?`${eng(S.clusters,0)} clusters`:`${S.k} → ${eng(S.clusters,0)} clusters`;
+  $('#kLab').textContent=km?'Number of clusters':'Cluster bits k';
+  $('#kWhy').innerHTML=km
+    ? `k-means places each centroid where documents actually are. There are no routing bits &mdash; probing means comparing the query against every centroid, so 4,096 clusters costs 4,096 dot products per query. Set to the minimum for a single flat cluster.`
+    : `Documents are assigned by their first <b>k</b> sign bits, giving 2^k clusters. <b>Example:</b> k=3 gives 8 clusters, and a code starting <code>101</code> lands in cluster 5. Set k=0 for one flat cluster holding the whole corpus &mdash; that is what the scaling study ran.`;
+  $('#vP').textContent=NF.format(Math.min(S.P,S.clusters));
+  $('#vL').textContent=NF.format(S.leaf);
+  $('#vB').textContent=S.budget?NF.format(S.budget):'no limit';
+  $('#vDl').textContent=S.Dl+' bits';
+  $('#vT').textContent=NF.format(S.target);
+  $('#vH').textContent=S.thash+' ns';
+  $('#rtHint').innerHTML=km
+    ? `Centroids sit where the data is, so clusters come out evenly sized and the ones you probe are far more likely to hold the true top 100. Routing costs more: one dot product per centroid.`
+    : `Assignment is free &mdash; just read the bits. But clusters come out badly imbalanced: the ones you probe hold ${S.crowd.toFixed(1)}&times; their even share, and the true nearest neighbour frequently sits in a cluster you never probed.`;
+
+  const best=Math.min(o.A.ns,o.B.ns,o.C.ns);
+  const defs=[
+    {c:'A',t:'Cluster, then full scan',o:o.A,dia:diaA(),
+     d:'Probe a few clusters, then score every document in them with the lookup table. No pruning inside a cluster. This is the IVF shape production systems ship.',
+     note:`Scores <b>${eng(o.A.docs,1)}</b> documents, ${pct(S.frac)} of the corpus. Once a cluster is probed nothing inside it is skipped, so recall is limited only by the missed-cluster error &mdash; documents whose cluster you never opened.`},
+    {c:'B',t:'Cluster, then bitplane branching',o:o.B,dia:diaB(),
+     d:'Same clustering. Inside each cluster a best-first tree splits on one sign bit at a time, expanding the lowest-penalty node first, hoping to score far fewer documents.',
+     note:`Every split walks the cluster&rsquo;s full <b>${eng(o.B.bmw,1)}-word</b> bitmap, no matter how few rows are still alive &mdash; the active set shrinks but the bitmap does not. That makes one split cost the same as scoring <b>${small(o.B.cutCost)}</b> document${o.B.cutCost>=1.5?'s':''}, so a split only pays if it eliminates more than that many. Bitplanes are a transposed second copy of the codes: <b>${bytes(S.N*S.D/8)}</b> on top of the base index.${o.B.capped?' <b>The node budget is binding</b>, so the search is stopping early and giving up recall.':''}`},
+    {c:'C',t:'Cluster, then walk backwards',o:o.C,dia:diaC(o.C),
+     d:'Same clustering. Inside the cluster, start at the query&rsquo;s own code sign(q) and enumerate keys outward in increasing weighted Hamming distance &mdash; flipping the lowest-|q| bits first &mdash; until enough candidates turn up.',
+     note:o.C.cannotRun
+       ? `<b>Cannot run.</b> The first hit sits at Hamming radius <b>${o.C.kn.radius}</b>, and reaching it means enumerating <b>${bigKeys(o.C.kn)}</b> keys. With ${S.Dl} key bits the code space is far larger than the ${eng(S.B,0)} documents in the cluster, so almost every key is empty. Shorten the key.`
+       : `First hit at Hamming radius <b>${o.C.kn.radius}</b> after <b>${bigKeys(o.C.kn)}</b> keys, yielding ${eng(o.C.found,1)} candidates. Enumeration is cheap here. The limit is recall: ${S.Dl} of ${S.D} bits does not rank well enough, which is why this sits at ${pct(o.C.recall)}.`}
+  ];
+  $('#cards').innerHTML=defs.map(x=>{
+    const win=(x.o.ns===best)?'<span class="flag good">fastest</span>':'';
+    const bad=(x.c==='C'&&x.o.cannotRun)?'<span class="flag bad">cannot run</span>':'';
+    const over=(x.o.mem>S.ram)?'<span class="flag bad">over memory budget</span>':'';
+    return `<section class="card ${x.c}">
+      <div class="card-h">
+        <div><h3 class="card-t">${x.t}${win}${bad}${over}</h3><p class="card-d">${x.d}</p></div>
+        <div class="big"><div class="n mono">${ms(x.o.ns/1e6)}</div><div class="u">per query, single thread</div>
+        <div class="rc mono">recall@100 ≈ ${pct(x.o.recall)}</div>
+        <div class="rc mono" style="color:${x.o.mem>S.ram?'var(--crit)':'var(--faint)'}">index ${bytes(x.o.mem)}</div></div>
+      </div>
+      <div class="dia">${x.dia}</div>
+      ${ledger(x.o)}${steps(x.c,x.o)}<p class="note">${x.note}</p></section>`;}).join('');
+
+  const sw=sweep();
+  $('#pareto').innerHTML=paretoChart(sw);
+  $('#targets tbody').innerHTML=targetsTable(sw);
+  const nA=sw.front.filter(p=>p.m==='A').length,nB=sw.front.filter(p=>p.m==='B').length,nC=sw.front.filter(p=>p.m==='C').length;
+  $('#sweepNote').innerHTML=`${NF.format(sw.all.length)} configurations fit inside ${bytes(S.ram)}. `+
+    `Of the ${sw.front.length} points on the best-achievable line, ${nA} are full scan, ${nB} bitplane branching, ${nC} walk backwards. `+
+    `<b>Caveat:</b> the clustering recall model was fitted at 4,096 clusters on 300,000 documents, so a sweep at ${eng(S.N,0)} documents extrapolates well past the measured range &mdash; read the ordering of the methods, not the exact recall values.`;
+  $('#mem').innerHTML=memory();
+  $('#imposs').innerHTML=impossible();
+}
+
+/* ---------- validation against real measured runs ---------- */
+const RUNS=[
+ {n:'100k docs, leaf size 32, exhaustive',N:1e5,leaf:32,docs:1e5,meas:11.06},
+ {n:'100k docs, leaf size 128',N:1e5,leaf:128,docs:1e5,meas:4.85},
+ {n:'100k docs, leaf size 256',N:1e5,leaf:256,docs:1e5,meas:4.07},
+ {n:'100k docs, leaf size 512',N:1e5,leaf:512,docs:1e5,meas:3.83},
+ {n:'100k docs, leaf size 1024',N:1e5,leaf:1024,docs:1e5,meas:3.73},
+ {n:'100k docs, leaf size 4096',N:1e5,leaf:4096,docs:1e5,meas:3.24},
+ {n:'100k docs, full scan',N:1e5,scan:1,docs:1e5,meas:2.71},
+ {n:'1M docs, full scan',N:1e6,scan:1,docs:1e6,meas:25.1,held:1},
+ {n:'1M docs, branching, node budget 32,768',N:1e6,leaf:32,budget:32768,docs:1e6,meas:245,held:1}
+];
+(function(){
+  $('#sanity tbody').innerHTML=RUNS.map(r=>{
+    let model,pieces='—',words='—';
+    if(r.scan){model=r.docs*64*T_SCAN/1e6;}
+    else{
+      const bmw=Math.ceil(r.N/64);let pc=C_NODE*r.docs/r.leaf,ds=r.docs;
+      if(r.budget&&pc>r.budget){pc=r.budget;ds=pc*r.leaf/C_NODE;}
+      const w=pc/2*bmw;model=(w*T_WORD+ds*64*T_LEAF)/1e6;
+      pieces=eng(pc,1);words=eng(w,1);
+    }
+    const e=100*(model-r.meas)/r.meas, lim=r.held?30:8;
+    return `<tr><td>${r.n}${r.held?' <span class="flag neu">held out</span>':''}</td>
+      <td class="mono r">${pieces}</td><td class="mono r">${words}</td>
+      <td class="mono r">${r.meas.toFixed(2)} ms</td><td class="mono r">${model.toFixed(2)} ms</td>
+      <td class="mono r ${Math.abs(e)<lim?'err-ok':'err-hi'}">${e>0?'+':''}${e.toFixed(1)}%</td></tr>`;}).join('');
+
+  const RC=[{l:'Prefilter on top-32 dims by |q|, 10k shortlist',K:32,f:1/30,m:.896},
+            {l:'Prefilter on top-64 dims by |q|, 10k shortlist',K:64,f:1/30,m:.991},
+            {l:'Prefilter on top-128 dims by |q|, 10k shortlist',K:128,f:1/30,m:1.0}];
+  const zm=Phinv(1-100/3e5);
+  $('#recheck tbody').innerHTML=RC.map(r=>{
+    const p=recallOf(Math.sqrt(varfrac(r.K/256)),zm,r.f);
+    return `<tr><td>${r.l}</td><td class="mono r">${(100*r.m).toFixed(1)}%</td>
+      <td class="mono r">${(100*p).toFixed(1)}%</td></tr>`;}).join('');
+  const CR=[[1e6,24,1000,'2'],[1e6,32,1000,'5'],[1e6,48,1000,'9'],[3e5,256,1,'51-60']];
+  $('#recheck tbody').innerHTML+=CR.map(([b,d,t,exp])=>{const k=keysNeeded(b,d,pFor(d),t);
+    return `<tr><td>Walk backwards, cluster of ${eng(b,0)}, ${d}-bit key: Hamming radius to first hit</td>
+      <td class="mono r">${exp}</td><td class="mono r">${k.radius}</td></tr>`;}).join('');
+  /* the twelve router measurements the imbalance curve and rho were fitted to */
+  const RT=[[1,.038,.057],[4,.115,.126],[16,.283,.373],[32,.378,.494],[64,.502,.630],[256,.767,.860]];
+  const zr=Phinv(1-100/3e5), rb=Math.sqrt(varfrac(12/768));
+  $('#router tbody').innerHTML=RT.map(([P,mrb,mrk])=>{
+    const fb=Math.min(1,(P/4096)*18.034*Math.pow(P,-0.231));
+    const fk=Math.min(1,(P/4096)*0.149*Math.pow(P,0.223));
+    const pb=recallOf(rb,zr,fb), pk=recallOf(Math.min(.995,rb*2.32),zr,fk);
+    const cell=(m,p)=>{const g=Math.abs(p-m); return `<td class="mono r">${(100*m).toFixed(1)}%</td>
+      <td class="mono r ${g<.06?'err-ok':'err-hi'}">${(100*p).toFixed(1)}%</td>`;};
+    return `<tr><td>${NF.format(P)} probe${P===1?'':'s'} of 4,096 clusters</td>${cell(mrb,pb)}${cell(mrk,pk)}</tr>`;
+  }).join('');
+})();
+
+document.querySelectorAll('input,select').forEach(el=>el.addEventListener('input',render));
+document.querySelectorAll('#rt button').forEach(b=>b.addEventListener('click',()=>{
+  router=b.dataset.v;
+  document.querySelectorAll('#rt button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  render();}));
+render();
+</script>

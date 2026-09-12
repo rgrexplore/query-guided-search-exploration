@@ -1,0 +1,1759 @@
+A MATHEMATICAL AND ENGINEERING REPORT
+Three ways to search
+binary embeddings
+From stored data to query latency,
+memory usage, and recall
+A Cluster, then score every selected document.
+B Cluster, then traverse an inverted bitplane index.
+C Cluster, then enumerate keys from the query’s ideal sign pattern.
+This report develops the three methods from the same score and the same retrieval task. It
+explains what is built before a query, what is touched during a query, and where each method
+can lose recall. Every general cost formula uses named parameters. Small numerical examples
+make the formulas concrete; measured results are identified separately.
+Reading order. Start with the four-bit example and shared pipeline. Each method then has
+its own data layout, pseudocode, operation count, latency model, and memory calculation. The
+statistical section explains what can and cannot be inferred about recall. The final section collects
+the formulas for comparison under a RAM limit.
+10 September 2026
+Three ways to search binary embeddings 1
+Contents
+1 Start with the question a search must answer 2
+2 What is built once, and what every query pays 5
+3 Approach A: cluster, then full scan 10
+4 Approach B: cluster, then inverted bitplanes and branching 13
+5 Approach C: cluster, then walk backwards from the ideal key 18
+6 Deriving recall without assuming the answer 25
+7 What the existing measurements support 31
+8 Bring the formulas together 34
+A A finite-sample view of prefix recall 38
+B Checklist for an honest numerical implementation 38
+C Floating-point arithmetic and exactness 39
+D Optional expansion of the embedding cost 39
+E Reproduction and parameter ledger 40
+Three ways to search binary embeddings 2
+1 Start with the question a search must answer
+Suppose a database contains N documents. A query arrives, and the system must return K
+documents. We want the smallest query latency that fits the available RAM and reaches a
+specified recall target. Before comparing algorithms, we must agree on what “the correct K
+documents” means.
+This report first uses one precise target: the top K documents under the same float-query,
+binary-document inner product. This isolates the search index. A later reranking step may
+use longer float embeddings, but that is a different score and a different reference ranking. Exact
+binary search need not recover the exact float ranking, and neither ranking is automatically the
+same as human relevance.
+1.1 Three costs that must not be confused
+1. Index storage: data built in advance and kept between queries. Examples are packed
+document codes, cluster offsets, centroids, bitplanes, and key directories.
+2. Query RAM: temporary live data needed by one query. Examples are a query vector, score
+tables, a top-R result heap, pending branch masks, and key-enumeration states.
+3. Query work: operations and data accesses over time. Reading the same array a thousand
+times does not require a thousand stored copies, but it can cost a thousand reads.
+The number of scored documents alone does not measure work. A method can score fewer
+documents and still read more memory or manage a much larger queue.
+1.2 The shared pipeline
+All three primary methods begin with clusters. The no-clustering experiment is the special case
+C = P = 1, not a different definition of the task. An embedding model converts query text
+to a float vector. A short representation routes the query to selected clusters. Optional filters
+select eligible documents. The index produces up to R binary-score candidates, with R ≥ K. An
+optional final stage fetches longer vectors and reranks those candidates, then returns K results.
+If the experiment only measures the index, cache the query embedding and omit the optional
+reranker. If the experiment claims end-to-end query latency, include them. We will keep both
+versions visible in the formulas.
+1.3 A four-bit example we can calculate by hand
+Let
+q = (0.7,−0.4,0.2,−0.1), t = sign(q) = (+1,−1,+1,−1).
+Write a stored +1 as bit 1 and −1 as bit 0. The ideal bit pattern is therefore 1010. Define
+a = |q | and A = P a = 1.4. A document bit that agrees with the query contributes +a ; a
+i i i i i
+disagreement contributes −a .
+i
+Three ways to search binary embeddings 3
+Query text
+Embed and prepare
+prefixes
+Route to selected
+clusters
+Apply the same
+eligibility filter
+C: enumerate lookup
+A: scan selected rows B: traverse bitplanes
+keys
+Keep binary candidates
+Optional longer-vector
+rerank
+Return top K documents
+Figure 1: The common query pipeline. Only the candidate-search stage changes between A, B and C.
+Three ways to search binary embeddings 4
+d d
+S(q,b) = X q b = A−2X a 1[b ̸= t ]. (1)
+i i i i i
+i=1 i=1
+| {z }
+πq(b)
+The quantity π (b) is the weighted mismatch penalty. Maximizing score is exactly the same
+q
+as minimizing this penalty. The factor two is not a hardware setting: replacing a contribution
++a by −a changes the score by 2a .
+i i i
+Document Code Mismatching coordinates Score
+1 1010 none 1.4
+2 1011 4 1.2
+3 1000 3 1.0
+4 0010 1 0.0
+5 1110 2 0.6
+6 0101 1,2,3,4 −1.4
+7 1001 3,4 0.8
+8 0011 1,4 −0.2
+For example, document 7 pays 0.2+0.1 = 0.3, so its score is 1.4−2(0.3) = 0.8. The exact global
+top two are documents 1 and 2. We break equal scores by document ID throughout.
+The query gives both a preferred sign and a cost for getting that sign wrong. It does not tell us
+which preferred patterns exist in the database. That distinction drives both branching and key
+enumeration.
+1.4 Matryoshka prefixes are useful; they are not sorted magnitudes
+A Matryoshka model trains selected prefixes of an embedding to remain useful representations
+[2]. It does not impose |q | ≥ |q | ≥ ··· ≥ |q | for every query. A later coordinate may have
+1 2 D
+a larger magnitude than an earlier one. Nor does the name of the training method tell us the
+numerical recall of the first h binary signs.
+There are three distinct choices:
+• Take the first h coordinates: a fixed prefix that can be indexed in advance.
+• Sort all coordinates by |q |: a query-dependent traversal order, useful for bitplanes.
+i
+• Use a longer representation for final scoring: this can change the ranking after retrieval.
+A hash table built for one fixed prefix does not become a table for the query’s largest-magnitude
+coordinates just because the query is sorted. The lookup coordinates would have changed.
+1.5 Parameters and units
+The formulas below are not tied to a particular code length, cluster count, word width, or SIMD
+implementation. Table 1 is the common notation. Additional symbols are introduced where their
+algorithm first needs them.
+Three ways to search binary embeddings 5
+Table 1: Shared parameters. Counts and byte sizes are different types of quantity.
+Symbol Meaning Units
+N Number of stored documents documents
+D Full embedding dimension coordinates
+d Dimension of the binary score in Equation (1) bits / doc
+d ,d Routing and optional final-reranking dimensions coordinates
+r f
+C Number of disjoint clusters clusters
+n Physical number of document rows in cluster j; P n =N documents
+j j j
+P(q),P Probed cluster set and its size set, count
+e Eligible rows in probed cluster j, after filters; e ≤n documents
+j j j
+N ,N P n and P e documents
+sel elig j∈P j j∈P j
+K,R Final result count and binary candidate-heap capacity, K ≤R documents
+w,b Bits and bytes per bitmap word; b =w/8 bits, bytes
+w w
+g,G Bits per score-table group and G=⌈d/g⌉ groups bits, groups
+b ,b Bytes per stored table score and query float bytes
+s q
+b ,b Bytes per document ID and offset bytes
+id o
+b ,b Bytes per routing-centroid and final-vector coordinate bytes
+c f
+M Available physical RAM budget bytes
+RAM
+J Number of simultaneously active queries queries
+c Effective time for a named unit of work x seconds/unit
+x
+T ,Q Query-embedding latency and its peak scratch RAM seconds,
+emb emb
+bytes
+Assume positive integer dimensions and counts, 1 ≤ P ≤ C, 1 ≤ K ≤ R, and a word width w
+divisible by eight. A selected pool may contain fewer than R eligible rows, in which case fewer
+candidates are returned.
+Define two widths we will use repeatedly:
+s = b ⌈d/w⌉, W = ⌈n /w⌉, s = b W . (2)
+code w j j mask,j w j
+The first describes one packed document; the second describes one bitplane across a cluster. They
+have different axes. If a filter leaves only a few eligible rows, W does not shrink unless the data
+j
+is physically rebuilt or represented differently.
+1.6 Three kinds of statement in this report
+An algebraic identity, such as Equation (1), is exact under its stated score. An operation count
+is exact for the stated pseudocode or layout, but can change with the implementation. A latency
+or statistical estimate also needs hardware or distribution assumptions. Measured tables report
+a particular experiment. Keeping these categories separate is necessary for a fair comparison.
+2 What is built once, and what every query pays
+2.1 The public Exa-style starting point
+Exa’s public description combines Matryoshka prefixes, binary document codes, float-query
+scoring through small lookup tables, similarity-based clustering, filtering, and final reranking [1].
+Its published example uses particular dimensions and cluster counts; our formulas replace those
+Three ways to search binary embeddings 6
+choices with parameters. The pseudocode here is an explicit reference design, not a claim to
+reproduce Exa’s private implementation or production latency.
+2.2 Preprocessing and the common index
+A document is encoded before queries arrive. Its code and document ID are placed in its cluster’s
+contiguous row range. The baseline ownership convention is simple: each document has one
+packed code and one ID. Cluster offsets identify the ranges. Bitplanes or hash-key postings are
+additional structures described later.
+Listing 1: Common preprocessing; executed before serving queries.
+BuildCommonIndex(documents, model, d, routing_configuration):
+vectors = encode documents with model
+routing = train or choose the cluster assignment rule
+for each document x:
+b = signs of the first d coordinates of vectors[x]
+j = assign x to one cluster
+append (document_id[x], packed(b)) to cluster j
+concatenate cluster rows and record C + 1 offsets
+save centroids if centroid routing is used
+save filter metadata and optional final vectors
+return common index
+Offline encoding, clustering and sorting are build costs. They are not charged as query latency.
+Their outputs are charged as index storage. Build-time temporary arrays can be large; the
+serving-RAM formulas below deliberately do not describe the construction peak.
+For centroid routing, define
+M = Ns +Nb +(C +1)b +Cd b +M +M . (3)
+base code id o r c filter extra
+M includesexplicitlychosencommonmetadataandoptionalstoredfinalvectors. Forexample,
+extra
+fully resident reranking vectors contribute Nd b . If they are on disk, they still consume storage,
+f f
+but only the resident portion belongs in serving RAM. For sign-prefix routing, omit the centroid
+term. Do not silently count a second ID array in one method and omit the only ID array in
+another.
+Example: Stored bytes versus touched bytes
+Suppose an illustrative database has N = 109 documents and d = 256 bits. Packed code
+payload without extra padding is 109·256/8 = 32 GB. With eight-byte IDs, the codes and
+IDs together need 40 GB before centroids or metadata. Here GB means 109 bytes. These
+are example choices for N,d,b , not constants in Equation (3).
+id
+2.3 Step 1: encode and prepare the query
+Listing 2: Query preparation shared by all methods.
+PrepareQuery(text, model, D, d, d_r):
+full_query = model.encode(text, D)
+Three ways to search binary embeddings 7
+q = prepare prefix full_query[0:d] for the chosen score
+routing_query = prepare prefix full_query[0:d_r]
+t[i] = +1 if q[i] >= 0 else -1
+a[i] = abs(q[i])
+return full_query, q, routing_query, t, a
+The model’s tokenization, neural-network computation and output processing cost T (ℓ ,D)
+emb q
+for query length ℓ . This is a measured function, not a universal linear formula in D. Truncation,
+q
+optional normalization, signs and magnitudes add T = O(D+d+d ) elementary work. Their
+prep r
+coefficient can be measured separately. A norm or layer-normalization rule must be the same
+rule used when preparing the documents.
+Query-vector storage is O(D+d+d ) floats, with possible views instead of copies. Record the
+r
+chosen ownership. We denote the actual retained query buffers by Q and the embedding
+vec
+model’s own scratch peak by Q .
+emb
+2.4 Step 2: select clusters
+With a flat centroid router, score all C centroids, then retain the best P. This is distinct from
+scoring binary documents: centroids are normally floats.
+Listing 3: A simple flat centroid router with bounded selection memory.
+Route(q_route, centroids, P):
+nearest = heap with capacity P
+for j in all C clusters:
+route_score = dot(q_route, centroid[j])
+offer (route_score, j) to nearest
+return the P selected cluster IDs
+Let c price one centroid coordinate’s multiply-add contribution, and let H be the number of
+fma r
+heap comparisons or equivalent selection operations. Then
+T = Cd c +H c , H = O(Clog(P +1)). (4)
+route r fma r sel r
+A streaming heap needs O(P) records; materializing all centroid scores needs O(C) scores instead.
+Either is valid, but their RAM formulas differ. Hierarchical or approximate routing has its own
+measured visited-centroid count; replace C by that count only when the algorithm actually avoids
+the other centroids. Its routing recall also needs evaluation.
+A sign-prefix router uses r fixed sign coordinates and at most 2r addresses. It is not the same as
+similarity-based centroid clustering. Assigning a document is cheap, but ranking many possible
+query buckets is not free. One reference router scores all C bucket keys using ⌈r/g⌉ lookup terms
+each and selects P, giving
+T = T +C⌈r/g⌉c +H c .
+route,sign table,r lut r sel
+A direct or multi-probe address generator can replace that router, but must count its own
+key-generation and queue work. When every cluster is probed, routing can simply return all
+cluster IDs and skip distance-based selection.
+Three ways to search binary embeddings 8
+2.5 Cluster count does not determine the selected document count
+Exactly,
+N (q) = X n . (5)
+sel j
+j∈P(q)
+Only under balanced clusters is this approximately NP/C. An optional load factor λ(q) =
+N /(NP/C) summarizes deviation for a given query; it is not automatically constant as P
+sel
+changes. For bitplanes, the individual n matter because wider clusters make each node more
+j
+expensive. A mean load factor does not identify the largest cluster or peak frontier memory.
+2.6 Step 3: apply optional filters
+A filter can return eligible row IDs or a bitmap. Denote its time by T and its scratch by
+filter
+Q . For a bitmap intersection over the probed clusters, a reference work count is P W
+filter j∈P j
+word visits per input mask. For sorted ID lists, cost depends on list lengths and the intersection
+method instead.
+After filtering, e rows are eligible in cluster j, so a scan scores N = P e documents. A dense
+j elig j j
+bitplane still has physical width W . A filter that removes most rows therefore helps scoring
+j
+immediately, but does not automatically make each bitplane intersection short.
+The reference set for recall must obey the same filter. Otherwise a correct filtered search is
+unfairly penalized for not returning ineligible documents.
+2.7 Step 4: build the float-query score tables
+Split the d document signs into groups of g. A group has at most 2g sign patterns. For each
+query group, precompute its dot product with every possible pattern.
+Listing 4: The score table. Padding contributes zero in the last group.
+BuildScoreTable(q, g):
+for group in ceil(len(q) / g) groups:
+for pattern in all g-bit patterns:
+table[group, pattern] = 0
+for coordinate in this group:
+add q[coordinate] * sign(pattern, coordinate)
+return table
+ScoreDocument(packed_code, table):
+score = 0
+for group in all groups:
+pattern = extract this group’s bits from packed_code
+score += table[group, pattern]
+return score
+For this straightforward build,
+G = ⌈d/g⌉, U ≤ G2gg, (6)
+build
+T = U c , Q = G2gb , (7)
+table build build table s
+T (F) = FGc . (8)
+score lut
+Three ways to search binary embeddings 9
+c includes extracting the pattern, the lookup and accumulation in the chosen kernel. Faster
+lut
+table construction is possible, but it must replace U explicitly. Larger g reduces the number
+build
+of lookup terms and increases the table exponentially. Register capacity and cache behavior
+therefore matter.
+Example: Two query values and a four-entry table
+For the first two values (0.7,−0.4), the contributions for patterns 00, 01, 10, 11 are
+respectively −0.3,−1.1,1.1,0.3. With g = 2, document 1011 uses the first-group entry 1.1
+and the second-group entry 0.1, giving 1.2.
+Plain XOR followed by a population count computes unweighted Hamming distance. It matches
+Equation(1)onlywhenallquerymagnitudesareequaluptoacommonscale. Replacingweighted
+scoring by that operation changes the task.
+2.8 Step 5: retain candidates and optionally rerank
+Atop-Rheapstorestheworstretainedcandidateatitsroot. Everyscoreddocumentneedsatleast
+a comparison with that root once the heap is full. Let H (F,R) be the actual selection-operation
+s
+count. A simple worst-case bound is O(F log(R+1)), not zero.
+T = H (F,R)c , Q ≈ R(b +b )+Q . (9)
+select s heap results id s heap,overhead
+For an optional rerank of R′ returned candidates, K ≤ R′ ≤ R, let
+T (R′) = T (R′,d )+R′d c +H (R′,K)c +T (K). (10)
+finish fetch f f fine f fine,sel output
+T depends on whether vectors are already resident, on SSD, or remote. If u vectors are
+fetch f
+fetched in a batch, the temporary float-vector buffer is u d b , not necessarily R′d b . The
+f f f f f
+candidate IDs must remain live until fetching and scoring finish.
+2.9 Shared latency and peak RAM
+For sequential stages, define
+T = T +T +T +T +T . (11)
+common emb prep route filter table
+The method-specific candidate work and Equation (10) are added later. For an index-only
+measurement, explicitly set the embedding and final-stage terms to zero.
+Peak scratch RAM is a maximum of simultaneously live buffers, not a sum of every temporary
+array ever allocated. If embedding, search and reranking do not overlap,
+Q = max{Q ,Q ,Q }. (12)
+peak emb,stage search,stage finish,stage
+Each stage term includes buffers retained from previous stages. We use Q for common buffers
+base
+live during candidate search, including query vectors, score tables, filter masks, routing output,
+and the candidate heap.
+For J concurrent queries sharing one resident index,
+M = M +M +M +max X Q (t)
+serving resident model runtime u
+t
+u∈A(t) (13)
+≤ M +M +M +JQ .
+resident model runtime peak,max
+Three ways to search binary embeddings 10
+M counts shared resident embedding-model weights when inference is local. An external
+model
+embedding service contributes latency but no local model-weight allocation. M is a chosen
+runtime
+reserve or measured runtime overhead. It is not another stored copy of the index. Separate
+process replicas or device copies must be counted if the actual system has them.
+For separate CPU and GPU memories, apply the residency and peak formulas to each memory
+pool. Count additional device copies if they exist. A throughput speedup does not by itself
+establish a feasible memory layout.
+3 Approach A: cluster, then full scan
+This is the reference candidate-search method. Once clusters and eligible rows are chosen, it
+scores every eligible row. There is no approximation inside that selected pool. The work is
+regular and can read packed codes sequentially when filtering does not scatter them.
+3.1 Data layout and preprocessing
+The common index from Equation (3) is sufficient. Cluster j occupies the row range between
+offsets j and j +1. A row contains its packed code, and the corresponding ID array maps the
+row back to the original document.
+Listing 5: Candidate search for Approach A.
+ScanSelectedClusters(q, selected_clusters, eligible, table, R):
+best = empty top-R heap
+for cluster j in selected_clusters:
+for row in eligible rows of j:
+score = ScoreDocument(code[row], table)
+best.offer(score, document_id[row])
+return best in descending score, breaking ties by ID
+The loop is over N rows, not necessarily NP/C. If all clusters are searched and no filter
+elig
+removes documents, N = N. Empty filtered clusters require no document scoring, although
+elig
+finding that they are empty can still have a cost.
+3.2 Step-by-step cost
+Step Work Live temporary data
+Locate cluster ranges P offset/range accesses selected cluster IDs
+Visit eligible rows N row iterations current row/iterator
+elig
+Score rows N G lookup terms shared score table,
+elig
+accumulator
+Keep best R H (N ,R) selection operations top-R heap
+s elig
+Return candidates sort at most R results if needed result array or heap
+storage
+Writing c for range setup and T (R) for final candidate ordering,
+range rank
+T = Pc +N Gc +H (N ,R)c +T (R). (14)
+A,candidates range elig lut s elig heap rank
+Three ways to search binary embeddings 11
+Stored cluster offsets,
+codes and IDs
+Prepared query and Open selected cluster
+score table ranges
+Score each eligible
+document
+Update the top-R heap Yes
+More eligible rows?
+No
+Order candidates and
+rerank if requested
+Figure 2: Approach A. The selected pool is smaller than the corpus only because of routing or filters.
+Three ways to search binary embeddings 12
+The general end-to-end latency is
+T = T +T +T (R′). (15)
+A common A,candidates finish
+For the stated heap implementation, the candidate-stage time complexity is
+O(P +N ⌈d/g⌉+N log(R+1)+Rlog(R+1)).
+elig elig
+The lookup term count is not a claim that each term is exactly one CPU instruction.
+3.3 What is read, and what must remain in RAM?
+The packed-code payload read for scoring is
+V = N s . (16)
+A,codes elig code
+ID reads, filter data, table accesses and result-heap accesses are additional traffic. A cache may
+satisfy many of them. Thus this is a named payload count, not a complete DRAM measurement.
+Sequential and scattered rows may have different effective c or c .
+lut row
+Index storage and candidate-stage scratch are
+M = M , (17)
+A,index base
+Q = Q +Q +Q . (18)
+A,search base row iterator scan workspace
+A streaming scan does not need an N-element score array. A matrix-based batch implementation
+may choose to allocate such an array; then that allocation must be added. The same algorithmic
+ranking can therefore have different peak RAM under different implementations.
+3.4 A routing miss in the four-bit example
+Partition the eight documents from Section 1 into
+C = {1,3,4,6}, C = {2,5,7,8}.
+0 1
+This is an illustrative fixed partition, not a claim about the output of a particular clustering
+run. Suppose the router opens only C . A scans scores 1.2,0.6,0.8,−0.2 and returns documents
+1
+2 and 7. The global top two are 1 and 2, so recall is 1/2. The scan did nothing wrong inside the
+opened cluster: document 1 was never considered.
+Opening both clusters returns documents 1 and 2. This is why a scan can be exact in its selected
+pool and still have imperfect global recall.
+3.5 SIMD changes a coefficient, not the score
+SIMD means one instruction operates on several data lanes. It can accelerate code extraction,
+lookup accumulation, and selection. It does not by itself change the number of stored bits. There
+are two useful ways to model its effect.
+Calibrated model. Measure the implemented kernel’s effective time per work unit, c , for the
+lut
+relevant dimensions and access pattern. If that rate already includes selection, use a combined
+T and do not add the heap cost a second time.
+score+select
+Three ways to search binary embeddings 13
+Resource model. If a kernel performs U compute units and causes V bytes of DRAM
+op DRAM
+traffic, compute throughput Γ and memory bandwidth β give the lower bound
+T ≥ max{U /Γ, V /β}. (19)
+kernel op DRAM
+An effective SIMD factor s can change Γ to s Γ . It cannot make the bandwidth term
+simd simd 0
+disappear. Random access, synchronization and fixed overhead can put actual time above the
+bound. Do not add this resource estimate on top of a fitted coefficient that already includes the
+same work.
+For multiple queries, a float score matrix can be written as QB⊤, where rows of B are expanded
+binary codes. That exposes matrix operations, but expansion, batching delay, device transfers
+and score-buffer storage have costs. A fast GPU batch is not automatically a fast single-query
+request.
+What Approach A guarantees
+For a fixed eligible pool, A returns its exact binary top R under the stated tie rule. With
+every eligible cluster searched, it has 100% binary recall. With partial routing, its global
+binary recall is limited by which true neighbors reach the selected pool. No property of
+the scan restores documents missed by routing, quantization or an earlier filter.
+4 Approach B: cluster, then inverted bitplanes and branching
+Approach B keeps the same document score and common routing stage. Its extra index stores
+the document bits by coordinate instead of only by row. That makes one sign test applicable to
+many document positions at once.
+4.1 What a bitplane stores
+For the opened example cluster C = (2,5,7,8), the document codes are 1011, 1110, 1001, 0011.
+1
+The transposed index is
+doc 2 doc 5 doc 7 doc 8
+bitplane 1 1 1 1 0
+bitplane 2 0 1 0 0
+bitplane 3 1 1 0 1
+bitplane 4 1 0 1 1
+Each row is a bitmap over document positions, not a list of full document vectors. An active
+bitmap says which document positions still belong to the current node. To require coordinate i
+to be 1, intersect the active bitmap with plane i. To require 0, intersect with its complement,
+while masking unused padding positions.
+Listing 6: Build the additional bitplane index.
+BuildBitplanes(cluster_codes, d, w):
+for each cluster j:
+W[j] = ceil(number_of_rows(j) / w)
+Three ways to search binary embeddings 14
+Eligible root masks from
+selected clusters
+Take the best pending
+node
+Split needed
+Intersect with next
+Bound cannot improve Small active set
+bitplane
+Yes
+Scan leaf mask and Queue both nonempty
+Discard node
+score rows children
+Continue within budget?
+No
+Return current
+candidates
+Figure 3: Approach B. A pending node has a set of active documents and an optimistic score bound.
+Three ways to search binary embeddings 15
+planes[j] = d arrays of W[j] zero words
+for local row u in j:
+for coordinate i in 0 .. d-1:
+if code[j, u, i] is 1:
+set bit (u mod w) in planes[j, i, floor(u/w)]
+return planes
+The extra persistent storage is exactly, for this layout,
+C
+M = db X W , M = M +M . (20)
+planes w j B,index base planes
+j=1
+Without per-cluster padding this is Nd/8, a second binary-code-sized payload. For example, ten
+billion 256-bit codes occupy 320 GB; their bitplanes add approximately another 320 GB, not 32
+TB. Padding and other index structures are additional.
+4.2 Why the query suggests a traversal direction
+At coordinate i, choosing the query’s sign adds no penalty; choosing the opposite sign adds
+a = |q |. Sorting coordinates by descending a tests the largest potential penalties first. For the
+i i i
+four-bit query, the order is 1,2,3,4 with weights 0.7,0.4,0.2,0.1.
+In C , matching bit 1 keeps documents 2,5,7; the alternative contains document 8 with accumu-
+1
+lated penalty 0.7. Matching bit 2 next keeps 2,7; document 5 moves to another pending node
+with penalty 0.4. This is a useful order, but neither alternative is automatically safe to discard.
+Example: A greedy path can miss the best document
+Take q = (0.6,0.5,0.4,0.3) and two documents: 0111 and 1000. The first has penalty 0.6
+and score 0.6. The second has penalty 1.2 and score −0.6. A greedy choice of the matching
+first bit selects 1000 and misses the better document. The largest individual weight is
+smaller than the sum of several remaining weights.
+4.3 A bound makes branching safe
+Let a node have accumulated penalty p on coordinates already tested. Untested coordinates
+cannot contribute a negative mismatch penalty. Consequently,
+U(node) = A−2p (21)
+is an upper bound on every active document’s final score. If the result heap is full and U is
+strictly below its worst retained score, that node cannot improve the result. For equal scores,
+keep searching unless the ID tie rule is also certified.
+The frontier is the collection of pending nodes. A best-first search takes the node with the
+largest upper bound, or equivalently the smallest penalty. The bound is optimistic: it may
+describe a sign combination that no actual document can achieve. A weak bound can keep many
+nodes alive even though none ultimately improves the answer.
+Listing 7: Dense bitplane search across the selected clusters.
+Three ways to search binary embeddings 16
+SearchBitplanes(q, selected_clusters, eligible, table, R, L, B_node):
+order = coordinates sorted by decreasing abs(q[i])
+frontier = empty min-penalty priority queue
+best = empty top-R heap
+for each selected cluster j:
+active = bitmap of eligible rows, with physical width W[j]
+if active is not empty:
+frontier.push(j, depth=0, penalty=0, active)
+visits = 0
+while frontier is not empty:
+if best is full and best_possible(frontier) < best.worst_score:
+break
+if a finite B_node is set and visits == B_node:
+break
+node = frontier.pop_smallest_penalty()
+visits += 1
+if node.count <= L or node.depth == d:
+for word in node.active: # includes zero words
+for each set bit in word:
+score its document and offer it to best
+continue
+i = order[node.depth]
+matching = active AND preferred_sign_plane(j, i, q)
+opposite = active AND NOT preferred_sign_plane(j, i, q)
+queue nonempty matching child with the same penalty
+queue nonempty opposite child with penalty + abs(q[i])
+return best
+L is the leaf-size threshold and B the total node budget across all probes. An unlimited
+node
+budget permits exact termination by bounds; a finite budget can stop before the remaining nodes
+are safely ruled out. A random exploration probability changes which pending node is visited
+next. It is not a direct formula for recall or a synonym for the number of nodes.
+4.4 Count split visits, leaf visits, and scored documents separately
+For each selected cluster, let
+s = visited split nodes, ℓ = visited leaf nodes, f = documents fully scored.
+j j j
+Define V = P (s +ℓ ) and F = P f . For a disjoint traversal without rescoring, F ≤ N . A
+j j j j j elig
+finite node budget gives V ≤ B , but does not determine F. The two principal bitmap counts
+node
+are
+U = X s W , U = X ℓ W . (22)
+split j j leaf j j
+j j
+A split word in the reference implementation reads an active word and a plane word, produces
+two child words, and counts matches. It includes two ANDs, a population count, complements
+and an accumulation. Allocating zero-filled child arrays can add two initialization writes. A leaf
+still scans all words in its active bitmap before enumerating set bits.
+Three ways to search binary embeddings 17
+With separate effective coefficients,
+T = T +T +U c +U c +Vc
+B,candidates order roots split split leaf leafword node
++FGc +H (F,R)c +T (R), (23)
+lut,leaf s heap rank
+T = T +T +T (R′). (24)
+B common B,candidates finish
+Here T = O(dlogd) and T = O(P W ) for dense root construction. c may be
+order roots j j node
+replaced by explicit queue-comparison, mask-allocation and copy terms. Use one convention
+consistently; do not charge an allocation twice.
+4.5 The full-width cost is the important hidden term
+Example: Few scores do not imply little work
+In the saved one-million-document run, w = 64 gives W = 15,625. A node budget of
+32,768 produced a mean 22,557.88 split visits and 10,210.12 leaf visits. Therefore
+U = 352,466,875, U = 159,533,125.
+split leaf
+Their sum is 512 million word-loop visits. About 163,766 documents were fully scored.
+With g = 4, that is 10.48 million score-table terms, versus 64 million terms for the scan.
+The reduction in scoring was real, but it came with hundreds of millions of bitmap visits.
+Word visits and score-table terms are not equal-cost instructions.
+If a tree were fully explored, perfectly balanced, and every internal node had two nonempty
+children, then with L documents per leaf there would be roughly n /L leaves and one fewer split.
+j
+This gives a dense bitmap term of order
+ 
+n2
+O X j . (25)
+Lw
+j
+This is an explanatory idealization, not a predictor for real embeddings. Fixed-bit splits can
+have only one nonempty child. A finite traversal also leaves unvisited nodes. Thus the actual
+split count need not be half the visited-node count.
+A single greedy path visits only about log (n /L) levels in a balanced example, but still pays
+2 j
+a full W at each level and has no general recall guarantee. In the broad worst case, a fixed-
+j
+coordinate trie can contain O(n d) nonempty prefix nodes, making dense traversal work as large
+j
+as O(dP n2/w) before scoring and queue costs. Growing N alone does not guarantee that
+j j
+branching will overtake a scan.
+4.6 Peak query RAM: the pending masks matter
+Let F(t) be the frontier at time t, and let j(v) identify a node’s cluster. If a node record needs
+b bytes and bitmap capacity is fully allocated,
+node
+Q (t) = X (b +b W ). (26)
+B,frontier node w j(v)
+v∈F(t)
+Three ways to search binary embeddings 18
+Capacity growth and allocator overhead can be represented by a factor γ ≥ 1 or, preferably,
+B
+by measured capacities. During a split, the parent and newly allocated children can coexist. A
+conservative candidate-stage expression is
+Q = Q +Q +max[γ Q (t)+Q (t)+Q (t)]. (27)
+B,search base order B B,frontier current children
+t
+For nonempty, disjoint pending sets, frontier count is at most N . Starting with at most P
+elig
+roots, each processed binary split can increase that count by at most one, so a finite budget also
+gives |F| ≤ P +B . Multiplying that bound by the largest possible mask is conservative and
+node
+can be very loose. It should not be reported as measured RAM.
+When Approach B can help
+B can help when it avoids enough full scoring to repay the bitmap, queue and allocation
+work. Useful conditions include strong early query penalties, small physical bitmaps, tight
+score bounds and a modest live frontier. Unlimited search is exact inside the selected pool
+under valid bounds and ties. Budget-limited search needs measured recall; its budget is
+not itself an accuracy percentage.
+5 Approach C: cluster, then walk backwards from the ideal key
+Approach C changes the lookup structure. Instead of repeatedly intersecting document masks, it
+asks: which stored documents have this particular key? Start from the signs the query prefers,
+then consider other keys in increasing mismatch penalty.
+The primary method here still starts with the same selected clusters. A global hash table is the
+special case C = P = 1. We do not silently switch between clustered and global formulas.
+5.1 Full keys and short keys are different choices
+Let I be the fixed set of h lookup coordinates, often the first h positions. A full key has h = d.
+h
+Its weighted penalty determines the complete binary score. A short key has h < d. It ranks a
+prefix, then the full d-bit score ranks the retrieved candidates.
+A full-key search can be exact if it enumerates keys in true query-weighted order and finishes the
+result-boundary tie. A short-key candidate quota does not have that guarantee. It can still work
+well, and can also be made exact with a valid full-score stopping bound. These are properties of
+the stopping rule, not of the name “walk backwards.”
+5.2 The data structure behind a key lookup
+For each cluster, a directory maps a key to a posting range containing the local row references of
+documents with that key. There may be many documents per key. Finding a directory entry
+without finding its document rows is not enough to produce results.
+Listing 8: Build a clustered key index.
+BuildKeyIndex(cluster_codes, lookup_coordinates):
+for each cluster j:
+groups = group local row references by their lookup key
+Three ways to search binary embeddings 19
+Selected clusters and
+key streams
+Take the next weighted
+key
+Look up its posting
+range
+Occupied key No
+Filter rows and update
+Empty key
+candidates
+Stopping rule satisfied?
+Yes
+Return candidates
+Figure 4: Approach C. Each cluster has a key directory and postings. Empty lookups still consume
+work.
+Three ways to search binary embeddings 20
+concatenate the groups into a posting array
+for each occupied key:
+directory[j][key] = (posting_start, posting_count)
+return directories, postings
+A dense directory has an offset for every possible key. A sparse hash table only stores
+occupied keys but adds key, slot and load-factor overhead. A sorted-key array is another option:
+it can use less overhead, but a lookup uses comparisons or another search structure instead of an
+assumed constant-time hash access.
+5.3 Do not index fixed routing bits as if they were still free
+If sign-prefix routing fixes some lookup coordinates inside cluster j, those coordinates cannot
+vary within it. Let r be the number of lookup coordinates fixed by that cluster, and let
+j
+h = h−r , U ≤ min(n ,2hj). (28)
+j j j j
+U is the number of occupied free keys. For first-r-bit routing and a first-h-bit lookup with h ≥ r,
+j
+h = h−r. The fixed coordinates add a constant penalty for that cluster; they do not create 2r
+j
+additional keys inside it. Ordinary k-means clusters do not generally fix any sign coordinate, so
+this simplification does not follow from their cluster ID.
+Example: Two fixed bits and a two-bit local key
+Suppose a four-bit code is routed by its first two bits. Inside cluster 10, codes 1010, 1011,
+1000, 1001 need only the local keys 10, 11, 00, 01. A lookup for the full prefix must
+include the cluster’s constant routing penalty when it is compared with a different cluster’s
+stream. The number of local possibilities is four, not sixteen.
+5.4 Index storage: name every array
+Use the common baseline row order and ID mapping. Let b be the bytes for a local posting
+ref
+reference, b (h ) the bytes storing a key, and b the remaining per-slot metadata. With a
+k j slot
+chosen hash load factor 0 < α < 1, a reference sparse-key layout uses
+M = X ⌈U /α⌉[b (h )+2b +b ], (29)
+keydir j k j o slot
+j
+where the two offsets represent start and length. Field alignment or different slot layouts can be
+substituted explicitly. The additional posting references cost Nb . Therefore
+ref
+M = M +Nb +M . (30)
+C,index base ref keydir
+This chosen layout deliberately counts both the common external-ID mapping and the extra
+row-reference permutation. If the build reorders the actual codes and IDs by key within each
+cluster, postings can become direct contiguous row ranges. Then the extra Nb can be removed.
+ref
+That is an explicit layout change, not permission to omit all document IDs.
+For a dense offset directory instead of a hash table,
+M = X(2hj +1)b .
+dense−dir o
+j
+Three ways to search binary embeddings 21
+Exponential key space makes dense directories expensive. Sparse directories avoid storing empty
+keys, but do not make probing empty keys free.
+5.5 How to enumerate all flip combinations in weighted order
+Let the free-coordinate weights be sorted in ascending order, a ≤ ··· ≤ a . Flipping a subset
+(1) (hj)
+S costs P a . Merely flipping the first bit, then the first two, then the first three misses
+i∈S (i)
+other subsets. We need a stream containing all subsets in order.
+The following priority-queue construction has at most two children per nonempty subset. It
+starts with the empty subset, then the subset containing coordinate 1.
+Listing 9: A complete sorted-subset stream, not one chain of flips.
+SortedFlipSets(weights):
+sort weights ascending, remembering original coordinate IDs
+emit (empty subset, penalty 0)
+if there are no free coordinates: stop
+queue.push(subset={1}, last=1, cost=weights[1])
+while queue is not empty:
+(S, i, cost) = queue.pop_smallest_cost()
+emit (S, cost)
+if i < number_of_weights:
+queue.push(S union {i+1}, i+1, cost + weights[i+1])
+queue.push((S minus {i}) union {i+1}, i+1,
+cost - weights[i] + weights[i+1])
+Both child costs are no smaller than the parent cost. Every nonempty subset has one parent: if
+the coordinate before its largest coordinate is also present, remove the largest one; otherwise
+replace the largest coordinate by its predecessor. This explains why the construction visits every
+subset without needing a duplicate-state hash set.
+A state must store enough information to construct the key. A full bitmask representation costs
+b ⌈h /w⌉ bytes per state, plus its penalty, last coordinate and queue metadata. Copying that
+w j
+mask into children is work. A persistent representation can change this cost, but it then needs
+its own traversal and memory accounting.
+Example: The full-key order can be accurate even when a greedy branch is not
+For q = (0.6,0.5,0.4,0.3), the ideal code is 1111. The first penalties include 0, 0.3, 0.4,
+0.5, 0.6, 0.7, and so on. The code 0111 is found by flipping coordinate 1 at penalty 0.6.
+The code 1000 has penalty 1.2 and comes later. Complete weighted enumeration finds the
+better document first, even though it disagrees on the query’s largest coordinate. It may
+have to check several empty keys before that hit.
+5.6 Lookup and stopping within selected clusters
+For short keys, a simple implementation allocates candidate targets m to probed clusters. A
+j
+more flexible implementation merges their next-prefix-key scores and draws candidates from
+the best available stream. Whichever policy is used must be a parameter of the experiment; a
+per-cluster target and a global target are not interchangeable.
+Three ways to search binary embeddings 22
+Listing 10: Short-key candidate search with explicit per-cluster targets.
+SearchShortKeys(q, selected_clusters, h, targets m[j], R):
+candidates = empty collection
+for each selected cluster j:
+stream = SortedFlipSets(free lookup weights in j)
+found = 0
+for (flip_set, variable_penalty) in stream:
+key = ideal_free_key(q, j) XOR flip_set
+rows = directory[j].lookup(key) # may be empty
+keep eligible rows from this posting range
+found += number of kept rows
+append those rows to candidates
+if found >= m[j] and final prefix-penalty ties are finished:
+break
+score every candidate with the full d-bit score
+keep the best R with the same score/ID rule as A
+return best R
+Afull-keyexactversioninsteadmergestheclusterstreamsbytheirtotal full-key penalty,including
+fixed-sign penalties. Once at least R documents have been found, continue through every key
+that can tie or exceed the Rth document. This produces the exact binary top R within the
+selected pool. If unprobed clusters remain, global exactness additionally requires their score
+bounds to be ruled out or those clusters to be searched.
+A short key can also stop exactly. Let T (b) be the prefix score and A = P |q |. Every
+h tail i∈/I i
+h
+document in an unvisited prefix key satisfies
+S(q,b) ≤ T (b)+A . (31)
+h tail
+If the best unvisited prefix upper bound is strictly below the current worst top-R score, the result
+is certified. If not, continue even when a nominal candidate quota has been reached. A larger
+tail makes this bound less selective. Fixed routing-coordinate contributions must be included
+consistently; no coordinate may be counted twice.
+5.7 Do we need to rescore a document whose full key is known?
+Notalways. Withafullkeyandthetruequeryweights, itscompletescoreisalreadyA−2π (key).
+q
+Everydocumentinthatkey’spostingrangehasthatsamebinaryscore. Thesearchcanoffertheir
+IDs to the result heap without unpacking and rescoring each code. For a short key, the known
+prefix contribution can similarly be reused while evaluating only the remaining coordinates.
+To make that implementation choice visible, let G be the number of score-table groups
+C,j
+actually evaluated per candidate in cluster j. The simple pseudocode above has G = G. A
+C,j
+full-key implementation reusing its exact key score can have G = 0. A tail-only scorer can
+C,j
+have approximately ⌈d /g⌉ groups, with alignment and fixed routing coordinates handled
+remaining
+explicitly. It still pays for postings, key-score arithmetic, selection, and any later float reranking.
+This optimization changes the cost; it is not a recall loss.
+The reference storage formula retains the common packed rows. A specialized full-key layout
+can also avoid a redundant per-document code copy by using its stored full keys, provided its
+ID/posting and key ownership are redesigned and counted. Equation (30) is one explicit layout,
+Three ways to search binary embeddings 23
+not a universal lower bound on every possible key index.
+5.8 If “work upwards” means removing a constraint
+There is another reasonable interpretation of the idea. Instead of flipping a bit and probing one
+more exact key, remove a bit constraint. For example, 101* means either 1010 or 1011. That is
+a set of keys. A plain exact-key hash table does not answer this wildcard request in one ordinary
+lookup.
+A fixed-order prefix trie stores paths by successive key coordinates. A node identifies an
+occupied prefix. If document rows are ordered by key within a cluster, each node can store
+the start and end of a contiguous posting range. Moving to its parent relaxes the last fixed
+coordinate. It does not require copying every descendant’s posting list into every ancestor.
+Example: Relaxing the key inside the example cluster
+For C = {2,5,7,8} and ideal key 1010:
+1
+Constraint Matching documents Newly visited documents
+1010 none none
+101* 2 2
+10** 2, 7 7
+1*** 2, 5, 7 5
+**** 2, 5, 7, 8 8
+The parent range contains the previous range. Scan only the newly added sibling ranges
+if the implementation can retain their boundaries. Otherwise repeated scans must be
+counted again. In this particular query the last coordinate is the cheapest one to relax.
+That is not true for every query.
+Listing 11: A fixed-prefix relaxation variant of Approach C.
+SearchByRelaxingPrefix(q, query_key, trie, table, R, candidate_target):
+path = follow query_key as far as the stored trie permits
+previous_range = empty
+best = empty top-R heap
+found = 0
+for node on that path, from deepest node toward the root:
+new_ranges = node.posting_range minus previous_range
+for eligible row in new_ranges:
+score its code and offer it to best
+found += 1
+previous_range = node.posting_range
+if found >= candidate_target:
+return best # approximate stopping rule
+return best
+An exact version may stop early only after bounding every unvisited region against the current
+full-score heap. Simply finding enough IDs in a relaxed prefix is not such a proof. The remaining
+score can still change the ordering.
+Three ways to search binary embeddings 24
+Let Z be the number of stored trie nodes and b their record size, including child links or
+j trie
+equivalent navigation and range offsets. A simple uncompressed trie satisfies
+hj
+Z ≤ 1+ Xmin(n ,2u).
+j j
+u=1
+Its directory term replaces the hash-directory term by P Z b . Path compression can reduce
+j j trie
+the actual node count. With range references, document postings are stored once; copying a
+posting list into every prefix node would instead add repeated references and can cost O(Nh)
+reference storage.
+For u ancestor/range visits and F total row visits, a reference cost is
+j j
+T = T +X[h c +u c +F c +F G c ]+T . (32)
+C,trie keyprep j path j range j post j C,j lut,gather select/rank
+j
+A saved navigation path uses O(h ) records per active stream. Add the candidate heap, gather
+j
+buffers, and common query RAM. Here F must count repeated rows if they are revisited. The
+j
+same common pipeline and final rerank terms are added for end-to-end latency.
+A fixed trie can drop its last prefix coordinate cheaply. Dropping an arbitrary query-selected
+low-magnitude coordinate can produce several disjoint ranges, so it does not have the same
+constant-cost parent operation. A query-adaptive bit order requires additional traversal or a
+different index. This is the main difference between a prebuilt fixed trie and the query-ordered
+bitplane traversal.
+5.9 Count keys, postings, scores and enumeration states
+Let H be the number of keys attempted in cluster j, including empty keys. Let F be the
+j j
+number of eligible posting rows retrieved and scored. Let E be the number of sorted-subset heap
+j
+comparisons,Ccopy thenumberofkey-wordcopies,andletQmax bethelargestenumeration-queue
+j j
+size. Define F = P F .
+j j
+Forthetwo-childstream, E = O(H log(Qmax+1))comparisonwork, andCcopy = O(H ⌈h /w⌉)
+j j j j j j
+for full-mask copies. Hashing a key also depends on its length and table layout. An effective
+c (h ,α) should price the emitted-key iteration outside heap comparisons and child-mask
+lookup j
+copies: key construction, fixed state bookkeeping, the directory lookup, and obtaining the current
+key score or bound. This includes cache effects and collisions, rather than assume one CPU
+operation.
+T = T +
+Xh
+E c +Ccopyc +H c (h ,α)+F c
+i
+C,candidates keyprep j enum j copy j lookup j j post
+j∈P
++X F G c +H (F,R)c +T (R), (33)
+j C,j lut,gather s heap rank
+j
+T = T +T +T (R′). (34)
+C common C,candidates finish
+T includes sorting lookup weights, initializing streams and constructing query keys. For P
+keyprep
+different free-coordinate sets, a straightforward upper count is O(P h log(h +1)). A global
+j j j
+merge adds its own P-stream selection work, typically O((P H )log(P +1)); include it when
+j j
+that variant is used.
+Three ways to search binary embeddings 25
+The hash directory can be built before the query, but query-specific weighted order depends on q.
+Precomputing a hash table does not precompute this order for every float query.
+5.10 Query RAM while enumerating
+Let b include a key mask, penalty and queue metadata. For simultaneously active streams,
+enum,j
+the candidate-search scratch is
+ 
+Q C,search = Q base +max  X γ C Q j (t)b enum,j +Q stream merge (t)+Q posting buffer (t)+Q gather (t) .
+t
+j
+(35)
+A sequential per-cluster implementation can reuse enumeration memory, replacing the sum of
+live stream sizes by the maximum live cluster stream. A global full-score stream may need all
+selected streams active. These are different execution choices.
+Postings can be streamed into a top-R heap; storing all F retrieved IDs is not mandatory. If
+they are materialized for batch reranking, add Fb or the actual bounded batch size. A sparse
+ref
+dictionary’s small stored size does not bound the size of a query’s enumeration queue. With the
+two-child stream, the queue can grow by at most one per emitted state, but H itself can be
+j
+enormous.
+What Approach C does and does not lose
+Full-key enumeration in true penalty order can have 100% binary recall. Its difficulty can
+be time or queue memory, especially when most keys are empty. Short-key search is a
+different tradeoff: it can collect useful candidates cheaply, but a fixed quota is not a recall
+guarantee. It becomes exact if a valid full-score bound proves that no unseen candidate
+can improve the result, or if it eventually scores every eligible document.
+6 Deriving recall without assuming the answer
+The work formulas require counts such as visited nodes, retrieved postings and scored rows. They
+do not, by themselves, give recall. Recall depends on which rows survive and on the reference
+ranking. This section starts with an exact definition, then adds assumptions one at a time so
+their consequences can be checked.
+6.1 The exact measured definition
+Let E(q) be the eligible document set after the intended filter, across the whole database. Let
+G (q) be its exact top K under the chosen reference score, and let R (q) be the returned results.
+K K
+Then
+|G (q)∩R (q)|
+Recall@K(q) = K K . (36)
+K
+Use the same tie rule in both sets. Average this quantity over queries. Repeating one query for
+timing does not create new independent quality observations.
+If a candidate set D(q) is reranked with the same exact reference score, every true top-K
+Three ways to search binary embeddings 26
+document in that set survives into the final top K. Therefore
+|G (q)∩D(q)|
+Recall@K(q) = K . (37)
+K
+A different reranking score breaks that identity. In particular, exact binary candidates may still
+miss the true float-vector top K or the documents relevant to a human question.
+6.2 Separate routing loss from candidate-search loss
+Let U(q) be the eligible pool in the probed clusters. Define
+|G (q)∩U(q)| |G (q)∩D(q)|
+r (q) = K , r (q) = K .
+route K local |G (q)∩U(q)|
+K
+When the denominator is positive and D ⊆ U,
+Recall@K(q) = r (q)r (q). (38)
+route local
+If no true top-K result enters the selected pool, total recall is zero. This factorization is exact
+when both factors refer to the same true global neighbors. However, multiplying an average
+routing recall by an average local recall is generally wrong:
+E[r r ] = E[r ]E[r ]+Cov(r ,r ).
+route local route local route local
+Nor is recall against a cluster’s own local top K automatically the same as recall for the particular
+global neighbors routed into it. That distinction matters when transferring the flat-pool branch
+measurements into a clustered model.
+For A, local binary search is exact. For unlimited B with valid bounds, it is exact as well. For
+full-key C with complete weighted ordering, it is exact. Their global recall can still be limited by
+routing. Finite node budgets and short-key quotas add a second possible loss.
+6.3 A deterministic error bound for a short prefix
+Split the full score into retained and omitted coordinates:
+S = T +Z , T = X q b , Z = X q b . (39)
+h h h i i h i i
+i∈I h i∈/I h
+Because b ∈ {−1,+1},
+i
+|Z | ≤ A = X |q |. (40)
+h tail i
+i∈/I
+h
+Two documents can reverse their prefix order if the omitted contributions overcome their prefix
+score difference. A prefix gap greater than 2A is sufficient to preserve that pair’s order. This
+tail
+is a sufficient bound, not a typical-error estimate.
+A more useful query-time certificate compares the best unseen prefix score plus A with the
+tail
+worst fully scored retained result, as in Equation (31). It adapts to the actual query. If the bound
+is too loose, more keys must be visited. Returning a fixed candidate count without checking that
+condition remains approximate.
+For float truncation, the analogous score error obeys Cauchy–Schwarz:
+|q⊤ x | ≤ ∥q ∥ ∥x ∥ .
+tail tail tail 2 tail 2
+Three ways to search binary embeddings 27
+Truncation and binary quantization are separate approximations. Matryoshka training can
+improve the usefulness of prefixes, but it does not set either bound to zero or supply a universal
+recall percentage.
+6.4 Random documents: what the independence assumption actually gives
+The following distribution models first omit routing. When routing is added, retain the same
+global true-neighbor event or apply Equation (38); replacing it with a different local top-K event
+changes the question. Assume nonzero score variance when computing a correlation.
+First condition on a particular query q. Assume document signs are independent and equally
+likely to be −1 or +1. Then
+d
+E[S | q] = 0, Var(S | q) = X q2, (41)
+i
+i=1
+E[T | q] = 0, Var(T | q) = X q2, (42)
+h h i
+i∈I
+h
+Cov(T ,S | q) = Var(T | q). (43)
+h h
+Hence the score correlation is exactly
+v
+uP q2
+ρ q = Corr(T h ,S | q) = u t P i d ∈I h q2 i . (44)
+i=1 i
+High retained variance is not the same as a small worst-case tail bound. Many small omitted
+coordinates can have a modest sum of squares but a large sum of absolute values. A useful
+approximate prefix can therefore still lack a cheap exactness certificate.
+√
+The square root is important. Retaining a fraction v of score variance gives correlation v, not
+√
+recall v and not recall v.
+Example: Two random-data cases can have very different prefix recall
+With equal coordinate variances, a 24-coordinate prefix of a 256-coordinate query retains
+roughly24/256ofexpectedscorevariance. Ifinsteadthefirst24coordinatesareconstructed
+to hold 80% of expected score variance, their score is much more strongly correlated with
+the full score. The controlled measurements in Section 7 test both cases. The second is a
+deliberately favorable distribution, not the definition of Matryoshka embeddings.
+If query coordinates are random normals q ∼ N(0,σ2), we can choose a variance profile σ2. The
+i i i
+ratio of expected prefix and full variances is P σ2/P σ2. For a specific sampled query, use
+i∈I h i i i
+its actual Equation (44). The expectation of a ratio need not equal the ratio of expectations.
+6.5 Real documents need a covariance model, not just a label
+A covariance matrix records how coordinates vary together. Its diagonal entries are individual
+variances. An off-diagonal entry describes whether two coordinates tend to move together or in
+opposite directions. Independent, balanced signs have unit diagonal entries and zero off-diagonal
+entries.
+Three ways to search binary embeddings 28
+For a general binary document vector with mean µ and covariance matrix Σ, let q be q with
+h
+omitted coordinates set to zero. Then
+q⊤Σq
+ρ = h . (45)
+q q
+(q⊤Σq )(q⊤Σq)
+h h
+This includes dependencies between coordinates. Conditioning on a cluster or filter can change
+both µ and Σ. A covariance measured globally is not automatically the conditional covariance
+inside the query’s selected clusters.
+A learned prefix may preserve ranking information through these dependencies even when its raw
+coordinate-energy share is small. Conversely, a prefix can have considerable energy and still fail
+to identify the extreme nearest neighbors. Estimating covariance also does not prove a normal
+distribution in the tails.
+6.6 Equal-weight mistakes lead to a binomial model
+Let X = 1[b ̸= t ]. If the X are independent with the same disagreement probability p, and all
+i i i i
+relevant weights equal a, then a mismatch count over h coordinates satisfies
+h
+M = X X ∼ Binomial(h,p), π = aM . (46)
+h i h h
+i=1
+A Hamming radius r visits
+V (r) = X r h ! (47)
+h
+u
+u=0
+keys, and its expected candidate population is
+N Pr(M ≤ r) = N X r h ! pu(1−p)h−u. (48)
+∗ h ∗
+u
+u=0
+Here N is the relevant reference pool size; it is N without filters or cluster restriction. Equa-
+∗
+tion (48) is a candidate-count model, not yet recall.
+If p = 1/2, every key has equal probability and the expected count reduces to N V (r)/2h.
+∗ h
+Different p with equal weights give a Poisson-binomial count. Unequal weights give a weighted
+i
+Bernoulli sum. Neither is described by one ordinary binomial with an average p.
+6.7 Derive recall by asking which true neighbors pass
+Write F (x) = Pr(X ≤ x) for a cumulative distribution function (CDF): the probability that X
+X
+is at or below a threshold.
+Let A be the prefix penalty and B the omitted-coordinate penalty. Full penalty is A +B .
+h h h h
+Under coordinate independence, the two sums are independent. Let u define the true full-score
+tail, and let v be the candidate prefix-penalty threshold. Then
+Z
+F (u−a)dF (a)
+Pr(A ≤ v, A +B ≤ u) B h A h
+r (u,v) = h h h = a≤v . (49)
+population Pr(A +B ≤ u) F (u)
+h h A h +B h
+Three ways to search binary embeddings 29
+Readthenumeratorasaweightedsum: foreachallowedprefixpenalty,askwhethertheremaining
+coordinates fit within the full-score threshold, multiply by the probability of that prefix penalty,
+and add.
+This is the logic missing from a candidate-count-only calculation: a retrieved document counts
+toward recall only if it also belongs to the true full-score tail.
+For equal weights and an integer full radius r , the formula becomes
+d
+min(h,r ,r ) !
+X h d h pu(1−p)h−uF (r −u)
+u Bin(d−h,p) d
+u=0 . (50)
+F (r )
+Bin(d,p) d
+This is exact for the stated population events. Choosing those radii to approximate top K and a
+candidate budget is another step. Finite-sample ranks and score ties need care.
+Example: Candidate fraction is not recall
+Use all 64 six-bit codes as documents and an all-positive equal-weight query. The best
+seven codes have zero or one mistake. Keep only codes matching the first two query bits:
+16 codes pass, so the candidate fraction is 16/64 = 25%. Five of the true seven pass: the
+ideal code and the four codes whose one error is in an omitted coordinate. Recall is 5/7,
+about 71.4%, not 25%. Allowing one error in the two-bit prefix retrieves 48 codes and
+includes all seven. Both numbers follow by counting the same true-neighbor event.
+6.8 Unequal query weights: count weighted subsets
+For a fixed query and lookup coordinates I , define
+h
+( )
+V (v) = # S ⊆ I : X |q | ≤ v . (51)
+q h i
+i∈S
+This counts every attempted key through threshold v, whether occupied or empty. Under
+independent uniform keys, expected candidates are N V (v)/2h. With real key probabilities,
+∗ q
+E[F(v) | q] = N X Pr(key = k | q,cluster,filter). (52)
+∗
+k:πq(k)≤v
+For a clustered lookup, apply Equation (52) separately with pool size e and the conditional key
+j
+distribution in cluster j, then sum the results.
+An average bit-disagreement rate is insufficient to determine these joint probabilities. The
+empty-key count V and occupied candidate count F are separate inputs to the latency formula.
+q
+A dense document distribution near the query key can make F large while V remains small; a
+q
+sparse key space can do the reverse.
+For small h, split weights in two, enumerate each half’s subset sums, sort one list, and count
+pairs whose sum is at most v. This meet-in-the-middle calculation uses roughly O(2h/2) memory
+and O(h2h/2) sorting/search work. It is an analysis tool for counting keys, not the measured
+latency of an online hash enumerator.
+For quantized nonnegative integer weights a , a dynamic program computes probability mass:
+i
+f (s) = (1−p )f (s)+p f (s−a ). (53)
+i i i−1 i i−1 i
+Three ways to search binary embeddings 30
+Replacing probabilities by counts and adding both predecessor counts computes key volumes.
+This is exact for the quantized-weight model. It does not silently become an exact calculation
+for unquantized query weights. If score quantization incurs a uniform score error at most ϵ, a
+score gap greater than 2ϵ is sufficient to preserve a pair’s order. Otherwise candidates near the
+boundary need exact scoring or a safe expanded bound.
+6.9 The conditional-normal approximation
+For many small independent contributions, a joint-normal approximation for full and prefix
+scores can be convenient. Subtract each score’s mean and divide by its standard deviation. This
+standardizes them to (Z,Y) with correlation ρ. For a true fraction a = K/N and selected
+∗
+candidate fraction f, set
+z = Φ−1(1−a), y = Φ−1(1−f),
+K f
+where Φ and ϕ are the standard normal CDF and density. The implied recall is
+1 Z ∞ ρz−y !
+r = ϕ(z)Φ f dz. (54)
+b
+a
+zK
+p1−ρ2
+We average over the entire true tail. Substituting only z = z calculates a boundary conditional
+K
+probability, not the integral. When ρ = 0, recall is f. In the limit of identical rankings, ρ = 1, it
+is min(1,f/a), subject to ties.
+This formula is not valid simply because an embedding is called Matryoshka. A short weighted
+binary prefix has finite, discrete support. Its extreme-score distribution can differ greatly from a
+normal tail. At a billion documents, top-K events may be far deeper in the tail than any small
+validation sample covers. Strong overall score correlation does not certify 99% recall.
+The controlled study below fits score correlation on one query group and checks predicted recall
+on different queries. Even there, the real-data normal approximation misses by several percentage
+points. Such a model can generate hypotheses; it should not declare a real 99%-recall winner.
+6.10 What can be concluded about the three methods
+• A: exact local scanning has no local candidate-search loss; global loss comes from routing,
+candidate/reranker score changes, and the declared filtering task.
+• B: exact bound-based traversal has the same binary result as A on the same selected pool.
+Finite budgets require query-level measurements or a distribution model for visited nodes
+and surviving true neighbors. A node count alone is not enough.
+• C: full keys with complete weighted ordering are exact locally. Short keys can be accurate
+when their ranking preserves true neighbors and the candidate budget is sufficient. That
+possibility should be measured, not dismissed. Their enumeration and posting costs remain
+separate from the recall benefit.
+The exact empirical definition is always available. Distribution models explain mechanisms;
+validation determines where their numerical estimates are useful.
+Three ways to search binary embeddings 31
+7 What the existing measurements support
+The purpose of these measurements is to check the reasoning, not to fit every equation until one
+method appears to win. The experiments have different scopes, so their numbers must not be
+merged into one unqualified performance claim.
+7.1 The one-million-passage scaling study
+The archived study used one flat cluster, a fixed 256-bit score, 100 binary candidates, leaf size
+32, deterministic branching, cached query embeddings, and one CPU thread. There were 100
+validation queries for selecting configurations and 200 held-out test queries, with three timing
+repeats. It covered pools from 1,000 to one million real MS MARCO passages.
+One-million-document test Median latency Binary recall Fully scored rows
+Packed scan 25.14 ms 100% 1,000,000
+Branch, budget 32,768 244.98 ms 99.26% about 163,766
+Unlimited branch 1,068.84 ms 100% about 999,961
+The branch reduced scoring at the finite budget, but did not win at matched target recall. The
+whole study found no median or p95 crossover among the tested 95% and 99% target settings.
+This conclusion belongs to that implementation, dataset, hardware and grid. It is not a theorem
+that every bitplane representation loses.
+The original implementation uses dense active masks for every node. Its measured split-word
+counter omits leaf reads, which must be derived from the visited-node counts and cluster widths.
+The physical mask size at one million rows is 15,625×8 = 125,000 bytes. A frontier with 20,000
+such masks would contain 2.5 GB of masks alone. This example explains how query RAM can
+be much larger than the packed-code payload; it is not a claimed observed frontier count.
+The source summary is results/scaling-msmarco-1m/analysis/settings.csv. Full run
+metadata and the validation protocol live beside it. The report’s verification script checks
+the numerical rows quoted here.
+7.2 The FiQA study asked a broader pipeline question
+The denser FiQA run used 57,638 documents and 648 queries, with 583 settings including random
+seeds. Its timings include routing, binary candidate search and float reranking, with embeddings
+cached. Its quality measures include float Recall@10 and nDCG@10, rather than the scaling
+study’s binary Recall@100.
+Method Probes Node budget Median ms Float Recall@10
+Sign-route binary scan 16 – 0.7524 0.6784
+Sign-route branch 32 2,048 0.6256 0.7006
+Sign-route branch 64 2,048 0.6466 0.7062
+Float IVF reference 8 – 0.1661 0.9127
+These selected examples show that probing more clusters with limited work inside them can be
+a useful combined tradeoff. They do not isolate traversal efficiency: the selected pools differ.
+Three ways to search binary embeddings 32
+Within the same selected buckets, unlimited branching was slower than scanning. The float IVF
+row uses a different scorer and was a strong practical reference in that experiment.
+Random exploration at probability 0.1 did not show a consistent improvement. Its purpose is
+to change visit order; it does not provide a mathematical guarantee of higher recall. The full
+FiQA report retains losing configurations, empty returns, and the relevant measurement scope.
+Its source is results/fiqa-2026-09-09-dense/README.md and the accompanying data.
+7.3 A new controlled check of the 24-bit prefix
+The small quality study used the same full weighted-binary score and row-ID tie rule for all
+methods. There was no outer routing: C = P = 1. Two synthetic datasets had 20,000 random
+binary documents. The real-data case used the first 100,000 rows of the cached Nomic/MS
+MARCO sample. All cases used d = 256 and h = 24.
+One synthetic query distribution gave all coordinates equal variance. The other multiplied the
+first 24 coordinates so that they held 80% of expected full-score variance. It was a controlled
+favorable case for a prefix, not a model of what Matryoshka always does.
+For each case, 16 queries estimated a score correlation and 16 different queries checked the
+normal-model prediction. The native full scan agreed with an independent exact score sort on
+all 96 query references. The short-key candidate set included all documents in keys tied at the
+final prefix threshold, then used the exact full score to keep the top 100.
+Data, candidate target Measured recall Normal prediction Gap Median keys
+Random equal variance, 1,000 23.00% 21.84% −1.16 pp 846,156
+Strong prefix, 1,000 95.00% 97.01% +2.01 pp 846,156
+Cached Nomic, 1,000 25.25% 17.41% −7.84 pp 6,976
+Cached Nomic, 5,000 52.13% 42.57% −9.56 pp 35,504
+Cached Nomic, 10,000 66.19% 58.46% −7.73 pp 78,370
+“Gap” is prediction minus measurement in percentage points. Values are rounded from the
+per-query evidence. The identical synthetic key counts are expected: the strong-prefix case scales
+all first-24 query weights by the same factor, which changes neither their key order nor the prefix
+candidate sets. It changes their importance in the full score.
+These results support two different conclusions. First, a short prefix is not inherently inaccurate:
+the constructed favorable case reaches 95% recall with 1,000 candidates. Second, a simple
+statisticalpredictioncanstillmissrealrecallbyseveralpoints. Anerrorofthatsizeisunacceptable
+as a certificate of a 99% recall target.
+The key counts were calculated from the actual query weights by meet-in-the-middle counting,
+including empty keys. The candidate set was constructed using an exhaustive prefix-score
+calculation for quality evaluation. That computation is not an implemented hash-search
+latency benchmark. Its wall time must not be plotted as the latency of Approach C.
+In the same favorable synthetic case, native B at budget 512 recovered about 99.38% of the
+binary top 100 while fully scoring about 4,122 documents on average. In the real-data case, B
+reached about 58.06%, 86.56% and 99.56% at budgets 512, 2,048 and 8,192. These are quality
+and work observations for a flat pool with a 1,000-candidate heap. They do not establish a
+latency ranking between an implemented native B and a hypothetical C.
+Three ways to search binary embeddings 33
+1.0
+0.8
+0.6
+0.4
+0.2
+0.0
+100 1k 10k
+Candidate target
+001@llaceR
+Measured Normal estimate
+Random coordinates Strong prefix Cached Nomic
+N = 20,000 N = 20,000 N = 100,000
+100 1k 10k 100 1k 10k
+Candidate target Candidate target
+Figure 5: Measured short-key recall versus the checked normal approximation. Each panel has its own
+explicitly stated document population.
+7.4 What was not validated
+The study does not validate:
+• real recall at a billion documents;
+• a routing-recall model across arbitrary cluster counts;
+• a normal tail for every query or a fixed percentage of Matryoshka prefix information;
+• a concrete hash enumerator’s timing, peak queue size, or SIMD speed;
+• float-vector recall, human relevance, or final answer accuracy from binary recall alone.
+The supplied calculator notes mixed float top-100 references at different dimensions with the
+binary-score reference. That mismatch cannot validate one common recall curve. The new
+report uses the same binary truth where it makes direct index comparisons and labels the other
+evidence.
+7.5 How to extend the checks fairly
+Freeze the representation, query set, filtering task and reference score first. Tune on one query
+set; check selected configurations on a different one. For every method, retain failures and empty
+returns, and record counts as well as times. For C, implement the actual enumerator before
+claiming its measured latency. For B, record split words, leaf words, documents scored and peak
+frontier memory separately.
+At each target recall, compare measured latency quantiles using configurations that actually
+reach that target. Use the same query population and report the uncertainty of quality estimates.
+Query-levelresamplingisappropriate;countingrepeatedtimingsasindependentqualitysamplesis
+not. Afewmeasuredcasesareusefulevidenceaboutmechanisms, notacompletecharacterization
+of every data distribution.
+Three ways to search binary embeddings 34
+8 Bring the formulas together
+The three methods share query embedding, preparation, routing, filtering, and the optional final
+reranker. Their difference is the work used to obtain candidates from the selected pool. This is
+the right boundary for comparing the index algorithms without hiding common costs.
+8.1 Latency, one method at a time
+Using the earlier definitions,
+T = T +Pc +N Gc +H (N ,R)c +T (R)+T (R′), (55)
+A common range elig lut s elig heap rank finish
+T = T +T +T +X s W c +X ℓ W c
+B common order roots j j split j j leafword
+j j
++Vc +FGc +H (F,R)c +T (R)+T (R′), (56)
+node lut,leaf s heap rank finish
+T = T +T
++X(cid:16)
+E c +Ccopyc +H c +F c
+(cid:17)
+C common keyprep j enum j copy j lookup j post
+j
++X F G c +H (F,R)c +T (R)+T (R′). (57)
+j C,j lut,gather s heap rank finish
+j
+G is the candidate scoring work actually needed after reusing the key contribution; it can be
+C,j
+zero for a full key with its exact score already known.
+All cluster sums in query work run over j ∈ P(q). If C uses a merged stream, add its explicitly
+counted stream-selection cost. Different execution choices can share preparation or reuse buffers;
+record those choices rather than charging duplicated work.
+8.2 An index speedup is not the same as an end-to-end speedup
+If two configurations have identical embedding and final-stage costs, write their shared time as
+T . Replacing index time t by t gives speedup
+0 A B
+T +t
+0 A
+,
+T +t
+0 B
+not t /t . Even removing index time entirely cannot exceed 1+t /T when T > 0. If candidate
+A B A 0 0
+counts or final-vector fetches differ, those costs are no longer shared and must be evaluated
+separately. This is why cached-query index timings and complete text-query timings should both
+be reported rather than substituted for one another.
+8.3 Persistent storage
+For the reference layouts selected in this report,
+M = M , (58)
+A,index base
+C
+M = M +db X ⌈n /w⌉, (59)
+B,index base w j
+j=1
+C
+M = M +Nb +X ⌈U /α⌉ [b (h )+2b +b ]. (60)
+C,index base ref j k j o slot
+j=1
+Three ways to search binary embeddings 35
+Storage sums run over all clusters, not only probed clusters. Increasing probes usually changes
+query work and scratch, not the already built index size. For literal prefix relaxation, substitute
+the trie directory and query-work formula from Equation (32).
+A different C layout can remove the additional posting permutation; it cannot remove the
+information needed to map results back to documents.
+8.4 Peak query RAM and the serving budget
+Search: tables, heap,
+Embedding stage Fetch and rerank stage
+frontier
+Resident index: one Local embedding-model Runtime overhead or Live query scratch at
+shared copy weights reserve time t
+Total serving RAM
+Compare peak against
+RAM budget
+Figure 6: Persistent index data, runtime reserve and simultaneous scratch are separate terms. Sequential
+stage buffers need a lifetime analysis.
+The search-stage scratch terms are
+Q = Q +Q , (61)
+A,search base scan workspace
+Q = Q +Q +max[γ Q (t)+Q (t)+Q (t)], (62)
+B,search base order B B,frontier current children
+t
+ 
+Q C,search = Q base +max  X γ C Q j (t)b enum,j +Q stream merge (t)+Q posting buffer (t)+Q gather (t) .
+t
+j
+(63)
+Small iterator state is included in workspace terms. Embedding and final reranking can have
+larger scratch than search, so use Equation (12) to obtain the full query peak. With resident
+index size M for method m, the RAM constraint is
+m,resident
+M +M +M +max X Q (t) ≤ M . (64)
+m,resident model runtime m,u RAM
+t
+u∈A(t)
+M is the shared resident embedding-model memory if encoding runs locally; it is zero in
+model
+this memory domain when an external service performs encoding. It is not multiplied by the
+number of queries.
+For a conservative bound, replace the sum by JQ . A loose upper bound that exceeds
+m,peak,max
+RAM does not prove that a tighter implementation cannot fit. An observed peak below the limit
+does not prove that every possible query fits. These are different claims.
+8.5 A compact comparison table
+Three ways to search binary embeddings 36
+A: full scan B: bitplanes C: key enumeration
+Additional index none beyond common db P W postings and key directory
+w j j
+layout
+Principal work every eligible code split masks, leaf masks, empty and occupied keys,
+full scores, frontier enumeration, postings,
+full scores
+Variable counts N s ,ℓ ,f ,V H ,F ,E ,Qmax
+elig j j j j j j j
+Largest scratch selection or batch score many full-width pending many pending flip sets or
+concern buffers masks candidate gather buffers
+Local exactness scan all eligible rows valid bounds, sufficient full-key weighted order or
+traversal, correct ties a valid full-score bound
+Approximation routing probes; node budget, visit policy, prefix width, candidate or
+control candidate/rerank earlier routing key budget, earlier routing
+boundary
+What must be kernel cost, routing skipped scores versus empty-key volume versus
+measured quality bitmap/queue cost and useful candidates, timing
+recall and recall
+8.6 The variables most likely to move the tradeoff
+Documents per physical cluster, n . A grows roughly linearly with eligible row count. In B,
+j
+a larger cluster also widens every active bitmap. In C, more documents per key can reduce the
+number of empty probes needed, while increasing posting and scoring work.
+Binary dimension, d. Longer codes increase score terms and stored bits. B may gain more
+from avoiding full scores, but also stores more planes and can traverse more coordinates. For
+full-key C, the number of possible keys grows exponentially. For short-key C, h and d are separate
+parameters.
+Probes, P. More clusters can recover missed neighbors. They also increase eligible rows, root
+masks, active key streams and candidate competition. Cluster sizes and the query’s routing
+behavior matter, not just the number P.
+Leaf size and node budget. A small leaf threshold can trade scoring for more mask work. A
+finite node budget caps visits but does not specify how many useful leaves are reached. The best
+choice depends on the query and data, not a general monotonic recall formula.
+Lookup width and candidate target. A short key has denser postings and a smaller key
+space, but leaves more score information out. A longer key can improve candidate discrimination
+and simultaneously make empty-key enumeration costly. A strong prefix can improve recall; that
+does not remove the enumeration cost.
+Kernel and memory system. SIMD, cache residency, batch size, alignment, layout and thread
+count change the effective coefficients. Keep them fixed for an algorithm comparison, or report
+their changes as a separate experiment.
+8.7 Choosing configurations at fixed N and RAM
+Let θ contain the chosen method’s tunable parameters and let r be a recall target. Choose
+m 0
+the latency objective explicitly, for example median or p95 across queries. A valid optimization
+Three ways to search binary embeddings 37
+statement is
+θ∗ ∈ argminQuantile [T (q;θ )] (65)
+m p m m
+θm
+subject to the RAM condition in Equation (64) and
+E [Recall@K(q;θ )] ≥ r . (66)
+q m 0
+The expectation specifies an average-recall target. A requirement that almost every query reach
+r is stronger and needs a different probability constraint.
+0
+Listing 12: A defensible finite-grid experiment.
+ChooseConfiguration(corpus, queries, fixed_reference, RAM_limit, targets):
+build or cache every configuration’s required index
+compute exact reference results once for each query
+on tuning queries:
+for every configuration in the declared grid:
+measure latency, quality, work counts and peak RAM
+keep failures and empty returns in the record
+choose qualifying configurations for each target
+on separate test queries:
+evaluate those choices without retuning
+report lowest tested latency only where the target and RAM checks pass
+distinguish measured results from untested model predictions
+A mathematical model can reduce the grid and explain its results. It cannot manufacture the
+unknown query/document distribution or the true hardware coefficients. A “best estimated
+point” from a model is a proposed experiment, not a verified engineering choice.
+If d is also varied, keep the quality reference fixed across choices, for example the same long-vector
+top K or the same relevance labels. Recomputing a different binary ground truth for every d
+makes a tiny representation look perfectly accurate against its own changed task.
+Final interpretation
+A pays to score the selected pool. B pays to discover which scores can be avoided, and
+dense bitmaps can make that discovery expensive. C pays to discover which keys contain
+useful candidates, including empty keys and queue work. Each can be exact under a
+suitable stopping rule. Which is fastest at a recall target is determined by the data,
+the representation, the visited work, the memory layout and the hardware—not by one
+operation count or one assumed normal distribution.
+Three ways to search binary embeddings 38
+A A finite-sample view of prefix recall
+The population-tail approximation is not the only mathematical definition available. This
+appendix shows what an exact finite-N calculation would require, under independent, identically
+∗
+distributed document score pairs and no score ties. It is useful for understanding why knowing
+only a correlation is insufficient.
+For a particular document with full score s and prefix score t, classify another document into
+four events:
+p (s,t) = Pr(S > s,T > t), p (s,t) = Pr(S > s,T ≤ t),
+11 10
+p (s,t) = Pr(S ≤ s,T > t), p (s,t) = Pr(S ≤ s,T ≤ t).
+01 00
+Among the other N − 1 documents, let (a,b,c,e) count these categories. A multinomial
+∗
+distribution counts how many independent documents land in each of the four categories, using
+those probabilities. The chosen document belongs to the full top K when a+b ≤ K −1, and
+belongs to the prefix top R when a+c ≤ R−1. Therefore, with e = N −1−a−b−c,
+∗
+P (s,t) = X
+(N
+∗
+−1)!
+,pa pb pc pe . (67)
+K,R a!b!c!e! 11 10 01 00
+a,b,c≥0; a+b≤K−1; a+c≤R−1
+a+b+c≤N∗−1
+If F is the joint distribution of one document’s scores, every document has the same event
+S,T
+probability under the identical-sampling assumption. Summing over all N documents and
+∗
+dividing by K gives
+N Z
+E[Recall@K] = ∗ P (s,t)dF (s,t). (68)
+K,R S,T
+K
+This assumes the candidate stage returns exactly the prefix top R and the final stage uses
+the same full score. Retrieving whole tied prefix keys changes that candidate rule; ties can
+be handled by augmenting the ordering with document IDs or by explicitly integrating their
+selection probabilities.
+Equation (68) is much harder to evaluate than the conditional-normal approximation. More
+importantly, it still needs F . Matryoshka training, a code length, a cluster count and a RAM
+S,T
+budget do not uniquely specify that distribution. Exact mathematics can organize unknown
+inputs; it cannot infer them from the algorithm’s name.
+B Checklist for an honest numerical implementation
+1. Fix the score and tie rule. Keep original-float, truncated-float, binary-score and human
+relevance references distinct.
+2. Check the score identity on small vectors and enumerate the actual top K.
+3. Check that the weighted-subset stream emits every subset once, in nondecreasing penalty,
+and processes the final boundary tie before claiming exactness.
+4. Count split words and leaf words separately. Use each cluster’s physical width, including
+padding; do not substitute the number of active documents for the bitmap length.
+5. Record the ownership of codes, external IDs, posting references and key storage. Any shared
+or reordered array must be stated before removing its bytes from a formula.
+Three ways to search binary embeddings 39
+6. Count temporary state at its lifetime peak. A queue-capacity bound and an observed
+allocation peak are different quantities.
+7. Keep key attempts separate from occupied keys and returned postings. Expected first hit is
+not the same threshold as finding R candidates.
+8. Price centroid float arithmetic separately from binary score lookups. Charge selection,
+allocation, copying and gathers where the implementation performs them.
+9. Use either a calibrated combined cost or a disaggregated operation model for each block. Do
+not count the same memory and selection work in both.
+10. Test statistical predictions on queries not used to estimate their parameters. Evaluate recall
+after the actual candidate and tie rules, not merely a probability of finding some key.
+C Floating-point arithmetic and exactness
+The score and bound proofs use real arithmetic. A numerical implementation must ensure its
+computed upper bounds remain conservative under rounding. The local C++ reference includes a
+rounding allowance for bound pruning and a deterministic row-ID tie order. A report should not
+claim exactness merely because an unguarded floating-point comparison resembles the algebra.
+This does not require inventing a collection of hypothetical production patches. It requires
+checking the numerical path used by the implementation and testing it against a full reference
+scan on the same inputs. The small examples and archived candidate checks provide such
+evidence for their stated scopes; they do not prove every future implementation correct.
+D Optional expansion of the embedding cost
+The main formulas keep T and Q as measured model-specific functions. If a more detailed
+emb emb
+encoder estimate is needed, its architecture must be another set of inputs, not an unexplained
+constant.
+For an illustrative standard dense Transformer encoder, let n be query tokens, L the number
+t e
+of layers, m hidden width, f feed-forward width, and H attention heads. For one layer with
+a
+ordinary two-matrix feed-forward computation, multiply-add contributions are
+U = 4n m2+2n2m+2n mf. (69)
+layer t t t
+The first term comes from the query, key, value and attention-output projections. The second
+comes from attention-score and attention-value matrix products. The third comes from the
+feed-forward expansion and contraction. Activation, normalization and softmax operations add
+separate elementwise terms. A different block, gated feed-forward network or sparse attention
+requires different counts.
+A corresponding parameterized time model is
+T = T +L (cid:0) U c +U c (cid:1)+T .
+emb tokenize e layer enc,mac elementwise enc,elt pool/project
+These effective coefficients depend on batching, device kernels, precision and memory behavior.
+Alternatively use the resource bound in Equation (19), without adding it on top of coefficients
+that already include the same work.
+Three ways to search binary embeddings 40
+A non-fused attention implementation may materialize H n2 attention values. With bytes per
+a t
+activation b , an explicit scratch model can be written
+a
+Q = b (cid:0) η n m+η n f +η H n2(cid:1)+Q ,
+emb a m t f t a a t kernel
+where the η coefficients count simultaneously live buffers, not time. Fused attention can avoid
+materializing the square attention matrix, so its chosen buffer counts differ. Layer workspaces can
+be reused during inference; multiplying a per-layer peak by L is not a general inference-RAM
+e
+formula. Resident model weights are shared and counted separately.
+A Matryoshka prefix normally reuses an already computed embedding. Halving the search
+prefix d does not automatically halve the encoder’s layer count or hidden width. It reduces
+the subsequent representation and search work unless the actual encoder implementation also
+changes.
+E Reproduction and parameter ledger
+The editable source is report.tex, with chapter files in sections/. Mermaid sources and
+rendered diagrams are in figures/. The build instructions are in the adjacent README.md. The
+arithmeticchecksareimplementedinverify_math.py. Theyvalidatetheworkedexamples,exact
+subset ordering, binomial conditional-recall example, word widths, selected storage identities,
+and quoted measured rows. The statistical evidence is preserved with its source hash.
+The following ledger identifies the inputs a future calculator must obtain rather than infer from
+one document count.
+Input family Parameters or counts How to obtain them
+Representation D,d,d ,d , preparation and score fixed experimental definition;
+r f
+rule embedding/model metadata
+Retrieval target K,R, filter, reference score, tie rule fixed task definition
+Cluster layout C,n ,P(q),e built index and per-query
+j j
+routing/filter traces
+Storage widths w,b ,b ,b ,b ,b ,b actual types, packing and
+w id o c f s
+alignment
+Baseline scoring g,G,H ,c source code, work counters and
+s lut
+kernel measurements
+Bitplane search L,B ,s ,ℓ ,f ,V configuration plus query traces;
+node j j j
+not budget alone
+Bitplane RAM frontier masks, current/child buffers, allocation/capacity measurements
+capacities or an explicit bound
+Key index I ,h ,U ,α,b ,b chosen lookup coordinates, index
+h j j k ref
+build and slot layout
+Key search H ,F ,E ,Qmax, stopping rule actual key enumeration, posting
+j j j j
+and frontier traces
+Prefix-trie variant Z ,b ,u , posting ranges actual stored nodes, path and
+j trie j
+range visits
+Hardware compute rates, bandwidth, cache calibrated for the actual workload
+regime, SIMD, threads and machine
+Optional final stage fetch policy, R′,u ,d , rerank score execution pipeline and
+f f
+storage-residency decision
+Three ways to search binary embeddings 41
+Input family Parameters or counts How to obtain them
+Statistical model query/data distribution, covariance, declared synthetic assumptions or
+score tails measured and checked estimates
+Serving RAM M ,M ,M ,J,Q ownership/lifetime analysis and
+resident model runtime peak
+process measurements
+A numerical example can assign values to these parameters. The equations themselves remain
+parameterized, so changing the workload changes the inputs instead of requiring a different
+explanation of the algorithm.
+References
+[1] Exa Team. How we built a web-scale vector database. 17 December 2024. https://exa.ai/
+blog/building-web-scale-vector-db.
+[2] A. Kusupati et al. Matryoshka Representation Learning. 2022, revised 2024. https://arxiv.
+org/abs/2205.13147.
+[3] M. Norouzi, A. Punjani, D. J. Fleet. Fast Exact Search in Hamming Space with Multi-Index
+Hashing. 2013, revised 2014. https://arxiv.org/abs/1307.2982. This concerns Hamming
+search; it is not a weighted-search guarantee for the methods here.
+[4] Local project evidence. cpp/index.cpp, cpp/index.hpp, results/scaling-msmarco-1m/,
+results/fiqa-2026-09-09-dense/, and calculator/recall-validation.json. Repro-
+duction and source hashes are described in Section 7.

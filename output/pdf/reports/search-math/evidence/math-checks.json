@@ -1,0 +1,9 @@
+{
+  "score_identity_and_lookup": "passed",
+  "complete_weighted_subset_order": "passed",
+  "finite_binary_recall_example": "passed",
+  "memory_and_archived_numbers": "passed",
+  "fiqa_csv_sha256": "1fa8dbcdbae365d2562696c92d14a7eec2bed8f9ccac0c26b1bb26c0cb3443c1",
+  "scaling_csv_sha256": "cfeeed179a4363abd892c5412813bc2e0acfc25b2cb476bb4ec03e57797543bc",
+  "recall_study_sha256": "89fef2537d3a43e50efa5004706400f638a7695fe85a8a343756dd6baf22f677"
+}
