@@ -40,11 +40,18 @@
 
 ## 4. Run fair, extensive experiments
 
-Current run: `results/prefix-study-2026-09-13/`, two 256-bit pools with 570 settings each and two wide pools with 380 settings each.
-All encoding, exact references, cluster layouts and prefix-geometry calculations are complete.
-The serial timing sweeps and repeats are running. Nomic768 will use the focused configuration after the current sweep; its original wide schedule has not run. Quora256 completed570settings and three selected-point repeats with no failed jobs. Preparation checkpoint: `b5daa9e`.
-The Nomic256 main process loaded its original75-minute limit; its saved configuration now allows110minutes for repeats and explicit continuation if needed. Any interrupted case must be archived with its reason before an explicit rerun; do not silently discard an attempt.
-The outer sequencer is suspended (see `pipeline-pause.json`); the current Quora1024 controller continues normally. Finish its summary/repeats manually, then complete missing Nomic256 groups before changing the native build. Wide-pool schedules were adjusted before starting; original schedules remain beside them.
+Current run: `results/prefix-study-2026-09-13/`.
+Quora256 completed570settings and the selected repeats. Quora1024 has302completed,
+qualified settings from380scheduled; its selected repeats are complete. The time-limited
+prefix1024 batch and unstarted global alternatives remain recorded, not counted as losses.
+Nomic256 is completing its missing groups in small batches; its earlier interrupted
+attempt and repeat records are preserved under `attempts/initial-time-allowance/`.
+
+The old outer sequencer has stopped. `checkpoint-continuation.json` records the live
+Nomic continuation. Once it ends, the native agent builds the optional deeper-first
+order once, then the pool agent prepares Qwen32 and Nomic64. The serial follow-up is
+queued in `continue-exploration.py`: short widths, focused Nomic768, and direct A/C
+controls. Each stage has a saved time allowance; original schedules remain beside changes.
 
 - [x] Connect the new method to the existing isolated runner.
 - [ ] Verify document/query/reference hashes before and after every stage.
@@ -123,3 +130,10 @@ Section1 is protected by `docs/section-one.sha256`. Update the abstract and late
 - [ ] Prepare the two short pools and run the next comparisons serially.
 - [ ] Fill missing A probe points and measure C at depth zero before calling an apparent win.
 - [ ] Repeat promising choices, without repeating the whole grid or adding review rounds.
+
+### Paper setup update
+
+1. Build: describe the actual pools, parameter families and timing limits in the experiment section.
+2. Leave out: changes to Section 1, new methods, and results that have not completed.
+3. Out of scope: rewriting the whole paper again or adding a separate experiment framework.
+4. Necessary: show which inputs stay fixed, distinguish code lengths, and identify actual tested coverage.

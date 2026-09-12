@@ -95,6 +95,18 @@
       {
         "start_depth": 32,
         "candidate_target": 100
+      },
+      {
+        "start_depth": 1,
+        "candidate_target": 1
+      },
+      {
+        "start_depth": 4,
+        "candidate_target": 100
+      },
+      {
+        "start_depth": 4,
+        "candidate_target": 1000
       }
     ]
   }
