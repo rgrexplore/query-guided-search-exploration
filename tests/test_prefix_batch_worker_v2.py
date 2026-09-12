@@ -168,3 +168,18 @@ def test_cli_runs_declared_variants_in_a_fresh_process(job, tmp_path):
     result = json.loads((output / "result.json").read_text())
     assert result["completed_variants"] == ["one", "two"]
     assert result["measurements"] == 6
+
+
+def test_worker_forwards_optional_exact_stop_without_changing_its_default(job, tmp_path):
+    worker = importlib.import_module("experiments.prefix_batch_worker_v2")
+    base = job["variants"][0]
+    job["variants"] = [dict(base, setting_id="default"),
+                       dict(base, setting_id="bounded", stop_when_exact=True)]
+    result = worker.run_job(job, tmp_path / "out")
+    records = read_records(tmp_path / "out")
+    assert result["completed_variants"] == ["default", "bounded"]
+    assert result["exact_checks"] == 4
+    assert all(row["recall"] == 1 for row in records)
+    assert [row["documents_scored"] for row in records] == [3, 3, 2, 3]
+    assert records[2]["stop_reason"] == "bound"
+    assert records[3]["stop_reason"] == "exhausted"
