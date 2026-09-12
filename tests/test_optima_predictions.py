@@ -1,5 +1,6 @@
 import math
 import json
+import itertools
 
 import pytest
 
@@ -10,6 +11,8 @@ from experiments.optima_predictions import (
     features,
     fit_model,
     global_branch_derivative,
+    nonempty_leaf_words,
+    posting_occupancy,
     predict_search,
     summarize_configuration,
 )
@@ -66,7 +69,7 @@ def test_constant_lookup_terms_are_reported_as_unidentifiable():
     model = fit_model(observations)
     assert not model['identifiable']
     assert model['matrix_rank'] == 3
-    assert model['omitted_columns'] == ['key_lookups', 'key_queue_work']
+    assert model['omitted_columns'] == ['key_lookups', 'key_queue_work', 'successful_postings']
     assert model['fit_within_threshold']
 
 
@@ -92,7 +95,7 @@ def test_fixed_key_and_direct_scan_can_select_the_same_document_group():
 
 def test_global_derivative_requires_identifiable_costs():
     prices = dict(fixed=.1, scored_rows=.01, log_scored_ratio=.002,
-                  split_words=.001, leaf_words=.001, nodes=.002)
+                  split_words=.001, leaf_words=.001, nodes=.002, nonempty_leaf_words=.01)
     model = dict(identifiable=False, coefficients=prices)
     assert not global_branch_derivative(model, DATA, 4)['available']
     model['identifiable'] = True
@@ -104,6 +107,47 @@ def test_global_derivative_requires_identifiable_costs():
                       leaf_words=4, nodes=depth + 1)
         full_costs.append(predict_search(model, 'branch', counts, 4))
     assert min(full_costs[i] for i in derivative['candidate_depths']) == min(full_costs)
+    assert derivative['candidate_depths'] == list(range(DATA['strong_bits'] + 1))
+    assert derivative['preferred_depth'] == full_costs.index(min(full_costs))
+
+
+def test_nonempty_words_matches_small_independent_position_distribution():
+    # Two 4-bit words, with independent position probability 1/2. The input
+    # is the expected count of four survivors, not a fixed-size sample.
+    masks = list(itertools.product([0, 1], repeat=8))
+    actual_mean = sum(bool(any(mask[:4])) + bool(any(mask[4:])) for mask in masks) / len(masks)
+    assert nonempty_leaf_words(4, 2, word_bits=4) == actual_mean
+    assert nonempty_leaf_words(0, 2, word_bits=4) == 0
+    assert nonempty_leaf_words(8, 2, word_bits=4) == 2
+    assert nonempty_leaf_words(0, 0) == 0
+
+
+def test_successful_posting_proxy_matches_uniform_directory_visits():
+    # Three of the eight (cluster, key) cells exist. Visiting every cell once
+    # gives three posting starts and five misses, not eight posting starts.
+    key_case = case('keys', clusters=2, key_bits=2)
+    occupied = posting_occupancy(key_case, dict(buckets=2, occupied_keys=3))
+    assert occupied == 3 / 8
+    counts = work(12, key_attempts=8, keys_generated=4)
+    assert features('keys', counts, 4, occupied)['successful_postings'] == 3
+    assert features('keys', counts, 4, 0)['successful_postings'] == 0
+
+
+def test_new_word_term_addresses_saved_sparse_leaf_failure_and_keeps_small_leaf_control():
+    # Recorded tuning diagnostics from the 1M fixed-support run. This checks
+    # the model correction, not its accuracy on the unused final queries.
+    old = dict(fixed=0, scored_rows=2.4915568694334586e-5,
+               log_scored_ratio=.012919648891021058, split_words=5.196858792862577e-7,
+               leaf_words=3.1199716470276285e-6, nodes=.0006526586029027414,
+               nonempty_leaf_words=0)
+    revised = dict(fixed=.005959622, scored_rows=2.4229e-5,
+                   log_scored_ratio=.00792611, split_words=4.35e-7,
+                   leaf_words=1.348e-6, nodes=.000143297, nonempty_leaf_words=.000139189)
+    large = work(3905.5, bitplane_words=125000, leaf_words=15625, nodes=9)
+    small = work(244.5, bitplane_words=187500, leaf_words=15625, nodes=13)
+    assert abs(predict_search(dict(coefficients=old), 'branch', large, 100) / .59948 - 1) > .5
+    assert abs(predict_search(dict(coefficients=revised), 'branch', large, 100) / .59948 - 1) < .2
+    assert abs(predict_search(dict(coefficients=revised), 'branch', small, 100) / .16150 - 1) < .2
 
 
 def test_frozen_check_keeps_time_and_recall_misses_without_refitting(tmp_path, monkeypatch):

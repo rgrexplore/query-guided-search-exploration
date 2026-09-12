@@ -36,18 +36,42 @@ def read_csv(path):
         return list(csv.DictReader(source))
 
 
-def features(method, work, top_k):
+def nonempty_leaf_words(scored_rows, leaf_words, word_bits=64):
+    """Expected nonzero words when surviving positions are uniformly spread.
+
+    Zero words skip the scorer. A nonzero word starts a short sequence of
+    row accesses. This estimates those starts; it is not a native counter.
+    """
+    if leaf_words == 0:
+        return 0.0
+    density = min(max(scored_rows / (word_bits * leaf_words), 0), 1)
+    return leaf_words * (1 - (1 - density)**word_bits)
+
+
+def posting_occupancy(case, storage):
+    """Fraction of possible (cluster, key) cells that are occupied.
+
+    Applying this fraction to visited keys assumes representative directory
+    cells. Selected clusters and weighted key order can violate that premise.
+    """
+    cells = storage['buckets'] * 2**case['key_bits']
+    return min(max(storage['occupied_keys'] / cells, 0), 1)
+
+
+def features(method, work, top_k, occupied_fraction=0.0):
     """Separate work terms; all coefficients are combined empirical prices."""
     count = work['documents_scored']
     values = dict(fixed=1.0, scored_rows=count,
                   log_scored_ratio=math.log(max(count / top_k, 1)))
     if method == 'branch':
         values.update(split_words=work['bitplane_words'], leaf_words=work['leaf_words'],
-                      nodes=work['nodes'])
+                      nodes=work['nodes'],
+                      nonempty_leaf_words=nonempty_leaf_words(count, work['leaf_words']))
     elif method == 'keys':
         generated = work['keys_generated']
         values.update(key_lookups=work['key_attempts'],
-                      key_queue_work=generated * math.log2(generated + 2))
+                      key_queue_work=generated * math.log2(generated + 2),
+                      successful_postings=work['key_attempts'] * occupied_fraction)
     return values
 
 
@@ -59,7 +83,9 @@ def summarize_configuration(items):
     """
     case = items[0]['case']
     rows = [row for item in items for row in item['queries']]
-    per_query_features = [features(case['method'], row, case['top_k']) for row in rows]
+    occupancy = (posting_occupancy(case, items[0]['result']['storage'])
+                 if case['method'] == 'keys' else 0.0)
+    per_query_features = [features(case['method'], row, case['top_k'], occupancy) for row in rows]
     return {
         'work': {name: float(np.median([row[name] for row in rows])) for name in WORK_FIELDS},
         'features': {name: float(np.median([row[name] for row in per_query_features]))
@@ -69,6 +95,7 @@ def summarize_configuration(items):
         'query_ms': float(np.median([row['query_ms'] for row in rows])),
         'composition_gap_ms': float(np.median([
             row['query_ms'] - row['routing_ms'] - row['search_ms'] for row in rows])),
+        'posting_occupancy': occupancy,
     }
 
 
@@ -108,9 +135,9 @@ def fit_model(observations, threshold_percent=20.0):
     }
 
 
-def predict_search(model, method, work, top_k):
+def predict_search(model, method, work, top_k, occupied_fraction=0.0):
     return sum(model['coefficients'][name] * value
-               for name, value in features(method, work, top_k).items())
+               for name, value in features(method, work, top_k, occupied_fraction).items())
 
 
 def analytic_work(case, data):
@@ -159,7 +186,12 @@ def analytic_work(case, data):
 
 
 def global_branch_derivative(model, data, top_k):
-    """Derivative of the fitted one-path model while its leaf has at least K rows."""
+    """Keep the earlier derivative as a guide, then check every valid depth.
+
+    The nonempty-word term is nonlinear. The earlier stationary point no
+    longer optimizes the full revised model; there are only m+1 integers to
+    evaluate for this single-path calculation.
+    """
     prices = model['coefficients']
     documents, depth = data['documents'], data['strong_bits']
     if not model['identifiable'] or prices['scored_rows'] <= 0:
@@ -176,9 +208,21 @@ def global_branch_derivative(model, data, top_k):
     else:
         optimum = branch_depth_optimum(documents, marginal_fixed / words,
                                        prices['scored_rows'], depth)
-    return dict(available=True, **optimum,
-                scope='Global balanced single path; fixed leaf width; F>=K. Check recall and integer choices.',
-                equation='W*c_split+c_node-ln(2)*c_log = ln(2)*N*2^(-j)*c_row')
+    candidates = list(range(depth + 1))
+    predicted_costs = []
+    for candidate in candidates:
+        work = dict.fromkeys(WORK_FIELDS, 0.0)
+        work.update(documents_scored=documents * 2.0**-candidate,
+                    bitplane_words=candidate * words, leaf_words=words, nodes=candidate + 1)
+        predicted_costs.append(predict_search(model, 'branch', work, top_k))
+    return dict(available=True, candidate_depths=candidates,
+                initial_unconstrained_depth=optimum['unconstrained_depth'],
+                initial_candidate_depths=optimum['candidate_depths'],
+                predicted_search_ms=predicted_costs,
+                preferred_depth=candidates[int(np.argmin(predicted_costs))],
+                scope='Global balanced single path; F>=K. All valid integer depths evaluated with the revised model.',
+                initial_guide_equation='W*c_split+c_node-ln(2)*c_log = ln(2)*N*2^(-j)*c_row',
+                initial_guide_limitation='The closed form omits the added nonempty-leaf-word term.')
 
 
 def fit_support(folder, threshold_percent):
@@ -214,7 +258,9 @@ def fit_support(folder, threshold_percent):
         work = observation['work'] if calculated is None else calculated
         routing = float(np.median(router_samples[(case['router'], case['probes'])]))
         model = models[case['method']]
-        predicted = predict_search(model, case['method'], work, case['top_k']) + routing + model['composition_gap_ms']
+        occupancy = observation['posting_occupancy']
+        predicted = (predict_search(model, case['method'], work, case['top_k'], occupancy)
+                     + routing + model['composition_gap_ms'])
         predictions.append(dict(
             support=folder.name, setting_id=identifier, method=case['method'],
             router=case['router_kind'], clusters=case['clusters'], probes=case['probes'],
@@ -228,6 +274,9 @@ def fit_support(folder, threshold_percent):
             work_source='analytic_uniform_sign_expectation' if calculated is not None else 'empirical_tuning_medians',
             routing_source='empirical_tuning_layout_probe_median', predicted_routing_ms=routing,
             recall_source='empirical_tuning_bootstrap_lower_bound',
+            posting_occupancy=occupancy,
+            predicted_nonempty_leaf_words=nonempty_leaf_words(work['documents_scored'], work['leaf_words']),
+            predicted_successful_postings=work['key_attempts'] * occupancy,
             **{'predicted_' + name: value for name, value in work.items()},
         ))
     choices = []
@@ -274,11 +323,19 @@ def fit(study, supports, threshold_percent=20.0):
     save_json(output / 'shortlist.json', choices)
     save_json(output / 'formulas.json', formulas)
     save_json(output / 'provenance.json', dict(
-        supports=supports, p50_error_threshold_percent=threshold_percent, source_hashes=hashes,
+        version=2, supports=supports, p50_error_threshold_percent=threshold_percent, source_hashes=hashes,
         script_sha256=digest(Path(__file__)),
         math_helpers_sha256=digest(Path(__file__).with_name('optima_model.py')), failures=failures,
+        proxy_formulas={
+            'nonempty_leaf_words': 'V_leaf * (1 - (1 - F/(64*V_leaf))^64); zero if V_leaf=0',
+            'successful_postings': 'H * occupied_keys/(stored_clusters * 2^key_bits)',
+            'interpretation': 'Counts of short scoring runs and successful directory entries; '
+                              'combined empirical prices include memory-access overhead.',
+        },
         scope='Frozen before evaluation. One median observation per qualified tuning configuration. '
               'Recall and routing are empirical. Expected work is analytic only where explicitly labeled. '
+              'Nonempty leaf words assume uniformly spread survivors; successful postings use stored directory '
+              'occupancy. Both are approximations, not exact native event counters. '
               'Fit residuals are training diagnostics, not evidence of future accuracy.'))
     print(f'Frozen {len(forecasts)} predictions and {len(choices)} formula-selected settings in {output}.')
 
@@ -303,7 +360,8 @@ def check(study):
             actual = float(observed['p50_ms'])
             error = 100 * (prediction['predicted_p50_ms'] / actual - 1)
             items = [item for item in cases if item['case']['setting_id'] == identifier]
-            actual_work = summarize_configuration(items)['work']
+            actual_summary = summarize_configuration(items)
+            actual_work = actual_summary['work']
             best_id = choice['measured_best_setting']
             best = summaries.get(best_id)
             work_errors = {}
@@ -319,6 +377,9 @@ def check(study):
                 recall=float(observed['recall']), met_target=float(observed['recall']) >= .99,
                 qualified_environment=observed['qualified_environment'] == 'True',
                 work_source=prediction['work_source'], work=work_errors, model_status=choice['model_status'],
+                proxy_work={name: dict(predicted=prediction.get('predicted_' + name),
+                                       estimated_from_final_work=actual_summary['features'].get(name, 0))
+                            for name in ('nonempty_leaf_words', 'successful_postings')},
                 same_as_measured_best=choice['same_as_measured_best'],
                 measured_best_setting=best_id,
                 formula_to_measured_best_ratio=None if best is None else actual / float(best['p50_ms']),
