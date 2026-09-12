@@ -137,3 +137,24 @@ Section1 is protected by `docs/section-one.sha256`. Update the abstract and late
 2. Leave out: changes to Section 1, new methods, and results that have not completed.
 3. Out of scope: rewriting the whole paper again or adding a separate experiment framework.
 4. Necessary: show which inputs stay fixed, distinguish code lengths, and identify actual tested coverage.
+
+## Evidence-led final controls
+
+- [x] Qwen32 completed608settings and selected repeats. B's observed top-one time at the99% target was0.125ms versus A0.760ms with float-trained IVF; B recovered all1000reference IDs in that setting. This is provisional until the binary-trained router comparison.
+- [x] Add binary-code training as a router option, shared by A/B/C, keeping every pool array unchanged. Commit `a45a311`.
+- [x] Prepare optional C exact stopping in isolated commit `d5157f4`; do not change the active native build during timings.
+- [x] Declare focused binary-router comparisons and a global exact-search control in the configuration folder.
+- [x] Prepare probability/seed comparisons within B, using the same selected routers and query arrays.
+- [ ] After `exploration-finished.json`, integrate C's exact-stop option and run its focused checks once.
+- [ ] Run `final-focused-runs.py` after the exact-stop build marker. Keep all parameter choices and full-query records.
+- [ ] Check predicted prefix end depths and row counts against the global exact-stop run.
+- [ ] Compare all tested router choices within each unchanged pool before writing the final conclusions.
+
+The optional C rule leaves its default behavior unchanged. After a complete prefix
+level, any unseen row must differ in at least one retained sign. Its score is at
+most Q minus twice the smallest absolute query value in that prefix. If the worst
+kept score is above that bound, C can stop without losing any result in the opened
+clusters. This adds a stopping check, not a new index layout. The quick reference
+probe found possible positive-depth stopping for665/1000Qwen32 top-one queries,
+75/1000Nomic64 top-one queries, and none in either256-bit pool. Actual timing and
+returned-ID checks remain necessary.

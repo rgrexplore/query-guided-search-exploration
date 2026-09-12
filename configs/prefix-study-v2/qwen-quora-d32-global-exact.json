@@ -1,0 +1,61 @@
+{
+  "pool": "data/prefix-study-2026-09-13/pools/qwen-quora-d32",
+  "cluster_counts": [
+    1
+  ],
+  "top_ks": [
+    1
+  ],
+  "recall_targets": [
+    0.99,
+    1.0
+  ],
+  "probe_targets": [
+    1.0
+  ],
+  "include_all_clusters": true,
+  "repetitions": 1,
+  "ram_budget_bytes": 32000000000,
+  "worker_stop_bytes": 32000000000,
+  "global_seconds": 300,
+  "job_seconds": 60,
+  "schedule_seed": 43,
+  "router_seed": 42,
+  "branch": {
+    "settings": [
+      {
+        "leaf_size": 2048,
+        "node_budget": 0,
+        "prefer_deeper_ties": false
+      }
+    ],
+    "exploration": 0,
+    "seed": 42
+  },
+  "prefix": {
+    "max_prefix_bits": 32,
+    "settings": [
+      {
+        "start_depth": 1,
+        "candidate_target": 0,
+        "stop_when_exact": true
+      },
+      {
+        "start_depth": 4,
+        "candidate_target": 0,
+        "stop_when_exact": true
+      },
+      {
+        "start_depth": 32,
+        "candidate_target": 0,
+        "stop_when_exact": true
+      },
+      {
+        "start_depth": 0,
+        "candidate_target": 0,
+        "stop_when_exact": false
+      }
+    ]
+  },
+  "routing_representation": "binary"
+}
