@@ -1,0 +1,182 @@
+\newpage
+\section{Preliminary calculations}
+\subsection{Time complexity}
+Let $N$ be the document count, $d$ the code length, $C$ the cluster count, $P$ the number of
+opened clusters, and $K$ the requested results. A cluster $c$ has $n_c$ documents and
+$W_c=\ceil{n_c/w}$ words per dense mask, where $w=64$ in the implementation. A complete
+document score uses $G=\ceil{d/g}$ table terms, with group width $g=4$ in the measurements.
+
+\paragraph{A: scan.} The row count is $F_A=\sum_{c\in\mathcal P}n_c$, where $\mathcal P$
+contains the selected clusters. The approximation $NP/C$ requires balanced clusters. The
+scoring work is $F_AG$ table terms. Keeping a top-$K$ heap has worst-case work $O(F_A\log K)$,
+although many scores do not change the retained set. Measured cost per row can include both.
+
+\paragraph{B: bitplanes.} Let $J_c$ count splits and $E_c$ count enumerated leaf masks.
+The word visits are $V_s=\sum_cJ_cW_c$ and $V_l=\sum_cE_cW_c$. The number of scored documents
+is $F_B$. Sorting query coordinates costs $O(d\log d)$; the queue adds work for each visited
+branch. Counts of surviving candidates alone omit full-width split and leaf reads.
+
+\begin{figure}[H]\centering
+\begin{tikzpicture}
+\node[anchor=west,font=\small] at (0,1.05) {6,400 documents: each mask contains 100 words of 64 bits};
+\draw[fill=Branch!18,draw=Branch] (0,.45) rectangle (12,.8);
+\node[anchor=west,font=\small] at (0,.08) {After filtering: only 80 positions remain set};
+\draw[fill=Soft,draw=Branch] (0,-.55) rectangle (12,-.2);
+\foreach \x in {.2,1.4,4.0,8.5,10.7}{\draw[Branch,very thick](\x,-.52)--(\x,-.23);}
+\draw[<->,Ink!60] (0,-.9)--node[below,font=\small]{Both loops still read 100 words}(12,-.9);
+\end{tikzpicture}
+\caption{Logical membership decreases; physical mask width remains fixed. Marks in the lower
+bar illustrate surviving positions rather than drawing all 80 individual bits.}
+\end{figure}
+
+\paragraph{C: backward walk.} Let $E$ be enumerated keys and $H$ all directory lookups.
+For complete enumeration across $P$ clusters, $H=PE$. A hash lookup has expected constant
+algorithmic work, but includes memory access. Key generation, queue maintenance, empty
+lookups, and the $F_C$ full scores remain separate costs. More key bits can reduce candidates
+while increasing enumeration work and stored directory entries.
+
+\subsubsection*{Time summary}
+Write $T_R$ for routing time and $T_Q$ for the common score-table preparation. The measured
+coefficients $c_s,c_b,c_l,c_g,c_h,c_p$ price a consecutive score, split-word visit, leaf-word
+visit, gathered score, directory lookup, and posting score, respectively.
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
+Method & Retrieval-time model\\\midrule
+A & $T_R+T_Q+F_Ac_s+T_{\rm select}$\\
+B & $T_R+T_Q+T_{\rm order}+V_sc_b+V_lc_l+F_Bc_g+T_{\rm queue}+T_{\rm select}$\\
+C & $T_R+T_Q+T_{\rm keyprep}+Hc_h+F_Cc_p+T_{\rm keyqueue}+T_{\rm select}$\\\bottomrule
+\end{tabularx}\normalsize
+\end{center}
+These formulas explain work; coefficients convert work to time on a stated machine. SIMD,
+cache behavior and memory bandwidth change those coefficients. A combined measured stage
+must not be charged again as separate sub-stages. Complete text requests additionally include
+embedding, normalization, enabled filters, output work, and any reranker.
+
+\newpage
+\subsection{Memory complexity}
+Memory has two roles: the stored index and temporary allocations that coexist during a
+query. Let $u=w/8$ bytes per packed word and $b_{\rm id}$ bytes per document ID. The common
+row data occupies
+\begin{equation}
+ M_{\rm rows}=N\left(u\ceil{d/w}+b_{\rm id}\right).
+ \label{eq:rows}
+\end{equation}
+For 256 bits and eight-byte IDs, each row contains 32+8=40 bytes. Array capacity may exceed
+the number of filled rows. Router data is additional: for example, $C$ float centroids of
+width $d_R$ require $4Cd_R$ coordinate bytes, plus labels and supporting containers.
+
+\paragraph{A: scan.} A stores the rows and router. Query memory includes the float query,
+the score table of $G2^g$ values, selected cluster IDs, and top-$K$ results. Their main size
+terms are $O(d+G2^g+P+K)$, with byte widths applied to each array.
+
+\paragraph{B: bitplanes.} B keeps the rows and adds
+\begin{equation}
+ M_{\rm planes}=du\sum_{c=1}^{C}\ceil{n_c/w}.
+ \label{eq:planes}
+\end{equation}
+Each cluster is padded separately. With $A_c(t)$ allocated masks for cluster $c$ at time $t$,
+peak mask data is $u\max_t\sum_c A_c(t)W_c$. Waiting branches and the parent mask during child
+creation must be counted, not just the currently selected mask. Queue records are additional.
+
+\paragraph{C: backward walk.} C reorders the existing rows and IDs. The IDs already serve
+as postings, so there is no additional copy of all $N$ IDs. If $U$ occupied directory entries
+store a key, start and count, their field data is $U(b_{\rm key}+2b_{\rm offset})$ bytes.
+The current hash table also allocates nodes, pointers and a bucket array; those cannot be
+inferred from field sizes alone. A query also maintains its key queue.
+
+\begin{figure}[H]\centering
+\begin{tikzpicture}
+\node[anchor=east,font=\small] at (-.15,1.35) {A};
+\node[anchor=east,font=\small] at (-.15,.6) {B};
+\node[anchor=east,font=\small] at (-.15,-.15) {C};
+\draw[fill=Scan!12,draw=Scan] (0,1.1) rectangle (6,1.6);
+\draw[fill=Scan!12,draw=Scan] (0,.35) rectangle (6,.85);
+\draw[fill=Branch!18,draw=Branch] (6,.35) rectangle (10.8,.85);
+\draw[fill=Scan!12,draw=Scan] (0,-.4) rectangle (6,.1);
+\draw[fill=Keys!18,draw=Keys] (6,-.4) rectangle (7,.1);
+\node[font=\small] at (3,1.35) {40 MB rows and IDs};
+\node[font=\small] at (8.4,.6) {32 MB planes};
+\node[anchor=west,font=\small] at (7.15,-.15) {directory size varies};
+\end{tikzpicture}
+\caption{Logical data at 1M rows and 256 bits. The directory bar is schematic. Router, array
+capacity, program memory, and temporary query allocations are not included in these bars.}
+\end{figure}
+
+\subsubsection*{Memory summary}
+Let $M_0$ include allocated rows and routing structures, $Q_0$ common query allocations,
+$D_C$ the allocated directory, and $Q_B,Q_C$ the extra method-specific query memory.
+\begin{center}
+\begin{tabular}{@{}lll@{}}\toprule
+Method & Allocated index & Temporary query memory\\\midrule
+A & $M_0$ & $Q_0$\\
+B & $M_0+M_{\rm planes,allocated}$ & $Q_0+Q_B$\\
+C & $M_0+D_C$ & $Q_0+Q_C$\\\bottomrule
+\end{tabular}
+\end{center}
+The actual RAM test also charges the running process and retained inputs. A process lifetime
+peak includes construction and provides a conservative upper bound for that measured run.
+It is distinct from index data size and from a sampled query-memory reading.
+
+\newpage
+\subsection{Recall estimation}
+Recall compares returned IDs with an explicitly chosen reference:
+\begin{equation}
+ R_K(q)=\frac{|\text{returned top-}K\;\cap\;\text{reference top-}K|}{K}.
+ \label{eq:recall}
+\end{equation}
+Returning IDs [3,0] when the reference is [3,4] gives 50\% recall. Here the reference is the
+exact binary-document score. This differs from recovering the full float-vector ranking or
+retrieving text judged relevant by people.
+
+For a fixed query, select a reference document uniformly from its top $K$. Let $R_R(q)$ be
+the probability its cluster is opened. Local recall is conditional on reaching that cluster.
+
+\paragraph{A: scan.} Exact scoring returns every reference document that reaches it.
+Its recall is $R_R(q)$.
+
+\paragraph{B: bitplanes.} Recall is $R_R(q)R_B^{\rm local}(q)$. A node budget can reduce
+the local factor; safe unlimited search makes it one.
+
+\paragraph{C: backward walk.} Recall is $R_R(q)R_C^{\rm local}(q)$. A lookup or candidate
+budget can reduce the local factor; exhaustion or safe bounds make it one.
+
+\begin{figure}[H]\centering
+\begin{tikzpicture}[node distance=9mm]
+\node[box,text width=32mm] (truth) {10 reference\\documents};
+\node[box,text width=36mm,right=of truth] (route) {8 reach the\\opened clusters};
+\node[branch,text width=37mm,right=of route] (local) {6 survive\\approximate local search};
+\draw[arr](truth)--(route);\draw[arr](route)--(local);
+\node[font=\small,below=5mm of route] {$R=(8/10)(6/8)=60\%$};
+\end{tikzpicture}
+\caption{The factors are conditional probabilities. Independence is not assumed. Across
+queries, average their products rather than multiply separate averages.}
+\end{figure}
+
+\subsubsection*{A distribution that permits a calculation}
+Assume independent balanced document signs. Each query has $m$ strong coordinates of
+magnitude $a$ and $d-m$ weak coordinates of magnitude $\epsilon$, with
+$a>(d-m)\epsilon$. All documents matching the strong signs then outrank every document with
+a strong mismatch. Their count is $Z\sim\operatorname{Binomial}(N,2^{-m})$. If only that
+group is searched and fully scored,
+\begin{equation}
+ \E[R_K]=\frac{\E[\min(Z,K)]}{K}
+         =\frac1K\sum_{i=1}^{K}\Pr(Z\ge i).
+ \label{eq:ideal-recall}
+\end{equation}
+For two documents, one required sign and $K=1$, the ideal group is empty with probability
+$1/4$, so expected recall is $3/4$. Its mean size is one, but using that mean as a guaranteed
+count would incorrectly predict perfect recall. This distribution is constructed; Matryoshka
+training does not promise it or sort each query's coordinates by magnitude~\cite{mrl}.
+
+\subsubsection*{Recall summary}
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}lYY@{}}\toprule
+Method & General per-query recall & Exact local search\\\midrule
+A & $R_R(q)$ & Scores all opened rows\\
+B & $R_R(q)R_B^{\rm local}(q)$ & Unlimited work and safe bounds\\
+C & $R_R(q)R_C^{\rm local}(q)$ & Exhaustion or safe bounds\\\bottomrule
+\end{tabularx}\normalsize
+\end{center}
+Equation~\ref{eq:ideal-recall} estimates all three only when they search the specified ideal
+group. Arbitrary IVF routing and limited local searches require additional assumptions or
+measured tuning recall.

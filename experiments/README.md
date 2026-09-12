@@ -1,5 +1,10 @@
 # Reproduce the component checks
 
+For the current parameter-selection study, start with
+[`reports/search-math-optima/README.md`](../reports/search-math-optima/README.md). It connects
+the formulas to a fresh controlled experiment, a real-data replication, and the revised paper.
+The component and earlier study commands below remain available.
+
 Start with the paper in `../reports/search-math/`, then use this small run to check its storage
 formulas and the native search results. It uses random signs, one cluster and cached queries.
 It does not download data or measure semantic retrieval quality.

@@ -1,0 +1,113 @@
+\newpage
+\section{Deriving optima}
+\subsection{The constrained choice}
+Let $\theta_a$ contain method $a$'s router, cluster count, probes and local settings. The
+question is
+\begin{equation}
+ \theta_a^*=\arg\min_{\theta\in\Theta_a} T_a(\theta)
+ \quad\text{subject to}\quad R_a(\theta)\ge\rho,\quad M_a(\theta)\le B_{\max}.
+ \label{eq:optimum}
+\end{equation}
+The family $\Theta_a$ must allow each method its own cluster layout. B must also be allowed
+to stop splitting immediately; otherwise an unnecessary traversal is forced into its cost.
+A receives direct prefix routing as well as IVF. The desired minimum is meaningful only
+when the time, recall and memory functions are specified or estimated from evidence.
+
+\subsection{Cluster size and probes}
+For balanced clusters and a router that compares all centroids, a simple scan model is
+$T_A(C)=\alpha C+\beta NP/C$. Holding $P$ fixed gives
+\begin{equation}
+ \frac{dT_A}{dC}=\alpha-\frac{\beta NP}{C^2}=0,
+ \qquad C^*=\sqrt{\frac{\beta NP}{\alpha}}.
+ \label{eq:cluster-optimum}
+\end{equation}
+This does not solve the fixed-recall problem when more clusters also require more probes.
+The relevant function is $P_\rho(C)$: the probes needed for recall $\rho$. Substituting it
+gives $T_A(C)=T_R(C,P_\rho(C))+\beta NP_\rho(C)/C$. The experiment obtains this relationship
+from tuning-query reference ranks. It is not inferred from document count and RAM alone.
+
+\subsection{When to stop splitting}
+For one global cluster, suppose each useful cut halves the remaining documents and one
+preferred path contains the reference top $K$. At depth $j$,
+\begin{equation}
+ T_B(j)\approx T_0+jWc_b+Wc_l+N2^{-j}c_g.
+ \label{eq:depth}
+\end{equation}
+The first terms charge full-mask work; the last charges the remaining scores. Differentiating
+the smooth approximation gives
+\begin{equation}
+ j^*=\log_2\!\left(\frac{N\ln(2)c_g}{Wc_b}\right).
+ \label{eq:depth-optimum}
+\end{equation}
+Depth must be an integer, so test the neighboring integers, zero and the largest depth for
+which the assumptions hold. Equivalently, one further cut helps when its saved score time
+$N2^{-(j+1)}c_g$ exceeds $Wc_b$ and any added queue work. Since $W$ grows with $N$, increasing
+the collection size does not automatically make branching favorable.
+
+The implementation visits all coordinates in global query-magnitude order, including bits
+already fixed by a prefix cluster. With $r$ such initial coordinates, $n=N/2^r$, and
+$W_r=\ceil{n/w}$, a path ending at absolute depth $j\ge r$ has approximately
+\[
+ T_B(j;r)=T_0+jW_rc_b+W_rc_l+n2^{-(j-r)}c_g.
+\]
+The corresponding stationary depth is $r+\log_2(n\ln(2)c_g/(W_rc_b))$. A zero-split leaf is
+a separate candidate. Subtracting the $r$ fixed bits from measured split work would make
+the current implementation appear cheaper than it is.
+
+The experiment retains the model's choice and the fastest measured tuning choice separately.
+A fitted time estimate cannot resolve a difference smaller than its observed error.
+
+\newpage
+\subsection{Fixed and changing coordinates}
+The controlled study uses $N=10^6$, $d=256$, $K=100$, and $m=12$ strong coordinates of
+magnitude 1, with magnitude 0.0001 elsewhere. The strong-match group has
+\[
+ \lambda=N2^{-m}=244.14,\qquad
+ \sigma=\sqrt{N2^{-m}(1-2^{-m})}=15.62.
+\]
+A leaf near $\lambda+3\sigma\approx291$ suggests testing 288 and 320, rather than choosing an
+arbitrary threshold. The preceding group has mean 488 rows. Every query remains in the test,
+including groups outside this allowance; the statistical margin is not a size guarantee.
+
+\paragraph{Fixed important positions.} Suppose the first $m$ coordinates are strong. With
+$r\le m$ direct prefix bits and one probe, A scores about $N2^{-r}$ rows. At $r=m$, it reads
+the complete ideal group. Adding weak routing bits requires opening their compatible
+patterns, so it need not reduce the number of full scores.
+
+C can divide the same $m$ strong coordinates between $r$ routing bits and $h=m-r$ local
+key bits. It still scores about $N2^{-m}$ rows. The expected number of occupied directory
+entries in this uniform case is
+\begin{equation}
+ \E[U]=2^{r+h}\left[1-(1-2^{-(r+h)})^N\right].
+\end{equation}
+A direct 12-bit scan and a global 12-bit backward walk therefore select the same ideal group.
+Their difference is routing, directory organization and call overhead. This prevents an
+unfair comparison against a baseline that unnecessarily scans the entire collection.
+
+\paragraph{Changing important positions.} A fixed $h$-coordinate key captures a random
+number $S$ of strong positions:
+\begin{equation}
+ \Pr(S=s)=\frac{\binom ms\binom{d-m}{h-s}}{\binom dh}.
+ \label{eq:overlap}
+\end{equation}
+If all compatible weak patterns must be examined, the retained fraction is $2^{-S}$ and
+the attempted key count is $2^{h-S}$. With $h=m=12$, the key misses every strong coordinate
+in about 55.48\% of queries. The expected retained fraction is about 75\%, far above the
+ideal group's 0.0244\%. This explains why the same key can be excellent for one distribution
+and expensive for another. The average row count does not by itself determine median latency.
+
+B instead selects its coordinates from each query. A global path through twelve strong
+bits visits $12\ceil{10^6/64}=187{,}500$ split words, then 15,625 leaf words, and scores about 244
+rows. Its conditional peak mask data is $(12+2)15{,}625\times8=1.75$ MB. Whether routing improves
+this path is tested separately, including its preparation and extra root-mask work.
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}lYY@{}}\toprule
+Condition & Promising settings & What must be checked\\\midrule
+Accurate, inexpensive routing & A with small selected groups & Recall at the selected probes\\
+Fixed strong coordinates & A direct prefix; C global key near $m$ & Same candidates; compare total overhead\\
+Strong positions change & B with global or larger clusters & Full masks, leaf size, routing alternatives\\\bottomrule
+\end{tabularx}\normalsize
+\end{center}
+These are predictions for testing. They do not require a different winner in every row,
+and they do not claim that real Matryoshka vectors satisfy the constructed distribution.

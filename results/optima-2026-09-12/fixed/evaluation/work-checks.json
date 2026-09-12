@@ -1,0 +1,7689 @@
+{
+  "checked": 384,
+  "outside_stated_conditions": 768,
+  "failed_cases": [],
+  "mismatches": [],
+  "checks": [
+    {
+      "case_id": 4,
+      "query": 32,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 33,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 34,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 35,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "score_terms": 16064,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "recall": 1.0,
+        "score_terms": 16064
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 36,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 241,
+        "score_terms": 15424,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 241,
+        "recall": 1.0,
+        "score_terms": 15424
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 37,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 228,
+        "score_terms": 14592,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 228,
+        "recall": 1.0,
+        "score_terms": 14592
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 38,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "score_terms": 15040,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "recall": 1.0,
+        "score_terms": 15040
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 39,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 40,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "score_terms": 16128,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "recall": 1.0,
+        "score_terms": 16128
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 41,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "score_terms": 15040,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "recall": 1.0,
+        "score_terms": 15040
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 42,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 43,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 44,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 237,
+        "score_terms": 15168,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 237,
+        "recall": 1.0,
+        "score_terms": 15168
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 45,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 46,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 271,
+        "score_terms": 17344,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 271,
+        "recall": 1.0,
+        "score_terms": 17344
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 47,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 224,
+        "score_terms": 14336,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 224,
+        "recall": 1.0,
+        "score_terms": 14336
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 48,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "score_terms": 16064,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "recall": 1.0,
+        "score_terms": 16064
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 49,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "score_terms": 14720,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "recall": 1.0,
+        "score_terms": 14720
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 50,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "score_terms": 17280,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "recall": 1.0,
+        "score_terms": 17280
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 51,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 240,
+        "score_terms": 15360,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 240,
+        "recall": 1.0,
+        "score_terms": 15360
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 52,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 233,
+        "score_terms": 14912,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 233,
+        "recall": 1.0,
+        "score_terms": 14912
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 53,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 231,
+        "score_terms": 14784,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 231,
+        "recall": 1.0,
+        "score_terms": 14784
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 54,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "score_terms": 15104,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "recall": 1.0,
+        "score_terms": 15104
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 55,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 56,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "score_terms": 16000,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "recall": 1.0,
+        "score_terms": 16000
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 57,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 267,
+        "score_terms": 17088,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 267,
+        "recall": 1.0,
+        "score_terms": 17088
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 58,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "score_terms": 14976,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "recall": 1.0,
+        "score_terms": 14976
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 59,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 253,
+        "score_terms": 16192,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 253,
+        "recall": 1.0,
+        "score_terms": 16192
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 60,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 61,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 62,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 254,
+        "score_terms": 16256,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 254,
+        "recall": 1.0,
+        "score_terms": 16256
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 63,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "score_terms": 15232,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "recall": 1.0,
+        "score_terms": 15232
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 64,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 255,
+        "score_terms": 16320,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 255,
+        "recall": 1.0,
+        "score_terms": 16320
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 65,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 66,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 67,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "score_terms": 16000,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "recall": 1.0,
+        "score_terms": 16000
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 68,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 69,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 70,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 249,
+        "score_terms": 15936,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 249,
+        "recall": 1.0,
+        "score_terms": 15936
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 71,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "score_terms": 15104,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "recall": 1.0,
+        "score_terms": 15104
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 72,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "score_terms": 14720,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "recall": 1.0,
+        "score_terms": 14720
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 73,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 263,
+        "score_terms": 16832,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 263,
+        "recall": 1.0,
+        "score_terms": 16832
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 74,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 75,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "score_terms": 17280,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "recall": 1.0,
+        "score_terms": 17280
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 76,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 215,
+        "score_terms": 13760,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 215,
+        "recall": 1.0,
+        "score_terms": 13760
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 77,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "score_terms": 16704,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "recall": 1.0,
+        "score_terms": 16704
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 78,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "score_terms": 14976,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "recall": 1.0,
+        "score_terms": 14976
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 79,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "score_terms": 16128,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "recall": 1.0,
+        "score_terms": 16128
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 80,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 81,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 247,
+        "score_terms": 15808,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 247,
+        "recall": 1.0,
+        "score_terms": 15808
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 82,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 83,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 226,
+        "score_terms": 14464,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 226,
+        "recall": 1.0,
+        "score_terms": 14464
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 84,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "score_terms": 16704,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "recall": 1.0,
+        "score_terms": 16704
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 85,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 260,
+        "score_terms": 16640,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 260,
+        "recall": 1.0,
+        "score_terms": 16640
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 86,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 87,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 88,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 216,
+        "score_terms": 13824,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 216,
+        "recall": 1.0,
+        "score_terms": 13824
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 89,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 90,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "score_terms": 15232,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "recall": 1.0,
+        "score_terms": 15232
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 91,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 92,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 223,
+        "score_terms": 14272,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 223,
+        "recall": 1.0,
+        "score_terms": 14272
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 93,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 212,
+        "score_terms": 13568,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 212,
+        "recall": 1.0,
+        "score_terms": 13568
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 94,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 259,
+        "score_terms": 16576,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 259,
+        "recall": 1.0,
+        "score_terms": 16576
+      }
+    },
+    {
+      "case_id": 4,
+      "query": 95,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 32,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 33,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 34,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 35,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "score_terms": 16064,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "recall": 1.0,
+        "score_terms": 16064
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 36,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 241,
+        "score_terms": 15424,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 241,
+        "recall": 1.0,
+        "score_terms": 15424
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 37,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 228,
+        "score_terms": 14592,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 228,
+        "recall": 1.0,
+        "score_terms": 14592
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 38,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "score_terms": 15040,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "recall": 1.0,
+        "score_terms": 15040
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 39,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 40,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "score_terms": 16128,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "recall": 1.0,
+        "score_terms": 16128
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 41,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "score_terms": 15040,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "recall": 1.0,
+        "score_terms": 15040
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 42,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 43,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 44,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 237,
+        "score_terms": 15168,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 237,
+        "recall": 1.0,
+        "score_terms": 15168
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 45,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 46,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 271,
+        "score_terms": 17344,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 271,
+        "recall": 1.0,
+        "score_terms": 17344
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 47,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 224,
+        "score_terms": 14336,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 224,
+        "recall": 1.0,
+        "score_terms": 14336
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 48,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "score_terms": 16064,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "recall": 1.0,
+        "score_terms": 16064
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 49,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "score_terms": 14720,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "recall": 1.0,
+        "score_terms": 14720
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 50,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "score_terms": 17280,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "recall": 1.0,
+        "score_terms": 17280
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 51,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 240,
+        "score_terms": 15360,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 240,
+        "recall": 1.0,
+        "score_terms": 15360
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 52,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 233,
+        "score_terms": 14912,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 233,
+        "recall": 1.0,
+        "score_terms": 14912
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 53,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 231,
+        "score_terms": 14784,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 231,
+        "recall": 1.0,
+        "score_terms": 14784
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 54,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "score_terms": 15104,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "recall": 1.0,
+        "score_terms": 15104
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 55,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 56,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "score_terms": 16000,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "recall": 1.0,
+        "score_terms": 16000
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 57,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 267,
+        "score_terms": 17088,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 267,
+        "recall": 1.0,
+        "score_terms": 17088
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 58,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "score_terms": 14976,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "recall": 1.0,
+        "score_terms": 14976
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 59,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 253,
+        "score_terms": 16192,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 253,
+        "recall": 1.0,
+        "score_terms": 16192
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 60,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 61,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 62,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 254,
+        "score_terms": 16256,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 254,
+        "recall": 1.0,
+        "score_terms": 16256
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 63,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "score_terms": 15232,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "recall": 1.0,
+        "score_terms": 15232
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 64,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 255,
+        "score_terms": 16320,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 255,
+        "recall": 1.0,
+        "score_terms": 16320
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 65,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 66,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 67,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "score_terms": 16000,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "recall": 1.0,
+        "score_terms": 16000
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 68,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 69,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 70,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 249,
+        "score_terms": 15936,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 249,
+        "recall": 1.0,
+        "score_terms": 15936
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 71,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "score_terms": 15104,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "recall": 1.0,
+        "score_terms": 15104
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 72,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "score_terms": 14720,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "recall": 1.0,
+        "score_terms": 14720
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 73,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 263,
+        "score_terms": 16832,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 263,
+        "recall": 1.0,
+        "score_terms": 16832
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 74,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 75,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "score_terms": 17280,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "recall": 1.0,
+        "score_terms": 17280
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 76,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 215,
+        "score_terms": 13760,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 215,
+        "recall": 1.0,
+        "score_terms": 13760
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 77,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "score_terms": 16704,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "recall": 1.0,
+        "score_terms": 16704
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 78,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "score_terms": 14976,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "recall": 1.0,
+        "score_terms": 14976
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 79,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "score_terms": 16128,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "recall": 1.0,
+        "score_terms": 16128
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 80,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 81,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 247,
+        "score_terms": 15808,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 247,
+        "recall": 1.0,
+        "score_terms": 15808
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 82,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 83,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 226,
+        "score_terms": 14464,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 226,
+        "recall": 1.0,
+        "score_terms": 14464
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 84,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "score_terms": 16704,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "recall": 1.0,
+        "score_terms": 16704
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 85,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 260,
+        "score_terms": 16640,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 260,
+        "recall": 1.0,
+        "score_terms": 16640
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 86,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 87,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 88,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 216,
+        "score_terms": 13824,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 216,
+        "recall": 1.0,
+        "score_terms": 13824
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 89,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 90,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "score_terms": 15232,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "recall": 1.0,
+        "score_terms": 15232
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 91,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 92,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 223,
+        "score_terms": 14272,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 223,
+        "recall": 1.0,
+        "score_terms": 14272
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 93,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 212,
+        "score_terms": 13568,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 212,
+        "recall": 1.0,
+        "score_terms": 13568
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 94,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 259,
+        "score_terms": 16576,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 259,
+        "recall": 1.0,
+        "score_terms": 16576
+      }
+    },
+    {
+      "case_id": 8,
+      "query": 95,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 32,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 33,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 34,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 35,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "score_terms": 16064,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "recall": 1.0,
+        "score_terms": 16064
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 36,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 241,
+        "score_terms": 15424,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 241,
+        "recall": 1.0,
+        "score_terms": 15424
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 37,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 228,
+        "score_terms": 14592,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 228,
+        "recall": 1.0,
+        "score_terms": 14592
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 38,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "score_terms": 15040,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "recall": 1.0,
+        "score_terms": 15040
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 39,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 40,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "score_terms": 16128,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "recall": 1.0,
+        "score_terms": 16128
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 41,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "score_terms": 15040,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "recall": 1.0,
+        "score_terms": 15040
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 42,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 43,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 44,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 237,
+        "score_terms": 15168,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 237,
+        "recall": 1.0,
+        "score_terms": 15168
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 45,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 46,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 271,
+        "score_terms": 17344,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 271,
+        "recall": 1.0,
+        "score_terms": 17344
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 47,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 224,
+        "score_terms": 14336,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 224,
+        "recall": 1.0,
+        "score_terms": 14336
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 48,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "score_terms": 16064,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "recall": 1.0,
+        "score_terms": 16064
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 49,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "score_terms": 14720,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "recall": 1.0,
+        "score_terms": 14720
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 50,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "score_terms": 17280,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "recall": 1.0,
+        "score_terms": 17280
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 51,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 240,
+        "score_terms": 15360,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 240,
+        "recall": 1.0,
+        "score_terms": 15360
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 52,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 233,
+        "score_terms": 14912,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 233,
+        "recall": 1.0,
+        "score_terms": 14912
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 53,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 231,
+        "score_terms": 14784,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 231,
+        "recall": 1.0,
+        "score_terms": 14784
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 54,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "score_terms": 15104,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "recall": 1.0,
+        "score_terms": 15104
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 55,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 56,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "score_terms": 16000,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "recall": 1.0,
+        "score_terms": 16000
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 57,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 267,
+        "score_terms": 17088,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 267,
+        "recall": 1.0,
+        "score_terms": 17088
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 58,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "score_terms": 14976,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "recall": 1.0,
+        "score_terms": 14976
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 59,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 253,
+        "score_terms": 16192,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 253,
+        "recall": 1.0,
+        "score_terms": 16192
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 60,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 61,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 62,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 254,
+        "score_terms": 16256,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 254,
+        "recall": 1.0,
+        "score_terms": 16256
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 63,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "score_terms": 15232,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "recall": 1.0,
+        "score_terms": 15232
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 64,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 255,
+        "score_terms": 16320,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 255,
+        "recall": 1.0,
+        "score_terms": 16320
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 65,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 66,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 67,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "score_terms": 16000,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "recall": 1.0,
+        "score_terms": 16000
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 68,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 69,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 70,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 249,
+        "score_terms": 15936,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 249,
+        "recall": 1.0,
+        "score_terms": 15936
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 71,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "score_terms": 15104,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "recall": 1.0,
+        "score_terms": 15104
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 72,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "score_terms": 14720,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "recall": 1.0,
+        "score_terms": 14720
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 73,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 263,
+        "score_terms": 16832,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 263,
+        "recall": 1.0,
+        "score_terms": 16832
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 74,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 75,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "score_terms": 17280,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "recall": 1.0,
+        "score_terms": 17280
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 76,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 215,
+        "score_terms": 13760,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 215,
+        "recall": 1.0,
+        "score_terms": 13760
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 77,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "score_terms": 16704,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "recall": 1.0,
+        "score_terms": 16704
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 78,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "score_terms": 14976,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "recall": 1.0,
+        "score_terms": 14976
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 79,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "score_terms": 16128,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "recall": 1.0,
+        "score_terms": 16128
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 80,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 81,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 247,
+        "score_terms": 15808,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 247,
+        "recall": 1.0,
+        "score_terms": 15808
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 82,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 83,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 226,
+        "score_terms": 14464,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 226,
+        "recall": 1.0,
+        "score_terms": 14464
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 84,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "score_terms": 16704,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "recall": 1.0,
+        "score_terms": 16704
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 85,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 260,
+        "score_terms": 16640,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 260,
+        "recall": 1.0,
+        "score_terms": 16640
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 86,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 87,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 88,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 216,
+        "score_terms": 13824,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 216,
+        "recall": 1.0,
+        "score_terms": 13824
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 89,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 90,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "score_terms": 15232,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "recall": 1.0,
+        "score_terms": 15232
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 91,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 92,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 223,
+        "score_terms": 14272,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 223,
+        "recall": 1.0,
+        "score_terms": 14272
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 93,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 212,
+        "score_terms": 13568,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 212,
+        "recall": 1.0,
+        "score_terms": 13568
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 94,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 259,
+        "score_terms": 16576,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 259,
+        "recall": 1.0,
+        "score_terms": 16576
+      }
+    },
+    {
+      "case_id": 9,
+      "query": 95,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 32,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 33,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 34,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 35,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "score_terms": 16064,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "recall": 1.0,
+        "score_terms": 16064
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 36,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 241,
+        "score_terms": 15424,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 241,
+        "recall": 1.0,
+        "score_terms": 15424
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 37,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 228,
+        "score_terms": 14592,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 228,
+        "recall": 1.0,
+        "score_terms": 14592
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 38,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "score_terms": 15040,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "recall": 1.0,
+        "score_terms": 15040
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 39,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 40,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "score_terms": 16128,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "recall": 1.0,
+        "score_terms": 16128
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 41,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "score_terms": 15040,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "recall": 1.0,
+        "score_terms": 15040
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 42,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 43,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 44,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 237,
+        "score_terms": 15168,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 237,
+        "recall": 1.0,
+        "score_terms": 15168
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 45,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 46,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 271,
+        "score_terms": 17344,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 271,
+        "recall": 1.0,
+        "score_terms": 17344
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 47,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 224,
+        "score_terms": 14336,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 224,
+        "recall": 1.0,
+        "score_terms": 14336
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 48,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "score_terms": 16064,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "recall": 1.0,
+        "score_terms": 16064
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 49,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "score_terms": 14720,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "recall": 1.0,
+        "score_terms": 14720
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 50,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "score_terms": 17280,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "recall": 1.0,
+        "score_terms": 17280
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 51,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 240,
+        "score_terms": 15360,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 240,
+        "recall": 1.0,
+        "score_terms": 15360
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 52,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 233,
+        "score_terms": 14912,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 233,
+        "recall": 1.0,
+        "score_terms": 14912
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 53,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 231,
+        "score_terms": 14784,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 231,
+        "recall": 1.0,
+        "score_terms": 14784
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 54,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "score_terms": 15104,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "recall": 1.0,
+        "score_terms": 15104
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 55,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 56,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "score_terms": 16000,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "recall": 1.0,
+        "score_terms": 16000
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 57,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 267,
+        "score_terms": 17088,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 267,
+        "recall": 1.0,
+        "score_terms": 17088
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 58,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "score_terms": 14976,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "recall": 1.0,
+        "score_terms": 14976
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 59,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 253,
+        "score_terms": 16192,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 253,
+        "recall": 1.0,
+        "score_terms": 16192
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 60,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 61,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 62,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 254,
+        "score_terms": 16256,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 254,
+        "recall": 1.0,
+        "score_terms": 16256
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 63,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "score_terms": 15232,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "recall": 1.0,
+        "score_terms": 15232
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 64,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 255,
+        "score_terms": 16320,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 255,
+        "recall": 1.0,
+        "score_terms": 16320
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 65,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 66,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 67,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "score_terms": 16000,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "recall": 1.0,
+        "score_terms": 16000
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 68,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 69,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 70,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 249,
+        "score_terms": 15936,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 249,
+        "recall": 1.0,
+        "score_terms": 15936
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 71,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "score_terms": 15104,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "recall": 1.0,
+        "score_terms": 15104
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 72,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "score_terms": 14720,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "recall": 1.0,
+        "score_terms": 14720
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 73,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 263,
+        "score_terms": 16832,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 263,
+        "recall": 1.0,
+        "score_terms": 16832
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 74,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 75,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "score_terms": 17280,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "recall": 1.0,
+        "score_terms": 17280
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 76,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 215,
+        "score_terms": 13760,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 215,
+        "recall": 1.0,
+        "score_terms": 13760
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 77,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "score_terms": 16704,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "recall": 1.0,
+        "score_terms": 16704
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 78,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "score_terms": 14976,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "recall": 1.0,
+        "score_terms": 14976
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 79,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "score_terms": 16128,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "recall": 1.0,
+        "score_terms": 16128
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 80,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 81,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 247,
+        "score_terms": 15808,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 247,
+        "recall": 1.0,
+        "score_terms": 15808
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 82,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 83,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 226,
+        "score_terms": 14464,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 226,
+        "recall": 1.0,
+        "score_terms": 14464
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 84,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "score_terms": 16704,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "recall": 1.0,
+        "score_terms": 16704
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 85,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 260,
+        "score_terms": 16640,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 260,
+        "recall": 1.0,
+        "score_terms": 16640
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 86,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 87,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 88,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 216,
+        "score_terms": 13824,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 216,
+        "recall": 1.0,
+        "score_terms": 13824
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 89,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 90,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "score_terms": 15232,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "recall": 1.0,
+        "score_terms": 15232
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 91,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 92,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 223,
+        "score_terms": 14272,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 223,
+        "recall": 1.0,
+        "score_terms": 14272
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 93,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 212,
+        "score_terms": 13568,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 212,
+        "recall": 1.0,
+        "score_terms": 13568
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 94,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 259,
+        "score_terms": 16576,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 259,
+        "recall": 1.0,
+        "score_terms": 16576
+      }
+    },
+    {
+      "case_id": 10,
+      "query": 95,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 32,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 33,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 34,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 35,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "score_terms": 16064,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "recall": 1.0,
+        "score_terms": 16064
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 36,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 241,
+        "score_terms": 15424,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 241,
+        "recall": 1.0,
+        "score_terms": 15424
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 37,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 228,
+        "score_terms": 14592,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 228,
+        "recall": 1.0,
+        "score_terms": 14592
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 38,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "score_terms": 15040,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "recall": 1.0,
+        "score_terms": 15040
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 39,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 40,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "score_terms": 16128,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "recall": 1.0,
+        "score_terms": 16128
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 41,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "score_terms": 15040,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "recall": 1.0,
+        "score_terms": 15040
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 42,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 43,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 44,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 237,
+        "score_terms": 15168,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 237,
+        "recall": 1.0,
+        "score_terms": 15168
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 45,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 46,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 271,
+        "score_terms": 17344,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 271,
+        "recall": 1.0,
+        "score_terms": 17344
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 47,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 224,
+        "score_terms": 14336,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 224,
+        "recall": 1.0,
+        "score_terms": 14336
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 48,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "score_terms": 16064,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "recall": 1.0,
+        "score_terms": 16064
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 49,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "score_terms": 14720,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "recall": 1.0,
+        "score_terms": 14720
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 50,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "score_terms": 17280,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "recall": 1.0,
+        "score_terms": 17280
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 51,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 240,
+        "score_terms": 15360,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 240,
+        "recall": 1.0,
+        "score_terms": 15360
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 52,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 233,
+        "score_terms": 14912,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 233,
+        "recall": 1.0,
+        "score_terms": 14912
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 53,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 231,
+        "score_terms": 14784,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 231,
+        "recall": 1.0,
+        "score_terms": 14784
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 54,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "score_terms": 15104,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "recall": 1.0,
+        "score_terms": 15104
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 55,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 56,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "score_terms": 16000,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "recall": 1.0,
+        "score_terms": 16000
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 57,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 267,
+        "score_terms": 17088,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 267,
+        "recall": 1.0,
+        "score_terms": 17088
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 58,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "score_terms": 14976,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "recall": 1.0,
+        "score_terms": 14976
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 59,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 253,
+        "score_terms": 16192,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 253,
+        "recall": 1.0,
+        "score_terms": 16192
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 60,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 61,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 62,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 254,
+        "score_terms": 16256,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 254,
+        "recall": 1.0,
+        "score_terms": 16256
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 63,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "score_terms": 15232,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "recall": 1.0,
+        "score_terms": 15232
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 64,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 255,
+        "score_terms": 16320,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 255,
+        "recall": 1.0,
+        "score_terms": 16320
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 65,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 66,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 67,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "score_terms": 16000,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "recall": 1.0,
+        "score_terms": 16000
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 68,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 69,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 70,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 249,
+        "score_terms": 15936,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 249,
+        "recall": 1.0,
+        "score_terms": 15936
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 71,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "score_terms": 15104,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "recall": 1.0,
+        "score_terms": 15104
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 72,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "score_terms": 14720,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "recall": 1.0,
+        "score_terms": 14720
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 73,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 263,
+        "score_terms": 16832,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 263,
+        "recall": 1.0,
+        "score_terms": 16832
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 74,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 75,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "score_terms": 17280,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "recall": 1.0,
+        "score_terms": 17280
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 76,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 215,
+        "score_terms": 13760,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 215,
+        "recall": 1.0,
+        "score_terms": 13760
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 77,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "score_terms": 16704,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "recall": 1.0,
+        "score_terms": 16704
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 78,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "score_terms": 14976,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "recall": 1.0,
+        "score_terms": 14976
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 79,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "score_terms": 16128,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "recall": 1.0,
+        "score_terms": 16128
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 80,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 81,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 247,
+        "score_terms": 15808,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 247,
+        "recall": 1.0,
+        "score_terms": 15808
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 82,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 83,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 226,
+        "score_terms": 14464,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 226,
+        "recall": 1.0,
+        "score_terms": 14464
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 84,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "score_terms": 16704,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "recall": 1.0,
+        "score_terms": 16704
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 85,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 260,
+        "score_terms": 16640,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 260,
+        "recall": 1.0,
+        "score_terms": 16640
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 86,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 87,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 88,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 216,
+        "score_terms": 13824,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 216,
+        "recall": 1.0,
+        "score_terms": 13824
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 89,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 90,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "score_terms": 15232,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "recall": 1.0,
+        "score_terms": 15232
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 91,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 92,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 223,
+        "score_terms": 14272,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 223,
+        "recall": 1.0,
+        "score_terms": 14272
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 93,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 212,
+        "score_terms": 13568,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 212,
+        "recall": 1.0,
+        "score_terms": 13568
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 94,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 259,
+        "score_terms": 16576,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 259,
+        "recall": 1.0,
+        "score_terms": 16576
+      }
+    },
+    {
+      "case_id": 13,
+      "query": 95,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 32,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 33,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 34,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 35,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "score_terms": 16064,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "recall": 1.0,
+        "score_terms": 16064
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 36,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 241,
+        "score_terms": 15424,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 241,
+        "recall": 1.0,
+        "score_terms": 15424
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 37,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 228,
+        "score_terms": 14592,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 228,
+        "recall": 1.0,
+        "score_terms": 14592
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 38,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "score_terms": 15040,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "recall": 1.0,
+        "score_terms": 15040
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 39,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 40,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "score_terms": 16128,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "recall": 1.0,
+        "score_terms": 16128
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 41,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "score_terms": 15040,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 235,
+        "recall": 1.0,
+        "score_terms": 15040
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 42,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 43,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 44,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 237,
+        "score_terms": 15168,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 237,
+        "recall": 1.0,
+        "score_terms": 15168
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 45,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 46,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 271,
+        "score_terms": 17344,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 271,
+        "recall": 1.0,
+        "score_terms": 17344
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 47,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 224,
+        "score_terms": 14336,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 224,
+        "recall": 1.0,
+        "score_terms": 14336
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 48,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "score_terms": 16064,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 251,
+        "recall": 1.0,
+        "score_terms": 16064
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 49,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "score_terms": 14720,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "recall": 1.0,
+        "score_terms": 14720
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 50,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "score_terms": 17280,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "recall": 1.0,
+        "score_terms": 17280
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 51,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 240,
+        "score_terms": 15360,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 240,
+        "recall": 1.0,
+        "score_terms": 15360
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 52,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 233,
+        "score_terms": 14912,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 233,
+        "recall": 1.0,
+        "score_terms": 14912
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 53,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 231,
+        "score_terms": 14784,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 231,
+        "recall": 1.0,
+        "score_terms": 14784
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 54,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "score_terms": 15104,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "recall": 1.0,
+        "score_terms": 15104
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 55,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 56,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "score_terms": 16000,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "recall": 1.0,
+        "score_terms": 16000
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 57,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 267,
+        "score_terms": 17088,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 267,
+        "recall": 1.0,
+        "score_terms": 17088
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 58,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "score_terms": 14976,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "recall": 1.0,
+        "score_terms": 14976
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 59,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 253,
+        "score_terms": 16192,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 253,
+        "recall": 1.0,
+        "score_terms": 16192
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 60,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 61,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "score_terms": 14848,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 232,
+        "recall": 1.0,
+        "score_terms": 14848
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 62,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 254,
+        "score_terms": 16256,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 254,
+        "recall": 1.0,
+        "score_terms": 16256
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 63,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "score_terms": 15232,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "recall": 1.0,
+        "score_terms": 15232
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 64,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 255,
+        "score_terms": 16320,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 255,
+        "recall": 1.0,
+        "score_terms": 16320
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 65,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 66,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 67,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "score_terms": 16000,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 250,
+        "recall": 1.0,
+        "score_terms": 16000
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 68,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "score_terms": 16768,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 262,
+        "recall": 1.0,
+        "score_terms": 16768
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 69,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 70,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 249,
+        "score_terms": 15936,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 249,
+        "recall": 1.0,
+        "score_terms": 15936
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 71,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "score_terms": 15104,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 236,
+        "recall": 1.0,
+        "score_terms": 15104
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 72,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "score_terms": 14720,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 230,
+        "recall": 1.0,
+        "score_terms": 14720
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 73,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 263,
+        "score_terms": 16832,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 263,
+        "recall": 1.0,
+        "score_terms": 16832
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 74,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 75,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "score_terms": 17280,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 270,
+        "recall": 1.0,
+        "score_terms": 17280
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 76,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 215,
+        "score_terms": 13760,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 215,
+        "recall": 1.0,
+        "score_terms": 13760
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 77,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "score_terms": 16704,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "recall": 1.0,
+        "score_terms": 16704
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 78,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "score_terms": 14976,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 234,
+        "recall": 1.0,
+        "score_terms": 14976
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 79,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "score_terms": 16128,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 252,
+        "recall": 1.0,
+        "score_terms": 16128
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 80,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "score_terms": 15488,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 242,
+        "recall": 1.0,
+        "score_terms": 15488
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 81,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 247,
+        "score_terms": 15808,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 247,
+        "recall": 1.0,
+        "score_terms": 15808
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 82,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 83,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 226,
+        "score_terms": 14464,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 226,
+        "recall": 1.0,
+        "score_terms": 14464
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 84,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "score_terms": 16704,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 261,
+        "recall": 1.0,
+        "score_terms": 16704
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 85,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 260,
+        "score_terms": 16640,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 260,
+        "recall": 1.0,
+        "score_terms": 16640
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 86,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 87,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 88,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 216,
+        "score_terms": 13824,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 216,
+        "recall": 1.0,
+        "score_terms": 13824
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 89,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "score_terms": 15296,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 239,
+        "recall": 1.0,
+        "score_terms": 15296
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 90,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "score_terms": 15232,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 238,
+        "recall": 1.0,
+        "score_terms": 15232
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 91,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "score_terms": 15552,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 243,
+        "recall": 1.0,
+        "score_terms": 15552
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 92,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 223,
+        "score_terms": 14272,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 223,
+        "recall": 1.0,
+        "score_terms": 14272
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 93,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 212,
+        "score_terms": 13568,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 212,
+        "recall": 1.0,
+        "score_terms": 13568
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 94,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 259,
+        "score_terms": 16576,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 259,
+        "recall": 1.0,
+        "score_terms": 16576
+      }
+    },
+    {
+      "case_id": 15,
+      "query": 95,
+      "method": "keys",
+      "documents": 1000000,
+      "predicted": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "score_terms": 15616,
+        "recall": 1.0
+      },
+      "measured": {
+        "keys_generated": 1,
+        "key_attempts": 1,
+        "documents_scored": 244,
+        "recall": 1.0,
+        "score_terms": 15616
+      }
+    }
+  ],
+  "scope": "First repetition per query. Exact counts under stated dominance/enough-match conditions; no latency fit and no deletion of other queries from the study."
+}

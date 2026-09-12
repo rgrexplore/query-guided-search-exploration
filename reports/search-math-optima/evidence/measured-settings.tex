@@ -1,0 +1,12 @@
+\begin{tabular}{@{}lllrrrrr@{}}
+\toprule
+Condition & Method & Route $C/P$ & $L$ & $h$ & Recall (\%) & ms & Peak MB \\
+\midrule
+Fixed & A & Prefix 4,096/1 & -- & -- & 100.00 & 0.0227 & 189.5 \\
+Fixed & B & Prefix 4,096/1 & $N$ & -- & 100.00 & 0.0234 & 225.4 \\
+Fixed & C & Global 1/1 & -- & 12 & 100.00 & 0.0207 & 136.7 \\
+Changing & A & Global 1/1 & -- & -- & 100.00 & 25.0578 & 154.0 \\
+Changing & B & Global 1/1 & 288 & -- & 100.00 & 0.1649 & 185.8 \\
+Changing & C & Global 1/1 & -- & 8 & 100.00 & 26.7614 & 136.8 \\
+\bottomrule
+\end{tabular}

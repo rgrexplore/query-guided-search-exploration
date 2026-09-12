@@ -1,7 +1,9 @@
 # Derivation and experiment protocol
 
-Status: protocol written before the new timings. This study extends the saved experiment;
-it does not overwrite its results or assume that each method must win somewhere.
+Status: completed. The protocol below was written before the new timings. This study extends
+the saved experiment; it does not overwrite its results or assume that each method must win.
+Final evidence is in `results/optima-2026-09-12/`; the paper is
+`output/pdf/search-methods-optima.pdf`.
 
 ## Question
 
@@ -145,3 +147,23 @@ Source attribution: [Exa's vector database](https://exa.ai/blog/building-web-sca
 [Matryoshka Representation Learning](https://arxiv.org/abs/2205.13147). Both inspected2026-09-12.
 Exa's public article describes learned similarity clusters; sign-prefix routing is a control
 implemented in this project, not an attributed detail of Exa's system.
+
+## Completion checks
+
+| Requirement | Verified evidence |
+|---|---|
+| Independently chosen layouts/local settings | 130 fixed and 299 changing-position tuning cases; `layouts.json`, `tuning-cases.json`, and frozen shortlists |
+| Same score, reference, budget and implementation | All 498 worker records completed with one common native hash and worker hash, unchanged recorded power per case, and peak RAM below 32 GB |
+| Separate tuning and final queries | Controlled schedules use rows 0–31 for tuning and 32–95 for evaluation; source hashes match the frozen choices |
+| Explain and test exact work formulas | 1,395 applicable conditional count checks match native counters; other observations retained |
+| Debug failed estimates | First fit retained in `predictions-v1/`; v2 adds expected nonempty leaf words and successful posting starts, tested with independent small distributions and the reproduced mismatch |
+| Check revised predictions without refitting | Six frozen model choices meet recall; maximum absolute final p50 error 9.66%, below the unchanged 20% threshold |
+| Compare every method pair fairly | `reports/search-math-optima/evidence/results.json` contains paired A/B, A/C and B/C query/process-block intervals |
+| Preserve limits and losing settings | Broad-grid residual failures remain; constructed cases are separated from the repeated real-data evaluation |
+| Concise paper with requested content | 13 pages including references, eight diagrams/plots, three inline algorithms, time/memory/recall tables, optima, experiments, limits and code pointers |
+| Runnable source and previous versions | 18-file LaTeX archive independently rebuilt with identical page text; all five earlier PDF bytes unchanged |
+| Code verification | Full current suite: 287 tests pass |
+
+There were 38,736 timed observations across the 498 workers. Repeated observations and repeated
+conditional checks are not independent query populations. The claims remain bounded to the
+declared family and recorded hardware state; no global optimum or billion-row measurement is claimed.

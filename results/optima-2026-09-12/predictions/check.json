@@ -1,0 +1,374 @@
+{
+  "frozen_models_sha256": "0b8a180258bd92c9be19d0e65c7b72825d2c9032b13faf0e0cf22936279afd11",
+  "frozen_choices_sha256": "d371df8ac8e2ab3f60489e10c8c19ff7a0a4b4d43528ce73f7785d210b8d90ca",
+  "p50_error_threshold_percent": 20.0,
+  "rows": [
+    {
+      "support": "fixed",
+      "setting_id": "formula-A",
+      "method": "scan",
+      "status": "checked",
+      "predicted_p50_ms": 0.02449038980010783,
+      "measured_p50_ms": 0.02233288250863552,
+      "p50_error_percent": 9.660675421715293,
+      "within_frozen_tolerance": true,
+      "recall": 1.0,
+      "met_target": true,
+      "qualified_environment": true,
+      "work_source": "analytic_uniform_sign_expectation",
+      "work": {
+        "documents_scored": {
+          "predicted": 244.140625,
+          "measured": 242.0,
+          "error_percent": 0.8845557851239638
+        },
+        "bitplane_words": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "leaf_words": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "nodes": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "key_attempts": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "keys_generated": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        }
+      },
+      "model_status": "within_tuning_tolerance",
+      "proxy_work": {
+        "nonempty_leaf_words": {
+          "predicted": 0.0,
+          "estimated_from_final_work": 0
+        },
+        "successful_postings": {
+          "predicted": 0.0,
+          "estimated_from_final_work": 0
+        }
+      },
+      "same_as_measured_best": true,
+      "measured_best_setting": "s0045",
+      "formula_to_measured_best_ratio": 0.9834820055367579,
+      "within_five_percent_of_measured_best": true
+    },
+    {
+      "support": "fixed",
+      "setting_id": "formula-B",
+      "method": "branch",
+      "status": "checked",
+      "predicted_p50_ms": 0.022592486621720257,
+      "measured_p50_ms": 0.024041859433054924,
+      "p50_error_percent": -6.028538746640944,
+      "within_frozen_tolerance": true,
+      "recall": 1.0,
+      "met_target": true,
+      "qualified_environment": true,
+      "work_source": "analytic_uniform_sign_expectation",
+      "work": {
+        "documents_scored": {
+          "predicted": 244.140625,
+          "measured": 242.0,
+          "error_percent": 0.8845557851239638
+        },
+        "bitplane_words": {
+          "predicted": 0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "leaf_words": {
+          "predicted": 4,
+          "measured": 4.0,
+          "error_percent": 0.0
+        },
+        "nodes": {
+          "predicted": 1,
+          "measured": 1.0,
+          "error_percent": 0.0
+        },
+        "key_attempts": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "keys_generated": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        }
+      },
+      "model_status": "exploratory_fit_exceeds_tolerance",
+      "proxy_work": {
+        "nonempty_leaf_words": {
+          "predicted": 4.0,
+          "estimated_from_final_work": 4.0
+        },
+        "successful_postings": {
+          "predicted": 0.0,
+          "estimated_from_final_work": 0
+        }
+      },
+      "same_as_measured_best": false,
+      "measured_best_setting": "s0067",
+      "formula_to_measured_best_ratio": 1.0285170723933224,
+      "within_five_percent_of_measured_best": true
+    },
+    {
+      "support": "fixed",
+      "setting_id": "formula-C",
+      "method": "keys",
+      "status": "checked",
+      "predicted_p50_ms": 0.019781284739800873,
+      "measured_p50_ms": 0.02095801755785942,
+      "p50_error_percent": -5.614714344092453,
+      "within_frozen_tolerance": true,
+      "recall": 1.0,
+      "met_target": true,
+      "qualified_environment": true,
+      "work_source": "analytic_uniform_sign_expectation",
+      "work": {
+        "documents_scored": {
+          "predicted": 244.140625,
+          "measured": 242.0,
+          "error_percent": 0.8845557851239638
+        },
+        "bitplane_words": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "leaf_words": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "nodes": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "key_attempts": {
+          "predicted": 1.0,
+          "measured": 1.0,
+          "error_percent": 0.0
+        },
+        "keys_generated": {
+          "predicted": 1.0,
+          "measured": 1.0,
+          "error_percent": 0.0
+        }
+      },
+      "model_status": "exploratory_fit_exceeds_tolerance",
+      "proxy_work": {
+        "nonempty_leaf_words": {
+          "predicted": 0.0,
+          "estimated_from_final_work": 0
+        },
+        "successful_postings": {
+          "predicted": 1.0,
+          "estimated_from_final_work": 1.0
+        }
+      },
+      "same_as_measured_best": true,
+      "measured_best_setting": "s0055",
+      "formula_to_measured_best_ratio": 1.0141279855790897,
+      "within_five_percent_of_measured_best": true
+    },
+    {
+      "support": "adaptive",
+      "setting_id": "formula-A",
+      "method": "scan",
+      "status": "checked",
+      "predicted_p50_ms": 26.245410766366433,
+      "measured_p50_ms": 26.399833615869284,
+      "p50_error_percent": -0.5849387225305258,
+      "within_frozen_tolerance": true,
+      "recall": 1.0,
+      "met_target": true,
+      "qualified_environment": true,
+      "work_source": "analytic_uniform_sign_expectation",
+      "work": {
+        "documents_scored": {
+          "predicted": 1000000.0,
+          "measured": 1000000.0,
+          "error_percent": 0.0
+        },
+        "bitplane_words": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "leaf_words": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "nodes": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "key_attempts": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "keys_generated": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        }
+      },
+      "model_status": "within_tuning_tolerance",
+      "proxy_work": {
+        "nonempty_leaf_words": {
+          "predicted": 0.0,
+          "estimated_from_final_work": 0
+        },
+        "successful_postings": {
+          "predicted": 0.0,
+          "estimated_from_final_work": 0
+        }
+      },
+      "same_as_measured_best": true,
+      "measured_best_setting": "s0283",
+      "formula_to_measured_best_ratio": 1.0535596097824336,
+      "within_five_percent_of_measured_best": false
+    },
+    {
+      "support": "adaptive",
+      "setting_id": "formula-B",
+      "method": "branch",
+      "status": "checked",
+      "predicted_p50_ms": 0.16303036195431142,
+      "measured_p50_ms": 0.1661251299083233,
+      "p50_error_percent": -1.8629137901771564,
+      "within_frozen_tolerance": true,
+      "recall": 1.0,
+      "met_target": true,
+      "qualified_environment": true,
+      "work_source": "analytic_uniform_sign_expectation",
+      "work": {
+        "documents_scored": {
+          "predicted": 244.140625,
+          "measured": 243.0,
+          "error_percent": 0.4693930041152372
+        },
+        "bitplane_words": {
+          "predicted": 187500,
+          "measured": 187500.0,
+          "error_percent": 0.0
+        },
+        "leaf_words": {
+          "predicted": 15625,
+          "measured": 15625.0,
+          "error_percent": 0.0
+        },
+        "nodes": {
+          "predicted": 13,
+          "measured": 13.0,
+          "error_percent": 0.0
+        },
+        "key_attempts": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "keys_generated": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        }
+      },
+      "model_status": "within_tuning_tolerance",
+      "proxy_work": {
+        "nonempty_leaf_words": {
+          "predicted": 242.27251681901984,
+          "estimated_from_final_work": 241.14926312322586
+        },
+        "successful_postings": {
+          "predicted": 0.0,
+          "estimated_from_final_work": 0
+        }
+      },
+      "same_as_measured_best": true,
+      "measured_best_setting": "s0023",
+      "formula_to_measured_best_ratio": 1.0075833319211673,
+      "within_five_percent_of_measured_best": true
+    },
+    {
+      "support": "adaptive",
+      "setting_id": "formula-C",
+      "method": "keys",
+      "status": "checked",
+      "predicted_p50_ms": 27.82368877096509,
+      "measured_p50_ms": 26.760854525491595,
+      "p50_error_percent": 3.9716005498295015,
+      "within_frozen_tolerance": true,
+      "recall": 1.0,
+      "met_target": true,
+      "qualified_environment": true,
+      "work_source": "empirical_tuning_medians",
+      "work": {
+        "documents_scored": {
+          "predicted": 1000000.0,
+          "measured": 1000000.0,
+          "error_percent": 0.0
+        },
+        "bitplane_words": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "leaf_words": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "nodes": {
+          "predicted": 0.0,
+          "measured": 0.0,
+          "error_percent": null
+        },
+        "key_attempts": {
+          "predicted": 2.0,
+          "measured": 2.0,
+          "error_percent": 0.0
+        },
+        "keys_generated": {
+          "predicted": 2.0,
+          "measured": 2.0,
+          "error_percent": 0.0
+        }
+      },
+      "model_status": "exploratory_fit_exceeds_tolerance",
+      "proxy_work": {
+        "nonempty_leaf_words": {
+          "predicted": 0.0,
+          "estimated_from_final_work": 0
+        },
+        "successful_postings": {
+          "predicted": 2.0,
+          "estimated_from_final_work": 2.0
+        }
+      },
+      "same_as_measured_best": false,
+      "measured_best_setting": "s0189",
+      "formula_to_measured_best_ratio": 0.9999805462418658,
+      "within_five_percent_of_measured_best": true
+    }
+  ],
+  "scope": "Frozen predictions compared with final queries; no refit or replacement of choices. The 5% comparison is descriptive, not a significance test."
+}

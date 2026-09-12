@@ -1,0 +1,69 @@
+{
+  "data": {
+    "documents": 1000000,
+    "dimensions": 256,
+    "document_seed": 73,
+    "query_seed": 20260912,
+    "queries": 96,
+    "tuning_queries": 32,
+    "strong_bits": 12,
+    "weak_weight": 0.0001
+  },
+  "search": {
+    "top_k": 100,
+    "recall_targets": [
+      0.8,
+      0.9,
+      0.95,
+      0.99
+    ]
+  },
+  "sweep": {
+    "direct_bits": [
+      4,
+      8,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "ivf_clusters": [
+      256,
+      4096
+    ],
+    "global_leaf_sizes": [
+      128,
+      256,
+      288,
+      320,
+      384,
+      640,
+      1280,
+      4096
+    ],
+    "routed_leaf_sizes": [
+      128,
+      320
+    ],
+    "global_key_bits": [
+      1,
+      8,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  "measurement": {
+    "repetitions": 2,
+    "evaluation_repetitions": 2,
+    "blocks": 3,
+    "schedule_seed": 20260913
+  },
+  "limits": {
+    "ram_budget_bytes": 32000000000,
+    "worker_stop_bytes": 34359738368,
+    "case_seconds": 180
+  }
+}

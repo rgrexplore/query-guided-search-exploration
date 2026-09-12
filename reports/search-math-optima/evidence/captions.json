@@ -1,0 +1,7 @@
+{
+  "tuning-clusters.pdf": "Lowest measured tuning latency at each cluster count among settings whose tuning recall lower bound reaches 99%. Each method selects its own router, probes, and local settings. These points are tuning results, not independent evidence of a speedup.",
+  "global-branch-depth.pdf": "Frozen model prediction for one global bitplane path. Every integer depth is evaluated. The highlighted final depth matches all strong coordinates; this curve is a model prediction, not a measured latency curve.",
+  "measured-settings.tex": "Previously selected conservative 99% settings on final queries. C/P denotes clusters/probes, L the leaf limit, and h the local key width. N means a scan-size leaf. Peak MB is the maximum whole-process lifetime peak, including construction.",
+  "pairwise-ratios.tex": "Paired bootstrap intervals for ratios of median query times. A ratio above one favors the denominator. A faster method is identified only when both methods meet the target and environment checks and the interval excludes one.",
+  "model-check.tex": "Frozen model-selected settings compared with final measurements. Error is predicted/measured minus one. Same setting compares the parameter choice with the earlier measured-tuning choice, not whether the final times are identical."
+}

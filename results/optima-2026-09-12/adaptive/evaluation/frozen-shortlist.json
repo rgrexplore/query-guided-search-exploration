@@ -1,0 +1,1104 @@
+[
+  {
+    "setting_id": "s0023",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      },
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      },
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      },
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      },
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool",
+      "support": "adaptive",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "branch",
+      "node_budget": 0,
+      "leaf_size": 288
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/tuning",
+        "case_id": 23,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0059",
+    "uses": [
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool",
+      "support": "adaptive",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/ivf-4096-seed73",
+      "router_kind": "ivf",
+      "clusters": 4096,
+      "probes": 3109,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/tuning",
+        "case_id": 59,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0091",
+    "uses": [
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool",
+      "support": "adaptive",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/direct-256-seed73",
+      "router_kind": "direct",
+      "clusters": 256,
+      "probes": 250,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "keys",
+      "key_bits": 1,
+      "key_offset": 8,
+      "candidate_target": 0,
+      "key_limit": 0
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/tuning",
+        "case_id": 91,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0104",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool",
+      "support": "adaptive",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/ivf-4096-seed73",
+      "router_kind": "ivf",
+      "clusters": 4096,
+      "probes": 2623,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/tuning",
+        "case_id": 104,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0137",
+    "uses": [
+      {
+        "target": 0.9,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.95,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool",
+      "support": "adaptive",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/ivf-4096-seed73",
+      "router_kind": "ivf",
+      "clusters": 4096,
+      "probes": 3109,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "keys",
+      "key_bits": 1,
+      "key_offset": 0,
+      "candidate_target": 0,
+      "key_limit": 0
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/tuning",
+        "case_id": 137,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0189",
+    "uses": [
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool",
+      "support": "adaptive",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "keys",
+      "key_bits": 8,
+      "key_offset": 0,
+      "candidate_target": 0,
+      "key_limit": 0
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/tuning",
+        "case_id": 189,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0199",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool",
+      "support": "adaptive",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/ivf-4096-seed73",
+      "router_kind": "ivf",
+      "clusters": 4096,
+      "probes": 1872,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/tuning",
+        "case_id": 199,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0204",
+    "uses": [
+      {
+        "target": 0.95,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.99,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool",
+      "support": "adaptive",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/ivf-256-seed73",
+      "router_kind": "ivf",
+      "clusters": 256,
+      "probes": 243,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/tuning",
+        "case_id": 204,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0229",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool",
+      "support": "adaptive",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/ivf-4096-seed73",
+      "router_kind": "ivf",
+      "clusters": 4096,
+      "probes": 1872,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "keys",
+      "key_bits": 1,
+      "key_offset": 0,
+      "candidate_target": 0,
+      "key_limit": 0
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/tuning",
+        "case_id": 229,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0230",
+    "uses": [
+      {
+        "target": 0.8,
+        "selection": "conservative"
+      },
+      {
+        "target": 0.9,
+        "selection": "mean"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool",
+      "support": "adaptive",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool/routers/ivf-4096-seed73",
+      "router_kind": "ivf",
+      "clusters": 4096,
+      "probes": 2623,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "keys",
+      "key_bits": 1,
+      "key_offset": 0,
+      "candidate_target": 0,
+      "key_limit": 0
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/tuning",
+        "case_id": 230,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "s0283",
+    "uses": [
+      {
+        "target": 0.99,
+        "selection": "conservative"
+      }
+    ],
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool",
+      "support": "adaptive",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "sources": [
+      {
+        "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/tuning",
+        "case_id": 283,
+        "seed": 0
+      }
+    ]
+  },
+  {
+    "setting_id": "formula-A",
+    "support": "adaptive",
+    "source_setting_id": "s0283",
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool",
+      "support": "adaptive",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "scan"
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "uses": [
+      {
+        "selection": "formula",
+        "target": 0.99
+      }
+    ],
+    "prediction": {
+      "support": "adaptive",
+      "setting_id": "s0283",
+      "method": "scan",
+      "router": "none",
+      "clusters": 1,
+      "probes": 1,
+      "leaf_size": 0,
+      "key_bits": 0,
+      "key_offset": 0,
+      "predicted_p50_ms": 26.245410766366433,
+      "measured_tuning_p50_ms": 25.033479556441307,
+      "recall": 1.0,
+      "recall_low": 1.0,
+      "lifetime_peak_bytes": 153649152,
+      "eligible_99": true,
+      "work_source": "analytic_uniform_sign_expectation",
+      "routing_source": "empirical_tuning_layout_probe_median",
+      "predicted_routing_ms": 0.0011249212548136711,
+      "recall_source": "empirical_tuning_bootstrap_lower_bound",
+      "posting_occupancy": 0.0,
+      "predicted_nonempty_leaf_words": 0.0,
+      "predicted_successful_postings": 0.0,
+      "predicted_documents_scored": 1000000.0,
+      "predicted_bitplane_words": 0.0,
+      "predicted_leaf_words": 0.0,
+      "predicted_nodes": 0.0,
+      "predicted_key_attempts": 0.0,
+      "predicted_keys_generated": 0.0
+    },
+    "model_status": "within_tuning_tolerance",
+    "measured_best_setting": "s0283",
+    "same_as_measured_best": true
+  },
+  {
+    "setting_id": "formula-B",
+    "support": "adaptive",
+    "source_setting_id": "s0023",
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool",
+      "support": "adaptive",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "branch",
+      "node_budget": 0,
+      "leaf_size": 288
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "uses": [
+      {
+        "selection": "formula",
+        "target": 0.99
+      }
+    ],
+    "prediction": {
+      "support": "adaptive",
+      "setting_id": "s0023",
+      "method": "branch",
+      "router": "none",
+      "clusters": 1,
+      "probes": 1,
+      "leaf_size": 288,
+      "key_bits": 0,
+      "key_offset": 0,
+      "predicted_p50_ms": 0.16303036195431142,
+      "measured_tuning_p50_ms": 0.16331207007169724,
+      "recall": 1.0,
+      "recall_low": 1.0,
+      "lifetime_peak_bytes": 185827328,
+      "eligible_99": true,
+      "work_source": "analytic_uniform_sign_expectation",
+      "routing_source": "empirical_tuning_layout_probe_median",
+      "predicted_routing_ms": 0.0011249212548136711,
+      "recall_source": "empirical_tuning_bootstrap_lower_bound",
+      "posting_occupancy": 0.0,
+      "predicted_nonempty_leaf_words": 242.27251681901984,
+      "predicted_successful_postings": 0.0,
+      "predicted_documents_scored": 244.140625,
+      "predicted_bitplane_words": 187500,
+      "predicted_leaf_words": 15625,
+      "predicted_nodes": 13,
+      "predicted_key_attempts": 0.0,
+      "predicted_keys_generated": 0.0
+    },
+    "model_status": "within_tuning_tolerance",
+    "measured_best_setting": "s0023",
+    "same_as_measured_best": true
+  },
+  {
+    "setting_id": "formula-C",
+    "support": "adaptive",
+    "source_setting_id": "s0270",
+    "case": {
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/optima-2026-09-12/adaptive/pool",
+      "support": "adaptive",
+      "documents": 1000000,
+      "dimensions": 256,
+      "query_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "router": null,
+      "router_kind": "none",
+      "clusters": 1,
+      "probes": 1,
+      "top_k": 100,
+      "repetitions": 2,
+      "ram_budget_bytes": 32000000000,
+      "method": "keys",
+      "key_bits": 1,
+      "key_offset": 0,
+      "candidate_target": 0,
+      "key_limit": 0
+    },
+    "evaluation_seeds": [
+      0
+    ],
+    "uses": [
+      {
+        "selection": "formula",
+        "target": 0.99
+      }
+    ],
+    "prediction": {
+      "support": "adaptive",
+      "setting_id": "s0270",
+      "method": "keys",
+      "router": "none",
+      "clusters": 1,
+      "probes": 1,
+      "leaf_size": 0,
+      "key_bits": 1,
+      "key_offset": 0,
+      "predicted_p50_ms": 27.82368877096509,
+      "measured_tuning_p50_ms": 27.05999999307096,
+      "recall": 1.0,
+      "recall_low": 1.0,
+      "lifetime_peak_bytes": 136282112,
+      "eligible_99": true,
+      "work_source": "empirical_tuning_medians",
+      "routing_source": "empirical_tuning_layout_probe_median",
+      "predicted_routing_ms": 0.0011249212548136711,
+      "recall_source": "empirical_tuning_bootstrap_lower_bound",
+      "posting_occupancy": 1.0,
+      "predicted_nonempty_leaf_words": 0.0,
+      "predicted_successful_postings": 2.0,
+      "predicted_documents_scored": 1000000.0,
+      "predicted_bitplane_words": 0.0,
+      "predicted_leaf_words": 0.0,
+      "predicted_nodes": 0.0,
+      "predicted_key_attempts": 2.0,
+      "predicted_keys_generated": 2.0
+    },
+    "model_status": "exploratory_fit_exceeds_tolerance",
+    "measured_best_setting": "s0189",
+    "same_as_measured_best": false
+  }
+]

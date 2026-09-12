@@ -1,0 +1,47 @@
+\newpage
+\section{Limitations and next steps}
+The optimized choices apply to the declared family and tested workload. The controlled
+distribution creates a clear score gap: twelve coordinates dominate all others combined.
+That is a useful test of the indexing idea, not evidence that typical text embeddings have
+the same structure. Matryoshka prefixes alone do not establish the assumption.
+
+The cost model is more reliable for the selected operating points than across every setting.
+Memory access order, result-selection behavior and different query mixtures can change
+latency even when aggregate work counts match. The new occupancy terms improve the estimate
+without making it a universal hardware model. The next relevant check on real embeddings
+is whether a small, query-dependent coordinate set actually determines their nearest neighbors.
+
+A larger collection does not automatically create a crossover. Under the simple fixed-depth
+model, write $T_A=t_A+fNc_s$ and $T_B=t_B+N\beta_B$, where $f$ is A's scanned fraction and
+$\beta_B=(mc_b+c_l)/w+2^{-m}c_g$. Their candidate crossing is
+\[
+ N^*=\frac{t_B-t_A}{fc_s-\beta_B}.
+\]
+It is useful only within the model's valid range and while recall and RAM constraints hold.
+If B has both a higher fixed cost and a larger per-document cost, increasing $N$ creates no
+win in this model. At one billion 256-bit documents, codes and eight-byte IDs alone need 40 GB;
+B adds at least 32 GB of bitplanes. All current layouts therefore exceed a 32 GB budget at
+that size, before program and temporary memory. No billion-document experiment is claimed.
+
+\section{Conclusion}
+Scanning was fastest in the real-data replication. In the constructed fixed-position case,
+backward walk was about 10\% faster than a direct-prefix scan that selected the same candidate
+group. With changing important coordinates, bitplanes were about 152 times faster than the
+best tested scan. These results support different choices for different workloads; they do
+not establish a universal winner or the prevalence of those conditions in real embeddings.
+
+The formulas identify candidates and explain their work. The final decision still combines
+measured recall, memory and complete retrieval time, with every method allowed its own
+settings. The selected-point prediction check, the retained failures and the real-data
+replication define the scope of that conclusion.
+
+\begin{thebibliography}{9}\small\raggedright
+\bibitem{exa} Exa Team. \emph{How we built a web-scale vector database}. 2024.
+\url{https://exa.ai/blog/building-web-scale-vector-db}.
+\bibitem{mrl} A. Kusupati et al. \emph{Matryoshka Representation Learning}. 2022.
+\url{https://arxiv.org/abs/2205.13147}.
+\bibitem{msmarco} Microsoft. \emph{MS MARCO}. Passage collection and benchmark resources.
+\url{https://microsoft.github.io/msmarco/}.
+\bibitem{nomic} Nomic AI. \emph{nomic-embed-text-v1.5}. Model documentation.
+\url{https://huggingface.co/nomic-ai/nomic-embed-text-v1.5}.
+\end{thebibliography}

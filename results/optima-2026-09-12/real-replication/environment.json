@@ -1,0 +1,16 @@
+{
+  "platform": "macOS-26.3.2-arm64-arm-64bit",
+  "python": "3.12.11 (main, Aug 18 2025, 19:02:39) [Clang 20.1.4 ]",
+  "power_before": {
+    "available": true,
+    "source": "AC Power",
+    "settings": "Battery Power:\n Sleep On Power Button 1\n powermode            1\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         2\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            10\nAC Power:\n Sleep On Power Button 1\n powermode            2\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 1\n networkoversleep     0\n sleep                1\n tcpkeepalive         1\n disksleep            10"
+  },
+  "hardware": "Apple M5 Max\n137438953472",
+  "scope": "Independent evaluation of a frozen shortlist; no parameter selection in this stage.",
+  "power_after": {
+    "available": true,
+    "source": "AC Power",
+    "settings": "Battery Power:\n Sleep On Power Button 1\n powermode            1\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         2\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            10\nAC Power:\n Sleep On Power Button 1\n powermode            2\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 1\n networkoversleep     0\n sleep                1\n tcpkeepalive         1\n disksleep            10"
+  }
+}
