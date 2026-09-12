@@ -59,7 +59,8 @@ def search_index(index, method, query, selected, variant):
         return index.search(query, selected, candidate_limit=variant["top_k"],
                             node_budget=variant["node_budget"], leaf_size=variant["leaf_size"],
                             explore_probability=variant.get("exploration", 0),
-                            seed=variant.get("seed", 0))
+                            seed=variant.get("seed", 0),
+                            prefer_deeper_ties=variant.get("prefer_deeper_ties", False))
     return index.search(query, selected, candidate_limit=variant["top_k"],
                         start_depth=variant["start_depth"],
                         candidate_target=variant["candidate_target"])

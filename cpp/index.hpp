@@ -15,6 +15,7 @@ struct SearchOptions {
     double explore_probability = 0.0; // Chance to try a queued alternative.
     std::uint64_t seed = 0;
     bool trace = false;
+    bool prefer_deeper_ties = false; // Equal penalties prefer depth, then creation order.
 };
 
 struct TraceStep {

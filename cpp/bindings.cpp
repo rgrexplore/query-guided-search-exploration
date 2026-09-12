@@ -225,7 +225,8 @@ py::dict scan_index(const bitplane::Index& index, const py::array& queries,
 py::dict search_index(const bitplane::Index& index, const py::array& queries,
                       const py::array& buckets, py::ssize_t candidate_limit,
                       py::ssize_t node_budget, py::ssize_t leaf_size,
-                      double explore_probability, std::uint64_t seed, bool trace) {
+                      double explore_probability, std::uint64_t seed, bool trace,
+                      bool prefer_deeper_ties) {
     check_queries(index, queries, buckets);
     if (candidate_limit <= 0) {
         throw py::value_error("candidate_limit must be positive");
@@ -247,6 +248,7 @@ py::dict search_index(const bitplane::Index& index, const py::array& queries,
     options.explore_probability = explore_probability;
     options.seed = seed;
     options.trace = trace;
+    options.prefer_deeper_ties = prefer_deeper_ties;
 
     const auto* query_data = static_cast<const float*>(queries.data());
     const auto* bucket_data = static_cast<const std::int64_t*>(buckets.data());
@@ -375,7 +377,8 @@ PYBIND11_MODULE(bitplane_index, module) {
         py::arg("leaf_size") = 32,
         py::arg("explore_probability") = 0.0,
         py::arg("seed") = 0,
-        py::arg("trace") = false
+        py::arg("trace") = false,
+        py::arg("prefer_deeper_ties") = false
     );
 
     index_type.def("info", &index_info);
