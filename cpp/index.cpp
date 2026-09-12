@@ -32,14 +32,21 @@ struct Node {
     std::vector<std::uint64_t> active; // One bit for each row still in this branch.
 };
 
-bool better_node(const Node& left, const Node& right) {
-    return left.penalty < right.penalty ||
-           (left.penalty == right.penalty && left.order < right.order);
+bool better_node(const Node& left, const Node& right, bool prefer_deeper_ties) {
+    if (left.penalty != right.penalty) {
+        return left.penalty < right.penalty;
+    }
+    if (prefer_deeper_ties && left.depth != right.depth) {
+        return left.depth > right.depth;
+    }
+    return left.order < right.order;
 }
 
 // Index 0 is the cheapest branch. Other slots can be picked for exploration.
 class Frontier {
 public:
+    explicit Frontier(bool prefer_deeper_ties) : prefer_deeper_ties_(prefer_deeper_ties) {}
+
     void push(Node node) {
         mask_bytes_ += node.active.capacity() * sizeof(std::uint64_t);
         nodes_.push_back(std::move(node));
@@ -55,7 +62,7 @@ public:
         }
         nodes_[index] = std::move(nodes_.back());
         nodes_.pop_back();
-        if (index > 0 && better_node(nodes_[index], nodes_[(index - 1) / 2])) {
+        if (index > 0 && better_node(nodes_[index], nodes_[(index - 1) / 2], prefer_deeper_ties_)) {
             sift_up(index);
         } else {
             sift_down(index);
@@ -72,7 +79,7 @@ private:
     void sift_up(std::size_t index) {
         while (index > 0) {
             const auto parent = (index - 1) / 2;
-            if (!better_node(nodes_[index], nodes_[parent])) {
+            if (!better_node(nodes_[index], nodes_[parent], prefer_deeper_ties_)) {
                 break;
             }
             std::swap(nodes_[index], nodes_[parent]);
@@ -83,10 +90,10 @@ private:
     void sift_down(std::size_t index) {
         while (index * 2 + 1 < nodes_.size()) {
             auto child = index * 2 + 1;
-            if (child + 1 < nodes_.size() && better_node(nodes_[child + 1], nodes_[child])) {
+            if (child + 1 < nodes_.size() && better_node(nodes_[child + 1], nodes_[child], prefer_deeper_ties_)) {
                 ++child;
             }
-            if (!better_node(nodes_[child], nodes_[index])) {
+            if (!better_node(nodes_[child], nodes_[index], prefer_deeper_ties_)) {
                 break;
             }
             std::swap(nodes_[index], nodes_[child]);
@@ -96,6 +103,7 @@ private:
 
     std::vector<Node> nodes_;
     std::size_t mask_bytes_ = 0;
+    bool prefer_deeper_ties_;
 };
 
 
@@ -198,7 +206,7 @@ std::vector<QueryResult> Index::search(const float* queries, std::size_t query_c
         }
 
         // Start with every row active in each selected bucket.
-        Frontier frontier;
+        Frontier frontier(options.prefer_deeper_ties);
         std::uint64_t next_order = 0;
         for (std::size_t probe = 0; probe < probes; ++probe) {
             const auto entry = bucket_lookup_.find(selected_buckets[query_id * probes + probe]);
