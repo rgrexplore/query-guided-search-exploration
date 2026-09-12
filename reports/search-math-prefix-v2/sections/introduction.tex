@@ -38,7 +38,6 @@ this step while keeping the rest of the pipeline largely the same.
 \caption{The baseline pipeline; B and C change document search inside the selected clusters.}
 \end{figure}
 
-\newpage
 \subsection{Idea background}
 When I took a closer look at the pipeline, one part that particularly stood out to me was the comparison between the floating-point query and the binary-quantized document. Consider a simple example:
 
@@ -69,7 +68,6 @@ $Q$ is the score of the ideal binary pattern. $p$ adds the absolute query values
 
 Instead of treating every binary document equally and scoring all of them one by one, can we use the query itself to guide the search toward documents that are closer to its ideal binary pattern, while avoiding unnecessary full-score calculations?
 
-\newpage
 \subsection{Exploring new methods}
 From the previous section, we know two useful things before we even start searching: we know what the ideal binary document looks like from the signs of the query, and we know that some bits matter more than others, based on the magnitude $|q_i|$. The next question is therefore: can we build an index that uses this information directly, instead of treating every document inside the selected clusters equally?
 
@@ -101,19 +99,31 @@ Each row above is a bitplane: one bit position across many documents. Suppose th
 
 For bit 2, the query prefers 1. The corresponding bitplane is \texttt{011}, so keeping the documents that match the query is simply $\texttt{111}\ \&\ \texttt{011}=\texttt{011}$. We immediately reduce the candidate set to IDs 1 and 2. The earlier splits on bits 1 and 4 keep all three rows in this example.
 
-This is attractive because the filtering itself consists mostly of bitwise operations. A simplified first version of the idea might therefore look like:
+This is attractive because the filtering itself consists mostly of bitwise operations. The Python below shows a simplified first version. Here, a cluster provides its bitplanes and rows. Masks use Python integers to keep the example short; the measured C++ code uses fixed-width word arrays. \texttt{full\_score} writes out the dot product; the cost calculations later describe the C++ lookup-table scorer, not Python operation costs. \texttt{TopK} keeps the best $K$ scores, breaking ties by document ID, and \texttt{rows\_in\_mask} yields the selected rows without copying them:
 
-\begin{lstlisting}
-order = bits sorted by decreasing abs(query[i])
-candidates = all documents in selected clusters
-for bit in order:
-    candidates &= preferred_bitplane(bit)
-    if candidates is small enough:
-        fully score candidates
-        return top K
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python]
+def full_score(query, code):
+    return sum(q if bit else -q for q, bit in zip(query, code))
+
+
+def greedy_search(query, cluster, k, leaf_size):
+    order = sorted(range(len(query)), key=lambda i: -abs(query[i]))
+    active = cluster.full_mask
+    for bit in order:
+        plane = cluster.planes[bit]
+        preferred = plane if query[bit] >= 0 else ~plane
+        active &= preferred
+        if active.bit_count() <= leaf_size:
+            break
+
+    best = TopK(k)
+    for row_id, code in cluster.rows_in_mask(active):
+        best.add(row_id, full_score(query, code))
+    return best.results()
 \end{lstlisting}
+\end{minipage}
 
-\newpage
 \subsubsection*{PROBLEM 1: We might miss the actual best document.}
 Consider $q=[0.6,0.5,0.4,0.3]$. The ideal binary document is \texttt{1111}. Suppose the database only contains document A: \texttt{0111}, and document B: \texttt{1000}. If we greedily start with the first bit, the query prefers 1. We would therefore keep document B and throw away document A. But their complete scores are:
 
@@ -123,6 +133,7 @@ S(B)=0.6-0.5-0.4-0.3=-0.6.
 \]
 So document A is actually better. The problem is that matching one important bit does not guarantee that the remaining bits will also match.
 
+\Needspace{4\baselineskip}
 \textbf{Solution: branching.}\par
 Instead of discarding the alternative, we keep both branches.
 
@@ -139,7 +150,7 @@ The branch matching the preferred bit receives no additional mismatch penalty. T
 \caption{Keep the alternative until its score bound proves it cannot improve the result.}
 \end{figure}
 
-\newpage
+\Needspace{4\baselineskip}
 \textbf{Stopping condition.}\par
 If a branch has already accumulated mismatch penalty $p$, any document below it must have penalty at least $p$. Therefore, $Q-2p$ is an upper bound on the score of every document inside that branch. For example, suppose $Q=2.5$ and we are looking for the top two results. We have already found scores 2.5 and 1.9.
 
@@ -162,23 +173,46 @@ An unexplored branch with $p=0.5$ can score at most $2.5-2(0.5)=1.5$. Since $1.5
 
 If the best remaining branch in the queue already fails this test, then every other branch is worse and the entire search can stop. Equal scores still follow the document-ID tie rule.
 
-\begin{lstlisting}
-order = bits sorted by decreasing abs(query[i])
-queue = full candidate mask for each selected cluster
-best = empty top-K
-while queue is not empty:
-    node = branch with smallest penalty
-    if best is full and node.upper_bound < best.Kth_score:
-        break
-    if node contains few enough documents:
-        fully score those documents and update best
-    else:
-        split node using the next bit
-        keep each nonempty child with its penalty
-return best
-\end{lstlisting}
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python]
+from heapq import heappop, heappush
+from itertools import count
 
-\newpage
+
+def bitplane_search(query, clusters, k, leaf_size):
+    order = sorted(range(len(query)), key=lambda i: -abs(query[i]))
+    ideal_score = sum(abs(q) for q in query)
+    sequence = count()
+    queue = []
+    for cluster in clusters:
+        if cluster.full_mask:
+            heappush(queue, (0, next(sequence), 0,
+                            cluster.full_mask, cluster))
+    best = TopK(k)
+    while queue:
+        penalty, _, depth, active, cluster = heappop(queue)
+        upper_bound = ideal_score - 2 * penalty
+        if best.full() and upper_bound < best.worst_score():
+            break
+        if active.bit_count() <= leaf_size or depth == len(query):
+            for row_id, code in cluster.rows_in_mask(active):
+                best.add(row_id, full_score(query, code))
+            continue
+
+        bit = order[depth]
+        plane = cluster.planes[bit]
+        preferred = plane if query[bit] >= 0 else ~plane
+        matching = active & preferred
+        # Keep the other half too; its remaining bits may be better.
+        children = ((matching, 0), (active ^ matching, abs(query[bit])))
+        for mask, extra_penalty in children:
+            if mask:
+                heappush(queue, (penalty + extra_penalty,
+                                next(sequence), depth + 1, mask, cluster))
+    return best.results()
+\end{lstlisting}
+\end{minipage}
+
 \subsubsection*{PROBLEM 2: The bitmap can still be large.}
 There is another issue. A bitwise AND sounds almost free, but it is not literally one operation when the cluster contains thousands or millions of documents. Suppose one cluster contains 6400 documents. With 64-bit machine words, one bitplane contains $6400/64=100$ machine words. So one split requires us to loop over those 100 words.
 
@@ -201,7 +235,6 @@ The question is finding the point where the time saved by avoiding scores is wor
 
 However, thinking about this cost led me to a second idea. Bitplanes starts with a large set of documents and repeatedly narrows it down. What if we instead did the opposite? If this approach is bottom-up, the walk backwards can be described as top-down. Here those names describe broad-to-specific versus specific-to-broad search. In an actual prefix tree, the backward walk moves toward the root as it removes bits.
 
-\newpage
 \subsubsection{Backward Walk}
 Backward Walk builds on the same observation: given a query, we already know what its ideal binary document should look like. However, instead of starting with thousands of documents and filtering them using bitplanes, we try to start directly from a small bucket of documents that already looks similar to the query.
 
@@ -233,31 +266,45 @@ If the bits are independent and equally likely to be 0 or 1, each removed bit do
 So we can widen one bit at a time and score only the newly exposed documents, as in Figure 6.
 Real prefix counts can differ from this simple model.
 
-\newpage
+\Needspace{4\baselineskip}
 \textbf{Lookup and widening.}\par
 A trie or rows sorted by prefix can support the lookup. The proposed first implementation uses sorted keys and row ranges, with no document graph. Each broader prefix contains the previous range. Subtracting the old range means processing at most two new slices: one on either side. The query keeps the original bit order. It does not sort the prefix bits by $|q_i|$, and it does not enumerate arbitrary flipped keys.
 
-\begin{lstlisting}
-signs = binary signs of query
-previous_range[cluster] = empty
-best = empty top-K
-scored = 0
-for depth in starting_depth, ..., 0:
-    for cluster in selected_clusters:
-        current = lookup(signs[:depth], cluster)
-        new_slices = current - previous_range[cluster]
-        fully score only new_slices; update best
-        scored += number of rows in new_slices
-        previous_range[cluster] = current
-    if candidate_target > 0 and scored >= candidate_target:
-        break
-return best
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python]
+def backward_walk(query, clusters, k, start_depth, candidate_target):
+    signs = tuple(q >= 0 for q in query)
+    previous = [None] * len(clusters)
+    best = TopK(k)
+    scored = 0
+    for depth in range(start_depth, -1, -1):
+        for index, cluster in enumerate(clusters):
+            left, right = cluster.prefix_range(signs[:depth])
+            if previous[index] is None:
+                new_ranges = [(left, right)]
+            else:
+                old_left, old_right = previous[index]
+                # Only the new rows beside the old range need scores.
+                new_ranges = [(left, old_left), (old_right, right)]
+            for start, stop in new_ranges:
+                for row_id, code in cluster.rows_in_range(start, stop):
+                    best.add(row_id, full_score(query, code))
+                scored += stop - start
+            previous[index] = (left, right)
+
+        # Finish this depth in every cluster before testing the target.
+        if candidate_target > 0 and scored >= candidate_target:
+            break
+    return best.results()
 \end{lstlisting}
+\end{minipage}
+Here, \texttt{prefix\_range} returns the two positions enclosing a prefix in sorted rows. \texttt{rows\_in\_range} yields those rows without copying them. The Python illustrates the search steps; it is not a new benchmark implementation.
+
 This proposed stopping rule completes a whole depth across all opened clusters before checking the candidate target. It can return more candidates than the target. A target of zero disables early stopping and continues to depth zero. Stopping simply because we have collected, for example, 100 candidates is an approximate stopping rule. It does not mathematically prove that a better document does not exist outside the current prefix.
 
 Therefore, recall still needs to be measured against the same exact reference results. An exact early-stop version would require a valid bound on the documents outside the visited prefixes. Reaching depth zero scores every document in the opened clusters, once. That matches the original scan's local result, though not necessarily its time.
 
-\newpage
+\Needspace{4\baselineskip}
 \textbf{Relationship to HNSW.}\par
 At first glance, this approach may sound somewhat similar to HNSW because both methods use a hierarchy to progressively change the search space. However, the hierarchy is being used differently. HNSW builds a proximity graph. During a query, it begins from sparse upper layers, navigates toward promising neighbors, and descends toward the denser bottom layer~\cite{hnsw}.
 
@@ -273,6 +320,7 @@ Insertion & Find neighbors; update edges & Compute prefix; update storage\\\bott
 \end{tabularx}
 \end{center}
 
+\Needspace{4\baselineskip}
 \textbf{Potential advantage 1: index construction and updates.}\par
 One possible advantage that I would like to investigate further is the cost of adding new documents. For HNSW, inserting a new vector generally requires searching the existing graph to find suitable neighbors and then creating or updating graph connections. For Backward Walk, the conceptual insertion process is simpler: document $\to$ embedding $\to$ binary signs $\to$ prefix key $\to$ corresponding bucket.
 
@@ -280,6 +328,7 @@ There is no nearest-neighbor graph that needs to be constructed for each new doc
 
 In particular, inserting into a sorted array can move many rows or require a rebuild. The first planned version is static; it does not establish cheap online updates.
 
+\Needspace{4\baselineskip}
 \textbf{Potential advantage 2: Matryoshka prefixes give the relaxation some meaning.}\par
 A Matryoshka model is trained so that shorter prefixes of the embedding remain useful representations at its trained lengths~\cite{mrl}. This gives us a reason to investigate shorter prefixes. It does not mean that the first coordinate is always more important than the second, or that the nearest neighbor under 16 dimensions must remain the nearest neighbor under 15 dimensions.
 

@@ -39,3 +39,15 @@ bash reports/search-math-prefix-v2/build.sh
 3. Prefix counts can stay unchanged when a sibling is empty. New ranges must exclude rows already scored.
 4. Stopping at a candidate count is approximate. The first proposed version completes each depth across all opened clusters before checking that count. A target of zero means continue to depth zero.
 5. Sorted arrays may require row movement or rebuilding on insertion. Cheap online updates remain a hypothesis, outside the first static experiment.
+
+## Python examples
+
+The three inline search listings use Python syntax. They share a small `TopK` helper that
+keeps the best scores, with document ID as the tie breaker. Cluster helpers expose bitplanes,
+selected rows and prefix ranges; these describe the example interface, not an installed API.
+The examples use integer masks and direct dot products for readability. The measured C++
+implementation uses packed-word arrays and score tables, so its cost counts remain separate.
+
+The listings were parsed and exercised with small helper fixtures: the three-row example,
+the greedy counterexample, empty prefixes, no rescoring, target zero, and finishing a depth
+across all opened clusters. These checks are not new benchmark measurements.

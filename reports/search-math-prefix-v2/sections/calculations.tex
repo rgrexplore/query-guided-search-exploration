@@ -1,4 +1,3 @@
-\newpage
 \section{Preliminary calculations}
 The collection contains $N=1{,}000{,}000$ documents. The same 200 query vectors, 256-bit codes and reference answers are used throughout. Each method may choose its own cluster count $C$, probe count $P$ and local settings. A probe opens one cluster. The result count is $K=100$; $d$ denotes the number of document bits.
 
@@ -19,11 +18,13 @@ ID & Document bits & Full score & Calculation\\\midrule
 These are teaching rows, not a change to the benchmark dataset. Bits are shown in position order, left to right. Scores are rounded here. For larger collections, $n=N/C$ estimates rows per cluster if clusters are equal-sized.
 
 \subsubsection{Original method}
+\Needspace{4\baselineskip}
 \textbf{Step 1: open the cluster and prepare the query.}\par
 Open cluster 0: \texttt{[ID 0, ID 1, ID 2]}. One cluster lookup here. Following Exa's four-sign table method~\cite{exa}, split the five query values into \texttt{[0.7, 0.5, -0.4, -0.6]} and \texttt{[0.3, 0, 0, 0]}. Each group has 16 sign patterns: $2\times16=32$ table entries. The final group is padded.
 
 The code checks four slots per entry: $32\times4=128$ slot visits. Table setup is $O(d)$ for a fixed group width of four. Cluster selection costs $T_{\rm route}$.
 
+\Needspace{4\baselineskip}
 \textbf{Step 2: score each document.}\par
 \[
  \texttt{ID 0}\longrightarrow0.1\qquad
@@ -32,6 +33,7 @@ The code checks four slots per entry: $32\times4=128$ slot visits. Table setup i
 \]
 Loop over three rows; each reads two score-table entries: $3\times2=6$ terms. For $F_A$ rows, this is $F_A\ceil{d/4}$ terms, or $O(F_A d)$ work.
 
+\Needspace{4\baselineskip}
 \textbf{Step 3: keep the best two.}\par
 \[
  [0{:}0.1]\ \longrightarrow\ [1{:}2.5,\ 0{:}0.1]
@@ -46,13 +48,14 @@ Offer three scores; keep at most two. The display above is sorted for readabilit
 \]
 $T_0$ includes cluster selection and table setup. $a_A$ is average time per document, including its score and result update. For fixed $C,P,d,K$, scan work grows as $O(N)$.
 
-\newpage
 \subsubsection{Bitplanes}
 \textbf{Same input:} $q=[0.7,0.5,-0.4,-0.6,0.3]$; rows \texttt{10100}, \texttt{11001}, \texttt{11000}; best two results. Stop splitting when at most two rows remain. Keep all other work limits unlimited.
 
+\Needspace{4\baselineskip}
 \textbf{Step 1: open, prepare and order the bits.}\par
 Open the same cluster and build the same 32 score-table entries as A. Sort five query positions by absolute value: $1\ (0.7)\to4\ (0.6)\to2\ (0.5)\to3\ (0.4)\to5\ (0.3)$. Sorting costs $O(d\log d)$. One pass sums the five absolute values: $Q=2.5$, costing $O(d)$. Write one word for mask \texttt{111}: all rows are active. Initial masks cost $O(PW)$ word writes.
 
+\Needspace{4\baselineskip}
 \textbf{Step 2: split the mask.}\par
 \begin{center}
 \begin{tikzpicture}[node distance=5mm]
@@ -66,9 +69,11 @@ Open the same cluster and build the same 32 score-table entries as A. Sort five 
 \end{center}
 The first two splits remove nothing. The third separates ID 0 from IDs 1 and 2. All three masks still have three positions. Each occupies one 64-bit word. Three splits visit $3\times1=3$ word positions. With $J$ splits and mask width $W$, this costs $O(JW)$, where $W=\ceil{n/64}$.
 
+\Needspace{4\baselineskip}
 \textbf{Step 3: score the two remaining rows.}\par
 Mask \texttt{011} fits the leaf limit. Read one mask word, then score IDs 1 and 2. Two scores use $2\times2=4$ table terms. Best results: \texttt{[1: 2.5, 2: 1.9]}. Reading $L$ final masks costs $O(LW)$; scoring $F_B$ rows costs $O(F_Bd)$. Result updates have the same $O(F_B\log K)$ bound as A.
 
+\Needspace{4\baselineskip}
 \textbf{Step 4: check the waiting branch and stop.}\par
 Its best possible score is $2.5-2(0.5)=1.5$, below the retained score 1.9. Skip ID 0. One final bound check is $O(1)$ once the query sum and penalty are known. Four candidate sets were processed: three splits and one leaf. Including the $P$ initial sets, queue work is bounded by $O((P+V)\log(P+V+1))$.
 
@@ -80,13 +85,14 @@ Its best possible score is $2.5-2(0.5)=1.5$, below the retained score 1.9. Skip 
 \]
 $S$ is average splits per opened cluster; $f_B$ is the scored fraction; $b$ is time per split-word visit. Here $S=3$, $f_B=2/3$. Other time includes sorting, queues and final-mask reads. A wide mask still costs time after many rows are removed.
 
-\newpage
 \subsubsection{Backward Walk: prefix relaxation}
 This is the proposed prefix method. The steps below are arithmetic examples, not measurements of an implemented index. Use the same query and three rows as A and B. Start at depth $x=5$ and stop after scoring at least two candidates, after completing that depth across the selected clusters.
 
+\Needspace{4\baselineskip}
 \textbf{Step 1: find the full prefix.}\par
 Query signs: \texttt{11001}. Sort the stored five-bit keys in position order: \texttt{10100}, \texttt{11000}, \texttt{11001}. Two binary searches find the start and end of prefix \texttt{11001}: range $[2,3)$ contains ID 1. Score ID 1 using all five values: 2.5. Only one candidate has been scored, so continue.
 
+\Needspace{4\baselineskip}
 \textbf{Step 2: remove the last constraint.}\par
 \begin{center}
 \begin{tikzpicture}[node distance=7mm]
@@ -99,6 +105,7 @@ Query signs: \texttt{11001}. Sort the stored five-bit keys in position order: \t
 \end{center}
 The parent range contains the old range. Score only the new row, ID 2, which has score 1.9. Two distinct candidates have now been scored. Stop and return IDs 1 and 2. This happens to recover both reference IDs in this example. A candidate count of two does not guarantee top-two recall on other data.
 
+\Needspace{4\baselineskip}
 \textbf{Step 3: count the work.}\par
 Two prefix depths, one cluster, and two binary searches per range: four binary-search calls. Each call over three keys uses at most two key comparisons: at most eight comparisons in this example, plus range checks. Score two rows, once each: four score-table terms. Query table setup and result updates still cost time.
 
@@ -109,11 +116,11 @@ $P$ is opened clusters; $L=x-\ell+1$ is visited depths down to final depth $\ell
 
 In a static sorted-key index, range lookup is $O(PL\log(n+1))$. Full scoring is $O(F_Cd)$, plus top-$K$ work. A trie would have a different lookup cost. Under independent balanced bits at a fixed final depth, $\E[F_\ell]=Pn/2^\ell$. This is not a recall estimate or a prediction of the adaptive stopping depth.
 
-\newpage
 \subsection{Memory complexity}
 \textbf{Same example:} three documents, five bits each, one cluster, two results. We count bytes of data first. Full process RAM also includes unused capacity, queue records, hash-table overhead, Python, and other runtime memory.
 
 \subsubsection{Original method}
+\Needspace{4\baselineskip}
 \textbf{Step 1: store the codes and IDs before search.}\par
 \begin{center}
 \begin{tikzpicture}[node distance=7mm]
@@ -125,6 +132,7 @@ In a static sorted-key index, range lookup is $O(PL\log(n+1))$. Full scoring is 
 \end{center}
 Each five-bit row uses one eight-byte word. Packing all 15 bits across row boundaries would use a different layout; this implementation stores whole words per row. Formula: $M_{\rm rows}=N(8\ceil{d/64}+8)$ bytes. Size is $O(N\ceil{d/64}+N)$. Cluster data is extra. For example, $C$ float32 centroids of width $d_R$ use $4Cd_R$ bytes. This one-cluster example needs no centroid search.
 
+\Needspace{4\baselineskip}
 \textbf{Step 2: hold the query, score table and current results during search.}\par
 \[
  \boxed{5\times4=20}\quad+\quad
@@ -136,6 +144,7 @@ Left to right: float32 query, double-precision table entries, result IDs and sco
 \textbf{Total counted fields:} 48 bytes stored + 308 query bytes = 356 bytes. This is not total process RAM; cluster records and allocation overhead remain additional.
 
 \subsubsection{Bitplanes}
+\Needspace{4\baselineskip}
 \textbf{Step 1: keep A's rows and add the bitplanes.}\par
 \begin{center}\small
 \begin{tabular}{c|ccc|r}
@@ -149,7 +158,7 @@ Bit 5 &0&1&0&8 bytes
 \end{center}
 Each plane has three useful bits but occupies one word. Five planes add $5\times8=40$ bytes. Stored fields: $48+40=88$ bytes. Formula: $M_{\rm planes}=8d\sum_c\ceil{n_c/64}$ bytes. Include padding in every cluster.
 
-\newpage
+\Needspace{4\baselineskip}
 \textbf{Step 2: hold masks while splitting.}\par
 \[
  \underbrace{\texttt{111}}_{\text{parent: 8 bytes}}
@@ -163,6 +172,7 @@ The parent exists while both children are built: $3\times8=24$ live mask bytes a
 \textbf{Total counted fields:} 88 bytes stored + 372 query bytes = 460 bytes. Stored size is $O(N\ceil{d/64}+N+d\sum_c W_c)$; query masks grow with the number and width of live branches, not just the number of remaining document IDs.
 
 \subsubsection{Backward Walk: proposed sorted-key storage}
+\Needspace{4\baselineskip}
 \textbf{Step 1: store rows in prefix order.}\par
 \begin{center}
 \begin{tabular}{@{}cll@{}}\toprule
@@ -179,6 +189,7 @@ Keep one copy of full packed codes and IDs: $3\times(8+8)=48$ bytes of fields fo
 \]
 With one million 256-bit rows, those code, ID and key fields total 44 MB, before routing and allocation overhead. This is a proposed layout calculation, not a measured memory result. Wider-than-32-bit stored prefixes would need a larger key type.
 
+\Needspace{4\baselineskip}
 \textbf{Step 2: hold range boundaries during search.}\par
 Keep the previous range for each opened cluster: two eight-byte offsets, or $16P$ bytes of fields. Hold the current range and process only its new slices. This avoids a bitmap over all documents and a list of all visited document IDs. Query vector, score table and top-$K$ buffers remain. Their sizes follow A; added range bookkeeping grows as $O(P)$, not $O(N)$.
 
@@ -187,7 +198,6 @@ Full process RAM includes array capacity, routing, temporary build copies and th
 \textbf{Total.} Proposed persistent space is $O(N\ceil{d/64}+N)$ plus routing. Query work space is
 $O(P+d+K)$ for this layout; index construction and online insertion costs remain separate.
 
-\newpage
 \subsection{Recall estimation}
 Reference IDs are the exact best results under the full binary score. In our small example they are $[1,2]$. All three worked examples return both: $2/2=100\%$ recall; the prefix example is not an implemented measurement. In the benchmark, each query has $K=100$ reference IDs. Returning 99 gives 99\% recall. This checks the ranking, not whether the text answers a person's question.
 
@@ -207,10 +217,10 @@ Let $D_{q,\ell}$ be rows in the opened clusters matching the query's first $\ell
 
 At depth zero, $D_{q,0}$ is every row in the opened clusters, so C matches A's local recall. A candidate target can stop earlier and miss reference IDs. The first planned version has no early exactness claim. A valid bound on all unseen rows would be required to make one.
 
-\newpage
 \subsection{Summary}
 Each formula uses its method's own opened clusters and local work. Let $M_0$ be allocated row and router storage, $Q_0$ common query memory, and $Q_B$ extra branch memory. C adds a four-byte key per row and per-query range records; its allocation overhead is still to be measured.
 
+\Needspace{4\baselineskip}
 \textbf{Time complexity}\par
 {\small\noindent
 \begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
@@ -221,6 +231,7 @@ Backward Walk & $T_0+2PL\log_2(n+1)t_b+F_Ca_C+T_{\rm ranges}$ (proposed sorted-k
 \end{tabularx}\par}
 The symbols and loop counts are defined in the steps above. Use actual cluster sizes and key counts for the measured comparison. Each cost belongs in one term only.
 
+\Needspace{4\baselineskip}
 \textbf{Memory complexity}\par
 {\small\noindent
 \begin{tabular}{@{}lll@{}}\toprule
@@ -231,6 +242,7 @@ Backward Walk & $M_0+4N$ (prefix keys) & $Q_0+O(P)$ (range records)\\\bottomrule
 \end{tabular}\par}
 The process, including these arrays and the running program, must fit 32 GB. A peak that includes construction is reported as such, not as index size.
 
+\Needspace{4\baselineskip}
 \textbf{Recall estimation}\par
 {\small\noindent
 \begin{tabularx}{\linewidth}{@{}lYY@{}}\toprule

@@ -4,7 +4,7 @@ All eight PDFs are retained under `output/pdf/`.
 
 The new [prefix Backward Walk report](../output/pdf/search-methods-prefix-v2.pdf) follows the
 revised method: look up a prefix, shorten it, and score only newly exposed rows. It is a
-21-page proposal with the earlier C results explicitly labeled `C_key`. Its
+17-page proposal with the earlier C results explicitly labeled `C_key`. Its
 [source guide](search-math-prefix-v2/README.md) records the distinction; implementation and
 new measurements are pending.
 

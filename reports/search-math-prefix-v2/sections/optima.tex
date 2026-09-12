@@ -1,4 +1,3 @@
-\newpage
 \section{Deriving Optima}
 Minimize retrieval time at the required recall, within 32 GB RAM. Keep documents, queries and reference answers unchanged. Each method chooses its own index and search settings.
 
@@ -21,7 +20,6 @@ For a simple derivative, assume equal clusters, routing cost $\alpha C$, row cos
 \]
 $C^*$ balances cluster selection against document scanning. At a fixed recall target, $P_A(C,\rho)$ may change with $C$, so the measured comparison uses actual probe counts and cluster sizes.
 
-\newpage
 \subsection{Bitplanes}
 A 6400-document mask has 100 words. Removing 100 of 200 remaining candidates saves 100 scores, but adds 100 split-word visits. Let $W=\ceil{n/64}$. If a split avoids $\Delta F$ scores, it helps when:
 
@@ -38,7 +36,6 @@ This estimates a cost balance, not recall. Identical bitplanes may remove no mor
 
 A node budget counts visited sets, including leaves. A leaf of size $N$ allows scoring a cluster immediately. Record splits, final-mask reads and scores. A's probe cutoff is necessary for the same layout, but B's local limits may lose more IDs. Check the returned IDs against the recall target.
 
-\newpage
 \subsection{Backward Walk: settings to test}
 The new choices are starting prefix depth $x$ and candidate target $M$, alongside cluster count $C$ and probes $P$. All full scores still use 256 bits. A deeper start usually finds fewer rows, but may require more widening steps. A shallower start reduces lookups but may score many unnecessary rows.
 
