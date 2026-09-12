@@ -5,6 +5,10 @@ This report uses one unchanged benchmark: one million 256-bit MS MARCO document 
 The source follows the introduction, per-method calculations, per-method optima, summary,
 experiments, limitations and conclusion in that order.
 
+Section 2.1 gives each method's loop, a document-count equation and a numerical example.
+The equal-cluster and equal-rows-per-key assumptions are stated beside the estimates;
+the experimental tables still use the original measured counts and times.
+
 ## Build the PDF
 
 With TeX Live available, run from the repository root:

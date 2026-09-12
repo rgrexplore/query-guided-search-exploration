@@ -6,76 +6,94 @@ count $C$, probe count $P$ and local settings. A probe opens one cluster. The re
 is $K=100$; $d$ denotes the number of document bits.
 
 \subsection{Time complexity}
-The formulas count the work for one query. Converting it to milliseconds requires measured
-operation costs or direct stage timings. The final comparison uses measured query time,
-including cluster selection and local search.
+We count the work for one query. Let $N$ be the number of documents, $C$ the number of
+clusters, and $P$ the number opened. For this first estimate, assume equal-sized clusters:
+\[
+ n=N/C\quad\text{documents per cluster}.
+\]
+The examples below use $N=1{,}000{,}000$, $C=100$, and $P=10$. Each cluster has 10,000
+rows, so the opened clusters contain 100,000 rows. These are arithmetic examples, not
+additional benchmark runs. The experiment uses actual cluster sizes.
+
+Let $T_0$ be time spent choosing clusters and preparing the query's score table.
+Let $a_A,a_B,a_C$ be the average time per scored document for each method, including
+reading its code and maintaining the best results. These costs are measured; scattered
+reads can cost more than consecutive reads. The vector length $d$ and result count $K$
+are fixed in the examples.
 
 \subsubsection{Original method}
-If the opened clusters contain 200, 350 and 150 documents, A computes 700 complete scores.
-For cluster sizes $n_c$, the count is
+\textbf{Loop:} open each selected cluster, then score every document inside it.
+There are $P$ clusters with approximately $N/C$ documents each:
 \[
- F_A=\sum_{c\text{ opened}}n_c.
+ \boxed{T_A\approx T_0+\frac{PN}{C}a_A.}
 \]
-The approximation $NP/C$ is useful only when the opened clusters are close to equal in size.
-The experiment counts their actual documents.
+For example, A scores $10\times10{,}000=100{,}000$ documents. Following Exa's
+four-coordinate lookup-table approach~\cite{exa}, each 256-bit document needs 64 table
+terms. Thus this example evaluates $100{,}000\times64=6{,}400{,}000$ terms, in addition
+to selecting the best results. Four packed words do not mean four scoring operations.
 
-The scorer follows Exa's four-coordinate lookup-table approach~\cite{exa}. A 256-bit
-code requires 64 table terms. Each term extracts four signs, reads an entry and adds it
-to the score. Storing a document in four machine words does not reduce scoring to four
-operations. For group width $g$, let $G=\ceil{d/g}$. Preparing the query table creates
-$G2^g$ entries; scoring $F$ documents evaluates $FG$ terms.
-
-Define
-\[
- T_0=T_{\rm route}+T_{\rm table},\qquad
- T_{\rm score}(F)=Fc_s+T_{\rm top}(F,K).
-\]
-Here $c_s$ prices the work within a complete score; row-access costs can differ between methods. $T_{\rm top}$ covers retaining the best
-$K$ results and ordering the output. Its worst-case work is $O(F\log K)$; not every score
-replaces a retained result. A's total is $T_A=T_0+T_{\rm score}(F_A)$.
+For fixed $C$, $P$, $d$, and $K$, scanning work is $O(N)$: doubling the documents
+approximately doubles the number of scores. For unequal clusters, replace $PN/C$ by
+the actual count $F_A=\sum_{c\text{ opened}}n_c$.
 
 \subsubsection{Bitplanes}
-A cluster of 6400 documents needs 100 words in each mask when a word holds 64 bits. If a
-split leaves only 80 candidates, its mask still has 100 words. The next split reads all
-100 positions again.
+\textbf{Loop:} visit a branch, read its bitmap to split the candidates, and continue.
+When a candidate set is small enough, score its remaining documents.
 
-Let $W_c=\ceil{n_c/w}$, with word width $w=64$ here. If a query performs $J_c$ splits and
-scores $E_c$ final masks in cluster $c$, the word visits are
-\[
- V_s=\sum_c J_cW_c,\qquad V_l=\sum_c E_cW_c.
-\]
-A split reads a parent and a bitplane and writes children. One word visit therefore includes
-several bit operations and memory accesses. Ordering query coordinates costs $O(d\log d)$;
-the branch queue adds work when candidate sets are inserted or removed.
+A bitmap stores one bit per document. With 64 bits per word, a cluster of 10,000
+rows needs $\ceil{10{,}000/64}=157$ words. Every split processes all 157 positions,
+even after only 50 candidates remain. Each position requires reads, bit operations
+and writes; it is not a single CPU instruction.
 
-A zero word in a final mask skips scoring. A nonzero word starts a sequence of row reads;
-let $V_+$ count these words. Reading 100 mostly empty words and reading 100 words containing
-many candidates have different costs. With $F_B$ scored documents,
+Let $S$ be the average number of splits visited per opened cluster, including
+alternative branches. Let $f_B$ be the fraction of opened documents eventually scored,
+and $b$ the time to process one bitmap position during a split. Then
 \[
- T_B=T_0+T_{\rm order}+c_bV_s+c_lV_l+c_rV_+
-       +T_{\rm score}(F_B)+T_{\rm branches}.
+ \boxed{T_B\approx T_0+PS\ceil{\frac{N}{64C}}b
+              +f_B\frac{PN}{C}a_B+T_{\rm other,B}.}
 \]
-The coefficients price split-word work, final-mask checks and the additional cost of
-starting row reads. Actual splits and survivors depend on the query and stored signs.
-They cannot be obtained from $N$ and RAM alone.
+Here $T_{\rm other,B}$ is additional time for sorting query positions, managing waiting branches
+and reading final masks.
+
+For example, if $S=20$ and $f_B=0.1$, B processes
+$10\times20\times157=31{,}400$ bitmap positions and scores 10,000 documents.
+A scores 100,000. B wins only if its extra work costs less than the 90,000 avoided scores,
+while keeping the required recall.
+
+The bitmap term still grows with $N$ when $C$, $P$ and $S$ stay fixed. Branching therefore
+does not automatically give $O(\log N)$ search. The values of $S$ and $f_B$ must be measured
+on the actual queries; the example does not predict them.
 
 \subsubsection{Backward Walk}
-Trying three keys in two clusters requires six lookups, including empty results. If four
-lookups find document ranges, there are four range starts. All rows in those ranges still
-receive complete scores.
+\textbf{Loop:} generate a key, look it up in each opened cluster, then score the documents
+listed under that key. Repeat for another key if needed.
 
-For $E$ fully processed keys, $H=PE$. Let $H_+$ count successful lookups and $F_C$ count
-scored rows. Then
+Let $E$ be the number of key patterns tried, $c$ the average lookup time, and $F_C$ the
+number of documents found and scored. Trying every key in every opened cluster gives
 \[
- T_C=T_0+T_{\rm keys}+c_hH+c_pH_++T_{\rm score}(F_C).
+ \boxed{T_C\approx T_0+PE\,c+F_Ca_C+T_{\rm other,C}.}
 \]
-There is one shared key queue. $T_{\rm keys}$ includes ordering the $h$ key coordinates
-and generating alternatives. Priority-queue enumeration has an $O(E\log(E+1))$ upper
-bound. An empty lookup pays the lookup cost; a successful one also starts a document range.
-The experiment records lookup and score counts rather than assuming equal key occupancy.
+$T_{\rm other,C}$ is additional time for generating and ordering keys and starting document ranges.
+Empty lookups also cost time. If a budget stops midway through a key, use the actual
+lookup count instead of $PE$.
+
+An $h$-bit key has $2^h$ possible patterns. \emph{If} rows are evenly distributed among
+these patterns inside each cluster, $E$ distinct keys return approximately
+\[
+ F_C\approx\frac{PEN}{C2^h},\qquad
+ \boxed{T_C\approx T_0+PE\,c+\frac{PEN}{C2^h}a_C+T_{\rm other,C}.}
+\]
+For example, with $h=8$ and $E=16$, C performs $10\times16=160$ lookups. Under that
+assumption, it scores approximately $160\times10{,}000/256=6250$ documents.
+If all 256 keys are needed, it makes 2560 lookups and scores all 100,000 documents.
+
+Finding 6250 documents does not establish recall: the required reference documents must
+be among them. Real keys can also contain very different numbers of rows. The experiment
+therefore measures $E$ and $F_C$ rather than assuming this distribution.
 
 \subsection{Memory complexity}
-Stored index data and temporary query memory are separate. The running program, unused
+For cluster $c$, let $n_c$ be its document count and $W_c=\ceil{n_c/w}$ its bitmap width,
+where a word holds $w=64$ bits. Stored index data and temporary query memory are separate. The running program, unused
 array capacity and allocation overhead also consume RAM. Construction may have a higher
 peak because input arrays and the new index coexist.
 
@@ -152,7 +170,6 @@ The batch value averages these per-query products; multiplying separately averag
 is generally incorrect. A key returning many rows establishes no recall level unless the
 required reference IDs are among them.
 
-\newpage
 \subsection{Summary}
 Each formula uses its method's own opened clusters and local work. Let $M_0$ be allocated
 row and router storage, $Q_0$ common query memory, $D_C$ allocated directory memory, and
@@ -161,14 +178,20 @@ $Q_B,Q_C$ extra masks and queues. Allocation overhead is included in these memor
 \subsubsection*{Time complexity}
 \begin{center}\small
 \begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
-Method & Query-time formula\\\midrule
-Original method & $T_0+T_{\rm score}(F_A)$\\
-Bitplanes & $T_0+T_{\rm order}+c_bV_s+c_lV_l+c_rV_++T_{\rm score}(F_B)+T_{\rm branches}$\\
-Backward Walk & $T_0+T_{\rm keys}+c_hH+c_pH_++T_{\rm score}(F_C)$\\\bottomrule
+Method & Approximate query time\\\midrule
+Original method & $T_0+(PN/C)a_A$\\
+Bitplanes & $T_0+PS\ceil{N/(64C)}b+f_B(PN/C)a_B+T_{\rm other,B}$\\
+Backward Walk & $T_0+PE\,c+F_Ca_C+T_{\rm other,C}$; for equal rows per key, $F_C\approx PEN/(C2^h)$\\\bottomrule
 \end{tabularx}\normalsize
 \end{center}
-$T_0$ includes routing and table preparation. Costs already included in a measured stage
-must not be added a second time. Query encoding and later reranking are outside this timer.
+$N$ is document count; $C$ is clusters; $P$ is opened clusters. B visits an average of $S$
+splits per cluster and scores fraction $f_B$. C tries $E$ keys of width $h$.
+The $a$ terms price complete document scores; $b$ prices a split-word visit; $c$ prices a
+key lookup. $T_{\rm other,B}$ and $T_{\rm other,C}$ retain other search work, rather than treating it as free.
+These estimates use equal cluster sizes. The measured work uses actual sizes and key counts.
+
+$T_0$ includes routing and table preparation. Each cost belongs in one term only.
+Query encoding and later reranking are outside the measured retrieval time.
 
 \subsubsection*{Memory complexity}
 \begin{center}\small

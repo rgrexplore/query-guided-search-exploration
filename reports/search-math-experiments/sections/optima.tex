@@ -40,21 +40,20 @@ cluster sizes; the fixed-$P$ derivative is not a complete solution.
 \subsection{Bitplanes}
 Consider a mask covering 6400 documents, or 100 words. If 200 candidates remain and a split
 removes 100, it saves 100 complete scores. It also adds 100 split-word visits and branch
-work. For $\Delta F$ avoided scores, the local comparison is
+work. Let $W=\ceil{n/64}$ be the bitmap width. If an extra split avoids $\Delta F$
+scores, a simple comparison is
 \[
- \Delta F\,c_s>
- Wc_b+c_l\Delta V_l+\Delta T_{\rm branches}
-       +\Delta T_{\rm row\ starts}+\Delta T_{\rm top}.
+ \boxed{\Delta F\,a_B>Wb+\Delta T_{\rm other,B}.}
 \]
-The right side includes the changes caused by the extra split. Those changes need not all
-be positive. The complete search must also retain the required recall; scoring fewer rows
-by ending too early is insufficient.
+The left side is saved scoring time. The right side is split time plus the change in other
+branch work. The comparison assumes a roughly constant cost per score; actual timing also
+captures changes in memory access. The complete search must retain the required recall.
 
 If each split halves one candidate set, after $j$ cuts it contains approximately $n2^{-j}$
-rows. Ignoring changes in queue and row-start costs gives the guide
+rows. Holding other branch work constant gives the guide
 \[
- T_B(j)\approx T_0+jWc_b+Wc_l+n2^{-j}c_s,\qquad
- j^*=\log_2\!\left(\frac{n\ln(2)c_s}{Wc_b}\right).
+ T_B(j)\approx T_0+jWb+n2^{-j}a_B+T_{\rm other,B},\qquad
+ j^*=\log_2\!\left(\frac{n\ln(2)a_B}{Wb}\right).
 \]
 This is an illustrative cost balance, not a recall estimate for these embeddings. If two
 bitplanes are identical, splitting on the second after the first removes no additional rows.
@@ -80,10 +79,13 @@ key widths 1, 4, and 8.
 
 At the same routing settings, changing key width from $h$ to $h'$ helps when
 \[
- T_{\rm score}(F_h)-T_{\rm score}(F_{h'})>
- c_h(H_{h'}-H_h)+c_p(H_{+,h'}-H_{+,h})
-       +T_{{\rm keys},h'}-T_{{\rm keys},h}.
+ \boxed{\text{saved scoring time}>
+        \text{extra lookup time}+\text{extra key-management time}.}
 \]
+For example, saving 3 ms of document scoring pays for 1 ms of additional key work.
+Saving only 0.5 ms does not. These are cost examples; the measured comparison below
+checks both time and recall on the unchanged inputs.
+
 A smaller first range does not determine the answer. Search may need many additional keys,
 including empty ones, before finding enough high-scoring documents or proving that remaining
 keys cannot improve the result.
