@@ -1,0 +1,48 @@
+{
+  "stages": {
+    "sweep": {
+      "complete_workers": 128,
+      "timing_observations": 51200,
+      "archive_files_verified": 640,
+      "inputs_identical": true,
+      "memory_statuses": {
+        "fits_by_lifetime_peak": 128
+      },
+      "power_snapshot_changes": 0
+    },
+    "extra": {
+      "complete_workers": 128,
+      "timing_observations": 51200,
+      "archive_files_verified": 640,
+      "inputs_identical": true,
+      "memory_statuses": {
+        "fits_by_lifetime_peak": 128
+      },
+      "power_snapshot_changes": 0
+    },
+    "repeats": {
+      "complete_workers": 36,
+      "timing_observations": 14400,
+      "archive_files_verified": 180,
+      "inputs_identical": true,
+      "memory_statuses": {
+        "fits_by_lifetime_peak": 36
+      },
+      "power_snapshot_changes": 0
+    }
+  },
+  "complete_workers": 292,
+  "timing_observations": 116800,
+  "native_sha256": "bac37b00866725bff5ef4904b763c9685f3d6d2142126e5f047a2d897e6ffc1f",
+  "worker_sha256": "091ff5f9b9c369bbe23f9394972f632710eb696471f448e3d94153b9e2007b1d",
+  "input_hashes": {
+    "codes.npy": "14c1f435857b13ab177c22c0e74aecf1432630e1ba67289686bf8a1159273d0e",
+    "queries.npy": "d462a5c3eb9f1e082fb1a626b49f4a8050cb9f24b9d2751eaec7dd53589df93c",
+    "reference.npy": "dc2f32b0c78dadef21d6fba6e4013ae36b6113ffb3a31d988326b207f780c632",
+    "documents.npy": "29c709daa027a9789ae49efd822c3ec9f4d7755c9c080077af1bb772a97dd2b4"
+  },
+  "qualified_repeated_choices": 12,
+  "independent_work_checks": 6,
+  "logical_memory_checks": 3,
+  "scope": "All document, query and reference arrays unchanged; only index/search settings varied. Every original raw case and unsuccessful parameter choice remains archived."
+}

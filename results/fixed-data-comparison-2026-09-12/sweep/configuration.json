@@ -1,0 +1,21 @@
+{
+  "documents": 1000000,
+  "dimensions": 256,
+  "queries": 200,
+  "top_k": 100,
+  "recall_targets": [
+    0.8,
+    0.9,
+    0.95,
+    0.99
+  ],
+  "repetitions": 2,
+  "repeat_processes": 3,
+  "schedule_seed": 20260915,
+  "limits": {
+    "ram_budget_bytes": 32000000000,
+    "worker_stop_bytes": 34359738368,
+    "case_seconds": 180
+  },
+  "scope": "Only index parameters vary. Both stages read the same cached document, query and reference arrays."
+}

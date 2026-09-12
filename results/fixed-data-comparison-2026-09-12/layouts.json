@@ -1,0 +1,46 @@
+[
+  {
+    "path": null,
+    "kind": "none",
+    "clusters": 1,
+    "probes": [
+      1
+    ]
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/real-scale-2026-09-10/n1000000/routers/ivf-256-seed42",
+    "kind": "ivf",
+    "clusters": 256,
+    "probes": [
+      12,
+      29,
+      52,
+      119,
+      256
+    ]
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/real-scale-2026-09-10/n1000000/routers/ivf-4096-seed42",
+    "kind": "ivf",
+    "clusters": 4096,
+    "probes": [
+      72,
+      211,
+      467,
+      1330,
+      4096
+    ]
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/real-scale-2026-09-10/n1000000/routers/ivf-8192-seed42",
+    "kind": "ivf",
+    "clusters": 8192,
+    "probes": [
+      127,
+      353,
+      778,
+      2440,
+      8192
+    ]
+  }
+]
