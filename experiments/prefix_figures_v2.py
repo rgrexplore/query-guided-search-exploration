@@ -83,7 +83,7 @@ def draw_study(folder):
             # These are measured qualifying choices, not an interpolated speed model.
             # A setting at90% remains eligible through90%, but not above it.
             axis.step(np.asarray(targets) * 100, times, where="pre", label=label, color=color, linewidth=2)
-        axis.set(xlabel=f"Required recall@{k} (%)", ylabel="Median query time (ms)",
+        axis.set(xlabel=f"Required average recall@{k} (%)", ylabel="Median query time (ms)",
                  title=f"Fastest tested settings\n{counts}", xlim=(50, 100), yscale="log")
         axis.grid(alpha=.2)
         axis.legend(frameon=False)

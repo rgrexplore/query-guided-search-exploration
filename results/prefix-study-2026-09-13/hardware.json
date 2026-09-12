@@ -1,0 +1,8 @@
+{
+  "machdep.cpu.brand_string": "Apple M5 Max",
+  "hw.memsize": "137438953472",
+  "hw.physicalcpu": "18",
+  "hw.logicalcpu": "18",
+  "platform": "macOS-26.3.2-arm64-arm-64bit",
+  "scope": "Search uses one native query at a time. Embedding preparation uses MPS and runs before search timing."
+}
