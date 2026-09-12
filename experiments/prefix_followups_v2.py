@@ -21,6 +21,7 @@ import numpy as np
 from threadpoolctl import threadpool_limits
 
 from experiments import prefix_study_v2 as study
+from experiments.prefix_exploration_v2 import split_schedule
 from experiments.prefix_study_v2 import choose_settings
 
 
@@ -184,6 +185,10 @@ def prepare(source, output, *, seconds=900, minimum_advantage=.03):
                     k = str(variant["top_k"])
                     layout["probes"][k] = sorted(set(layout["probes"].get(k, [])) | {variant["probes"]})
     study.save_json(output / "layouts.json", layouts)
+    study.save_json(output / "main/schedule-before-batching.json", jobs)
+    evidence["jobs_before_batching"] = len(jobs)
+    jobs = split_schedule(jobs)
+    evidence["jobs"] = len(jobs)
     study.save_json(output / "main/schedule.json", jobs)
     study.save_json(output / "followup-selection.json", dict(evidence, source=str(source),
                     source_file_hashes=hashes, timing_budget_seconds=seconds,
