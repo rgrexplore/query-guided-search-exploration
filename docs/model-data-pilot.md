@@ -2,11 +2,12 @@
 
 2026-09-13, Apple M5 Max, 128 GiB RAM, macOS 26.3.2.
 
-**The first full-run checkpoints revise the encoding estimate to about 29 minutes.**
+**The complete corpus and 1,000 queries finished encoding in 23.83 minutes.**
 The initial short pilot projected 9.79 minutes, or about 15 minutes with 50% extra time.
-The actual run saved its first 32,768 rows in 108.7 cumulative chunk seconds, about
-302 questions per second. Checkpoints now supersede that short-pilot forecast. This
-covers encoding only; routing,
+That short pilot underestimated the actual run. The first 32,768 saved rows revised the
+forecast to about 29 minutes; later checkpoints tracked the remaining time more closely.
+The measured 23.83 minutes includes chunk encoding, normalization, saved checkpoints,
+and final array assembly. Routing,
 exact reference scores, search experiments, and reporting need separate estimates.
 An eight-hour study is not established by encoding throughput alone.
 
@@ -84,10 +85,11 @@ Using the batch-64 median document rate and measured query rate:
 | 522,931 documents + 1,000 queries | 9.79 minutes | 14.69 minutes |
 | 522,931 documents + 2,000 queries | 9.82 minutes | 14.74 minutes |
 
-The full run may differ because the pilot calls were short, long questions are rare,
-and the full run also saves files and concatenates completed chunks. Its checkpoints
-provide a better remaining-time estimate once it starts. The 1,000-query job is the
-authorized full encoding; the 2,000-query row is a forecast only.
+The completed 1,000-query job took 1,430.08 seconds, or 23.83 minutes: 2.43 times the
+direct pilot projection. The pilot calls were short, and the full run also saved files
+and concatenated completed chunks; this study did not isolate the cause of the gap.
+The 50% allowance was an assumption and proved too small. Saved full-run checkpoints
+provided a better remaining-time estimate. The 2,000-query row remains a forecast only.
 
 Memory was sampled every 50 ms. Across the pilot, the largest observed MPS driver
 allocation was 3.47 GB decimal; process lifetime peak RSS was 2.83 GB. Batch-64 document
@@ -140,4 +142,17 @@ establishes completion. Its array hashes and row IDs identify the input used to 
 the separate 256- and 1,024-dimensional search pools. The full-source check found 568
 extra corpus rows with repeated text. All are preserved.
 
-Full encoding is authorized and running; this note does not yet claim it has finished.
+The full run completed successfully with 64 document chunks and one query chunk.
+Cumulative document chunk time was 1,422.29 seconds; the query chunk took 3.90 seconds.
+Process lifetime peak RSS reached 3.68 GB decimal, and the largest MPS driver allocation
+recorded after a chunk was 5.59 GB; these must not be added as independent allocations.
+The encoder process exited before MPS was handed to the next preparation stage.
+
+| Completed array | Shape and type | SHA-256 |
+|---|---|---|
+| `quora-qwen-full/full-documents.npy` | 522,931 × 1,024 float32 | `971043bac6499d26e756eb733ecbfadd6e34394c97a52b7cd37be4e7c8d72000` |
+| `quora-qwen-full/full-queries.npy` | 1,000 × 1,024 float32 | `14ebf15e2394f58e1ab89dd2c526df90a8ff551ddd832b53c4bf8df5796c1fd9` |
+
+The complete manifest, IDs, unchanged raw relevance labels, per-chunk progress records,
+and runtime log remain beside these arrays. No additional model work or search benchmark
+was performed as part of this preparation task.
