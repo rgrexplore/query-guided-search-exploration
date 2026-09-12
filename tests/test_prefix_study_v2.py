@@ -188,3 +188,57 @@ def test_summary_keeps_complete_query_rows_when_a_worker_was_killed_mid_write(co
     assert row['measurements']==1 and row['p50_ms']==1.2 and row['recall']==1
     assert row['qualified'] is False and row['complete'] is False
     assert (folder/'run/result.json').read_text()=='{"status":'
+
+
+def test_explicit_policies_replace_grids_and_keep_declared_probes():
+    layouts = [dict(path='/ivf-8', clusters=8, probes={'1': [2, 3]})]
+    branch = dict(leaf_sizes=[100, 200], node_budgets=[1, 2], exploration=.1, seed=17,
+                  settings=[dict(leaf_size=4, node_budget=8),
+                            dict(leaf_size=32, node_budget=0, exploration=.5, seed=99,
+                                 prefer_deeper_ties=True)])
+    prefix = dict(max_prefix_bits=5, start_depths=[99], candidate_targets=[10, 20],
+                  settings=[dict(start_depth=2, candidate_target=3),
+                            dict(start_depth=4, candidate_target=0)])
+    original = json.dumps((branch, prefix), sort_keys=True)
+    jobs = study.build_jobs('/same-pool', layouts, [1], 'followup', branch=branch, prefix=prefix)
+    assert {job['method']: len(job['variants']) for job in jobs} == {'scan': 2, 'branch': 4, 'prefix': 4}
+    assert all({variant['probes'] for variant in job['variants']} == {2, 3} for job in jobs)
+    variants = next(job['variants'] for job in jobs if job['method'] == 'branch')
+    for variant in variants:
+        if variant['leaf_size'] == 4:
+            assert (variant['node_budget'], variant['exploration'], variant['seed']) == (8, .1, 17)
+        else:
+            assert (variant['leaf_size'], variant['node_budget'], variant['exploration'], variant['seed']) == (32, 0, .5, 99)
+            assert variant['prefer_deeper_ties'] is True
+    variants = next(job['variants'] for job in jobs if job['method'] == 'prefix')
+    assert {(variant['start_depth'], variant['candidate_target']) for variant in variants} == {(2, 3), (4, 0)}
+    assert json.dumps((branch, prefix), sort_keys=True) == original
+    for depth in (-1, 6):
+        invalid = dict(prefix, settings=[dict(start_depth=depth, candidate_target=3)])
+        with pytest.raises(ValueError, match='depth'):
+            study.build_jobs('/same-pool', layouts, [1], 'followup', prefix=invalid)
+
+
+def test_optional_all_cluster_choice_preserves_default_and_global_reference(config, tmp_path, monkeypatch):
+    pool = Path(config['pool'])
+    router = pool/'routers/ivf-2-seed42'; router.mkdir(parents=True)
+    np.save(router/'assignments.npy', np.array([0, 1, 0, 1], dtype=np.int64))
+    np.save(router/'labels.npy', np.array([0, 1], dtype=np.int64))
+    np.save(router/'centroids.npy', np.ones((2, 4), dtype=np.float32))
+    (router/'router.json').write_text(json.dumps(dict(kind='ivf', clusters=2, seed=42,
+        assignments_sha256=file_hash(router/'assignments.npy'),
+        centroids_sha256=file_hash(router/'centroids.npy'))))
+    # Hold the derived cutoff at one probe to isolate the optional all-cluster addition.
+    monkeypatch.setattr(study, 'routing_ranks', lambda case:
+        (np.ones((2, 2), dtype=np.int64), np.array([[2, 1], [2, 1]], dtype=np.float32)))
+    for option, expected in ((None, [1, 2]), (False, [1]), (True, [1, 2])):
+        settings = dict(config, cluster_counts=[1, 2])
+        if option is not None:
+            settings['include_all_clusters'] = option
+        output = tmp_path/f'study-{option}'
+        jobs = study.prepare(settings, output)
+        layouts = json.loads((output/'layouts.json').read_text())
+        assert layouts[0]['probes'] == {'1': [1], '2': [1]}
+        assert layouts[1]['probes'] == {'1': expected, '2': expected}
+        for job in jobs:
+            assert {variant['probes'] for variant in job['variants']} == set(expected if job['clusters'] == 2 else [1])

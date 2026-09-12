@@ -51,23 +51,26 @@ def build_jobs(pool, layouts, top_ks, phase, *, shape=None, repetitions=1,
     shape = shape or dict(documents=1_000_000, dimensions=256, queries=200)
     branch, prefix = branch or {}, prefix or {}
     width = min(prefix.get("max_prefix_bits", 32), shape["dimensions"])
-    depths = prefix.get("start_depths", [min(16, width)])
-    if not all(0 <= depth <= width for depth in depths):
+    branch_policies = branch["settings"] if "settings" in branch else [
+        dict(leaf_size=leaf, node_budget=budget)
+        for leaf, budget in product(branch.get("leaf_sizes", [32]), branch.get("node_budgets", [128, 0]))]
+    prefix_policies = prefix["settings"] if "settings" in prefix else [
+        dict(start_depth=depth, candidate_target=target)
+        for depth, target in product(prefix.get("start_depths", [min(16, width)]),
+                                     prefix.get("candidate_targets", [1000, 0]))]
+    if not all(0 <= policy["start_depth"] <= width for policy in prefix_policies):
         raise ValueError("start_depths must fit the stored prefix width")
-    policies = {"scan": [{}], "branch": [dict(leaf_size=leaf, node_budget=budget,
-                 exploration=branch.get("exploration", 0), seed=branch.get("seed", 42))
-                 for leaf, budget in product(branch.get("leaf_sizes", [32]),
-                                              branch.get("node_budgets", [128, 0]))],
-                "prefix": [dict(start_depth=depth, candidate_target=target)
-                 for depth, target in product(depths, prefix.get("candidate_targets", [1000, 0]))]}
+    policies = {"scan": [{}],
+                "branch": [{"exploration": branch.get("exploration", 0),
+                            "seed": branch.get("seed", 42), **policy} for policy in branch_policies],
+                "prefix": prefix_policies}
     jobs, number = [], 0
     rng = np.random.default_rng(schedule_seed)
     for layout in layouts:
         for method in METHODS:
             variants = []
             for k in top_ks:
-                for probes, policy in product(sorted(set(layout["probes"][str(k)] +
-                                                         [layout["clusters"]])), policies[method]):
+                for probes, policy in product(sorted(set(layout["probes"][str(k)])), policies[method]):
                     variants.append(dict(setting_id=f"{phase}-s{number:05d}", top_k=k,
                                          probes=probes, repetitions=repetitions, **policy))
                     number += 1
@@ -115,7 +118,7 @@ def prepare(config, output):
                 query_rows=list(range(manifest["identity"]["queries"]))))
             layout = dict(path=str(router), clusters=clusters, hashes=hashes, probes={}, cutoffs={})
             for k in config["top_ks"]:
-                evidence, choices = [], {clusters}
+                evidence, choices = [], {clusters} if config.get("include_all_clusters", True) else set()
                 for target in config.get("probe_targets", config["recall_targets"]):
                     rank = probe_cutoff(ranks[:, :k], target)
                     probes = cover_boundary_ties(scores, rank)
