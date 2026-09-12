@@ -38,6 +38,9 @@ struct SearchStats {
     std::size_t key_attempts = 0; // Includes lookups with no matching documents.
     std::size_t keys_generated = 0;
     std::size_t peak_key_queue_bytes = 0;
+    std::size_t prefix_levels = 0; // Visited depths, including depth zero.
+    std::size_t prefix_lookups = 0; // Binary boundary searches; none at depth zero.
+    std::size_t final_depth = 0;
     std::string stop_reason = "exhausted";
     bool trace_enabled = false;
     std::vector<TraceStep> trace;
@@ -56,6 +59,7 @@ struct StorageInfo {
     std::size_t codes_bytes = 0;
     std::size_t bitplanes_bytes = 0;
     std::size_t row_ids_bytes = 0;
+    std::size_t prefix_keys_bytes = 0;
     std::size_t array_capacity_bytes = 0; // Allocated vector storage; not whole-process RAM.
     std::size_t key_directory_payload_bytes = 0;
     std::size_t occupied_keys = 0;

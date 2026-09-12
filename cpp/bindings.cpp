@@ -1,5 +1,6 @@
 #include "index.hpp"
 #include "key_index.hpp"
+#include "prefix_index_v2.hpp"
 
 #include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
@@ -82,6 +83,9 @@ py::dict stats_to_python(const bitplane::SearchStats& stats) {
     result["key_attempts"] = stats.key_attempts;
     result["keys_generated"] = stats.keys_generated;
     result["peak_key_queue_bytes"] = stats.peak_key_queue_bytes;
+    result["prefix_levels"] = stats.prefix_levels;
+    result["prefix_lookups"] = stats.prefix_lookups;
+    result["final_depth"] = stats.final_depth;
     result["stop_reason"] = stats.stop_reason;
 
     if (stats.trace_enabled) {
@@ -183,6 +187,20 @@ std::unique_ptr<bitplane::KeyIndex> build_key_index(const py::array& codes,
                                                  dimensions, key_bits, key_offset);
 }
 
+std::unique_ptr<bitplane::PrefixIndexV2> build_prefix_index_v2(
+        const py::array& codes, const py::array& assignments,
+        int dimensions, int max_prefix_bits) {
+    check_codes(codes, assignments, dimensions);
+    if (max_prefix_bits < 1 || max_prefix_bits > 32 || max_prefix_bits > dimensions) {
+        throw py::value_error("max_prefix_bits must be between 1 and min(32, dimensions)");
+    }
+    const auto* code_data = static_cast<const std::uint64_t*>(codes.data());
+    const auto* assignment_data = static_cast<const std::int64_t*>(assignments.data());
+    py::gil_scoped_release release;
+    return std::make_unique<bitplane::PrefixIndexV2>(code_data, assignment_data, codes.shape(0),
+                                                     dimensions, max_prefix_bits);
+}
+
 py::dict scan_index(const bitplane::Index& index, const py::array& queries,
                     const py::array& buckets, py::ssize_t candidate_limit) {
     check_queries(index, queries, buckets);
@@ -251,12 +269,13 @@ py::dict storage_to_python(const bitplane::StorageInfo& info) {
     result["codes_bytes"] = info.codes_bytes;
     result["bitplanes_bytes"] = info.bitplanes_bytes;
     result["row_ids_bytes"] = info.row_ids_bytes;
+    result["prefix_keys_bytes"] = info.prefix_keys_bytes;
     result["array_capacity_bytes"] = info.array_capacity_bytes;
     result["key_directory_payload_bytes"] = info.key_directory_payload_bytes;
     result["occupied_keys"] = info.occupied_keys;
     result["directory_slots"] = info.directory_slots;
     result["logical_bytes"] = info.codes_bytes + info.bitplanes_bytes + info.row_ids_bytes
-                              + info.key_directory_payload_bytes;
+                              + info.key_directory_payload_bytes + info.prefix_keys_bytes;
     return result;
 }
 
@@ -266,6 +285,39 @@ py::dict index_info(const bitplane::Index& index) {
 
 py::dict key_index_info(const bitplane::KeyIndex& index) {
     return storage_to_python(index.info());
+}
+
+py::dict prefix_index_v2_info(const bitplane::PrefixIndexV2& index) {
+    auto result = storage_to_python(index.info());
+    result["max_prefix_bits"] = index.max_prefix_bits();
+    return result;
+}
+
+py::dict search_prefix_v2(const bitplane::PrefixIndexV2& index, const py::array& queries,
+                          const py::array& buckets, py::ssize_t candidate_limit,
+                          py::ssize_t start_depth, py::ssize_t candidate_target) {
+    check_queries(index, queries, buckets);
+    if (candidate_limit <= 0) {
+        throw py::value_error("candidate_limit must be positive");
+    }
+    if (candidate_target < 0) {
+        throw py::value_error("candidate_target must be nonnegative");
+    }
+    if (start_depth < 0 || start_depth > static_cast<py::ssize_t>(index.max_prefix_bits())) {
+        throw py::value_error("start_depth must be between 0 and max_prefix_bits");
+    }
+    bitplane::PrefixSearchOptionsV2 options;
+    options.candidate_limit = candidate_limit;
+    options.start_depth = start_depth;
+    options.candidate_target = candidate_target;
+    const auto* query_data = static_cast<const float*>(queries.data());
+    const auto* bucket_data = static_cast<const std::int64_t*>(buckets.data());
+    std::vector<bitplane::QueryResult> results;
+    {
+        py::gil_scoped_release release;
+        results = index.search(query_data, queries.shape(0), bucket_data, buckets.shape(1), options);
+    }
+    return results_to_python(results, candidate_limit);
 }
 
 py::dict search_keys(const bitplane::KeyIndex& index, const py::array& queries,
@@ -342,4 +394,19 @@ PYBIND11_MODULE(bitplane_index, module) {
         py::arg("key_limit") = 8192
     );
     key_type.def("info", &key_index_info);
+
+    auto prefix_type = py::class_<bitplane::PrefixIndexV2>(module, "PrefixIndexV2");
+    prefix_type.def(
+        py::init(&build_prefix_index_v2),
+        py::arg("codes").noconvert(), py::arg("assignments").noconvert(),
+        py::arg("dimensions"), py::arg("max_prefix_bits") = 24
+    );
+    prefix_type.def(
+        "search", &search_prefix_v2,
+        py::arg("queries").noconvert(), py::arg("buckets").noconvert(),
+        py::arg("candidate_limit") = 100,
+        py::arg("start_depth") = 16,
+        py::arg("candidate_target") = 1000
+    );
+    prefix_type.def("info", &prefix_index_v2_info);
 }
