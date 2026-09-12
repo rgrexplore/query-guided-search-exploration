@@ -47,7 +47,7 @@ We offer three scores and keep at most two. The display above is sorted for read
  F_A=\sum_{c\in\mathcal O}n_c,\qquad
  \boxed{T_A\approx T_0+F_Aa_A.}
 \]
-$T_0$ includes cluster selection, cluster lookups, table setup and final sorting. $a_A$ is average time per full score and result update. For roughly equal clusters, $n\approx N/C$ and $F_A\approx Pn=PN/C$. With $C$, $P$, $d$ and $K$ fixed, scan work then grows in proportion to $N$.
+$T_0$ includes cluster selection, cluster lookups, table setup and final sorting. $a_A$ is average time per full score and result update. For roughly equal clusters, $n\approx N/C$ and $F_A\approx Pn=PN/C$. With $C$, $P$, $d$ and $K$ fixed, scan work then grows in proportion to $N$. We measure the time coefficients for the machine and settings being used. Reading a larger index from RAM can cost more than reading a small one from the CPU cache, so one fitted coefficient need not work at every size.
 
 \subsubsection{Bitplanes}
 Use the same query and rows. Stop splitting when at most two rows remain, keeping other work limits unlimited.
@@ -221,7 +221,19 @@ Suppose eight of ten reference IDs are in the opened clusters, and B returns six
 \subsubsection{Backward Walk}
 Let $D_{q,\ell}$ be the rows in the opened clusters matching the query's first $\ell$ bits. After completing depth $\ell$ across those clusters, every row in this set has been scored once. Keeping its full-score top $K$ gives recall $|G_q\cap D_{q,\ell}|/K$. We need the intersection with the reference IDs to calculate that fraction; knowing how many rows match the prefix does not tell us how many reference results they contain.
 
+Consider $q=[0.1,0.9]$ and two documents, \texttt{10} and \texttt{01}. The ideal pattern is \texttt{11}, but it is absent. If we shorten it to \texttt{1*}, we find \texttt{10}, whose score is $0.1-0.9=-0.8$. The other document, \texttt{01}, scores $-0.1+0.9=0.8$ and is actually better. Stopping after finding one candidate would therefore give zero top-one recall. We must widen to depth zero to reach that other document. The fixed prefix order removed the more important second bit first; Matryoshka training does not sort each query's values by magnitude.
+
 At depth zero, $D_{q,0}$ contains every opened row, so C matches A's recall for the same routing choice. A zero candidate target reaches this depth. A positive target can stop earlier and miss reference IDs, because a candidate count does not bound the scores of unseen documents. Opening every cluster as well gives an exact search over the whole collection.
+
+\textbf{A simple approximation.} Suppose 80\% of the reference documents agree with the query's first sign, and 75\% agree with its second sign. If the two agreements are independent, about $0.8\times0.75=60\%$ agree with both. The multiplication is an assumption about those events; it does not follow from the length of the embedding.
+
+For a fixed ending depth $\ell$, let $p_i$ be the fraction of opened reference documents that agree at position $i$, counted across queries. Let $\overline R_A$ be the fraction of all reference IDs whose clusters we opened. Under independent sign agreement, we would estimate
+\[
+ \widehat R_C(\ell)=\overline R_A\prod_{i=1}^{\ell}p_i.
+\]
+The hat marks an estimate. We can obtain the $p_i$ values from a sample of queries and their exact reference documents, then compare this product with the fraction that actually matches the whole prefix. For one global cluster, $\overline R_A=1$. For clustered search, the rates must describe reference documents in the opened clusters.
+
+This calculation assumes every query ends at the same depth. In the actual walk, the candidate target decides when each query stops. We therefore check reference membership at each query's actual ending prefix. Substituting the average ending depth into the product would ignore how document counts and sign matches vary together. The experiment checks the simpler fixed-depth approximation separately.
 
 \subsection{Summary}
 \Needspace{4\baselineskip}

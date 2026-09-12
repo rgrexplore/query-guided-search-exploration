@@ -9,7 +9,7 @@ A reference document in the router's fifth cluster is scored when we open $P\ge5
  \frac{1}{n_qK}\sum_{q=1}^{n_q}\sum_{i=1}^{K}
  \mathbf 1[s_{qi}^{(C)}\le P]\ge\rho\right\}.
 \]
-The indicator $\mathbf 1$ counts an ID when its cluster is open. We increase the cutoff if it splits tied centroid scores, repeating until no query has a tie across the boundary. Every method receives these probe choices, plus opening all clusters.
+The indicator $\mathbf 1$ counts an ID when its cluster is open. We increase the cutoff if it splits tied centroid scores, repeating until no query has a tie across the boundary. Every method receives the same probe choices for a comparison. A one-cluster scan provides an exhaustive reference.
 
 These ranks require actual queries, centroids and document assignments. Document and cluster counts alone cannot determine the cutoff. We calculate it separately for each declared $K$ using all cached queries.
 
@@ -36,7 +36,7 @@ The saved time must exceed the added work while preserving the required recall. 
 \]
 Here $T_0$ is routing, common setup and final sorting time. Differentiating gives the candidate depth $j^*$; $\ln$ denotes the natural logarithm. Real cuts may remove no rows, and waiting branches add work, so we test the declared leaf sizes and node budgets rather than treating $j^*$ as a recall guarantee.
 
-A node budget counts visited sets, including leaves. A leaf limit at least as large as a cluster lets us score it immediately. B receives all of A's routing choices, but its local limits can lose additional reference IDs. We therefore record both work counts and returned IDs.
+A node budget counts visited sets, including leaves. A leaf limit at least as large as a cluster lets us score it immediately. B receives all of A's routing choices, but its local limits can lose additional reference IDs. We therefore record the work counts and check the returned IDs.
 
 \subsection{Backward Walk}
 Alongside $C$ and $P$, we choose starting depth $x$ and candidate target $M$. With $h$ stored key bits, $0\le x\le h\le\min(d,32)$; full scores use all $d$ document bits. A deeper start selects fewer or the same rows, but may need more widening steps.
@@ -54,7 +54,7 @@ In the three-row example, C avoids one of A's three scores but performs four bin
 $F_C$ counts C's scores; $a_A$ and $a_C$ include scoring and result updates. $T_{\rm key}$ builds the query key once, $L_+$ counts nonzero depths, $t_b$ estimates comparison time, and $T_{\rm ranges}$ covers range bookkeeping. Whether the inequality holds depends on measured costs and the required recall.
 
 \subsection{Comparison}
-For method $a$, let $\Theta_a$ be its tested settings and $\theta$ one choice. $T_{a,\rm measured}$ is median whole-query time, $\overline R_a$ average recall, and $M_{a,\rm process}$ the reported process-memory bound. With required recall $\rho$ and RAM limit $B_{\max}$ in bytes, we choose the qualifying setting with the smallest time:
+I keep the collection, embedding model and code length fixed for this comparison. For method $a$, let $\Theta_a$ be its tested settings and $\theta$ one choice. $T_{a,\rm measured}$ is median whole-query time, $\overline R_a$ average recall, and $M_{a,\rm process}$ the reported process-memory bound. With required recall $\rho$ and RAM limit $B_{\max}$ in bytes, we choose the qualifying setting with the smallest time:
 
 \[
  \theta_a^*=\underset{\theta\in\Theta_a}{\operatorname{argmin}}\;
@@ -71,4 +71,7 @@ Bitplanes & $C$, $P$, leaf size and node budget & Scores, at the cost of mask an
 Backward Walk & $C$, $P$, starting depth $x$, candidate target $M$ & Scores, at the cost of prefix lookups and new ranges\\\bottomrule
 \end{tabularx}\normalsize
 \end{center}
-Here $C$ is cluster count, $P$ opened clusters, $x$ starting depth and $M$ candidate target. Each method chooses its own setting for the same pool, $K$ and recall target. We retain failed settings and repeat selected ones in fresh processes. The comparison is limited to the declared grid.
+Here $C$ is cluster count, $P$ opened clusters, $x$ starting depth and $M$ candidate target. For each method, I choose its fastest qualifying setting using the same pool, $K$ and recall target. We retain failed settings and repeat selected ones in fresh processes. The comparison is limited to the declared grid.
+
+
+A larger collection does not automatically make B faster. The full-score term grows with the number of opened documents, but each dense mask pass grows with that number too. If B needs many alternative branches to preserve recall, those mask passes can cost more than the scores they avoid. Larger collections can also change how much pruning is possible, so we measure the work at the tested settings instead of assuming that the two latency curves must cross.
