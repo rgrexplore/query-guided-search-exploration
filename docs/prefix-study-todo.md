@@ -158,3 +158,11 @@ clusters. This adds a stopping check, not a new index layout. The quick referenc
 probe found possible positive-depth stopping for665/1000Qwen32 top-one queries,
 75/1000Nomic64 top-one queries, and none in either256-bit pool. Actual timing and
 returned-ID checks remain necessary.
+
+### Finish this run
+
+The remaining scope is fixed: finish the declared routing/exact-stop/probability
+controls, check representation agreement, generate the comparison tables and plots,
+finish the PDF, and update memory. Do not add another dataset, index layout or search
+method to this run. Missing repeated selections, if any, need only a small direct
+confirmation; do not repeat the full grid.
