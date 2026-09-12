@@ -1,23 +1,27 @@
 \begin{abstract}
-\begin{enumerate}
-\item This report explores two ways to improve the search stage described in Exa's vector-database article: Bitplanes and Backward Walk.
-\item Backward Walk now means prefix relaxation: start with a specific prefix and remove its last bit when more candidates are needed.
-\item The earlier exact-key method is called $C_{\rm key}$. Its results are historical; the prefix method described here has not yet been implemented or benchmarked.
-\end{enumerate}
+This report explores two ways to improve the search stage described in Exa's vector-database article: Bitplanes and Backward Walk. Backward Walk now means prefix relaxation: start with a specific prefix and remove its last bit when more candidates are needed. The earlier exact-key method is called $C_{\rm key}$. Its results are historical; the prefix method described here has not yet been implemented or benchmarked.
+
 \end{abstract}
 
 \section{Introduction}
 \subsection{Exa method and end to end pipeline}
-\begin{enumerate}
-\item Let's first understand the ``original'' pipeline that I am trying to improve upon.
-\item Note that the architecture I am referring to here is based on the pipeline described in Exa's article~\cite{exa}.
-\item I am aware that Exa's actual production system may have changed or improved since then, but for the purpose of this report, let's treat the architecture described in that article as the original baseline that we compare against.
-\item In this pipeline, document embeddings are first shortened using Matryoshka representations, converted into binary signs, and assigned to clusters.
-\item At query time, the query is encoded, a subset of nearby clusters is selected, and the documents inside those clusters are scored using the floating-point query.
-\item The top candidates can then be reranked using the original uncompressed vectors.
-\item The main part that I am trying to improve in this report is the search stage after cluster selection.
-\item The two new approaches introduced later, Bitplanes and Backward Walk, replace this step while keeping the rest of the pipeline largely the same.
-\end{enumerate}
+Let's first understand the ``original'' pipeline that I am trying to improve upon.
+
+Note that the architecture I am referring to here is based on the pipeline described in
+Exa's article~\cite{exa}. I am aware that Exa's actual production system may have changed
+or improved since then, but for the purpose of this report, let's treat the architecture
+described in that article as the original baseline that we compare against.
+
+In this pipeline, document embeddings are first shortened using Matryoshka representations,
+converted into binary signs, and assigned to clusters. At query time, the query is encoded,
+a subset of nearby clusters is selected, and the documents inside those clusters are scored
+using the floating-point query. The top candidates can then be reranked using the original
+uncompressed vectors.
+
+The main part that I am trying to improve in this report is the search stage after cluster
+selection. The two new approaches introduced later, Bitplanes and Backward Walk, replace
+this step while keeping the rest of the pipeline largely the same.
+
 \begin{figure}[H]\centering
 \begin{tikzpicture}[node distance=6mm]
 \node[box,text width=24mm] (doc) {Document text};
@@ -36,59 +40,48 @@
 
 \newpage
 \subsection{Idea background}
-\begin{enumerate}
-\item When I took a closer look at the pipeline, one part that particularly stood out to me was the comparison between the floating-point query and the binary-quantized document.
-\item Consider a simple example:
-\end{enumerate}
+When I took a closer look at the pipeline, one part that particularly stood out to me was the comparison between the floating-point query and the binary-quantized document. Consider a simple example:
+
 \[
 q=[0.7,\ 0.5,\ -0.4,\ -0.6,\ 0.3],\qquad \text{document}=\texttt{11000}.
 \]
-\begin{enumerate}[start=3]
-\item Suppose a document is represented using binary signs, where 1 means $+1$ and 0 means $-1$.
-\item The score is calculated by taking the dot product between the query values and the document signs. So for \texttt{11000}, the score is
-\end{enumerate}
+Suppose a document is represented using binary signs, where 1 means $+1$ and 0 means $-1$. The score is calculated by taking the dot product between the query values and the document signs. So for \texttt{11000}, the score is
+
 \[
 0.7(+1)+0.5(+1)+(-0.4)(-1)+(-0.6)(-1)+0.3(-1)=1.9.
 \]
-\begin{enumerate}[start=5]
-\item Now, something interesting follows from this. Just by looking at the signs of the query, we already know what the ideal binary document would look like.
-\item For every positive query value, we would prefer the corresponding document bit to be 1, and for every negative query value, we would prefer it to be 0.
-\item Therefore, for the query above, the ideal binary pattern is \texttt{11001}. This document would achieve the maximum possible score:
-\end{enumerate}
+Now, something interesting follows from this. Just by looking at the signs of the query, we already know what the ideal binary document would look like. For every positive query value, we would prefer the corresponding document bit to be 1, and for every negative query value, we would prefer it to be 0.
+
+Therefore, for the query above, the ideal binary pattern is \texttt{11001}. This document would achieve the maximum possible score:
+
 \[
 0.7+0.5+0.4+0.6+0.3=2.5.
 \]
-\begin{enumerate}[start=8]
-\item From here, we can think about every other document in terms of how far it is from this ideal pattern. More importantly, not every mismatch has the same cost.
-\item If we mismatch the first coordinate, where $|q_1|=0.7$, the score decreases by 1.4. But if we mismatch the last coordinate, where $|q_5|=0.3$, the score only decreases by 0.6.
-\end{enumerate}
+From here, we can think about every other document in terms of how far it is from this ideal pattern. More importantly, not every mismatch has the same cost. If we mismatch the first coordinate, where $|q_1|=0.7$, the score decreases by 1.4. But if we mismatch the last coordinate, where $|q_5|=0.3$, the score only decreases by 0.6.
+
 \begin{equation}
 Q=\sum_i|q_i|,\qquad
 p=\sum_{i:\,b_i\ne\operatorname{sign}(q_i)}|q_i|,\qquad
 S(q,b)=Q-2p.
 \label{eq:score}
 \end{equation}
-\begin{enumerate}[start=10]
-\item $Q$ is the score of the ideal binary pattern. $p$ adds the absolute query values at mismatched coordinates. In this formula, $b_i$ is the decoded sign ($+1$ or $-1$); the printed codes use 1 and 0.
-\item This observation is the main idea behind the approaches explored in this report.
-\item Instead of treating every binary document equally and scoring all of them one by one, can we use the query itself to guide the search toward documents that are closer to its ideal binary pattern, while avoiding unnecessary full-score calculations?
-\end{enumerate}
+$Q$ is the score of the ideal binary pattern. $p$ adds the absolute query values at mismatched coordinates. In this formula, $b_i$ is the decoded sign ($+1$ or $-1$); the printed codes use 1 and 0. This observation is the main idea behind the approaches explored in this report.
+
+Instead of treating every binary document equally and scoring all of them one by one, can we use the query itself to guide the search toward documents that are closer to its ideal binary pattern, while avoiding unnecessary full-score calculations?
 
 \newpage
 \subsection{Exploring new methods}
-\begin{enumerate}
-\item From the previous section, we know two useful things before we even start searching: we know what the ideal binary document looks like from the signs of the query, and we know that some bits matter more than others, based on the magnitude $|q_i|$.
-\item The next question is therefore: can we build an index that uses this information directly, instead of treating every document inside the selected clusters equally?
-\item This led me to explore two approaches.
-\item The first, Bitplanes, starts from a large set of candidate documents and progressively narrows it down using the query.
-\item The second, Backward Walk, approaches the problem from the opposite direction: it starts from a very specific binary pattern and progressively relaxes the constraints until enough useful candidates are found.
-\end{enumerate}
+From the previous section, we know two useful things before we even start searching: we know what the ideal binary document looks like from the signs of the query, and we know that some bits matter more than others, based on the magnitude $|q_i|$. The next question is therefore: can we build an index that uses this information directly, instead of treating every document inside the selected clusters equally?
+
+This led me to explore two approaches.
+
+The first, Bitplanes, starts from a large set of candidate documents and progressively narrows it down using the query.
+
+The second, Backward Walk, approaches the problem from the opposite direction: it starts from a very specific binary pattern and progressively relaxes the constraints until enough useful candidates are found.
 
 \subsubsection{Bitplanes}
-\begin{enumerate}
-\item Now that we know what the ideal document looks like based on the query, one idea is to build a data structure that makes filtering by individual bits very cheap.
-\item Normally, binary documents are stored row by row. Instead, we can additionally store an inverted representation of the same bits:
-\end{enumerate}
+Now that we know what the ideal document looks like based on the query, one idea is to build a data structure that makes filtering by individual bits very cheap. Normally, binary documents are stored row by row. Instead, we can additionally store an inverted representation of the same bits:
+
 \begin{figure}[H]\centering
 \begin{tikzpicture}
 \node[box,text width=30mm] (q) at (4.7,.25) {$|q|$ priority\\$1\to4\to2\to3\to5$};
@@ -104,14 +97,12 @@ Bit 3&1&0&0\\Bit 4&0&0&0\\Bit 5&0&1&0
 \end{tikzpicture}
 \caption{The same document signs, stored in an extra layout for bitwise filtering.}
 \end{figure}
-\begin{enumerate}[start=3]
-\item Each row above is a bitplane: one bit position across many documents.
-\item Suppose the query is $q=[0.7,0.5,-0.4,-0.6,0.3]$. From the magnitude of the query values, we prioritize the bits as $1,4,2,3,5$, because $0.7>0.6>0.5>0.4>0.3$.
-\item Now suppose our current candidate mask is \texttt{111}, meaning that IDs 0, 1 and 2 are all still possible candidates.
-\item For bit 2, the query prefers 1. The corresponding bitplane is \texttt{011}, so keeping the documents that match the query is simply $\texttt{111}\ \&\ \texttt{011}=\texttt{011}$.
-\item We immediately reduce the candidate set to IDs 1 and 2. The earlier splits on bits 1 and 4 keep all three rows in this example.
-\item This is attractive because the filtering itself consists mostly of bitwise operations. A simplified first version of the idea might therefore look like:
-\end{enumerate}
+Each row above is a bitplane: one bit position across many documents. Suppose the query is $q=[0.7,0.5,-0.4,-0.6,0.3]$. From the magnitude of the query values, we prioritize the bits as $1,4,2,3,5$, because $0.7>0.6>0.5>0.4>0.3$. Now suppose our current candidate mask is \texttt{111}, meaning that IDs 0, 1 and 2 are all still possible candidates.
+
+For bit 2, the query prefers 1. The corresponding bitplane is \texttt{011}, so keeping the documents that match the query is simply $\texttt{111}\ \&\ \texttt{011}=\texttt{011}$. We immediately reduce the candidate set to IDs 1 and 2. The earlier splits on bits 1 and 4 keep all three rows in this example.
+
+This is attractive because the filtering itself consists mostly of bitwise operations. A simplified first version of the idea might therefore look like:
+
 \begin{lstlisting}
 order = bits sorted by decreasing abs(query[i])
 candidates = all documents in selected clusters
@@ -123,27 +114,20 @@ for bit in order:
 \end{lstlisting}
 
 \newpage
-\paragraph{PROBLEM 1: We might miss the actual best document.}
-\begin{enumerate}
-\item Consider $q=[0.6,0.5,0.4,0.3]$. The ideal binary document is \texttt{1111}.
-\item Suppose the database only contains document A: \texttt{0111}, and document B: \texttt{1000}.
-\item If we greedily start with the first bit, the query prefers 1. We would therefore keep document B and throw away document A.
-\item But their complete scores are:
-\end{enumerate}
+\subsubsection*{PROBLEM 1: We might miss the actual best document.}
+Consider $q=[0.6,0.5,0.4,0.3]$. The ideal binary document is \texttt{1111}. Suppose the database only contains document A: \texttt{0111}, and document B: \texttt{1000}. If we greedily start with the first bit, the query prefers 1. We would therefore keep document B and throw away document A. But their complete scores are:
+
 \[
 S(A)=-0.6+0.5+0.4+0.3=0.6,\qquad
 S(B)=0.6-0.5-0.4-0.3=-0.6.
 \]
-\begin{enumerate}[start=5]
-\item So document A is actually better. The problem is that matching one important bit does not guarantee that the remaining bits will also match.
-\end{enumerate}
+So document A is actually better. The problem is that matching one important bit does not guarantee that the remaining bits will also match.
 
-\textbf{Solution: branching.}
-\begin{enumerate}
-\item Instead of discarding the alternative, we keep both branches.
-\item The branch matching the preferred bit receives no additional mismatch penalty. The alternative branch is still kept, but its penalty increases by $|q_i|$.
-\item We then explore the branches in order of smallest accumulated penalty. This gives us a search tree rather than one greedy path.
-\end{enumerate}
+\textbf{Solution: branching.}\par
+Instead of discarding the alternative, we keep both branches.
+
+The branch matching the preferred bit receives no additional mismatch penalty. The alternative branch is still kept, but its penalty increases by $|q_i|$. We then explore the branches in order of smallest accumulated penalty. This gives us a search tree rather than one greedy path.
+
 \begin{figure}[H]\centering
 \begin{tikzpicture}
 \node[branch,text width=43mm] (root) at (0,0) {2 documents\\$p=0$, bound $1.8$};
@@ -156,13 +140,11 @@ S(B)=0.6-0.5-0.4-0.3=-0.6.
 \end{figure}
 
 \newpage
-\textbf{Stopping condition.}
-\begin{enumerate}
-\item If a branch has already accumulated mismatch penalty $p$, any document below it must have penalty at least $p$.
-\item Therefore, $Q-2p$ is an upper bound on the score of every document inside that branch.
-\item For example, suppose $Q=2.5$ and we are looking for the top two results. We have already found scores 2.5 and 1.9.
-\item An unexplored branch with $p=0.5$ can score at most $2.5-2(0.5)=1.5$. Since $1.5<1.9$, nothing inside that branch can enter our current top two.
-\end{enumerate}
+\textbf{Stopping condition.}\par
+If a branch has already accumulated mismatch penalty $p$, any document below it must have penalty at least $p$. Therefore, $Q-2p$ is an upper bound on the score of every document inside that branch. For example, suppose $Q=2.5$ and we are looking for the top two results. We have already found scores 2.5 and 1.9.
+
+An unexplored branch with $p=0.5$ can score at most $2.5-2(0.5)=1.5$. Since $1.5<1.9$, nothing inside that branch can enter our current top two.
+
 \[
 \boxed{Q-2p<\text{current }K\text{th score}\quad\Rightarrow\quad\text{skip this branch}.}
 \]
@@ -178,9 +160,8 @@ S(B)=0.6-0.5-0.4-0.3=-0.6.
 \caption{The whole gray subtree can be skipped because even its best possible score is too low.}
 \end{figure}
 
-\begin{enumerate}[start=5]
-\item If the best remaining branch in the queue already fails this test, then every other branch is worse and the entire search can stop. Equal scores still follow the document-ID tie rule.
-\end{enumerate}
+If the best remaining branch in the queue already fails this test, then every other branch is worse and the entire search can stop. Equal scores still follow the document-ID tie rule.
+
 \begin{lstlisting}
 order = bits sorted by decreasing abs(query[i])
 queue = full candidate mask for each selected cluster
@@ -198,13 +179,11 @@ return best
 \end{lstlisting}
 
 \newpage
-\paragraph{PROBLEM 2: The bitmap can still be large.}
-\begin{enumerate}
-\item There is another issue. A bitwise AND sounds almost free, but it is not literally one operation when the cluster contains thousands or millions of documents.
-\item Suppose one cluster contains 6400 documents. With 64-bit machine words, one bitplane contains $6400/64=100$ machine words.
-\item So one split requires us to loop over those 100 words.
-\item Even worse, suppose after several splits only 80 documents remain. The physical mask can still be 100 words wide, so the next split may still need to process those same 100 words.
-\end{enumerate}
+\subsubsection*{PROBLEM 2: The bitmap can still be large.}
+There is another issue. A bitwise AND sounds almost free, but it is not literally one operation when the cluster contains thousands or millions of documents. Suppose one cluster contains 6400 documents. With 64-bit machine words, one bitplane contains $6400/64=100$ machine words. So one split requires us to loop over those 100 words.
+
+Even worse, suppose after several splits only 80 documents remain. The physical mask can still be 100 words wide, so the next split may still need to process those same 100 words.
+
 \begin{figure}[H]\centering
 \begin{tikzpicture}
 \node[anchor=west,font=\small] at (0,1.1) {Initial mask: 6400 candidates};
@@ -216,29 +195,20 @@ return best
 \end{tikzpicture}
 \caption{Fewer active document positions do not make this dense mask physically shorter.}
 \end{figure}
-\begin{enumerate}[start=5]
-\item In general, for a cluster containing $n$ documents, one dense bitplane operation costs roughly $O(\ceil{n/64})$ word visits.
-\item If we visit $J$ split nodes, this becomes $O(J\ceil{n/64})$, before counting queue operations and final document scoring.
-\item This was one of the important findings from the earlier experiments: reducing the number of fully scored documents does not automatically mean reducing total query time, because the bitmap traversal itself can become expensive.
-\item The question is finding the point where the time saved by avoiding scores is worth more than the additional bitmap traversal.
-\item We can tune cluster size during coarse routing, the number of clusters probed, how deep we split, leaf size, and when we switch back to ordinary full scoring.
-\item These are options to test, not a guarantee that tuning will make Bitplanes faster.
-\item However, thinking about this cost led me to a second idea. Bitplanes starts with a large set of documents and repeatedly narrows it down. What if we instead did the opposite?
-\item If this approach is bottom-up, the walk backwards can be described as top-down.
-\item Here those names describe broad-to-specific versus specific-to-broad search. In an actual prefix tree, the backward walk moves toward the root as it removes bits.
-\end{enumerate}
+In general, for a cluster containing $n$ documents, one dense bitplane operation costs roughly $O(\ceil{n/64})$ word visits. If we visit $J$ split nodes, this becomes $O(J\ceil{n/64})$, before counting queue operations and final document scoring. This was one of the important findings from the earlier experiments: reducing the number of fully scored documents does not automatically mean reducing total query time, because the bitmap traversal itself can become expensive.
+
+The question is finding the point where the time saved by avoiding scores is worth more than the additional bitmap traversal. We can tune cluster size during coarse routing, the number of clusters probed, how deep we split, leaf size, and when we switch back to ordinary full scoring. These are options to test, not a guarantee that tuning will make Bitplanes faster.
+
+However, thinking about this cost led me to a second idea. Bitplanes starts with a large set of documents and repeatedly narrows it down. What if we instead did the opposite? If this approach is bottom-up, the walk backwards can be described as top-down. Here those names describe broad-to-specific versus specific-to-broad search. In an actual prefix tree, the backward walk moves toward the root as it removes bits.
 
 \newpage
 \subsubsection{Backward Walk}
-\begin{enumerate}
-\item Backward Walk builds on the same observation: given a query, we already know what its ideal binary document should look like.
-\item However, instead of starting with thousands of documents and filtering them using bitplanes, we try to start directly from a small bucket of documents that already looks similar to the query.
-\item Suppose the binary query begins with \texttt{101101001011...}. Using all 256 bits as a lookup key can be far too specific. Under a balanced independent-bit model, an exact match is extremely unlikely; real occupancy must be measured.
-\item Instead, suppose we choose a prefix length $x$. For example, the first 16 bits: \texttt{1011010010110101}.
-\item During index construction, documents sharing this prefix are placed in the same bucket or contiguous range.
-\item At query time, we directly look up this prefix. If it contains enough useful documents, we score them using the complete 256-bit score.
-\item If it is empty, or contains too few candidates, we remove one constraint:
-\end{enumerate}
+Backward Walk builds on the same observation: given a query, we already know what its ideal binary document should look like. However, instead of starting with thousands of documents and filtering them using bitplanes, we try to start directly from a small bucket of documents that already looks similar to the query.
+
+Suppose the binary query begins with \texttt{101101001011...}. Using all 256 bits as a lookup key can be far too specific. Under a balanced independent-bit model, an exact match is extremely unlikely; real occupancy must be measured. Instead, suppose we choose a prefix length $x$. For example, the first 16 bits: \texttt{1011010010110101}. During index construction, documents sharing this prefix are placed in the same bucket or contiguous range.
+
+At query time, we directly look up this prefix. If it contains enough useful documents, we score them using the complete 256-bit score. If it is empty, or contains too few candidates, we remove one constraint:
+
 \begin{figure}[H]\centering
 \begin{tikzpicture}[node distance=8mm]
 \node[keys,text width=62mm] (p16) {\texttt{1011010010110101}\\12 documents found};
@@ -252,18 +222,14 @@ return best
 \end{tikzpicture}
 \caption{Illustrative counts: $12+19+35+70=136$ distinct rows scored, not $12+31+66+136$.}
 \end{figure}
-\begin{enumerate}[start=8]
-\item Every step moves to a larger candidate set, or the same set if the added sibling range is empty.
-\item This is why I call the method Backward Walk: instead of progressively adding constraints to a large candidate set, we begin from a very specific location and progressively walk backward toward more general prefixes.
-\item Only the newly exposed documents are scored. The previous range is contained inside the parent range, so we do not rescore the rows already found.
-\end{enumerate}
+Every step moves to a larger candidate set, or the same set if the added sibling range is empty. This is why I call the method Backward Walk: instead of progressively adding constraints to a large candidate set, we begin from a very specific location and progressively walk backward toward more general prefixes.
+
+Only the newly exposed documents are scored. The previous range is contained inside the parent range, so we do not rescore the rows already found.
 
 \newpage
-\textbf{Why one bit at a time is already an exponential expansion.}
-\begin{enumerate}
-\item Under a simple model where binary bits are independent and balanced, an $x$-bit prefix occurs with probability $2^{-x}$.
-\item Therefore, for one global cluster with $N$ documents,
-\end{enumerate}
+\textbf{Why one bit at a time is already an exponential expansion.}\par
+Under a simple model where binary bits are independent and balanced, an $x$-bit prefix occurs with probability $2^{-x}$. Therefore, for one global cluster with $N$ documents,
+
 \[
 F_x\sim\operatorname{Binomial}(N,2^{-x}),\qquad \E[F_x]=N/2^x.
 \]
@@ -273,20 +239,14 @@ Prefix length & Expected rows for $N=1{,}000{,}000$\\\midrule
 16&15.26\\15&30.52\\14&61.04\\13&122.07\\12&244.14\\\bottomrule
 \end{tabular}
 \end{center}
-\begin{enumerate}[start=3]
-\item So we do not necessarily need to jump from 16 bits to 8 bits. Simply removing one bit at a time already doubles the expected candidate count under this model.
-\item This binomial calculation is useful for building intuition and choosing an initial prefix depth, although real embedding bits are not guaranteed to be independent or balanced, so the actual distribution must be measured.
-\item For search inside one selected cluster, use that cluster's size in place of $N$. A cluster formed from embeddings may have strongly uneven prefix counts.
-\item This is a fixed-depth row-count model. It does not calculate recall, or the expected count after an adaptive stopping rule.
-\end{enumerate}
+So we do not necessarily need to jump from 16 bits to 8 bits. Simply removing one bit at a time already doubles the expected candidate count under this model. This binomial calculation is useful for building intuition and choosing an initial prefix depth, although real embedding bits are not guaranteed to be independent or balanced, so the actual distribution must be measured.
+
+For search inside one selected cluster, use that cluster's size in place of $N$. A cluster formed from embeddings may have strongly uneven prefix counts. This is a fixed-depth row-count model. It does not calculate recall, or the expected count after an adaptive stopping rule.
 
 \newpage
-\textbf{Lookup and widening.}
-\begin{enumerate}
-\item A trie or rows sorted by prefix can support the lookup. The proposed first implementation uses sorted keys and row ranges, with no document graph.
-\item Each broader prefix contains the previous range. Subtracting the old range means processing at most two new slices: one on either side.
-\item The query keeps the original bit order. It does not sort the prefix bits by $|q_i|$, and it does not enumerate arbitrary flipped keys.
-\end{enumerate}
+\textbf{Lookup and widening.}\par
+A trie or rows sorted by prefix can support the lookup. The proposed first implementation uses sorted keys and row ranges, with no document graph. Each broader prefix contains the previous range. Subtracting the old range means processing at most two new slices: one on either side. The query keeps the original bit order. It does not sort the prefix bits by $|q_i|$, and it does not enumerate arbitrary flipped keys.
+
 \begin{lstlisting}
 signs = binary signs of query
 previous_range[cluster] = empty
@@ -303,21 +263,16 @@ for depth in starting_depth, ..., 0:
         break
 return best
 \end{lstlisting}
-\begin{enumerate}[start=4]
-\item This proposed stopping rule completes a whole depth across all opened clusters before checking the candidate target. It can return more candidates than the target. A target of zero disables early stopping and continues to depth zero.
-\item Stopping simply because we have collected, for example, 100 candidates is an approximate stopping rule. It does not mathematically prove that a better document does not exist outside the current prefix.
-\item Therefore, recall still needs to be measured against the same exact reference results. An exact early-stop version would require a valid bound on the documents outside the visited prefixes.
-\item Reaching depth zero scores every document in the opened clusters, once. That matches the original scan's local result, though not necessarily its time.
-\end{enumerate}
+This proposed stopping rule completes a whole depth across all opened clusters before checking the candidate target. It can return more candidates than the target. A target of zero disables early stopping and continues to depth zero. Stopping simply because we have collected, for example, 100 candidates is an approximate stopping rule. It does not mathematically prove that a better document does not exist outside the current prefix.
+
+Therefore, recall still needs to be measured against the same exact reference results. An exact early-stop version would require a valid bound on the documents outside the visited prefixes. Reaching depth zero scores every document in the opened clusters, once. That matches the original scan's local result, though not necessarily its time.
 
 \newpage
-\textbf{Relationship to HNSW.}
-\begin{enumerate}
-\item At first glance, this approach may sound somewhat similar to HNSW because both methods use a hierarchy to progressively change the search space. However, the hierarchy is being used differently.
-\item HNSW builds a proximity graph. During a query, it begins from sparse upper layers, navigates toward promising neighbors, and descends toward the denser bottom layer~\cite{hnsw}.
-\item Backward Walk does not need to navigate between neighboring document vectors. The query itself directly tells us where to begin: query $\to$ binary prefix $\to$ prefix lookup.
-\item HNSW is not a root-to-leaf tree and is not restricted to nonbinary data. The relevant difference is graph navigation versus a prefix lookup.
-\end{enumerate}
+\textbf{Relationship to HNSW.}\par
+At first glance, this approach may sound somewhat similar to HNSW because both methods use a hierarchy to progressively change the search space. However, the hierarchy is being used differently. HNSW builds a proximity graph. During a query, it begins from sparse upper layers, navigates toward promising neighbors, and descends toward the denser bottom layer~\cite{hnsw}.
+
+Backward Walk does not need to navigate between neighboring document vectors. The query itself directly tells us where to begin: query $\to$ binary prefix $\to$ prefix lookup. HNSW is not a root-to-leaf tree and is not restricted to nonbinary data. The relevant difference is graph navigation versus a prefix lookup.
+
 \begin{center}\small
 \begin{tabularx}{\linewidth}{@{}lYY@{}}\toprule
  & HNSW & Backward Walk\\\midrule
@@ -328,20 +283,15 @@ Insertion & Find neighbors; update edges & Compute prefix; update storage\\\bott
 \end{tabularx}
 \end{center}
 
-\textbf{Potential advantage 1: index construction and updates.}
-\begin{enumerate}
-\item One possible advantage that I would like to investigate further is the cost of adding new documents.
-\item For HNSW, inserting a new vector generally requires searching the existing graph to find suitable neighbors and then creating or updating graph connections.
-\item For Backward Walk, the conceptual insertion process is simpler: document $\to$ embedding $\to$ binary signs $\to$ prefix key $\to$ corresponding bucket.
-\item There is no nearest-neighbor graph that needs to be constructed for each new document. So Backward Walk may be attractive for a search index that changes frequently.
-\item I would frame this as a hypothesis to verify, because the actual insertion cost still depends on how the buckets, ranges and index are implemented.
-\item In particular, inserting into a sorted array can move many rows or require a rebuild. The first planned version is static; it does not establish cheap online updates.
-\end{enumerate}
+\textbf{Potential advantage 1: index construction and updates.}\par
+One possible advantage that I would like to investigate further is the cost of adding new documents. For HNSW, inserting a new vector generally requires searching the existing graph to find suitable neighbors and then creating or updating graph connections. For Backward Walk, the conceptual insertion process is simpler: document $\to$ embedding $\to$ binary signs $\to$ prefix key $\to$ corresponding bucket.
 
-\textbf{Potential advantage 2: Matryoshka prefixes give the relaxation some meaning.}
-\begin{enumerate}
-\item A Matryoshka model is trained so that shorter prefixes of the embedding remain useful representations at its trained lengths~\cite{mrl}.
-\item This gives us a reason to investigate shorter prefixes. It does not mean that the first coordinate is always more important than the second, or that the nearest neighbor under 16 dimensions must remain the nearest neighbor under 15 dimensions.
-\item The actual recall of each prefix still has to be measured. Binary sign agreement is also different from similarity under the original float prefix.
-\item The Nomic model card reports float-prefix results at 64, 128, 256, 512 and 768 dimensions~\cite{nomic}. It does not establish high recall for every 16-to-15-bit sign-prefix relaxation.
-\end{enumerate}
+There is no nearest-neighbor graph that needs to be constructed for each new document. So Backward Walk may be attractive for a search index that changes frequently. I would frame this as a hypothesis to verify, because the actual insertion cost still depends on how the buckets, ranges and index are implemented.
+
+In particular, inserting into a sorted array can move many rows or require a rebuild. The first planned version is static; it does not establish cheap online updates.
+
+\textbf{Potential advantage 2: Matryoshka prefixes give the relaxation some meaning.}\par
+A Matryoshka model is trained so that shorter prefixes of the embedding remain useful representations at its trained lengths~\cite{mrl}. This gives us a reason to investigate shorter prefixes. It does not mean that the first coordinate is always more important than the second, or that the nearest neighbor under 16 dimensions must remain the nearest neighbor under 15 dimensions.
+
+The actual recall of each prefix still has to be measured. Binary sign agreement is also different from similarity under the original float prefix. The Nomic model card reports float-prefix results at 64, 128, 256, 512 and 768 dimensions~\cite{nomic}. It does not establish high recall for every 16-to-15-bit sign-prefix relaxation.
+

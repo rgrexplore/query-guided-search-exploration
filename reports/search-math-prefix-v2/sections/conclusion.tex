@@ -1,20 +1,13 @@
 \newpage
 \section{Limitations and next steps}
-\begin{enumerate}
-\item Prefix Backward Walk is a revised method definition. Its proposed layout and arithmetic examples are not implementation or benchmark results.
-\item Candidate-target stopping is approximate. A large returned set can still omit the most relevant reference documents.
-\item Balanced independent bits give useful count examples, but real embedding prefixes can be uneven and correlated, especially inside a cluster.
-\item Matryoshka motivates testing prefixes; it does not guarantee that every shorter sign prefix preserves recall.
-\item Sorted-key lookup avoids rescoring old rows, but construction and updates still have costs. No insertion or speed advantage over HNSW has been measured.
-\end{enumerate}
+Prefix Backward Walk is a revised method definition. Its proposed layout and arithmetic examples are not implementation or benchmark results. Candidate-target stopping is approximate. A large returned set can still omit the most relevant reference documents. Balanced independent bits give useful count examples, but real embedding prefixes can be uneven and correlated, especially inside a cluster. Matryoshka motivates testing prefixes; it does not guarantee that every shorter sign prefix preserves recall.
+
+Sorted-key lookup avoids rescoring old rows, but construction and updates still have costs. No insertion or speed advantage over HNSW has been measured.
 
 \section{Conclusion}
-\begin{enumerate}
-\item The common observation is unchanged: query signs define an ideal binary pattern, and mismatches have costs determined by the query values.
-\item Bitplanes uses those values to narrow a set of documents while keeping alternative branches.
-\item Backward Walk starts from the query's prefix, removes its last bit when more candidates are needed, and scores only newly exposed rows.
-\item The earlier key-enumeration experiment tested a different method. A new fixed-data comparison is required before saying where prefix Backward Walk wins or loses.
-\end{enumerate}
+The common observation is unchanged: query signs define an ideal binary pattern, and mismatches have costs determined by the query values. Bitplanes uses those values to narrow a set of documents while keeping alternative branches. Backward Walk starts from the query's prefix, removes its last bit when more candidates are needed, and scores only newly exposed rows.
+
+The earlier key-enumeration experiment tested a different method. A new fixed-data comparison is required before saying where prefix Backward Walk wins or loses.
 
 \begin{thebibliography}{9}\small\raggedright
 \bibitem{exa} Exa Team. \emph{How we built a web-scale vector database}. 2024.

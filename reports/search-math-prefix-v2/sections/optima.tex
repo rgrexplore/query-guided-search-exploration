@@ -1,81 +1,57 @@
 \newpage
 \section{Deriving Optima}
-\begin{enumerate}
-\item Minimize retrieval time at the required recall, within 32 GB RAM.
-\item Keep documents, queries and reference answers unchanged. Each method chooses its own index and search settings.
-\end{enumerate}
+Minimize retrieval time at the required recall, within 32 GB RAM. Keep documents, queries and reference answers unchanged. Each method chooses its own index and search settings.
 
 \subsection{Original method}
-\begin{enumerate}
-\item For each reference ID, record when its cluster is opened. Example: a document in the fifth cluster is included when $P\ge5$.
-\item Write that rank as $s_{qi}^{(C)}$ for result $i$ of query $q$. The smallest probe count meeting recall $\rho$ is:
-\end{enumerate}
+For each reference ID, record when its cluster is opened. Example: a document in the fifth cluster is included when $P\ge5$. Write that rank as $s_{qi}^{(C)}$ for result $i$ of query $q$. The smallest probe count meeting recall $\rho$ is:
 
 \[
  P_A(C,\rho)=\min\left\{P:
  \frac{1}{n_qK}\sum_{q=1}^{n_q}\sum_{i=1}^{K}
  \mathbf 1[s_{qi}^{(C)}\le P]\ge\rho\right\}.
 \]
-\begin{enumerate}[start=3]
-\item The indicator counts IDs whose clusters are open. At 99\% recall, $200\times100$ reference IDs require at least 19,800 matches. Compute these ranks before timing.
-\item Try cluster counts 1, 256, 4096 and 8192. For each, test probe cutoffs for 80\%, 90\%, 95\% and 99\% recall, plus opening every cluster.
-\item Measure time and rows scored. The cutoffs apply to this query batch; they do not guarantee recall for new queries.
-\item For a simple derivative, assume equal clusters, routing cost $\alpha C$, row cost $\beta$, and fixed $P$:
-\end{enumerate}
+The indicator counts IDs whose clusters are open. At 99\% recall, $200\times100$ reference IDs require at least 19,800 matches. Compute these ranks before timing. Try cluster counts 1, 256, 4096 and 8192. For each, test probe cutoffs for 80\%, 90\%, 95\% and 99\% recall, plus opening every cluster. Measure time and rows scored. The cutoffs apply to this query batch; they do not guarantee recall for new queries.
+
+For a simple derivative, assume equal clusters, routing cost $\alpha C$, row cost $\beta$, and fixed $P$:
 
 \[
  T_A(C)\approx\alpha C+\beta NP/C,\qquad
  \frac{dT_A}{dC}=\alpha-\frac{\beta NP}{C^2},\qquad
  C^*=\sqrt{\frac{\beta NP}{\alpha}}.
 \]
-\begin{enumerate}[start=7]
-\item $C^*$ balances cluster selection against document scanning. At a fixed recall target, $P_A(C,\rho)$ may change with $C$, so the measured comparison uses actual probe counts and cluster sizes.
-\end{enumerate}
+$C^*$ balances cluster selection against document scanning. At a fixed recall target, $P_A(C,\rho)$ may change with $C$, so the measured comparison uses actual probe counts and cluster sizes.
 
 \newpage
 \subsection{Bitplanes}
-\begin{enumerate}
-\item A 6400-document mask has 100 words. Removing 100 of 200 remaining candidates saves 100 scores, but adds 100 split-word visits.
-\item Let $W=\ceil{n/64}$. If a split avoids $\Delta F$ scores, it helps when:
-\end{enumerate}
+A 6400-document mask has 100 words. Removing 100 of 200 remaining candidates saves 100 scores, but adds 100 split-word visits. Let $W=\ceil{n/64}$. If a split avoids $\Delta F$ scores, it helps when:
 
 \[
  \boxed{\Delta F\,a_B>Wb+\Delta T_{\rm other,B}.}
 \]
-\begin{enumerate}[start=3]
-\item Left: saved scoring time. Right: split time and extra branch work. This assumes roughly constant cost per score; memory access and recall still need checking.
-\item If each cut halves one set, $j$ cuts leave about $n2^{-j}$ rows. Holding other work fixed gives:
-\end{enumerate}
+Left: saved scoring time. Right: split time and extra branch work. This assumes roughly constant cost per score; memory access and recall still need checking. If each cut halves one set, $j$ cuts leave about $n2^{-j}$ rows. Holding other work fixed gives:
 
 \[
  T_B(j)\approx T_0+jWb+n2^{-j}a_B+T_{\rm other,B},\qquad
  j^*=\log_2\!\left(\frac{n\ln(2)a_B}{Wb}\right).
 \]
-\begin{enumerate}[start=5]
-\item This estimates a cost balance, not recall. Identical bitplanes may remove no more rows; alternative branches add work. Measure both effects.
-\item Try every cluster/probe option from A. Test leaf size 128 with budgets 256 and 1024; leaf sizes 512 and $N$ with unlimited work; and leaves 32 and 128 with budget 4096.
-\item A node budget counts visited sets, including leaves. A leaf of size $N$ allows scoring a cluster immediately. Record splits, final-mask reads and scores.
-\item A's probe cutoff is necessary for the same layout, but B's local limits may lose more IDs. Check the returned IDs against the recall target.
-\end{enumerate}
+This estimates a cost balance, not recall. Identical bitplanes may remove no more rows; alternative branches add work. Measure both effects. Try every cluster/probe option from A. Test leaf size 128 with budgets 256 and 1024; leaf sizes 512 and $N$ with unlimited work; and leaves 32 and 128 with budget 4096.
+
+A node budget counts visited sets, including leaves. A leaf of size $N$ allows scoring a cluster immediately. Record splits, final-mask reads and scores. A's probe cutoff is necessary for the same layout, but B's local limits may lose more IDs. Check the returned IDs against the recall target.
 
 \newpage
 \subsection{Backward Walk: settings to test}
-\begin{enumerate}
-\item The new choices are starting prefix depth $x$ and candidate target $M$, alongside cluster count $C$ and probes $P$. All full scores still use 256 bits.
-\item A deeper start usually finds fewer rows, but may require more widening steps. A shallower start reduces lookups but may score many unnecessary rows.
-\item For equal clusters and balanced independent bits, a first guess is $x\approx\log_2(Pn/M)$, since $Pn/2^x\approx M$. Round to an allowed depth, then check actual prefix counts.
-\item This is a starting point for experiments, not the optimum. Empty or uneven prefixes and the required recall can change the answer.
-\item At fixed routing, widening helps recall by exposing more documents. Its cost is the extra range lookup work and the new rows scored; old rows must not be rescored.
-\item Compare saved full-score time with added prefix-lookup and bookkeeping time. The constants, final depth, recall and best settings remain unmeasured for this method.
-\end{enumerate}
+The new choices are starting prefix depth $x$ and candidate target $M$, alongside cluster count $C$ and probes $P$. All full scores still use 256 bits. A deeper start usually finds fewer rows, but may require more widening steps. A shallower start reduces lookups but may score many unnecessary rows.
+
+For equal clusters and balanced independent bits, a first guess is $x\approx\log_2(Pn/M)$, since $Pn/2^x\approx M$. Round to an allowed depth, then check actual prefix counts. This is a starting point for experiments, not the optimum. Empty or uneven prefixes and the required recall can change the answer.
+
+At fixed routing, widening helps recall by exposing more documents. Its cost is the extra range lookup work and the new rows scored; old rows must not be rescored. Compare saved full-score time with added prefix-lookup and bookkeeping time. The constants, final depth, recall and best settings remain unmeasured for this method.
+
 \[
 \boxed{\text{saved scoring time}>\text{prefix lookup time}+\text{extra range work}}
 \]
 
 \subsection{Comparison}
-\begin{enumerate}
-\item Let $\Theta_a$ be method $a$'s tested settings. The planned comparison chooses its lowest measured time subject to the recall and memory limits:
-\end{enumerate}
+Let $\Theta_a$ be method $a$'s tested settings. The planned comparison chooses its lowest measured time subject to the recall and memory limits:
 
 \[
  \theta_a^*=\underset{\theta\in\Theta_a}{\operatorname{argmin}}\;
@@ -92,7 +68,5 @@ Bitplanes & $C$, $P$, leaf size and node budget & Scores, at the cost of mask an
 Backward Walk & $C$, $P$, starting depth $x$, candidate target $M$ & Scores, at the cost of prefix lookups and new ranges\\\bottomrule
 \end{tabularx}\normalsize
 \end{center}
-\begin{enumerate}[start=2]
-\item Compare methods after each chooses its own qualifying setting. Keep results below the recall target in the records, but do not count them as wins.
-\item This will identify the best observed setting in the tested range, not a global optimum. No such selection has been run for prefix Backward Walk yet.
-\end{enumerate}
+Compare methods after each chooses its own qualifying setting. Keep results below the recall target in the records, but do not count them as wins. This will identify the best observed setting in the tested range, not a global optimum. No such selection has been run for prefix Backward Walk yet.
+

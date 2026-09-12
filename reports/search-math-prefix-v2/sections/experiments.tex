@@ -1,29 +1,18 @@
 \newpage
 \section{Existing measurements and the next comparison}
 \subsection{What the existing numbers measure}
-\begin{enumerate}
-\item The previous experiment used one million MS MARCO document codes~\cite{msmarco}, 200 existing Nomic query vectors~\cite{nomic}, and one exact top-100 reference set.
-\item Each method could choose its own cluster and search settings. The comparison used one CPU thread and a 32 GB process-memory limit on an Apple M5 Max.
-\item A is the cluster-and-scan baseline. B is the existing Bitplane search. $C_{\rm key}$ is the old weighted exact-key enumeration method.
-\item $C_{\rm key}$ tries distinct keys in order of mismatch penalty. It does not widen \texttt{101101} to \texttt{10110*}, so it is not the Backward Walk defined in this revision.
-\item The numbers below are retained unchanged as historical evidence. They must not be read as measurements of the new prefix method.
-\end{enumerate}
+The previous experiment used one million MS MARCO document codes~\cite{msmarco}, 200 existing Nomic query vectors~\cite{nomic}, and one exact top-100 reference set. Each method could choose its own cluster and search settings. The comparison used one CPU thread and a 32 GB process-memory limit on an Apple M5 Max. A is the cluster-and-scan baseline. B is the existing Bitplane search. $C_{\rm key}$ is the old weighted exact-key enumeration method.
+
+$C_{\rm key}$ tries distinct keys in order of mismatch penalty. It does not widen \texttt{101101} to \texttt{10110*}, so it is not the Backward Walk defined in this revision. The numbers below are retained unchanged as historical evidence. They must not be read as measurements of the new prefix method.
+
 \begin{table}[H]\centering\small
 \caption{Earlier results. $C_{\rm key}$ is the old method; prefix Backward Walk is not measured.}
 \input{evidence/fixed-results-table.tex}
 \end{table}
-\begin{enumerate}[start=6]
-\item At 99\% recall, the selected A, B and $C_{\rm key}$ settings all scored about 295,858 documents per query. Their median times were 8.74, 8.99 and 9.73 ms.
-\item Those results show that the selected old alternatives did not avoid full scores. They do not tell us whether prefix relaxation can do better.
-\item Earlier source and PDF: \path{reports/search-math-experiments/}.
-\item Earlier raw records: \path{results/fixed-data-comparison-2026-09-12/}.
-\end{enumerate}
+At 99\% recall, the selected A, B and $C_{\rm key}$ settings all scored about 295,858 documents per query. Their median times were 8.74, 8.99 and 9.73 ms. Those results show that the selected old alternatives did not avoid full scores. They do not tell us whether prefix relaxation can do better. Earlier source and PDF: \path{reports/search-math-experiments/}. Earlier raw records: \path{results/fixed-data-comparison-2026-09-12/}.
 
 \subsection{What remains to be measured}
-\begin{enumerate}
-\item Implement the proposed prefix range lookup and widen one bit per level. Check that each document is scored at most once.
-\item Keep the document codes, query vectors and reference IDs byte-identical to the earlier benchmark. Build different index layouts from these same inputs.
-\item Measure prefix depths, distinct rows scored, range lookups, recall, latency and memory. Do not convert an expected prefix count into assumed recall.
-\item Vary clusters and probes for A, B and C. Vary B's branch settings and C's starting depth and candidate target. Include the missing larger-cluster cases.
-\item Compare each method's best qualifying setting at the same recall and RAM limits. Repeat timing measurements before drawing a conclusion.
-\end{enumerate}
+Implement the proposed prefix range lookup and widen one bit per level. Check that each document is scored at most once. Keep the document codes, query vectors and reference IDs byte-identical to the earlier benchmark. Build different index layouts from these same inputs. Measure prefix depths, distinct rows scored, range lookups, recall, latency and memory. Do not convert an expected prefix count into assumed recall.
+
+Vary clusters and probes for A, B and C. Vary B's branch settings and C's starting depth and candidate target. Include the missing larger-cluster cases. Compare each method's best qualifying setting at the same recall and RAM limits. Repeat timing measurements before drawing a conclusion.
+
