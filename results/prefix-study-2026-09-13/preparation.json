@@ -1,0 +1,26 @@
+[
+  {
+    "pool": "qwen-quora-d256",
+    "seconds": 35.02266633399995,
+    "jobs": 12,
+    "settings": 570
+  },
+  {
+    "pool": "nomic-msmarco-d256",
+    "seconds": 63.05826483300007,
+    "jobs": 12,
+    "settings": 570
+  },
+  {
+    "pool": "qwen-quora-d1024",
+    "seconds": 69.91944245800005,
+    "jobs": 12,
+    "settings": 570
+  },
+  {
+    "pool": "nomic-msmarco-d768",
+    "seconds": 111.15620587500007,
+    "jobs": 12,
+    "settings": 570
+  }
+]
