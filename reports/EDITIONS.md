@@ -1,6 +1,11 @@
 # Report editions
 
-All four PDFs are retained under `output/pdf/`. They describe the same methods and results.
+All five PDFs are retained under `output/pdf/`. They cover the same study at different lengths.
+
+The [10-page brief formal paper](../output/pdf/search-methods-brief-formal.pdf) is the shortest
+edition. It includes the three methods, inline pseudocode, one worked example, the main
+formulas, and the measured conclusions. Its [LaTeX source](search-math-brief-formal/README.md)
+builds separately from the editions below.
 
 | Style | Concise | Detailed |
 |---|---|---|
