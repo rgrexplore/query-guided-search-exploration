@@ -1,104 +1,87 @@
 \newpage
 \section{Deriving Optima}
-The objective is minimum measured retrieval time at a required batch recall and a 32 GB
-RAM limit. Only index and search parameters change. Document codes, query vectors and
-reference answers remain identical. Each method chooses its own cluster count and local settings.
+\begin{enumerate}
+\item Minimize retrieval time at the required recall, within 32 GB RAM.
+\item Keep documents, queries and reference answers unchanged. Each method chooses its own index and search settings.
+\end{enumerate}
 
 \subsection{Original method}
-For a given layout, the reference answers show exactly how many clusters A must open.
-Suppose a reference document belongs to the fifth cluster in the query's routing order.
-A includes it when $P\ge5$. Record this rank for every reference document and query.
+\begin{enumerate}
+\item For each reference ID, record when its cluster is opened. Example: a document in the fifth cluster is included when $P\ge5$.
+\item Write that rank as $s_{qi}^{(C)}$ for result $i$ of query $q$. The smallest probe count meeting recall $\rho$ is:
+\end{enumerate}
 
-Let $s_{qi}^{(C)}$ be the cluster rank of reference result $i$ for query $q$. At recall
-requirement $\rho$, the smallest qualifying probe count is
 \[
  P_A(C,\rho)=\min\left\{P:
  \frac{1}{n_qK}\sum_{q=1}^{n_q}\sum_{i=1}^{K}
  \mathbf 1[s_{qi}^{(C)}\le P]\ge\rho\right\}.
 \]
-The indicator contributes one when the document's cluster is opened. With 200 queries
-and 100 reference IDs each, 99\% recall requires at least 19,800 recovered IDs across the
-batch. These ranks are calculated before timing the searches.
+\begin{enumerate}[start=3]
+\item The indicator counts IDs whose clusters are open. At 99\% recall, $200\times100$ reference IDs require at least 19,800 matches. Compute these ranks before timing.
+\item Try cluster counts 1, 256, 4096 and 8192. For each, test probe cutoffs for 80\%, 90\%, 95\% and 99\% recall, plus opening every cluster.
+\item Measure time and rows scored. The cutoffs apply to this query batch; they do not guarantee recall for new queries.
+\item For a simple derivative, assume equal clusters, routing cost $\alpha C$, row cost $\beta$, and fixed $P$:
+\end{enumerate}
 
-The experiment uses one global cluster and learned layouts with 256, 4096 and 8192 clusters.
-For each layout it computes probe cutoffs for 80\%, 90\%, 95\% and 99\% recall, and also opens
-all clusters. Query time and selected-row counts are then measured. These cutoffs describe
-this query batch; they do not guarantee the same recall on future queries.
-
-A derivative explains the competing costs. Suppose clusters are balanced, routing costs
-$\alpha C$, each row costs approximately $\beta$, and $P$ stays constant. Then
 \[
  T_A(C)\approx\alpha C+\beta NP/C,\qquad
  \frac{dT_A}{dC}=\alpha-\frac{\beta NP}{C^2},\qquad
  C^*=\sqrt{\frac{\beta NP}{\alpha}}.
 \]
-This balances routing more clusters against scanning fewer rows. Under a recall requirement,
-$P_A(C,\rho)$ can change with $C$. The measured comparison uses that probe count and actual
-cluster sizes; the fixed-$P$ derivative is not a complete solution.
+\begin{enumerate}[start=7]
+\item $C^*$ balances cluster selection against document scanning. At a fixed recall target, $P_A(C,\rho)$ may change with $C$, so the measured comparison uses actual probe counts and cluster sizes.
+\end{enumerate}
 
 \newpage
 \subsection{Bitplanes}
-Consider a mask covering 6400 documents, or 100 words. If 200 candidates remain and a split
-removes 100, it saves 100 complete scores. It also adds 100 split-word visits and branch
-work. Let $W=\ceil{n/64}$ be the bitmap width. If an extra split avoids $\Delta F$
-scores, a simple comparison is
+\begin{enumerate}
+\item A 6400-document mask has 100 words. Removing 100 of 200 remaining candidates saves 100 scores, but adds 100 split-word visits.
+\item Let $W=\ceil{n/64}$. If a split avoids $\Delta F$ scores, it helps when:
+\end{enumerate}
+
 \[
  \boxed{\Delta F\,a_B>Wb+\Delta T_{\rm other,B}.}
 \]
-The left side is saved scoring time. The right side is split time plus the change in other
-branch work. The comparison assumes a roughly constant cost per score; actual timing also
-captures changes in memory access. The complete search must retain the required recall.
+\begin{enumerate}[start=3]
+\item Left: saved scoring time. Right: split time and extra branch work. This assumes roughly constant cost per score; memory access and recall still need checking.
+\item If each cut halves one set, $j$ cuts leave about $n2^{-j}$ rows. Holding other work fixed gives:
+\end{enumerate}
 
-If each split halves one candidate set, after $j$ cuts it contains approximately $n2^{-j}$
-rows. Holding other branch work constant gives the guide
 \[
  T_B(j)\approx T_0+jWb+n2^{-j}a_B+T_{\rm other,B},\qquad
  j^*=\log_2\!\left(\frac{n\ln(2)a_B}{Wb}\right).
 \]
-This is an illustrative cost balance, not a recall estimate for these embeddings. If two
-bitplanes are identical, splitting on the second after the first removes no additional rows.
-Alternative branches also add paths. The experiment measures these effects rather than
-assuming repeated halving.
-
-B uses every cluster and probe option above, then varies local search: leaf size 128 with
-node budgets 256 and 1024; leaf size 512 with unlimited work; and leaf size $N$, which permits
-scoring an opened cluster without splitting. A node budget counts visited candidate sets,
-including leaves. Leaf sizes 32 and 128 are also compared at budget 4096. Actual splits, final-mask reads and scored rows explain the resulting time.
-
-The probe cutoff computed for A is a necessary routing condition for B using the same
-layout. It may not suffice when local limits lose more results. Returned IDs determine
-whether each complete setting qualifies.
+\begin{enumerate}[start=5]
+\item This estimates a cost balance, not recall. Identical bitplanes may remove no more rows; alternative branches add work. Measure both effects.
+\item Try every cluster/probe option from A. Test leaf size 128 with budgets 256 and 1024; leaf sizes 512 and $N$ with unlimited work; and leaves 32 and 128 with budget 4096.
+\item A node budget counts visited sets, including leaves. A leaf of size $N$ allows scoring a cluster immediately. Record splits, final-mask reads and scores.
+\item A's probe cutoff is necessary for the same layout, but B's local limits may lose more IDs. Check the returned IDs against the recall target.
+\end{enumerate}
 
 \newpage
 \subsection{Backward Walk}
-The key must be wide enough to rule out some patterns. For the first saved query, the
-ideal full score is 12.361. Even if all eight key bits mismatch, the remaining full-score
-upper bound is 11.373. The 100th reference score is only 9.994. Thus even the least promising
-eight-bit key cannot be discarded using this bound. All 200 queries have this problem at
-key widths 1, 4, and 8.
+\begin{enumerate}
+\item For the first saved query, the ideal score is 12.361. Even after all eight key bits mismatch, the bound is 11.373, above the 100th score of 9.994.
+\item That key cannot be discarded. All 200 queries have this issue for widths 1, 4 and 8.
+\item At the same routing settings, a change from width $h$ to $h'$ helps when:
+\end{enumerate}
 
-At the same routing settings, changing key width from $h$ to $h'$ helps when
 \[
  \boxed{\text{saved scoring time}>
         \text{extra lookup time}+\text{extra key-management time}.}
 \]
-For example, saving 3 ms of document scoring pays for 1 ms of additional key work.
-Saving only 0.5 ms does not. These are cost examples; the measured comparison below
-checks both time and recall on the unchanged inputs.
-
-A smaller first range does not determine the answer. Search may need many additional keys,
-including empty ones, before finding enough high-scoring documents or proving that remaining
-keys cannot improve the result.
-
-The experiment tries keys of 1, 4, 8, 16, 20, and 24 bits. For all 200 queries, the short
-1-, 4-, and 8-bit keys cannot be discarded using the score bound, so their complete key spaces
-are searched. Longer keys are compared with lookup limits of 4096 and 65,536.
-The full 256-bit score remains unchanged. Directory memory is measured for
-each index, and returned IDs establish recall. No $N/2^h$ occupancy assumption is used to
-assign recall or declare a winning key width.
+\begin{enumerate}[start=4]
+\item Saving 3 ms of scoring pays for 1 ms of extra key work. Saving 0.5 ms does not. These are cost examples, not measured outcomes.
+\item A small first result set is not enough. More keys, including empty ones, may be needed to reach the recall target or rule out the remaining results.
+\item Test widths 1, 4, 8, 16, 20 and 24. Short keys visit their full key spaces here; longer keys use lookup limits of 4096 and 65,536.
+\item Keep the full 256-bit score. Measure directory size and returned IDs; do not infer recall or a winning width from $N/2^h$.
+\end{enumerate}
 
 \subsection{Comparison}
-Let $\Theta_a$ contain method $a$'s tested settings. Its final choice is
+\begin{enumerate}
+\item Let $\Theta_a$ be method $a$'s tested settings. Choose its lowest measured time subject to the recall and memory limits:
+\end{enumerate}
+
 \[
  \theta_a^*=\underset{\theta\in\Theta_a}{\operatorname{argmin}}\;
  T_{a,\rm measured}(\theta)
@@ -114,7 +97,7 @@ Bitplanes & $C$, $P$, leaf size and node budget & Scores, at the cost of mask an
 Backward Walk & $C$, $P$, key width $h$ and lookup limit & Scores, at the cost of lookups and range starts\\\bottomrule
 \end{tabularx}\normalsize
 \end{center}
-The methods are compared after each has selected its own qualifying settings. Results below
-the recall target remain visible, but cannot establish a speedup at that target. This finds
-the best measured choices within the tested ranges on the unchanged query batch. It does not
-prove that every possible index configuration has been exhausted.
+\begin{enumerate}[start=2]
+\item Compare methods after each chooses its own qualifying setting. Keep results below the recall target in the records, but do not count them as wins.
+\item This finds the best observed setting in the tested range on the unchanged queries. It does not prove a global optimum.
+\end{enumerate}

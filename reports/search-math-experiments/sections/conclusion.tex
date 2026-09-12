@@ -1,24 +1,15 @@
 \newpage
 \section{Limitations and Next steps}
-This experiment compares the declared index settings on one unchanged document collection
-and query set. All methods use the same score, reference answers, RAM budget and CPU thread
-count. The selected settings are the fastest observed successful choices in that comparison;
-they are not a proof of the best possible implementation.
-
-The formulas count document scores, mask reads and key lookups. Their time cost depends on
-memory access, code organization and the machine. Knowing the ideal binary pattern does not
-by itself tell us how many branches or keys must be visited to recover the reference answers.
-Those data-dependent counts must be checked rather than assumed.
-
-A useful next step is to expand the parameter range or improve a demonstrated expensive
-operation while retaining this same benchmark. Any later comparison using a different
-embedding model, document collection or query set should be reported separately.
+\begin{enumerate}
+\item Only one unchanged document collection and query set were tested. Every method used the same score, reference IDs, RAM limit and CPU thread count.
+\item The chosen settings were fastest within this tested range. They do not prove the best possible implementation.
+\item Scores, mask reads and key lookups have different time costs. Memory access, code and hardware affect those costs.
+\item The ideal bit pattern does not tell us how many branches or keys are needed. Check those counts on the actual data.
+\item Next: expand the parameter range or improve a measured expensive operation on the same benchmark. Report any later change of model, documents or queries as a separate comparison.
+\end{enumerate}
 
 \section{Conclusion}
 \input{evidence/conclusion.tex}
-The comparison must keep the inputs unchanged while giving every method its own parameter
-choices. The practical test is whether the extra work used to avoid scores costs less than
-the scores it removes, at the same recall requirement and within the memory budget.
 
 \begin{thebibliography}{9}\small\raggedright
 \bibitem{exa} Exa Team. \emph{How we built a web-scale vector database}. 2024.

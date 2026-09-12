@@ -1,38 +1,20 @@
 \newpage
 \section{Experiments}
 \subsection{Setup}
-Every run uses the same one million MS MARCO document embeddings~\cite{msmarco}, the same 200 query
-embeddings, and the same reference answers. The embeddings were already produced with
-Nomic~\cite{nomic}. We do not regenerate them, change their values, shorten them, or select different
-queries for different methods.
-
-The documents contain 256 sign bits; queries retain 256 floating-point values. The reference
-answer is the best 100 document IDs from a full scoring calculation. A recall of 99\% means
-returning 99 of those same 100 IDs on average. All methods use that identical reference.
-
-Only the index parameters listed in Section 3 change: clusters, probes, B's leaf size and
-branch budget, and C's key width and lookup limit. The complete score still uses all 256 bits.
-
-For each cluster count, the code finds probe counts reaching 80\%, 90\%, 95\%, and 99\% recall
-with the original scan. It also includes opening every cluster. These probe choices are
-available to A, B and C. This avoids giving A an unnecessarily expensive probe count when
-comparing it with a more selective method.
-
-We measured 256 parameter settings in total.
-
-The machine is an Apple M5 Max with 128 GiB of physical memory. Each process has a 32 GB
-memory budget and uses one CPU thread. Every setting searches all 200 queries twice. The
-fastest successful settings are then repeated in three processes, still using those same
-queries. Reported time is the middle measurement, or median.
-
-Retrieval time includes choosing clusters and searching their documents. It excludes
-building the index and generating embeddings. File hashes for the document, query and
-reference arrays are checked before and after the measurements.
+\begin{enumerate}
+\item \textbf{Data.} One million MS MARCO documents~\cite{msmarco}, 200 queries, and existing Nomic embeddings~\cite{nomic}. Every run uses the same arrays, values and query rows.
+\item \textbf{Score.} Documents have 256 sign bits; queries have 256 float values. The reference is the exact best 100 IDs. Returning 99 on average gives 99\% recall.
+\item \textbf{Settings.} Vary clusters, probes, B's leaf size and branch budget, and C's key width and lookup limit. Keep the full score unchanged.
+\item \textbf{Probes.} For each cluster count, find where A reaches 80\%, 90\%, 95\% and 99\% recall. Include opening all clusters. Give A, B and C these same choices.
+\item \textbf{Machine.} Apple M5 Max, 128 GiB physical RAM, one CPU thread, and a 32 GB limit per process.
+\item \textbf{Runs.} Test 256 settings. Each searches all 200 queries twice. Repeat the fastest qualifying settings in three processes on those same queries.
+\item \textbf{Time.} Report the median. Include cluster selection and search; exclude index building and embedding generation.
+\item \textbf{Input check.} Compare file hashes before and after the runs. No input array changed.
+\end{enumerate}
 
 \begin{figure}[H]\centering
 \includegraphics[width=\linewidth]{figures/recall-time.pdf}
-\caption{Time required at each recall target. All points use the same document and query
-arrays. Lower time is better; every plotted setting meets the recall requirement.}
+\caption{Median time at each recall target; every plotted setting meets the target on the same inputs.}
 \end{figure}
 
 \newpage
@@ -44,17 +26,17 @@ arrays. Lower time is better; every plotted setting meets the recall requirement
 
 \begin{figure}[H]\centering
 \includegraphics[width=\linewidth]{figures/cluster-time.pdf}
-\caption{Initial measurements at each cluster count for 99\% recall. Table 1 uses repeated runs
-of the selected settings, so small timing differences are expected. All inputs remain unchanged.}
+\caption{Initial 99\% recall measurements by cluster count; Table 1 repeats selected settings, so small timing differences are expected.}
 \end{figure}
 
 \begin{table}[H]\centering\small
-\caption{Settings for 99\% recall. $L$ is leaf size and $h$ is key width. Budget counts visited candidate groups for B and key lookups for C; zero means unlimited.}
+\caption{Selected settings for 99\% recall.}
 \input{evidence/fixed-settings-table.tex}
 \end{table}
-The following page connects those settings to their actual work. A name such as
-``Bitplanes'' does not tell us whether the chosen setting split any candidates; a large
-leaf can make it score an opened cluster immediately.
+\begin{enumerate}
+\item $L$ is leaf size; $h$ is key width. Budget counts visited sets for B and lookups for C; zero means unlimited.
+\item A large leaf can make B score a whole cluster without splitting. The next table shows the work actually performed.
+\end{enumerate}
 
 \newpage
 \subsection{What the numbers mean}
@@ -63,23 +45,23 @@ leaf can make it score an opened cluster immediately.
 \input{evidence/fixed-work-table.tex}
 \end{table}
 \input{evidence/findings.tex}
+\begin{enumerate}[start=6]
+\item Check stored codes, IDs, padded bitplanes and occupied key entries against the memory formula.
+\item Measured process RAM also includes spare allocation capacity, temporary arrays and the running program.
+\end{enumerate}
 
-The code checks stored index data against the memory calculation: packed codes and IDs,
-padded bitplanes for B, and occupied directory entries for C. The measured process memory
-also includes allocation capacity, temporary arrays and the running program.
 \begin{table}[H]\centering\small
 \caption{Index data calculated from the layout and reported by the implementation.}
 \input{evidence/fixed-memory-table.tex}
 \end{table}
-The parameter sweep answers which tested settings were fastest on this unchanged dataset.
-For A, increasing the recall requirement from 90\% to 99\% increases the opened clusters
-from 353 to 2440, out of 8192. Its median time rises from 1.43 to 8.74 ms. The query vectors stay
-the same; the extra work comes from opening more clusters.
-These results concern this dataset and the tested parameter ranges.
+\begin{enumerate}[start=8]
+\item For A, raising recall from 90\% to 99\% opens 2440 rather than 353 of 8192 clusters. Median time rises from 1.43 to 8.74 ms.
+\item The queries are unchanged; opening more clusters adds work. The result applies to this dataset and the tested settings.
+\end{enumerate}
 
 \subsection{Code references}
-Run \texttt{experiments.fixed\_data\_comparison} with its \texttt{sweep}, \texttt{extend} and \texttt{repeat}
-commands. All three read the same arrays; the README gives the full commands and input paths.
-The search implementations are \path{cpp/index.cpp} and \path{cpp/key_index.cpp}.
-Results, parameter choices, input hashes and raw observations are saved under
-\path{results/fixed-data-comparison-2026-09-12/}.
+\begin{enumerate}
+\item Run \texttt{experiments.fixed\_data\_comparison}: \texttt{sweep}, \texttt{extend}, then \texttt{repeat}. The README gives full commands and input paths.
+\item Search code: \path{cpp/index.cpp} and \path{cpp/key_index.cpp}. All commands read the same benchmark arrays.
+\item Records: \path{results/fixed-data-comparison-2026-09-12/}. Includes settings, input hashes, work counts and timings.
+\end{enumerate}

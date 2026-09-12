@@ -3,7 +3,8 @@
 This report uses one unchanged benchmark: one million 256-bit MS MARCO document codes,
 200 existing Nomic query vectors, and their reference top-100 answers. Only index settings vary.
 The source follows the introduction, per-method calculations, per-method optima, summary,
-experiments, limitations and conclusion in that order.
+experiments, limitations and conclusion in that order. All explanatory sections use numbered
+points or bullets; equations, diagrams and pseudocode stay beside the relevant steps.
 
 Sections 2.1 and 2.2 use one query and the same three teaching documents for all methods.
 Each method has numbered steps, short bullets, diagrams, loop counts and byte counts.

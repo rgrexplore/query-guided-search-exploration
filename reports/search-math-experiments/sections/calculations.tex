@@ -1,13 +1,15 @@
 \newpage
 \section{Preliminary calculations}
-The collection contains $N=1{,}000{,}000$ documents. The same 200 query vectors, 256-bit
-codes and reference answers are used throughout. Each method may choose its own cluster
-count $C$, probe count $P$ and local settings. A probe opens one cluster. The result count
-is $K=100$; $d$ denotes the number of document bits.
+\begin{itemize}
+\item The collection contains $N=1{,}000{,}000$ documents. The same 200 query vectors, 256-bit codes and reference answers are used throughout.
+\item Each method may choose its own cluster count $C$, probe count $P$ and local settings. A probe opens one cluster.
+\item The result count is $K=100$; $d$ denotes the number of document bits.
+\end{itemize}
 
 \subsection{Time complexity}
-\textbf{One example for all three methods.} Open one cluster containing these three rows.
-Return the best two results: $N=3$, $C=P=1$, $d=5$, $K=2$.
+\begin{itemize}
+\item \textbf{One example for all three methods.} Open one cluster containing these three rows. Return the best two results: $N=3$, $C=P=1$, $d=5$, $K=2$.
+\end{itemize}
 \[
  q=[0.7,\ 0.5,\ -0.4,\ -0.6,\ 0.3],\qquad\text{ideal signs: }\texttt{11001}.
 \]
@@ -20,8 +22,7 @@ ID & Document bits & Full score & Calculation\\\midrule
 \end{tabular}
 \end{center}
 \begin{itemize}
-\item These are teaching rows, not a change to the benchmark dataset.
-\item Bits are shown in position order, left to right. Scores are rounded here.
+\item These are teaching rows, not a change to the benchmark dataset. Bits are shown in position order, left to right. Scores are rounded here.
 \item For larger collections, $n=N/C$ estimates rows per cluster if clusters are equal-sized.
 \end{itemize}
 
@@ -43,8 +44,7 @@ Table setup is $O(d)$ for a fixed group width of four. Cluster selection costs $
  \texttt{ID 2}\longrightarrow1.9
 \]
 \begin{itemize}
-\item Loop over three rows; each reads two score-table entries: $3\times2=6$ terms.
-\item For $F_A$ rows, this is $F_A\ceil{d/4}$ terms, or $O(F_A d)$ work.
+\item Loop over three rows; each reads two score-table entries: $3\times2=6$ terms. For $F_A$ rows, this is $F_A\ceil{d/4}$ terms, or $O(F_A d)$ work.
 \end{itemize}
 
 \textbf{Step 3: keep the best two.}
@@ -53,31 +53,31 @@ Table setup is $O(d)$ for a fixed group width of four. Cluster selection costs $
  \ \longrightarrow\ \boxed{[1{:}2.5,\ 2{:}1.9]}.
 \]
 \begin{itemize}
-\item Offer three scores; keep at most two. The display above is sorted for readability.
-\item Keeping $K$ results costs up to $O(F_A\log K)$; final sorting costs $O(K\log K)$.
+\item Offer three scores; keep at most two. The display above is sorted for readability. Keeping $K$ results costs up to $O(F_A\log K)$; final sorting costs $O(K\log K)$.
 \end{itemize}
 
-\textbf{Total.} One cluster lookup, 32 table entries built, six table terms read and three
-scores offered. These are different kinds of work, so we do not add them as equal CPU operations.
+\begin{itemize}
+\item \textbf{Total.} One cluster lookup, 32 table entries built, six table terms read and three scores offered.
+\item These are different kinds of work, so we do not add them as equal CPU operations.
+\end{itemize}
 \[
  \boxed{T_A\approx T_0+\frac{PN}{C}a_A.}
 \]
-$T_0$ includes cluster selection and table setup. $a_A$ is average time per document,
-including its score and result update. For fixed $C,P,d,K$, scan work grows as $O(N)$.
+\begin{itemize}
+\item $T_0$ includes cluster selection and table setup. $a_A$ is average time per document, including its score and result update. For fixed $C,P,d,K$, scan work grows as $O(N)$.
+\end{itemize}
 
 \newpage
 \subsubsection{Bitplanes}
-\textbf{Same input:} $q=[0.7,0.5,-0.4,-0.6,0.3]$; rows
-\texttt{10100}, \texttt{11001}, \texttt{11000}; best two results.
-Stop splitting when at most two rows remain. Keep all other work limits unlimited.
+\begin{itemize}
+\item \textbf{Same input:} $q=[0.7,0.5,-0.4,-0.6,0.3]$; rows \texttt{10100}, \texttt{11001}, \texttt{11000}; best two results. Stop splitting when at most two rows remain. Keep all other work limits unlimited.
+\end{itemize}
 
 \textbf{Step 1: open, prepare and order the bits.}
 \begin{itemize}
-\item Open the same cluster and build the same 32 score-table entries as A.
-\item Sort five query positions by absolute value:
+\item Open the same cluster and build the same 32 score-table entries as A. Sort five query positions by absolute value:
 $1\ (0.7)\to4\ (0.6)\to2\ (0.5)\to3\ (0.4)\to5\ (0.3)$.
-\item Sorting costs $O(d\log d)$. One pass sums the five absolute values: $Q=2.5$, costing $O(d)$.
-\item Write one word for mask \texttt{111}: all rows are active. Initial masks cost $O(PW)$ word writes.
+\item Sorting costs $O(d\log d)$. One pass sums the five absolute values: $Q=2.5$, costing $O(d)$. Write one word for mask \texttt{111}: all rows are active. Initial masks cost $O(PW)$ word writes.
 \end{itemize}
 
 \textbf{Step 2: split the mask.}
@@ -92,44 +92,43 @@ $1\ (0.7)\to4\ (0.6)\to2\ (0.5)\to3\ (0.4)\to5\ (0.3)$.
 \end{tikzpicture}
 \end{center}
 \begin{itemize}
-\item The first two splits remove nothing. The third separates ID 0 from IDs 1 and 2.
-\item All three masks still have three positions. Each occupies one 64-bit word.
+\item The first two splits remove nothing. The third separates ID 0 from IDs 1 and 2. All three masks still have three positions. Each occupies one 64-bit word.
 \item Three splits visit $3\times1=3$ word positions. With $J$ splits and mask width $W$,
 this costs $O(JW)$, where $W=\ceil{n/64}$.
 \end{itemize}
 
 \textbf{Step 3: score the two remaining rows.}
 \begin{itemize}
-\item Mask \texttt{011} fits the leaf limit. Read one mask word, then score IDs 1 and 2.
-\item Two scores use $2\times2=4$ table terms. Best results: \texttt{[1: 2.5, 2: 1.9]}.
+\item Mask \texttt{011} fits the leaf limit. Read one mask word, then score IDs 1 and 2. Two scores use $2\times2=4$ table terms. Best results: \texttt{[1: 2.5, 2: 1.9]}.
 \item Reading $L$ final masks costs $O(LW)$; scoring $F_B$ rows costs $O(F_Bd)$.
 Result updates have the same $O(F_B\log K)$ bound as A.
 \end{itemize}
 
 \textbf{Step 4: check the waiting branch and stop.}
 \begin{itemize}
-\item Its best possible score is $2.5-2(0.5)=1.5$, below the retained score 1.9.
-\item Skip ID 0. One final bound check is $O(1)$ once the query sum and penalty are known.
+\item Its best possible score is $2.5-2(0.5)=1.5$, below the retained score 1.9. Skip ID 0. One final bound check is $O(1)$ once the query sum and penalty are known.
 \item Four candidate sets were processed: three splits and one leaf. Including the $P$ initial sets, queue work is bounded by
 $O((P+V)\log(P+V+1))$.
 \end{itemize}
 
-\textbf{Total.} Same table setup as A; sum five weights; sort five positions; write one initial mask;
-visit three split words and one final-mask
-word; score two rows; skip one row. Fewer scores alone do not prove lower time.
+\begin{itemize}
+\item \textbf{Total.} Same table setup as A; sum five weights; sort five positions; write one initial mask; visit three split words and one final-mask word; score two rows; skip one row.
+\item Fewer scores alone do not prove lower time.
+\end{itemize}
 \[
  \boxed{T_B\approx T_0+PS\ceil{\frac{N}{64C}}b
              +f_B\frac{PN}{C}a_B+T_{\rm other,B}.}
 \]
-$S$ is average splits per opened cluster; $f_B$ is the scored fraction; $b$ is time per
-split-word visit. Here $S=3$, $f_B=2/3$. Other time includes sorting, queues and final-mask reads.
-A wide mask still costs time after many rows are removed.
+\begin{itemize}
+\item $S$ is average splits per opened cluster; $f_B$ is the scored fraction; $b$ is time per split-word visit. Here $S=3$, $f_B=2/3$. Other time includes sorting, queues and final-mask reads.
+\item A wide mask still costs time after many rows are removed.
+\end{itemize}
 
 \newpage
 \subsubsection{Backward Walk}
-\textbf{Same input:} $q=[0.7,0.5,-0.4,-0.6,0.3]$; rows
-\texttt{10100}, \texttt{11001}, \texttt{11000}; best two results.
-Use bits 2 and 3 as the key: $h=2$. Keep lookup and candidate limits unlimited.
+\begin{itemize}
+\item \textbf{Same input:} $q=[0.7,0.5,-0.4,-0.6,0.3]$; rows \texttt{10100}, \texttt{11001}, \texttt{11000}; best two results. Use bits 2 and 3 as the key: $h=2$. Keep lookup and candidate limits unlimited.
+\end{itemize}
 
 \textbf{Step 1: form the preferred key.}
 \[
@@ -137,10 +136,8 @@ Use bits 2 and 3 as the key: $h=2$. Keep lookup and candidate limits unlimited.
  \qquad\boxed{\text{preferred key}=\texttt{10}}.
 \]
 \begin{itemize}
-\item Open the same cluster and build the same 32 score-table entries as A.
-\item Read two signs: $O(h)$. Sort the two weights: $O(h\log h)$.
-\item One pass sums all five absolute query values: $Q=2.5$, costing $O(d)$.
-\item Flipping bit 3 costs 0.4 in penalty; flipping bit 2 costs 0.5. Try the smaller penalty first.
+\item Open the same cluster and build the same 32 score-table entries as A. Read two signs: $O(h)$. Sort the two weights: $O(h\log h)$.
+\item One pass sums all five absolute query values: $Q=2.5$, costing $O(d)$. Flipping bit 3 costs 0.4 in penalty; flipping bit 2 costs 0.5. Try the smaller penalty first.
 \end{itemize}
 
 \textbf{Step 2: look up the preferred key.}
@@ -153,8 +150,7 @@ Use bits 2 and 3 as the key: $h=2$. Keep lookup and candidate limits unlimited.
 \end{tikzpicture}
 \end{center}
 \begin{itemize}
-\item One lookup finds two rows. The other stored key, \texttt{01}, contains ID 0.
-\item Score both rows with all five query values: four table terms, not just two key bits.
+\item One lookup finds two rows. The other stored key, \texttt{01}, contains ID 0. Score both rows with all five query values: four table terms, not just two key bits.
 \item $H$ hash lookups cost expected $O(H)$ under normal hash-table behavior. Scoring costs
 $O(F_Cd)$, plus $O(F_C\log K)$ result updates.
 \end{itemize}
@@ -167,15 +163,15 @@ $O(F_Cd)$, plus $O(F_C\log K)$ result updates.
  \ \longrightarrow\ \boxed{1.7<1.9:\ \text{stop}}.
 \]
 \begin{itemize}
-\item The next key cannot beat the current second result. Do not look it up.
-\item The remaining keys have larger penalties, so they cannot improve the result either.
+\item The next key cannot beat the current second result. Do not look it up. The remaining keys have larger penalties, so they cannot improve the result either.
 \item One key was looked up; one next-key state was queued. The final bound check is $O(1)$.
 Generating and ordering $E$ visited keys costs up to $O(E\log(E+1))$ after the initial sort.
 \end{itemize}
 
-\textbf{Total.} Same table setup as A; sum five weights; sort two key positions; make one lookup; score two rows;
-check one next-key bound. All methods return IDs 1 and 2, so this example has 100\% recall.
-It does not establish a speedup on real data.
+\begin{itemize}
+\item \textbf{Total.} Same table setup as A; sum five weights; sort two key positions; make one lookup; score two rows; check one next-key bound.
+\item All methods return IDs 1 and 2, so this example has 100\% recall. It does not establish a speedup on real data.
+\end{itemize}
 \[
  \boxed{T_C\approx T_0+PE\,c+F_Ca_C+T_{\rm other,C}.}
 \]
@@ -190,9 +186,10 @@ sets how far the search must continue.
 
 \newpage
 \subsection{Memory complexity}
-\textbf{Same example:} three documents, five bits each, one cluster, two results.
-We count bytes of data first. Full process RAM also includes unused capacity, queue records,
-hash-table overhead, Python, and other runtime memory.
+\begin{itemize}
+\item \textbf{Same example:} three documents, five bits each, one cluster, two results. We count bytes of data first.
+\item Full process RAM also includes unused capacity, queue records, hash-table overhead, Python, and other runtime memory.
+\end{itemize}
 
 \subsubsection{Original method}
 \textbf{Step 1: store the codes and IDs before search.}
@@ -207,8 +204,7 @@ hash-table overhead, Python, and other runtime memory.
 \begin{itemize}
 \item Each five-bit row uses one eight-byte word. Packing all 15 bits across row boundaries
 would use a different layout; this implementation stores whole words per row.
-\item Formula: $M_{\rm rows}=N(8\ceil{d/64}+8)$ bytes. Size is $O(N\ceil{d/64}+N)$.
-\item Cluster data is extra. For example, $C$ float32 centroids of width $d_R$ use $4Cd_R$ bytes.
+\item Formula: $M_{\rm rows}=N(8\ceil{d/64}+8)$ bytes. Size is $O(N\ceil{d/64}+N)$. Cluster data is extra. For example, $C$ float32 centroids of width $d_R$ use $4Cd_R$ bytes.
 This one-cluster example needs no centroid search.
 \end{itemize}
 
@@ -224,8 +220,9 @@ This one-cluster example needs no centroid search.
 need a stored score for every document.
 \item General sizes: $4d+128\ceil{d/4}+16K$ bytes, or $O(d+K)$ for these buffers.
 \end{itemize}
-\textbf{Total counted fields:} 48 bytes stored + 308 query bytes = 356 bytes.
-This is not total process RAM; cluster records and allocation overhead remain additional.
+\begin{itemize}
+\item \textbf{Total counted fields:} 48 bytes stored + 308 query bytes = 356 bytes. This is not total process RAM; cluster records and allocation overhead remain additional.
+\end{itemize}
 
 \subsubsection{Bitplanes}
 \textbf{Step 1: keep A's rows and add the bitplanes.}
@@ -240,9 +237,7 @@ Bit 5 &0&1&0&8 bytes
 \end{tabular}\normalsize
 \end{center}
 \begin{itemize}
-\item Each plane has three useful bits but occupies one word. Five planes add $5\times8=40$ bytes.
-\item Stored fields: $48+40=88$ bytes.
-\item Formula: $M_{\rm planes}=8d\sum_c\ceil{n_c/64}$ bytes. Include padding in every cluster.
+\item Each plane has three useful bits but occupies one word. Five planes add $5\times8=40$ bytes. Stored fields: $48+40=88$ bytes. Formula: $M_{\rm planes}=8d\sum_c\ceil{n_c/64}$ bytes. Include padding in every cluster.
 \end{itemize}
 
 \newpage
@@ -257,14 +252,14 @@ Bit 5 &0&1&0&8 bytes
 \begin{itemize}
 \item The parent exists while both children are built: $3\times8=24$ live mask bytes at the peak.
 All three masks keep their full width, even if one child is empty.
-\item Sorting five positions adds $5\times8=40$ bytes on this 64-bit machine.
-\item Counted query data: A's $308+24+40=372$ bytes. Queue records are still extra.
+\item Sorting five positions adds $5\times8=40$ bytes on this 64-bit machine. Counted query data: A's $308+24+40=372$ bytes. Queue records are still extra.
 \item For mask width $W_c=\ceil{n_c/64}$ and $A_c(t)$ live masks, peak mask data is
 $8\max_t\sum_c A_c(t)W_c$ bytes. Waiting branches count too.
 \end{itemize}
-\textbf{Total counted fields:} 88 bytes stored + 372 query bytes = 460 bytes.
-Stored size is $O(N\ceil{d/64}+N+d\sum_c W_c)$; query masks grow with the number and width
-of live branches, not just the number of remaining document IDs.
+\begin{itemize}
+\item \textbf{Total counted fields:} 88 bytes stored + 372 query bytes = 460 bytes.
+\item Stored size is $O(N\ceil{d/64}+N+d\sum_c W_c)$; query masks grow with the number and width of live branches, not just the number of remaining document IDs.
+\end{itemize}
 
 \subsubsection{Backward Walk}
 \textbf{Step 1: group rows by their two-bit key before search.}
@@ -295,14 +290,15 @@ This example's measured key-queue peak is 16 bytes.
 \item Counted query data: A's $308+16+16=340$ bytes. Selected-cluster pointers and runtime objects
 are extra. With $Q$ waiting states, the extra arrays take $O(h+Q)$ space.
 \end{itemize}
-\textbf{Total counted fields:} 88 bytes stored + 340 query bytes = 428 bytes.
+\begin{itemize}
+\item \textbf{Total counted fields:} 88 bytes stored + 340 query bytes = 428 bytes.
+\end{itemize}
 
 \textbf{What these totals mean.}
 \begin{itemize}
 \item The totals add the listed buffer sizes; their peaks need not occur together. They are not
 measured process RAM. Reserved space and unlisted objects use extra bytes.
-\item The 32 GB experiment limit applies to measured process RAM, including overhead.
-\item Storage is built once. Query buffers are temporary; concurrent queries need their own work space.
+\item The 32 GB experiment limit applies to measured process RAM, including overhead. Storage is built once. Query buffers are temporary; concurrent queries need their own work space.
 \end{itemize}
 
 \subsection{Recall estimation}
@@ -312,24 +308,31 @@ example they are $[1,2]$. All methods return both: $2/2=100\%$ recall.
 \item In the benchmark, each query has $K=100$ reference IDs. Returning 99 gives 99\% recall.
 This checks the ranking, not whether the text answers a person's question.
 \end{itemize}
-Let $G_q$ be reference IDs and $O_{a,q}$ returned IDs. Across the same $n_q=200$ queries,
+\begin{itemize}
+\item Let $G_q$ be reference IDs and $O_{a,q}$ returned IDs. Across the same $n_q=200$ queries,
+\end{itemize}
 \[
  \overline R_a=\frac{1}{n_qK}\sum_q|G_q\cap O_{a,q}|.
 \]
 \subsubsection{Original method}
-Let $g_q$ reference IDs be in the opened clusters. A scores all opened rows, so recall is $g_q/K$.
+\begin{itemize}
+\item Let $g_q$ reference IDs be in the opened clusters. A scores all opened rows, so recall is $g_q/K$.
+\end{itemize}
 \subsubsection{Bitplanes}
-If B returns fraction $r_{B,q}$ of those IDs, recall is $(g_q/K)r_{B,q}$. For example,
-$(8/10)(6/8)=60\%$. Safe, unlimited local search gives $r_{B,q}=1$.
+\begin{itemize}
+\item If B returns fraction $r_{B,q}$ of those IDs, recall is $(g_q/K)r_{B,q}$. For example, $(8/10)(6/8)=60\%$. Safe, unlimited local search gives $r_{B,q}=1$.
+\end{itemize}
 \subsubsection{Backward Walk}
-Likewise, recall is $(g_q/K)r_{C,q}$. Visiting or safely ruling out all keys gives $r_{C,q}=1$.
-Limits can lose results. If $g_q=0$, recall is zero. Average the per-query products; multiplying
-separately averaged fractions can give a wrong answer.
+\begin{itemize}
+\item Likewise, recall is $(g_q/K)r_{C,q}$. Visiting or safely ruling out all keys gives $r_{C,q}=1$. Limits can lose results. If $g_q=0$, recall is zero.
+\item Average the per-query products; multiplying separately averaged fractions can give a wrong answer.
+\end{itemize}
 
 \subsection{Summary}
-Each formula uses its method's own opened clusters and local work. Let $M_0$ be allocated
-row and router storage, $Q_0$ common query memory, $D_C$ allocated directory memory, and
-$Q_B,Q_C$ extra masks and queues. Allocation overhead is included in these memory terms.
+\begin{itemize}
+\item Each formula uses its method's own opened clusters and local work.
+\item Let $M_0$ be allocated row and router storage, $Q_0$ common query memory, $D_C$ allocated directory memory, and $Q_B,Q_C$ extra masks and queues. Allocation overhead is included in these memory terms.
+\end{itemize}
 
 \textbf{Time complexity}\par
 {\small\noindent
@@ -339,8 +342,9 @@ Original method & $T_0+(PN/C)a_A$\\
 Bitplanes & $T_0+PS\ceil{N/(64C)}b+f_B(PN/C)a_B+T_{\rm other,B}$\\
 Backward Walk & $T_0+PE\,c+F_Ca_C+T_{\rm other,C}$; for equal rows per key, $F_C\approx PEN/(C2^h)$\\\bottomrule
 \end{tabularx}\par}
-The symbols and loop counts are defined in the steps above. Use actual cluster sizes and
-key counts for the measured comparison. Each cost belongs in one term only.
+\begin{itemize}
+\item The symbols and loop counts are defined in the steps above. Use actual cluster sizes and key counts for the measured comparison. Each cost belongs in one term only.
+\end{itemize}
 
 \textbf{Memory complexity}\par
 {\small\noindent
@@ -350,8 +354,9 @@ Original method & $M_0$ & $Q_0$\\
 Bitplanes & $M_0+M_{\rm planes,allocated}$ & $Q_0+Q_B$\\
 Backward Walk & $M_0+D_C$ & $Q_0+Q_C$\\\bottomrule
 \end{tabular}\par}
-The process, including these arrays and the running program, must fit 32 GB. A peak that
-includes construction is reported as such, not as index size.
+\begin{itemize}
+\item The process, including these arrays and the running program, must fit 32 GB. A peak that includes construction is reported as such, not as index size.
+\end{itemize}
 
 \textbf{Recall estimation}\par
 {\small\noindent
@@ -361,4 +366,6 @@ Original method & $g_q/K$ & Score all opened documents\\
 Bitplanes & $(g_q/K)r_{B,q}$ & Complete search with safe bounds\\
 Backward Walk & $(g_q/K)r_{C,q}$ & Visit or safely rule out remaining keys\\\bottomrule
 \end{tabularx}\par}
-The reported batch value averages the same 200 reference answers.
+\begin{itemize}
+\item The reported batch value averages the same 200 reference answers.
+\end{itemize}
