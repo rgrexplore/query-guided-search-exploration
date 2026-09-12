@@ -104,3 +104,32 @@ code revision, exact checks, stored bytes and peak process RAM. Produce simple
 recall-time curves and tables that identify the chosen parameters. Update the
 paper from those records, without changing Section 1 or inventing a favorable
 outcome. Commit the completed stages and update project memory at the end.
+
+## Broader follow-ups (13 September)
+
+The completed encoding took 23.83 minutes. Preparing the four original reference
+pools took 5.54 minutes. The Quora 256-bit first sweep completed all 570 settings
+in 41.46 minutes. The original Nomic 256-bit allowance ended before all groups
+finished; its attempted settings are retained, and the continuation is recorded
+separately. The wider Qwen sweep uses results counts 1 and 100 to spend more time
+on different settings instead of repeating the middle result count.
+
+The next comparisons reuse the full embedding caches at two additional supported
+widths: Qwen 32 and Nomic 64. The document IDs and query IDs stay fixed within each
+collection; each width gets a fresh exact binary reference. These runs try smaller
+leaves, a deeper-first order for equal branch penalties, extra routing coverage,
+and C starting depths 0, 1, 4, 16 and 32. The full Nomic width also gets a focused
+95%/99% comparison. The exact grids and time limits are saved in their JSON files.
+
+`experiments/prefix_exploration_v2.py` divides the new schedules into small batches.
+It retains every setting and query. Global settings run individually; clustered
+settings run up to three at a time. This saves useful completed groups when a slow
+setting reaches its time limit. A stopped setting is incomplete, not a loss.
+
+An apparent speedup between two sparse A probe samples needs a direct comparison.
+For example, B can score 512 opened clusters without making any split when its
+leaf limit is large. A must also be allowed to scan those 512 clusters. Likewise,
+C gets its depth-zero setting, which skips widening and scores the opened rows.
+These controls prevent a parameter-grid gap from being mistaken for an algorithm
+advantage. Small timing differences will be repeated; the full exploration grid
+will not be run three times.

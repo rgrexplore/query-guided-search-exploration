@@ -7,53 +7,49 @@
     4096
   ],
   "top_ks": [
-    1,
     100
   ],
   "recall_targets": [
-    0.5,
-    0.8,
-    0.9,
     0.95,
     0.99
   ],
   "probe_targets": [
-    0.5,
-    0.8,
-    0.9,
     0.95,
     0.99
   ],
   "repetitions": 1,
   "ram_budget_bytes": 32000000000,
   "worker_stop_bytes": 32000000000,
-  "global_seconds": 6600,
-  "job_seconds": 2400,
+  "global_seconds": 2400,
+  "job_seconds": 900,
   "schedule_seed": 42,
   "router_seed": 42,
   "branch": {
-    "leaf_sizes": [
-      128,
-      2048
-    ],
-    "node_budgets": [
-      512,
-      8192
+    "settings": [
+      {
+        "leaf_size": 128,
+        "node_budget": 8192
+      },
+      {
+        "leaf_size": 2048,
+        "node_budget": 8192
+      }
     ],
     "exploration": 0,
     "seed": 42
   },
   "prefix": {
     "max_prefix_bits": 32,
-    "start_depths": [
-      16
-    ],
-    "candidate_targets": [
-      1000,
-      10000,
-      100000,
-      500000,
-      0
+    "settings": [
+      {
+        "start_depth": 0,
+        "candidate_target": 0
+      },
+      {
+        "start_depth": 4,
+        "candidate_target": 100000
+      }
     ]
-  }
+  },
+  "include_all_clusters": false
 }

@@ -28,7 +28,7 @@
   "repetitions": 1,
   "ram_budget_bytes": 32000000000,
   "worker_stop_bytes": 32000000000,
-  "global_seconds": 4500,
+  "global_seconds": 6900,
   "job_seconds": 2400,
   "schedule_seed": 42,
   "router_seed": 42,

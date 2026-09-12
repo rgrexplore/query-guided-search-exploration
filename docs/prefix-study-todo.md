@@ -22,7 +22,7 @@
 
 - [x] Collect primary papers and documentation relevant to prefix relaxation, bitplane pruning, and clustered scans.
 - [x] Check existing query/reference geometry to identify promising settings and reasons a method may fail.
-- [ ] Declare the recall targets, cluster counts, result counts K, prefix settings and branch settings before the full run.
+- [x] Declare the recall targets, cluster counts, result counts K, prefix settings and branch settings before the full run. See `configs/prefix-study-v2/` and `docs/prefix-study-experiment-plan.md`.
 - [ ] Keep the same document arrays and every selected query vector for every method in a comparison.
 - [ ] If K changes, compare all methods at that same K using the first K IDs from the unchanged exact reference array.
 - [ ] Treat RAM as a common feasibility limit. Do not claim a speed improvement merely by giving methods different hardware or memory limits.
@@ -40,12 +40,24 @@
 
 ## 4. Run fair, extensive experiments
 
+Current run: `results/prefix-study-2026-09-13/`, two 256-bit pools with 570 settings each and two wide pools with 380 settings each.
+All encoding, exact references, cluster layouts and prefix-geometry calculations are complete.
+The serial timing sweeps and repeats are running. Nomic768 will use the focused configuration after the current sweep; its original wide schedule has not run. Quora256 completed570settings and three selected-point repeats with no failed jobs. Preparation checkpoint: `b5daa9e`.
+The Nomic256 main process loaded its original75-minute limit; its saved configuration now allows110minutes for repeats and explicit continuation if needed. Any interrupted case must be archived with its reason before an explicit rerun; do not silently discard an attempt.
+The outer sequencer is suspended (see `pipeline-pause.json`); the current Quora1024 controller continues normally. Finish its summary/repeats manually, then complete missing Nomic256 groups before changing the native build. Wide-pool schedules were adjusted before starting; original schedules remain beside them.
+
 - [x] Connect the new method to the existing isolated runner.
 - [ ] Verify document/query/reference hashes before and after every stage.
 - [x] Run a small set of configurations on all 200 original queries to check the complete run path. Saved in `results/prefix-study-pilot-2026-09-13/`.
 - [ ] Run the declared parameter grid, including previously missing cluster sizes and useful branch budgets/leaf sizes.
+- [ ] Try the documented shorter float prefixes: Qwen 32 dimensions and Nomic 64 dimensions, using the same full-vector caches, document IDs and query IDs. Recompute exact references for each width.
+- [ ] Follow up on B with smaller leaves (8 and 32) and larger budgets where the first sweep runs out before reaching useful leaves. Include probe choices above 99% routing recall when local search needs that extra coverage.
+- [ ] Give C its depth-zero full-scan setting at A's chosen routing settings, and try shorter starting prefixes around useful C settings. Do not make C pay for 16 widening steps when it needs the whole opened set.
+- [ ] Test the optional deeper-first order when branch penalties tie. Patch prepared on isolated branch `bitplane-deeper-ties-experiment`, commit `74a69c1`; do not merge/build it until the current native timing run finishes. Then compare both orders with the same data and budgets.
 - [ ] Include deterministic branching and a bounded probability/seed comparison where relevant.
+- [ ] Before recommending a shorter representation because it is faster, check equal-score ties and agreement with the full float representation. Keep binary-index recall separate from semantic retrieval quality.
 - [ ] Let A, B and C each choose their fastest tested settings that meet the same recall target and RAM limit.
+- [ ] Fill A probe-count gaps at any observed B/C advantage between the declared recall targets. Quora256 has B points at98.529% and99.79% with zero splits: budget512 simply scans512 selected clusters. Compare A at512 probes and derive A cutoffs at the other apparent-win recalls before claiming an advantage. C has an apparent58.586% point between sparse A probe samples as well.
 - [ ] Retain every setting, including recall misses and resource-limit failures, in the saved data.
 - [ ] Repeat the selected settings with timing order varied and power state recorded.
 - [ ] Report a B/C win only when it survives the fair comparison. Do not change documents, queries or labels to produce one.
@@ -86,11 +98,11 @@
 
 - [x] Confirm the first eight pilot settings finish in about43seconds, including process and index preparation.
 - [x] Locate the cached one-million-document Nomic embeddings at all768 dimensions.
-- [ ] Prepare1,000 fixed MS MARCO queries, then derive256- and768-dimensional pools from the same full embeddings.
-- [ ] Measure Qwen3-Embedding-0.6B encoding on representative Quora questions before choosing a full run.
-- [ ] Use the measured encoding, exact-reference and search costs to allocate an eight-hour run budget.
-- [ ] If the measured budget fits, encode the official Quora corpus and1,000 test queries, then compare256 and1024 dimensions.
-- [ ] Save each dataset/model combination separately. Within that comparison, A/B/C receive identical arrays and exact references.
+- [x] Prepare 1,000 fixed MS MARCO queries, then derive 256- and 768-dimensional pools from the same full embeddings.
+- [x] Measure Qwen3-Embedding-0.6B encoding on representative Quora questions before choosing a full run.
+- [x] Use the measured encoding, exact-reference and search costs to allocate an eight-hour run budget.
+- [x] Encode the official Quora corpus and 1,000 test queries; prepare 256- and 1024-dimensional comparisons. Full encoding took 23.83 minutes; all four exact-reference pools took 5.54 minutes.
+- [x] Save each dataset/model combination separately. Within that comparison, A/B/C receive identical arrays and exact references.
 - [ ] Save progress after encoding chunks, completed parameter settings and experiment stages. Record any timeout or memory stop.
 
 ## Scope boundary
@@ -102,3 +114,12 @@ Do not add a new UI, GPU search implementation, online-update system or generic 
 framework. Repairs must address a demonstrated failure or required current behavior.
 
 Section1 is protected by `docs/section-one.sha256`. Update the abstract and later sections only.
+
+## Fast exploration follow-up
+
+- [x] Keep the next runs in small independent batches, preserving every setting and query.
+- [x] Declare Qwen32, Nomic64 and the focused Nomic768 comparisons in configuration files.
+- [ ] Finish the current old-build timing sequence, then build the optional B visit order once.
+- [ ] Prepare the two short pools and run the next comparisons serially.
+- [ ] Fill missing A probe points and measure C at depth zero before calling an apparent win.
+- [ ] Repeat promising choices, without repeating the whole grid or adding review rounds.
