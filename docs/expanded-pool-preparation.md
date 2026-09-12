@@ -83,3 +83,31 @@ query-by-document score matrix and a full sort of a million scores per query.
 The reference is exact for the stored binary document codes and float query
 vectors. It is not a claim that the original float document vectors have the
 same nearest neighbors.
+
+## Prepared on 2026-09-13
+
+All four pools are complete. Each has 1,000 queries and an exact binary-score
+top-100 reference. The two dimensions for each model use the same document IDs
+and query IDs. The Nomic and Qwen experiments use different datasets and are
+reported as separate experiments.
+
+| Pool | Documents | Dimensions | Pilot estimate for reference | Actual reference | Total preparation |
+|---|---:|---:|---:|---:|---:|
+| `nomic-msmarco-d256` | 1,000,000 | 256 | 38.65 s | 39.60 s | 46.11 s |
+| `nomic-msmarco-d768` | 1,000,000 | 768 | 137.54 s | 137.63 s | 150.24 s |
+| `qwen-quora-d256` | 522,931 | 256 | 20.70 s | 20.78 s | 24.61 s |
+| `qwen-quora-d1024` | 522,931 | 1024 | 102.35 s | 102.61 s | 111.46 s |
+
+The estimate used the first ten queries. Total preparation includes array writes,
+hashes, index construction, the reference pilot and its continuation; it excludes
+model encoding. The saved data records are:
+
+- `data/prefix-study-2026-09-13/pool-preparation-summary.json` for timings and final manifest hashes.
+- `data/prefix-study-2026-09-13/pools/<pool>/pool.json` for exact array hashes and provenance.
+- `data/prefix-study-2026-09-13/nomic-msmarco/queries/embedding.json` for the Nomic query recipe.
+- `data/prefix-study-2026-09-13/quora-qwen-full/manifest.json` for the full Qwen encoding recipe.
+
+The Nomic query selection contains 1,000 of the official 6,980 dev-small queries.
+The selected-text SHA-256 is
+`29ef20e59d0316f29a1739d8f329d841abbbe3ec03ebec9464424c5e483e8c9d`.
+Selection happened before encoding and before any new search results.
