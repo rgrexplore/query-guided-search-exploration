@@ -119,7 +119,7 @@ There are $L=x-\ell+1$ visited depths. Of these, $L_+$ are nonzero: $L_+=L$ if $
 \]
 $T_{\rm key}$ builds the query key once, $t_b$ estimates time per key comparison, and $a_C$ covers a full score and result update. $T_{\rm ranges}$ counts prefix and new-slice checks at all $L$ depths. With roughly equal sizes $n\approx N/C$, the binary-search term becomes $2PL_+\log_2(n+1)t_b$.
 
-Range bookkeeping is $O(PL)$, scoring $O(F_Cd)$, and result updates up to $O(F_C\log(K+1))$. A zero candidate target reaches depth zero and scores all opened rows once. We need measured coefficients to turn these counts into milliseconds.
+Range bookkeeping is $O(PL)$, scoring $O(F_Cd)$, and result updates up to $O(F_C\log(K+1))$. Under the default stopping rule, a zero candidate target reaches depth zero and scores all opened rows once. Section~\ref{sec:prefix-optima} adds an optional score check that can prove the answer sooner; its setup and checks are included in $T_{\rm key}$ and $T_{\rm ranges}$. We need measured coefficients to turn these counts into milliseconds.
 
 \subsection{Memory complexity}
 We keep $N$ documents of $d$ bits in $C$ clusters, opening $P$ per query. Cluster $c$ has $n_c$ rows and $W_c=\ceil{n_c/64}$ words per mask. In bytes, a packed word or ID uses eight, a float query value four, and a double-precision score eight. Subscripts on $M$ and $Q$ name the stored and query fields being counted.
@@ -223,7 +223,7 @@ Let $D_{q,\ell}$ be the rows in the opened clusters matching the query's first $
 
 Consider $q=[0.1,0.9]$ and two documents, \texttt{10} and \texttt{01}. The ideal pattern is \texttt{11}, but it is absent. If we shorten it to \texttt{1*}, we find \texttt{10}, whose score is $0.1-0.9=-0.8$. The other document, \texttt{01}, scores $-0.1+0.9=0.8$ and is actually better. Stopping after finding one candidate would therefore give zero top-one recall. We must widen to depth zero to reach that other document. The fixed prefix order removed the more important second bit first; Matryoshka training does not sort each query's values by magnitude.
 
-At depth zero, $D_{q,0}$ contains every opened row, so C matches A's recall for the same routing choice. A zero candidate target reaches this depth. A positive target can stop earlier and miss reference IDs, because a candidate count does not bound the scores of unseen documents. Opening every cluster as well gives an exact search over the whole collection.
+At depth zero, $D_{q,0}$ contains every opened row, so C matches A's recall for the same routing choice. With the default stopping rule, a zero candidate target reaches this depth. The score check in Section~\ref{sec:prefix-optima} can prove the same result sooner. A positive target can still stop earlier and miss reference IDs, because a candidate count does not bound the scores of unseen documents. Opening every cluster and completing exact local search gives an exact search over the whole collection.
 
 \textbf{A simple approximation.} Suppose 80\% of the reference documents agree with the query's first sign, and 75\% agree with its second sign. If the two agreements are independent, about $0.8\times0.75=60\%$ agree with both. The multiplication is an assumption about those events; it does not follow from the length of the embedding.
 
@@ -254,9 +254,9 @@ Here $\mathcal O$ is the opened set, $n_c$ its cluster sizes, $W_c$ mask widths 
 Method & Stored fields & Query fields\\\midrule
 Original method & $M_0$ & $Q_0$\\
 Bitplanes & $M_0+M_{\rm planes}$ & $Q_0+Q_B$\\
-Backward Walk & $M_0+4N$ & $Q_0+24P+4$\\\bottomrule
+Backward Walk & $M_0+4N$ & $Q_0+24P+4+Q_{\rm exact}$\\\bottomrule
 \end{tabular}\par}
-$M_0=N(8\ceil{d/64}+8)+M_{\rm routing}$ counts full codes, IDs and routing fields. $M_{\rm planes}=8d\sum_c W_c$ includes every cluster's bitplanes. $Q_0=4d+128\ceil{d/4}+16K$ counts the query, table and one result buffer; $Q_B$ adds bit ordering, live masks and queue records. $P$ is the number of opened clusters. These field counts are separate from allocated array capacity and process RAM.
+$M_0=N(8\ceil{d/64}+8)+M_{\rm routing}$ counts full codes, IDs and routing fields. $M_{\rm planes}=8d\sum_c W_c$ includes every cluster's bitplanes. $Q_0=4d+128\ceil{d/4}+16K$ counts the query, table and one result buffer; $Q_B$ adds bit ordering, live masks and queue records. $P$ is the number of opened clusters. $Q_{\rm exact}=8x+8$ counts C's prefix minima and query sum when the optional score check is used at positive starting depth $x$; it is zero otherwise. These field counts are separate from allocated array capacity and process RAM.
 
 \Needspace{4\baselineskip}
 \textbf{Recall estimation}\par
@@ -265,6 +265,6 @@ $M_0=N(8\ceil{d/64}+8)+M_{\rm routing}$ counts full codes, IDs and routing field
 Method & Per-query recall & Local exactness condition\\\midrule
 Original method & $g_q/K$ & Score all opened documents\\
 Bitplanes & $(g_q/K)r_{B,q}$ & Complete search with safe bounds\\
-Backward Walk & $|G_q\cap D_{q,\ell}|/K$ & At depth zero, score all opened rows\\\bottomrule
+Backward Walk & $|G_q\cap D_{q,\ell}|/K$ & Reach depth zero, or prove the score bound\\\bottomrule
 \end{tabularx}\par}
 $K$ is the result count; $g_q$ counts opened reference IDs; $r_{B,q}$ is B's recovered fraction of those IDs. $G_q$ is the reference set, and $D_{q,\ell}$ is C's visited prefix range across the opened clusters. The batch value divides total recovered IDs by $n_qK$, using all $n_q$ cached queries. It measures agreement with the full binary ranking.

@@ -39,6 +39,7 @@ Here $T_0$ is routing, common setup and final sorting time. Differentiating give
 A node budget counts visited sets, including leaves. A leaf limit at least as large as a cluster lets us score it immediately. B receives all of A's routing choices, but its local limits can lose additional reference IDs. We therefore record the work counts and check the returned IDs.
 
 \subsection{Backward Walk}
+\label{sec:prefix-optima}
 Alongside $C$ and $P$, we choose starting depth $x$ and candidate target $M$. With $h$ stored key bits, $0\le x\le h\le\min(d,32)$; full scores use all $d$ document bits. A deeper start selects fewer or the same rows, but may need more widening steps.
 
 Let $F_A=\sum_{c\in\mathcal O}n_c$ count opened rows. Under independent, equally likely signs, a fixed prefix of depth $x$ would contain $F_A/2^x$ rows on average. For $M>0$, matching this count to $M$ gives $x\approx\log_2(F_A/M)$, with $F_A\approx PN/C$ if clusters are equal. That is a row-count estimate, not a prediction of reference membership or adaptive stopping. We check actual counts and recall for the declared settings.
@@ -52,6 +53,25 @@ In the three-row example, C avoids one of A's three scores but performs four bin
  T_{\rm key}+2L_+t_b\sum_{c\in\mathcal O}\log_2(n_c+1)+T_{\rm ranges}.}
 \]
 $F_C$ counts C's scores; $a_A$ and $a_C$ include scoring and result updates. $T_{\rm key}$ builds the query key once, $L_+$ counts nonzero depths, $t_b$ estimates comparison time, and $T_{\rm ranges}$ covers range bookkeeping. Whether the inequality holds depends on measured costs and the required recall.
+
+\textbf{Stopping with a score bound.} There is another way to stop the same walk. After scoring a whole prefix range, we can sometimes prove that no document outside it can enter the results. Let $Q=\sum_{i=1}^d|q_i|$ be the ideal binary score, and let $\tau$ be the smallest of the $K$ scores we have kept. At a positive depth $\ell$, any unseen row must disagree with at least one of the first $\ell$ query signs. Its highest possible score is therefore
+\[
+ u_\ell=Q-2\min_{1\le i\le\ell}|q_i|,
+ \qquad \boxed{\text{stop if }\tau>u_\ell.}
+\]
+The smallest weight appears because the best unseen row would choose the least costly sign to get wrong. If we have $K$ retained results and this inequality holds, the answer is exact within the opened clusters.
+
+In our three-document example, the prefix \texttt{1100*} contains scores 2.5 and 1.9. The four prefix weights are 0.7, 0.5, 0.4 and 0.6, so an unseen row can score at most $2.5-2(0.4)=1.7$. Both retained scores are higher. C can stop after scoring two rows, even when the candidate target is zero.
+
+I added this as the optional \texttt{stop\_when\_exact} setting. With candidate target zero, the walk continues until this bound proves the answer or until it reaches depth zero. A positive candidate target can still stop approximately. The default behavior is unchanged. The code keeps a small rounding margin and does not discard score ties.
+
+The query sum and prefix minima take $O(d+x)$ setup work for starting depth $x$. Each later bound check is constant work. The minima use $8x$ bytes and the sum uses eight bytes; the stored index does not grow. These costs are added to $T_{\rm key}$ and $T_{\rm ranges}$ in the time formula above.
+
+This also gives us a count prediction to test. Suppose we already know the exact $K$th score for the opened set, calling it $\tau_q^*$. Let $y_q$ be the deepest stored prefix whose unseen bound is below that score, or zero if none exists. We use the same rounding margin as the code. With no candidate-count stop, a walk starting at $x$ ends at
+\[
+ \ell_q=\min(x,y_q),\qquad L_q=x-\ell_q+1.
+\]
+Every true top-$K$ row must lie inside a prefix with such a bound. Scoring that range therefore produces the required score and lets the actual search stop there. Starting deeper than $y_q$ adds lookups while reaching the same final range; starting shallower may score more rows. I use the saved reference scores to check this prediction offline. The search itself uses only the scores it has found.
 
 \subsection{Comparison}
 I keep the collection, embedding model and code length fixed for this comparison. For method $a$, let $\Theta_a$ be its tested settings and $\theta$ one choice. $T_{a,\rm measured}$ is median whole-query time, $\overline R_a$ average recall, and $M_{a,\rm process}$ the reported process-memory bound. With required recall $\rho$ and RAM limit $B_{\max}$ in bytes, we choose the qualifying setting with the smallest time:
@@ -68,7 +88,7 @@ I keep the collection, embedding model and code length fixed for this comparison
 Method & Adjustable settings & Work that may be reduced\\\midrule
 Original method & Cluster count $C$ and probes $P$ & Documents reaching the scorer\\
 Bitplanes & $C$, $P$, leaf size and node budget & Scores, at the cost of mask and branch work\\
-Backward Walk & $C$, $P$, starting depth $x$, candidate target $M$ & Scores, at the cost of prefix lookups and new ranges\\\bottomrule
+Backward Walk & $C$, $P$, starting depth $x$, candidate target $M$, exact-stop option & Scores, at the cost of prefix lookups and new ranges\\\bottomrule
 \end{tabularx}\normalsize
 \end{center}
 Here $C$ is cluster count, $P$ opened clusters, $x$ starting depth and $M$ candidate target. For each method, I choose its fastest qualifying setting using the same pool, $K$ and recall target. We retain failed settings and repeat selected ones in fresh processes. The comparison is limited to the declared grid.

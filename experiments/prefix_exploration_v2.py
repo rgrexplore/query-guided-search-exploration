@@ -20,9 +20,11 @@ def split_schedule(jobs, batch_size=3):
                                 variants=job["variants"][start:start + size]))
 
     # Finish the scan references first. Then alternate small batches from the
-    # different indexes, so the first slow method cannot use the whole allowance.
+    # different indexes. Try finer layouts first within each round: the earlier
+    # sweeps showed that global and coarse scans can consume most of the allowance.
     batches.sort(key=lambda job: (job["method"] != "scan",
                                   int(job["job_id"].rsplit("part", 1)[1]),
+                                  -job["clusters"],
                                   job["job_id"]))
     before = Counter(v["setting_id"] for job in jobs for v in job["variants"])
     after = Counter(v["setting_id"] for job in batches for v in job["variants"])
