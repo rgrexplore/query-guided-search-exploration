@@ -164,6 +164,12 @@ def timing_worker(method, repetition):
     selected = np.load(DATA / "selected.npy")
     local = np.load(DATA / "local-reference.npy")
     assignments, _, _, _ = prepare_router(ROUTER, len(codes))
+    with (FOLDER / "query-stopping-gaps.csv").open() as source:
+        predicted_stops = {
+            (int(row["query"]), int(row["top_k"])):
+                (int(row["stop_depth"]), int(row["stop_documents_scored"]))
+            for row in csv.DictReader(source)
+        }
     index = (bitplane_index.PrefixIndexV2(codes, assignments, queries.shape[1], max_prefix_bits=32)
              if method == "prefix" else bitplane_index.Index(
                  codes, assignments, queries.shape[1], build_bitplanes=method == "branch"))
@@ -185,6 +191,9 @@ def timing_worker(method, repetition):
                 exact = method == "scan" or (method == "prefix" and variant["candidate_target"] == 0)
                 if exact:
                     np.testing.assert_array_equal(rows, local[qi,:k])
+                if method == "prefix" and variant["start_depth"] == 32 and exact:
+                    stats = result["stats"][0]
+                    assert (stats["final_depth"], stats["documents_scored"]) == predicted_stops[(qi,k)]
                 record = dict(method=method, repetition=repetition, query=qi, **variant,
                     local_ms=milliseconds, local_recall=recall(rows,local[qi,:k]),
                     global_recall=recall(rows,reference[qi,:k]), rows=rows, **result["stats"][0])
