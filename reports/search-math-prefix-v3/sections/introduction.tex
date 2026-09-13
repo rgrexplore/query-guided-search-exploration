@@ -260,6 +260,8 @@ Recall:
 \[
 S(q,b)=Q-2p,\qquad Q=\sum_i|q_i|.
 \]
+Here, $Q$ is the sum of the absolute query values, so it is the score of the ideal binary document with every bit matching the query's preferred sign. For the query above, $Q=0.6+0.5+0.4+0.3=1.8$, and it stays constant throughout the search.
+
 If a branch has already accumulated mismatch penalty $p$, any document below it must have
 penalty at least $p$.
 
