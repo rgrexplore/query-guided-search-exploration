@@ -99,3 +99,15 @@ explicitly requested Figure 1/caption edit; v2 retains its original hash.
 - [x] Explain that the current metric includes both routing and local-search losses.
 - [x] State how a same-selected-clusters reference would isolate local search, without claiming it is already reported.
 - [x] Add the same explanation to the README; leave existing report prose, code and results unchanged.
+
+## Calculation-section rewrite
+
+- [x] Write the supplied report text directly in LaTeX, excluding drafting instructions.
+- [x] Draw all ten requested diagrams in TikZ.
+- [x] Separate split-mask and leaf-mask visits and their time coefficients.
+- [x] Keep the rough independence model in its own optional box.
+- [x] Use three smaller symbol tables for shared, Bitplanes and Backward Walk terms.
+- [x] Retain only brief implementation clarifications for mask initialization, score bounds and query-state counts.
+- [x] Leave every other section, algorithm and result unchanged.
+
+Current PDF: 35 pages. Editor-generated root-level LaTeX outputs are left untouched.

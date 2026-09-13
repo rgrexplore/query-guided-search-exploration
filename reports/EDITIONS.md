@@ -3,7 +3,7 @@
 All ten PDFs are retained under `output/pdf/`.
 
 The current [prefix Backward Walk report](../output/pdf/search-methods-prefix-v3.pdf)
-is the 29-page edition, with a linked table of contents. It goes directly from the methods and preliminary calculations
+is the 35-page edition, with a linked table of contents. It goes directly from the methods and preliminary calculations
 to **Section 3: Experiments**, without the separate parameter-derivation section.
 Its [source guide](search-math-prefix-v3/README.md) links the implementation and saved
 measurements. Use this edition for future report edits.
