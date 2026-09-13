@@ -1,0 +1,78 @@
+\section{Experiments}
+The previous section describes the work each method performs. Here I vary the index and search settings, compare measured query time at the same recall requirement, and inspect the work counts to understand the results.
+
+Each method can choose its own parameters. Within a comparison, the document codes, queries, score, reference IDs, recall requirement and RAM allowance stay fixed. The question is: at that same recall requirement, what is the fastest configuration we tested for each method?
+
+\subsection{Setup}
+I use two collections and several supported code lengths from their cached embeddings. Every method sees all 1,000 fixed queries in a pool. A different model or code length is a separate comparison:
+
+\begin{center}\small
+\begin{tabular}{@{}llrrl@{}}\toprule
+Collection & Embedding model & Documents & Queries & Bits\\\midrule
+MS MARCO & Nomic v1.5 & 1,000,000 & 1,000 & 64, 256, 768\\
+Quora (BEIR) & Qwen3 0.6B & 522,931 & 1,000 & 32, 256, 1024\\\bottomrule
+\end{tabular}
+\end{center}
+I reused the cached Nomic document embeddings and selected 1,000 queries from MS MARCO's official \texttt{dev.small} file~\cite{msmarco,nomic}. For Quora, I encoded the full BEIR corpus and selected 1,000 official test queries~\cite{beir,qwen}. Both random selections were fixed before search. Corpus duplicates remain; none of the selected Quora queries has identical text or ID in its corpus.
+
+Each model produces a full vector once. I take supported prefixes, normalize them, and store their signs. Each length has its own reference: score every document and keep the best 100, resolving ties by document ID. The first one or ten IDs give the smaller result sets. Recall here measures recovery of these binary-score references; human relevance labels are a separate measure.
+
+The machine is an Apple M5 Max with 128 GiB of memory. I use one native search query at a time and one Faiss search thread. The completed runs used a common 32 GB process cap. This is a recorded experiment setting, not the budget required by the formulas; we can evaluate other budgets such as 64 or 128 GB. The largest peak among the selected repeated runs was 505.6 MB, so none of those selections was close to the 32 GB cap. Reported query time starts with a cached query vector and ends with the returned IDs. It includes selecting clusters and searching their documents. Embedding generation and text reranking are outside this timer. Encoding and reference preparation finish before timed searches begin.
+
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[node distance=7mm]
+\node[box,text width=124mm] (input) {One fixed collection and code length\\Same document codes and 1,000 floating-point queries};
+\node[scan,text width=33mm,below left=9mm and -34mm of input] (a) {A: scan\\Own index settings};
+\node[branch,text width=33mm,below=9mm of input] (b) {B: Bitplanes\\Own index settings};
+\node[keys,text width=33mm,below right=9mm and -34mm of input] (c) {C: Backward Walk\\Own index settings};
+\node[box,text width=124mm,below=9mm of b] (check) {Same exact binary top-$K$ reference\\Compare whole-query time, recall and process RAM};
+\draw[arr](input)--(a);\draw[arr](input)--(b);\draw[arr](input)--(c);
+\draw[arr](a)--(check);\draw[arr](b)--(check);\draw[arr](c)--(check);
+\end{tikzpicture}
+\caption{Only index and search settings differ within a pool. Changing the code length creates a new pool with its own reference ranking.}
+\end{figure}
+
+\subsection{Parameter search}
+For A, I vary the cluster layout, cluster count $C$ and probes $P$. The reference-cluster ranks give probe choices at the required recall targets. B receives those choices along with leaf sizes and node budgets. C receives them along with starting depths, candidate targets and the optional exact-stop rule.
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
+Settings & Tested ranges and follow-ups\\\midrule
+Routing & Float-trained clusters; binary-trained layouts also available to all methods in the short-code follow-ups. Cluster counts include 1, 16, 64, 256, 1024 and 4096.\\
+Result count and recall & $K=1,10,100$; targets 50\%, 80\%, 90\%, 95\%, 99\%, with additional probes near high recall and whole-collection controls.\\
+B & Initial leaves 128/2048 and budgets 512/8192; shorter codes also use leaves 8/32 and deeper-first ties. Probability 0/0.1/0.2 is a separate three-seed comparison.\\
+C & Starting depths 0/1/4/16/32; candidate targets 1,000/10,000/100,000/half the collection/0. Exact-stop runs use target zero.\\\bottomrule
+\end{tabularx}
+\end{center}
+This is a summary of the settings tried, not a full cross-product at every width. The two 256-bit grids each have 570 settings; wider Qwen keeps $K=1,100$, and full-width Nomic focuses on $K=100$ at 95\% and 99\% recall. Across the runs, 3,679 of 4,024 A/B/C settings qualify, plus all 72 probability settings. Three grids remain partial under their recorded time limits. The saved schedules list every attempted and missing setting.
+
+I record complete-query time, recall, process RAM and the method's work counts. For each target, I select the fastest qualifying setting in the main run, then repeat that exact choice in three fresh processes with varied run order. The tables report those repeated observations. Failed recall targets and incomplete runs stay in the saved data.
+
+I also check direct alternatives. If B visits 512 clusters and scores all their rows without splitting, A must be allowed to use 512 probes too. C gets a depth-zero scan at A's selected routing settings. These controls prevent a gap in the parameter grid from looking like an algorithmic advantage.
+
+The equations identify useful quantities to inspect, such as the scored fraction and mask width. They do not turn the broad grid into a proven optimum, or supply the measured time constants in advance.
+
+\subsection{Which method is fastest?}
+\input{evidence/study-results}
+
+\subsection{Checking the calculations}
+\input{evidence/work-checks}
+
+\subsection{Code and reproduction}
+The C++ scorer is shared by all three methods. A and B are in \path{cpp/index.cpp}; C is in \path{cpp/prefix_index_v2.cpp}. The Python worker in \path{experiments/prefix_batch_worker_v2.py} times routing and search, records the work counts, and compares returned IDs with the exact references.
+
+After preparing the arrays using \path{experiments/prepare_prefix_pools_v2.py}, we can run one complete setup with this Python flow:
+\begin{lstlisting}
+import json
+from pathlib import Path
+from experiments import prefix_study_v2 as study
+path = Path("configs/prefix-study-v2/qwen-quora-d256.json")
+config = json.loads(path.read_text())
+output = Path("results/my-quora-run")
+study.prepare(config, output)  # Build clusters and the schedule.
+study.run(output)             # Measure the declared settings.
+study.summarize(output)       # Select by recall and time.
+study.repeat(output)          # Repeat those choices three times.
+\end{lstlisting}
+Full commands, input hashes, selected settings and raw query records are linked from \path{results/prefix-study-2026-09-13/README.md}. The data and encoding recipe is in \path{docs/expanded-pool-preparation.md}. The root \path{README.md} maps the paper to its code, including the exact-stop prediction and full-float agreement checks.

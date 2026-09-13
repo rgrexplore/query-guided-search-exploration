@@ -1,0 +1,48 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,amsmath,amssymb,microtype}
+\usepackage[margin=24mm,headheight=14pt]{geometry}
+\usepackage{graphicx,booktabs,tabularx,longtable,array,listings,caption,float,needspace,fancyhdr,titlesec}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc,matrix}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,urlcolor=MidnightBlue,citecolor=MidnightBlue]{hyperref}
+\usepackage{bookmark}
+\definecolor{Ink}{HTML}{17354B}
+\definecolor{Scan}{HTML}{286493}
+\definecolor{Branch}{HTML}{C36620}
+\definecolor{Keys}{HTML}{7850A4}
+\definecolor{Soft}{HTML}{F3F6F8}
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small Searching Binary Embeddings}\rhead{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\setlength{\emergencystretch}{2em}\raggedbottom
+\titlespacing*{\section}{0pt}{12pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{5pt}
+\titlespacing*{\subsubsection}{0pt}{8pt}{4pt}
+\captionsetup{font=small,labelfont=bf,skip=5pt}
+\lstset{language=Python,keywordstyle=\color{Ink}\bfseries,commentstyle=\color{gray},basicstyle=\small\ttfamily,backgroundcolor=\color{Soft},frame=single,
+ rulecolor=\color{gray!30},columns=fullflexible,keepspaces=true,
+ showstringspaces=false,breaklines=true,aboveskip=6pt,belowskip=6pt}
+\tikzset{box/.style={draw=Ink!50,fill=Soft,rounded corners=2pt,align=center,
+ minimum height=9mm,font=\small,text=Ink},arr/.style={-{Latex[length=2mm]},draw=Ink!60},
+ scan/.style={box,draw=Scan,fill=Scan!8},branch/.style={box,draw=Branch,fill=Branch!8},
+ keys/.style={box,draw=Keys,fill=Keys!8}}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\E}{\mathbb E}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\hypersetup{pdftitle={Searching Binary Embeddings: Bitplanes and Prefix Backward Walk},
+ pdfsubject={Work, memory and measured retrieval time for three binary search methods}}
+\begin{document}
+\setlength{\abovedisplayskip}{7pt}
+\setlength{\belowdisplayskip}{7pt}
+{\Large\bfseries\color{Ink} Searching Binary Embeddings}\par
+{\large Bitplanes and Prefix Backward Walk}\par
+{\small 13 September 2026}\par
+\input{sections/introduction}
+\input{sections/calculations}
+\input{sections/experiments}
+\input{sections/conclusion}
+\end{document}

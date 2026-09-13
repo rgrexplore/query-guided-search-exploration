@@ -1,13 +1,17 @@
 # Report editions
 
-All eight PDFs are retained under `output/pdf/`.
+All nine PDFs are retained under `output/pdf/`.
 
-The current [prefix Backward Walk report](../output/pdf/search-methods-prefix-v2.pdf)
-contains the implemented prefix search, time and memory calculations, and experiments
-on six real embedding pools. It has 31 pages, with Python examples and measured
-A/B/C comparisons. The [source guide](search-math-prefix-v2/README.md) links the
-implementation and [saved measurements](../results/prefix-study-2026-09-13/README.md).
-The earlier prefix proposal remains in Git at checkpoint `570b51e`.
+The current [prefix Backward Walk report](../output/pdf/search-methods-prefix-v3.pdf)
+is the 28-page edition. It goes directly from the methods and preliminary calculations
+to **Section 3: Experiments**, without the separate parameter-derivation section.
+Its [source guide](search-math-prefix-v3/README.md) links the implementation and saved
+measurements. Use this edition for future report edits.
+
+The [previous prefix report](../output/pdf/search-methods-prefix-v2.pdf) is preserved
+as a 31-page edition with the derivation section, together with its source archive.
+Earlier prefix drafts remain in Git. The algorithms and measurements are shared across
+these two editions; creating the new report did not run another experiment.
 
 The preceding [calculations and experiments report](../output/pdf/search-methods-experiments.pdf)
 keeps both document and query vectors unchanged while varying index settings. It uses the

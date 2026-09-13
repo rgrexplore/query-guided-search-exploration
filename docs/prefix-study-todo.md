@@ -65,3 +65,16 @@ silently counted as losses.
 
 The supplied drafts are preserved in `docs/source/`. This is an explanation change;
 it does not change any algorithm or rerun the benchmark.
+
+
+## Current PDF: prefix v3
+
+- [x] Save the 31-page derivation edition at checkpoint `2741be7`.
+- [x] Create `reports/search-math-prefix-v3/` and a separate PDF.
+- [x] Remove the parameter-derivation section and renumber Experiments as Section 3.
+- [x] Update cross-references and retain the short exact-stop explanation needed by the measurements.
+- [x] Preserve Section 1, the supplied opening, algorithms and results.
+- [x] Point the root README and report-edition guide to v3 for future edits.
+
+Current output: `output/pdf/search-methods-prefix-v3.pdf` (28 pages).
+The old v2 PDF and source remain separate files.

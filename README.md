@@ -12,7 +12,7 @@ The starting point is [Exa's vector database description](https://exa.ai/blog/bu
 binary document vectors, floating-point query vectors, and a lookup table for scoring.
 The code here is a CPU experiment using one common scorer for all three methods.
 
-Start with the [paper](output/pdf/search-methods-prefix-v2.pdf), then try the
+Start with the [paper](output/pdf/search-methods-prefix-v3.pdf), then try the
 [three-document example](examples/prefix_search.py). It prints the returned IDs,
 document scores, mask work, prefix lookups and stored bytes. It needs no dataset download.
 
@@ -47,7 +47,7 @@ Those are different kinds of work, so fewer document scores alone do not prove l
 | Check storage and loop formulas | [experiments/prefix_work_checks_v2.py](experiments/prefix_work_checks_v2.py) |
 | Measure prefix counts and sign agreement | [experiments/prefix_geometry_v2.py](experiments/prefix_geometry_v2.py) |
 | Draw recall and latency graphs | [experiments/prefix_figures_v2.py](experiments/prefix_figures_v2.py) |
-| LaTeX source | [reports/search-math-prefix-v2](reports/search-math-prefix-v2) |
+| LaTeX source | [reports/search-math-prefix-v3](reports/search-math-prefix-v3) |
 
 ## Run an experiment
 
