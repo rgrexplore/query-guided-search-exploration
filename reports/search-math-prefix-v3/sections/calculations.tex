@@ -702,1181 +702,522 @@ A larger node budget can also improve recall, but again it allows B to search mo
 
 
 \subsubsection{Method C: Backward Walk}
+Now let's look at the second idea.
 
-Backward Walk starts from the opposite direction.
+Backward Walk approaches the problem from almost the opposite direction.
 
-A begins with every document inside the opened clusters.
+Method A starts with every document inside the opened clusters.
 
-B also starts with all of them, then progressively removes documents.
+Method B also starts with all of them, but progressively removes documents.
 
-C instead starts from a \textbf{very specific query prefix} and progressively broadens it only when necessary.
+Backward Walk instead asks:
 
-So C mainly pays for:
+\textbf{What if we start from the most specific binary prefix first, and only broaden the search when we need more documents?}
 
-\[
-\boxed{
-\text{prefix lookups}
-+
-\text{scoring operations for the documents that become visible}
-}
-\]
-
-
+So C mainly pays for two things:
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item looking up different prefixes;
+\item performing scoring operations for the documents exposed by those prefixes.
+\end{itemize}
 
 \Needspace{4\baselineskip}
 \textbf{Step 1: store the documents in prefix order}\par
-
-Using the same example, sort the documents by their binary key:
-
+Using the same example, let's sort the three documents by their binary key:
 \begin{center}
-\begin{minipage}{\linewidth}
-\small
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}p{.16\linewidth}p{.42\linewidth}p{.34\linewidth}@{}}
-\toprule
-Position & Binary key & ID\\
-\midrule
+\begin{tabular}{@{}rlr@{}}\toprule
+Position & Binary key & ID\\\midrule
 0 & \texttt{10100} & 0\\
 1 & \texttt{11000} & 2\\
-2 & \texttt{11001} & 1\\
-\bottomrule
+2 & \texttt{11001} & 1\\\bottomrule
 \end{tabular}
-\end{minipage}
 \end{center}
+Meanwhile, the ideal query pattern is \texttt{11001}.
 
+Because the rows are sorted, documents with the same prefix will appear next to each other.
 
-The query's ideal binary key is:
-
-\texttt{11001}.
-
-
+That means we can use binary search to quickly find the range corresponding to a particular prefix.
 
 \Needspace{4\baselineskip}
 \textbf{Step 2: start from the most specific prefix}\par
+Let's first use all five bits: \texttt{11001}.
 
-Suppose C starts using all five bits.
+Two binary searches find the beginning and the end of this range.
 
-It first searches for:
+In our example, the result is $[2,3)$, which contains only ID 1.
 
-\texttt{11001}.
+So we perform one scoring operation: ID 1 $\to$ 2.5.
 
-Because the documents are sorted, two binary searches find the beginning and end of this prefix range.
+However, remember that we want the top two results. Right now we only have one document.
 
-The result is:
-
-\texttt{[2,3)}
-
-which contains only ID 1.
-
-So C performs these document scoring operations:
-
-\begin{center}\begingroup\small\ttfamily\begin{tabular}{l}
-ID 1 \(\rightarrow\) 2.5
-\end{tabular}\endgroup\end{center}
-
-We need two results, so C continues.
-
-
+So unfortunately, we cannot stop yet. We need to broaden the prefix.
 
 \Needspace{4\baselineskip}
-\textbf{Step 3: broaden the prefix}\par
+\textbf{Step 3: remove one constraint}\par
+We now go from \texttt{11001} to \texttt{1100*}.
 
-C removes one prefix constraint:
+The \texttt{*} means that we no longer care whether the last bit is \texttt{0} or \texttt{1}.
 
-\begin{center}\begingroup\small\ttfamily\begin{tabular}{l}
-11001\\ \relax   \(\downarrow\)\\ \relax 1100*
-\end{tabular}\endgroup\end{center}
+The new range becomes $[1,3)$, which contains:
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item ID 2: \texttt{11000};
+\item ID 1: \texttt{11001}.
+\end{itemize}
+Now, ID 1 was already scored at the previous depth.
 
-The new range is:
+So the good news is that we do \textbf{not} need to score it again.
 
-\texttt{[1,3)}
+The only new document is ID 2: ID 2 $\to$ 1.9.
 
-which contains IDs 2 and 1.
+Now we have two results.
 
-ID 1 already had its scoring operation.
-
-So C needs a scoring operation only for the newly added document:
-
-\texttt{ID 2 \(\rightarrow\) 1.9}.
-
-Now C has two results.
-
-
-\begin{figure}[htbp]
-\centering
+\begin{figure}[htbp]\centering
 \begin{tikzpicture}
-
-\node[box,fill=gray!9,text width=30mm,minimum height=16mm] (d0) at (0,0) {ID 0\\\texttt{10100}};
-\node[keys,fill=Keys!12,text width=30mm,minimum height=16mm] (d2) at (40mm,0) {ID 2\\\texttt{11000}};
-\node[keys,fill=Keys!70,text=white,text width=30mm,minimum height=16mm] (d1) at (80mm,0) {ID 1\\\texttt{11001}};
-\draw[Keys,thick] (64mm,-12mm)--(64mm,-16mm)--(96mm,-16mm)--(96mm,-12mm);
-\node[text=Keys,font=\small] at (80mm,-21mm) {\texttt{11001}};
-\draw[Keys,thick] (24mm,-29mm)--(24mm,-33mm)--(96mm,-33mm)--(96mm,-29mm);
-\node[text=Keys,font=\small] at (60mm,-38mm) {\texttt{1100*}};
-\draw[arr,draw=Keys] (40mm,19mm)--node[right,font=\small]{new row}(d2.north);
-
+\node[box,draw=gray!60,fill=gray!10,text width=35mm] (outside) at (-44mm,0) {ID 0\\\texttt{10100}};
+\node[keys,fill=Keys!12,text width=35mm] (added) at (0,0) {ID 2\\\texttt{11000}};
+\node[keys,fill=Keys!38,text width=35mm] (old) at (44mm,0) {ID 1\\\texttt{11001}};
+\node[font=\small,text=Keys] (label) at (0,15mm) {new document};
+\draw[arr](label)--(added);
+\draw[Keys,thick] (25mm,-9mm)--(25mm,-12mm)--(63mm,-12mm)--(63mm,-9mm);
+\node[font=\small,text=Keys] at (44mm,-16mm) {\texttt{11001}};
+\draw[Keys,thick] (-19mm,-21mm)--(-19mm,-24mm)--(63mm,-24mm)--(63mm,-21mm);
+\node[font=\small,text=Keys] at (22mm,-28mm) {\texttt{1100*}};
 \end{tikzpicture}
-\caption{A broader prefix already contains the documents found at the previous depth, so only the newly exposed rows need a scoring operation.}
+\caption{The broader prefix contains the previous range. ID 1 is already scored, so only the newly included document, ID 2, needs a scoring operation.}
 \end{figure}
 
-
-
-This is important because C does not rescore the same documents every time the prefix becomes shorter.
-
-
-
 \Needspace{4\baselineskip}
-\textbf{Step 4: how many prefix lookups do we perform?}\par
+\textbf{Step 4: how much prefix lookup work do we need?}\par
+Suppose we start at prefix depth $x$, and eventually stop at depth $\ell$.
 
-Let:
-
-\begin{itemize}\setlength{\itemsep}{1pt}
-\item \(x\): starting prefix depth;
-\item \(\ell\): depth where C finally stops.
-\end{itemize}
-
-Then the number of depths visited is:
-
+Then the number of depths we visit is:
 \[
 L=x-\ell+1.
 \]
-
-Depth zero represents the entire cluster, so there is no prefix lookup there.
-
-Let \(L_+\) be the number of visited depths above zero.
-
-At each positive depth, C performs two boundary searches in each opened cluster:
-
+At every positive depth, we need two binary searches for every opened cluster:
 \begin{itemize}\setlength{\itemsep}{1pt}
-\item one to find the start of the matching prefix;
-\item one to find the end.
+\item one to find where the prefix starts;
+\item one to find where it ends.
 \end{itemize}
+So if we open $P$ clusters and visit $L_+$ positive prefix depths, we perform $2PL_+$ binary searches.
 
-Therefore the number of binary-search calls is:
+Depth zero uses the known whole-cluster range and needs no binary search.
 
-\[
-\boxed{
-2PL_+.
-}
-\]
-
-For cluster \(c\), each search costs approximately:
-
+Each binary search over cluster $c$ costs roughly:
 \[
 O(\log(n_c+1)).
 \]
-
-So the lookup work is approximately:
-
+So the total lookup work is approximately:
 \[
-\boxed{
-2L_+
-\sum_{c\in O}
-\log_2(n_c+1).
-}
+2L_+\sum_{c\in O}\log_2(n_c+1).
 \]
+Again, the formula looks more complicated than the idea.
 
+The idea is simply:
 
+\textbf{Backward Walk cost grows with how many prefix depths we visit and how many clusters we search at each depth.}
 
 \Needspace{4\baselineskip}
-\textbf{Step 5: how many documents end up undergoing a document scoring operation?}\par
+\textbf{Step 5: how many documents do we eventually score?}\par
+Let $F_C$ be the total number of distinct documents that become visible before we stop.
 
-Let:
+Because each broader prefix contains the previous prefix, a document that was already scored does not need another scoring operation.
 
-\[
-F_C
-\]
-
-be the total number of distinct documents exposed before C stops.
-
-Because every broader prefix contains the previous range, each document undergoes at most one scoring operation.
-
-So the document scoring part is simply:
-
+So C's document-scoring work is simply:
 \[
 F_Ca_C.
 \]
+Here $a_C$ is the average time for a document scoring operation and its top-$K$ update.
 
-This means the most important question for C is:
+This means the main question for Backward Walk is actually:
 
-\Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{How broad does the prefix have to become before we have enough useful documents?}}}\end{center}
+\textbf{How broad does the prefix need to become before we have enough useful documents?}
 
+If we can stop while the prefix is still very specific, $F_C$ can be very small.
 
+If we need to keep broadening all the way to the root, $F_C$ eventually becomes all documents in the opened clusters.
 
 \Needspace{4\baselineskip}
-\textbf{Step 6: how quickly does a prefix grow?}\par
+\textbf{Step 6: how quickly does the prefix grow?}\par
+Let's use a simple model just to build intuition.
 
-For a simple intuition, temporarily assume that every bit is:
+Assume, temporarily, that every bit is independent and has a 50\% chance of being \texttt{0} or \texttt{1}.
 
-\begin{itemize}\setlength{\itemsep}{1pt}
-\item independent;
-\item equally likely to be \texttt{0} or \texttt{1}.
-\end{itemize}
-
-Then a prefix of length \(\ell\) matches one random document with probability:
-
+Then the probability that a random document matches an $\ell$-bit prefix is:
 \[
 2^{-\ell}.
 \]
-
-So in a cluster with \(n\) documents, the expected number of matches is:
-
+So if we have $n$ documents, the expected number matching that prefix is:
 \[
 \frac{n}{2^\ell}.
 \]
-
-Across \(P\) roughly balanced clusters:
-
-\[
-\boxed{
-E[F_\ell]
-\approx
-\frac{PN}{C2^\ell}.
-}
-\]
-
-For one global collection of one million documents:
-
+For a collection of one million documents:
 \begin{center}
-\begin{minipage}{\linewidth}
-\small
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}p{.26\linewidth}p{.68\linewidth}@{}}
-\toprule
-Prefix depth & Expected matching documents\\
-\midrule
+\begin{tabular}{@{}rr@{}}\toprule
+Prefix depth & Expected documents\\\midrule
 16 & about 15\\
 15 & about 31\\
 14 & about 61\\
 13 & about 122\\
-12 & about 244\\
-\bottomrule
+12 & about 244\\\bottomrule
 \end{tabular}
-\end{minipage}
 \end{center}
+So something interesting happens here.
 
+We only remove \textbf{one bit} each time, but the number of matching documents approximately \textbf{doubles}.
 
-So removing one prefix bit roughly doubles the number of matching documents under this simplified model.
-
-
-\begin{figure}[htbp]
-\centering
+\begin{figure}[htbp]\centering
 \begin{tikzpicture}
-
-\foreach \depth/\count/\y in {16/15/0,15/31/-12,14/61/-24,13/122/-36,12/244/-48} {
-  \node[anchor=east,font=\small] at (-3mm,\y mm+3mm) {\depth\ bits};
-  \draw[draw=Keys!65,fill=Keys!55] (0,\y mm) rectangle (\count*0.42mm,\y mm+6mm);
-  \node[anchor=west,font=\small,text=Keys] at (\count*0.42mm+2mm,\y mm+3mm) {$\sim$\count};
-}
-
+\node[anchor=east,font=\small]at(-3mm,0){16 bits $\to$ about 15};
+\node[anchor=east,font=\small]at(-3mm,-9mm){15 bits $\to$ about 31};
+\node[anchor=east,font=\small]at(-3mm,-18mm){14 bits $\to$ about 61};
+\node[anchor=east,font=\small]at(-3mm,-27mm){13 bits $\to$ about 122};
+\node[anchor=east,font=\small]at(-3mm,-36mm){12 bits $\to$ about 244};
+\draw[Keys,fill=Keys!25](0,-2.5mm)rectangle(6mm,2.5mm);
+\draw[Keys,fill=Keys!25](0,-11.5mm)rectangle(12mm,-6.5mm);
+\draw[Keys,fill=Keys!25](0,-20.5mm)rectangle(24mm,-15.5mm);
+\draw[Keys,fill=Keys!25](0,-29.5mm)rectangle(48mm,-24.5mm);
+\draw[Keys,fill=Keys!25](0,-38.5mm)rectangle(96mm,-33.5mm);
 \end{tikzpicture}
-\caption{Under a simple balanced-bit model, removing one prefix constraint approximately doubles the number of matching documents.}
+\caption{Under the independent 50/50-bit model, removing one prefix bit doubles the expected matching count. The labels are rounded; they describe document counts, not recall.}
 \end{figure}
 
+However, we should remember that this is only an intuition.
 
+Real embedding bits can be correlated, and once the documents have already been divided into clusters, the distribution can be even further from a perfect 50/50 split.
 
-This is only an intuition for \textbf{how many documents} a prefix may contain.
+Most importantly:
 
-It is not a recall estimate.
-
-Real embedding bits can be correlated, and the distribution can change further once the documents have been divided into clusters.
-
-
+\textbf{This only estimates how many documents we might find. It does not tell us whether those documents are actually the correct top results.}
 
 \Needspace{4\baselineskip}
-\textbf{Step 7: when should C stop?}\par
+\textbf{Step 7: when should Backward Walk stop?}\par
+There are two ways to stop.
 
-There are two possible stopping rules.
-
-\Needspace{4\baselineskip}
 \textbf{Approximate stopping}\par
-
-The simplest rule is:
-
-\Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{stop once at least \(M\) documents have been found.}}\end{center}
+The simplest option is to stop after we have found enough documents.
 
 For example:
+\begin{center}
+\begin{tabular}{@{}rl@{}}
+16 bits & $\to$ 12 documents\\
+15 bits & $\to$ 31 documents\\
+14 bits & $\to$ 66 documents\\
+13 bits & $\to$ 136 documents
+\end{tabular}
+\end{center}
+If our target is 100 documents, we could stop at 13 bits.
 
-\begin{center}\begin{tikzpicture}
-\foreach \i/\depth/\count in {0/16/12,1/15/31,2/14/66,3/13/136} {
-\node[keys,text width=28mm] (b\i) at (\i*37mm,0) {\depth-bit prefix\\\count\ docs};
-}
-\foreach \i/\j in {0/1,1/2,2/3} {\draw[arr](b\i)--(b\j);}
-\end{tikzpicture}\end{center}
+This is simple and cheap. However, there is one problem.
 
-If our target is 100 documents, we stop at 13 bits.
+Finding 100 documents does not prove that the best unseen document is worse than the ones we found.
 
-This is cheap, but it does \textbf{not} prove that a better document does not exist outside that prefix.
+So this stopping rule is approximate, and we need to measure its recall experimentally.
 
-So this version can lose recall.
+\textbf{Exact stopping}\par
+Fortunately, we can also use the scoring equation to derive a safe bound.
 
+Suppose we have already searched all documents matching the first $\ell$ query signs inside the opened clusters.
 
-
-\Needspace{4\baselineskip}
-\textbf{Exact stopping inside the opened clusters}\par
-
-We can also use the scoring equation to prove that no unseen document can beat the current results.
-
-Suppose C has fully searched a prefix of length \(\ell\).
-
-Any unseen document must disagree with the query on at least one of those first \(\ell\) bits.
+Any unseen document in those clusters must disagree with the query on at least one of those first $\ell$ positions.
 
 The cheapest possible mismatch is:
-
 \[
-m_\ell
-=
-\min_{1\le i\le\ell}|q_i|.
+m_\ell=\min_{1\le i\le\ell}|q_i|.
 \]
-
-Therefore the highest possible score value of any unseen document is:
-
+Therefore, the best possible score of an unseen document is:
 \[
-\boxed{
-U_\ell
-=
-Q-2m_\ell.
-}
+U_\ell=Q-2m_\ell.
 \]
-
-Let \(\tau\) be the worst score value currently inside the top-\(K\).
+Meanwhile, suppose we have already kept $K$ documents and the worst document currently inside our top-$K$ has score $\tau$.
 
 If:
-
 \[
-\boxed{
 \tau>U_\ell,
-}
 \]
+then even the \textbf{best possible unseen document} cannot enter our top-$K$.
 
-then no unseen document inside the opened clusters can enter the result.
+So the good news is that we can stop safely. The implementation also keeps its tie-breaking and floating-point rounding checks.
 
-C can stop safely.
+If this never happens, we can keep broadening the prefix until depth zero.
 
-If that never happens, C can keep relaxing the prefix until depth zero, where it has exposed every document inside the opened clusters.
-
-At that point C becomes equivalent to A locally.
-
-
+At depth zero, we have exposed every document inside the opened clusters, so Backward Walk becomes equivalent to Method A locally.
 
 \Needspace{4\baselineskip}
-\textbf{Total cost for C}\par
-
-Let:
-
-\begin{center}
-\begin{minipage}{\linewidth}
-\small
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}p{.26\linewidth}p{.68\linewidth}@{}}
-\toprule
-Symbol & Meaning\\
-\midrule
-\(T_{\text{key}}\) & Preparing the query prefix and data for bounds on score values\\
-\(t_b\) & Average time for one binary-search comparison\\
-\(T_{\text{ranges}}\) & Updating prefix ranges and identifying new rows\\
-\(a_C\) & Average time to fully process one exposed document\\
-\bottomrule
-\end{tabular}
-\end{minipage}
-\end{center}
-
-
-Then:
-
+\textbf{Total cost for Backward Walk}\par
+Backward Walk therefore pays for:
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item building the query prefix;
+\item performing prefix lookups;
+\item updating the current prefix ranges;
+\item performing scoring operations for $F_C$ exposed documents.
+\end{itemize}
+We can summarize this as:
 \[
-\boxed{\begin{aligned}T_C\approx{}&T_{\text{base}}+T_{\text{key}}+2L_+t_b\sum_{c\in O}\log_2(n_c+1)\\&+F_Ca_C+T_{\text{ranges}}.\end{aligned}}
+\begin{aligned}
+T_C\approx{}&T_{\text{base}}+T_{\text{key}}
++2L_+t_b\sum_{c\in O}\log_2(n_c+1)\\
+&+F_Ca_C+T_{\text{ranges}}.
+\end{aligned}
 \]
+$T_{\text{key}}$ covers the query key and optional bound preparation; $t_b$ is time per binary-search comparison; $T_{\text{ranges}}$ covers range updates and stopping checks.
 
-The key condition is:
+Again, the exact symbols are not the most important part.
 
+The important condition is:
 \[
-\boxed{
-\text{document scoring work avoided}
->
-\text{prefix lookup work added}.
-}
+\boxed{\text{document scoring work avoided}>\text{prefix lookup work added}}
 \]
+If C can stop at a fairly deep prefix, then $F_C\ll F_A$, and we may save a lot of scoring work.
 
-If C can stop at a deep prefix, then:
-
-\[
-F_C\ll F_A
-\]
-
-and it may save a lot of scoring work.
-
-But if C has to relax all the way to depth zero:
-
-\[
-F_C=F_A,
-\]
-
-so it does all of A’s scoring operations \textbf{plus} the additional prefix lookups.
+However, if C has to broaden the prefix all the way to depth zero, $F_C=F_A$, then C ends up doing all of A's scoring operations \textbf{plus} the additional prefix lookups.
 
 \Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- Backward Walk:} C works best when a fairly specific query prefix already contains the documents we need. If it has to keep broadening until almost the whole cluster is visible, then the prefix index does not help.}}\end{center}
+\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- Backward Walk:} Backward Walk works best when a fairly specific prefix already contains the documents we need. If we have to keep broadening until almost the whole cluster becomes visible, then the prefix lookup has not saved us anything.}}\end{center}
 
+\subsection{Memory complexity}
+So far, we have only talked about query time.
 
+However, B and C also need additional index structures, so we should also check how much memory they require.
 
-\subsubsection{Comparing the three methods}
-
-At this point, the difference between the methods can be summarized very simply.
-
-\begin{center}
-\begin{minipage}{\linewidth}
-\small
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}p{.22\linewidth}p{.72\linewidth}@{}}
-\toprule
-Method & What it spends time on\\
-\midrule
-A & Perform a scoring operation for every document inside the opened clusters\\
-B & Bitplane filtering + perform scoring operations for the documents that survive\\
-C & Prefix lookups + perform scoring operations for the documents that become visible\\
-\bottomrule
-\end{tabular}
-\end{minipage}
-\end{center}
-
-
-The approximate time models are:
-
-\begin{center}
-\begin{minipage}{\linewidth}
-\small
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}p{.22\linewidth}p{.72\linewidth}@{}}
-\toprule
-Method & Approximate query time\\
-\midrule
-A & \(T_{\text{base}}+F_Aa_A\)\\
-B & \(\begin{aligned}&T_{\text{base}}+T_{\text{order}}\\&+b_sV_{\text{split}}+b_lV_{\text{leaf}}\\&+F_Ba_B+T_{\text{queue}}\end{aligned}\)\\
-C & \(\begin{aligned}&T_{\text{base}}+T_{\text{key}}+T_{\text{lookup}}\\&+F_Ca_C+T_{\text{ranges}}\end{aligned}\)\\
-\bottomrule
-\end{tabular}
-\end{minipage}
-\end{center}
-
-
-where:
-
-\[
-V_{\text{split}}
-=
-\sum_{c\in O}J_cW_c,
-\]
-
-\[
-V_{\text{leaf}}
-=
-\sum_{c\in O}H_cW_c,
-\]
-
-and:
-
-\[
-T_{\text{lookup}}
-=
-2L_+t_b
-\sum_{c\in O}
-\log_2(n_c+1).
-\]
-
-The overall question is therefore:
-
-\begin{center}\begin{tikzpicture}
-\node[scan,text width=42mm,minimum height=25mm] at (0,0) {\textbf{Method A}\\perform document\\scoring operations};
-\node[font=\small] at (38mm,0) {versus};
-\node[box,draw=Branch,text width=56mm,minimum height=25mm] at (87mm,0) {\textbf{Method B / C}\\do extra search work\\$\downarrow$\\avoid some document scoring operations};
-\end{tikzpicture}\end{center}
-
-The new method is only worthwhile if the second path ends up cheaper.
-
-
-
-\subsection{Memory}
-
-Query time is not the only cost.
-
-B and C also require additional index structures, so we need to understand how much memory each method stores.
-
-There are two useful categories:
-
-\textbf{Persistent index memory} is built before queries arrive and remains loaded.
-
-\textbf{Temporary query memory} only exists while one query is running.
-
-
-
-\subsubsection{Method A}
-
-A stores:
-
+There are two kinds of memory that matter here:
 \begin{itemize}\setlength{\itemsep}{1pt}
-\item one packed binary code per document;
-\item one document ID per document;
+\item \textbf{persistent index memory}, which remains loaded between queries;
+\item \textbf{temporary query memory}, which only exists while one query is running.
+\end{itemize}
+
+\subsubsection{Method A memory}
+Method A stores:
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item the packed binary document;
+\item the document ID;
 \item the cluster/routing information.
 \end{itemize}
-
-With 64-bit words, one binary code occupies:
-
+Using 64-bit words, one binary document needs
 \[
-8
-\left\lceil
-\frac d{64}
-\right\rceil
+8\left\lceil\frac d{64}\right\rceil
 \]
+bytes. The ID adds another 8 bytes.
 
-bytes.
-
-An ID occupies 8 bytes.
-
-So the document rows use:
-
+So the document storage is:
 \[
-\boxed{
-M_{A,\text{rows}}
-=
-N
-\left(
-8\left\lceil\frac d{64}\right\rceil+8
-\right).
-}
+M_{A,\text{rows}}=N\left(8\left\lceil\frac d{64}\right\rceil+8\right).
 \]
+During a query, A also keeps the query values, the lookup table and the current top-$K$.
 
-The router uses additional memory.
+This is our baseline.
 
-For example, \(C\) float32 centroids of routing dimension \(d_R\) use approximately:
+\subsubsection{Method B memory}
+B keeps everything A needs.
 
-\[
-4Cd_R
-\]
+However, it adds two things. First, it stores the Bitplanes.
 
-bytes, plus their labels, offsets and implementation overhead.
-
-During one query, A also keeps:
-
-\begin{itemize}\setlength{\itemsep}{1pt}
-\item the floating-point query;
-\item the lookup table;
-\item the current top-\(K\);
-\item small routing state.
-\end{itemize}
-
-This is the baseline memory that B and C build on.
-
-
-
-\subsubsection{Method B}
-
-B keeps everything A stores.
-
-It additionally stores:
-
-\begin{enumerate}\setlength{\itemsep}{1pt}
-\item the Bitplanes;
-\item the temporary branch masks used during search.
-\end{enumerate}
-
-\Needspace{4\baselineskip}
-\textbf{Stored Bitplanes}\par
-
-One Bitplane in cluster \(c\) uses \(W_c\) words.
-
-There are \(d\) Bitplanes.
+For each cluster, every binary dimension needs one bitmap spanning all document positions in that cluster.
 
 Therefore:
-
 \[
-\boxed{
-M_{\text{planes}}
-=
-8d
-\sum_{c=1}^{C}W_c.
-}
+M_{\text{planes}}=8d\sum_{c=1}^{C}W_c.
+\]
+So in a rough sense, B stores the document bits twice:
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item once arranged by document;
+\item once arranged as Bitplanes.
+\end{itemize}
+The second extra cost is temporary query memory.
+
+Remember that branching means we can have several masks waiting in the queue at the same time.
+
+Each one still has the full physical width of its cluster.
+
+If $A_c(t)$ masks belonging to cluster $c$ are alive at time $t$, then the raw mask memory is:
+\[
+Q_{\text{masks}}=8\max_t\sum_c A_c(t)W_c.
 \]
 
-The ceiling in \(W_c\) matters because every cluster has its own word padding.
-
-
-
-\Needspace{4\baselineskip}
-\textbf{Temporary branch masks}\par
-
-Every active or waiting branch has its own mask.
-
-For cluster \(c\), one mask uses:
-
-\[
-8W_c
-\]
-
-bytes.
-
-If several branches are waiting, several full-width masks can be alive at the same time.
-
-If \(A_c(t)\) masks from cluster \(c\) are alive at time \(t\), then the raw peak mask memory is:
-
-\[
-\boxed{
-Q_{\text{masks}}
-=
-8
-\max_t
-\sum_c
-A_c(t)W_c.
-}
-\]
-
-The priority queue and node information require additional memory.
-
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
-
-\node[box,text width=38mm,minimum height=35mm] (stored) at (0,0) {\textbf{Stored once}\\Packed documents\\IDs\\Bitplanes};
-\node[box,text width=38mm,minimum height=35mm] (common) at (47mm,0) {\textbf{Common query}\\Query\\Lookup table\\Top $K$};
-\node[branch,text width=42mm,minimum height=35mm] (masks) at (96mm,0) {\textbf{B-specific query}\\\phantom{Mask}\\\phantom{Mask}\\\phantom{Mask}\\$\cdots$};
-\foreach \y in {4,-2,-8} {\node[branch,text width=28mm,minimum height=4mm,font=\small] at (96mm,\y mm) {Mask};}
-
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[node distance=8mm]
+\node[box,text width=37mm,minimum height=31mm] (stored) {\textbf{Stored once}\\Packed documents\\IDs\\Bitplanes};
+\node[box,text width=37mm,minimum height=31mm,right=of stored] (common) {\textbf{Common query}\\Query\\Lookup table\\Top $K$};
+\node[branch,text width=37mm,minimum height=31mm,right=of common] (extra) {\textbf{B-specific query}\\\phantom{Mask}\\\phantom{Mask}\\\phantom{Mask}\\\phantom{...}};
+\node[branch,text width=27mm,minimum height=4mm,font=\scriptsize]at([yshift=3mm]extra.center){Mask};
+\node[branch,text width=27mm,minimum height=4mm,font=\scriptsize]at([yshift=-2mm]extra.center){Mask};
+\node[branch,text width=27mm,minimum height=4mm,font=\scriptsize]at([yshift=-7mm]extra.center){Mask};
+\node[font=\small,text=Branch]at([yshift=-12mm]extra.center){\ldots};
 \end{tikzpicture}
-\caption{B stores an additional Bitplane layout and can also keep several full-width masks alive during one query.}
+\caption{B stores Bitplanes alongside its packed documents. During a query, several full-width masks may also remain alive in the branch queue.}
 \end{figure}
 
-
-
 \Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- B memory:} B uses more persistent memory because it stores the bits twice: once by document and once as Bitplanes. Its main temporary-memory cost comes from the masks of waiting branches.}}\end{center}
+\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- B memory:} Bitplanes need extra persistent memory because we store another arrangement of the document bits. During search, B can also temporarily hold several full-width branch masks at the same time.}}\end{center}
 
+\subsubsection{Method C memory}
+C also keeps the normal packed documents and IDs.
 
-
-\subsubsection{Method C}
-
-C also keeps A's binary documents and IDs.
-
-The current implementation additionally stores one 32-bit prefix key per document.
-
-So:
-
+The current implementation additionally stores one 32-bit prefix key for every document. So:
 \[
-\boxed{
 M_{\text{prefix}}=4N.
-}
 \]
+The important part is that we do \textbf{not} create a new copy of the documents for every prefix depth.
 
-The documents are sorted once by this key inside each cluster.
+For example, \texttt{11001}, \texttt{1100*}, \texttt{110**} all refer to different ranges of the \textbf{same sorted document array}.
 
-Importantly, C does \textbf{not} store a new copy of the documents for every prefix length.
-
-The same sorted rows support:
-
-\begin{center}\begingroup\small\ttfamily\begin{tabular}{l}
-11001\\ \relax 1100*\\ \relax 110**\\ \relax 11***\\ \relax ...
-\end{tabular}\endgroup\end{center}
-
-by using different ranges.
-
-
-\begin{figure}[htbp]
-\centering
+\begin{figure}[htbp]\centering
 \begin{tikzpicture}
-
-\node[box,text width=27mm] at (0,0) {\texttt{10100}};
-\node[keys,text width=27mm] at (36mm,0) {\texttt{11000}};
-\node[keys,text width=27mm] at (72mm,0) {\texttt{11001}};
-\node[font=\small] at (101mm,0) {$\cdots$};
-\draw[Keys,thick] (57mm,-9mm)--(57mm,-13mm)--(87mm,-13mm)--(87mm,-9mm);
-\node[anchor=west,text=Keys,font=\small] at (92mm,-13mm) {\texttt{11001}};
-\draw[Keys,thick] (21mm,-22mm)--(21mm,-26mm)--(87mm,-26mm)--(87mm,-22mm);
-\node[anchor=west,text=Keys,font=\small] at (92mm,-26mm) {\texttt{1100*}};
-\draw[Keys,thick] (21mm,-35mm)--(21mm,-39mm)--(87mm,-39mm)--(87mm,-35mm);
-\node[anchor=west,text=Keys,font=\small] at (92mm,-39mm) {\texttt{110**}};
-
+\node[box,text width=28mm]at(-52.5mm,0){\texttt{10100}};
+\node[keys,text width=28mm]at(-17.5mm,0){\texttt{11000}};
+\node[keys,fill=Keys!30,text width=28mm]at(17.5mm,0){\texttt{11001}};
+\node[keys,text width=28mm]at(52.5mm,0){\texttt{11010}};
+\draw[Keys,thick](2.5mm,8mm)--(2.5mm,11mm)--(32.5mm,11mm)--(32.5mm,8mm);
+\node[font=\small,text=Keys]at(17.5mm,15mm){\texttt{11001}};
+\draw[Keys,thick](-32.5mm,20mm)--(-32.5mm,23mm)--(32.5mm,23mm)--(32.5mm,20mm);
+\node[font=\small,text=Keys]at(0,27mm){\texttt{1100*}};
+\draw[Keys,thick](-32.5mm,32mm)--(-32.5mm,35mm)--(67.5mm,35mm)--(67.5mm,32mm);
+\node[font=\small,text=Keys]at(17.5mm,39mm){\texttt{110**}};
+\node[font=\small]at(0,-11mm){One sorted array, not three copies};
 \end{tikzpicture}
-\caption{Different prefix lengths point to different ranges of the same sorted document array. The documents are not copied for every prefix.}
+\caption{In this illustrative array, three prefix ranges refer to the same stored rows. Broadening the prefix does not create a new document list.}
 \end{figure}
 
+During the query, C mainly needs to remember the previous range for every opened cluster.
 
-
-During one query, C mainly keeps the previous range for every opened cluster.
-
-So its temporary search state is relatively small compared with B.
+So compared with B, its temporary search state is relatively small. Actual byte totals still depend on the selected parameters and number of live branches.
 
 \Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- C memory:} C adds one small prefix key per document, but it does not need full-document bitmaps or many branch masks during the query.}}\end{center}
-
-
-
-\subsubsection{Memory comparison}
-
-\begin{center}
-\begin{minipage}{\linewidth}
-\small
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}p{.16\linewidth}p{.38\linewidth}p{.38\linewidth}@{}}
-\toprule
-Method & Persistent index & Main temporary query memory\\
-\midrule
-A & Binary documents + IDs + router & Query, lookup table, top-\(K\)\\
-B & A + Bitplanes & Waiting branch masks\\
-C & A + prefix keys & Previous prefix ranges\\
-\bottomrule
-\end{tabular}
-\end{minipage}
-\end{center}
-
-
-The formulas above count the main logical fields.
-
-The actual process memory can be somewhat larger because of allocation capacity, runtime state and temporary buffers.
-
-For that reason, the experiments later report both the calculated index size and the measured process peak.
-
-
+\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- C memory:} Backward Walk adds a small prefix key per document, but it does not need full-width masks for many waiting branches.}}\end{center}
 
 \subsection{Recall}
+Now we know roughly how much work each method performs.
 
-So far we have only talked about speed.
+However, none of those savings matter if we stop too early and return the wrong documents.
 
-But avoiding work is only useful if we still return the correct documents.
+So we also need to understand where recall can be lost.
 
-For query \(q\), let:
-
+For query $q$:
 \begin{itemize}\setlength{\itemsep}{1pt}
-\item \(G_q\) be the exact global top-\(K\) document IDs;
-\item \(O_{a,q}\) be the IDs returned by method \(a\).
+\item $G_q$ is the exact global top-$K$;
+\item $O_{a,q}$ is the result returned by method $a$.
 \end{itemize}
-
-Then average recall is:
-
+Average recall is:
 \[
-\boxed{
-R_a
-=
-\frac{
-\sum_q
-|G_q\cap O_{a,q}|
-}{
-n_qK
-}.
-}
+R_a=\frac{\sum_q|G_q\cap O_{a,q}|}{n_qK}.
 \]
+Here $n_q$ is the number of queries. The reference and returned results use the same score and document-ID tie rule.
 
 For example:
-
-\begin{center}\begingroup\small\ttfamily\begin{tabular}{l}
-Reference:\\ \relax [1, 2]\\ \relax Returned:\\ \relax [1, 0]
-\end{tabular}\endgroup\end{center}
-
-recovers one out of two:
-
-\[
-Recall=50\%.
-\]
-
-
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+Reference: & \texttt{[1,2]}\\
+Returned: & \texttt{[1,0]}
+\end{tabular}
+\end{center}
+means we recovered one of two: 50\%.
 
 \Needspace{4\baselineskip}
-\textbf{Where can recall be lost?}\par
+\textbf{Where can the correct document disappear?}\par
+There are actually two places.
 
-There are actually two stages where a correct document can disappear.
+First, cluster selection can fail to open the cluster containing the correct document.
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
+Second, even if the correct document is inside an opened cluster, B or C may stop their local search before reaching it.
 
-\node[box,text width=65mm] (global) at (0,0) {Global exact top-$K$};
-\node[box,text width=90mm] (opened) at (0,-24mm) {Correct documents inside opened clusters};
-\draw[arr] (global)--node[right,font=\small]{cluster selection}(opened);
-\node[scan,text width=35mm,minimum height=23mm] (a) at (-49mm,-56mm) {\textbf{A}\\scan\\no local loss};
-\node[branch,text width=35mm,minimum height=23mm] (b) at (0,-56mm) {\textbf{B}\\Bitplanes\\may stop early};
-\node[keys,text width=35mm,minimum height=23mm] (c) at (49mm,-56mm) {\textbf{C}\\prefix\\may stop early};
-\draw[arr] (opened)--(a); \draw[arr] (opened)--(b); \draw[arr] (opened)--(c);
-
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[node distance=8mm]
+\node[box,text width=120mm] (global) {Global exact top-$K$};
+\node[box,text width=120mm,below=9mm of global] (opened) {Correct documents that reached the opened clusters};
+\node[scan,text width=37mm,below left=10mm and -32mm of opened] (a) {\textbf{A}\\Scan everything\\No additional local loss};
+\node[branch,text width=37mm,below=10mm of opened] (b) {\textbf{B}\\Bitplane search\\May stop early};
+\node[keys,text width=37mm,below right=10mm and -32mm of opened] (c) {\textbf{C}\\Prefix search\\May stop early};
+\draw[arr](global)--node[right,font=\small]{cluster selection}(opened);
+\draw[arr](opened)--(a);\draw[arr](opened)--(b);\draw[arr](opened)--(c);
 \end{tikzpicture}
-\caption{Every method can miss a global result if its cluster was not opened. B and C can introduce another loss if their local search stops before reaching that document.}
+\caption{Cluster selection can lose a correct document before local search begins. B and C may also lose a document by stopping their local search early.}
 \end{figure}
 
+\subsubsection{Recall for Method A}
+Let $g_q$ be the number of global top-$K$ documents whose clusters were opened.
 
-
-
-\subsubsection{Method A}
-
-Let:
-
+Because A scores every document inside those clusters, all $g_q$ of those documents are recovered locally. So:
 \[
-g_q
+R_{A,q}=\frac{g_q}{K}.
 \]
+In other words:
 
-be the number of global reference documents whose clusters were opened.
+A can lose a correct document because cluster selection missed it, but once the document is inside an opened cluster, A will not lose it during local search.
 
-A performs a document scoring operation for every document in those clusters.
-
-So all \(g_q\) of those reference documents are recovered locally.
-
-Therefore:
-
-\[
-\boxed{
-R_{A,q}
-=
-\frac{g_q}{K}.
-}
-\]
-
-A can lose recall during cluster selection, but not during its local scan.
-
-
-
-\subsubsection{Method B}
-
-Suppose B recovers fraction:
-
-\[
-r_{B,q}
-\]
-
-of the reference documents that are already inside the opened clusters.
+\subsubsection{Recall for Bitplanes}
+Suppose $g_q$ correct documents reached the opened clusters, but B only recovers some fraction $r_{B,q}$ of them.
 
 Then:
-
 \[
-\boxed{
-R_{B,q}
-=
-\frac{g_q}{K}
-r_{B,q}.
-}
+R_{B,q}=\frac{g_q}{K}r_{B,q}.
 \]
+If $g_q=0$, recall is zero.
 
-For example, suppose:
-
+For example, imagine:
 \begin{itemize}\setlength{\itemsep}{1pt}
-\item 8 of the 10 correct documents are inside the opened clusters;
-\item B finds 6 of those 8.
+\item 8 of the global top 10 documents are inside the opened clusters;
+\item B recovers 6 of those 8.
 \end{itemize}
+Then:
+\[
+\mathrm{Recall}=\frac{8}{10}\times\frac{6}{8}=60\%.
+\]
+If B performs a complete branch-and-bound search using valid score bounds, then it eventually recovers all of the correct documents inside the opened clusters.
+
+However, if we impose a finite node budget, B may stop early.
+
+\Needspace{6\baselineskip}
+\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- B recall:} B can lose recall in two places: cluster selection can miss the document before B starts, and a limited Bitplane search can miss a document even after its cluster has been opened.}}\end{center}
+
+\subsubsection{Recall for Backward Walk}
+For Backward Walk, let $D_{q,\ell}$ be all documents exposed when the search stops at prefix depth $\ell$.
 
 Then:
-
 \[
-Recall
-=
-\frac{8}{10}
-\times
-\frac{6}{8}
-=
-60\%.
+R_{C,q}=\frac{|G_q\cap D_{q,\ell}|}{K}.
 \]
+The important thing here is that \textbf{candidate count and recall are not the same thing}.
 
-If B performs a complete branch-and-bound search using valid bounds on score values, then:
+Finding 100 documents does not mean that we found the correct 100 documents.
 
-\[
-r_{B,q}=1.
-\]
-
-If we give B a finite node budget, it may stop early and reduce recall.
-
-\Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- B recall:} Routing can lose documents before B even starts, and a limited Bitplane search can lose additional documents inside the opened clusters.}}\end{center}
-
-
-
-\subsubsection{Method C}
-
-Let:
-
-\[
-D_{q,\ell}
-\]
-
-be all documents exposed when Backward Walk stops at prefix depth \(\ell\).
-
-Every document in that set has undergone a document scoring operation.
-
-So:
-
-\[
-\boxed{
-R_{C,q}
-=
-\frac{|G_q\cap D_{q,\ell}|}{K}.
-}
-\]
-
-The important point is:
-
-\Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{The number of documents inside a prefix does not tell us its recall.}}}\end{center}
-
-A prefix can contain many documents and still miss the best result.
-
-
-
-\Needspace{4\baselineskip}
-\textbf{Small example}\par
-
-Take:
-
+Consider:
 \[
 q=[0.1,\ 0.9].
 \]
+The ideal binary pattern is \texttt{11} and suppose the only documents are \texttt{10} and \texttt{01}.
 
-The ideal binary pattern is:
-
-\texttt{11}.
-
-Suppose the only two documents are:
-
-\texttt{10}
-
-and:
-
-\texttt{01}.
-
-Their score values are:
-
+Their scores are:
 \[
-S(10)=0.1-0.9=-0.8,
+S(10)=-0.8,\qquad S(01)=0.8.
 \]
+If we search prefix \texttt{1*}, we find \texttt{10}.
 
-\[
-S(01)=-0.1+0.9=0.8.
-\]
+However, the better document is \texttt{01}, which is outside that prefix.
 
-If C searches:
+So even though we found one candidate, we did not find the best result.
 
-\texttt{1*}
+That is why stopping after ``enough documents'' is only an approximate rule.
 
-it finds \texttt{10}.
-
-But the better document is \texttt{01}, which lies outside that prefix.
-
-So simply finding one document does not prove that we found the best document.
-
-
-
-\Needspace{4\baselineskip}
-\textbf{When is C exact inside the opened clusters?}\par
-
-C can become exact in two ways.
-
-The simple way is to keep relaxing until depth zero.
-
-At depth zero, every document inside the opened clusters has been exposed, so C becomes equivalent to A locally.
-
-The second way is to prove that the unseen documents cannot win.
-
-At prefix depth \(\ell\), every unseen document must disagree with the query in at least one of the first \(\ell\) bits.
-
-The cheapest such mismatch is:
-
-\[
-m_\ell
-=
-\min_{1\le i\le\ell}|q_i|.
-\]
-
-So the best possible score value of any unseen document is:
-
-\[
-\boxed{
-U_\ell
-=
-Q-2m_\ell.
-}
-\]
-
-Let \(\tau\) be the worst score value currently inside the top-\(K\).
-
-If:
-
-\[
-\boxed{
-\tau>U_\ell,
-}
-\]
-
-then no unseen document inside the opened clusters can enter the result.
-
-C can stop safely.
+C is exact locally only when:
+\begin{enumerate}\setlength{\itemsep}{1pt}
+\item we broaden all the way to depth zero and expose every document inside the opened clusters; or
+\item the score bound proves that none of the unseen documents can beat the current top-$K$.
+\end{enumerate}
 
 \Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- C recall:} Stopping after “enough documents” is only an approximation. C is exact locally only when it has either exposed every document or mathematically proved that the unseen documents cannot beat the current top-\(K\).}}\end{center}
-
-
+\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- C recall:} A large prefix range does not automatically mean high recall. Backward Walk can safely stop only when it has either searched every document or mathematically proved that the unseen documents cannot win.}}\end{center}
 
 \subsection{Summary}
-
-\Needspace{4\baselineskip}
-\textbf{Query time}\par
-
-\begin{center}
-\begin{minipage}{\linewidth}
-\small
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}p{.22\linewidth}p{.72\linewidth}@{}}
-\toprule
-Method & Approximate query cost\\
-\midrule
-A & \(T_{\text{base}}+F_Aa_A\)\\
-B & \(\begin{aligned}&T_{\text{base}}+T_{\text{order}}\\&+b_sV_{\text{split}}+b_lV_{\text{leaf}}\\&+F_Ba_B+T_{\text{queue}}\end{aligned}\)\\
-C & \(\begin{aligned}&T_{\text{base}}+T_{\text{key}}+T_{\text{lookup}}\\&+F_Ca_C+T_{\text{ranges}}\end{aligned}\)\\
-\bottomrule
-\end{tabular}
-\end{minipage}
+The whole calculation section can be summarized with one simple idea:
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
+Method & What it does\\\midrule
+A & Score every document inside the opened clusters\\
+B & Spend Bitplane work to avoid some document scoring\\
+C & Spend prefix-lookup work to avoid some document scoring\\\bottomrule
+\end{tabularx}
 \end{center}
+So:
 
+\textbf{A just pays for document scoring. B and C deliberately add extra search work, hoping that this lets them avoid enough document scoring to make the total query faster.}
 
-with:
-
-\[
-F_A=\sum_{c\in O}n_c,
-\]
-
-\[
-V_{\text{split}}
-=
-\sum_{c\in O}J_cW_c,
-\]
-
-\[
-V_{\text{leaf}}
-=
-\sum_{c\in O}H_cW_c,
-\]
-
-\[
-T_{\text{lookup}}
-=
-2L_+t_b
-\sum_{c\in O}
-\log_2(n_c+1).
-\]
-
-
-
-\Needspace{4\baselineskip}
-\textbf{Memory}\par
-
-\begin{center}
-\begin{minipage}{\linewidth}
-\small
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}p{.16\linewidth}p{.38\linewidth}p{.38\linewidth}@{}}
-\toprule
-Method & Stored index & Main temporary query memory\\
-\midrule
-A & \(M_0\) & \(Q_0\)\\
-B & \(M_0+M_{\text{planes}}\) & \(Q_0+Q_B\)\\
-C & \(M_0+M_{\text{prefix}}\) & \(Q_0+Q_C\)\\
-\bottomrule
-\end{tabular}
-\end{minipage}
-\end{center}
-
-
-
-
-\Needspace{4\baselineskip}
-\textbf{Recall}\par
-
-\begin{center}
-\begin{minipage}{\linewidth}
-\small
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}p{.16\linewidth}p{.38\linewidth}p{.38\linewidth}@{}}
-\toprule
-Method & Per-query recall & When local search is exact\\
-\midrule
-A & \(g_q/K\) & Always, because every opened document undergoes a scoring operation\\
-B & \((g_q/K)r_{B,q}\) & Complete safe Bitplane search\\
-C & \(|G_q\cap D_{q,\ell}|/K\) & Reach depth zero or prove unseen documents cannot win\\
-\bottomrule
-\end{tabular}
-\end{minipage}
-\end{center}
-
-
-
-
-\Needspace{4\baselineskip}
-\textbf{Main variables}\par
-
-\Needspace{4\baselineskip}
-\textbf{Shared}\par
-
-\begin{center}
-\begin{minipage}{\linewidth}
-\small
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}p{.26\linewidth}p{.68\linewidth}@{}}
-\toprule
-Symbol & Meaning\\
-\midrule
-\(N\) & Total number of documents\\
-\(C\) & Total number of clusters\\
-\(P\) & Number of clusters opened for one query\\
-\(n_c\) & Documents inside cluster \(c\)\\
-\(d\) & Binary dimensions\\
-\(K\) & Number of requested results\\
-\(O\) & Set of opened clusters\\
-\(F_A\) & \shortstack{Scoring\\operations} by A\\
-\bottomrule
-\end{tabular}
-\end{minipage}
-\end{center}
-
-
-\Needspace{4\baselineskip}
-\textbf{Bitplanes}\par
-
-\begin{center}
-\begin{minipage}{\linewidth}
-\small
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}p{.26\linewidth}p{.68\linewidth}@{}}
-\toprule
-Symbol & Meaning\\
-\midrule
-\(W_c\) & Machine words in one mask for cluster \(c\)\\
-\(J_c\) & Number of splits performed in cluster \(c\)\\
-\(H_c\) & Number of leaf masks read in cluster \(c\)\\
-\(V_{\text{split}}\) & Total split-mask word reads\\
-\(V_{\text{leaf}}\) & Total leaf-mask word reads\\
-\(F_B\) & \shortstack{Scoring\\operations} by B\\
-\bottomrule
-\end{tabular}
-\end{minipage}
-\end{center}
-
-
-\Needspace{4\baselineskip}
-\textbf{Backward Walk}\par
-
-\begin{center}
-\begin{minipage}{\linewidth}
-\small
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}p{.26\linewidth}p{.68\linewidth}@{}}
-\toprule
-Symbol & Meaning\\
-\midrule
-\(x\) & Starting prefix depth\\
-\(\ell\) & Final prefix depth\\
-\(L_+\) & Number of positive prefix depths searched\\
-\(F_C\) & Distinct documents with a scoring operation under C\\
-\(D_{q,\ell}\) & Documents exposed at the final prefix depth\\
-\bottomrule
-\end{tabular}
-\end{minipage}
-\end{center}
-
-
-The main idea from the entire section is therefore simple:
-
-\Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{A just pays for document scoring operations. B and C spend some extra work in an attempt to avoid those scoring operations. The experiment will tell us whether the scoring operations they avoid are actually expensive enough to make that extra work worthwhile.}}}\end{center}
+The experiment in the next section will tell us whether that actually happens on real embeddings.
