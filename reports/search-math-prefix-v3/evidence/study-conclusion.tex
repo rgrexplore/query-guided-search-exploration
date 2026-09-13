@@ -1,3 +1,11 @@
-For Qwen32 with one returned result, B takes 0.081 ms at 99.2\% binary recall, versus A's 0.195 ms and C's 0.169 ms at 99.0\%. All methods can choose binary-trained clusters. With 100 results at the 99\% target, the selected B and C settings instead become scans. C has a narrower exact-search benefit: it takes 4.875 $\mu$s on the 82 queries whose complete code exists, while B remains faster over all 1,000 queries.
+This report started from a simple observation: once we have a floating-point query, we already know the ideal binary document and how costly each bit mismatch would be.
 
-These results identify useful tested settings, not a universal optimum. Qwen32's exact binary top 1 agrees with the full-float best score value on only 14\% of queries, so the short-code speed does not preserve full-embedding quality. For a fixed representation and recall requirement, the decision remains whether the scoring operations avoided pay for the added mask or prefix work. The measured counts let us check that explanation directly.
+From that idea, I explored two alternatives to the original scan. Bitplanes try to remove unlikely documents before scoring them, while Backward Walk tries to begin from a small prefix range and only broaden the search when needed.
+
+The experiments show that the extra search structure can be useful, but only in the right setting. The clearest result is Bitplanes with a small requested result count, where the method can avoid a very large number of document scoring operations and become substantially faster than the original scan. When more results are required, that advantage becomes much smaller because more of the search space still needs to be explored.
+
+Backward Walk shows a similar tradeoff from the opposite direction. It can be very cheap when a useful prefix already isolates the right documents, but it becomes less attractive when the prefix has to be broadened too far.
+
+So the main takeaway is not that one method should always replace the others. It is that \textbf{the best search strategy depends on how much work we can avoid compared with the extra work required to avoid it}.
+
+That gives a useful direction for future work: instead of choosing one search method for every query, we may be able to choose between scanning, Bitplanes and prefix search depending on the query, the requested $K$, and the structure of the opened clusters.

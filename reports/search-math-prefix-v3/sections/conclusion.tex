@@ -1,11 +1,23 @@
 \section{Limitations and next steps}
-The timings describe this CPU implementation. All three methods reuse the same C++ lookup-table scorer, which adds entries using float64. Exa's production system and its SIMD kernels are not reproduced here. A faster scoring kernel can change the balance between document scoring operations and maintaining an index search.
+\Needspace{4\baselineskip}
+\textbf{Environment might be different.}\par
+In this experiment, all three methods are tested using the same CPU implementation and the same document scoring code. This gives us a fair comparison inside this report, but a production system may behave differently. For example, Exa may use a more optimized scorer, different SIMD kernels, or a different memory layout. If document scoring becomes much cheaper, then avoiding a scoring operation also becomes less valuable. One useful extension would be to test the same methods in a more production-like environment, or against an implementation closer to the system described by Exa.
 
-I hold the collection, model and code length fixed when choosing each method's parameters. Shorter codes change the reference ranking, so their binary recall does not establish the same retrieval quality as a longer representation. The source datasets provide human relevance labels for that separate evaluation.
+\Needspace{5\baselineskip}
+\textbf{Bitplanes are effective for small $K$, but the benefit becomes less predictable as $K$ grows.}\par
+In the experiments, Bitplanes perform very well when we only need a small number of results. The reason is that many branches can be ignored once we already have a strong top result. However, when $K$ becomes larger, more branches may still contain one of the required documents, so B has to keep exploring and the extra bitmap work can start to dominate. One possible direction for future work is to predict, from the query and the requested $K$, whether Bitplanes are likely to be useful before running them.
 
-These are static indexes built before querying. The experiment does not measure document updates or concurrent requests. In particular, keeping rows sorted still costs work when new documents are added. The memory formulas count the binary search index and its query buffers; an application that keeps uncompressed vectors or document text in RAM must add that storage.
+\Needspace{4\baselineskip}
+\textbf{Backward Walk still needs further investigation.}\par
+The current version works best when a fairly specific query prefix already contains useful documents. If that prefix is too restrictive, the method has to keep broadening it, and eventually it may expose a large part of the opened clusters. A useful next step would be to study better ways of choosing the starting prefix, the order of the prefix bits, or when to stop broadening.
 
-Prefix expansion also appears in LSH Forest~\cite{lshforest} and PUFFINN~\cite{puffinn}. Those methods use multiple hash indexes and different stopping rules. Their recall guarantees do not transfer to a single prefix in the embedding's original coordinate order.
+\Needspace{4\baselineskip}
+\textbf{Real retrieval quality still needs to be investigated.}\par
+The recall measured in this report is based on the exact ranking of the binary index being tested. For example, 99\% recall with a 32-bit representation means recovering 99\% of the exact 32-bit binary results. It does not necessarily mean that those results match the original full embedding or the documents that are most relevant to a user. A more complete evaluation should also compare against the full embedding and, where possible, human relevance labels.
+
+\Needspace{4\baselineskip}
+\textbf{Other operations, such as index updates, also matter in production.}\par
+The experiments here focus on query-time search, but a real search system also needs to insert, delete and update documents while continuing to serve queries. This is especially interesting for Backward Walk, because its prefix-based index may be simpler to update than a graph-based structure, but that has not been measured yet. Future work should therefore look at both query latency and index-maintenance cost.
 
 \section{Conclusion}
 \input{evidence/study-conclusion}
@@ -26,7 +38,7 @@ Prefix expansion also appears in LSH Forest~\cite{lshforest} and PUFFINN~\cite{p
 \url{https://arxiv.org/abs/1611.09268}. Passage-ranking data: \url{https://github.com/microsoft/MSMARCO-Passage-Ranking}.
 \bibitem{beir} N. Thakur et al. \emph{BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models}. NeurIPS Datasets and Benchmarks, 2021.
 \url{https://arxiv.org/abs/2104.08663}. Dataset catalog: \url{https://github.com/beir-cellar/beir}.
-\bibitem{lshforest} M. Bawa, T. Condie and P. Ganesan. \emph{LSH Forest: Self-Tuning Indexes for Similarity Search}. WWW, 2005, pp. 651--660.
+\bibitem{lshforest} M. Bawa, T. Condie and P. Ganesan. \emph{LSH Forest: Self-Tuning Indexes for Similarity Search}. WWW, 2005, pp. 651 to 660.
 \url{https://www.cs.princeton.edu/courses/archive/spring06/cos592/bib/LSHForest-bawa05.pdf}.
 \bibitem{puffinn} M. Aum\"uller, T. Christiani, R. Pagh and M. Vesterli. \emph{PUFFINN: Parameterless and Universally Fast FInding of Nearest Neighbors}. ESA, 2019.
 \url{https://doi.org/10.4230/LIPIcs.ESA.2019.10}.
