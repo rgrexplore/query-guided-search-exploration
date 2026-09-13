@@ -1,0 +1,47 @@
+% Sources: */work-checks.json; bounds/*/bounds.json; exact-predictions/qwen-quora-d32;
+% comparison-final selected repeat rows; *-probability/figures/probability-summary.csv.
+I checked stored field sizes and operation counts separately from the timings. Across 13 saved work-check reports, all 890 index-storage checks match the formulas, including padding at cluster boundaries; the saved query-count checks report no failures. These checks do not assign a constant time to a mask word or document score.
+
+The score gap helps explain why short codes behave differently. For each Qwen query, I divide the gap between the ideal binary score $Q$ and the true best score by $Q$. The median gap is 2.60\% at 32 bits, 14.48\% at 256 bits and 16.15\% at 1024 bits. When a retained score is close to $Q$, a smaller mismatch penalty can rule out a branch. The short-code result makes such pruning possible earlier; the representation table shows the separate cost of changing the ranking problem.
+
+At the other extreme, one completed global Nomic768 setting with $K=100$, leaf 2048 and budget 8192 scores all one million rows. It also visits 21.57 million split-mask words and 21.46 million final-mask words per query on average: about 43.03 million word visits without avoiding a full score. More available RAM would not remove that work.
+
+\textbf{Stopping depth.}
+For the global Qwen32 exact-stop runs, I use the saved exact best score to calculate $y_q$, then predict $\ell_q=\min(x,y_q)$. Counting the corresponding sorted prefix range gives the number of scored rows; the visited-depth and lookup counts follow from $x-\ell_q+1$. All four predictions match all 3,000 query records: the same 1,000 queries at starts 1, 4 and 32.
+
+\begin{center}\small
+\begin{tabular}{@{}rrrrr@{}}\toprule
+Start $x$ & \shortstack{Mean final\\depth} & \shortstack{Mean rows\\scored} & \shortstack{Mean visited\\depths} & \shortstack{Mean boundary\\searches}\\\midrule
+1 & 0.665 & 353,270.1 & 1.335 & 2.000\\
+4 & 1.497 & 290,211.1 & 3.503 & 6.336\\
+32 & 4.505 & 278,316.6 & 28.495 & 56.320\\\bottomrule
+\end{tabular}
+\end{center}
+For $K=1$, 665 queries prove a stop above the root. Starting at 32 reduces the mean number of scores, but requires many more boundary searches. The prediction uses reference scores only in this offline check; actual search uses the scores it has found. The saved $K=100$ predictions were not measured in this global run, so they are not included in the 3,000 matching records.
+
+\textbf{Memory at the selected settings.}
+For the Qwen32 top-1 settings, the verified native fields plus router storage and the largest repeated-process memory peak are:
+
+\begin{center}\small
+\begin{tabular}{@{}lrr@{}}\toprule
+Method & \shortstack{Native and router\\fields (MB)} & \shortstack{Repeated-process\\peak (MB)}\\\midrule
+A & 8.924 & 77.971\\
+B & 10.463 & 72.139\\
+C & 10.598 & 77.529\\\bottomrule
+\end{tabular}
+\end{center}
+MB here means one million bytes. The field count includes codes, IDs, bitplanes or prefix keys, and router centroids and labels. It excludes unused capacity and other process memory, so it must not be confused with the measured peak. Even the selected Nomic768 B setting uses 225.1 MB of stored fields and a 505.6 MB process peak. The common 32 GB cap does not determine these selected winners.
+
+\textbf{Random visits.}
+I also held the Qwen32 layout at 64 float-trained clusters, opened 16, and kept leaf size 32 while varying B's exploration probability. The following top-1 results use three seeds per probability. Recall is their mean and time is the median of their query-time medians.
+
+\begin{center}\small
+\begin{tabular}{@{}rrrrr@{}}\toprule
+Probability & \multicolumn{2}{c}{Budget 128} & \multicolumn{2}{c}{Budget 8192}\\
+ & Recall & ms & Recall & ms\\\midrule
+0 & 87.30\% & 0.0460 & 95.30\% & 0.0766\\
+0.1 & 83.33\% & 0.0479 & 95.30\% & 0.0857\\
+0.2 & 70.90\% & 0.0490 & 95.30\% & 0.0959\\\bottomrule
+\end{tabular}
+\end{center}
+With the smaller budget, random visits change which branches are processed before the limit, and recall falls. With the larger budget, recall stays at 95.3\% while time increases. The Nomic64 runs show no consistent time gain at matching recall either. This experiment does not establish that randomness can never help; it does not improve the tested tradeoff here.

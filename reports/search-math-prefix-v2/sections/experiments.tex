@@ -9,9 +9,9 @@ MS MARCO & Nomic v1.5 & 1,000,000 & 1,000 & 64, 256, 768\\
 Quora (BEIR) & Qwen3 0.6B & 522,931 & 1,000 & 32, 256, 1024\\\bottomrule
 \end{tabular}
 \end{center}
-I reused the cached Nomic document embeddings and encoded a fixed random selection of 1,000 official MS MARCO development queries~\cite{msmarco,nomic}. For Quora, I encoded the complete BEIR corpus and a fixed random selection of 1,000 official test queries~\cite{beir,qwen}. Selection happened before running any search. All corpus entries are retained, including duplicate text. None of the selected Quora queries has an identical ID or text in the corpus.
+I reused the cached Nomic document embeddings and selected 1,000 queries from MS MARCO's official \texttt{dev.small} file~\cite{msmarco,nomic}. For Quora, I encoded the full BEIR corpus and selected 1,000 official test queries~\cite{beir,qwen}. Both random selections were fixed before search. Corpus duplicates remain; none of the selected Quora queries has identical text or ID in its corpus.
 
-Each model produces a full vector once. I take prefixes at lengths supported by its model card, normalize each prefix, and store its signs. Changing the length can change the nearest neighbors, so each length has its own reference results. I obtain those results by scoring every document with the full binary score and keeping the best 100, using document ID to resolve ties. The first one or ten IDs give the references for the smaller result counts. Human relevance labels are available in the source datasets; the recall measured here is agreement with the exhaustive binary scorer.
+Each model produces a full vector once. I take supported prefixes, normalize them, and store their signs. Each length has its own reference: score every document and keep the best 100, resolving ties by document ID. The first one or ten IDs give the smaller result sets. Recall here measures recovery of these binary-score references; human relevance labels are a separate measure.
 
 The machine is an Apple M5 Max with 128 GiB of memory. I use one native search query at a time and one Faiss search thread, with the same 32 GB process limit for all methods. Reported query time starts with a cached query vector and ends with the returned IDs. It includes selecting clusters and searching their documents. Embedding generation and text reranking are outside this timer. Encoding and reference preparation finish before timed searches begin.
 
@@ -34,13 +34,17 @@ C: candidate target & 1,000; 10,000; 100,000; half the collection; or 0\\\bottom
 \end{center}
 For C, target zero continues to depth zero and scores every opened document. A positive target stops after a complete depth has produced enough candidates. This can exceed the requested count when the next prefix contains many documents.
 
-The two 256-bit grids each contain 570 settings. The wider Qwen grid keeps result counts 1 and 100; the full-width Nomic comparison focuses on 100 results at 95\% and 99\% recall. These choices leave time to try different search settings instead of repeating the same grid at every width. The saved schedule states exactly what was attempted, and the results table counts only completed settings.
+The two 256-bit grids each contain 570 settings. The wider Qwen grid keeps result counts 1 and 100; full-width Nomic focuses on 100 results at 95\% and 99\% recall. Across the first sweeps and follow-ups, 3,679 of 4,024 scheduled A/B/C settings qualify, plus all 72 probability settings. Time limits leave three grids partial. The saved study lists their completed and missing settings; only complete measurements enter the comparisons.
 
-For the shorter codes, I also try leaves of 8 and 32 rows, extra probe counts aimed at 99.5\% routing coverage, and C starting depths 0, 1, 4, 16 and 32. B normally visits equal-penalty sets in the order they were created. I add an option to visit the deeper set first when penalties tie. This changes the visit order while keeping both branches and the same score bound. The configurations record which order each setting uses.
+For shorter codes, I add leaves of 8 and 32 rows, probes aimed at 99.5\% routing coverage, and C starting depths 0, 1, 4, 16 and 32. B also tries visiting the deeper set first when penalties tie, instead of creation order. Both branches and the score bound stay unchanged.
 
-I use all 1,000 queries for each completed setting and keep results that miss the recall target. The next runs are divided into small batches so that one slow setting does not consume the whole allowance. I then select each method's fastest qualifying settings and repeat those choices in three fresh processes, changing the order of the runs. The whole grid is not repeated three times.
+I build clusters from either normalized float vectors or document signs scaled by $1/\sqrt d$. The second option trains on the representation used by the binary scorer. All methods receive both options with unchanged codes, queries and references. The short-code follow-ups include 16, 64, 256, 1024 and 4096 clusters.
 
-There is one comparison worth checking directly. If B scores 512 whole clusters without splitting any of them, its alternative is A with 512 probes. Comparing it only with A at a larger probe count would exaggerate the benefit. I therefore add A probe counts at apparent B or C advantages, and give C its depth-zero setting at A's selected layouts. The follow-up settings use the same arrays and queries as the first sweep.
+C's exact-stop option uses target zero with starting depths 1, 4 and 32, alongside a depth-zero scan. A one-cluster Qwen32 run checks exact search over the whole collection. For B, a separate experiment holds the layout and leaf size fixed while comparing probabilities 0, 0.1 and 0.2, three seeds and two budgets. Probability changes which waiting branch we visit next; both alternatives are still kept.
+
+Every completed setting uses all 1,000 queries, including settings that miss the recall target. I select each method's fastest qualifying settings and repeat those choices in three fresh processes with varied run order. Small batches and saved checkpoints limit the time lost to slow settings.
+
+If B scores 512 whole clusters without splitting, its direct alternative is A with 512 probes. I add these missing A probe counts wherever B or C appears faster, and give C its depth-zero setting at A's selected layouts. Each method can therefore use the simpler scan when branching or widening adds no benefit.
 
 \subsection{Results}
 \input{evidence/study-results}
@@ -55,18 +59,15 @@ After preparing the arrays using \path{experiments/prepare_prefix_pools_v2.py}, 
 \begin{lstlisting}
 import json
 from pathlib import Path
-from experiments.prefix_study_v2 import (
-    prepare, run, summarize, repeat,
-)
-
-config = json.loads(Path(
-    "configs/prefix-study-v2/qwen-quora-d256.json"
-).read_text())
+from experiments import prefix_study_v2 as study
+path = Path("configs/prefix-study-v2/qwen-quora-d256.json")
+config = json.loads(path.read_text())
 output = Path("results/my-quora-run")
-
-prepare(config, output)  # Build cluster layouts and the schedule.
-run(output)             # Measure every declared setting.
-summarize(output)       # Choose settings that reach the targets.
-repeat(output)          # Run those choices three more times.
+study.prepare(config, output)  # Build clusters and the schedule.
+study.run(output)             # Measure the declared settings.
+study.summarize(output)       # Select by recall and time.
+study.repeat(output)          # Repeat those choices three times.
 \end{lstlisting}
-The configurations are in \path{configs/prefix-study-v2/}. Input hashes, parameters, power settings, per-query records and repeated timings are saved under \path{results/prefix-study-2026-09-13/}. The plots come from \path{experiments/prefix_figures_v2.py}. Data acquisition and encoding commands are in \path{docs/expanded-pool-preparation.md}. The short-code schedules use \path{experiments/prefix_exploration_v2.py} to divide settings into small batches; \path{experiments/prefix_followups_v2.py} prepares the direct comparisons described above.
+The configurations are in \path{configs/prefix-study-v2/}; input hashes, per-query records, power settings and repeated times are in \path{results/prefix-study-2026-09-13/}. Its README links every final table and graph to the source measurements. \path{docs/expanded-pool-preparation.md} gives the data and encoding commands.
+
+The root README maps the paper to its code. In particular, \path{experiments/prefix_comparison_v2.py} combines only runs with matching inputs; \path{experiments/prefix_exact_prediction_v2.py} checks prefix stopping counts; and \path{experiments/prefix_representation_v2.py} measures agreement with full float vectors.

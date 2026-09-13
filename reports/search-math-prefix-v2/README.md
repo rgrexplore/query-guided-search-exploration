@@ -7,7 +7,8 @@ recall calculations, and the measured parameter comparisons.
 Backward Walk starts with the query's own prefix and removes one trailing bit at
 a time. The sorted index locates each larger range; rows already scored are skipped.
 A candidate target ends a depth after enough rows have been scored across the opened
-clusters. A target of zero continues to the whole opened set.
+clusters. A target of zero continues to the whole opened set, unless the optional
+exact-stop bound proves that the remaining rows cannot improve the result.
 
 ## Read and run
 

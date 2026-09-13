@@ -245,7 +245,7 @@ Original method & $T_0+a_A\sum_{c\in\mathcal O}n_c$\\
 Bitplanes & $T_0+b\sum_{c\in\mathcal O}J_cW_c+F_Ba_B+T_{\rm other,B}$\\
 Backward Walk & $T_0+T_{\rm key}+2L_+t_b\sum_{c\in\mathcal O}\log_2(n_c+1)+F_Ca_C+T_{\rm ranges}$\\\bottomrule
 \end{tabularx}\par}
-Here $\mathcal O$ is the opened set, $n_c$ its cluster sizes, $W_c$ mask widths and $J_c$ split counts. $F_B$ and $F_C$ count scores; $L_+$ counts nonzero prefix depths. The $a$ coefficients give time per score and result update, $b$ per split-word visit, and $t_b$ per key comparison. $T_0$ includes routing, common setup and final sorting; $T_{\rm key}$ builds the query key, $T_{\rm ranges}$ checks ranges, and $T_{\rm other,B}$ covers B's ordering, masks and queues.
+Here $\mathcal O$ is the opened set, $n_c$ its cluster sizes, $W_c$ mask widths and $J_c$ split counts. $F_B$ and $F_C$ count scores; $L_+$ counts nonzero prefix depths. The $a$ coefficients give time per score and result update, $b$ per split-word visit, and $t_b$ per key comparison. $T_0$ includes routing, common setup and final sorting; $T_{\rm key}$ builds the key and any optional query-weight summaries, $T_{\rm ranges}$ checks ranges, and $T_{\rm other,B}$ covers B's ordering, masks and queues.
 
 \Needspace{4\baselineskip}
 \textbf{Memory complexity}\par

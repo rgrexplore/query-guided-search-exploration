@@ -1,5 +1,10 @@
 # Comparing scan, Bitplanes and Backward Walk
 
+**Completed on 13 September 2026.** The plan below records the original choices and
+dated follow-ups. Final coverage, partial grids, timings and conclusions are in
+[the results guide](../results/prefix-study-2026-09-13/README.md); the current
+[TODO](prefix-study-todo.md) tracks artifact completion. No additional sweep is queued.
+
 ## Question
 
 For a fixed collection and a required recall, which method gives the lowest query

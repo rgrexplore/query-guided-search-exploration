@@ -91,6 +91,10 @@ so the count can exceed the target. Target zero continues to the whole opened se
 Starting at depth zero skips widening. `max_prefix_bits` controls the stored key width,
 up to 32 bits; full scores still use every bit in the document code.
 
+With `candidate_target=0`, setting `stop_when_exact=True` lets C finish sooner when
+the current scores prove that no unseen row in the opened clusters can do better.
+A positive candidate target can still stop approximately. The stored index stays the same.
+
 ## Reading the results
 
 The dated study is saved under [results/prefix-study-2026-09-13](results/prefix-study-2026-09-13).

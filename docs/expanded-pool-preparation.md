@@ -11,7 +11,7 @@ experiment's inputs.
 2. Check that member's SHA-256, sort query IDs, and select 1,000 IDs using seed 42.
 3. Save the selected IDs and text before encoding or search.
 4. Encode `search_query: <text>` with the pinned Nomic model and its original recipe.
-5. Take the first 256 or 768 coordinates from the normalized full vectors, then
+5. Take the requested supported coordinates from the normalized full vectors, then
    normalize that prefix. The cached documents already have Nomic's layer
    normalization; we do not apply it again.
 6. Pack document signs into binary codes. Scan every document for every query to
@@ -87,7 +87,7 @@ same nearest neighbors.
 ## Prepared on 2026-09-13
 
 All four pools are complete. Each has 1,000 queries and an exact binary-score
-top-100 reference. The two dimensions for each model use the same document IDs
+top-100 reference. The dimensions for each model use the same document IDs
 and query IDs. The Nomic and Qwen experiments use different datasets and are
 reported as separate experiments.
 
@@ -111,3 +111,11 @@ The Nomic query selection contains 1,000 of the official 6,980 dev-small queries
 The selected-text SHA-256 is
 `29ef20e59d0316f29a1739d8f329d841abbbe3ec03ebec9464424c5e483e8c9d`.
 Selection happened before encoding and before any new search results.
+
+## Additional short prefixes
+
+The same full caches also produced Qwen32 and Nomic64, with the same document and
+query order. Qwen32 reference preparation took 2.557 seconds (4.011 seconds including
+array preparation); Nomic64 took 8.447 seconds (10.973 seconds total). Their final
+identities and geometry records are included in the dated study. No additional
+model encoding was needed.
