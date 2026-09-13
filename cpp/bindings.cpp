@@ -4,6 +4,7 @@
 
 #include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 
 #include <algorithm>
 #include <cmath>
@@ -298,7 +299,7 @@ py::dict prefix_index_v2_info(const bitplane::PrefixIndexV2& index) {
 py::dict search_prefix_v2(const bitplane::PrefixIndexV2& index, const py::array& queries,
                           const py::array& buckets, py::ssize_t candidate_limit,
                           py::ssize_t start_depth, py::ssize_t candidate_target,
-                          bool stop_when_exact) {
+                          bool stop_when_exact, bool trace) {
     check_queries(index, queries, buckets);
     if (candidate_limit <= 0) {
         throw py::value_error("candidate_limit must be positive");
@@ -317,11 +318,35 @@ py::dict search_prefix_v2(const bitplane::PrefixIndexV2& index, const py::array&
     const auto* query_data = static_cast<const float*>(queries.data());
     const auto* bucket_data = static_cast<const std::int64_t*>(buckets.data());
     std::vector<bitplane::QueryResult> results;
+    std::vector<std::vector<bitplane::PrefixDepthTrace>> traces;
     {
         py::gil_scoped_release release;
-        results = index.search(query_data, queries.shape(0), bucket_data, buckets.shape(1), options);
+        results = index.search(query_data, queries.shape(0), bucket_data, buckets.shape(1), options,
+                               trace ? &traces : nullptr);
     }
-    return results_to_python(results, candidate_limit);
+    auto result = results_to_python(results, candidate_limit);
+    if (trace) {
+        py::list query_traces;
+        for (const auto& steps : traces) {
+            py::list records;
+            for (const auto& step : steps) {
+                py::dict record;
+                record["depth"] = step.depth;
+                record["documents_scored"] = step.documents_scored;
+                record["prefix_lookups"] = step.prefix_lookups;
+                record["full"] = step.full;
+                record["can_stop_exact"] = step.can_stop_exact;
+                record["upper_bound"] = step.depth ? py::cast(step.upper_bound) : py::none();
+                record["worst_score"] = step.full ? py::cast(step.worst_score) : py::none();
+                record["rows"] = step.rows;
+                record["scores"] = step.scores;
+                records.append(record);
+            }
+            query_traces.append(records);
+        }
+        result["prefix_trace"] = query_traces;
+    }
+    return result;
 }
 
 py::dict search_keys(const bitplane::KeyIndex& index, const py::array& queries,
@@ -412,7 +437,8 @@ PYBIND11_MODULE(bitplane_index, module) {
         py::arg("candidate_limit") = 100,
         py::arg("start_depth") = 16,
         py::arg("candidate_target") = 1000,
-        py::arg("stop_when_exact") = false
+        py::arg("stop_when_exact") = false,
+        py::arg("trace") = false
     );
     prefix_type.def("info", &prefix_index_v2_info);
 }

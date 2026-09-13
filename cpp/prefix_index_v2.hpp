@@ -11,6 +11,19 @@ struct PrefixSearchOptionsV2 {
     bool stop_when_exact = false; // Optional bound can finish before depth zero.
 };
 
+// Only collected when requested. These snapshots explain the search, not its speed.
+struct PrefixDepthTrace {
+    std::size_t depth;
+    std::size_t documents_scored;
+    std::size_t prefix_lookups;
+    bool full;
+    bool can_stop_exact;
+    double upper_bound;
+    double worst_score;
+    std::vector<std::int64_t> rows;
+    std::vector<double> scores;
+};
+
 // Static rows sorted by the first embedding signs, then original document ID.
 // Relaxing one trailing prefix bit widens a contiguous range in each cluster.
 class PrefixIndexV2 {
@@ -21,7 +34,8 @@ public:
 
     std::vector<QueryResult> search(const float* queries, std::size_t query_count,
                                     const std::int64_t* selected_buckets, std::size_t probes,
-                                    const PrefixSearchOptionsV2& options) const;
+                                    const PrefixSearchOptionsV2& options,
+                                    std::vector<std::vector<PrefixDepthTrace>>* traces = nullptr) const;
     StorageInfo info() const;
     std::size_t dimensions() const { return dimensions_; }
     std::size_t max_prefix_bits() const { return max_prefix_bits_; }

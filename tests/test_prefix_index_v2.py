@@ -265,6 +265,38 @@ def test_optional_exact_stop_matches_scan_with_zero_weights_ties_and_opened_clus
                for row in result["stats"])
 
 
+@pytest.mark.parametrize("stop_when_exact", [False, True])
+def test_prefix_trace_records_each_depth_without_changing_results(stop_when_exact):
+    codes = pack(binary_rows("1101", "1011", "0011"))
+    labels = np.zeros(3, dtype=np.int64)
+    queries = np.array([[.6, .5, .4, .3]], dtype=np.float32)
+    buckets = np.array([[0]], dtype=np.int64)
+    index = native.PrefixIndexV2(codes, labels, 4, max_prefix_bits=4)
+    options = dict(candidate_limit=1, start_depth=4, candidate_target=0,
+                   stop_when_exact=stop_when_exact)
+    ordinary = index.search(queries, buckets, **options)
+    traced = index.search(queries, buckets, **options, trace=True)
+    np.testing.assert_array_equal(traced["rows"], ordinary["rows"])
+    np.testing.assert_array_equal(traced["scores"], ordinary["scores"])
+    steps = traced["prefix_trace"][0]
+    expected_depths = [4, 3, 2] if stop_when_exact else [4, 3, 2, 1, 0]
+    assert [step["depth"] for step in steps] == expected_depths
+    assert [step["documents_scored"] for step in steps] == [0, 0, 1, 2, 3][:len(steps)]
+    assert steps[0]["can_stop_exact"] is False
+    assert steps[0]["worst_score"] is None
+    assert steps[2]["can_stop_exact"] is True
+    assert steps[2]["upper_bound"] == pytest.approx(.8)
+    assert steps[2]["rows"] == [0]
+    assert steps[2]["scores"] == pytest.approx([1.0])
+    if not stop_when_exact:
+        # Reaching the root scores each document once; snapshots must not empty the heap.
+        scan = native.Index(codes, labels, 4, build_bitplanes=False).scan(
+            queries, buckets, candidate_limit=1)
+        np.testing.assert_array_equal(traced["rows"], scan["rows"])
+        assert steps[-1]["prefix_lookups"] == 8
+        assert steps[-1]["upper_bound"] is None
+
+
 def test_optional_exact_stop_keeps_a_tied_unseen_smaller_id_alive():
     codes = pack(binary_rows("10", "11", "00"))
     labels = np.zeros(3, dtype=np.int64)

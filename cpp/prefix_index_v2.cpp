@@ -81,13 +81,17 @@ PrefixIndexV2::Range PrefixIndexV2::prefix_range(const Bucket& bucket,
 std::vector<QueryResult> PrefixIndexV2::search(const float* queries, std::size_t query_count,
                                               const std::int64_t* selected_buckets,
                                               std::size_t probes,
-                                              const PrefixSearchOptionsV2& options) const {
+                                              const PrefixSearchOptionsV2& options,
+                                              std::vector<std::vector<PrefixDepthTrace>>* traces) const {
     struct SelectedBucket {
         const Bucket* bucket;
         Range previous;
     };
 
     std::vector<QueryResult> results(query_count);
+    if (traces) {
+        traces->resize(query_count);
+    }
     for (std::size_t qi = 0; qi < query_count; ++qi) {
         const auto start = std::chrono::steady_clock::now();
         auto& result = results[qi];
@@ -102,7 +106,7 @@ std::vector<QueryResult> PrefixIndexV2::search(const float* queries, std::size_t
 
         double query_l1 = 0;
         std::vector<double> prefix_min_weights;
-        if (options.stop_when_exact && options.start_depth > 0) {
+        if ((options.stop_when_exact || traces) && options.start_depth > 0) {
             prefix_min_weights.resize(options.start_depth);
             for (std::size_t dimension = 0; dimension < dimensions_; ++dimension) {
                 const auto weight = std::abs(double(query[dimension]));
@@ -147,9 +151,21 @@ std::vector<QueryResult> PrefixIndexV2::search(const float* queries, std::size_t
             }
             // All matching rows at this depth have been scored across every opened
             // cluster. Any unseen row mismatches at least one constrained sign.
-            if (options.stop_when_exact && depth > 0
-                    && detail::cannot_improve(prefix_min_weights[depth - 1], query_l1,
-                                               dimensions_, best)) {
+            const bool can_stop_exact = (options.stop_when_exact || traces) && depth > 0
+                && detail::cannot_improve(prefix_min_weights[depth - 1], query_l1,
+                                           dimensions_, best);
+            if (traces) {
+                // write_to consumes its heap, so take a copy for this snapshot.
+                auto snapshot_candidates = best;
+                QueryResult snapshot;
+                snapshot_candidates.write_to(snapshot);
+                const double bound = depth > 0
+                    ? query_l1 - 2 * prefix_min_weights[depth - 1] : 0;
+                (*traces)[qi].push_back({depth, stats.documents_scored, stats.prefix_lookups,
+                    best.full(), can_stop_exact, bound, best.full() ? best.worst_score() : 0,
+                    std::move(snapshot.rows), std::move(snapshot.scores)});
+            }
+            if (options.stop_when_exact && can_stop_exact) {
                 stats.stop_reason = "bound";
                 break;
             }
