@@ -1,0 +1,129 @@
+{
+  "setups": [
+    {
+      "name": "qwen-quora-d32-scan-routing",
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32",
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-4096-seed42",
+      "top_k": 1,
+      "dimensions": 32,
+      "clusters": 4096,
+      "probes": 180,
+      "source_setting": "qwen-quora-d32-binary::qwen-quora-d32-binary-main-s00452",
+      "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/same-clusters-2026-09-13/qwen-quora-d32-scan-routing",
+      "queries": 1000,
+      "documents": 522931,
+      "input_hashes": {
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/codes.npy": "9a8f1acd712f85e103898098dd51248c8be24d09055ba12aa4de0e68d099ece2",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/queries.npy": "7b8dad9bbf85eee39c42d5361e6047aa5752e09fd8a1bf0bcac40c24e11d384d",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/reference.npy": "975e40f0777adc74aaba98b16635b31e93e5eb3fdd358bbfb63c8b8ab8fd067e",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-4096-seed42/assignments.npy": "9ecf5e64804b2343526d1f3c3e6e7efcfcce57753fb962350a331b2a14b29a5b",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-4096-seed42/centroids.npy": "b9ca2159ac022ab6886ba70122ecb1a52cfdf693f16c15bdc05351f233d4444d",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-4096-seed42/labels.npy": "d6f654147cde165cd29348ff442421bd5f7428648f32a823ae7b0744da17991c",
+        "data/same-clusters-2026-09-13/qwen-quora-d32-scan-routing/selected.npy": "7edc1ddf8518a6ecfa195f26f0f246361d790fed0096cd83d612078ce4b515d9",
+        "data/same-clusters-2026-09-13/qwen-quora-d32-scan-routing/local-reference.npy": "2acd28b2b091000cda23c9a54094d5588f8a709155aefdf1f3a8068f7185895e",
+        "data/same-clusters-2026-09-13/qwen-quora-d32-scan-routing/opened-rows.npy": "4d1d7c8d86e6bcd50e97ab0540c81f940f7bdd5a6cc1d9b396f19985a8737d9c"
+      }
+    },
+    {
+      "name": "qwen-quora-d32-branch-routing",
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32",
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-16-seed42",
+      "top_k": 1,
+      "dimensions": 32,
+      "clusters": 16,
+      "probes": 9,
+      "source_setting": "qwen-quora-d32-binary::qwen-quora-d32-binary-main-s00027",
+      "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/same-clusters-2026-09-13/qwen-quora-d32-branch-routing",
+      "queries": 1000,
+      "documents": 522931,
+      "input_hashes": {
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/codes.npy": "9a8f1acd712f85e103898098dd51248c8be24d09055ba12aa4de0e68d099ece2",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/queries.npy": "7b8dad9bbf85eee39c42d5361e6047aa5752e09fd8a1bf0bcac40c24e11d384d",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/reference.npy": "975e40f0777adc74aaba98b16635b31e93e5eb3fdd358bbfb63c8b8ab8fd067e",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-16-seed42/assignments.npy": "b714f9efa8ea11622bc8c6096d186eef5d7d13b7c97e1642f74830f5dcd7285f",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-16-seed42/centroids.npy": "24d4df8e25c25963942db6341907b2c157794ea1c6cfd5fdf173e17df00bd858",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-16-seed42/labels.npy": "41ab14437a68231a24825086c1458c38d7f2273fa6143b754ee58336d4df46e1",
+        "data/same-clusters-2026-09-13/qwen-quora-d32-branch-routing/selected.npy": "acec7c948c7683e3c2c7207666895ac4cfc9521930a78fa03ee0a7a109204806",
+        "data/same-clusters-2026-09-13/qwen-quora-d32-branch-routing/local-reference.npy": "02aef83a1b47753a3d3ed87a1bf44f6283c9aa72e2e32bc1c1e2bd4a9bf2a0bb",
+        "data/same-clusters-2026-09-13/qwen-quora-d32-branch-routing/opened-rows.npy": "0af06f0f4b38b0e18dcc39b77ee21c79695bbc96ae4845e152186eb73cba44ab"
+      }
+    },
+    {
+      "name": "qwen-quora-d32-prefix-routing",
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32",
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-1024-seed42",
+      "top_k": 1,
+      "dimensions": 32,
+      "clusters": 1024,
+      "probes": 78,
+      "source_setting": "qwen-quora-d32-binary::qwen-quora-d32-binary-main-s00409",
+      "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/same-clusters-2026-09-13/qwen-quora-d32-prefix-routing",
+      "queries": 1000,
+      "documents": 522931,
+      "input_hashes": {
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/codes.npy": "9a8f1acd712f85e103898098dd51248c8be24d09055ba12aa4de0e68d099ece2",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/queries.npy": "7b8dad9bbf85eee39c42d5361e6047aa5752e09fd8a1bf0bcac40c24e11d384d",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/reference.npy": "975e40f0777adc74aaba98b16635b31e93e5eb3fdd358bbfb63c8b8ab8fd067e",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-1024-seed42/assignments.npy": "e4b7e7329db42eb4afaf46750ec4c6098dc4cde5e3bf8f0c341c7f4f430c1713",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-1024-seed42/centroids.npy": "b12107e6db6d710c0e7b0e19b6434033c7822422c68499e755f6db5bae92ee1f",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-1024-seed42/labels.npy": "27e2935cb98e5eb3fb0264594106564a3e83ce74e1ed36de78fe986cbd63fb9c",
+        "data/same-clusters-2026-09-13/qwen-quora-d32-prefix-routing/selected.npy": "981f9dc5d323a54bc6aa30d920c8ab2959cf04a1ceae691dfc5a425248852685",
+        "data/same-clusters-2026-09-13/qwen-quora-d32-prefix-routing/local-reference.npy": "fe1ff2eb79d63c949a1f7ab6bcd691730b8776682a8d088dacc535e18966ee1a",
+        "data/same-clusters-2026-09-13/qwen-quora-d32-prefix-routing/opened-rows.npy": "48fc3d44bc6790c2159571571393a58b0439e1eda416956c6b8a419ca04a9f72"
+      }
+    },
+    {
+      "name": "qwen-quora-d256-scan-routing",
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d256",
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d256/routers/ivf-4096-seed42",
+      "top_k": 100,
+      "dimensions": 256,
+      "clusters": 4096,
+      "probes": 668,
+      "source_setting": "qwen-quora-d256::main-s00406",
+      "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/same-clusters-2026-09-13/qwen-quora-d256-scan-routing",
+      "queries": 1000,
+      "documents": 522931,
+      "input_hashes": {
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d256/codes.npy": "3c42f17d5aa4b29fe8ba461c300cc982f28f12be3f41971a6a481dbe39aeb34c",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d256/queries.npy": "ca64f76f675e3120da27ea82f738bc4ba788af76614254a20d396805de47e7c6",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d256/reference.npy": "1a2fc0d2189487492bb4568b34ed529cfadc7cb820a759f44867e9b4ac9b06ae",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d256/routers/ivf-4096-seed42/assignments.npy": "098b5441398c1868011bb4bb6e760a05a6626a278a92009c2f5dc9f4af0cd3c5",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d256/routers/ivf-4096-seed42/centroids.npy": "809b71e9d6ee53f2854a62ffceb28fb860be1d31f839946dbb783387a30c90ac",
+        "data/prefix-study-2026-09-13/pools/qwen-quora-d256/routers/ivf-4096-seed42/labels.npy": "d6f654147cde165cd29348ff442421bd5f7428648f32a823ae7b0744da17991c",
+        "data/same-clusters-2026-09-13/qwen-quora-d256-scan-routing/selected.npy": "c17a5aebd2ab6005f6279f81127f113d3d432e259891f082cad9fb7a03ed9914",
+        "data/same-clusters-2026-09-13/qwen-quora-d256-scan-routing/local-reference.npy": "28c0c374d1e89990b4a34e4cad887e56251702d8820ab06d86553bb979d56eb9",
+        "data/same-clusters-2026-09-13/qwen-quora-d256-scan-routing/opened-rows.npy": "5c3fd84fb81ec60b176764021945233ada56b22476f0626b16fb391ec131e8ff"
+      }
+    },
+    {
+      "name": "nomic-msmarco-d256-scan-routing",
+      "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256",
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 100,
+      "dimensions": 256,
+      "clusters": 4096,
+      "probes": 1414,
+      "source_setting": "nomic-msmarco-d256::main-s00406",
+      "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/same-clusters-2026-09-13/nomic-msmarco-d256-scan-routing",
+      "queries": 1000,
+      "documents": 1000000,
+      "input_hashes": {
+        "data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/codes.npy": "14c1f435857b13ab177c22c0e74aecf1432630e1ba67289686bf8a1159273d0e",
+        "data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/queries.npy": "f07ea1bc88dd659b25646577cf0dca0cc3270b3786bd705c314b7a4c17b30ecf",
+        "data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/reference.npy": "5fc9838a7afa7c94c567d3d190faf702076ee3038c5c5490e029aae0c936b1c9",
+        "data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42/assignments.npy": "75ca48119677b158e27f7c1652c42782e996a76d942dd516c50314e08f61da71",
+        "data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42/centroids.npy": "42f323f9ffd8ea0e2b1d4feb1fb8ddcb2de4e2286a648f977d8abc99cd688da1",
+        "data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42/labels.npy": "d6f654147cde165cd29348ff442421bd5f7428648f32a823ae7b0744da17991c",
+        "data/same-clusters-2026-09-13/nomic-msmarco-d256-scan-routing/selected.npy": "914e6cb2050e3ef459febc171882e216b668c047c4bef874aa2890c9efe7929c",
+        "data/same-clusters-2026-09-13/nomic-msmarco-d256-scan-routing/local-reference.npy": "009c8f9a47e815821a704470215911d91b26b036a6b400b19d7c83f9a9fceb79",
+        "data/same-clusters-2026-09-13/nomic-msmarco-d256-scan-routing/opened-rows.npy": "c286099c1570e4b19cb6df8de13150a208fef94219390f5ae72011c8de8bc9e0"
+      }
+    }
+  ],
+  "repetitions": 3,
+  "ram_limit_bytes": 64000000000,
+  "method_order": "rotated across repeat blocks",
+  "timing": "local native call and result conversion; routing precomputed and excluded",
+  "reference": "exhaustive scan of the saved selected clusters; global reference retained separately"
+}
