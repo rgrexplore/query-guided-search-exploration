@@ -1,0 +1,220 @@
+{
+  "storage": [
+    {
+      "job_id": "qwen-quora-d1024-followup-j0000-part000",
+      "clusters": 64,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 71118616
+      },
+      "reported": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 71118616
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "qwen-quora-d1024-followup-j0000-part001",
+      "clusters": 64,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 71118616
+      },
+      "reported": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 71118616
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "qwen-quora-d1024-followup-j0001-part000",
+      "clusters": 1024,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 71118616
+      },
+      "reported": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 71118616
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "qwen-quora-d1024-followup-j0001-part001",
+      "clusters": 1024,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 71118616
+      },
+      "reported": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 71118616
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "qwen-quora-d1024-followup-j0002-part000",
+      "clusters": 4096,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 71118616
+      },
+      "reported": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 71118616
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "qwen-quora-d1024-followup-j0002-part001",
+      "clusters": 4096,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 71118616
+      },
+      "reported": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 71118616
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "qwen-quora-d1024-followup-j0003-part000",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 2091724,
+        "logical_bytes": 73210340
+      },
+      "reported": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 2091724,
+        "logical_bytes": 73210340
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "qwen-quora-d1024-followup-j0004-part000",
+      "clusters": 4096,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 2091724,
+        "logical_bytes": 73210340
+      },
+      "reported": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 2091724,
+        "logical_bytes": 73210340
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "qwen-quora-d1024-followup-j0004-part001",
+      "clusters": 4096,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 2091724,
+        "logical_bytes": 73210340
+      },
+      "reported": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 2091724,
+        "logical_bytes": 73210340
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "qwen-quora-d1024-followup-j0004-part002",
+      "clusters": 4096,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 2091724,
+        "logical_bytes": 73210340
+      },
+      "reported": {
+        "codes_bytes": 66935168,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 2091724,
+        "logical_bytes": 73210340
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    }
+  ],
+  "checked_query_counts": {
+    "prefix_levels": 10000,
+    "prefix_lookups": 10000
+  },
+  "failures": [],
+  "scope": "Exact logical field sizes include cluster padding. Query checks compare loop counts, not elapsed-time predictions. Only complete processes are checked. This does not measure every allocation or establish a constant cost per CPU operation."
+}

@@ -1,0 +1,20 @@
+{
+  "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64",
+  "ram_budget_bytes": 32000000000,
+  "worker_stop_bytes": 32000000000,
+  "schedule_seed": 43,
+  "router_seed": 42,
+  "top_ks": [
+    1,
+    100
+  ],
+  "recall_targets": [
+    0.8,
+    0.95
+  ],
+  "repetitions": 1,
+  "global_seconds": 300,
+  "job_seconds": 60,
+  "probability_source": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d64",
+  "scope": "Probability comparison within Method B; fixed documents, queries and selected router."
+}

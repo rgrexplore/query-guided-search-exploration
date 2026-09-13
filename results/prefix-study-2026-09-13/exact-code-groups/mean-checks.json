@@ -1,0 +1,218 @@
+[
+  {
+    "method": "scan",
+    "field": "mean_query_ms",
+    "overall": 2.4910115863749525,
+    "weighted_groups": 2.4910115863749525,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "scan",
+    "field": "recall",
+    "overall": 1.0,
+    "weighted_groups": 1.0,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "scan",
+    "field": "mean_documents_scored",
+    "overall": 522931.0,
+    "weighted_groups": 522931.0,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "scan",
+    "field": "mean_nodes",
+    "overall": 0.0,
+    "weighted_groups": 0.0,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "scan",
+    "field": "mean_bitplane_words",
+    "overall": 0.0,
+    "weighted_groups": 0.0,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "scan",
+    "field": "mean_leaf_words",
+    "overall": 0.0,
+    "weighted_groups": 0.0,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "scan",
+    "field": "mean_prefix_levels",
+    "overall": 0.0,
+    "weighted_groups": 0.0,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "scan",
+    "field": "mean_prefix_lookups",
+    "overall": 0.0,
+    "weighted_groups": 0.0,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "scan",
+    "field": "mean_final_depth",
+    "overall": 0.0,
+    "weighted_groups": 0.0,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "branch",
+    "field": "mean_query_ms",
+    "overall": 0.13460220366929812,
+    "weighted_groups": 0.13460220366929815,
+    "difference": 2.7755575615628914e-17,
+    "matches": true
+  },
+  {
+    "method": "branch",
+    "field": "recall",
+    "overall": 1.0,
+    "weighted_groups": 1.0,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "branch",
+    "field": "mean_documents_scored",
+    "overall": 1699.622,
+    "weighted_groups": 1699.622,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "branch",
+    "field": "mean_nodes",
+    "overall": 13.026,
+    "weighted_groups": 13.026,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "branch",
+    "field": "mean_bitplane_words",
+    "overall": 96303.406,
+    "weighted_groups": 96303.406,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "branch",
+    "field": "mean_leaf_words",
+    "overall": 10132.04,
+    "weighted_groups": 10132.04,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "branch",
+    "field": "mean_prefix_levels",
+    "overall": 0.0,
+    "weighted_groups": 0.0,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "branch",
+    "field": "mean_prefix_lookups",
+    "overall": 0.0,
+    "weighted_groups": 0.0,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "branch",
+    "field": "mean_final_depth",
+    "overall": 0.0,
+    "weighted_groups": 0.0,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "prefix",
+    "field": "mean_query_ms",
+    "overall": 1.3218508296389093,
+    "weighted_groups": 1.3218508296389095,
+    "difference": 2.220446049250313e-16,
+    "matches": true
+  },
+  {
+    "method": "prefix",
+    "field": "recall",
+    "overall": 1.0,
+    "weighted_groups": 1.0,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "prefix",
+    "field": "mean_documents_scored",
+    "overall": 278316.626,
+    "weighted_groups": 278316.626,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "prefix",
+    "field": "mean_nodes",
+    "overall": 0.0,
+    "weighted_groups": 0.0,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "prefix",
+    "field": "mean_bitplane_words",
+    "overall": 0.0,
+    "weighted_groups": 0.0,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "prefix",
+    "field": "mean_leaf_words",
+    "overall": 0.0,
+    "weighted_groups": 0.0,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "prefix",
+    "field": "mean_prefix_levels",
+    "overall": 28.495,
+    "weighted_groups": 28.495,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "prefix",
+    "field": "mean_prefix_lookups",
+    "overall": 56.32,
+    "weighted_groups": 56.32,
+    "difference": 0.0,
+    "matches": true
+  },
+  {
+    "method": "prefix",
+    "field": "mean_final_depth",
+    "overall": 4.505,
+    "weighted_groups": 4.505,
+    "difference": 0.0,
+    "matches": true
+  }
+]

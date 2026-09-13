@@ -1,0 +1,55 @@
+{
+  "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d768",
+  "cluster_counts": [
+    1,
+    64,
+    1024,
+    4096
+  ],
+  "top_ks": [
+    100
+  ],
+  "recall_targets": [
+    0.95,
+    0.99
+  ],
+  "probe_targets": [
+    0.95,
+    0.99
+  ],
+  "repetitions": 1,
+  "ram_budget_bytes": 32000000000,
+  "worker_stop_bytes": 32000000000,
+  "global_seconds": 2400,
+  "job_seconds": 900,
+  "schedule_seed": 42,
+  "router_seed": 42,
+  "branch": {
+    "settings": [
+      {
+        "leaf_size": 128,
+        "node_budget": 8192
+      },
+      {
+        "leaf_size": 2048,
+        "node_budget": 8192
+      }
+    ],
+    "exploration": 0,
+    "seed": 42
+  },
+  "prefix": {
+    "max_prefix_bits": 32,
+    "settings": [
+      {
+        "start_depth": 0,
+        "candidate_target": 0
+      },
+      {
+        "start_depth": 4,
+        "candidate_target": 100000
+      }
+    ]
+  },
+  "include_all_clusters": false
+}

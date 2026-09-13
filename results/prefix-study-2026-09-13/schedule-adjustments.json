@@ -1,0 +1,36 @@
+[
+  {
+    "pool": "qwen-quora-d1024",
+    "initial_settings": 570,
+    "scheduled_settings": 380,
+    "top_ks": [
+      1,
+      100
+    ],
+    "global_seconds": 5400,
+    "reason": "Quora256 first sweep took 2487.83 seconds. Keep every cluster/local setting but omit intermediate K10 at wide dimensions; prioritize baseline coverage, then clustered alternatives, then global alternatives. Original schedule retained."
+  },
+  {
+    "pool": "nomic-msmarco-d768",
+    "initial_settings": 570,
+    "scheduled_settings": 380,
+    "top_ks": [
+      1,
+      100
+    ],
+    "global_seconds": 6600,
+    "reason": "Quora256 first sweep took 2487.83 seconds. Keep every cluster/local setting but omit intermediate K10 at wide dimensions; prioritize baseline coverage, then clustered alternatives, then global alternatives. Original schedule retained."
+  },
+  {
+    "pool": "nomic-msmarco-d256",
+    "running_main_limit_seconds": 4500,
+    "saved_global_seconds": 6600,
+    "reason": "The active main process already loaded4500 seconds. Extra time applies when the next stage reads the saved configuration. Preserve any incomplete attempt before an explicit continuation."
+  },
+  {
+    "pool": "nomic-msmarco-d768",
+    "status": "original schedule not started",
+    "replacement": "nomic-msmarco-d768-focused",
+    "reason": "Use a focused full-width control at95% and99% recall, keeping all four cluster layouts and one global full-scan reference. Reserve time for supported shorter codes and branch-order/local-parameter experiments. No dataset arrays changed."
+  }
+]

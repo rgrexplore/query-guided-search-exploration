@@ -1,0 +1,1356 @@
+{
+  "storage": [
+    {
+      "job_id": "main-j0000",
+      "clusters": 1,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 40000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 40000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0001",
+      "clusters": 1,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32000000,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32000000,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0002",
+      "clusters": 1,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0003",
+      "clusters": 64,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 40000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 40000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part000",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part001",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part002",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part003",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part004",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part005",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part006",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part007",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part008",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part009",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part010",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part011",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part012",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part013",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part014",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part015",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part016",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part017",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part018",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part019",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part020",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part021",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part022",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0004-part023",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 32065536,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 72065536
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0005",
+      "clusters": 64,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0006",
+      "clusters": 1024,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 40000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 40000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0007",
+      "clusters": 1024,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 33024000,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 73024000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 33024000,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 73024000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part000",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part001",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part002",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part003",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part004",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part005",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part006",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part007",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part008",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part009",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part010",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part011",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part012",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part013",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part014",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part015",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part016",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part017",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part018",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part019",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part020",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part021",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part022",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part023",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part024",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part025",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part026",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part027",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part028",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0008-part029",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0009",
+      "clusters": 4096,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 40000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 40000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0010",
+      "clusters": 4096,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 36110336,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 76110336
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 36110336,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 76110336
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "main-j0011",
+      "clusters": 4096,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "reported": {
+        "codes_bytes": 32000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 44000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    }
+  ],
+  "checked_query_counts": {
+    "documents_scored": 27012,
+    "all_mask_words": 12000,
+    "prefix_levels": 285000,
+    "prefix_lookups": 285000
+  },
+  "failures": [],
+  "scope": "Exact logical field sizes include cluster padding. Query checks compare loop counts, not elapsed-time predictions. Only complete processes are checked. This does not measure every allocation or establish a constant cost per CPU operation."
+}

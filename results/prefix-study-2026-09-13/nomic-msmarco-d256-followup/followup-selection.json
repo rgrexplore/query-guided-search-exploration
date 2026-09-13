@@ -1,0 +1,1363 @@
+{
+  "apparent_advantages": [
+    {
+      "method": "branch",
+      "clusters": 1024,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "setting_id": "main-s00250",
+      "top_k": 1,
+      "probes": 1024,
+      "repetitions": 1,
+      "leaf_size": 2048,
+      "node_budget": 512,
+      "exploration": 0,
+      "seed": 42,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.992,
+      "p50_ms": 20.59477100010554,
+      "p95_ms": 21.408118749968708,
+      "total_query_ms": 20615.802936992623,
+      "process_p50_median_ms": 20.59477100010554,
+      "process_p50_min_ms": 20.59477100010554,
+      "process_p50_max_ms": 20.59477100010554,
+      "logical_index_bytes": 73024000,
+      "lifetime_peak_bytes": 218759168,
+      "mean_documents_scored": 500070.191,
+      "mean_nodes": 512.0,
+      "mean_bitplane_words": 18.915,
+      "mean_leaf_words": 8064.674,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0,
+      "sampled_scan_setting_id": "main-s00000",
+      "sampled_scan_p50_ms": 37.192104500718415,
+      "apparent_advantage": 0.4462595952399595
+    },
+    {
+      "method": "prefix",
+      "clusters": 1024,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "setting_id": "main-s00300",
+      "top_k": 1,
+      "probes": 2,
+      "repetitions": 1,
+      "start_depth": 16,
+      "candidate_target": 1000,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.535,
+      "p50_ms": 0.08764599988353439,
+      "p95_ms": 0.12800625318050152,
+      "total_query_ms": 92.02782802822185,
+      "process_p50_median_ms": 0.08764599988353439,
+      "process_p50_min_ms": 0.08764599988353439,
+      "process_p50_max_ms": 0.08764599988353439,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 155746304,
+      "mean_documents_scored": 1527.804,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 14.305,
+      "mean_prefix_lookups": 56.2,
+      "mean_final_depth": 2.695,
+      "sampled_scan_setting_id": "main-s00390",
+      "sampled_scan_p50_ms": 0.09822950050875079,
+      "apparent_advantage": 0.10774258822861027
+    },
+    {
+      "method": "prefix",
+      "clusters": 64,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "setting_id": "main-s00120",
+      "top_k": 1,
+      "probes": 1,
+      "repetitions": 1,
+      "start_depth": 16,
+      "candidate_target": 1000,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.234,
+      "p50_ms": 0.07108350018825149,
+      "p95_ms": 0.37669555049433223,
+      "total_query_ms": 113.41870595970249,
+      "process_p50_median_ms": 0.07108350018825149,
+      "process_p50_min_ms": 0.07108350018825149,
+      "process_p50_max_ms": 0.07108350018825149,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 144408576,
+      "mean_documents_scored": 2666.374,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 10.797,
+      "mean_prefix_lookups": 21.57,
+      "mean_final_depth": 6.203,
+      "sampled_scan_setting_id": "main-s00390",
+      "sampled_scan_p50_ms": 0.09822950050875079,
+      "apparent_advantage": 0.2763528286299388
+    },
+    {
+      "method": "prefix",
+      "clusters": 64,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "setting_id": "main-s00125",
+      "top_k": 1,
+      "probes": 3,
+      "repetitions": 1,
+      "start_depth": 16,
+      "candidate_target": 1000,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.217,
+      "p50_ms": 0.07002050006121863,
+      "p95_ms": 0.16625420066702634,
+      "total_query_ms": 85.63738304292201,
+      "process_p50_median_ms": 0.07002050006121863,
+      "process_p50_min_ms": 0.07002050006121863,
+      "process_p50_max_ms": 0.07002050006121863,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 144408576,
+      "mean_documents_scored": 1837.313,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 8.896,
+      "mean_prefix_lookups": 53.376,
+      "mean_final_depth": 8.104,
+      "sampled_scan_setting_id": "main-s00390",
+      "sampled_scan_p50_ms": 0.09822950050875079,
+      "apparent_advantage": 0.28717442623073464
+    },
+    {
+      "method": "prefix",
+      "clusters": 1,
+      "router": null,
+      "setting_id": "main-s00015",
+      "top_k": 1,
+      "probes": 1,
+      "repetitions": 1,
+      "start_depth": 16,
+      "candidate_target": 1000,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.101,
+      "p50_ms": 0.06864599890832324,
+      "p95_ms": 0.17628570085435047,
+      "total_query_ms": 87.02312900641118,
+      "process_p50_median_ms": 0.06864599890832324,
+      "process_p50_min_ms": 0.06864599890832324,
+      "process_p50_max_ms": 0.06864599890832324,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 142508032,
+      "mean_documents_scored": 2019.298,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 5.007,
+      "mean_prefix_lookups": 10.014,
+      "mean_final_depth": 11.993,
+      "sampled_scan_setting_id": "main-s00390",
+      "sampled_scan_p50_ms": 0.09822950050875079,
+      "apparent_advantage": 0.30116717938306226
+    },
+    {
+      "method": "branch",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "setting_id": "main-s00450",
+      "top_k": 10,
+      "probes": 994,
+      "repetitions": 1,
+      "leaf_size": 2048,
+      "node_budget": 512,
+      "exploration": 0,
+      "seed": 42,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.9721,
+      "p50_ms": 5.228854000051797,
+      "p95_ms": 5.542099701233383,
+      "total_query_ms": 5216.361328006315,
+      "process_p50_median_ms": 5.228854000051797,
+      "process_p50_min_ms": 5.228854000051797,
+      "process_p50_max_ms": 5.228854000051797,
+      "logical_index_bytes": 76110336,
+      "lifetime_peak_bytes": 221806592,
+      "mean_documents_scored": 125054.981,
+      "mean_nodes": 512.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 2202.678,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0,
+      "sampled_scan_setting_id": "main-s00400",
+      "sampled_scan_p50_ms": 9.474145499552833,
+      "apparent_advantage": 0.4480922843861125
+    },
+    {
+      "method": "prefix",
+      "clusters": 1024,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "setting_id": "main-s00330",
+      "top_k": 10,
+      "probes": 3,
+      "repetitions": 1,
+      "start_depth": 16,
+      "candidate_target": 1000,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.4213,
+      "p50_ms": 0.096187497547362,
+      "p95_ms": 0.16496845073561417,
+      "total_query_ms": 106.52588096127147,
+      "process_p50_median_ms": 0.096187497547362,
+      "process_p50_min_ms": 0.096187497547362,
+      "process_p50_max_ms": 0.096187497547362,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 155795456,
+      "mean_documents_scored": 1833.907,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 13.482,
+      "mean_prefix_lookups": 80.1,
+      "mean_final_depth": 3.518,
+      "sampled_scan_setting_id": "main-s00396",
+      "sampled_scan_p50_ms": 0.11260399878665339,
+      "apparent_advantage": 0.14578968257064406
+    },
+    {
+      "method": "prefix",
+      "clusters": 64,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "setting_id": "main-s00150",
+      "top_k": 10,
+      "probes": 1,
+      "repetitions": 1,
+      "start_depth": 16,
+      "candidate_target": 1000,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.185,
+      "p50_ms": 0.07631249900441617,
+      "p95_ms": 0.39354964910671675,
+      "total_query_ms": 119.74054595884809,
+      "process_p50_median_ms": 0.07631249900441617,
+      "process_p50_min_ms": 0.07631249900441617,
+      "process_p50_max_ms": 0.07631249900441617,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 144408576,
+      "mean_documents_scored": 2666.374,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 10.797,
+      "mean_prefix_lookups": 21.57,
+      "mean_final_depth": 6.203,
+      "sampled_scan_setting_id": "main-s00396",
+      "sampled_scan_p50_ms": 0.11260399878665339,
+      "apparent_advantage": 0.32229317052050144
+    },
+    {
+      "method": "prefix",
+      "clusters": 64,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "setting_id": "main-s00155",
+      "top_k": 10,
+      "probes": 4,
+      "repetitions": 1,
+      "start_depth": 16,
+      "candidate_target": 1000,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.1405,
+      "p50_ms": 0.07402100072795292,
+      "p95_ms": 0.17307290036114859,
+      "total_query_ms": 88.7641579774936,
+      "process_p50_median_ms": 0.07402100072795292,
+      "process_p50_min_ms": 0.07402100072795292,
+      "process_p50_max_ms": 0.07402100072795292,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 144408576,
+      "mean_documents_scored": 1787.745,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 8.47,
+      "mean_prefix_lookups": 67.76,
+      "mean_final_depth": 8.53,
+      "sampled_scan_setting_id": "main-s00396",
+      "sampled_scan_p50_ms": 0.11260399878665339,
+      "apparent_advantage": 0.3426432318074444
+    },
+    {
+      "method": "prefix",
+      "clusters": 1,
+      "router": null,
+      "setting_id": "main-s00020",
+      "top_k": 10,
+      "probes": 1,
+      "repetitions": 1,
+      "start_depth": 16,
+      "candidate_target": 1000,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.0718,
+      "p50_ms": 0.07135449959605467,
+      "p95_ms": 0.1847372010161051,
+      "total_query_ms": 90.3255550074391,
+      "process_p50_median_ms": 0.07135449959605467,
+      "process_p50_min_ms": 0.07135449959605467,
+      "process_p50_max_ms": 0.07135449959605467,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 142508032,
+      "mean_documents_scored": 2019.298,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 5.007,
+      "mean_prefix_lookups": 10.014,
+      "mean_final_depth": 11.993,
+      "sampled_scan_setting_id": "main-s00396",
+      "sampled_scan_p50_ms": 0.11260399878665339,
+      "apparent_advantage": 0.3663235731863539
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "setting_id": "main-s00546",
+      "top_k": 100,
+      "probes": 87,
+      "repetitions": 1,
+      "start_depth": 16,
+      "candidate_target": 10000,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.65829,
+      "p50_ms": 0.7774170003358449,
+      "p95_ms": 1.1008044993559452,
+      "total_query_ms": 818.9895039849944,
+      "process_p50_median_ms": 0.7774170003358449,
+      "process_p50_min_ms": 0.7774170003358449,
+      "process_p50_max_ms": 0.7774170003358449,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 157073408,
+      "mean_documents_scored": 15197.285,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 14.232,
+      "mean_prefix_lookups": 2442.786,
+      "mean_final_depth": 2.768,
+      "sampled_scan_setting_id": "main-s00403",
+      "sampled_scan_p50_ms": 1.0081875007017516,
+      "apparent_advantage": 0.22889641084151335
+    },
+    {
+      "method": "prefix",
+      "clusters": 1024,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "setting_id": "main-s00366",
+      "top_k": 100,
+      "probes": 34,
+      "repetitions": 1,
+      "start_depth": 16,
+      "candidate_target": 10000,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.55744,
+      "p50_ms": 0.7375005006906576,
+      "p95_ms": 1.3970913503726479,
+      "total_query_ms": 824.835511008132,
+      "process_p50_median_ms": 0.7375005006906576,
+      "process_p50_min_ms": 0.7375005006906576,
+      "process_p50_max_ms": 0.7375005006906576,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 155336704,
+      "mean_documents_scored": 18301.841,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 13.459,
+      "mean_prefix_lookups": 909.84,
+      "mean_final_depth": 3.541,
+      "sampled_scan_setting_id": "main-s00403",
+      "sampled_scan_p50_ms": 1.0081875007017516,
+      "apparent_advantage": 0.26848874819682
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "setting_id": "main-s00540",
+      "top_k": 100,
+      "probes": 9,
+      "repetitions": 1,
+      "start_depth": 16,
+      "candidate_target": 1000,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.40157,
+      "p50_ms": 0.17585449950274779,
+      "p95_ms": 0.2233398996850155,
+      "total_query_ms": 181.30702401595045,
+      "process_p50_median_ms": 0.17585449950274779,
+      "process_p50_min_ms": 0.17585449950274779,
+      "process_p50_max_ms": 0.17585449950274779,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 157073408,
+      "mean_documents_scored": 1614.029,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 13.896,
+      "mean_prefix_lookups": 246.87,
+      "mean_final_depth": 3.104,
+      "sampled_scan_setting_id": "main-s00402",
+      "sampled_scan_p50_ms": 0.19720800082723144,
+      "apparent_advantage": 0.10827908216153403
+    },
+    {
+      "method": "prefix",
+      "clusters": 1024,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "setting_id": "main-s00360",
+      "top_k": 100,
+      "probes": 5,
+      "repetitions": 1,
+      "start_depth": 16,
+      "candidate_target": 1000,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.28669,
+      "p50_ms": 0.116979501399328,
+      "p95_ms": 0.25961700084735634,
+      "total_query_ms": 140.9206749922305,
+      "process_p50_median_ms": 0.116979501399328,
+      "process_p50_min_ms": 0.116979501399328,
+      "process_p50_max_ms": 0.116979501399328,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 155975680,
+      "mean_documents_scored": 2043.548,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 12.52,
+      "mean_prefix_lookups": 124.67,
+      "mean_final_depth": 4.48,
+      "sampled_scan_setting_id": "main-s00402",
+      "sampled_scan_p50_ms": 0.19720800082723144,
+      "apparent_advantage": 0.4068217267624423
+    },
+    {
+      "method": "prefix",
+      "clusters": 64,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "setting_id": "main-s00180",
+      "top_k": 100,
+      "probes": 2,
+      "repetitions": 1,
+      "start_depth": 16,
+      "candidate_target": 1000,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.11339,
+      "p50_ms": 0.09635449987399625,
+      "p95_ms": 0.23561279922432715,
+      "total_query_ms": 125.60836100237793,
+      "process_p50_median_ms": 0.09635449987399625,
+      "process_p50_min_ms": 0.09635449987399625,
+      "process_p50_max_ms": 0.09635449987399625,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 144408576,
+      "mean_documents_scored": 2161.902,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 9.588,
+      "mean_prefix_lookups": 38.352,
+      "mean_final_depth": 7.412,
+      "sampled_scan_setting_id": "main-s00402",
+      "sampled_scan_p50_ms": 0.19720800082723144,
+      "apparent_advantage": 0.5114067407518126
+    },
+    {
+      "method": "prefix",
+      "clusters": 1,
+      "router": null,
+      "setting_id": "main-s00025",
+      "top_k": 100,
+      "probes": 1,
+      "repetitions": 1,
+      "start_depth": 16,
+      "candidate_target": 1000,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.04154,
+      "p50_ms": 0.09545850025460823,
+      "p95_ms": 0.21679585061065149,
+      "total_query_ms": 115.12583399417053,
+      "process_p50_median_ms": 0.09545850025460823,
+      "process_p50_min_ms": 0.09545850025460823,
+      "process_p50_max_ms": 0.09545850025460823,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 142508032,
+      "mean_documents_scored": 2019.298,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 5.007,
+      "mean_prefix_lookups": 10.014,
+      "mean_final_depth": 11.993,
+      "sampled_scan_setting_id": "main-s00402",
+      "sampled_scan_p50_ms": 0.19720800082723144,
+      "apparent_advantage": 0.5159501650329248
+    }
+  ],
+  "routing_cutoffs": [
+    {
+      "router": null,
+      "clusters": 1,
+      "top_k": 1,
+      "target": 0.992,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 1.0
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "clusters": 64,
+      "top_k": 1,
+      "target": 0.992,
+      "probes": 27,
+      "rank_cutoff": 27,
+      "routing_recall": 0.992
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "clusters": 1024,
+      "top_k": 1,
+      "target": 0.992,
+      "probes": 198,
+      "rank_cutoff": 198,
+      "routing_recall": 0.992
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "clusters": 4096,
+      "top_k": 1,
+      "target": 0.992,
+      "probes": 659,
+      "rank_cutoff": 659,
+      "routing_recall": 0.992
+    },
+    {
+      "router": null,
+      "clusters": 1,
+      "top_k": 1,
+      "target": 0.535,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 1.0
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "clusters": 64,
+      "top_k": 1,
+      "target": 0.535,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.568
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "clusters": 1024,
+      "top_k": 1,
+      "target": 0.535,
+      "probes": 2,
+      "rank_cutoff": 2,
+      "routing_recall": 0.601
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "clusters": 4096,
+      "top_k": 1,
+      "target": 0.535,
+      "probes": 2,
+      "rank_cutoff": 2,
+      "routing_recall": 0.552
+    },
+    {
+      "router": null,
+      "clusters": 1,
+      "top_k": 1,
+      "target": 0.234,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 1.0
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "clusters": 64,
+      "top_k": 1,
+      "target": 0.234,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.568
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "clusters": 1024,
+      "top_k": 1,
+      "target": 0.234,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.445
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "clusters": 4096,
+      "top_k": 1,
+      "target": 0.234,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.423
+    },
+    {
+      "router": null,
+      "clusters": 1,
+      "top_k": 1,
+      "target": 0.217,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 1.0
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "clusters": 64,
+      "top_k": 1,
+      "target": 0.217,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.568
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "clusters": 1024,
+      "top_k": 1,
+      "target": 0.217,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.445
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "clusters": 4096,
+      "top_k": 1,
+      "target": 0.217,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.423
+    },
+    {
+      "router": null,
+      "clusters": 1,
+      "top_k": 1,
+      "target": 0.101,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 1.0
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "clusters": 64,
+      "top_k": 1,
+      "target": 0.101,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.568
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "clusters": 1024,
+      "top_k": 1,
+      "target": 0.101,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.445
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "clusters": 4096,
+      "top_k": 1,
+      "target": 0.101,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.423
+    },
+    {
+      "router": null,
+      "clusters": 1,
+      "top_k": 10,
+      "target": 0.9721,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 1.0
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "clusters": 64,
+      "top_k": 10,
+      "target": 0.9721,
+      "probes": 21,
+      "rank_cutoff": 21,
+      "routing_recall": 0.9734
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "clusters": 1024,
+      "top_k": 10,
+      "target": 0.9721,
+      "probes": 173,
+      "rank_cutoff": 173,
+      "routing_recall": 0.9722
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "clusters": 4096,
+      "top_k": 10,
+      "target": 0.9721,
+      "probes": 511,
+      "rank_cutoff": 511,
+      "routing_recall": 0.9721
+    },
+    {
+      "router": null,
+      "clusters": 1,
+      "top_k": 10,
+      "target": 0.4213,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 1.0
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "clusters": 64,
+      "top_k": 10,
+      "target": 0.4213,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.5198
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "clusters": 1024,
+      "top_k": 10,
+      "target": 0.4213,
+      "probes": 2,
+      "rank_cutoff": 2,
+      "routing_recall": 0.494
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "clusters": 4096,
+      "top_k": 10,
+      "target": 0.4213,
+      "probes": 2,
+      "rank_cutoff": 2,
+      "routing_recall": 0.4542
+    },
+    {
+      "router": null,
+      "clusters": 1,
+      "top_k": 10,
+      "target": 0.185,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 1.0
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "clusters": 64,
+      "top_k": 10,
+      "target": 0.185,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.5198
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "clusters": 1024,
+      "top_k": 10,
+      "target": 0.185,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.3678
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "clusters": 4096,
+      "top_k": 10,
+      "target": 0.185,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.3412
+    },
+    {
+      "router": null,
+      "clusters": 1,
+      "top_k": 10,
+      "target": 0.1405,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 1.0
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "clusters": 64,
+      "top_k": 10,
+      "target": 0.1405,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.5198
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "clusters": 1024,
+      "top_k": 10,
+      "target": 0.1405,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.3678
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "clusters": 4096,
+      "top_k": 10,
+      "target": 0.1405,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.3412
+    },
+    {
+      "router": null,
+      "clusters": 1,
+      "top_k": 10,
+      "target": 0.0718,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 1.0
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "clusters": 64,
+      "top_k": 10,
+      "target": 0.0718,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.5198
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "clusters": 1024,
+      "top_k": 10,
+      "target": 0.0718,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.3678
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "clusters": 4096,
+      "top_k": 10,
+      "target": 0.0718,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.3412
+    },
+    {
+      "router": null,
+      "clusters": 1,
+      "top_k": 100,
+      "target": 0.65829,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 1.0
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "clusters": 64,
+      "top_k": 100,
+      "target": 0.65829,
+      "probes": 3,
+      "rank_cutoff": 3,
+      "routing_recall": 0.69539
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "clusters": 1024,
+      "top_k": 100,
+      "target": 0.65829,
+      "probes": 12,
+      "rank_cutoff": 12,
+      "routing_recall": 0.66406
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "clusters": 4096,
+      "top_k": 100,
+      "target": 0.65829,
+      "probes": 27,
+      "rank_cutoff": 27,
+      "routing_recall": 0.66116
+    },
+    {
+      "router": null,
+      "clusters": 1,
+      "top_k": 100,
+      "target": 0.55744,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 1.0
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "clusters": 64,
+      "top_k": 100,
+      "target": 0.55744,
+      "probes": 2,
+      "rank_cutoff": 2,
+      "routing_recall": 0.60889
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "clusters": 1024,
+      "top_k": 100,
+      "target": 0.55744,
+      "probes": 6,
+      "rank_cutoff": 6,
+      "routing_recall": 0.56146
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "clusters": 4096,
+      "top_k": 100,
+      "target": 0.55744,
+      "probes": 13,
+      "rank_cutoff": 13,
+      "routing_recall": 0.56379
+    },
+    {
+      "router": null,
+      "clusters": 1,
+      "top_k": 100,
+      "target": 0.40157,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 1.0
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "clusters": 64,
+      "top_k": 100,
+      "target": 0.40157,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.45894
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "clusters": 1024,
+      "top_k": 100,
+      "target": 0.40157,
+      "probes": 3,
+      "rank_cutoff": 3,
+      "routing_recall": 0.4499
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "clusters": 4096,
+      "top_k": 100,
+      "target": 0.40157,
+      "probes": 4,
+      "rank_cutoff": 4,
+      "routing_recall": 0.40278
+    },
+    {
+      "router": null,
+      "clusters": 1,
+      "top_k": 100,
+      "target": 0.28669,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 1.0
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "clusters": 64,
+      "top_k": 100,
+      "target": 0.28669,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.45894
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "clusters": 1024,
+      "top_k": 100,
+      "target": 0.28669,
+      "probes": 2,
+      "rank_cutoff": 2,
+      "routing_recall": 0.38525
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "clusters": 4096,
+      "top_k": 100,
+      "target": 0.28669,
+      "probes": 2,
+      "rank_cutoff": 2,
+      "routing_recall": 0.30728
+    },
+    {
+      "router": null,
+      "clusters": 1,
+      "top_k": 100,
+      "target": 0.11339,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 1.0
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "clusters": 64,
+      "top_k": 100,
+      "target": 0.11339,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.45894
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "clusters": 1024,
+      "top_k": 100,
+      "target": 0.11339,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.27572
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "clusters": 4096,
+      "top_k": 100,
+      "target": 0.11339,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.21798
+    },
+    {
+      "router": null,
+      "clusters": 1,
+      "top_k": 100,
+      "target": 0.04154,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 1.0
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "clusters": 64,
+      "top_k": 100,
+      "target": 0.04154,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.45894
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "clusters": 1024,
+      "top_k": 100,
+      "target": 0.04154,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.27572
+    },
+    {
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "clusters": 4096,
+      "top_k": 100,
+      "target": 0.04154,
+      "probes": 1,
+      "rank_cutoff": 1,
+      "routing_recall": 0.21798
+    }
+  ],
+  "skipped_completed_settings": [
+    {
+      "existing_setting_id": "main-s00000",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00250",
+        "target": 0.992
+      }
+    },
+    {
+      "existing_setting_id": "main-s00000",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00300",
+        "target": 0.535
+      }
+    },
+    {
+      "existing_setting_id": "main-s00030",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00300",
+        "target": 0.535
+      }
+    },
+    {
+      "existing_setting_id": "main-s00210",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00300",
+        "target": 0.535
+      }
+    },
+    {
+      "existing_setting_id": "main-s00390",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00300",
+        "target": 0.535
+      }
+    },
+    {
+      "existing_setting_id": "main-s00000",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00120",
+        "target": 0.234
+      }
+    },
+    {
+      "existing_setting_id": "main-s00030",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00120",
+        "target": 0.234
+      }
+    },
+    {
+      "existing_setting_id": "main-s00000",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00125",
+        "target": 0.217
+      }
+    },
+    {
+      "existing_setting_id": "main-s00030",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00125",
+        "target": 0.217
+      }
+    },
+    {
+      "existing_setting_id": "main-s00000",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00015",
+        "target": 0.101
+      }
+    },
+    {
+      "existing_setting_id": "main-s00030",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00015",
+        "target": 0.101
+      }
+    },
+    {
+      "existing_setting_id": "main-s00001",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00450",
+        "target": 0.9721
+      }
+    },
+    {
+      "existing_setting_id": "main-s00001",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00330",
+        "target": 0.4213
+      }
+    },
+    {
+      "existing_setting_id": "main-s00036",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00330",
+        "target": 0.4213
+      }
+    },
+    {
+      "existing_setting_id": "main-s00001",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00150",
+        "target": 0.185
+      }
+    },
+    {
+      "existing_setting_id": "main-s00036",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00150",
+        "target": 0.185
+      }
+    },
+    {
+      "existing_setting_id": "main-s00001",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00155",
+        "target": 0.1405
+      }
+    },
+    {
+      "existing_setting_id": "main-s00036",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00155",
+        "target": 0.1405
+      }
+    },
+    {
+      "existing_setting_id": "main-s00001",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00020",
+        "target": 0.0718
+      }
+    },
+    {
+      "existing_setting_id": "main-s00036",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00020",
+        "target": 0.0718
+      }
+    },
+    {
+      "existing_setting_id": "main-s00002",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00546",
+        "target": 0.65829
+      }
+    },
+    {
+      "existing_setting_id": "main-s00002",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00366",
+        "target": 0.55744
+      }
+    },
+    {
+      "existing_setting_id": "main-s00042",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00366",
+        "target": 0.55744
+      }
+    },
+    {
+      "existing_setting_id": "main-s00002",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00540",
+        "target": 0.40157
+      }
+    },
+    {
+      "existing_setting_id": "main-s00002",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00360",
+        "target": 0.28669
+      }
+    },
+    {
+      "existing_setting_id": "main-s00002",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00180",
+        "target": 0.11339
+      }
+    },
+    {
+      "existing_setting_id": "main-s00002",
+      "reason": {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00025",
+        "target": 0.04154
+      }
+    }
+  ],
+  "settings": 42,
+  "jobs": 16,
+  "minimum_advantage": 0.03,
+  "policy": "Positive-recall nondominated B/C points, each compared with the fastest sampled A at at least that recall. New A cutoffs use every saved layout. Explicit zero-split budget512 controls and depth0/target0 controls at declared-target best A settings are added separately.",
+  "jobs_before_batching": 4,
+  "source": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d256",
+  "source_file_hashes": {
+    "configuration.json": "8295928423ca02577f146cf585226f5bb1a7523beaa73523f6e9e0f5f4c178f3",
+    "inputs-manifest.json": "50f6342026a8109fc64aead4c562cf9643040d4a02feed343738423b3a4bbdb3",
+    "layouts.json": "46772d3921425aa6a3f387906b73c1da9ec6964224b4fe32cbecd6d15450f2e9",
+    "main/schedule.json": "65a8a35a5514627a7d5d1e265e2aa1ccb7dd8fe14267c25e746e8d5e3252aaf7",
+    "main/settings.json": "aae64c486b03c45792ab13d04525deb3f5ec43aca45e31d01f06f8387da29e3e"
+  },
+  "timing_budget_seconds": 900.0,
+  "scope": "Follow-up controls selected after inspecting the original results; input arrays, layouts and query rows remain fixed. Original setting IDs are retained as provenance, not reused for new measurements."
+}

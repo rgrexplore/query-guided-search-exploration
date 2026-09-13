@@ -1,0 +1,2153 @@
+{
+  "storage": [
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0000-part000",
+      "clusters": 16,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0000-part001",
+      "clusters": 16,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0000-part002",
+      "clusters": 16,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0000-part003",
+      "clusters": 16,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0000-part004",
+      "clusters": 16,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0001-part000",
+      "clusters": 16,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8003584,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24003584
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8003584,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24003584
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0001-part001",
+      "clusters": 16,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8003584,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24003584
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8003584,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24003584
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0001-part002",
+      "clusters": 16,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8003584,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24003584
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8003584,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24003584
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0001-part003",
+      "clusters": 16,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8003584,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24003584
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8003584,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24003584
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0001-part004",
+      "clusters": 16,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8003584,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24003584
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8003584,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24003584
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0001-part005",
+      "clusters": 16,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8003584,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24003584
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8003584,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24003584
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0001-part006",
+      "clusters": 16,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8003584,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24003584
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8003584,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24003584
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0002-part000",
+      "clusters": 16,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0002-part001",
+      "clusters": 16,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0002-part002",
+      "clusters": 16,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0002-part003",
+      "clusters": 16,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0002-part004",
+      "clusters": 16,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0002-part005",
+      "clusters": 16,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0002-part006",
+      "clusters": 16,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0003-part000",
+      "clusters": 64,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0003-part001",
+      "clusters": 64,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0003-part002",
+      "clusters": 64,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0003-part003",
+      "clusters": 64,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0003-part004",
+      "clusters": 64,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0004-part000",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8015360,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24015360
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8015360,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24015360
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0004-part001",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8015360,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24015360
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8015360,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24015360
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0004-part002",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8015360,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24015360
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8015360,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24015360
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0004-part003",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8015360,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24015360
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8015360,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24015360
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0004-part004",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8015360,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24015360
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8015360,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24015360
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0004-part005",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8015360,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24015360
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8015360,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24015360
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0004-part006",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8015360,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24015360
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8015360,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24015360
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0004-part007",
+      "clusters": 64,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8015360,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24015360
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8015360,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24015360
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0005-part000",
+      "clusters": 64,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0005-part001",
+      "clusters": 64,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0005-part002",
+      "clusters": 64,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0005-part003",
+      "clusters": 64,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0005-part004",
+      "clusters": 64,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0005-part005",
+      "clusters": 64,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0005-part006",
+      "clusters": 64,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0006-part000",
+      "clusters": 256,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0006-part001",
+      "clusters": 256,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0006-part002",
+      "clusters": 256,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0006-part003",
+      "clusters": 256,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0006-part004",
+      "clusters": 256,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0007-part000",
+      "clusters": 256,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8063488,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24063488
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8063488,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24063488
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0007-part001",
+      "clusters": 256,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8063488,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24063488
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8063488,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24063488
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0007-part002",
+      "clusters": 256,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8063488,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24063488
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8063488,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24063488
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0007-part003",
+      "clusters": 256,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8063488,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24063488
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8063488,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24063488
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0007-part004",
+      "clusters": 256,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8063488,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24063488
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8063488,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24063488
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0007-part005",
+      "clusters": 256,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8063488,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24063488
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8063488,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24063488
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0007-part006",
+      "clusters": 256,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8063488,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24063488
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8063488,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24063488
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0007-part007",
+      "clusters": 256,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8063488,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24063488
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8063488,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24063488
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0008-part000",
+      "clusters": 256,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0008-part001",
+      "clusters": 256,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0008-part002",
+      "clusters": 256,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0008-part003",
+      "clusters": 256,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0008-part004",
+      "clusters": 256,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0008-part005",
+      "clusters": 256,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0008-part006",
+      "clusters": 256,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0008-part007",
+      "clusters": 256,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0009-part000",
+      "clusters": 1024,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0009-part001",
+      "clusters": 1024,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0009-part002",
+      "clusters": 1024,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0009-part003",
+      "clusters": 1024,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0009-part004",
+      "clusters": 1024,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0010-part000",
+      "clusters": 1024,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8267776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24267776
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8267776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24267776
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0010-part001",
+      "clusters": 1024,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8267776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24267776
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8267776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24267776
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0010-part002",
+      "clusters": 1024,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8267776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24267776
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8267776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24267776
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0010-part003",
+      "clusters": 1024,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8267776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24267776
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8267776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24267776
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0010-part004",
+      "clusters": 1024,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8267776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24267776
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8267776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24267776
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0010-part005",
+      "clusters": 1024,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8267776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24267776
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8267776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24267776
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0010-part006",
+      "clusters": 1024,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8267776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24267776
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8267776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24267776
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0010-part007",
+      "clusters": 1024,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8267776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24267776
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 8267776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 24267776
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0011-part000",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0011-part001",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0011-part002",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0011-part003",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0011-part004",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0011-part005",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0011-part006",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0011-part007",
+      "clusters": 1024,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0012-part000",
+      "clusters": 4096,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0012-part001",
+      "clusters": 4096,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0012-part002",
+      "clusters": 4096,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0012-part003",
+      "clusters": 4096,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0012-part004",
+      "clusters": 4096,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 16000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0013-part000",
+      "clusters": 4096,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 9026560,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 25026560
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 9026560,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 25026560
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0013-part001",
+      "clusters": 4096,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 9026560,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 25026560
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 9026560,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 25026560
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0013-part002",
+      "clusters": 4096,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 9026560,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 25026560
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 9026560,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 25026560
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0013-part003",
+      "clusters": 4096,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 9026560,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 25026560
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 9026560,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 25026560
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0013-part004",
+      "clusters": 4096,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 9026560,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 25026560
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 9026560,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 25026560
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0013-part005",
+      "clusters": 4096,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 9026560,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 25026560
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 9026560,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 25026560
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0013-part006",
+      "clusters": 4096,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 9026560,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 25026560
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 9026560,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 25026560
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0013-part007",
+      "clusters": 4096,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 9026560,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 25026560
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 9026560,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 25026560
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0014-part000",
+      "clusters": 4096,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0014-part001",
+      "clusters": 4096,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0014-part002",
+      "clusters": 4096,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0014-part003",
+      "clusters": 4096,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0014-part004",
+      "clusters": 4096,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0014-part005",
+      "clusters": 4096,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0014-part006",
+      "clusters": 4096,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "nomic-msmarco-d64-binary-main-j0014-part007",
+      "clusters": 4096,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "reported": {
+        "codes_bytes": 8000000,
+        "row_ids_bytes": 8000000,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 4000000,
+        "logical_bytes": 20000000
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    }
+  ],
+  "checked_query_counts": {
+    "documents_scored": 23617,
+    "prefix_levels": 114000,
+    "prefix_lookups": 114000
+  },
+  "failures": [],
+  "scope": "Exact logical field sizes include cluster padding. Query checks compare loop counts, not elapsed-time predictions. Only complete processes are checked. This does not measure every allocation or establish a constant cost per CPU operation."
+}

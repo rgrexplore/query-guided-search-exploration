@@ -1,0 +1,61 @@
+{
+  "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024",
+  "cluster_counts": [
+    1,
+    64,
+    1024,
+    4096
+  ],
+  "top_ks": [
+    1,
+    100
+  ],
+  "recall_targets": [
+    0.5,
+    0.8,
+    0.9,
+    0.95,
+    0.99
+  ],
+  "probe_targets": [
+    0.5,
+    0.8,
+    0.9,
+    0.95,
+    0.99
+  ],
+  "repetitions": 1,
+  "ram_budget_bytes": 32000000000,
+  "worker_stop_bytes": 32000000000,
+  "global_seconds": 900,
+  "job_seconds": 900.0,
+  "schedule_seed": 42,
+  "router_seed": 42,
+  "branch": {
+    "leaf_sizes": [
+      128,
+      2048
+    ],
+    "node_budgets": [
+      512,
+      8192
+    ],
+    "exploration": 0,
+    "seed": 42
+  },
+  "prefix": {
+    "max_prefix_bits": 32,
+    "start_depths": [
+      16
+    ],
+    "candidate_targets": [
+      1000,
+      10000,
+      100000,
+      261465,
+      0
+    ]
+  },
+  "followup_source": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d1024",
+  "followup_minimum_advantage": 0.03
+}

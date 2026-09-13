@@ -1,0 +1,849 @@
+[
+  {
+    "target": 0.5,
+    "method": "scan",
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-4096-seed42",
+    "top_k": 1,
+    "probes": 157,
+    "repetitions": 1,
+    "reasons": [
+      {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00430",
+        "target": 0.999
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00430"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00005",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.999,
+    "p50_ms": 4.468291499506449,
+    "p95_ms": 4.991088148926792,
+    "total_query_ms": 4467.660729038471,
+    "process_p50_median_ms": 4.468291499506449,
+    "process_p50_min_ms": 4.468291499506449,
+    "process_p50_max_ms": 4.468291499506449,
+    "logical_index_bytes": 71118616,
+    "lifetime_peak_bytes": 293699584,
+    "mean_documents_scored": 20879.36,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 0.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.5,
+    "method": "prefix",
+    "clusters": 1024,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-1024-seed42",
+    "top_k": 1,
+    "probes": 1,
+    "repetitions": 1,
+    "start_depth": 0,
+    "candidate_target": 0,
+    "reasons": [
+      {
+        "kind": "prefix_depth_zero_at_best_scan",
+        "source_setting_id": "main-s00210",
+        "target": 0.5
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00210"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00017",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.728,
+    "p50_ms": 0.19558349958970211,
+    "p95_ms": 0.2747497032032697,
+    "total_query_ms": 200.85248196846806,
+    "process_p50_median_ms": 0.19558349958970211,
+    "process_p50_min_ms": 0.19558349958970211,
+    "process_p50_max_ms": 0.19558349958970211,
+    "logical_index_bytes": 73210340,
+    "lifetime_peak_bytes": 220676096,
+    "mean_documents_scored": 584.657,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 1.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.8,
+    "method": "scan",
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-4096-seed42",
+    "top_k": 1,
+    "probes": 157,
+    "repetitions": 1,
+    "reasons": [
+      {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00430",
+        "target": 0.999
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00430"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00005",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.999,
+    "p50_ms": 4.468291499506449,
+    "p95_ms": 4.991088148926792,
+    "total_query_ms": 4467.660729038471,
+    "process_p50_median_ms": 4.468291499506449,
+    "process_p50_min_ms": 4.468291499506449,
+    "process_p50_max_ms": 4.468291499506449,
+    "logical_index_bytes": 71118616,
+    "lifetime_peak_bytes": 293699584,
+    "mean_documents_scored": 20879.36,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 0.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.8,
+    "method": "prefix",
+    "clusters": 1024,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-1024-seed42",
+    "top_k": 1,
+    "probes": 2,
+    "repetitions": 1,
+    "start_depth": 0,
+    "candidate_target": 0,
+    "reasons": [
+      {
+        "kind": "prefix_depth_zero_at_best_scan",
+        "source_setting_id": "main-s00211",
+        "target": 0.8
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00211"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00018",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.859,
+    "p50_ms": 0.30272950061771553,
+    "p95_ms": 0.42982534851034865,
+    "total_query_ms": 312.5426240148954,
+    "process_p50_median_ms": 0.30272950061771553,
+    "process_p50_min_ms": 0.30272950061771553,
+    "process_p50_max_ms": 0.30272950061771553,
+    "logical_index_bytes": 73210340,
+    "lifetime_peak_bytes": 220676096,
+    "mean_documents_scored": 1149.348,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 1.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.9,
+    "method": "scan",
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-4096-seed42",
+    "top_k": 1,
+    "probes": 157,
+    "repetitions": 1,
+    "reasons": [
+      {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00430",
+        "target": 0.999
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00430"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00005",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.999,
+    "p50_ms": 4.468291499506449,
+    "p95_ms": 4.991088148926792,
+    "total_query_ms": 4467.660729038471,
+    "process_p50_median_ms": 4.468291499506449,
+    "process_p50_min_ms": 4.468291499506449,
+    "process_p50_max_ms": 4.468291499506449,
+    "logical_index_bytes": 71118616,
+    "lifetime_peak_bytes": 293699584,
+    "mean_documents_scored": 20879.36,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 0.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.9,
+    "method": "prefix",
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-4096-seed42",
+    "top_k": 1,
+    "probes": 3,
+    "repetitions": 1,
+    "start_depth": 0,
+    "candidate_target": 0,
+    "reasons": [
+      {
+        "kind": "prefix_depth_zero_at_best_scan",
+        "source_setting_id": "main-s00392",
+        "target": 0.9
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00392"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00019",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.92,
+    "p50_ms": 0.40212499879999086,
+    "p95_ms": 0.4548648998024873,
+    "total_query_ms": 404.98818804189796,
+    "process_p50_median_ms": 0.40212499879999086,
+    "process_p50_min_ms": 0.40212499879999086,
+    "process_p50_max_ms": 0.40212499879999086,
+    "logical_index_bytes": 73210340,
+    "lifetime_peak_bytes": 246939648,
+    "mean_documents_scored": 461.878,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 1.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.95,
+    "method": "scan",
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-4096-seed42",
+    "top_k": 1,
+    "probes": 157,
+    "repetitions": 1,
+    "reasons": [
+      {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00430",
+        "target": 0.999
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00430"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00005",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.999,
+    "p50_ms": 4.468291499506449,
+    "p95_ms": 4.991088148926792,
+    "total_query_ms": 4467.660729038471,
+    "process_p50_median_ms": 4.468291499506449,
+    "process_p50_min_ms": 4.468291499506449,
+    "process_p50_max_ms": 4.468291499506449,
+    "logical_index_bytes": 71118616,
+    "lifetime_peak_bytes": 293699584,
+    "mean_documents_scored": 20879.36,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 0.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.95,
+    "method": "prefix",
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-4096-seed42",
+    "top_k": 1,
+    "probes": 6,
+    "repetitions": 1,
+    "start_depth": 0,
+    "candidate_target": 0,
+    "reasons": [
+      {
+        "kind": "prefix_depth_zero_at_best_scan",
+        "source_setting_id": "main-s00393",
+        "target": 0.95
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00393"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00020",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.956,
+    "p50_ms": 0.48768749911687337,
+    "p95_ms": 0.5634041506709764,
+    "total_query_ms": 491.18509298205026,
+    "process_p50_median_ms": 0.48768749911687337,
+    "process_p50_min_ms": 0.48768749911687337,
+    "process_p50_max_ms": 0.48768749911687337,
+    "logical_index_bytes": 73210340,
+    "lifetime_peak_bytes": 246939648,
+    "mean_documents_scored": 890.047,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 1.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.99,
+    "method": "scan",
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-4096-seed42",
+    "top_k": 1,
+    "probes": 157,
+    "repetitions": 1,
+    "reasons": [
+      {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00430",
+        "target": 0.999
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00430"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00005",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.999,
+    "p50_ms": 4.468291499506449,
+    "p95_ms": 4.991088148926792,
+    "total_query_ms": 4467.660729038471,
+    "process_p50_median_ms": 4.468291499506449,
+    "process_p50_min_ms": 4.468291499506449,
+    "process_p50_max_ms": 4.468291499506449,
+    "logical_index_bytes": 71118616,
+    "lifetime_peak_bytes": 293699584,
+    "mean_documents_scored": 20879.36,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 0.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.99,
+    "method": "prefix",
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-4096-seed42",
+    "top_k": 1,
+    "probes": 33,
+    "repetitions": 1,
+    "start_depth": 0,
+    "candidate_target": 0,
+    "reasons": [
+      {
+        "kind": "prefix_depth_zero_at_best_scan",
+        "source_setting_id": "main-s00394",
+        "target": 0.99
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00394"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00021",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.99,
+    "p50_ms": 1.2170835016149795,
+    "p95_ms": 1.4142583468128578,
+    "total_query_ms": 1222.9080080032873,
+    "process_p50_median_ms": 1.2170835016149795,
+    "process_p50_min_ms": 1.2170835016149795,
+    "process_p50_max_ms": 1.2170835016149795,
+    "logical_index_bytes": 73210340,
+    "lifetime_peak_bytes": 246775808,
+    "mean_documents_scored": 4558.183,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 1.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.5,
+    "method": "scan",
+    "clusters": 1024,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-1024-seed42",
+    "top_k": 100,
+    "probes": 3,
+    "repetitions": 1,
+    "reasons": [
+      {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00545",
+        "target": 0.64684
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00545"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00013",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.66068,
+    "p50_ms": 0.4391250004118774,
+    "p95_ms": 0.5933139524131548,
+    "total_query_ms": 448.7612960365368,
+    "process_p50_median_ms": 0.4391250004118774,
+    "process_p50_min_ms": 0.4391250004118774,
+    "process_p50_max_ms": 0.4391250004118774,
+    "logical_index_bytes": 71118616,
+    "lifetime_peak_bytes": 261193728,
+    "mean_documents_scored": 1703.657,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 0.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.5,
+    "method": "prefix",
+    "clusters": 1024,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-1024-seed42",
+    "top_k": 100,
+    "probes": 2,
+    "repetitions": 1,
+    "start_depth": 0,
+    "candidate_target": 0,
+    "reasons": [
+      {
+        "kind": "prefix_depth_zero_at_best_scan",
+        "source_setting_id": "main-s00222",
+        "target": 0.5
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00222"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00022",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.59931,
+    "p50_ms": 0.32922900209086947,
+    "p95_ms": 0.4596059530740604,
+    "total_query_ms": 338.18684695870616,
+    "process_p50_median_ms": 0.32922900209086947,
+    "process_p50_min_ms": 0.32922900209086947,
+    "process_p50_max_ms": 0.32922900209086947,
+    "logical_index_bytes": 73210340,
+    "lifetime_peak_bytes": 220676096,
+    "mean_documents_scored": 1149.348,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 1.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.8,
+    "method": "scan",
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-4096-seed42",
+    "top_k": 100,
+    "probes": 512,
+    "repetitions": 1,
+    "reasons": [
+      {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00474",
+        "target": 0.98116
+      },
+      {
+        "kind": "zero_split_budget_512",
+        "source_setting_id": "main-s00474"
+      },
+      {
+        "kind": "zero_split_budget_512",
+        "source_setting_id": "main-s00478"
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00474",
+      "main-s00478"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00011",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.98116,
+    "p50_ms": 13.60975050010893,
+    "p95_ms": 14.678274349716958,
+    "total_query_ms": 13624.678838084947,
+    "process_p50_median_ms": 13.60975050010893,
+    "process_p50_min_ms": 13.60975050010893,
+    "process_p50_max_ms": 13.60975050010893,
+    "logical_index_bytes": 71118616,
+    "lifetime_peak_bytes": 293699584,
+    "mean_documents_scored": 66911.499,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 0.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.8,
+    "method": "prefix",
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-4096-seed42",
+    "top_k": 100,
+    "probes": 15,
+    "repetitions": 1,
+    "start_depth": 0,
+    "candidate_target": 0,
+    "reasons": [
+      {
+        "kind": "prefix_depth_zero_at_best_scan",
+        "source_setting_id": "main-s00403",
+        "target": 0.8
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00403"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00023",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.80501,
+    "p50_ms": 0.757333500587265,
+    "p95_ms": 0.8825773973512696,
+    "total_query_ms": 761.3499169892748,
+    "process_p50_median_ms": 0.757333500587265,
+    "process_p50_min_ms": 0.757333500587265,
+    "process_p50_max_ms": 0.757333500587265,
+    "logical_index_bytes": 73210340,
+    "lifetime_peak_bytes": 247136256,
+    "mean_documents_scored": 2132.107,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 1.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.9,
+    "method": "scan",
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-4096-seed42",
+    "top_k": 100,
+    "probes": 512,
+    "repetitions": 1,
+    "reasons": [
+      {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00474",
+        "target": 0.98116
+      },
+      {
+        "kind": "zero_split_budget_512",
+        "source_setting_id": "main-s00474"
+      },
+      {
+        "kind": "zero_split_budget_512",
+        "source_setting_id": "main-s00478"
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00474",
+      "main-s00478"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00011",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.98116,
+    "p50_ms": 13.60975050010893,
+    "p95_ms": 14.678274349716958,
+    "total_query_ms": 13624.678838084947,
+    "process_p50_median_ms": 13.60975050010893,
+    "process_p50_min_ms": 13.60975050010893,
+    "process_p50_max_ms": 13.60975050010893,
+    "logical_index_bytes": 71118616,
+    "lifetime_peak_bytes": 293699584,
+    "mean_documents_scored": 66911.499,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 0.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.9,
+    "method": "prefix",
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-4096-seed42",
+    "top_k": 100,
+    "probes": 57,
+    "repetitions": 1,
+    "start_depth": 0,
+    "candidate_target": 0,
+    "reasons": [
+      {
+        "kind": "prefix_depth_zero_at_best_scan",
+        "source_setting_id": "main-s00404",
+        "target": 0.9
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00404"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00024",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.90021,
+    "p50_ms": 1.8720625012065284,
+    "p95_ms": 2.150085402718105,
+    "total_query_ms": 1878.0117360656732,
+    "process_p50_median_ms": 1.8720625012065284,
+    "process_p50_min_ms": 1.8720625012065284,
+    "process_p50_max_ms": 1.8720625012065284,
+    "logical_index_bytes": 73210340,
+    "lifetime_peak_bytes": 247136256,
+    "mean_documents_scored": 7737.498,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 1.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.95,
+    "method": "scan",
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-4096-seed42",
+    "top_k": 100,
+    "probes": 512,
+    "repetitions": 1,
+    "reasons": [
+      {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00474",
+        "target": 0.98116
+      },
+      {
+        "kind": "zero_split_budget_512",
+        "source_setting_id": "main-s00474"
+      },
+      {
+        "kind": "zero_split_budget_512",
+        "source_setting_id": "main-s00478"
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00474",
+      "main-s00478"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00011",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.98116,
+    "p50_ms": 13.60975050010893,
+    "p95_ms": 14.678274349716958,
+    "total_query_ms": 13624.678838084947,
+    "process_p50_median_ms": 13.60975050010893,
+    "process_p50_min_ms": 13.60975050010893,
+    "process_p50_max_ms": 13.60975050010893,
+    "logical_index_bytes": 71118616,
+    "lifetime_peak_bytes": 293699584,
+    "mean_documents_scored": 66911.499,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 0.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.95,
+    "method": "prefix",
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-4096-seed42",
+    "top_k": 100,
+    "probes": 170,
+    "repetitions": 1,
+    "start_depth": 0,
+    "candidate_target": 0,
+    "reasons": [
+      {
+        "kind": "prefix_depth_zero_at_best_scan",
+        "source_setting_id": "main-s00405",
+        "target": 0.95
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00405"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00025",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.95004,
+    "p50_ms": 4.831562502658926,
+    "p95_ms": 5.388710099396121,
+    "total_query_ms": 4835.095461061428,
+    "process_p50_median_ms": 4.831562502658926,
+    "process_p50_min_ms": 4.831562502658926,
+    "process_p50_max_ms": 4.831562502658926,
+    "logical_index_bytes": 73210340,
+    "lifetime_peak_bytes": 247136256,
+    "mean_documents_scored": 22585.081,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 1.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.99,
+    "method": "scan",
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-4096-seed42",
+    "top_k": 100,
+    "probes": 1405,
+    "repetitions": 1,
+    "reasons": [
+      {
+        "kind": "match_alternative_recall",
+        "source_setting_id": "main-s00298",
+        "target": 0.99522
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00298"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00008",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.99522,
+    "p50_ms": 36.4670835006109,
+    "p95_ms": 38.10717115229636,
+    "total_query_ms": 36428.71452599502,
+    "process_p50_median_ms": 36.4670835006109,
+    "process_p50_min_ms": 36.4670835006109,
+    "process_p50_max_ms": 36.4670835006109,
+    "logical_index_bytes": 71118616,
+    "lifetime_peak_bytes": 293666816,
+    "mean_documents_scored": 181806.651,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 0.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  },
+  {
+    "target": 0.99,
+    "method": "prefix",
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d1024/routers/ivf-4096-seed42",
+    "top_k": 100,
+    "probes": 874,
+    "repetitions": 1,
+    "start_depth": 0,
+    "candidate_target": 0,
+    "reasons": [
+      {
+        "kind": "prefix_depth_zero_at_best_scan",
+        "source_setting_id": "main-s00406",
+        "target": 0.99
+      }
+    ],
+    "source_setting_ids": [
+      "main-s00406"
+    ],
+    "setting_id": "qwen-quora-d1024-followup-s00026",
+    "measurements": 1000,
+    "complete_processes": 1,
+    "complete": true,
+    "qualified": true,
+    "recall": 0.99,
+    "p50_ms": 23.068374501235667,
+    "p95_ms": 24.342208301459323,
+    "total_query_ms": 23058.30076703569,
+    "process_p50_median_ms": 23.068374501235667,
+    "process_p50_min_ms": 23.068374501235667,
+    "process_p50_max_ms": 23.068374501235667,
+    "logical_index_bytes": 73210340,
+    "lifetime_peak_bytes": 246939648,
+    "mean_documents_scored": 113571.472,
+    "mean_nodes": 0.0,
+    "mean_bitplane_words": 0.0,
+    "mean_leaf_words": 0.0,
+    "mean_prefix_levels": 1.0,
+    "mean_prefix_lookups": 0.0,
+    "mean_final_depth": 0.0
+  }
+]

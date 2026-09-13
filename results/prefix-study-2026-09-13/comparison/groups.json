@@ -1,0 +1,59 @@
+{
+  "groups": [
+    {
+      "pool": "nomic-msmarco-d256",
+      "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/comparison/nomic-msmarco-d256",
+      "sources": 2,
+      "main_settings": 612,
+      "repeated_settings": 65,
+      "table_rows": 45,
+      "missing_repeat_rows": 0
+    },
+    {
+      "pool": "nomic-msmarco-d64",
+      "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/comparison/nomic-msmarco-d64",
+      "sources": 2,
+      "main_settings": 1168,
+      "repeated_settings": 60,
+      "table_rows": 30,
+      "missing_repeat_rows": 0
+    },
+    {
+      "pool": "nomic-msmarco-d768",
+      "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/comparison/nomic-msmarco-d768",
+      "sources": 1,
+      "main_settings": 35,
+      "repeated_settings": 6,
+      "table_rows": 6,
+      "missing_repeat_rows": 0
+    },
+    {
+      "pool": "qwen-quora-d1024",
+      "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/comparison/qwen-quora-d1024",
+      "sources": 2,
+      "main_settings": 407,
+      "repeated_settings": 44,
+      "table_rows": 30,
+      "missing_repeat_rows": 0
+    },
+    {
+      "pool": "qwen-quora-d256",
+      "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/comparison/qwen-quora-d256",
+      "sources": 2,
+      "main_settings": 620,
+      "repeated_settings": 66,
+      "table_rows": 45,
+      "missing_repeat_rows": 0
+    },
+    {
+      "pool": "qwen-quora-d32",
+      "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/comparison/qwen-quora-d32",
+      "sources": 3,
+      "main_settings": 1174,
+      "repeated_settings": 63,
+      "table_rows": 36,
+      "missing_repeat_rows": 4
+    }
+  ],
+  "excluded_sources": []
+}

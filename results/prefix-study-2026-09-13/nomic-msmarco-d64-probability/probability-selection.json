@@ -1,0 +1,61 @@
+{
+  "selected": [
+    {
+      "top_k": 1,
+      "source_setting_id": "main-s00259",
+      "target": 0.95,
+      "source_recall": 0.95,
+      "source_p50_ms": 1.0075420013890835,
+      "source_mean_bitplane_words": 15.024,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64/routers/ivf-1024-seed42",
+      "probes": 114,
+      "leaf_size": 2048,
+      "node_budgets": [
+        128,
+        8192
+      ],
+      "prefer_deeper_ties": false
+    },
+    {
+      "top_k": 100,
+      "source_setting_id": "main-s00295",
+      "target": 0.95,
+      "source_recall": 0.95014,
+      "source_p50_ms": 2.589542000350775,
+      "source_mean_bitplane_words": 30.63,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64/routers/ivf-1024-seed42",
+      "probes": 287,
+      "leaf_size": 2048,
+      "node_budgets": [
+        128,
+        8192
+      ],
+      "prefer_deeper_ties": false
+    }
+  ],
+  "omitted": [],
+  "settings": 36,
+  "probabilities": [
+    0,
+    0.1,
+    0.2
+  ],
+  "seeds": [
+    7,
+    23,
+    42
+  ],
+  "source": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d64",
+  "source_file_hashes": {
+    "configuration.json": "fda1280bd1e7166d80153b85ec2828c2fab73c26cc94bbcce29f0c7b412d908b",
+    "inputs-manifest.json": "e18c77baa769c32a087a144c3c5da8c8d4732e3fda19863df7ce480fe9ce555f",
+    "layouts.json": "eff7e63d0634709e346dc6b2b0fdccb5eb733a7c0a8a558e86f7a300b9c6227a",
+    "main/schedule.json": "341366c0dc1da465665a3563cd1c63ffc0dedce2986d34ea327528a5fec8f4a0",
+    "main/settings.json": "0e7df29db9fdd02ca6f916d6eed1c41d592502d4cab6bfa650bc1116e8eb3aa7"
+  },
+  "jobs": 12,
+  "timing_budget_seconds": 300,
+  "policy": "For each K, use the fastest qualified B setting with actual bitmap splits at 95% recall; fall back to 80%, otherwise omit K. Keep its router, probes, leaf size and tie order. Compare 128 nodes and its selected budget across every declared probability and seed.",
+  "scope": "This is an ablation within B, not an A/B/C comparison. Probability 0 is retained at all three seeds as the deterministic control. Compare all seeds when interpreting probability; the fastest seed alone is not evidence of an improvement.",
+  "input_check": "Preparation copies saved input and layout records. The study controller verifies their hashes before running."
+}

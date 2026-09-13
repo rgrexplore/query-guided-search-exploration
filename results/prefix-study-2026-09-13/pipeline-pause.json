@@ -1,0 +1,14 @@
+{
+  "time": 1789243708.452068,
+  "pipeline_pid": 27117,
+  "controller_pid": 34207,
+  "worker_pid": 34889,
+  "reason": "Pause only the outer sequencer. Current Quora1024 sweep continues to its normal checkpoint; next work will prioritize shorter code lengths and missing groups within the overall time budget.",
+  "controller_command": [
+    "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/../../.venv/bin/python",
+    "-m",
+    "experiments.prefix_study_v2",
+    "run",
+    "results/prefix-study-2026-09-13/qwen-quora-d1024"
+  ]
+}

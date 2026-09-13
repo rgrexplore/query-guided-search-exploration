@@ -1,0 +1,271 @@
+{
+  "groups": [
+    {
+      "top_k": 1,
+      "node_budget": 128,
+      "probability": 0,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-64-seed42",
+      "probes": 16,
+      "leaf_size": 32,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 87.3,
+      "recall_percent_min": 87.3,
+      "recall_percent_max": 87.3,
+      "query_ms_median": 0.045979499191162176,
+      "query_ms_min": 0.04587500006891787,
+      "query_ms_max": 0.04724999962490983
+    },
+    {
+      "top_k": 1,
+      "node_budget": 128,
+      "probability": 0.1,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-64-seed42",
+      "probes": 16,
+      "leaf_size": 32,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 83.33333333333333,
+      "recall_percent_min": 82.39999999999999,
+      "recall_percent_max": 84.8,
+      "query_ms_median": 0.047917001211317256,
+      "query_ms_min": 0.047790999815333635,
+      "query_ms_max": 0.04797949986823369
+    },
+    {
+      "top_k": 1,
+      "node_budget": 128,
+      "probability": 0.2,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-64-seed42",
+      "probes": 16,
+      "leaf_size": 32,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 70.9,
+      "recall_percent_min": 65.3,
+      "recall_percent_max": 80.2,
+      "query_ms_median": 0.04895799793303013,
+      "query_ms_min": 0.04875000013271347,
+      "query_ms_max": 0.049458001740276814
+    },
+    {
+      "top_k": 1,
+      "node_budget": 8192,
+      "probability": 0,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-64-seed42",
+      "probes": 16,
+      "leaf_size": 32,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 95.3,
+      "recall_percent_min": 95.3,
+      "recall_percent_max": 95.3,
+      "query_ms_median": 0.07660449955437798,
+      "query_ms_min": 0.07579199882457033,
+      "query_ms_max": 0.07720900066487957
+    },
+    {
+      "top_k": 1,
+      "node_budget": 8192,
+      "probability": 0.1,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-64-seed42",
+      "probes": 16,
+      "leaf_size": 32,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 95.3,
+      "recall_percent_min": 95.3,
+      "recall_percent_max": 95.3,
+      "query_ms_median": 0.08572949809604324,
+      "query_ms_min": 0.08458350021101069,
+      "query_ms_max": 0.08660400089866016
+    },
+    {
+      "top_k": 1,
+      "node_budget": 8192,
+      "probability": 0.2,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-64-seed42",
+      "probes": 16,
+      "leaf_size": 32,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 95.3,
+      "recall_percent_min": 95.3,
+      "recall_percent_max": 95.3,
+      "query_ms_median": 0.0958540022111265,
+      "query_ms_min": 0.09529199815005995,
+      "query_ms_max": 0.09872899863694329
+    },
+    {
+      "top_k": 100,
+      "node_budget": 128,
+      "probability": 0,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-64-seed42",
+      "probes": 23,
+      "leaf_size": 128,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 65.16300000000001,
+      "recall_percent_min": 65.16300000000001,
+      "recall_percent_max": 65.16300000000001,
+      "query_ms_median": 0.07489550080208573,
+      "query_ms_min": 0.07447899952239823,
+      "query_ms_max": 0.07529200229328126
+    },
+    {
+      "top_k": 100,
+      "node_budget": 128,
+      "probability": 0.1,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-64-seed42",
+      "probes": 23,
+      "leaf_size": 128,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 61.47366666666667,
+      "recall_percent_min": 58.791000000000004,
+      "recall_percent_max": 62.99,
+      "query_ms_median": 0.0767090023146011,
+      "query_ms_min": 0.07650000043213367,
+      "query_ms_max": 0.07747949894110207
+    },
+    {
+      "top_k": 100,
+      "node_budget": 128,
+      "probability": 0.2,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-64-seed42",
+      "probes": 23,
+      "leaf_size": 128,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 51.60766666666667,
+      "recall_percent_min": 46.641,
+      "recall_percent_max": 56.961,
+      "query_ms_median": 0.08108300062303897,
+      "query_ms_min": 0.07895799899415579,
+      "query_ms_max": 0.08554200030630454
+    },
+    {
+      "top_k": 100,
+      "node_budget": 8192,
+      "probability": 0,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-64-seed42",
+      "probes": 23,
+      "leaf_size": 128,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 95.488,
+      "recall_percent_min": 95.488,
+      "recall_percent_max": 95.488,
+      "query_ms_median": 0.4131460009375587,
+      "query_ms_min": 0.4105205007363111,
+      "query_ms_max": 0.4137504984100815
+    },
+    {
+      "top_k": 100,
+      "node_budget": 8192,
+      "probability": 0.1,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-64-seed42",
+      "probes": 23,
+      "leaf_size": 128,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 95.488,
+      "recall_percent_min": 95.488,
+      "recall_percent_max": 95.488,
+      "query_ms_median": 0.44616699960897677,
+      "query_ms_min": 0.437541499195504,
+      "query_ms_max": 0.45145900003262796
+    },
+    {
+      "top_k": 100,
+      "node_budget": 8192,
+      "probability": 0.2,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-64-seed42",
+      "probes": 23,
+      "leaf_size": 128,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 95.488,
+      "recall_percent_min": 95.488,
+      "recall_percent_max": 95.488,
+      "query_ms_median": 0.48879150199354626,
+      "query_ms_min": 0.4881040003965609,
+      "query_ms_max": 0.4901869997411268
+    }
+  ],
+  "omitted": [],
+  "source": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d32-probability",
+  "scope": "Recall points are means across three seeds. Time points are medians of the three seed median query times. Bars show the minimum to maximum seed range, not a confidence interval. Only complete, qualified three-seed groups are plotted; gaps remain in the saved summary."
+}

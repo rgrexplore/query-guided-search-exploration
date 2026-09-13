@@ -1,0 +1,38 @@
+[
+  {
+    "setting_id": "qwen-quora-d32-binary::qwen-quora-d32-binary-main-s00230",
+    "original_setting_id": "qwen-quora-d32-binary-main-s00230",
+    "source_folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d32-binary",
+    "method": "scan",
+    "top_k": 1,
+    "target": 1.0,
+    "repeat_status": "missing"
+  },
+  {
+    "setting_id": "qwen-quora-d32-binary::qwen-quora-d32-binary-main-s00125",
+    "original_setting_id": "qwen-quora-d32-binary-main-s00125",
+    "source_folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d32-binary",
+    "method": "scan",
+    "top_k": 100,
+    "target": 1.0,
+    "repeat_status": "missing"
+  },
+  {
+    "setting_id": "qwen-quora-d32-binary::qwen-quora-d32-binary-main-s00054",
+    "original_setting_id": "qwen-quora-d32-binary-main-s00054",
+    "source_folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d32-binary",
+    "method": "branch",
+    "top_k": 100,
+    "target": 1.0,
+    "repeat_status": "missing"
+  },
+  {
+    "setting_id": "qwen-quora-d32-binary::qwen-quora-d32-binary-main-s00109",
+    "original_setting_id": "qwen-quora-d32-binary-main-s00109",
+    "source_folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d32-binary",
+    "method": "prefix",
+    "top_k": 100,
+    "target": 1.0,
+    "repeat_status": "missing"
+  }
+]

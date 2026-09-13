@@ -1,0 +1,303 @@
+{
+  "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d32-global-exact",
+  "selected_settings": [
+    {
+      "target": 1.0,
+      "method": "scan",
+      "clusters": 1,
+      "router": null,
+      "setting_id": "qwen-quora-d32-global-exact-main-s00000",
+      "top_k": 1,
+      "probes": 1,
+      "repetitions": 1,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 1.0,
+      "p50_ms": 2.462354501403752,
+      "p95_ms": 2.531698249913461,
+      "total_query_ms": 2470.088692050922,
+      "process_p50_median_ms": 2.462354501403752,
+      "process_p50_min_ms": 2.462354501403752,
+      "process_p50_max_ms": 2.462354501403752,
+      "logical_index_bytes": 8366896,
+      "lifetime_peak_bytes": 71204864,
+      "mean_documents_scored": 522931.0,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "target": 1.0,
+      "method": "branch",
+      "clusters": 1,
+      "router": null,
+      "setting_id": "qwen-quora-d32-global-exact-main-s00001",
+      "top_k": 1,
+      "probes": 1,
+      "repetitions": 1,
+      "exploration": 0,
+      "seed": 42,
+      "leaf_size": 2048,
+      "node_budget": 0,
+      "prefer_deeper_ties": false,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 1.0,
+      "p50_ms": 0.12195800081826746,
+      "p95_ms": 0.18202114933956173,
+      "total_query_ms": 132.0532580211875,
+      "process_p50_median_ms": 0.12195800081826746,
+      "process_p50_min_ms": 0.12195800081826746,
+      "process_p50_max_ms": 0.12195800081826746,
+      "logical_index_bytes": 10458672,
+      "lifetime_peak_bytes": 71467008,
+      "mean_documents_scored": 1699.622,
+      "mean_nodes": 13.026,
+      "mean_bitplane_words": 96303.406,
+      "mean_leaf_words": 10132.04,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "target": 1.0,
+      "method": "prefix",
+      "clusters": 1,
+      "router": null,
+      "setting_id": "qwen-quora-d32-global-exact-main-s00004",
+      "top_k": 1,
+      "probes": 1,
+      "repetitions": 1,
+      "start_depth": 32,
+      "candidate_target": 0,
+      "stop_when_exact": true,
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 1.0,
+      "p50_ms": 1.1653960009425646,
+      "p95_ms": 2.4877562500478234,
+      "total_query_ms": 1320.5230260355165,
+      "process_p50_median_ms": 1.1653960009425646,
+      "process_p50_min_ms": 1.1653960009425646,
+      "process_p50_max_ms": 1.1653960009425646,
+      "logical_index_bytes": 10458620,
+      "lifetime_peak_bytes": 71680000,
+      "mean_documents_scored": 278316.626,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 28.495,
+      "mean_prefix_lookups": 56.32,
+      "mean_final_depth": 4.505
+    }
+  ],
+  "repeated_settings": [
+    {
+      "method": "scan",
+      "clusters": 1,
+      "router": null,
+      "setting_id": "qwen-quora-d32-global-exact-main-s00000",
+      "top_k": 1,
+      "probes": 1,
+      "repetitions": 1,
+      "measurements": 3000,
+      "complete_processes": 3,
+      "complete": true,
+      "qualified": true,
+      "recall": 1.0,
+      "p50_ms": 2.4816670011205133,
+      "p95_ms": 2.556127100433514,
+      "total_query_ms": 7473.034759124857,
+      "process_p50_median_ms": 2.480208999259048,
+      "process_p50_min_ms": 2.47954199949163,
+      "process_p50_max_ms": 2.484687500327709,
+      "logical_index_bytes": 8366896,
+      "lifetime_peak_bytes": 71598080,
+      "mean_documents_scored": 522931.0,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "branch",
+      "clusters": 1,
+      "router": null,
+      "setting_id": "qwen-quora-d32-global-exact-main-s00001",
+      "top_k": 1,
+      "probes": 1,
+      "repetitions": 1,
+      "exploration": 0,
+      "seed": 42,
+      "leaf_size": 2048,
+      "node_budget": 0,
+      "prefer_deeper_ties": false,
+      "measurements": 3000,
+      "complete_processes": 3,
+      "complete": true,
+      "qualified": true,
+      "recall": 1.0,
+      "p50_ms": 0.12408350085024722,
+      "p95_ms": 0.18921940045402147,
+      "total_query_ms": 403.8066110078944,
+      "process_p50_median_ms": 0.12437499935913365,
+      "process_p50_min_ms": 0.12222949953866191,
+      "process_p50_max_ms": 0.12539550152723677,
+      "logical_index_bytes": 10458672,
+      "lifetime_peak_bytes": 72744960,
+      "mean_documents_scored": 1699.622,
+      "mean_nodes": 13.026,
+      "mean_bitplane_words": 96303.406,
+      "mean_leaf_words": 10132.04,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "prefix",
+      "clusters": 1,
+      "router": null,
+      "setting_id": "qwen-quora-d32-global-exact-main-s00004",
+      "top_k": 1,
+      "probes": 1,
+      "repetitions": 1,
+      "start_depth": 32,
+      "candidate_target": 0,
+      "stop_when_exact": true,
+      "measurements": 3000,
+      "complete_processes": 3,
+      "complete": true,
+      "qualified": true,
+      "recall": 1.0,
+      "p50_ms": 1.1635210012173047,
+      "p95_ms": 2.4853381501088734,
+      "total_query_ms": 3965.552488916728,
+      "process_p50_median_ms": 1.1657709983410314,
+      "process_p50_min_ms": 1.1605415002122754,
+      "process_p50_max_ms": 1.1662085016723722,
+      "logical_index_bytes": 10458620,
+      "lifetime_peak_bytes": 72040448,
+      "mean_documents_scored": 278316.626,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 28.495,
+      "mean_prefix_lookups": 56.32,
+      "mean_final_depth": 4.505
+    }
+  ],
+  "used_cases": [
+    {
+      "job_id": "repeat-b0-qwen-quora-d32-global-exact-main-j0001-part000",
+      "block": 0,
+      "setting_ids": [
+        "qwen-quora-d32-global-exact-main-s00001"
+      ]
+    },
+    {
+      "job_id": "repeat-b0-qwen-quora-d32-global-exact-main-j0000-part000",
+      "block": 0,
+      "setting_ids": [
+        "qwen-quora-d32-global-exact-main-s00000"
+      ]
+    },
+    {
+      "job_id": "repeat-b0-qwen-quora-d32-global-exact-main-j0002-part001",
+      "block": 0,
+      "setting_ids": [
+        "qwen-quora-d32-global-exact-main-s00004"
+      ]
+    },
+    {
+      "job_id": "repeat-b1-qwen-quora-d32-global-exact-main-j0000-part000",
+      "block": 1,
+      "setting_ids": [
+        "qwen-quora-d32-global-exact-main-s00000"
+      ]
+    },
+    {
+      "job_id": "repeat-b1-qwen-quora-d32-global-exact-main-j0002-part001",
+      "block": 1,
+      "setting_ids": [
+        "qwen-quora-d32-global-exact-main-s00004"
+      ]
+    },
+    {
+      "job_id": "repeat-b1-qwen-quora-d32-global-exact-main-j0001-part000",
+      "block": 1,
+      "setting_ids": [
+        "qwen-quora-d32-global-exact-main-s00001"
+      ]
+    },
+    {
+      "job_id": "repeat-b2-qwen-quora-d32-global-exact-main-j0002-part001",
+      "block": 2,
+      "setting_ids": [
+        "qwen-quora-d32-global-exact-main-s00004"
+      ]
+    },
+    {
+      "job_id": "repeat-b2-qwen-quora-d32-global-exact-main-j0001-part000",
+      "block": 2,
+      "setting_ids": [
+        "qwen-quora-d32-global-exact-main-s00001"
+      ]
+    },
+    {
+      "job_id": "repeat-b2-qwen-quora-d32-global-exact-main-j0000-part000",
+      "block": 2,
+      "setting_ids": [
+        "qwen-quora-d32-global-exact-main-s00000"
+      ]
+    }
+  ],
+  "geometry": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/geometry/qwen-quora-d32/geometry.json",
+  "geometry_sha256": "a0dace5cdbaef7c90fbeb09681176603b19154cb53a228b8dc5e36d1c83e341d",
+  "source_file_hashes": {
+    "inputs-manifest.json": "7581f68489cc70b58c56a600fa9dfae8ed2dbad4ea1db9798ee0061308af2edb",
+    "selected-settings.json": "1a9ede353b05e4a0bb0ed473bd937b9bede251e94335e7d272ecfa2bcff8ebf9",
+    "repeat/settings.json": "50fe671880a2e4a79abd10d745cf03303981c7ba7f2dcefa7399a387b7c998fe",
+    "repeat/schedule.json": "80b555005ae282fdfb8d264a823acd27513dc758ecbc359b6623a09b244c2400",
+    "repeat/cases/repeat-b0-qwen-quora-d32-global-exact-main-j0001-part000/process.json": "99556d3567b39e7d1b790a63c8753c3a465f5cca5ee8af12489b9fbbef500515",
+    "repeat/cases/repeat-b0-qwen-quora-d32-global-exact-main-j0001-part000/run/result.json": "0fecda2d7470d7b91c53a7d5e139cf273c7e5cc99700d61bbf7dac23621e19f4",
+    "repeat/cases/repeat-b0-qwen-quora-d32-global-exact-main-j0001-part000/run/queries.jsonl": "1a5f1e751dd5571fac3818e23e117bfb50298b2d4308d3c43ed6db0840ba88bc",
+    "repeat/cases/repeat-b0-qwen-quora-d32-global-exact-main-j0000-part000/process.json": "bb05df6bd23ff4384337444852901acf44b8b2c8aa9d9d3fd99c2aee5881439f",
+    "repeat/cases/repeat-b0-qwen-quora-d32-global-exact-main-j0000-part000/run/result.json": "1cc05d5a86f54a9dc81d78fdef007d85c2023a85c01836fc44ec6c09d5dcec88",
+    "repeat/cases/repeat-b0-qwen-quora-d32-global-exact-main-j0000-part000/run/queries.jsonl": "32da0878ab00694179e35e2fff32bab8a5d74c587743066f7afd5d3b5948e626",
+    "repeat/cases/repeat-b0-qwen-quora-d32-global-exact-main-j0002-part001/process.json": "fd253c005f449510cd01d1294b45ac1961aa2375a3d172f1aa3afe7d3b851242",
+    "repeat/cases/repeat-b0-qwen-quora-d32-global-exact-main-j0002-part001/run/result.json": "6d270d402d61af60564be0046c3115fde7f394ed69a4ef973a8225120718df7d",
+    "repeat/cases/repeat-b0-qwen-quora-d32-global-exact-main-j0002-part001/run/queries.jsonl": "b78a363889a7cffdb1bb1d2c06eb8c7fe15507f936fba1ffb3ec6dbea101fe35",
+    "repeat/cases/repeat-b1-qwen-quora-d32-global-exact-main-j0000-part000/process.json": "a6816b3fff1b6a1b0077674f95600630c81448825f0c7973f7dfba65f05abe52",
+    "repeat/cases/repeat-b1-qwen-quora-d32-global-exact-main-j0000-part000/run/result.json": "6bc683f7b58609ac33e152755527bffb6c59d71cd1cb9064cdafa32ecd80a6aa",
+    "repeat/cases/repeat-b1-qwen-quora-d32-global-exact-main-j0000-part000/run/queries.jsonl": "a527be2fe521f35e2fd6ea9325dceb117b1e3e70e5fef997cb942b2198a8e331",
+    "repeat/cases/repeat-b1-qwen-quora-d32-global-exact-main-j0002-part001/process.json": "7cca6a0a7a63db4d49e09688a321f00a365d2295c2168e45f4a9cca31a7155dc",
+    "repeat/cases/repeat-b1-qwen-quora-d32-global-exact-main-j0002-part001/run/result.json": "2ec17267551f10c989493e6b3047cdf3ac517a677d48a6c30f9fa814e725d215",
+    "repeat/cases/repeat-b1-qwen-quora-d32-global-exact-main-j0002-part001/run/queries.jsonl": "5e2c11318e16a01be432643e7e36b50c8051c38d71cb194a0c69ce4355210a0d",
+    "repeat/cases/repeat-b1-qwen-quora-d32-global-exact-main-j0001-part000/process.json": "ae18ecc52cb9b3018bbb60786447987b7e3e268617851d612336cf5acf22598d",
+    "repeat/cases/repeat-b1-qwen-quora-d32-global-exact-main-j0001-part000/run/result.json": "5e7edc5e3c42a7977bd46bf92af471b8465ab2f907697941b1650eabda489331",
+    "repeat/cases/repeat-b1-qwen-quora-d32-global-exact-main-j0001-part000/run/queries.jsonl": "380a87604ff1eac2624e9c12d4ce8a08aa48599726913d995375545b45f08913",
+    "repeat/cases/repeat-b2-qwen-quora-d32-global-exact-main-j0002-part001/process.json": "4941d7fce32385393478574bd50396b94d274e339372dfa0adcb58d73dabf15d",
+    "repeat/cases/repeat-b2-qwen-quora-d32-global-exact-main-j0002-part001/run/result.json": "184040887385ded7d333ef0bb0a167fb9a796995788ca5ce7b196a4b53e4ea07",
+    "repeat/cases/repeat-b2-qwen-quora-d32-global-exact-main-j0002-part001/run/queries.jsonl": "45bd0fa4b930ca7a4499966f316039ce67681d8b587f5a70259874e2a5e0610b",
+    "repeat/cases/repeat-b2-qwen-quora-d32-global-exact-main-j0001-part000/process.json": "6b7b67904477804d4561d8b03b771182ec5c55af5c5d5a019132b0e253189a75",
+    "repeat/cases/repeat-b2-qwen-quora-d32-global-exact-main-j0001-part000/run/result.json": "253c0318848219a6f9b013b208431a49028591a46f137ee6f872f477c5b524c6",
+    "repeat/cases/repeat-b2-qwen-quora-d32-global-exact-main-j0001-part000/run/queries.jsonl": "795adceb99fd5dc86e4bd62bb9bcdce3c1ed356b85c268ea84d6fb6edefebfbe",
+    "repeat/cases/repeat-b2-qwen-quora-d32-global-exact-main-j0000-part000/process.json": "bbc93d9d57c2be1dc79828327f452851c444180145fc287db22c024268e4f0ce",
+    "repeat/cases/repeat-b2-qwen-quora-d32-global-exact-main-j0000-part000/run/result.json": "4672d193c05171ffd833fd85a04e4c932f28c77c5fe4c6063a5394bc54c780dd",
+    "repeat/cases/repeat-b2-qwen-quora-d32-global-exact-main-j0000-part000/run/queries.jsonl": "55769659113d3359f2cf34d597b53516e4dc22e4ae366ea62110f37b44c4cb28"
+  },
+  "group_rule": "Geometry at depth 32, top_k 1: exact-code-present means matched_rows>0; exact-code-absent means matched_rows=0.",
+  "scope": "Conditional breakdown of the same global settings selected on all 1,000 queries. No setting is retuned for a group. This is not a cluster-optimized subgroup comparison and does not establish an overall Method C advantage.",
+  "aggregation": "Time statistics use all repeated observations. Each query appears once in each of three process blocks. The process median range is the minimum and maximum subgroup median over those blocks. Weighted subgroup means reproduce the overall means; medians and percentiles are not additive."
+}

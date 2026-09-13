@@ -1,0 +1,14 @@
+{
+  "changed": [
+    {
+      "original": "main-j0004",
+      "batches": 24
+    },
+    {
+      "original": "main-j0008",
+      "batches": 30
+    }
+  ],
+  "settings": 570,
+  "scope": "Only unstarted continuation jobs were divided. Completed jobs and all settings/query rows are unchanged."
+}

@@ -1,0 +1,112 @@
+{
+  "status": "complete; ready marker held for root analysis confirmation",
+  "native_sha256": "3b6c6780a8eec645812d0a68b42ebcc00dfc2e0794f10ac68d7a4003d7e6b925",
+  "pools": [
+    {
+      "name": "qwen-quora-d32",
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32",
+      "documents": 522931,
+      "queries": 1000,
+      "dimensions": 32,
+      "reference_seconds": 2.557034879009734,
+      "preparation_seconds": 4.010681416002626,
+      "manifest_sha256": "424105f30f111b8da05ffbc3fe03cd78def2931593ad465cf8fcfef03180cff4"
+    },
+    {
+      "name": "nomic-msmarco-d64",
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64",
+      "documents": 1000000,
+      "queries": 1000,
+      "dimensions": 64,
+      "reference_seconds": 8.44661120598903,
+      "preparation_seconds": 10.973165958999743,
+      "manifest_sha256": "e26439f36a7da09158131462cde1518f71ed63d26a8f578a4b91d55606ce60f8"
+    }
+  ],
+  "analyses": [
+    {
+      "pool": "qwen-quora-d32",
+      "analysis": "geometry",
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/geometry/qwen-quora-d32",
+      "status": "created",
+      "seconds": 0.18023070900017046
+    },
+    {
+      "pool": "qwen-quora-d32",
+      "analysis": "bounds",
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/bounds/qwen-quora-d32",
+      "status": "created",
+      "seconds": 0.07106279199797427
+    },
+    {
+      "pool": "qwen-quora-d256",
+      "analysis": "geometry",
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/geometry/qwen-quora-d256",
+      "status": "created",
+      "seconds": 0.43249179199847276
+    },
+    {
+      "pool": "qwen-quora-d256",
+      "analysis": "bounds",
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/bounds/qwen-quora-d256",
+      "status": "created",
+      "seconds": 0.3302602500007197
+    },
+    {
+      "pool": "qwen-quora-d1024",
+      "analysis": "geometry",
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/geometry/qwen-quora-d1024",
+      "status": "created",
+      "seconds": 1.3755776660000265
+    },
+    {
+      "pool": "qwen-quora-d1024",
+      "analysis": "bounds",
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/bounds/qwen-quora-d1024",
+      "status": "created",
+      "seconds": 1.2037670419995266
+    },
+    {
+      "pool": "nomic-msmarco-d64",
+      "analysis": "geometry",
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/geometry/nomic-msmarco-d64",
+      "status": "created",
+      "seconds": 0.30101545800062013
+    },
+    {
+      "pool": "nomic-msmarco-d64",
+      "analysis": "bounds",
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/bounds/nomic-msmarco-d64",
+      "status": "created",
+      "seconds": 0.17065779099721112
+    },
+    {
+      "pool": "nomic-msmarco-d256",
+      "analysis": "geometry",
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/geometry/nomic-msmarco-d256",
+      "status": "created",
+      "seconds": 0.7127274589984154
+    },
+    {
+      "pool": "nomic-msmarco-d256",
+      "analysis": "bounds",
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/bounds/nomic-msmarco-d256",
+      "status": "created",
+      "seconds": 0.5841174170018348
+    },
+    {
+      "pool": "nomic-msmarco-d768",
+      "analysis": "geometry",
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/geometry/nomic-msmarco-d768",
+      "status": "created",
+      "seconds": 1.8737838749984803
+    },
+    {
+      "pool": "nomic-msmarco-d768",
+      "analysis": "bounds",
+      "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/bounds/nomic-msmarco-d768",
+      "status": "created",
+      "seconds": 1.642388166001183
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "predictions_sha256": "84a505dce346d883856ef12c0a7983239ca3beb1e9c782e542a4d84f10f3850b",
+  "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d32-global-exact",
+  "phase": "main",
+  "compared_records": 3000,
+  "measured_prediction_rows": 3000,
+  "unmeasured_prediction_rows": 3000,
+  "settings": [
+    {
+      "job_id": "qwen-quora-d32-global-exact-main-j0002-part000",
+      "setting_id": "qwen-quora-d32-global-exact-main-s00003",
+      "top_k": 1,
+      "start_depth": 4,
+      "records": 1000
+    },
+    {
+      "job_id": "qwen-quora-d32-global-exact-main-j0002-part001",
+      "setting_id": "qwen-quora-d32-global-exact-main-s00004",
+      "top_k": 1,
+      "start_depth": 32,
+      "records": 1000
+    },
+    {
+      "job_id": "qwen-quora-d32-global-exact-main-j0002-part002",
+      "setting_id": "qwen-quora-d32-global-exact-main-s00002",
+      "top_k": 1,
+      "start_depth": 1,
+      "records": 1000
+    }
+  ],
+  "mismatches": [],
+  "coverage_errors": [],
+  "skipped_jobs": [],
+  "matches": true,
+  "scope": "Compare four integer work counts only for completed global exact-stop variants; unmatched predictions are not claimed as verified."
+}

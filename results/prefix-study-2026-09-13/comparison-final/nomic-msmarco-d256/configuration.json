@@ -1,0 +1,17 @@
+{
+  "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256",
+  "top_ks": [
+    1,
+    10,
+    100
+  ],
+  "recall_targets": [
+    0.5,
+    0.8,
+    0.9,
+    0.95,
+    0.99
+  ],
+  "scope": "Derived tables from saved summaries; no new search measurements.",
+  "storage_scope": "Stored fields with router = native logical_index_bytes plus routing_payload_bytes recorded in saved worker metadata. This excludes unused allocation capacity, original float vectors, runtime and query workspace."
+}

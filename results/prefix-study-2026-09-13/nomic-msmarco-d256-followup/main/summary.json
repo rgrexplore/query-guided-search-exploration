@@ -1,0 +1,1769 @@
+{
+  "settings": [
+    {
+      "method": "scan",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 100,
+      "probes": 4,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00540",
+          "target": 0.40157
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00540"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00019",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.40278,
+      "p50_ms": 0.14356300016515888,
+      "p95_ms": 0.16262709796137642,
+      "total_query_ms": 144.33346896475996,
+      "process_p50_median_ms": 0.14356300016515888,
+      "process_p50_min_ms": 0.14356300016515888,
+      "process_p50_max_ms": 0.14356300016515888,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 184434688,
+      "mean_documents_scored": 1065.783,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 1,
+      "probes": 659,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00250",
+          "target": 0.992
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00250"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00002",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.992,
+      "p50_ms": 6.583207999938168,
+      "p95_ms": 7.014083348985878,
+      "total_query_ms": 6588.5529359584325,
+      "process_p50_median_ms": 6.583207999938168,
+      "process_p50_min_ms": 6.583207999938168,
+      "process_p50_max_ms": 6.583207999938168,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 184434688,
+      "mean_documents_scored": 160841.721,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 100,
+      "probes": 2,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00360",
+          "target": 0.28669
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00360"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00021",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.30728,
+      "p50_ms": 0.11797949991887435,
+      "p95_ms": 0.13280655002745334,
+      "total_query_ms": 118.54062699785572,
+      "process_p50_median_ms": 0.11797949991887435,
+      "process_p50_min_ms": 0.11797949991887435,
+      "process_p50_max_ms": 0.11797949991887435,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 184434688,
+      "mean_documents_scored": 535.118,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 1024,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "top_k": 1,
+      "probes": 1,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00120",
+          "target": 0.234
+        },
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00125",
+          "target": 0.217
+        },
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00015",
+          "target": 0.101
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00120",
+        "main-s00125",
+        "main-s00015"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00003",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.445,
+      "p50_ms": 0.06422949991247151,
+      "p95_ms": 0.08843160048854769,
+      "total_query_ms": 65.75312094719266,
+      "process_p50_median_ms": 0.06422949991247151,
+      "process_p50_min_ms": 0.06422949991247151,
+      "process_p50_max_ms": 0.06422949991247151,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 180781056,
+      "mean_documents_scored": 1035.91,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 1024,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "top_k": 100,
+      "probes": 2,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00360",
+          "target": 0.28669
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00360"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00020",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.38525,
+      "p50_ms": 0.1364169984299224,
+      "p95_ms": 0.17370899877278134,
+      "total_query_ms": 137.55670501996065,
+      "process_p50_median_ms": 0.1364169984299224,
+      "process_p50_min_ms": 0.1364169984299224,
+      "process_p50_max_ms": 0.1364169984299224,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 180781056,
+      "mean_documents_scored": 2073.908,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 1024,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "top_k": 100,
+      "probes": 6,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00366",
+          "target": 0.55744
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00366"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00015",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.56146,
+      "p50_ms": 0.30185449941200204,
+      "p95_ms": 0.36789999994653044,
+      "total_query_ms": 304.3898989453737,
+      "process_p50_median_ms": 0.30185449941200204,
+      "process_p50_min_ms": 0.30185449941200204,
+      "process_p50_max_ms": 0.30185449941200204,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 180781056,
+      "mean_documents_scored": 6112.112,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 64,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "top_k": 100,
+      "probes": 1,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00540",
+          "target": 0.40157
+        },
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00360",
+          "target": 0.28669
+        },
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00180",
+          "target": 0.11339
+        },
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00025",
+          "target": 0.04154
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00540",
+        "main-s00360",
+        "main-s00180",
+        "main-s00025"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00017",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.45894,
+      "p50_ms": 0.6651040002907394,
+      "p95_ms": 1.1390312500225264,
+      "total_query_ms": 722.7243469642417,
+      "process_p50_median_ms": 0.6651040002907394,
+      "process_p50_min_ms": 0.6651040002907394,
+      "process_p50_max_ms": 0.6651040002907394,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 147341312,
+      "mean_documents_scored": 17173.241,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 64,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "top_k": 100,
+      "probes": 3,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00546",
+          "target": 0.65829
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00546"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00012",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.69539,
+      "p50_ms": 1.9577084985940019,
+      "p95_ms": 2.531706550507806,
+      "total_query_ms": 1969.2265080448124,
+      "process_p50_median_ms": 1.9577084985940019,
+      "process_p50_min_ms": 1.9577084985940019,
+      "process_p50_max_ms": 1.9577084985940019,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 147341312,
+      "mean_documents_scored": 49531.735,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 64,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "top_k": 1,
+      "probes": 27,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00250",
+          "target": 0.992
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00250"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00000",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.992,
+      "p50_ms": 16.10422900012054,
+      "p95_ms": 17.862445798709814,
+      "total_query_ms": 15974.18295602256,
+      "process_p50_median_ms": 16.10422900012054,
+      "process_p50_min_ms": 16.10422900012054,
+      "process_p50_max_ms": 16.10422900012054,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 147341312,
+      "mean_documents_scored": 423030.567,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 100,
+      "probes": 27,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00546",
+          "target": 0.65829
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00546"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00014",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.66116,
+      "p50_ms": 0.384082999516977,
+      "p95_ms": 0.4363854512121179,
+      "total_query_ms": 386.4288019540254,
+      "process_p50_median_ms": 0.384082999516977,
+      "process_p50_min_ms": 0.384082999516977,
+      "process_p50_max_ms": 0.384082999516977,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 184090624,
+      "mean_documents_scored": 6865.132,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 10,
+      "probes": 2,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00330",
+          "target": 0.4213
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00330"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00009",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.4542,
+      "p50_ms": 0.1021249991026707,
+      "p95_ms": 0.11616700066952035,
+      "total_query_ms": 103.69247707421891,
+      "process_p50_median_ms": 0.1021249991026707,
+      "process_p50_min_ms": 0.1021249991026707,
+      "process_p50_max_ms": 0.1021249991026707,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 184090624,
+      "mean_documents_scored": 535.118,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 1,
+      "probes": 512,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "zero_split_budget_512",
+          "source_setting_id": "main-s00430"
+        },
+        {
+          "kind": "zero_split_budget_512",
+          "source_setting_id": "main-s00426"
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00430",
+        "main-s00426"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00024",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.989,
+      "p50_ms": 4.967166500136955,
+      "p95_ms": 5.268839599193598,
+      "total_query_ms": 4959.761207013798,
+      "process_p50_median_ms": 4.967166500136955,
+      "process_p50_min_ms": 4.967166500136955,
+      "process_p50_max_ms": 4.967166500136955,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 184090624,
+      "mean_documents_scored": 125054.981,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 1024,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "top_k": 10,
+      "probes": 1,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00150",
+          "target": 0.185
+        },
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00155",
+          "target": 0.1405
+        },
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00020",
+          "target": 0.0718
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00150",
+        "main-s00155",
+        "main-s00020"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00010",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.3678,
+      "p50_ms": 0.06795800072723068,
+      "p95_ms": 0.09254310207325034,
+      "total_query_ms": 69.54799101367826,
+      "process_p50_median_ms": 0.06795800072723068,
+      "process_p50_min_ms": 0.06795800072723068,
+      "process_p50_max_ms": 0.06795800072723068,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 180649984,
+      "mean_documents_scored": 1035.91,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 1024,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "top_k": 100,
+      "probes": 3,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00540",
+          "target": 0.40157
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00540"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00018",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.4499,
+      "p50_ms": 0.17756300258042756,
+      "p95_ms": 0.22625210185651667,
+      "total_query_ms": 178.8601359257882,
+      "process_p50_median_ms": 0.17756300258042756,
+      "process_p50_min_ms": 0.17756300258042756,
+      "process_p50_max_ms": 0.17756300258042756,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 180649984,
+      "mean_documents_scored": 3082.531,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 1024,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "top_k": 100,
+      "probes": 12,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00546",
+          "target": 0.65829
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00546"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00013",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.66406,
+      "p50_ms": 0.5317289997037733,
+      "p95_ms": 0.6260750007641035,
+      "total_query_ms": 534.1116250165214,
+      "process_p50_median_ms": 0.5317289997037733,
+      "process_p50_min_ms": 0.5317289997037733,
+      "process_p50_max_ms": 0.5317289997037733,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 180649984,
+      "mean_documents_scored": 12064.205,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 64,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-64-seed42",
+      "top_k": 10,
+      "probes": 21,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00450",
+          "target": 0.9721
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00450"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00005",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.9734,
+      "p50_ms": 13.00864599943452,
+      "p95_ms": 14.611879803123884,
+      "total_query_ms": 12915.343087981455,
+      "process_p50_median_ms": 13.00864599943452,
+      "process_p50_min_ms": 13.00864599943452,
+      "process_p50_max_ms": 13.00864599943452,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 147701760,
+      "mean_documents_scored": 329776.977,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 10,
+      "probes": 511,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00450",
+          "target": 0.9721
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00450"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00007",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.9721,
+      "p50_ms": 4.946917000779649,
+      "p95_ms": 5.2569002991731395,
+      "total_query_ms": 4939.76228700194,
+      "process_p50_median_ms": 4.946917000779649,
+      "process_p50_min_ms": 4.946917000779649,
+      "process_p50_max_ms": 4.946917000779649,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 184008704,
+      "mean_documents_scored": 124812.426,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 100,
+      "probes": 512,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "zero_split_budget_512",
+          "source_setting_id": "main-s00474"
+        },
+        {
+          "kind": "zero_split_budget_512",
+          "source_setting_id": "main-s00470"
+        },
+        {
+          "kind": "zero_split_budget_512",
+          "source_setting_id": "main-s00478"
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00474",
+        "main-s00470",
+        "main-s00478"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00025",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.94992,
+      "p50_ms": 5.009167000025627,
+      "p95_ms": 5.369304799569363,
+      "total_query_ms": 5010.512412831304,
+      "process_p50_median_ms": 5.009167000025627,
+      "process_p50_min_ms": 5.009167000025627,
+      "process_p50_max_ms": 5.009167000025627,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 184008704,
+      "mean_documents_scored": 125054.981,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 100,
+      "probes": 13,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00366",
+          "target": 0.55744
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00366"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00016",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.56379,
+      "p50_ms": 0.24347899852728005,
+      "p95_ms": 0.2767666508589173,
+      "total_query_ms": 244.1527379960462,
+      "process_p50_median_ms": 0.24347899852728005,
+      "process_p50_min_ms": 0.24347899852728005,
+      "process_p50_max_ms": 0.24347899852728005,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 184008704,
+      "mean_documents_scored": 3385.764,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 1024,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "top_k": 1,
+      "probes": 198,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00250",
+          "target": 0.992
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00250"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00001",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.992,
+      "p50_ms": 7.456833500327775,
+      "p95_ms": 8.09848159988178,
+      "total_query_ms": 7477.635477978765,
+      "process_p50_median_ms": 7.456833500327775,
+      "process_p50_min_ms": 7.456833500327775,
+      "process_p50_max_ms": 7.456833500327775,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 180994048,
+      "mean_documents_scored": 192942.856,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 1024,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "top_k": 100,
+      "probes": 1,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00180",
+          "target": 0.11339
+        },
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00025",
+          "target": 0.04154
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00180",
+        "main-s00025"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00022",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.27572,
+      "p50_ms": 0.0881455016497057,
+      "p95_ms": 0.11753124981623839,
+      "total_query_ms": 90.13605599102448,
+      "process_p50_median_ms": 0.0881455016497057,
+      "process_p50_min_ms": 0.0881455016497057,
+      "process_p50_max_ms": 0.0881455016497057,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 180994048,
+      "mean_documents_scored": 1035.91,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 1024,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "top_k": 10,
+      "probes": 173,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00450",
+          "target": 0.9721
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00450"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00006",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.9722,
+      "p50_ms": 6.552854500114336,
+      "p95_ms": 7.152430947098765,
+      "total_query_ms": 6584.3952920076845,
+      "process_p50_median_ms": 6.552854500114336,
+      "process_p50_min_ms": 6.552854500114336,
+      "process_p50_max_ms": 6.552854500114336,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 180994048,
+      "mean_documents_scored": 168559.546,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 10,
+      "probes": 1,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00150",
+          "target": 0.185
+        },
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00155",
+          "target": 0.1405
+        },
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00020",
+          "target": 0.0718
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00150",
+        "main-s00155",
+        "main-s00020"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00011",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.3412,
+      "p50_ms": 0.09012500231619924,
+      "p95_ms": 0.09954825127351796,
+      "total_query_ms": 90.7499620152521,
+      "process_p50_median_ms": 0.09012500231619924,
+      "process_p50_min_ms": 0.09012500231619924,
+      "process_p50_max_ms": 0.09012500231619924,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 184205312,
+      "mean_documents_scored": 267.562,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 100,
+      "probes": 1,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00180",
+          "target": 0.11339
+        },
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00025",
+          "target": 0.04154
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00180",
+        "main-s00025"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00023",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.21798,
+      "p50_ms": 0.1011454987747129,
+      "p95_ms": 0.11317115313431714,
+      "total_query_ms": 101.47012006564182,
+      "process_p50_median_ms": 0.1011454987747129,
+      "process_p50_min_ms": 0.1011454987747129,
+      "process_p50_max_ms": 0.1011454987747129,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 184205312,
+      "mean_documents_scored": 267.562,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 1,
+      "probes": 1,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00120",
+          "target": 0.234
+        },
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00125",
+          "target": 0.217
+        },
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00015",
+          "target": 0.101
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00120",
+        "main-s00125",
+        "main-s00015"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00004",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.423,
+      "p50_ms": 0.08695900032762438,
+      "p95_ms": 0.0949160485106404,
+      "total_query_ms": 87.46210601384519,
+      "process_p50_median_ms": 0.08695900032762438,
+      "process_p50_min_ms": 0.08695900032762438,
+      "process_p50_max_ms": 0.08695900032762438,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 184205312,
+      "mean_documents_scored": 267.562,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 1024,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-1024-seed42",
+      "top_k": 10,
+      "probes": 2,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "match_alternative_recall",
+          "source_setting_id": "main-s00330",
+          "target": 0.4213
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00330"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00008",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.494,
+      "p50_ms": 0.10541700248722918,
+      "p95_ms": 0.1389336493957671,
+      "total_query_ms": 106.5990959359624,
+      "process_p50_median_ms": 0.10541700248722918,
+      "process_p50_min_ms": 0.10541700248722918,
+      "process_p50_max_ms": 0.10541700248722918,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 180682752,
+      "mean_documents_scored": 2073.908,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "scan",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 10,
+      "probes": 512,
+      "repetitions": 1,
+      "reasons": [
+        {
+          "kind": "zero_split_budget_512",
+          "source_setting_id": "main-s00454"
+        },
+        {
+          "kind": "zero_split_budget_512",
+          "source_setting_id": "main-s00450"
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00454",
+        "main-s00450"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00026",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.9721,
+      "p50_ms": 4.9760205001803115,
+      "p95_ms": 5.291946447141527,
+      "total_query_ms": 4971.585651903297,
+      "process_p50_median_ms": 4.9760205001803115,
+      "process_p50_min_ms": 4.9760205001803115,
+      "process_p50_max_ms": 4.9760205001803115,
+      "logical_index_bytes": 40000000,
+      "lifetime_peak_bytes": 184107008,
+      "mean_documents_scored": 125054.981,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 0.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 100,
+      "probes": 87,
+      "repetitions": 1,
+      "start_depth": 0,
+      "candidate_target": 0,
+      "reasons": [
+        {
+          "kind": "prefix_depth_zero_at_best_scan",
+          "source_setting_id": "main-s00403",
+          "target": 0.8
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00403"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00038",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.80098,
+      "p50_ms": 1.027062500725151,
+      "p95_ms": 1.1404291495637153,
+      "total_query_ms": 1031.679858922871,
+      "process_p50_median_ms": 1.027062500725151,
+      "process_p50_min_ms": 1.027062500725151,
+      "process_p50_max_ms": 1.027062500725151,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 157204480,
+      "mean_documents_scored": 21658.065,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 1.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 100,
+      "probes": 1414,
+      "repetitions": 1,
+      "start_depth": 0,
+      "candidate_target": 0,
+      "reasons": [
+        {
+          "kind": "prefix_depth_zero_at_best_scan",
+          "source_setting_id": "main-s00406",
+          "target": 0.99
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00406"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00041",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.99002,
+      "p50_ms": 14.60362550096761,
+      "p95_ms": 15.244654152593283,
+      "total_query_ms": 14570.053240066045,
+      "process_p50_median_ms": 14.60362550096761,
+      "process_p50_min_ms": 14.60362550096761,
+      "process_p50_max_ms": 14.60362550096761,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 157204480,
+      "mean_documents_scored": 345279.339,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 1.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 1,
+      "probes": 125,
+      "repetitions": 1,
+      "start_depth": 0,
+      "candidate_target": 0,
+      "reasons": [
+        {
+          "kind": "prefix_depth_zero_at_best_scan",
+          "source_setting_id": "main-s00393",
+          "target": 0.95
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00393"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00030",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.95,
+      "p50_ms": 1.3953335001133382,
+      "p95_ms": 1.54760145014734,
+      "total_query_ms": 1406.9367150223115,
+      "process_p50_median_ms": 1.3953335001133382,
+      "process_p50_min_ms": 1.3953335001133382,
+      "process_p50_max_ms": 1.3953335001133382,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 157204480,
+      "mean_documents_scored": 30948.356,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 1.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 10,
+      "probes": 994,
+      "repetitions": 1,
+      "start_depth": 0,
+      "candidate_target": 0,
+      "reasons": [
+        {
+          "kind": "prefix_depth_zero_at_best_scan",
+          "source_setting_id": "main-s00400",
+          "target": 0.99
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00400"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00036",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.99,
+      "p50_ms": 10.655145499185892,
+      "p95_ms": 11.253921153002011,
+      "total_query_ms": 10662.986465042195,
+      "process_p50_median_ms": 10.655145499185892,
+      "process_p50_min_ms": 10.655145499185892,
+      "process_p50_max_ms": 10.655145499185892,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 156991488,
+      "mean_documents_scored": 242528.686,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 1.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 1,
+      "probes": 15,
+      "repetitions": 1,
+      "start_depth": 0,
+      "candidate_target": 0,
+      "reasons": [
+        {
+          "kind": "prefix_depth_zero_at_best_scan",
+          "source_setting_id": "main-s00391",
+          "target": 0.8
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00391"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00028",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.804,
+      "p50_ms": 0.2506044984329492,
+      "p95_ms": 0.28815835012210295,
+      "total_query_ms": 251.6068310069386,
+      "process_p50_median_ms": 0.2506044984329492,
+      "process_p50_min_ms": 0.2506044984329492,
+      "process_p50_max_ms": 0.2506044984329492,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 156991488,
+      "mean_documents_scored": 3886.685,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 1.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 1,
+      "probes": 2,
+      "repetitions": 1,
+      "start_depth": 0,
+      "candidate_target": 0,
+      "reasons": [
+        {
+          "kind": "prefix_depth_zero_at_best_scan",
+          "source_setting_id": "main-s00390",
+          "target": 0.5
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00390"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00027",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.552,
+      "p50_ms": 0.10062499859486707,
+      "p95_ms": 0.11234345020056934,
+      "total_query_ms": 101.38181298680138,
+      "process_p50_median_ms": 0.10062499859486707,
+      "process_p50_min_ms": 0.10062499859486707,
+      "process_p50_max_ms": 0.10062499859486707,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 156991488,
+      "mean_documents_scored": 535.118,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 1.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 10,
+      "probes": 289,
+      "repetitions": 1,
+      "start_depth": 0,
+      "candidate_target": 0,
+      "reasons": [
+        {
+          "kind": "prefix_depth_zero_at_best_scan",
+          "source_setting_id": "main-s00399",
+          "target": 0.95
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00399"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00035",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.9501,
+      "p50_ms": 3.1105004982237006,
+      "p95_ms": 3.3642475980741438,
+      "total_query_ms": 3107.576631955453,
+      "process_p50_median_ms": 3.1105004982237006,
+      "process_p50_min_ms": 3.1105004982237006,
+      "process_p50_max_ms": 3.1105004982237006,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 156975104,
+      "mean_documents_scored": 70870.196,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 1.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 10,
+      "probes": 35,
+      "repetitions": 1,
+      "start_depth": 0,
+      "candidate_target": 0,
+      "reasons": [
+        {
+          "kind": "prefix_depth_zero_at_best_scan",
+          "source_setting_id": "main-s00397",
+          "target": 0.8
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00397"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00033",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.8008,
+      "p50_ms": 0.4600629999913508,
+      "p95_ms": 0.5213381507928716,
+      "total_query_ms": 461.71951291762525,
+      "process_p50_median_ms": 0.4600629999913508,
+      "process_p50_min_ms": 0.4600629999913508,
+      "process_p50_max_ms": 0.4600629999913508,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 156975104,
+      "mean_documents_scored": 8847.072,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 1.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 1,
+      "probes": 53,
+      "repetitions": 1,
+      "start_depth": 0,
+      "candidate_target": 0,
+      "reasons": [
+        {
+          "kind": "prefix_depth_zero_at_best_scan",
+          "source_setting_id": "main-s00392",
+          "target": 0.9
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00392"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00029",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.901,
+      "p50_ms": 0.6411875001504086,
+      "p95_ms": 0.7213517990749096,
+      "total_query_ms": 641.5862161084078,
+      "process_p50_median_ms": 0.6411875001504086,
+      "process_p50_min_ms": 0.6411875001504086,
+      "process_p50_max_ms": 0.6411875001504086,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 156975104,
+      "mean_documents_scored": 13302.015,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 1.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 10,
+      "probes": 118,
+      "repetitions": 1,
+      "start_depth": 0,
+      "candidate_target": 0,
+      "reasons": [
+        {
+          "kind": "prefix_depth_zero_at_best_scan",
+          "source_setting_id": "main-s00398",
+          "target": 0.9
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00398"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00034",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.9002,
+      "p50_ms": 1.3301875005709007,
+      "p95_ms": 1.4702464975925977,
+      "total_query_ms": 1337.3013469863508,
+      "process_p50_median_ms": 1.3301875005709007,
+      "process_p50_min_ms": 1.3301875005709007,
+      "process_p50_max_ms": 1.3301875005709007,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 157204480,
+      "mean_documents_scored": 29231.202,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 1.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 10,
+      "probes": 3,
+      "repetitions": 1,
+      "start_depth": 0,
+      "candidate_target": 0,
+      "reasons": [
+        {
+          "kind": "prefix_depth_zero_at_best_scan",
+          "source_setting_id": "main-s00396",
+          "target": 0.5
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00396"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00032",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.5101,
+      "p50_ms": 0.1141875000030268,
+      "p95_ms": 0.13096104721626034,
+      "total_query_ms": 115.13532999015297,
+      "process_p50_median_ms": 0.1141875000030268,
+      "process_p50_min_ms": 0.1141875000030268,
+      "process_p50_max_ms": 0.1141875000030268,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 157204480,
+      "mean_documents_scored": 801.38,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 1.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 100,
+      "probes": 246,
+      "repetitions": 1,
+      "start_depth": 0,
+      "candidate_target": 0,
+      "reasons": [
+        {
+          "kind": "prefix_depth_zero_at_best_scan",
+          "source_setting_id": "main-s00404",
+          "target": 0.9
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00404"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00039",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.90028,
+      "p50_ms": 2.7035419989260845,
+      "p95_ms": 2.961397951185063,
+      "total_query_ms": 2710.0697299465537,
+      "process_p50_median_ms": 2.7035419989260845,
+      "process_p50_min_ms": 2.7035419989260845,
+      "process_p50_max_ms": 2.7035419989260845,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 157204480,
+      "mean_documents_scored": 60451.827,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 1.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 1,
+      "probes": 527,
+      "repetitions": 1,
+      "start_depth": 0,
+      "candidate_target": 0,
+      "reasons": [
+        {
+          "kind": "prefix_depth_zero_at_best_scan",
+          "source_setting_id": "main-s00394",
+          "target": 0.99
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00394"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00031",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.99,
+      "p50_ms": 5.741021001085755,
+      "p95_ms": 6.106939249548304,
+      "total_query_ms": 5734.877538088767,
+      "process_p50_median_ms": 5.741021001085755,
+      "process_p50_min_ms": 5.741021001085755,
+      "process_p50_max_ms": 5.741021001085755,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 157122560,
+      "mean_documents_scored": 128686.342,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 1.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 100,
+      "probes": 513,
+      "repetitions": 1,
+      "start_depth": 0,
+      "candidate_target": 0,
+      "reasons": [
+        {
+          "kind": "prefix_depth_zero_at_best_scan",
+          "source_setting_id": "main-s00405",
+          "target": 0.95
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00405"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00040",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.95003,
+      "p50_ms": 5.65293749968987,
+      "p95_ms": 6.0585732531762915,
+      "total_query_ms": 5654.943585006549,
+      "process_p50_median_ms": 5.65293749968987,
+      "process_p50_min_ms": 5.65293749968987,
+      "process_p50_max_ms": 5.65293749968987,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 157122560,
+      "mean_documents_scored": 125302.799,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 1.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    },
+    {
+      "method": "prefix",
+      "clusters": 4096,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+      "top_k": 100,
+      "probes": 9,
+      "repetitions": 1,
+      "start_depth": 0,
+      "candidate_target": 0,
+      "reasons": [
+        {
+          "kind": "prefix_depth_zero_at_best_scan",
+          "source_setting_id": "main-s00402",
+          "target": 0.5
+        }
+      ],
+      "source_setting_ids": [
+        "main-s00402"
+      ],
+      "setting_id": "nomic-msmarco-d256-followup-s00037",
+      "measurements": 1000,
+      "complete_processes": 1,
+      "complete": true,
+      "qualified": true,
+      "recall": 0.51447,
+      "p50_ms": 0.20720850079669617,
+      "p95_ms": 0.23804615084372927,
+      "total_query_ms": 208.62219101400115,
+      "process_p50_median_ms": 0.20720850079669617,
+      "process_p50_min_ms": 0.20720850079669617,
+      "process_p50_max_ms": 0.20720850079669617,
+      "logical_index_bytes": 44000000,
+      "lifetime_peak_bytes": 157122560,
+      "mean_documents_scored": 2366.209,
+      "mean_nodes": 0.0,
+      "mean_bitplane_words": 0.0,
+      "mean_leaf_words": 0.0,
+      "mean_prefix_levels": 1.0,
+      "mean_prefix_lookups": 0.0,
+      "mean_final_depth": 0.0
+    }
+  ],
+  "failures": [],
+  "scope": "All methods use the same cached queries. Repeat timings are separate from setting selection."
+}

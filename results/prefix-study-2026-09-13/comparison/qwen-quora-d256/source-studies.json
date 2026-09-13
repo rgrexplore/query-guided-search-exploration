@@ -1,0 +1,52 @@
+[
+  {
+    "name": "qwen-quora-d256",
+    "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d256",
+    "file_hashes": {
+      "configuration.json": "779d06f4b4251640e53cd8fb87896d4370feec81e7c79553d494c4ab4b545896",
+      "inputs-manifest.json": "273be80df9b2292ecca23e9ddaee83a3ae97cd8a5326961608b28088ff3e75b7",
+      "main/settings.json": "08ef59a2fa83926806ca3b079a770079fc156e0b092ab76f34d94359641c4396",
+      "repeat/settings.json": "8e5c771051ae42ac2c47f35564538b72551fc6fa169e09d5c32ae57737973e86",
+      "main/cases/main-j0000/run/result.json": "08ffb9ba892e200e43e6144241a4f146c366fa1e32b78b9b3c3d5b4c7c6e1951",
+      "main/cases/main-j0001/run/result.json": "4908c3058d5345eaf2cc90dcf158a71b132ced161c8d196b14fe13d5699ede85",
+      "main/cases/main-j0002/run/result.json": "fbddf82f499d925d4629ebe9538b8691a12679428b63034e3d55dfd5b34db382",
+      "main/cases/main-j0003/run/result.json": "3603e6303a28e6e83f0c4e2e56b28780ee2f6147b9e5588b6a6ed631fe3bd567",
+      "main/cases/main-j0004/run/result.json": "236e1d8001d852fb44a2cd61b02f2229589f167a3ec3d5bf35c141a45327463e",
+      "main/cases/main-j0005/run/result.json": "e990aece4e922f065f199047b4782dfa9c5eef2e1db8722602aafacf8067f8f0",
+      "main/cases/main-j0006/run/result.json": "d7cf0c2df8847d8c48f510bbc31d018b0a1190155f7794b47037abe201e6ec0a",
+      "main/cases/main-j0007/run/result.json": "f32df93b802e4b438aaa495cb1f4d0ce15b42b29c5e325359a40b3fb88e1e152",
+      "main/cases/main-j0008/run/result.json": "c0361cdbb0abf5c3bbdecd1521005ebc774636489527d553e29c209f0d3c6f1f",
+      "main/cases/main-j0009/run/result.json": "49d6e9c0aa4448a2ce7676ecb414583c137c90f3c161d75e07d4d283814e41bc",
+      "main/cases/main-j0010/run/result.json": "402f89c2b679e6644353c79144d22f634682e9dc952a3f65cbccb5d0059cfe90",
+      "main/cases/main-j0011/run/result.json": "4acd6e54c012fad5324f13edc538c05479b1102a33af9c03bc2d92691f236f6a"
+    }
+  },
+  {
+    "name": "qwen-quora-d256-followup",
+    "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d256-followup",
+    "file_hashes": {
+      "configuration.json": "c6d25e71fc0b6ae73eef41fecc6830ac860ce86e4e8b4d42352f4a103029139f",
+      "inputs-manifest.json": "273be80df9b2292ecca23e9ddaee83a3ae97cd8a5326961608b28088ff3e75b7",
+      "main/settings.json": "29ede2631d7c0dd8188504acdf7cd878a78d831440a5fcce67fcf09fba952b53",
+      "repeat/settings.json": "2522ea7040d1959b6008e6de462dc012815afe06081b73a324b69ccce2e008ad",
+      "main/cases/qwen-quora-d256-followup-j0000-part000/run/result.json": "375d3bdff7427267a056f30d34d165a54279f6f34eab14bf4aa8f5f2c4ada816",
+      "main/cases/qwen-quora-d256-followup-j0000-part001/run/result.json": "f7c687535a8c9ee5ce6752ad2fed8d8d9e68dabd5407d74efeb65ded7fbceb9a",
+      "main/cases/qwen-quora-d256-followup-j0000-part002/run/result.json": "473351ce0172f362153eb0f6526495dac0fe4055699c7a94c3e6ff4988a70d55",
+      "main/cases/qwen-quora-d256-followup-j0000-part003/run/result.json": "3c03266e2907d49a2145fb248caadceeaaced054f024dd93e31ee1f7c5071b9c",
+      "main/cases/qwen-quora-d256-followup-j0001-part000/run/result.json": "396b2d8a888a8eb1c20d2709718ee456321912eaed5c3c4c98ff6fb0d332a0f3",
+      "main/cases/qwen-quora-d256-followup-j0001-part001/run/result.json": "948ca03f0438133c4119200849082c9fcfb5851c36728124d7bf64eca80857f8",
+      "main/cases/qwen-quora-d256-followup-j0001-part002/run/result.json": "ef8aeacd5688cb98e2250aeb158ba3cc201fdf9a322f2e27a72c5db12a8a8931",
+      "main/cases/qwen-quora-d256-followup-j0001-part003/run/result.json": "d0015225e59e1d9a6def83cbdb7c33dbe5d3b336b4c02921e4e4023ace3f001f",
+      "main/cases/qwen-quora-d256-followup-j0002-part000/run/result.json": "c88f5659140413ad2d1e4dc7bd3dbfed9e3169d0546d166a65bdfb0f1d9bd5e1",
+      "main/cases/qwen-quora-d256-followup-j0002-part001/run/result.json": "bd69c7d12abf9e53be13279526f79fefe76ac3fce44592cbe908697afa09dcf2",
+      "main/cases/qwen-quora-d256-followup-j0002-part002/run/result.json": "23ed10789f8a96a2a4cbf650d7a741efccfee02d100c4a8509fe66fea22810f8",
+      "main/cases/qwen-quora-d256-followup-j0002-part003/run/result.json": "94a08953f908c485936454f84273403fb2684e17020bc855f3fd0341ff3468c2",
+      "main/cases/qwen-quora-d256-followup-j0002-part004/run/result.json": "3201deeae7520d061295c68d0ceadbf677a6bbcb2d68aee9c9df9fa6b6b61456",
+      "main/cases/qwen-quora-d256-followup-j0003-part000/run/result.json": "ec3b3fe102c9eebca1de193d4462bdc900fa36b99bba890e6562c5996aad90bf",
+      "main/cases/qwen-quora-d256-followup-j0003-part001/run/result.json": "cac99b21bb38fc6e3231e99cf0df5885a72492999311f4fa1fbfc89e2148a414",
+      "main/cases/qwen-quora-d256-followup-j0004-part000/run/result.json": "7948046a415a8f81e6153c720deef9af7f16cd5c2fa474670e6f23e10d2cbada",
+      "main/cases/qwen-quora-d256-followup-j0004-part001/run/result.json": "934e3220682069921769d0874166eda800780ce206cf3ab08dcd9c3c39ef639c",
+      "main/cases/qwen-quora-d256-followup-j0004-part002/run/result.json": "92d69105ed7e59ab995cc6b6a5216ce12a03bc58673ece28bbf363f5a2f96f40"
+    }
+  }
+]

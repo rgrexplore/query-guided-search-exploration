@@ -1,0 +1,6002 @@
+[
+  {
+    "query": 0,
+    "full_float_best_row": 795454,
+    "full_float_best_score": 0.7967658042907715,
+    "query_id": "990375"
+  },
+  {
+    "query": 1,
+    "full_float_best_row": 134436,
+    "full_float_best_score": 0.7994076013565063,
+    "query_id": "127682"
+  },
+  {
+    "query": 2,
+    "full_float_best_row": 388092,
+    "full_float_best_score": 0.8388969302177429,
+    "query_id": "1059253"
+  },
+  {
+    "query": 3,
+    "full_float_best_row": 893625,
+    "full_float_best_score": 0.9017114043235779,
+    "query_id": "144491"
+  },
+  {
+    "query": 4,
+    "full_float_best_row": 528637,
+    "full_float_best_score": 0.7764394879341125,
+    "query_id": "601684"
+  },
+  {
+    "query": 5,
+    "full_float_best_row": 553106,
+    "full_float_best_score": 0.7313552498817444,
+    "query_id": "696918"
+  },
+  {
+    "query": 6,
+    "full_float_best_row": 913696,
+    "full_float_best_score": 0.6913633346557617,
+    "query_id": "1094220"
+  },
+  {
+    "query": 7,
+    "full_float_best_row": 938708,
+    "full_float_best_score": 0.7478996515274048,
+    "query_id": "1033580"
+  },
+  {
+    "query": 8,
+    "full_float_best_row": 249402,
+    "full_float_best_score": 0.6961480975151062,
+    "query_id": "1002596"
+  },
+  {
+    "query": 9,
+    "full_float_best_row": 740024,
+    "full_float_best_score": 0.8352001309394836,
+    "query_id": "1099340"
+  },
+  {
+    "query": 10,
+    "full_float_best_row": 77839,
+    "full_float_best_score": 0.825136125087738,
+    "query_id": "1100035"
+  },
+  {
+    "query": 11,
+    "full_float_best_row": 736661,
+    "full_float_best_score": 0.701326847076416,
+    "query_id": "559009"
+  },
+  {
+    "query": 12,
+    "full_float_best_row": 472418,
+    "full_float_best_score": 0.7457189559936523,
+    "query_id": "1061237"
+  },
+  {
+    "query": 13,
+    "full_float_best_row": 281422,
+    "full_float_best_score": 0.8052669763565063,
+    "query_id": "1087066"
+  },
+  {
+    "query": 14,
+    "full_float_best_row": 564778,
+    "full_float_best_score": 0.6513327956199646,
+    "query_id": "724275"
+  },
+  {
+    "query": 15,
+    "full_float_best_row": 383884,
+    "full_float_best_score": 0.7172079086303711,
+    "query_id": "693297"
+  },
+  {
+    "query": 16,
+    "full_float_best_row": 10425,
+    "full_float_best_score": 0.8774731159210205,
+    "query_id": "728836"
+  },
+  {
+    "query": 17,
+    "full_float_best_row": 709408,
+    "full_float_best_score": 0.7845781445503235,
+    "query_id": "666792"
+  },
+  {
+    "query": 18,
+    "full_float_best_row": 680106,
+    "full_float_best_score": 0.7942816615104675,
+    "query_id": "546956"
+  },
+  {
+    "query": 19,
+    "full_float_best_row": 762651,
+    "full_float_best_score": 0.8309018611907959,
+    "query_id": "543251"
+  },
+  {
+    "query": 20,
+    "full_float_best_row": 204543,
+    "full_float_best_score": 0.8623309135437012,
+    "query_id": "694560"
+  },
+  {
+    "query": 21,
+    "full_float_best_row": 124286,
+    "full_float_best_score": 0.8365209102630615,
+    "query_id": "743868"
+  },
+  {
+    "query": 22,
+    "full_float_best_row": 558229,
+    "full_float_best_score": 0.6977510452270508,
+    "query_id": "438058"
+  },
+  {
+    "query": 23,
+    "full_float_best_row": 651088,
+    "full_float_best_score": 0.7826722264289856,
+    "query_id": "998891"
+  },
+  {
+    "query": 24,
+    "full_float_best_row": 189472,
+    "full_float_best_score": 0.857132077217102,
+    "query_id": "554738"
+  },
+  {
+    "query": 25,
+    "full_float_best_row": 243150,
+    "full_float_best_score": 0.7399149537086487,
+    "query_id": "991662"
+  },
+  {
+    "query": 26,
+    "full_float_best_row": 597994,
+    "full_float_best_score": 0.7952873110771179,
+    "query_id": "985275"
+  },
+  {
+    "query": 27,
+    "full_float_best_row": 975593,
+    "full_float_best_score": 0.8933180570602417,
+    "query_id": "894161"
+  },
+  {
+    "query": 28,
+    "full_float_best_row": 611391,
+    "full_float_best_score": 0.7231478691101074,
+    "query_id": "1070324"
+  },
+  {
+    "query": 29,
+    "full_float_best_row": 504239,
+    "full_float_best_score": 0.8296670913696289,
+    "query_id": "863623"
+  },
+  {
+    "query": 30,
+    "full_float_best_row": 153442,
+    "full_float_best_score": 0.7254360318183899,
+    "query_id": "1097492"
+  },
+  {
+    "query": 31,
+    "full_float_best_row": 255035,
+    "full_float_best_score": 0.8630824089050293,
+    "query_id": "1082384"
+  },
+  {
+    "query": 32,
+    "full_float_best_row": 238824,
+    "full_float_best_score": 0.8552760481834412,
+    "query_id": "508104"
+  },
+  {
+    "query": 33,
+    "full_float_best_row": 613382,
+    "full_float_best_score": 0.8125026822090149,
+    "query_id": "618223"
+  },
+  {
+    "query": 34,
+    "full_float_best_row": 715915,
+    "full_float_best_score": 0.8920443058013916,
+    "query_id": "1083085"
+  },
+  {
+    "query": 35,
+    "full_float_best_row": 68810,
+    "full_float_best_score": 0.7916085124015808,
+    "query_id": "385652"
+  },
+  {
+    "query": 36,
+    "full_float_best_row": 978855,
+    "full_float_best_score": 0.8200627565383911,
+    "query_id": "751797"
+  },
+  {
+    "query": 37,
+    "full_float_best_row": 987749,
+    "full_float_best_score": 0.7533677816390991,
+    "query_id": "1002716"
+  },
+  {
+    "query": 38,
+    "full_float_best_row": 565732,
+    "full_float_best_score": 0.7800360918045044,
+    "query_id": "528760"
+  },
+  {
+    "query": 39,
+    "full_float_best_row": 553840,
+    "full_float_best_score": 0.8727210760116577,
+    "query_id": "88160"
+  },
+  {
+    "query": 40,
+    "full_float_best_row": 847028,
+    "full_float_best_score": 0.8522014021873474,
+    "query_id": "753040"
+  },
+  {
+    "query": 41,
+    "full_float_best_row": 15273,
+    "full_float_best_score": 0.8078603148460388,
+    "query_id": "914845"
+  },
+  {
+    "query": 42,
+    "full_float_best_row": 55926,
+    "full_float_best_score": 0.7292695641517639,
+    "query_id": "1060616"
+  },
+  {
+    "query": 43,
+    "full_float_best_row": 204883,
+    "full_float_best_score": 0.8715061545372009,
+    "query_id": "27932"
+  },
+  {
+    "query": 44,
+    "full_float_best_row": 123273,
+    "full_float_best_score": 0.8156422972679138,
+    "query_id": "1095059"
+  },
+  {
+    "query": 45,
+    "full_float_best_row": 468410,
+    "full_float_best_score": 0.8200910687446594,
+    "query_id": "1082966"
+  },
+  {
+    "query": 46,
+    "full_float_best_row": 725899,
+    "full_float_best_score": 0.8420657515525818,
+    "query_id": "1085141"
+  },
+  {
+    "query": 47,
+    "full_float_best_row": 195435,
+    "full_float_best_score": 0.8750072717666626,
+    "query_id": "319652"
+  },
+  {
+    "query": 48,
+    "full_float_best_row": 631394,
+    "full_float_best_score": 0.7356913089752197,
+    "query_id": "527568"
+  },
+  {
+    "query": 49,
+    "full_float_best_row": 173558,
+    "full_float_best_score": 0.8065806031227112,
+    "query_id": "239830"
+  },
+  {
+    "query": 50,
+    "full_float_best_row": 431559,
+    "full_float_best_score": 0.7574851512908936,
+    "query_id": "1052585"
+  },
+  {
+    "query": 51,
+    "full_float_best_row": 96482,
+    "full_float_best_score": 0.7799615859985352,
+    "query_id": "1098276"
+  },
+  {
+    "query": 52,
+    "full_float_best_row": 908352,
+    "full_float_best_score": 0.7863599061965942,
+    "query_id": "906901"
+  },
+  {
+    "query": 53,
+    "full_float_best_row": 800043,
+    "full_float_best_score": 0.8300161957740784,
+    "query_id": "227637"
+  },
+  {
+    "query": 54,
+    "full_float_best_row": 610534,
+    "full_float_best_score": 0.7643043994903564,
+    "query_id": "583686"
+  },
+  {
+    "query": 55,
+    "full_float_best_row": 343336,
+    "full_float_best_score": 0.7838178873062134,
+    "query_id": "75717"
+  },
+  {
+    "query": 56,
+    "full_float_best_row": 428874,
+    "full_float_best_score": 0.8369560241699219,
+    "query_id": "1089868"
+  },
+  {
+    "query": 57,
+    "full_float_best_row": 945094,
+    "full_float_best_score": 0.7914921045303345,
+    "query_id": "1011382"
+  },
+  {
+    "query": 58,
+    "full_float_best_row": 970338,
+    "full_float_best_score": 0.865027904510498,
+    "query_id": "583766"
+  },
+  {
+    "query": 59,
+    "full_float_best_row": 465925,
+    "full_float_best_score": 0.8368968963623047,
+    "query_id": "1089051"
+  },
+  {
+    "query": 60,
+    "full_float_best_row": 246415,
+    "full_float_best_score": 0.8834593892097473,
+    "query_id": "790110"
+  },
+  {
+    "query": 61,
+    "full_float_best_row": 731587,
+    "full_float_best_score": 0.8366429805755615,
+    "query_id": "447540"
+  },
+  {
+    "query": 62,
+    "full_float_best_row": 355267,
+    "full_float_best_score": 0.7685653567314148,
+    "query_id": "1083157"
+  },
+  {
+    "query": 63,
+    "full_float_best_row": 454908,
+    "full_float_best_score": 0.7564841508865356,
+    "query_id": "348994"
+  },
+  {
+    "query": 64,
+    "full_float_best_row": 859955,
+    "full_float_best_score": 0.857674777507782,
+    "query_id": "1024950"
+  },
+  {
+    "query": 65,
+    "full_float_best_row": 453813,
+    "full_float_best_score": 0.783561110496521,
+    "query_id": "1056265"
+  },
+  {
+    "query": 66,
+    "full_float_best_row": 501650,
+    "full_float_best_score": 0.8676449060440063,
+    "query_id": "1087603"
+  },
+  {
+    "query": 67,
+    "full_float_best_row": 438410,
+    "full_float_best_score": 0.8884674310684204,
+    "query_id": "1095716"
+  },
+  {
+    "query": 68,
+    "full_float_best_row": 315609,
+    "full_float_best_score": 0.8364276885986328,
+    "query_id": "234644"
+  },
+  {
+    "query": 69,
+    "full_float_best_row": 325931,
+    "full_float_best_score": 0.862202525138855,
+    "query_id": "256052"
+  },
+  {
+    "query": 70,
+    "full_float_best_row": 133752,
+    "full_float_best_score": 0.7632209658622742,
+    "query_id": "1086555"
+  },
+  {
+    "query": 71,
+    "full_float_best_row": 606775,
+    "full_float_best_score": 0.8813152313232422,
+    "query_id": "1007550"
+  },
+  {
+    "query": 72,
+    "full_float_best_row": 200768,
+    "full_float_best_score": 0.8249679803848267,
+    "query_id": "1098570"
+  },
+  {
+    "query": 73,
+    "full_float_best_row": 310409,
+    "full_float_best_score": 0.8237096071243286,
+    "query_id": "399364"
+  },
+  {
+    "query": 74,
+    "full_float_best_row": 48487,
+    "full_float_best_score": 0.7775566577911377,
+    "query_id": "91790"
+  },
+  {
+    "query": 75,
+    "full_float_best_row": 180873,
+    "full_float_best_score": 0.8812318444252014,
+    "query_id": "1038859"
+  },
+  {
+    "query": 76,
+    "full_float_best_row": 959328,
+    "full_float_best_score": 0.7269766926765442,
+    "query_id": "1092416"
+  },
+  {
+    "query": 77,
+    "full_float_best_row": 325599,
+    "full_float_best_score": 0.7984426021575928,
+    "query_id": "49234"
+  },
+  {
+    "query": 78,
+    "full_float_best_row": 375163,
+    "full_float_best_score": 0.793766438961029,
+    "query_id": "174592"
+  },
+  {
+    "query": 79,
+    "full_float_best_row": 616131,
+    "full_float_best_score": 0.7419721484184265,
+    "query_id": "994070"
+  },
+  {
+    "query": 80,
+    "full_float_best_row": 73571,
+    "full_float_best_score": 0.7872350811958313,
+    "query_id": "1090456"
+  },
+  {
+    "query": 81,
+    "full_float_best_row": 952336,
+    "full_float_best_score": 0.8321444392204285,
+    "query_id": "1074997"
+  },
+  {
+    "query": 82,
+    "full_float_best_row": 536808,
+    "full_float_best_score": 0.685397744178772,
+    "query_id": "199177"
+  },
+  {
+    "query": 83,
+    "full_float_best_row": 231633,
+    "full_float_best_score": 0.6113725900650024,
+    "query_id": "762455"
+  },
+  {
+    "query": 84,
+    "full_float_best_row": 489555,
+    "full_float_best_score": 0.819716215133667,
+    "query_id": "586916"
+  },
+  {
+    "query": 85,
+    "full_float_best_row": 871336,
+    "full_float_best_score": 0.7152120471000671,
+    "query_id": "334867"
+  },
+  {
+    "query": 86,
+    "full_float_best_row": 369624,
+    "full_float_best_score": 0.833928108215332,
+    "query_id": "91881"
+  },
+  {
+    "query": 87,
+    "full_float_best_row": 911057,
+    "full_float_best_score": 0.6696867942810059,
+    "query_id": "1100816"
+  },
+  {
+    "query": 88,
+    "full_float_best_row": 704760,
+    "full_float_best_score": 0.7162407636642456,
+    "query_id": "1099729"
+  },
+  {
+    "query": 89,
+    "full_float_best_row": 52434,
+    "full_float_best_score": 0.8080835342407227,
+    "query_id": "707670"
+  },
+  {
+    "query": 90,
+    "full_float_best_row": 340149,
+    "full_float_best_score": 0.8192203044891357,
+    "query_id": "507381"
+  },
+  {
+    "query": 91,
+    "full_float_best_row": 873391,
+    "full_float_best_score": 0.7215082049369812,
+    "query_id": "153037"
+  },
+  {
+    "query": 92,
+    "full_float_best_row": 130803,
+    "full_float_best_score": 0.7789148092269897,
+    "query_id": "569939"
+  },
+  {
+    "query": 93,
+    "full_float_best_row": 779826,
+    "full_float_best_score": 0.8980802893638611,
+    "query_id": "810210"
+  },
+  {
+    "query": 94,
+    "full_float_best_row": 864695,
+    "full_float_best_score": 0.8612666130065918,
+    "query_id": "709936"
+  },
+  {
+    "query": 95,
+    "full_float_best_row": 608550,
+    "full_float_best_score": 0.8490001559257507,
+    "query_id": "565696"
+  },
+  {
+    "query": 96,
+    "full_float_best_row": 146072,
+    "full_float_best_score": 0.8060039281845093,
+    "query_id": "808019"
+  },
+  {
+    "query": 97,
+    "full_float_best_row": 751727,
+    "full_float_best_score": 0.8632110357284546,
+    "query_id": "478295"
+  },
+  {
+    "query": 98,
+    "full_float_best_row": 304538,
+    "full_float_best_score": 0.7230173349380493,
+    "query_id": "229325"
+  },
+  {
+    "query": 99,
+    "full_float_best_row": 577624,
+    "full_float_best_score": 0.9089678525924683,
+    "query_id": "449442"
+  },
+  {
+    "query": 100,
+    "full_float_best_row": 180281,
+    "full_float_best_score": 0.794794499874115,
+    "query_id": "421145"
+  },
+  {
+    "query": 101,
+    "full_float_best_row": 213511,
+    "full_float_best_score": 0.7193459272384644,
+    "query_id": "1097298"
+  },
+  {
+    "query": 102,
+    "full_float_best_row": 680210,
+    "full_float_best_score": 0.8426662683486938,
+    "query_id": "302878"
+  },
+  {
+    "query": 103,
+    "full_float_best_row": 593884,
+    "full_float_best_score": 0.87809157371521,
+    "query_id": "260172"
+  },
+  {
+    "query": 104,
+    "full_float_best_row": 146269,
+    "full_float_best_score": 0.7447694540023804,
+    "query_id": "1025991"
+  },
+  {
+    "query": 105,
+    "full_float_best_row": 211431,
+    "full_float_best_score": 0.8026723861694336,
+    "query_id": "1101298"
+  },
+  {
+    "query": 106,
+    "full_float_best_row": 779023,
+    "full_float_best_score": 0.6721187829971313,
+    "query_id": "672352"
+  },
+  {
+    "query": 107,
+    "full_float_best_row": 678786,
+    "full_float_best_score": 0.843117892742157,
+    "query_id": "1083502"
+  },
+  {
+    "query": 108,
+    "full_float_best_row": 488652,
+    "full_float_best_score": 0.8189701437950134,
+    "query_id": "982481"
+  },
+  {
+    "query": 109,
+    "full_float_best_row": 475906,
+    "full_float_best_score": 0.8615060448646545,
+    "query_id": "42361"
+  },
+  {
+    "query": 110,
+    "full_float_best_row": 589641,
+    "full_float_best_score": 0.7195839881896973,
+    "query_id": "114573"
+  },
+  {
+    "query": 111,
+    "full_float_best_row": 148572,
+    "full_float_best_score": 0.8401163816452026,
+    "query_id": "426504"
+  },
+  {
+    "query": 112,
+    "full_float_best_row": 42646,
+    "full_float_best_score": 0.7544955015182495,
+    "query_id": "800987"
+  },
+  {
+    "query": 113,
+    "full_float_best_row": 476703,
+    "full_float_best_score": 0.9004340767860413,
+    "query_id": "1090115"
+  },
+  {
+    "query": 114,
+    "full_float_best_row": 781964,
+    "full_float_best_score": 0.8026155233383179,
+    "query_id": "974201"
+  },
+  {
+    "query": 115,
+    "full_float_best_row": 798169,
+    "full_float_best_score": 0.8288100957870483,
+    "query_id": "964054"
+  },
+  {
+    "query": 116,
+    "full_float_best_row": 707410,
+    "full_float_best_score": 0.7445868849754333,
+    "query_id": "478691"
+  },
+  {
+    "query": 117,
+    "full_float_best_row": 603319,
+    "full_float_best_score": 0.7421823143959045,
+    "query_id": "783433"
+  },
+  {
+    "query": 118,
+    "full_float_best_row": 224927,
+    "full_float_best_score": 0.7592980861663818,
+    "query_id": "430985"
+  },
+  {
+    "query": 119,
+    "full_float_best_row": 896909,
+    "full_float_best_score": 0.6599999666213989,
+    "query_id": "1051095"
+  },
+  {
+    "query": 120,
+    "full_float_best_row": 938335,
+    "full_float_best_score": 0.7434585094451904,
+    "query_id": "361620"
+  },
+  {
+    "query": 121,
+    "full_float_best_row": 851790,
+    "full_float_best_score": 0.8244513273239136,
+    "query_id": "992946"
+  },
+  {
+    "query": 122,
+    "full_float_best_row": 303436,
+    "full_float_best_score": 0.7983502745628357,
+    "query_id": "1043914"
+  },
+  {
+    "query": 123,
+    "full_float_best_row": 351437,
+    "full_float_best_score": 0.709851086139679,
+    "query_id": "1047917"
+  },
+  {
+    "query": 124,
+    "full_float_best_row": 929979,
+    "full_float_best_score": 0.8300207853317261,
+    "query_id": "176065"
+  },
+  {
+    "query": 125,
+    "full_float_best_row": 947304,
+    "full_float_best_score": 0.8107938766479492,
+    "query_id": "785721"
+  },
+  {
+    "query": 126,
+    "full_float_best_row": 189735,
+    "full_float_best_score": 0.8550884127616882,
+    "query_id": "1035861"
+  },
+  {
+    "query": 127,
+    "full_float_best_row": 670853,
+    "full_float_best_score": 0.8380194306373596,
+    "query_id": "1024300"
+  },
+  {
+    "query": 128,
+    "full_float_best_row": 96950,
+    "full_float_best_score": 0.8325445652008057,
+    "query_id": "1030388"
+  },
+  {
+    "query": 129,
+    "full_float_best_row": 941529,
+    "full_float_best_score": 0.9310205578804016,
+    "query_id": "1040848"
+  },
+  {
+    "query": 130,
+    "full_float_best_row": 884462,
+    "full_float_best_score": 0.7770057916641235,
+    "query_id": "472024"
+  },
+  {
+    "query": 131,
+    "full_float_best_row": 196282,
+    "full_float_best_score": 0.9404800534248352,
+    "query_id": "1098354"
+  },
+  {
+    "query": 132,
+    "full_float_best_row": 892317,
+    "full_float_best_score": 0.8252846002578735,
+    "query_id": "1006199"
+  },
+  {
+    "query": 133,
+    "full_float_best_row": 441512,
+    "full_float_best_score": 0.7891653776168823,
+    "query_id": "533398"
+  },
+  {
+    "query": 134,
+    "full_float_best_row": 755717,
+    "full_float_best_score": 0.8009482622146606,
+    "query_id": "334558"
+  },
+  {
+    "query": 135,
+    "full_float_best_row": 781062,
+    "full_float_best_score": 0.7770588397979736,
+    "query_id": "288139"
+  },
+  {
+    "query": 136,
+    "full_float_best_row": 28023,
+    "full_float_best_score": 0.8652542233467102,
+    "query_id": "1098646"
+  },
+  {
+    "query": 137,
+    "full_float_best_row": 123804,
+    "full_float_best_score": 0.8245346546173096,
+    "query_id": "1082502"
+  },
+  {
+    "query": 138,
+    "full_float_best_row": 685787,
+    "full_float_best_score": 0.7242279648780823,
+    "query_id": "989647"
+  },
+  {
+    "query": 139,
+    "full_float_best_row": 183225,
+    "full_float_best_score": 0.8065139055252075,
+    "query_id": "682910"
+  },
+  {
+    "query": 140,
+    "full_float_best_row": 972172,
+    "full_float_best_score": 0.7981153726577759,
+    "query_id": "991854"
+  },
+  {
+    "query": 141,
+    "full_float_best_row": 129832,
+    "full_float_best_score": 0.7997158169746399,
+    "query_id": "626918"
+  },
+  {
+    "query": 142,
+    "full_float_best_row": 605548,
+    "full_float_best_score": 0.7959635853767395,
+    "query_id": "852179"
+  },
+  {
+    "query": 143,
+    "full_float_best_row": 747979,
+    "full_float_best_score": 0.8043583035469055,
+    "query_id": "677460"
+  },
+  {
+    "query": 144,
+    "full_float_best_row": 751845,
+    "full_float_best_score": 0.8415834307670593,
+    "query_id": "724872"
+  },
+  {
+    "query": 145,
+    "full_float_best_row": 41913,
+    "full_float_best_score": 0.8665482401847839,
+    "query_id": "191971"
+  },
+  {
+    "query": 146,
+    "full_float_best_row": 753473,
+    "full_float_best_score": 0.8781337738037109,
+    "query_id": "240504"
+  },
+  {
+    "query": 147,
+    "full_float_best_row": 651608,
+    "full_float_best_score": 0.8624904751777649,
+    "query_id": "873886"
+  },
+  {
+    "query": 148,
+    "full_float_best_row": 20228,
+    "full_float_best_score": 0.8618136048316956,
+    "query_id": "902657"
+  },
+  {
+    "query": 149,
+    "full_float_best_row": 310388,
+    "full_float_best_score": 0.7142956256866455,
+    "query_id": "1008515"
+  },
+  {
+    "query": 150,
+    "full_float_best_row": 908598,
+    "full_float_best_score": 0.7453416585922241,
+    "query_id": "1093540"
+  },
+  {
+    "query": 151,
+    "full_float_best_row": 97201,
+    "full_float_best_score": 0.7216475009918213,
+    "query_id": "1057334"
+  },
+  {
+    "query": 152,
+    "full_float_best_row": 303290,
+    "full_float_best_score": 0.6190800070762634,
+    "query_id": "1002938"
+  },
+  {
+    "query": 153,
+    "full_float_best_row": 599365,
+    "full_float_best_score": 0.7671403288841248,
+    "query_id": "1055125"
+  },
+  {
+    "query": 154,
+    "full_float_best_row": 63014,
+    "full_float_best_score": 0.7390494346618652,
+    "query_id": "997860"
+  },
+  {
+    "query": 155,
+    "full_float_best_row": 376170,
+    "full_float_best_score": 0.8046446442604065,
+    "query_id": "64960"
+  },
+  {
+    "query": 156,
+    "full_float_best_row": 876781,
+    "full_float_best_score": 0.8164001703262329,
+    "query_id": "1032822"
+  },
+  {
+    "query": 157,
+    "full_float_best_row": 370391,
+    "full_float_best_score": 0.6943821907043457,
+    "query_id": "995576"
+  },
+  {
+    "query": 158,
+    "full_float_best_row": 532962,
+    "full_float_best_score": 0.7846888303756714,
+    "query_id": "1083839"
+  },
+  {
+    "query": 159,
+    "full_float_best_row": 363415,
+    "full_float_best_score": 0.7926414608955383,
+    "query_id": "547018"
+  },
+  {
+    "query": 160,
+    "full_float_best_row": 526648,
+    "full_float_best_score": 0.6545858383178711,
+    "query_id": "44072"
+  },
+  {
+    "query": 161,
+    "full_float_best_row": 27216,
+    "full_float_best_score": 0.851624608039856,
+    "query_id": "1079888"
+  },
+  {
+    "query": 162,
+    "full_float_best_row": 442585,
+    "full_float_best_score": 0.7521142959594727,
+    "query_id": "1069981"
+  },
+  {
+    "query": 163,
+    "full_float_best_row": 301900,
+    "full_float_best_score": 0.8631254434585571,
+    "query_id": "641284"
+  },
+  {
+    "query": 164,
+    "full_float_best_row": 765199,
+    "full_float_best_score": 0.7079945206642151,
+    "query_id": "1083952"
+  },
+  {
+    "query": 165,
+    "full_float_best_row": 912966,
+    "full_float_best_score": 0.8470938205718994,
+    "query_id": "1096268"
+  },
+  {
+    "query": 166,
+    "full_float_best_row": 174009,
+    "full_float_best_score": 0.7274457812309265,
+    "query_id": "1025801"
+  },
+  {
+    "query": 167,
+    "full_float_best_row": 200108,
+    "full_float_best_score": 0.8470235466957092,
+    "query_id": "1010607"
+  },
+  {
+    "query": 168,
+    "full_float_best_row": 68914,
+    "full_float_best_score": 0.7666053771972656,
+    "query_id": "1026098"
+  },
+  {
+    "query": 169,
+    "full_float_best_row": 964695,
+    "full_float_best_score": 0.8683390021324158,
+    "query_id": "933652"
+  },
+  {
+    "query": 170,
+    "full_float_best_row": 391801,
+    "full_float_best_score": 0.7872913479804993,
+    "query_id": "192579"
+  },
+  {
+    "query": 171,
+    "full_float_best_row": 612418,
+    "full_float_best_score": 0.7228500247001648,
+    "query_id": "1100855"
+  },
+  {
+    "query": 172,
+    "full_float_best_row": 938698,
+    "full_float_best_score": 0.7871093153953552,
+    "query_id": "1063758"
+  },
+  {
+    "query": 173,
+    "full_float_best_row": 505267,
+    "full_float_best_score": 0.7420290112495422,
+    "query_id": "568709"
+  },
+  {
+    "query": 174,
+    "full_float_best_row": 152412,
+    "full_float_best_score": 0.8313403725624084,
+    "query_id": "788484"
+  },
+  {
+    "query": 175,
+    "full_float_best_row": 362089,
+    "full_float_best_score": 0.851142168045044,
+    "query_id": "165007"
+  },
+  {
+    "query": 176,
+    "full_float_best_row": 524439,
+    "full_float_best_score": 0.7914918065071106,
+    "query_id": "1094241"
+  },
+  {
+    "query": 177,
+    "full_float_best_row": 997109,
+    "full_float_best_score": 0.8730259537696838,
+    "query_id": "292094"
+  },
+  {
+    "query": 178,
+    "full_float_best_row": 475060,
+    "full_float_best_score": 0.7884023785591125,
+    "query_id": "841919"
+  },
+  {
+    "query": 179,
+    "full_float_best_row": 559628,
+    "full_float_best_score": 0.8535358905792236,
+    "query_id": "619087"
+  },
+  {
+    "query": 180,
+    "full_float_best_row": 568647,
+    "full_float_best_score": 0.8725842237472534,
+    "query_id": "660479"
+  },
+  {
+    "query": 181,
+    "full_float_best_row": 858541,
+    "full_float_best_score": 0.9049654603004456,
+    "query_id": "1097786"
+  },
+  {
+    "query": 182,
+    "full_float_best_row": 381405,
+    "full_float_best_score": 0.8194834589958191,
+    "query_id": "1096656"
+  },
+  {
+    "query": 183,
+    "full_float_best_row": 207119,
+    "full_float_best_score": 0.7941705584526062,
+    "query_id": "208265"
+  },
+  {
+    "query": 184,
+    "full_float_best_row": 466126,
+    "full_float_best_score": 0.8773453235626221,
+    "query_id": "1089760"
+  },
+  {
+    "query": 185,
+    "full_float_best_row": 697217,
+    "full_float_best_score": 0.7501306533813477,
+    "query_id": "21793"
+  },
+  {
+    "query": 186,
+    "full_float_best_row": 650725,
+    "full_float_best_score": 0.8439568877220154,
+    "query_id": "622658"
+  },
+  {
+    "query": 187,
+    "full_float_best_row": 241624,
+    "full_float_best_score": 0.860547661781311,
+    "query_id": "191632"
+  },
+  {
+    "query": 188,
+    "full_float_best_row": 515111,
+    "full_float_best_score": 0.8194252252578735,
+    "query_id": "106125"
+  },
+  {
+    "query": 189,
+    "full_float_best_row": 838264,
+    "full_float_best_score": 0.7897767424583435,
+    "query_id": "827791"
+  },
+  {
+    "query": 190,
+    "full_float_best_row": 148821,
+    "full_float_best_score": 0.799055278301239,
+    "query_id": "909111"
+  },
+  {
+    "query": 191,
+    "full_float_best_row": 466779,
+    "full_float_best_score": 0.7699837684631348,
+    "query_id": "1090624"
+  },
+  {
+    "query": 192,
+    "full_float_best_row": 889228,
+    "full_float_best_score": 0.8332675695419312,
+    "query_id": "392936"
+  },
+  {
+    "query": 193,
+    "full_float_best_row": 334841,
+    "full_float_best_score": 0.7024993896484375,
+    "query_id": "987644"
+  },
+  {
+    "query": 194,
+    "full_float_best_row": 182428,
+    "full_float_best_score": 0.7358378171920776,
+    "query_id": "1067276"
+  },
+  {
+    "query": 195,
+    "full_float_best_row": 234879,
+    "full_float_best_score": 0.7896034717559814,
+    "query_id": "1101341"
+  },
+  {
+    "query": 196,
+    "full_float_best_row": 967361,
+    "full_float_best_score": 0.7469871044158936,
+    "query_id": "686746"
+  },
+  {
+    "query": 197,
+    "full_float_best_row": 214821,
+    "full_float_best_score": 0.8711342811584473,
+    "query_id": "1100168"
+  },
+  {
+    "query": 198,
+    "full_float_best_row": 259590,
+    "full_float_best_score": 0.8171414732933044,
+    "query_id": "140216"
+  },
+  {
+    "query": 199,
+    "full_float_best_row": 2749,
+    "full_float_best_score": 0.8134698867797852,
+    "query_id": "1098510"
+  },
+  {
+    "query": 200,
+    "full_float_best_row": 443985,
+    "full_float_best_score": 0.7574569582939148,
+    "query_id": "329515"
+  },
+  {
+    "query": 201,
+    "full_float_best_row": 530354,
+    "full_float_best_score": 0.8586734533309937,
+    "query_id": "393268"
+  },
+  {
+    "query": 202,
+    "full_float_best_row": 5883,
+    "full_float_best_score": 0.8411887884140015,
+    "query_id": "1089787"
+  },
+  {
+    "query": 203,
+    "full_float_best_row": 420945,
+    "full_float_best_score": 0.7447217702865601,
+    "query_id": "1069521"
+  },
+  {
+    "query": 204,
+    "full_float_best_row": 222140,
+    "full_float_best_score": 0.7486991286277771,
+    "query_id": "1092715"
+  },
+  {
+    "query": 205,
+    "full_float_best_row": 544407,
+    "full_float_best_score": 0.8072312474250793,
+    "query_id": "607292"
+  },
+  {
+    "query": 206,
+    "full_float_best_row": 291967,
+    "full_float_best_score": 0.6079711318016052,
+    "query_id": "1051475"
+  },
+  {
+    "query": 207,
+    "full_float_best_row": 331970,
+    "full_float_best_score": 0.8766117691993713,
+    "query_id": "74328"
+  },
+  {
+    "query": 208,
+    "full_float_best_row": 942505,
+    "full_float_best_score": 0.7212589383125305,
+    "query_id": "714678"
+  },
+  {
+    "query": 209,
+    "full_float_best_row": 31246,
+    "full_float_best_score": 0.7202463746070862,
+    "query_id": "1097153"
+  },
+  {
+    "query": 210,
+    "full_float_best_row": 878791,
+    "full_float_best_score": 0.9176861643791199,
+    "query_id": "604229"
+  },
+  {
+    "query": 211,
+    "full_float_best_row": 574546,
+    "full_float_best_score": 0.7460171580314636,
+    "query_id": "1097939"
+  },
+  {
+    "query": 212,
+    "full_float_best_row": 174441,
+    "full_float_best_score": 0.7247442603111267,
+    "query_id": "1045203"
+  },
+  {
+    "query": 213,
+    "full_float_best_row": 736457,
+    "full_float_best_score": 0.6927550435066223,
+    "query_id": "1094825"
+  },
+  {
+    "query": 214,
+    "full_float_best_row": 389258,
+    "full_float_best_score": 0.7317887544631958,
+    "query_id": "1094081"
+  },
+  {
+    "query": 215,
+    "full_float_best_row": 349718,
+    "full_float_best_score": 0.8124411702156067,
+    "query_id": "685177"
+  },
+  {
+    "query": 216,
+    "full_float_best_row": 303846,
+    "full_float_best_score": 0.7052799463272095,
+    "query_id": "277799"
+  },
+  {
+    "query": 217,
+    "full_float_best_row": 99460,
+    "full_float_best_score": 0.7816553711891174,
+    "query_id": "1002197"
+  },
+  {
+    "query": 218,
+    "full_float_best_row": 722633,
+    "full_float_best_score": 0.8069358468055725,
+    "query_id": "1086288"
+  },
+  {
+    "query": 219,
+    "full_float_best_row": 863583,
+    "full_float_best_score": 0.8691072463989258,
+    "query_id": "1009742"
+  },
+  {
+    "query": 220,
+    "full_float_best_row": 37541,
+    "full_float_best_score": 0.8870486617088318,
+    "query_id": "955093"
+  },
+  {
+    "query": 221,
+    "full_float_best_row": 772158,
+    "full_float_best_score": 0.7988841533660889,
+    "query_id": "1085139"
+  },
+  {
+    "query": 222,
+    "full_float_best_row": 303417,
+    "full_float_best_score": 0.7878116369247437,
+    "query_id": "1010615"
+  },
+  {
+    "query": 223,
+    "full_float_best_row": 611463,
+    "full_float_best_score": 0.8875117897987366,
+    "query_id": "560357"
+  },
+  {
+    "query": 224,
+    "full_float_best_row": 346616,
+    "full_float_best_score": 0.7260719537734985,
+    "query_id": "1048185"
+  },
+  {
+    "query": 225,
+    "full_float_best_row": 492431,
+    "full_float_best_score": 0.8052446842193604,
+    "query_id": "856568"
+  },
+  {
+    "query": 226,
+    "full_float_best_row": 699941,
+    "full_float_best_score": 0.7289735674858093,
+    "query_id": "573899"
+  },
+  {
+    "query": 227,
+    "full_float_best_row": 818119,
+    "full_float_best_score": 0.7793674468994141,
+    "query_id": "416846"
+  },
+  {
+    "query": 228,
+    "full_float_best_row": 968689,
+    "full_float_best_score": 0.8693544268608093,
+    "query_id": "1102206"
+  },
+  {
+    "query": 229,
+    "full_float_best_row": 87590,
+    "full_float_best_score": 0.7264611124992371,
+    "query_id": "57402"
+  },
+  {
+    "query": 230,
+    "full_float_best_row": 50309,
+    "full_float_best_score": 0.6476901769638062,
+    "query_id": "1023363"
+  },
+  {
+    "query": 231,
+    "full_float_best_row": 543528,
+    "full_float_best_score": 0.8631099462509155,
+    "query_id": "747345"
+  },
+  {
+    "query": 232,
+    "full_float_best_row": 647134,
+    "full_float_best_score": 0.8044963479042053,
+    "query_id": "513779"
+  },
+  {
+    "query": 233,
+    "full_float_best_row": 504161,
+    "full_float_best_score": 0.8068709969520569,
+    "query_id": "1099656"
+  },
+  {
+    "query": 234,
+    "full_float_best_row": 913238,
+    "full_float_best_score": 0.8013215065002441,
+    "query_id": "610190"
+  },
+  {
+    "query": 235,
+    "full_float_best_row": 193856,
+    "full_float_best_score": 0.772928774356842,
+    "query_id": "173001"
+  },
+  {
+    "query": 236,
+    "full_float_best_row": 352709,
+    "full_float_best_score": 0.823802649974823,
+    "query_id": "1087959"
+  },
+  {
+    "query": 237,
+    "full_float_best_row": 582858,
+    "full_float_best_score": 0.7699230909347534,
+    "query_id": "1055940"
+  },
+  {
+    "query": 238,
+    "full_float_best_row": 542216,
+    "full_float_best_score": 0.8888691663742065,
+    "query_id": "20356"
+  },
+  {
+    "query": 239,
+    "full_float_best_row": 339846,
+    "full_float_best_score": 0.6630977392196655,
+    "query_id": "1037826"
+  },
+  {
+    "query": 240,
+    "full_float_best_row": 503683,
+    "full_float_best_score": 0.8018267750740051,
+    "query_id": "1096619"
+  },
+  {
+    "query": 241,
+    "full_float_best_row": 371466,
+    "full_float_best_score": 0.8368427157402039,
+    "query_id": "999552"
+  },
+  {
+    "query": 242,
+    "full_float_best_row": 938665,
+    "full_float_best_score": 0.8787146806716919,
+    "query_id": "993748"
+  },
+  {
+    "query": 243,
+    "full_float_best_row": 630867,
+    "full_float_best_score": 0.745573878288269,
+    "query_id": "154372"
+  },
+  {
+    "query": 244,
+    "full_float_best_row": 487162,
+    "full_float_best_score": 0.8472090363502502,
+    "query_id": "933861"
+  },
+  {
+    "query": 245,
+    "full_float_best_row": 250278,
+    "full_float_best_score": 0.7119507789611816,
+    "query_id": "635058"
+  },
+  {
+    "query": 246,
+    "full_float_best_row": 20759,
+    "full_float_best_score": 0.8638795018196106,
+    "query_id": "29169"
+  },
+  {
+    "query": 247,
+    "full_float_best_row": 381672,
+    "full_float_best_score": 0.8380380868911743,
+    "query_id": "59217"
+  },
+  {
+    "query": 248,
+    "full_float_best_row": 775196,
+    "full_float_best_score": 0.8150361180305481,
+    "query_id": "1084722"
+  },
+  {
+    "query": 249,
+    "full_float_best_row": 298237,
+    "full_float_best_score": 0.7909321784973145,
+    "query_id": "1087514"
+  },
+  {
+    "query": 250,
+    "full_float_best_row": 667956,
+    "full_float_best_score": 0.7801899909973145,
+    "query_id": "962443"
+  },
+  {
+    "query": 251,
+    "full_float_best_row": 277988,
+    "full_float_best_score": 0.8275786638259888,
+    "query_id": "1095126"
+  },
+  {
+    "query": 252,
+    "full_float_best_row": 618163,
+    "full_float_best_score": 0.9158509373664856,
+    "query_id": "938359"
+  },
+  {
+    "query": 253,
+    "full_float_best_row": 138470,
+    "full_float_best_score": 0.7834001779556274,
+    "query_id": "935362"
+  },
+  {
+    "query": 254,
+    "full_float_best_row": 903584,
+    "full_float_best_score": 0.8325347304344177,
+    "query_id": "823421"
+  },
+  {
+    "query": 255,
+    "full_float_best_row": 717560,
+    "full_float_best_score": 0.7089816331863403,
+    "query_id": "570979"
+  },
+  {
+    "query": 256,
+    "full_float_best_row": 141963,
+    "full_float_best_score": 0.8538646101951599,
+    "query_id": "1100070"
+  },
+  {
+    "query": 257,
+    "full_float_best_row": 866234,
+    "full_float_best_score": 0.9134670495986938,
+    "query_id": "1098236"
+  },
+  {
+    "query": 258,
+    "full_float_best_row": 466526,
+    "full_float_best_score": 0.6769461631774902,
+    "query_id": "291516"
+  },
+  {
+    "query": 259,
+    "full_float_best_row": 646742,
+    "full_float_best_score": 0.7743330597877502,
+    "query_id": "220151"
+  },
+  {
+    "query": 260,
+    "full_float_best_row": 357866,
+    "full_float_best_score": 0.7700614929199219,
+    "query_id": "1090841"
+  },
+  {
+    "query": 261,
+    "full_float_best_row": 998401,
+    "full_float_best_score": 0.79613196849823,
+    "query_id": "1042507"
+  },
+  {
+    "query": 262,
+    "full_float_best_row": 703381,
+    "full_float_best_score": 0.793060302734375,
+    "query_id": "1099855"
+  },
+  {
+    "query": 263,
+    "full_float_best_row": 224075,
+    "full_float_best_score": 0.7373272180557251,
+    "query_id": "351820"
+  },
+  {
+    "query": 264,
+    "full_float_best_row": 83111,
+    "full_float_best_score": 0.7429159283638,
+    "query_id": "1058140"
+  },
+  {
+    "query": 265,
+    "full_float_best_row": 236981,
+    "full_float_best_score": 0.8302907943725586,
+    "query_id": "307521"
+  },
+  {
+    "query": 266,
+    "full_float_best_row": 279300,
+    "full_float_best_score": 0.7981988191604614,
+    "query_id": "989894"
+  },
+  {
+    "query": 267,
+    "full_float_best_row": 817195,
+    "full_float_best_score": 0.8426559567451477,
+    "query_id": "972699"
+  },
+  {
+    "query": 268,
+    "full_float_best_row": 192555,
+    "full_float_best_score": 0.7202049493789673,
+    "query_id": "866251"
+  },
+  {
+    "query": 269,
+    "full_float_best_row": 623740,
+    "full_float_best_score": 0.7970234751701355,
+    "query_id": "594105"
+  },
+  {
+    "query": 270,
+    "full_float_best_row": 964539,
+    "full_float_best_score": 0.7326400279998779,
+    "query_id": "722413"
+  },
+  {
+    "query": 271,
+    "full_float_best_row": 31548,
+    "full_float_best_score": 0.8074658513069153,
+    "query_id": "47674"
+  },
+  {
+    "query": 272,
+    "full_float_best_row": 269179,
+    "full_float_best_score": 0.8329354524612427,
+    "query_id": "1038724"
+  },
+  {
+    "query": 273,
+    "full_float_best_row": 185519,
+    "full_float_best_score": 0.8674448132514954,
+    "query_id": "331352"
+  },
+  {
+    "query": 274,
+    "full_float_best_row": 959189,
+    "full_float_best_score": 0.724578320980072,
+    "query_id": "1082281"
+  },
+  {
+    "query": 275,
+    "full_float_best_row": 157659,
+    "full_float_best_score": 0.8016164898872375,
+    "query_id": "1087076"
+  },
+  {
+    "query": 276,
+    "full_float_best_row": 250514,
+    "full_float_best_score": 0.7681882381439209,
+    "query_id": "920753"
+  },
+  {
+    "query": 277,
+    "full_float_best_row": 124956,
+    "full_float_best_score": 0.7627445459365845,
+    "query_id": "1080555"
+  },
+  {
+    "query": 278,
+    "full_float_best_row": 125136,
+    "full_float_best_score": 0.8664759397506714,
+    "query_id": "108037"
+  },
+  {
+    "query": 279,
+    "full_float_best_row": 241432,
+    "full_float_best_score": 0.6881973147392273,
+    "query_id": "983451"
+  },
+  {
+    "query": 280,
+    "full_float_best_row": 565339,
+    "full_float_best_score": 0.865234375,
+    "query_id": "905604"
+  },
+  {
+    "query": 281,
+    "full_float_best_row": 223913,
+    "full_float_best_score": 0.6772218942642212,
+    "query_id": "455456"
+  },
+  {
+    "query": 282,
+    "full_float_best_row": 47659,
+    "full_float_best_score": 0.8515996932983398,
+    "query_id": "1001279"
+  },
+  {
+    "query": 283,
+    "full_float_best_row": 921247,
+    "full_float_best_score": 0.8291134834289551,
+    "query_id": "659182"
+  },
+  {
+    "query": 284,
+    "full_float_best_row": 764194,
+    "full_float_best_score": 0.6971770524978638,
+    "query_id": "900696"
+  },
+  {
+    "query": 285,
+    "full_float_best_row": 869977,
+    "full_float_best_score": 0.8352928757667542,
+    "query_id": "767745"
+  },
+  {
+    "query": 286,
+    "full_float_best_row": 108068,
+    "full_float_best_score": 0.7689363956451416,
+    "query_id": "1026711"
+  },
+  {
+    "query": 287,
+    "full_float_best_row": 786547,
+    "full_float_best_score": 0.8428139090538025,
+    "query_id": "987183"
+  },
+  {
+    "query": 288,
+    "full_float_best_row": 662209,
+    "full_float_best_score": 0.7688145637512207,
+    "query_id": "824371"
+  },
+  {
+    "query": 289,
+    "full_float_best_row": 842684,
+    "full_float_best_score": 0.8164433240890503,
+    "query_id": "992757"
+  },
+  {
+    "query": 290,
+    "full_float_best_row": 638974,
+    "full_float_best_score": 0.9093374013900757,
+    "query_id": "1101714"
+  },
+  {
+    "query": 291,
+    "full_float_best_row": 172427,
+    "full_float_best_score": 0.8590724468231201,
+    "query_id": "275528"
+  },
+  {
+    "query": 292,
+    "full_float_best_row": 940286,
+    "full_float_best_score": 0.8220224380493164,
+    "query_id": "1092972"
+  },
+  {
+    "query": 293,
+    "full_float_best_row": 421228,
+    "full_float_best_score": 0.6735043525695801,
+    "query_id": "989042"
+  },
+  {
+    "query": 294,
+    "full_float_best_row": 852580,
+    "full_float_best_score": 0.9020462036132812,
+    "query_id": "1096947"
+  },
+  {
+    "query": 295,
+    "full_float_best_row": 20810,
+    "full_float_best_score": 0.7732076644897461,
+    "query_id": "991748"
+  },
+  {
+    "query": 296,
+    "full_float_best_row": 882144,
+    "full_float_best_score": 0.6621814370155334,
+    "query_id": "313438"
+  },
+  {
+    "query": 297,
+    "full_float_best_row": 575785,
+    "full_float_best_score": 0.849053144454956,
+    "query_id": "1101048"
+  },
+  {
+    "query": 298,
+    "full_float_best_row": 280218,
+    "full_float_best_score": 0.7933951616287231,
+    "query_id": "1089639"
+  },
+  {
+    "query": 299,
+    "full_float_best_row": 426977,
+    "full_float_best_score": 0.9172553420066833,
+    "query_id": "1040238"
+  },
+  {
+    "query": 300,
+    "full_float_best_row": 688202,
+    "full_float_best_score": 0.7383288145065308,
+    "query_id": "623857"
+  },
+  {
+    "query": 301,
+    "full_float_best_row": 950126,
+    "full_float_best_score": 0.6976672410964966,
+    "query_id": "690956"
+  },
+  {
+    "query": 302,
+    "full_float_best_row": 514304,
+    "full_float_best_score": 0.8254592418670654,
+    "query_id": "1092952"
+  },
+  {
+    "query": 303,
+    "full_float_best_row": 28680,
+    "full_float_best_score": 0.8548489809036255,
+    "query_id": "450921"
+  },
+  {
+    "query": 304,
+    "full_float_best_row": 880771,
+    "full_float_best_score": 0.886962354183197,
+    "query_id": "738162"
+  },
+  {
+    "query": 305,
+    "full_float_best_row": 540772,
+    "full_float_best_score": 0.8925994634628296,
+    "query_id": "1093637"
+  },
+  {
+    "query": 306,
+    "full_float_best_row": 152988,
+    "full_float_best_score": 0.7945740818977356,
+    "query_id": "189174"
+  },
+  {
+    "query": 307,
+    "full_float_best_row": 74946,
+    "full_float_best_score": 0.7733110189437866,
+    "query_id": "1038161"
+  },
+  {
+    "query": 308,
+    "full_float_best_row": 252892,
+    "full_float_best_score": 0.8104349374771118,
+    "query_id": "259781"
+  },
+  {
+    "query": 309,
+    "full_float_best_row": 387391,
+    "full_float_best_score": 0.8664960265159607,
+    "query_id": "1093419"
+  },
+  {
+    "query": 310,
+    "full_float_best_row": 439834,
+    "full_float_best_score": 0.8416215181350708,
+    "query_id": "1066916"
+  },
+  {
+    "query": 311,
+    "full_float_best_row": 508806,
+    "full_float_best_score": 0.7706179618835449,
+    "query_id": "1090910"
+  },
+  {
+    "query": 312,
+    "full_float_best_row": 95847,
+    "full_float_best_score": 0.8762470483779907,
+    "query_id": "558548"
+  },
+  {
+    "query": 313,
+    "full_float_best_row": 356912,
+    "full_float_best_score": 0.7315607666969299,
+    "query_id": "1083783"
+  },
+  {
+    "query": 314,
+    "full_float_best_row": 772941,
+    "full_float_best_score": 0.7387875318527222,
+    "query_id": "792187"
+  },
+  {
+    "query": 315,
+    "full_float_best_row": 163149,
+    "full_float_best_score": 0.7646605372428894,
+    "query_id": "992340"
+  },
+  {
+    "query": 316,
+    "full_float_best_row": 176087,
+    "full_float_best_score": 0.7949772477149963,
+    "query_id": "1097027"
+  },
+  {
+    "query": 317,
+    "full_float_best_row": 787846,
+    "full_float_best_score": 0.8078569769859314,
+    "query_id": "454258"
+  },
+  {
+    "query": 318,
+    "full_float_best_row": 76031,
+    "full_float_best_score": 0.8755658864974976,
+    "query_id": "194724"
+  },
+  {
+    "query": 319,
+    "full_float_best_row": 864764,
+    "full_float_best_score": 0.7905350923538208,
+    "query_id": "627513"
+  },
+  {
+    "query": 320,
+    "full_float_best_row": 500374,
+    "full_float_best_score": 0.688924252986908,
+    "query_id": "1084383"
+  },
+  {
+    "query": 321,
+    "full_float_best_row": 155756,
+    "full_float_best_score": 0.7884984612464905,
+    "query_id": "13397"
+  },
+  {
+    "query": 322,
+    "full_float_best_row": 372532,
+    "full_float_best_score": 0.7024998664855957,
+    "query_id": "863187"
+  },
+  {
+    "query": 323,
+    "full_float_best_row": 119408,
+    "full_float_best_score": 0.8346130847930908,
+    "query_id": "223165"
+  },
+  {
+    "query": 324,
+    "full_float_best_row": 607960,
+    "full_float_best_score": 0.7838371992111206,
+    "query_id": "1008968"
+  },
+  {
+    "query": 325,
+    "full_float_best_row": 564255,
+    "full_float_best_score": 0.8838686943054199,
+    "query_id": "1065227"
+  },
+  {
+    "query": 326,
+    "full_float_best_row": 870134,
+    "full_float_best_score": 0.8973601460456848,
+    "query_id": "1088209"
+  },
+  {
+    "query": 327,
+    "full_float_best_row": 425701,
+    "full_float_best_score": 0.6880550384521484,
+    "query_id": "1091665"
+  },
+  {
+    "query": 328,
+    "full_float_best_row": 913619,
+    "full_float_best_score": 0.7337012887001038,
+    "query_id": "365044"
+  },
+  {
+    "query": 329,
+    "full_float_best_row": 146901,
+    "full_float_best_score": 0.7620022892951965,
+    "query_id": "1097723"
+  },
+  {
+    "query": 330,
+    "full_float_best_row": 4883,
+    "full_float_best_score": 0.8757176399230957,
+    "query_id": "180592"
+  },
+  {
+    "query": 331,
+    "full_float_best_row": 614765,
+    "full_float_best_score": 0.6549245119094849,
+    "query_id": "1089674"
+  },
+  {
+    "query": 332,
+    "full_float_best_row": 537492,
+    "full_float_best_score": 0.7807451486587524,
+    "query_id": "339501"
+  },
+  {
+    "query": 333,
+    "full_float_best_row": 347641,
+    "full_float_best_score": 0.9224705100059509,
+    "query_id": "153588"
+  },
+  {
+    "query": 334,
+    "full_float_best_row": 667207,
+    "full_float_best_score": 0.8121179342269897,
+    "query_id": "323535"
+  },
+  {
+    "query": 335,
+    "full_float_best_row": 356230,
+    "full_float_best_score": 0.6750982403755188,
+    "query_id": "55223"
+  },
+  {
+    "query": 336,
+    "full_float_best_row": 724556,
+    "full_float_best_score": 0.7520516514778137,
+    "query_id": "1012328"
+  },
+  {
+    "query": 337,
+    "full_float_best_row": 665468,
+    "full_float_best_score": 0.7903636693954468,
+    "query_id": "1039495"
+  },
+  {
+    "query": 338,
+    "full_float_best_row": 112092,
+    "full_float_best_score": 0.8820587396621704,
+    "query_id": "47270"
+  },
+  {
+    "query": 339,
+    "full_float_best_row": 42694,
+    "full_float_best_score": 0.756659984588623,
+    "query_id": "860655"
+  },
+  {
+    "query": 340,
+    "full_float_best_row": 938017,
+    "full_float_best_score": 0.8361536860466003,
+    "query_id": "573954"
+  },
+  {
+    "query": 341,
+    "full_float_best_row": 119844,
+    "full_float_best_score": 0.6766091585159302,
+    "query_id": "230725"
+  },
+  {
+    "query": 342,
+    "full_float_best_row": 820541,
+    "full_float_best_score": 0.8669785261154175,
+    "query_id": "549235"
+  },
+  {
+    "query": 343,
+    "full_float_best_row": 339999,
+    "full_float_best_score": 0.8584818243980408,
+    "query_id": "624644"
+  },
+  {
+    "query": 344,
+    "full_float_best_row": 217286,
+    "full_float_best_score": 0.7424638271331787,
+    "query_id": "1093405"
+  },
+  {
+    "query": 345,
+    "full_float_best_row": 357281,
+    "full_float_best_score": 0.7741807103157043,
+    "query_id": "829103"
+  },
+  {
+    "query": 346,
+    "full_float_best_row": 735905,
+    "full_float_best_score": 0.6985434293746948,
+    "query_id": "1093406"
+  },
+  {
+    "query": 347,
+    "full_float_best_row": 560433,
+    "full_float_best_score": 0.8021315932273865,
+    "query_id": "1098905"
+  },
+  {
+    "query": 348,
+    "full_float_best_row": 962362,
+    "full_float_best_score": 0.6287668943405151,
+    "query_id": "1054595"
+  },
+  {
+    "query": 349,
+    "full_float_best_row": 575141,
+    "full_float_best_score": 0.8329824209213257,
+    "query_id": "1018525"
+  },
+  {
+    "query": 350,
+    "full_float_best_row": 675386,
+    "full_float_best_score": 0.8529609441757202,
+    "query_id": "446834"
+  },
+  {
+    "query": 351,
+    "full_float_best_row": 154751,
+    "full_float_best_score": 0.8315150737762451,
+    "query_id": "1097885"
+  },
+  {
+    "query": 352,
+    "full_float_best_row": 494981,
+    "full_float_best_score": 0.8489969372749329,
+    "query_id": "478359"
+  },
+  {
+    "query": 353,
+    "full_float_best_row": 657563,
+    "full_float_best_score": 0.8761112689971924,
+    "query_id": "1099595"
+  },
+  {
+    "query": 354,
+    "full_float_best_row": 57717,
+    "full_float_best_score": 0.8935476541519165,
+    "query_id": "1084324"
+  },
+  {
+    "query": 355,
+    "full_float_best_row": 880936,
+    "full_float_best_score": 0.8845977783203125,
+    "query_id": "921173"
+  },
+  {
+    "query": 356,
+    "full_float_best_row": 907380,
+    "full_float_best_score": 0.7237434387207031,
+    "query_id": "1102351"
+  },
+  {
+    "query": 357,
+    "full_float_best_row": 328701,
+    "full_float_best_score": 0.7373454570770264,
+    "query_id": "1054969"
+  },
+  {
+    "query": 358,
+    "full_float_best_row": 840155,
+    "full_float_best_score": 0.8402766585350037,
+    "query_id": "544260"
+  },
+  {
+    "query": 359,
+    "full_float_best_row": 261931,
+    "full_float_best_score": 0.800858199596405,
+    "query_id": "8854"
+  },
+  {
+    "query": 360,
+    "full_float_best_row": 704549,
+    "full_float_best_score": 0.800989031791687,
+    "query_id": "855031"
+  },
+  {
+    "query": 361,
+    "full_float_best_row": 46580,
+    "full_float_best_score": 0.8232930898666382,
+    "query_id": "482496"
+  },
+  {
+    "query": 362,
+    "full_float_best_row": 475044,
+    "full_float_best_score": 0.8307695388793945,
+    "query_id": "300933"
+  },
+  {
+    "query": 363,
+    "full_float_best_row": 634472,
+    "full_float_best_score": 0.856366753578186,
+    "query_id": "1084887"
+  },
+  {
+    "query": 364,
+    "full_float_best_row": 504719,
+    "full_float_best_score": 0.7802665829658508,
+    "query_id": "1098110"
+  },
+  {
+    "query": 365,
+    "full_float_best_row": 288084,
+    "full_float_best_score": 0.7835332751274109,
+    "query_id": "430229"
+  },
+  {
+    "query": 366,
+    "full_float_best_row": 880978,
+    "full_float_best_score": 0.7331366539001465,
+    "query_id": "895263"
+  },
+  {
+    "query": 367,
+    "full_float_best_row": 238271,
+    "full_float_best_score": 0.8345268964767456,
+    "query_id": "183723"
+  },
+  {
+    "query": 368,
+    "full_float_best_row": 815949,
+    "full_float_best_score": 0.8495633602142334,
+    "query_id": "786937"
+  },
+  {
+    "query": 369,
+    "full_float_best_row": 40644,
+    "full_float_best_score": 0.7003622055053711,
+    "query_id": "1099805"
+  },
+  {
+    "query": 370,
+    "full_float_best_row": 259305,
+    "full_float_best_score": 0.7276302576065063,
+    "query_id": "545359"
+  },
+  {
+    "query": 371,
+    "full_float_best_row": 729959,
+    "full_float_best_score": 0.7935172319412231,
+    "query_id": "605169"
+  },
+  {
+    "query": 372,
+    "full_float_best_row": 336369,
+    "full_float_best_score": 0.7057470083236694,
+    "query_id": "436475"
+  },
+  {
+    "query": 373,
+    "full_float_best_row": 929829,
+    "full_float_best_score": 0.7572063207626343,
+    "query_id": "1099767"
+  },
+  {
+    "query": 374,
+    "full_float_best_row": 644078,
+    "full_float_best_score": 0.8259426951408386,
+    "query_id": "454872"
+  },
+  {
+    "query": 375,
+    "full_float_best_row": 121561,
+    "full_float_best_score": 0.8551704287528992,
+    "query_id": "1098804"
+  },
+  {
+    "query": 376,
+    "full_float_best_row": 223582,
+    "full_float_best_score": 0.8335310816764832,
+    "query_id": "300306"
+  },
+  {
+    "query": 377,
+    "full_float_best_row": 868828,
+    "full_float_best_score": 0.8244125843048096,
+    "query_id": "270520"
+  },
+  {
+    "query": 378,
+    "full_float_best_row": 740263,
+    "full_float_best_score": 0.8546175956726074,
+    "query_id": "582641"
+  },
+  {
+    "query": 379,
+    "full_float_best_row": 707224,
+    "full_float_best_score": 0.8205270767211914,
+    "query_id": "136157"
+  },
+  {
+    "query": 380,
+    "full_float_best_row": 385386,
+    "full_float_best_score": 0.7327383160591125,
+    "query_id": "988211"
+  },
+  {
+    "query": 381,
+    "full_float_best_row": 307683,
+    "full_float_best_score": 0.8500593304634094,
+    "query_id": "425072"
+  },
+  {
+    "query": 382,
+    "full_float_best_row": 207498,
+    "full_float_best_score": 0.9227733612060547,
+    "query_id": "858421"
+  },
+  {
+    "query": 383,
+    "full_float_best_row": 509016,
+    "full_float_best_score": 0.811913013458252,
+    "query_id": "814987"
+  },
+  {
+    "query": 384,
+    "full_float_best_row": 154768,
+    "full_float_best_score": 0.8155296444892883,
+    "query_id": "989831"
+  },
+  {
+    "query": 385,
+    "full_float_best_row": 742123,
+    "full_float_best_score": 0.7076354622840881,
+    "query_id": "1037817"
+  },
+  {
+    "query": 386,
+    "full_float_best_row": 857546,
+    "full_float_best_score": 0.819090723991394,
+    "query_id": "1001108"
+  },
+  {
+    "query": 387,
+    "full_float_best_row": 883483,
+    "full_float_best_score": 0.8990762233734131,
+    "query_id": "984930"
+  },
+  {
+    "query": 388,
+    "full_float_best_row": 651122,
+    "full_float_best_score": 0.653523325920105,
+    "query_id": "435412"
+  },
+  {
+    "query": 389,
+    "full_float_best_row": 630746,
+    "full_float_best_score": 0.765508770942688,
+    "query_id": "119975"
+  },
+  {
+    "query": 390,
+    "full_float_best_row": 253115,
+    "full_float_best_score": 0.7885677814483643,
+    "query_id": "816893"
+  },
+  {
+    "query": 391,
+    "full_float_best_row": 828581,
+    "full_float_best_score": 0.8570517301559448,
+    "query_id": "1086565"
+  },
+  {
+    "query": 392,
+    "full_float_best_row": 905160,
+    "full_float_best_score": 0.7533164620399475,
+    "query_id": "1000509"
+  },
+  {
+    "query": 393,
+    "full_float_best_row": 444768,
+    "full_float_best_score": 0.7705816030502319,
+    "query_id": "231292"
+  },
+  {
+    "query": 394,
+    "full_float_best_row": 405601,
+    "full_float_best_score": 0.84996497631073,
+    "query_id": "917489"
+  },
+  {
+    "query": 395,
+    "full_float_best_row": 585746,
+    "full_float_best_score": 0.8613396883010864,
+    "query_id": "818798"
+  },
+  {
+    "query": 396,
+    "full_float_best_row": 18185,
+    "full_float_best_score": 0.8550599217414856,
+    "query_id": "969750"
+  },
+  {
+    "query": 397,
+    "full_float_best_row": 703760,
+    "full_float_best_score": 0.8663748502731323,
+    "query_id": "1054440"
+  },
+  {
+    "query": 398,
+    "full_float_best_row": 747655,
+    "full_float_best_score": 0.7780369520187378,
+    "query_id": "407662"
+  },
+  {
+    "query": 399,
+    "full_float_best_row": 104405,
+    "full_float_best_score": 0.8010246157646179,
+    "query_id": "1095922"
+  },
+  {
+    "query": 400,
+    "full_float_best_row": 377311,
+    "full_float_best_score": 0.8300992846488953,
+    "query_id": "167620"
+  },
+  {
+    "query": 401,
+    "full_float_best_row": 141307,
+    "full_float_best_score": 0.7333326935768127,
+    "query_id": "1085780"
+  },
+  {
+    "query": 402,
+    "full_float_best_row": 554238,
+    "full_float_best_score": 0.8373229503631592,
+    "query_id": "471850"
+  },
+  {
+    "query": 403,
+    "full_float_best_row": 523360,
+    "full_float_best_score": 0.8737983703613281,
+    "query_id": "496175"
+  },
+  {
+    "query": 404,
+    "full_float_best_row": 780731,
+    "full_float_best_score": 0.8402873277664185,
+    "query_id": "1101995"
+  },
+  {
+    "query": 405,
+    "full_float_best_row": 760260,
+    "full_float_best_score": 0.912577748298645,
+    "query_id": "507434"
+  },
+  {
+    "query": 406,
+    "full_float_best_row": 553077,
+    "full_float_best_score": 0.8985047340393066,
+    "query_id": "885932"
+  },
+  {
+    "query": 407,
+    "full_float_best_row": 415106,
+    "full_float_best_score": 0.7467918395996094,
+    "query_id": "724680"
+  },
+  {
+    "query": 408,
+    "full_float_best_row": 625207,
+    "full_float_best_score": 0.8080505132675171,
+    "query_id": "1083285"
+  },
+  {
+    "query": 409,
+    "full_float_best_row": 449867,
+    "full_float_best_score": 0.909195601940155,
+    "query_id": "565231"
+  },
+  {
+    "query": 410,
+    "full_float_best_row": 984658,
+    "full_float_best_score": 0.7735224962234497,
+    "query_id": "699837"
+  },
+  {
+    "query": 411,
+    "full_float_best_row": 611895,
+    "full_float_best_score": 0.7689180374145508,
+    "query_id": "280825"
+  },
+  {
+    "query": 412,
+    "full_float_best_row": 233917,
+    "full_float_best_score": 0.8281749486923218,
+    "query_id": "738931"
+  },
+  {
+    "query": 413,
+    "full_float_best_row": 175277,
+    "full_float_best_score": 0.6395931243896484,
+    "query_id": "1032011"
+  },
+  {
+    "query": 414,
+    "full_float_best_row": 185720,
+    "full_float_best_score": 0.8795725107192993,
+    "query_id": "60339"
+  },
+  {
+    "query": 415,
+    "full_float_best_row": 761328,
+    "full_float_best_score": 0.8812039494514465,
+    "query_id": "1045494"
+  },
+  {
+    "query": 416,
+    "full_float_best_row": 583502,
+    "full_float_best_score": 0.8510818481445312,
+    "query_id": "531142"
+  },
+  {
+    "query": 417,
+    "full_float_best_row": 988050,
+    "full_float_best_score": 0.6786714792251587,
+    "query_id": "1071992"
+  },
+  {
+    "query": 418,
+    "full_float_best_row": 115310,
+    "full_float_best_score": 0.7557622194290161,
+    "query_id": "1092757"
+  },
+  {
+    "query": 419,
+    "full_float_best_row": 230005,
+    "full_float_best_score": 0.8751406669616699,
+    "query_id": "648049"
+  },
+  {
+    "query": 420,
+    "full_float_best_row": 953128,
+    "full_float_best_score": 0.6930673718452454,
+    "query_id": "538570"
+  },
+  {
+    "query": 421,
+    "full_float_best_row": 222109,
+    "full_float_best_score": 0.8365207314491272,
+    "query_id": "1096533"
+  },
+  {
+    "query": 422,
+    "full_float_best_row": 873922,
+    "full_float_best_score": 0.8432684540748596,
+    "query_id": "242863"
+  },
+  {
+    "query": 423,
+    "full_float_best_row": 138099,
+    "full_float_best_score": 0.7996333241462708,
+    "query_id": "1096827"
+  },
+  {
+    "query": 424,
+    "full_float_best_row": 898021,
+    "full_float_best_score": 0.6686866879463196,
+    "query_id": "193866"
+  },
+  {
+    "query": 425,
+    "full_float_best_row": 414698,
+    "full_float_best_score": 0.8769441246986389,
+    "query_id": "271038"
+  },
+  {
+    "query": 426,
+    "full_float_best_row": 223989,
+    "full_float_best_score": 0.8855394124984741,
+    "query_id": "1099746"
+  },
+  {
+    "query": 427,
+    "full_float_best_row": 618821,
+    "full_float_best_score": 0.8356475830078125,
+    "query_id": "907127"
+  },
+  {
+    "query": 428,
+    "full_float_best_row": 541915,
+    "full_float_best_score": 0.7148008346557617,
+    "query_id": "511367"
+  },
+  {
+    "query": 429,
+    "full_float_best_row": 609450,
+    "full_float_best_score": 0.9073566198348999,
+    "query_id": "428113"
+  },
+  {
+    "query": 430,
+    "full_float_best_row": 678571,
+    "full_float_best_score": 0.7205410003662109,
+    "query_id": "10312"
+  },
+  {
+    "query": 431,
+    "full_float_best_row": 393309,
+    "full_float_best_score": 0.8510929346084595,
+    "query_id": "388465"
+  },
+  {
+    "query": 432,
+    "full_float_best_row": 903045,
+    "full_float_best_score": 0.8264875411987305,
+    "query_id": "423878"
+  },
+  {
+    "query": 433,
+    "full_float_best_row": 219744,
+    "full_float_best_score": 0.7567358016967773,
+    "query_id": "924895"
+  },
+  {
+    "query": 434,
+    "full_float_best_row": 847865,
+    "full_float_best_score": 0.9125686883926392,
+    "query_id": "1041226"
+  },
+  {
+    "query": 435,
+    "full_float_best_row": 811309,
+    "full_float_best_score": 0.8290309309959412,
+    "query_id": "1100190"
+  },
+  {
+    "query": 436,
+    "full_float_best_row": 934413,
+    "full_float_best_score": 0.8399156928062439,
+    "query_id": "14151"
+  },
+  {
+    "query": 437,
+    "full_float_best_row": 775019,
+    "full_float_best_score": 0.7176044583320618,
+    "query_id": "1082501"
+  },
+  {
+    "query": 438,
+    "full_float_best_row": 601327,
+    "full_float_best_score": 0.6757876873016357,
+    "query_id": "318073"
+  },
+  {
+    "query": 439,
+    "full_float_best_row": 714193,
+    "full_float_best_score": 0.8929718136787415,
+    "query_id": "1083865"
+  },
+  {
+    "query": 440,
+    "full_float_best_row": 610349,
+    "full_float_best_score": 0.8396615386009216,
+    "query_id": "734426"
+  },
+  {
+    "query": 441,
+    "full_float_best_row": 319935,
+    "full_float_best_score": 0.833547830581665,
+    "query_id": "1012780"
+  },
+  {
+    "query": 442,
+    "full_float_best_row": 720664,
+    "full_float_best_score": 0.7979823350906372,
+    "query_id": "1100687"
+  },
+  {
+    "query": 443,
+    "full_float_best_row": 547496,
+    "full_float_best_score": 0.7591018676757812,
+    "query_id": "1022621"
+  },
+  {
+    "query": 444,
+    "full_float_best_row": 572125,
+    "full_float_best_score": 0.7903430461883545,
+    "query_id": "26079"
+  },
+  {
+    "query": 445,
+    "full_float_best_row": 134349,
+    "full_float_best_score": 0.8321025371551514,
+    "query_id": "1011044"
+  },
+  {
+    "query": 446,
+    "full_float_best_row": 624043,
+    "full_float_best_score": 0.7931687235832214,
+    "query_id": "326629"
+  },
+  {
+    "query": 447,
+    "full_float_best_row": 351779,
+    "full_float_best_score": 0.8596900701522827,
+    "query_id": "832508"
+  },
+  {
+    "query": 448,
+    "full_float_best_row": 955189,
+    "full_float_best_score": 0.786746084690094,
+    "query_id": "1034172"
+  },
+  {
+    "query": 449,
+    "full_float_best_row": 640469,
+    "full_float_best_score": 0.7662856578826904,
+    "query_id": "1082341"
+  },
+  {
+    "query": 450,
+    "full_float_best_row": 46195,
+    "full_float_best_score": 0.7915704250335693,
+    "query_id": "565856"
+  },
+  {
+    "query": 451,
+    "full_float_best_row": 736170,
+    "full_float_best_score": 0.8235365748405457,
+    "query_id": "625205"
+  },
+  {
+    "query": 452,
+    "full_float_best_row": 444580,
+    "full_float_best_score": 0.673364520072937,
+    "query_id": "1058822"
+  },
+  {
+    "query": 453,
+    "full_float_best_row": 863491,
+    "full_float_best_score": 0.8156353235244751,
+    "query_id": "610425"
+  },
+  {
+    "query": 454,
+    "full_float_best_row": 813458,
+    "full_float_best_score": 0.8072530031204224,
+    "query_id": "1095555"
+  },
+  {
+    "query": 455,
+    "full_float_best_row": 157332,
+    "full_float_best_score": 0.7596571445465088,
+    "query_id": "1075980"
+  },
+  {
+    "query": 456,
+    "full_float_best_row": 814192,
+    "full_float_best_score": 0.8886196613311768,
+    "query_id": "554511"
+  },
+  {
+    "query": 457,
+    "full_float_best_row": 922019,
+    "full_float_best_score": 0.8549153208732605,
+    "query_id": "1089501"
+  },
+  {
+    "query": 458,
+    "full_float_best_row": 891110,
+    "full_float_best_score": 0.7389929294586182,
+    "query_id": "1092724"
+  },
+  {
+    "query": 459,
+    "full_float_best_row": 971582,
+    "full_float_best_score": 0.7589584589004517,
+    "query_id": "1059820"
+  },
+  {
+    "query": 460,
+    "full_float_best_row": 432890,
+    "full_float_best_score": 0.8397048115730286,
+    "query_id": "1080937"
+  },
+  {
+    "query": 461,
+    "full_float_best_row": 230608,
+    "full_float_best_score": 0.7738960385322571,
+    "query_id": "166403"
+  },
+  {
+    "query": 462,
+    "full_float_best_row": 171388,
+    "full_float_best_score": 0.871422290802002,
+    "query_id": "807845"
+  },
+  {
+    "query": 463,
+    "full_float_best_row": 378742,
+    "full_float_best_score": 0.7895320653915405,
+    "query_id": "273014"
+  },
+  {
+    "query": 464,
+    "full_float_best_row": 71166,
+    "full_float_best_score": 0.9072564840316772,
+    "query_id": "20520"
+  },
+  {
+    "query": 465,
+    "full_float_best_row": 301594,
+    "full_float_best_score": 0.8116445541381836,
+    "query_id": "1100064"
+  },
+  {
+    "query": 466,
+    "full_float_best_row": 573449,
+    "full_float_best_score": 0.8480468988418579,
+    "query_id": "842221"
+  },
+  {
+    "query": 467,
+    "full_float_best_row": 605993,
+    "full_float_best_score": 0.7608982920646667,
+    "query_id": "188134"
+  },
+  {
+    "query": 468,
+    "full_float_best_row": 601199,
+    "full_float_best_score": 0.8227893114089966,
+    "query_id": "1089688"
+  },
+  {
+    "query": 469,
+    "full_float_best_row": 179836,
+    "full_float_best_score": 0.7342946529388428,
+    "query_id": "401640"
+  },
+  {
+    "query": 470,
+    "full_float_best_row": 276870,
+    "full_float_best_score": 0.6712891459465027,
+    "query_id": "1101845"
+  },
+  {
+    "query": 471,
+    "full_float_best_row": 468220,
+    "full_float_best_score": 0.7815730571746826,
+    "query_id": "51054"
+  },
+  {
+    "query": 472,
+    "full_float_best_row": 75646,
+    "full_float_best_score": 0.8066699504852295,
+    "query_id": "1096360"
+  },
+  {
+    "query": 473,
+    "full_float_best_row": 641392,
+    "full_float_best_score": 0.7131142020225525,
+    "query_id": "1093773"
+  },
+  {
+    "query": 474,
+    "full_float_best_row": 648972,
+    "full_float_best_score": 0.8063609600067139,
+    "query_id": "912879"
+  },
+  {
+    "query": 475,
+    "full_float_best_row": 867352,
+    "full_float_best_score": 0.8181346654891968,
+    "query_id": "828779"
+  },
+  {
+    "query": 476,
+    "full_float_best_row": 975518,
+    "full_float_best_score": 0.7636427879333496,
+    "query_id": "405660"
+  },
+  {
+    "query": 477,
+    "full_float_best_row": 535481,
+    "full_float_best_score": 0.8729475140571594,
+    "query_id": "947974"
+  },
+  {
+    "query": 478,
+    "full_float_best_row": 680795,
+    "full_float_best_score": 0.7799152135848999,
+    "query_id": "231109"
+  },
+  {
+    "query": 479,
+    "full_float_best_row": 678130,
+    "full_float_best_score": 0.7713098526000977,
+    "query_id": "1077356"
+  },
+  {
+    "query": 480,
+    "full_float_best_row": 738987,
+    "full_float_best_score": 0.6831134557723999,
+    "query_id": "1099836"
+  },
+  {
+    "query": 481,
+    "full_float_best_row": 516563,
+    "full_float_best_score": 0.7523977160453796,
+    "query_id": "937578"
+  },
+  {
+    "query": 482,
+    "full_float_best_row": 805068,
+    "full_float_best_score": 0.7366792559623718,
+    "query_id": "206117"
+  },
+  {
+    "query": 483,
+    "full_float_best_row": 349818,
+    "full_float_best_score": 0.7998796701431274,
+    "query_id": "91711"
+  },
+  {
+    "query": 484,
+    "full_float_best_row": 459702,
+    "full_float_best_score": 0.6518017053604126,
+    "query_id": "1052421"
+  },
+  {
+    "query": 485,
+    "full_float_best_row": 970871,
+    "full_float_best_score": 0.8796775341033936,
+    "query_id": "522953"
+  },
+  {
+    "query": 486,
+    "full_float_best_row": 96201,
+    "full_float_best_score": 0.8268481492996216,
+    "query_id": "950355"
+  },
+  {
+    "query": 487,
+    "full_float_best_row": 845906,
+    "full_float_best_score": 0.9000073075294495,
+    "query_id": "593275"
+  },
+  {
+    "query": 488,
+    "full_float_best_row": 887888,
+    "full_float_best_score": 0.8677088618278503,
+    "query_id": "504335"
+  },
+  {
+    "query": 489,
+    "full_float_best_row": 26082,
+    "full_float_best_score": 0.856281042098999,
+    "query_id": "724947"
+  },
+  {
+    "query": 490,
+    "full_float_best_row": 14284,
+    "full_float_best_score": 0.8174549341201782,
+    "query_id": "57882"
+  },
+  {
+    "query": 491,
+    "full_float_best_row": 126498,
+    "full_float_best_score": 0.8517981767654419,
+    "query_id": "402427"
+  },
+  {
+    "query": 492,
+    "full_float_best_row": 616466,
+    "full_float_best_score": 0.6955013275146484,
+    "query_id": "467612"
+  },
+  {
+    "query": 493,
+    "full_float_best_row": 251795,
+    "full_float_best_score": 0.8135690689086914,
+    "query_id": "1097314"
+  },
+  {
+    "query": 494,
+    "full_float_best_row": 117604,
+    "full_float_best_score": 0.7808796167373657,
+    "query_id": "1085630"
+  },
+  {
+    "query": 495,
+    "full_float_best_row": 581991,
+    "full_float_best_score": 0.7833734750747681,
+    "query_id": "527769"
+  },
+  {
+    "query": 496,
+    "full_float_best_row": 188021,
+    "full_float_best_score": 0.8656517863273621,
+    "query_id": "868410"
+  },
+  {
+    "query": 497,
+    "full_float_best_row": 295293,
+    "full_float_best_score": 0.8139952421188354,
+    "query_id": "217246"
+  },
+  {
+    "query": 498,
+    "full_float_best_row": 46709,
+    "full_float_best_score": 0.7739558815956116,
+    "query_id": "433685"
+  },
+  {
+    "query": 499,
+    "full_float_best_row": 723946,
+    "full_float_best_score": 0.8344842791557312,
+    "query_id": "822649"
+  },
+  {
+    "query": 500,
+    "full_float_best_row": 378960,
+    "full_float_best_score": 0.6992864608764648,
+    "query_id": "1047642"
+  },
+  {
+    "query": 501,
+    "full_float_best_row": 223075,
+    "full_float_best_score": 0.8297499418258667,
+    "query_id": "1097040"
+  },
+  {
+    "query": 502,
+    "full_float_best_row": 743573,
+    "full_float_best_score": 0.8548842072486877,
+    "query_id": "783963"
+  },
+  {
+    "query": 503,
+    "full_float_best_row": 469431,
+    "full_float_best_score": 0.8252245187759399,
+    "query_id": "920885"
+  },
+  {
+    "query": 504,
+    "full_float_best_row": 540332,
+    "full_float_best_score": 0.9100502133369446,
+    "query_id": "1060391"
+  },
+  {
+    "query": 505,
+    "full_float_best_row": 661477,
+    "full_float_best_score": 0.7969852685928345,
+    "query_id": "635125"
+  },
+  {
+    "query": 506,
+    "full_float_best_row": 5565,
+    "full_float_best_score": 0.8557614088058472,
+    "query_id": "46095"
+  },
+  {
+    "query": 507,
+    "full_float_best_row": 487142,
+    "full_float_best_score": 0.7151479721069336,
+    "query_id": "984856"
+  },
+  {
+    "query": 508,
+    "full_float_best_row": 850919,
+    "full_float_best_score": 0.8885207772254944,
+    "query_id": "1091569"
+  },
+  {
+    "query": 509,
+    "full_float_best_row": 317102,
+    "full_float_best_score": 0.7411330938339233,
+    "query_id": "405238"
+  },
+  {
+    "query": 510,
+    "full_float_best_row": 12374,
+    "full_float_best_score": 0.8967435956001282,
+    "query_id": "789332"
+  },
+  {
+    "query": 511,
+    "full_float_best_row": 983789,
+    "full_float_best_score": 0.6824966669082642,
+    "query_id": "1088958"
+  },
+  {
+    "query": 512,
+    "full_float_best_row": 745886,
+    "full_float_best_score": 0.6834983825683594,
+    "query_id": "1088434"
+  },
+  {
+    "query": 513,
+    "full_float_best_row": 42963,
+    "full_float_best_score": 0.8245492577552795,
+    "query_id": "1000006"
+  },
+  {
+    "query": 514,
+    "full_float_best_row": 73126,
+    "full_float_best_score": 0.6846926808357239,
+    "query_id": "722615"
+  },
+  {
+    "query": 515,
+    "full_float_best_row": 119982,
+    "full_float_best_score": 0.8334097266197205,
+    "query_id": "203039"
+  },
+  {
+    "query": 516,
+    "full_float_best_row": 96068,
+    "full_float_best_score": 0.7059102058410645,
+    "query_id": "985372"
+  },
+  {
+    "query": 517,
+    "full_float_best_row": 232082,
+    "full_float_best_score": 0.8968404531478882,
+    "query_id": "656859"
+  },
+  {
+    "query": 518,
+    "full_float_best_row": 227810,
+    "full_float_best_score": 0.8772172927856445,
+    "query_id": "86264"
+  },
+  {
+    "query": 519,
+    "full_float_best_row": 276491,
+    "full_float_best_score": 0.8145049214363098,
+    "query_id": "1088254"
+  },
+  {
+    "query": 520,
+    "full_float_best_row": 179758,
+    "full_float_best_score": 0.660538375377655,
+    "query_id": "1039361"
+  },
+  {
+    "query": 521,
+    "full_float_best_row": 297322,
+    "full_float_best_score": 0.8862113952636719,
+    "query_id": "1094395"
+  },
+  {
+    "query": 522,
+    "full_float_best_row": 128945,
+    "full_float_best_score": 0.8437052965164185,
+    "query_id": "332797"
+  },
+  {
+    "query": 523,
+    "full_float_best_row": 106196,
+    "full_float_best_score": 0.8515405654907227,
+    "query_id": "931905"
+  },
+  {
+    "query": 524,
+    "full_float_best_row": 278543,
+    "full_float_best_score": 0.807395875453949,
+    "query_id": "1096644"
+  },
+  {
+    "query": 525,
+    "full_float_best_row": 764649,
+    "full_float_best_score": 0.7351258397102356,
+    "query_id": "460403"
+  },
+  {
+    "query": 526,
+    "full_float_best_row": 24004,
+    "full_float_best_score": 0.7951838970184326,
+    "query_id": "1024305"
+  },
+  {
+    "query": 527,
+    "full_float_best_row": 116048,
+    "full_float_best_score": 0.6831129789352417,
+    "query_id": "384406"
+  },
+  {
+    "query": 528,
+    "full_float_best_row": 182090,
+    "full_float_best_score": 0.8372209072113037,
+    "query_id": "1064852"
+  },
+  {
+    "query": 529,
+    "full_float_best_row": 100792,
+    "full_float_best_score": 0.7732256650924683,
+    "query_id": "295406"
+  },
+  {
+    "query": 530,
+    "full_float_best_row": 139780,
+    "full_float_best_score": 0.7851610779762268,
+    "query_id": "1041753"
+  },
+  {
+    "query": 531,
+    "full_float_best_row": 724135,
+    "full_float_best_score": 0.8537628054618835,
+    "query_id": "497470"
+  },
+  {
+    "query": 532,
+    "full_float_best_row": 46864,
+    "full_float_best_score": 0.8235126733779907,
+    "query_id": "1020710"
+  },
+  {
+    "query": 533,
+    "full_float_best_row": 923314,
+    "full_float_best_score": 0.8887932896614075,
+    "query_id": "607338"
+  },
+  {
+    "query": 534,
+    "full_float_best_row": 317713,
+    "full_float_best_score": 0.8516553640365601,
+    "query_id": "760367"
+  },
+  {
+    "query": 535,
+    "full_float_best_row": 160711,
+    "full_float_best_score": 0.8521695137023926,
+    "query_id": "1049456"
+  },
+  {
+    "query": 536,
+    "full_float_best_row": 85940,
+    "full_float_best_score": 0.7455079555511475,
+    "query_id": "614069"
+  },
+  {
+    "query": 537,
+    "full_float_best_row": 633169,
+    "full_float_best_score": 0.8183095455169678,
+    "query_id": "1082622"
+  },
+  {
+    "query": 538,
+    "full_float_best_row": 808971,
+    "full_float_best_score": 0.9201374053955078,
+    "query_id": "1098102"
+  },
+  {
+    "query": 539,
+    "full_float_best_row": 202306,
+    "full_float_best_score": 0.8228879570960999,
+    "query_id": "939744"
+  },
+  {
+    "query": 540,
+    "full_float_best_row": 797565,
+    "full_float_best_score": 0.8167752623558044,
+    "query_id": "31595"
+  },
+  {
+    "query": 541,
+    "full_float_best_row": 983015,
+    "full_float_best_score": 0.7857242822647095,
+    "query_id": "987791"
+  },
+  {
+    "query": 542,
+    "full_float_best_row": 979819,
+    "full_float_best_score": 0.8028730750083923,
+    "query_id": "1059970"
+  },
+  {
+    "query": 543,
+    "full_float_best_row": 204254,
+    "full_float_best_score": 0.7299696803092957,
+    "query_id": "129491"
+  },
+  {
+    "query": 544,
+    "full_float_best_row": 560835,
+    "full_float_best_score": 0.6449877619743347,
+    "query_id": "1088758"
+  },
+  {
+    "query": 545,
+    "full_float_best_row": 253538,
+    "full_float_best_score": 0.812179684638977,
+    "query_id": "129565"
+  },
+  {
+    "query": 546,
+    "full_float_best_row": 461235,
+    "full_float_best_score": 0.8275062441825867,
+    "query_id": "1047700"
+  },
+  {
+    "query": 547,
+    "full_float_best_row": 188589,
+    "full_float_best_score": 0.6412123441696167,
+    "query_id": "751778"
+  },
+  {
+    "query": 548,
+    "full_float_best_row": 418524,
+    "full_float_best_score": 0.7941242456436157,
+    "query_id": "91345"
+  },
+  {
+    "query": 549,
+    "full_float_best_row": 105277,
+    "full_float_best_score": 0.8414317965507507,
+    "query_id": "1088734"
+  },
+  {
+    "query": 550,
+    "full_float_best_row": 817140,
+    "full_float_best_score": 0.7545254230499268,
+    "query_id": "820027"
+  },
+  {
+    "query": 551,
+    "full_float_best_row": 435280,
+    "full_float_best_score": 0.7929993867874146,
+    "query_id": "1070546"
+  },
+  {
+    "query": 552,
+    "full_float_best_row": 977950,
+    "full_float_best_score": 0.7508814334869385,
+    "query_id": "425505"
+  },
+  {
+    "query": 553,
+    "full_float_best_row": 458244,
+    "full_float_best_score": 0.826569139957428,
+    "query_id": "577930"
+  },
+  {
+    "query": 554,
+    "full_float_best_row": 802045,
+    "full_float_best_score": 0.8016259670257568,
+    "query_id": "992950"
+  },
+  {
+    "query": 555,
+    "full_float_best_row": 501848,
+    "full_float_best_score": 0.8339427709579468,
+    "query_id": "323555"
+  },
+  {
+    "query": 556,
+    "full_float_best_row": 789342,
+    "full_float_best_score": 0.8377997279167175,
+    "query_id": "584500"
+  },
+  {
+    "query": 557,
+    "full_float_best_row": 340822,
+    "full_float_best_score": 0.7755043506622314,
+    "query_id": "1087803"
+  },
+  {
+    "query": 558,
+    "full_float_best_row": 441909,
+    "full_float_best_score": 0.7600414156913757,
+    "query_id": "1052985"
+  },
+  {
+    "query": 559,
+    "full_float_best_row": 159301,
+    "full_float_best_score": 0.8561908602714539,
+    "query_id": "1033718"
+  },
+  {
+    "query": 560,
+    "full_float_best_row": 122000,
+    "full_float_best_score": 0.7821500301361084,
+    "query_id": "540456"
+  },
+  {
+    "query": 561,
+    "full_float_best_row": 298132,
+    "full_float_best_score": 0.7951302528381348,
+    "query_id": "1101434"
+  },
+  {
+    "query": 562,
+    "full_float_best_row": 590589,
+    "full_float_best_score": 0.7983925342559814,
+    "query_id": "794319"
+  },
+  {
+    "query": 563,
+    "full_float_best_row": 316956,
+    "full_float_best_score": 0.7814674973487854,
+    "query_id": "957688"
+  },
+  {
+    "query": 564,
+    "full_float_best_row": 314696,
+    "full_float_best_score": 0.7013697624206543,
+    "query_id": "1088444"
+  },
+  {
+    "query": 565,
+    "full_float_best_row": 68927,
+    "full_float_best_score": 0.8374934792518616,
+    "query_id": "748321"
+  },
+  {
+    "query": 566,
+    "full_float_best_row": 994643,
+    "full_float_best_score": 0.6880306601524353,
+    "query_id": "1084602"
+  },
+  {
+    "query": 567,
+    "full_float_best_row": 578303,
+    "full_float_best_score": 0.6396069526672363,
+    "query_id": "741274"
+  },
+  {
+    "query": 568,
+    "full_float_best_row": 410935,
+    "full_float_best_score": 0.8466054201126099,
+    "query_id": "1094453"
+  },
+  {
+    "query": 569,
+    "full_float_best_row": 692205,
+    "full_float_best_score": 0.8112068176269531,
+    "query_id": "983499"
+  },
+  {
+    "query": 570,
+    "full_float_best_row": 143786,
+    "full_float_best_score": 0.803142249584198,
+    "query_id": "984499"
+  },
+  {
+    "query": 571,
+    "full_float_best_row": 451091,
+    "full_float_best_score": 0.8116250038146973,
+    "query_id": "1046475"
+  },
+  {
+    "query": 572,
+    "full_float_best_row": 328276,
+    "full_float_best_score": 0.7988393306732178,
+    "query_id": "1091421"
+  },
+  {
+    "query": 573,
+    "full_float_best_row": 970875,
+    "full_float_best_score": 0.7295099496841431,
+    "query_id": "998609"
+  },
+  {
+    "query": 574,
+    "full_float_best_row": 760949,
+    "full_float_best_score": 0.8849695324897766,
+    "query_id": "206819"
+  },
+  {
+    "query": 575,
+    "full_float_best_row": 169055,
+    "full_float_best_score": 0.7223786115646362,
+    "query_id": "1005888"
+  },
+  {
+    "query": 576,
+    "full_float_best_row": 1798,
+    "full_float_best_score": 0.8393269777297974,
+    "query_id": "1070867"
+  },
+  {
+    "query": 577,
+    "full_float_best_row": 456401,
+    "full_float_best_score": 0.8016512989997864,
+    "query_id": "1006987"
+  },
+  {
+    "query": 578,
+    "full_float_best_row": 462980,
+    "full_float_best_score": 0.7204847931861877,
+    "query_id": "997713"
+  },
+  {
+    "query": 579,
+    "full_float_best_row": 371271,
+    "full_float_best_score": 0.8731517791748047,
+    "query_id": "184621"
+  },
+  {
+    "query": 580,
+    "full_float_best_row": 190419,
+    "full_float_best_score": 0.7646533846855164,
+    "query_id": "505541"
+  },
+  {
+    "query": 581,
+    "full_float_best_row": 220692,
+    "full_float_best_score": 0.702789843082428,
+    "query_id": "510858"
+  },
+  {
+    "query": 582,
+    "full_float_best_row": 609385,
+    "full_float_best_score": 0.8480798006057739,
+    "query_id": "161117"
+  },
+  {
+    "query": 583,
+    "full_float_best_row": 401019,
+    "full_float_best_score": 0.8289936780929565,
+    "query_id": "831560"
+  },
+  {
+    "query": 584,
+    "full_float_best_row": 54836,
+    "full_float_best_score": 0.7077190279960632,
+    "query_id": "94798"
+  },
+  {
+    "query": 585,
+    "full_float_best_row": 551372,
+    "full_float_best_score": 0.9136286973953247,
+    "query_id": "314907"
+  },
+  {
+    "query": 586,
+    "full_float_best_row": 719336,
+    "full_float_best_score": 0.8160651922225952,
+    "query_id": "1099433"
+  },
+  {
+    "query": 587,
+    "full_float_best_row": 759935,
+    "full_float_best_score": 0.91508948802948,
+    "query_id": "146269"
+  },
+  {
+    "query": 588,
+    "full_float_best_row": 775637,
+    "full_float_best_score": 0.8334351778030396,
+    "query_id": "1024727"
+  },
+  {
+    "query": 589,
+    "full_float_best_row": 634649,
+    "full_float_best_score": 0.7631543278694153,
+    "query_id": "160339"
+  },
+  {
+    "query": 590,
+    "full_float_best_row": 899496,
+    "full_float_best_score": 0.8454210162162781,
+    "query_id": "869759"
+  },
+  {
+    "query": 591,
+    "full_float_best_row": 847705,
+    "full_float_best_score": 0.8072256445884705,
+    "query_id": "15607"
+  },
+  {
+    "query": 592,
+    "full_float_best_row": 483424,
+    "full_float_best_score": 0.8034802079200745,
+    "query_id": "512278"
+  },
+  {
+    "query": 593,
+    "full_float_best_row": 204932,
+    "full_float_best_score": 0.8803306818008423,
+    "query_id": "930721"
+  },
+  {
+    "query": 594,
+    "full_float_best_row": 122265,
+    "full_float_best_score": 0.7753820419311523,
+    "query_id": "25534"
+  },
+  {
+    "query": 595,
+    "full_float_best_row": 196078,
+    "full_float_best_score": 0.9064671993255615,
+    "query_id": "85053"
+  },
+  {
+    "query": 596,
+    "full_float_best_row": 66466,
+    "full_float_best_score": 0.7657617926597595,
+    "query_id": "945535"
+  },
+  {
+    "query": 597,
+    "full_float_best_row": 721531,
+    "full_float_best_score": 0.8961039781570435,
+    "query_id": "18101"
+  },
+  {
+    "query": 598,
+    "full_float_best_row": 755682,
+    "full_float_best_score": 0.7676636576652527,
+    "query_id": "632055"
+  },
+  {
+    "query": 599,
+    "full_float_best_row": 827542,
+    "full_float_best_score": 0.8047997951507568,
+    "query_id": "1094145"
+  },
+  {
+    "query": 600,
+    "full_float_best_row": 543217,
+    "full_float_best_score": 0.8793123960494995,
+    "query_id": "1024893"
+  },
+  {
+    "query": 601,
+    "full_float_best_row": 419103,
+    "full_float_best_score": 0.8549243211746216,
+    "query_id": "1085348"
+  },
+  {
+    "query": 602,
+    "full_float_best_row": 244155,
+    "full_float_best_score": 0.8793935775756836,
+    "query_id": "696738"
+  },
+  {
+    "query": 603,
+    "full_float_best_row": 709380,
+    "full_float_best_score": 0.8846323490142822,
+    "query_id": "1098111"
+  },
+  {
+    "query": 604,
+    "full_float_best_row": 164195,
+    "full_float_best_score": 0.8107738494873047,
+    "query_id": "191792"
+  },
+  {
+    "query": 605,
+    "full_float_best_row": 730029,
+    "full_float_best_score": 0.8154231309890747,
+    "query_id": "1093561"
+  },
+  {
+    "query": 606,
+    "full_float_best_row": 378789,
+    "full_float_best_score": 0.8914107084274292,
+    "query_id": "526671"
+  },
+  {
+    "query": 607,
+    "full_float_best_row": 904192,
+    "full_float_best_score": 0.8362433314323425,
+    "query_id": "1098860"
+  },
+  {
+    "query": 608,
+    "full_float_best_row": 746795,
+    "full_float_best_score": 0.7393012046813965,
+    "query_id": "1090513"
+  },
+  {
+    "query": 609,
+    "full_float_best_row": 352182,
+    "full_float_best_score": 0.8527441024780273,
+    "query_id": "36388"
+  },
+  {
+    "query": 610,
+    "full_float_best_row": 609072,
+    "full_float_best_score": 0.6673054695129395,
+    "query_id": "1100187"
+  },
+  {
+    "query": 611,
+    "full_float_best_row": 372191,
+    "full_float_best_score": 0.7968515157699585,
+    "query_id": "448035"
+  },
+  {
+    "query": 612,
+    "full_float_best_row": 622183,
+    "full_float_best_score": 0.7226808071136475,
+    "query_id": "1094027"
+  },
+  {
+    "query": 613,
+    "full_float_best_row": 646517,
+    "full_float_best_score": 0.7860698103904724,
+    "query_id": "1047738"
+  },
+  {
+    "query": 614,
+    "full_float_best_row": 379105,
+    "full_float_best_score": 0.9368746876716614,
+    "query_id": "93308"
+  },
+  {
+    "query": 615,
+    "full_float_best_row": 567877,
+    "full_float_best_score": 0.789172887802124,
+    "query_id": "1029003"
+  },
+  {
+    "query": 616,
+    "full_float_best_row": 783247,
+    "full_float_best_score": 0.7918367385864258,
+    "query_id": "1084905"
+  },
+  {
+    "query": 617,
+    "full_float_best_row": 738148,
+    "full_float_best_score": 0.8237370252609253,
+    "query_id": "1089966"
+  },
+  {
+    "query": 618,
+    "full_float_best_row": 936581,
+    "full_float_best_score": 0.7172386646270752,
+    "query_id": "1058165"
+  },
+  {
+    "query": 619,
+    "full_float_best_row": 326505,
+    "full_float_best_score": 0.7678899765014648,
+    "query_id": "1094536"
+  },
+  {
+    "query": 620,
+    "full_float_best_row": 164449,
+    "full_float_best_score": 0.867327868938446,
+    "query_id": "1011021"
+  },
+  {
+    "query": 621,
+    "full_float_best_row": 508981,
+    "full_float_best_score": 0.7795460224151611,
+    "query_id": "1099981"
+  },
+  {
+    "query": 622,
+    "full_float_best_row": 724589,
+    "full_float_best_score": 0.8141944408416748,
+    "query_id": "537526"
+  },
+  {
+    "query": 623,
+    "full_float_best_row": 891885,
+    "full_float_best_score": 0.7336694002151489,
+    "query_id": "657264"
+  },
+  {
+    "query": 624,
+    "full_float_best_row": 540310,
+    "full_float_best_score": 0.874138593673706,
+    "query_id": "887395"
+  },
+  {
+    "query": 625,
+    "full_float_best_row": 83507,
+    "full_float_best_score": 0.8910890817642212,
+    "query_id": "994338"
+  },
+  {
+    "query": 626,
+    "full_float_best_row": 828130,
+    "full_float_best_score": 0.7902461290359497,
+    "query_id": "476724"
+  },
+  {
+    "query": 627,
+    "full_float_best_row": 665302,
+    "full_float_best_score": 0.8619754314422607,
+    "query_id": "626701"
+  },
+  {
+    "query": 628,
+    "full_float_best_row": 200734,
+    "full_float_best_score": 0.7478886246681213,
+    "query_id": "406923"
+  },
+  {
+    "query": 629,
+    "full_float_best_row": 665841,
+    "full_float_best_score": 0.8049309253692627,
+    "query_id": "406351"
+  },
+  {
+    "query": 630,
+    "full_float_best_row": 839116,
+    "full_float_best_score": 0.870740532875061,
+    "query_id": "1063709"
+  },
+  {
+    "query": 631,
+    "full_float_best_row": 507572,
+    "full_float_best_score": 0.7038678526878357,
+    "query_id": "1082893"
+  },
+  {
+    "query": 632,
+    "full_float_best_row": 235136,
+    "full_float_best_score": 0.7612636089324951,
+    "query_id": "1074499"
+  },
+  {
+    "query": 633,
+    "full_float_best_row": 55614,
+    "full_float_best_score": 0.8417834043502808,
+    "query_id": "555458"
+  },
+  {
+    "query": 634,
+    "full_float_best_row": 477359,
+    "full_float_best_score": 0.8445000648498535,
+    "query_id": "390813"
+  },
+  {
+    "query": 635,
+    "full_float_best_row": 430191,
+    "full_float_best_score": 0.8449130058288574,
+    "query_id": "1004199"
+  },
+  {
+    "query": 636,
+    "full_float_best_row": 99588,
+    "full_float_best_score": 0.811072051525116,
+    "query_id": "239511"
+  },
+  {
+    "query": 637,
+    "full_float_best_row": 44931,
+    "full_float_best_score": 0.8333187103271484,
+    "query_id": "1045709"
+  },
+  {
+    "query": 638,
+    "full_float_best_row": 335304,
+    "full_float_best_score": 0.7323957681655884,
+    "query_id": "1074807"
+  },
+  {
+    "query": 639,
+    "full_float_best_row": 911868,
+    "full_float_best_score": 0.8431148529052734,
+    "query_id": "1093491"
+  },
+  {
+    "query": 640,
+    "full_float_best_row": 158539,
+    "full_float_best_score": 0.8192343711853027,
+    "query_id": "132263"
+  },
+  {
+    "query": 641,
+    "full_float_best_row": 654348,
+    "full_float_best_score": 0.7888164520263672,
+    "query_id": "1092930"
+  },
+  {
+    "query": 642,
+    "full_float_best_row": 864834,
+    "full_float_best_score": 0.7734056711196899,
+    "query_id": "991241"
+  },
+  {
+    "query": 643,
+    "full_float_best_row": 198465,
+    "full_float_best_score": 0.7590582966804504,
+    "query_id": "1092162"
+  },
+  {
+    "query": 644,
+    "full_float_best_row": 95106,
+    "full_float_best_score": 0.8473318815231323,
+    "query_id": "985259"
+  },
+  {
+    "query": 645,
+    "full_float_best_row": 516705,
+    "full_float_best_score": 0.7948238849639893,
+    "query_id": "1086760"
+  },
+  {
+    "query": 646,
+    "full_float_best_row": 551294,
+    "full_float_best_score": 0.8474923968315125,
+    "query_id": "1003210"
+  },
+  {
+    "query": 647,
+    "full_float_best_row": 272201,
+    "full_float_best_score": 0.7327587008476257,
+    "query_id": "1039728"
+  },
+  {
+    "query": 648,
+    "full_float_best_row": 549827,
+    "full_float_best_score": 0.843548595905304,
+    "query_id": "1045527"
+  },
+  {
+    "query": 649,
+    "full_float_best_row": 159144,
+    "full_float_best_score": 0.7227884531021118,
+    "query_id": "796383"
+  },
+  {
+    "query": 650,
+    "full_float_best_row": 914765,
+    "full_float_best_score": 0.7649855017662048,
+    "query_id": "714636"
+  },
+  {
+    "query": 651,
+    "full_float_best_row": 3945,
+    "full_float_best_score": 0.8204009532928467,
+    "query_id": "1101448"
+  },
+  {
+    "query": 652,
+    "full_float_best_row": 610898,
+    "full_float_best_score": 0.7560571432113647,
+    "query_id": "585165"
+  },
+  {
+    "query": 653,
+    "full_float_best_row": 618414,
+    "full_float_best_score": 0.8903551697731018,
+    "query_id": "1100370"
+  },
+  {
+    "query": 654,
+    "full_float_best_row": 999293,
+    "full_float_best_score": 0.7959760427474976,
+    "query_id": "372792"
+  },
+  {
+    "query": 655,
+    "full_float_best_row": 724003,
+    "full_float_best_score": 0.8237921595573425,
+    "query_id": "1089750"
+  },
+  {
+    "query": 656,
+    "full_float_best_row": 71713,
+    "full_float_best_score": 0.8371145725250244,
+    "query_id": "582557"
+  },
+  {
+    "query": 657,
+    "full_float_best_row": 463912,
+    "full_float_best_score": 0.7085883021354675,
+    "query_id": "934964"
+  },
+  {
+    "query": 658,
+    "full_float_best_row": 788133,
+    "full_float_best_score": 0.84171462059021,
+    "query_id": "195693"
+  },
+  {
+    "query": 659,
+    "full_float_best_row": 200939,
+    "full_float_best_score": 0.7896841764450073,
+    "query_id": "617968"
+  },
+  {
+    "query": 660,
+    "full_float_best_row": 3339,
+    "full_float_best_score": 0.8131818771362305,
+    "query_id": "578362"
+  },
+  {
+    "query": 661,
+    "full_float_best_row": 234197,
+    "full_float_best_score": 0.93439120054245,
+    "query_id": "814699"
+  },
+  {
+    "query": 662,
+    "full_float_best_row": 251168,
+    "full_float_best_score": 0.76857590675354,
+    "query_id": "964152"
+  },
+  {
+    "query": 663,
+    "full_float_best_row": 356113,
+    "full_float_best_score": 0.8634734153747559,
+    "query_id": "1088628"
+  },
+  {
+    "query": 664,
+    "full_float_best_row": 978650,
+    "full_float_best_score": 0.8209552764892578,
+    "query_id": "1083342"
+  },
+  {
+    "query": 665,
+    "full_float_best_row": 335359,
+    "full_float_best_score": 0.853208601474762,
+    "query_id": "352236"
+  },
+  {
+    "query": 666,
+    "full_float_best_row": 846468,
+    "full_float_best_score": 0.8217987418174744,
+    "query_id": "953020"
+  },
+  {
+    "query": 667,
+    "full_float_best_row": 469533,
+    "full_float_best_score": 0.8202767968177795,
+    "query_id": "1079086"
+  },
+  {
+    "query": 668,
+    "full_float_best_row": 687204,
+    "full_float_best_score": 0.8224537372589111,
+    "query_id": "174273"
+  },
+  {
+    "query": 669,
+    "full_float_best_row": 267122,
+    "full_float_best_score": 0.7731952667236328,
+    "query_id": "715508"
+  },
+  {
+    "query": 670,
+    "full_float_best_row": 36614,
+    "full_float_best_score": 0.8161309361457825,
+    "query_id": "541274"
+  },
+  {
+    "query": 671,
+    "full_float_best_row": 641173,
+    "full_float_best_score": 0.8218399882316589,
+    "query_id": "748054"
+  },
+  {
+    "query": 672,
+    "full_float_best_row": 578501,
+    "full_float_best_score": 0.7897390127182007,
+    "query_id": "786857"
+  },
+  {
+    "query": 673,
+    "full_float_best_row": 98409,
+    "full_float_best_score": 0.8240143656730652,
+    "query_id": "183874"
+  },
+  {
+    "query": 674,
+    "full_float_best_row": 169531,
+    "full_float_best_score": 0.8119305968284607,
+    "query_id": "409143"
+  },
+  {
+    "query": 675,
+    "full_float_best_row": 576108,
+    "full_float_best_score": 0.7598893642425537,
+    "query_id": "1037250"
+  },
+  {
+    "query": 676,
+    "full_float_best_row": 831646,
+    "full_float_best_score": 0.8622936606407166,
+    "query_id": "1088309"
+  },
+  {
+    "query": 677,
+    "full_float_best_row": 9678,
+    "full_float_best_score": 0.7070333957672119,
+    "query_id": "993606"
+  },
+  {
+    "query": 678,
+    "full_float_best_row": 149719,
+    "full_float_best_score": 0.7892588973045349,
+    "query_id": "1014131"
+  },
+  {
+    "query": 679,
+    "full_float_best_row": 308194,
+    "full_float_best_score": 0.7865593433380127,
+    "query_id": "600350"
+  },
+  {
+    "query": 680,
+    "full_float_best_row": 482917,
+    "full_float_best_score": 0.8146236538887024,
+    "query_id": "1102325"
+  },
+  {
+    "query": 681,
+    "full_float_best_row": 595568,
+    "full_float_best_score": 0.7355992794036865,
+    "query_id": "794665"
+  },
+  {
+    "query": 682,
+    "full_float_best_row": 610103,
+    "full_float_best_score": 0.6995240449905396,
+    "query_id": "112035"
+  },
+  {
+    "query": 683,
+    "full_float_best_row": 31572,
+    "full_float_best_score": 0.8036733269691467,
+    "query_id": "144694"
+  },
+  {
+    "query": 684,
+    "full_float_best_row": 286905,
+    "full_float_best_score": 0.7948607206344604,
+    "query_id": "1040082"
+  },
+  {
+    "query": 685,
+    "full_float_best_row": 349614,
+    "full_float_best_score": 0.7683566808700562,
+    "query_id": "1069983"
+  },
+  {
+    "query": 686,
+    "full_float_best_row": 686481,
+    "full_float_best_score": 0.7712224721908569,
+    "query_id": "132317"
+  },
+  {
+    "query": 687,
+    "full_float_best_row": 980636,
+    "full_float_best_score": 0.8064216375350952,
+    "query_id": "156215"
+  },
+  {
+    "query": 688,
+    "full_float_best_row": 156023,
+    "full_float_best_score": 0.8767896890640259,
+    "query_id": "98817"
+  },
+  {
+    "query": 689,
+    "full_float_best_row": 657771,
+    "full_float_best_score": 0.7970842123031616,
+    "query_id": "329369"
+  },
+  {
+    "query": 690,
+    "full_float_best_row": 109258,
+    "full_float_best_score": 0.877226710319519,
+    "query_id": "403095"
+  },
+  {
+    "query": 691,
+    "full_float_best_row": 424162,
+    "full_float_best_score": 0.8204050064086914,
+    "query_id": "1098787"
+  },
+  {
+    "query": 692,
+    "full_float_best_row": 580323,
+    "full_float_best_score": 0.8732856512069702,
+    "query_id": "630318"
+  },
+  {
+    "query": 693,
+    "full_float_best_row": 248041,
+    "full_float_best_score": 0.7322602868080139,
+    "query_id": "1059504"
+  },
+  {
+    "query": 694,
+    "full_float_best_row": 755570,
+    "full_float_best_score": 0.7320737838745117,
+    "query_id": "636434"
+  },
+  {
+    "query": 695,
+    "full_float_best_row": 351815,
+    "full_float_best_score": 0.8916046023368835,
+    "query_id": "1088715"
+  },
+  {
+    "query": 696,
+    "full_float_best_row": 875697,
+    "full_float_best_score": 0.6827210783958435,
+    "query_id": "611468"
+  },
+  {
+    "query": 697,
+    "full_float_best_row": 817286,
+    "full_float_best_score": 0.7828146815299988,
+    "query_id": "1074995"
+  },
+  {
+    "query": 698,
+    "full_float_best_row": 683221,
+    "full_float_best_score": 0.9234025478363037,
+    "query_id": "428847"
+  },
+  {
+    "query": 699,
+    "full_float_best_row": 956451,
+    "full_float_best_score": 0.8044521808624268,
+    "query_id": "719749"
+  },
+  {
+    "query": 700,
+    "full_float_best_row": 35774,
+    "full_float_best_score": 0.7133880257606506,
+    "query_id": "1092484"
+  },
+  {
+    "query": 701,
+    "full_float_best_row": 680315,
+    "full_float_best_score": 0.7706683874130249,
+    "query_id": "434369"
+  },
+  {
+    "query": 702,
+    "full_float_best_row": 291845,
+    "full_float_best_score": 0.8692689538002014,
+    "query_id": "171691"
+  },
+  {
+    "query": 703,
+    "full_float_best_row": 139718,
+    "full_float_best_score": 0.8452757596969604,
+    "query_id": "244808"
+  },
+  {
+    "query": 704,
+    "full_float_best_row": 42293,
+    "full_float_best_score": 0.823991060256958,
+    "query_id": "1087492"
+  },
+  {
+    "query": 705,
+    "full_float_best_row": 651500,
+    "full_float_best_score": 0.820053219795227,
+    "query_id": "736713"
+  },
+  {
+    "query": 706,
+    "full_float_best_row": 284807,
+    "full_float_best_score": 0.6702610850334167,
+    "query_id": "1090063"
+  },
+  {
+    "query": 707,
+    "full_float_best_row": 321249,
+    "full_float_best_score": 0.7938665747642517,
+    "query_id": "921621"
+  },
+  {
+    "query": 708,
+    "full_float_best_row": 515323,
+    "full_float_best_score": 0.8571659326553345,
+    "query_id": "437324"
+  },
+  {
+    "query": 709,
+    "full_float_best_row": 312287,
+    "full_float_best_score": 0.8708521127700806,
+    "query_id": "1096021"
+  },
+  {
+    "query": 710,
+    "full_float_best_row": 124346,
+    "full_float_best_score": 0.7797102332115173,
+    "query_id": "891498"
+  },
+  {
+    "query": 711,
+    "full_float_best_row": 637461,
+    "full_float_best_score": 0.7318326830863953,
+    "query_id": "1084326"
+  },
+  {
+    "query": 712,
+    "full_float_best_row": 797962,
+    "full_float_best_score": 0.7432266473770142,
+    "query_id": "94865"
+  },
+  {
+    "query": 713,
+    "full_float_best_row": 150302,
+    "full_float_best_score": 0.6929588317871094,
+    "query_id": "524835"
+  },
+  {
+    "query": 714,
+    "full_float_best_row": 611289,
+    "full_float_best_score": 0.6983880400657654,
+    "query_id": "456551"
+  },
+  {
+    "query": 715,
+    "full_float_best_row": 316291,
+    "full_float_best_score": 0.8331801891326904,
+    "query_id": "1091659"
+  },
+  {
+    "query": 716,
+    "full_float_best_row": 572573,
+    "full_float_best_score": 0.8099716901779175,
+    "query_id": "995141"
+  },
+  {
+    "query": 717,
+    "full_float_best_row": 773726,
+    "full_float_best_score": 0.7719953060150146,
+    "query_id": "1086391"
+  },
+  {
+    "query": 718,
+    "full_float_best_row": 74703,
+    "full_float_best_score": 0.6985940933227539,
+    "query_id": "736347"
+  },
+  {
+    "query": 719,
+    "full_float_best_row": 225644,
+    "full_float_best_score": 0.7490121722221375,
+    "query_id": "167994"
+  },
+  {
+    "query": 720,
+    "full_float_best_row": 913717,
+    "full_float_best_score": 0.8524218201637268,
+    "query_id": "230891"
+  },
+  {
+    "query": 721,
+    "full_float_best_row": 587484,
+    "full_float_best_score": 0.8413905501365662,
+    "query_id": "1072750"
+  },
+  {
+    "query": 722,
+    "full_float_best_row": 696576,
+    "full_float_best_score": 0.7927005290985107,
+    "query_id": "1098044"
+  },
+  {
+    "query": 723,
+    "full_float_best_row": 574177,
+    "full_float_best_score": 0.7709057927131653,
+    "query_id": "127315"
+  },
+  {
+    "query": 724,
+    "full_float_best_row": 801159,
+    "full_float_best_score": 0.8297046422958374,
+    "query_id": "647872"
+  },
+  {
+    "query": 725,
+    "full_float_best_row": 88943,
+    "full_float_best_score": 0.8579045534133911,
+    "query_id": "259885"
+  },
+  {
+    "query": 726,
+    "full_float_best_row": 959945,
+    "full_float_best_score": 0.7491663098335266,
+    "query_id": "930621"
+  },
+  {
+    "query": 727,
+    "full_float_best_row": 140701,
+    "full_float_best_score": 0.7834781408309937,
+    "query_id": "1092919"
+  },
+  {
+    "query": 728,
+    "full_float_best_row": 11994,
+    "full_float_best_score": 0.8914575576782227,
+    "query_id": "882002"
+  },
+  {
+    "query": 729,
+    "full_float_best_row": 514152,
+    "full_float_best_score": 0.8841391801834106,
+    "query_id": "1024669"
+  },
+  {
+    "query": 730,
+    "full_float_best_row": 422111,
+    "full_float_best_score": 0.8373194932937622,
+    "query_id": "1095787"
+  },
+  {
+    "query": 731,
+    "full_float_best_row": 561977,
+    "full_float_best_score": 0.6401765942573547,
+    "query_id": "53814"
+  },
+  {
+    "query": 732,
+    "full_float_best_row": 814600,
+    "full_float_best_score": 0.7256122827529907,
+    "query_id": "992535"
+  },
+  {
+    "query": 733,
+    "full_float_best_row": 78277,
+    "full_float_best_score": 0.8086320757865906,
+    "query_id": "973731"
+  },
+  {
+    "query": 734,
+    "full_float_best_row": 396811,
+    "full_float_best_score": 0.876808762550354,
+    "query_id": "417902"
+  },
+  {
+    "query": 735,
+    "full_float_best_row": 226903,
+    "full_float_best_score": 0.8705258369445801,
+    "query_id": "1051285"
+  },
+  {
+    "query": 736,
+    "full_float_best_row": 19746,
+    "full_float_best_score": 0.8238323330879211,
+    "query_id": "588888"
+  },
+  {
+    "query": 737,
+    "full_float_best_row": 964947,
+    "full_float_best_score": 0.8109626770019531,
+    "query_id": "762652"
+  },
+  {
+    "query": 738,
+    "full_float_best_row": 290565,
+    "full_float_best_score": 0.8312147855758667,
+    "query_id": "709342"
+  },
+  {
+    "query": 739,
+    "full_float_best_row": 538821,
+    "full_float_best_score": 0.8136655688285828,
+    "query_id": "1017605"
+  },
+  {
+    "query": 740,
+    "full_float_best_row": 81413,
+    "full_float_best_score": 0.8306904435157776,
+    "query_id": "996119"
+  },
+  {
+    "query": 741,
+    "full_float_best_row": 529028,
+    "full_float_best_score": 0.8801496028900146,
+    "query_id": "1083690"
+  },
+  {
+    "query": 742,
+    "full_float_best_row": 11809,
+    "full_float_best_score": 0.8074227571487427,
+    "query_id": "665972"
+  },
+  {
+    "query": 743,
+    "full_float_best_row": 286492,
+    "full_float_best_score": 0.8507353067398071,
+    "query_id": "922593"
+  },
+  {
+    "query": 744,
+    "full_float_best_row": 680267,
+    "full_float_best_score": 0.7639737725257874,
+    "query_id": "745402"
+  },
+  {
+    "query": 745,
+    "full_float_best_row": 74624,
+    "full_float_best_score": 0.7168960571289062,
+    "query_id": "111995"
+  },
+  {
+    "query": 746,
+    "full_float_best_row": 839106,
+    "full_float_best_score": 0.8865056037902832,
+    "query_id": "713448"
+  },
+  {
+    "query": 747,
+    "full_float_best_row": 330011,
+    "full_float_best_score": 0.8264635801315308,
+    "query_id": "61623"
+  },
+  {
+    "query": 748,
+    "full_float_best_row": 943671,
+    "full_float_best_score": 0.8173321485519409,
+    "query_id": "399414"
+  },
+  {
+    "query": 749,
+    "full_float_best_row": 558083,
+    "full_float_best_score": 0.8179263472557068,
+    "query_id": "357664"
+  },
+  {
+    "query": 750,
+    "full_float_best_row": 481597,
+    "full_float_best_score": 0.8636983633041382,
+    "query_id": "998675"
+  },
+  {
+    "query": 751,
+    "full_float_best_row": 500869,
+    "full_float_best_score": 0.8148978352546692,
+    "query_id": "321363"
+  },
+  {
+    "query": 752,
+    "full_float_best_row": 674365,
+    "full_float_best_score": 0.793480396270752,
+    "query_id": "995598"
+  },
+  {
+    "query": 753,
+    "full_float_best_row": 827111,
+    "full_float_best_score": 0.8280972838401794,
+    "query_id": "883282"
+  },
+  {
+    "query": 754,
+    "full_float_best_row": 820689,
+    "full_float_best_score": 0.9180896878242493,
+    "query_id": "125545"
+  },
+  {
+    "query": 755,
+    "full_float_best_row": 735842,
+    "full_float_best_score": 0.7061043381690979,
+    "query_id": "896383"
+  },
+  {
+    "query": 756,
+    "full_float_best_row": 212491,
+    "full_float_best_score": 0.8603206872940063,
+    "query_id": "914368"
+  },
+  {
+    "query": 757,
+    "full_float_best_row": 220952,
+    "full_float_best_score": 0.8521046042442322,
+    "query_id": "478220"
+  },
+  {
+    "query": 758,
+    "full_float_best_row": 751529,
+    "full_float_best_score": 0.725476086139679,
+    "query_id": "1057168"
+  },
+  {
+    "query": 759,
+    "full_float_best_row": 7739,
+    "full_float_best_score": 0.6862955093383789,
+    "query_id": "1006852"
+  },
+  {
+    "query": 760,
+    "full_float_best_row": 940753,
+    "full_float_best_score": 0.7046219706535339,
+    "query_id": "829087"
+  },
+  {
+    "query": 761,
+    "full_float_best_row": 6576,
+    "full_float_best_score": 0.7551895976066589,
+    "query_id": "786786"
+  },
+  {
+    "query": 762,
+    "full_float_best_row": 597671,
+    "full_float_best_score": 0.8701826333999634,
+    "query_id": "59426"
+  },
+  {
+    "query": 763,
+    "full_float_best_row": 554996,
+    "full_float_best_score": 0.7314205169677734,
+    "query_id": "1057996"
+  },
+  {
+    "query": 764,
+    "full_float_best_row": 112082,
+    "full_float_best_score": 0.8033273816108704,
+    "query_id": "886382"
+  },
+  {
+    "query": 765,
+    "full_float_best_row": 280284,
+    "full_float_best_score": 0.8354833722114563,
+    "query_id": "1090789"
+  },
+  {
+    "query": 766,
+    "full_float_best_row": 318183,
+    "full_float_best_score": 0.8547167181968689,
+    "query_id": "986935"
+  },
+  {
+    "query": 767,
+    "full_float_best_row": 131745,
+    "full_float_best_score": 0.8203116059303284,
+    "query_id": "403793"
+  },
+  {
+    "query": 768,
+    "full_float_best_row": 116118,
+    "full_float_best_score": 0.8149205446243286,
+    "query_id": "196949"
+  },
+  {
+    "query": 769,
+    "full_float_best_row": 857167,
+    "full_float_best_score": 0.8203179240226746,
+    "query_id": "1094840"
+  },
+  {
+    "query": 770,
+    "full_float_best_row": 151539,
+    "full_float_best_score": 0.8455097675323486,
+    "query_id": "438324"
+  },
+  {
+    "query": 771,
+    "full_float_best_row": 626246,
+    "full_float_best_score": 0.7657245397567749,
+    "query_id": "557492"
+  },
+  {
+    "query": 772,
+    "full_float_best_row": 622005,
+    "full_float_best_score": 0.7345719933509827,
+    "query_id": "1037188"
+  },
+  {
+    "query": 773,
+    "full_float_best_row": 972780,
+    "full_float_best_score": 0.7100586891174316,
+    "query_id": "709802"
+  },
+  {
+    "query": 774,
+    "full_float_best_row": 748917,
+    "full_float_best_score": 0.7320272326469421,
+    "query_id": "1009109"
+  },
+  {
+    "query": 775,
+    "full_float_best_row": 347078,
+    "full_float_best_score": 0.8450275659561157,
+    "query_id": "1096911"
+  },
+  {
+    "query": 776,
+    "full_float_best_row": 961128,
+    "full_float_best_score": 0.8093684315681458,
+    "query_id": "1092756"
+  },
+  {
+    "query": 777,
+    "full_float_best_row": 781301,
+    "full_float_best_score": 0.8481674194335938,
+    "query_id": "630905"
+  },
+  {
+    "query": 778,
+    "full_float_best_row": 583476,
+    "full_float_best_score": 0.8348112106323242,
+    "query_id": "156723"
+  },
+  {
+    "query": 779,
+    "full_float_best_row": 617080,
+    "full_float_best_score": 0.7965743541717529,
+    "query_id": "135465"
+  },
+  {
+    "query": 780,
+    "full_float_best_row": 79395,
+    "full_float_best_score": 0.7939609289169312,
+    "query_id": "1094039"
+  },
+  {
+    "query": 781,
+    "full_float_best_row": 350915,
+    "full_float_best_score": 0.7979740500450134,
+    "query_id": "363332"
+  },
+  {
+    "query": 782,
+    "full_float_best_row": 218280,
+    "full_float_best_score": 0.7818281650543213,
+    "query_id": "1005949"
+  },
+  {
+    "query": 783,
+    "full_float_best_row": 697946,
+    "full_float_best_score": 0.8677418828010559,
+    "query_id": "545450"
+  },
+  {
+    "query": 784,
+    "full_float_best_row": 886037,
+    "full_float_best_score": 0.7441843748092651,
+    "query_id": "627323"
+  },
+  {
+    "query": 785,
+    "full_float_best_row": 154043,
+    "full_float_best_score": 0.7962777614593506,
+    "query_id": "463635"
+  },
+  {
+    "query": 786,
+    "full_float_best_row": 509604,
+    "full_float_best_score": 0.8138090968132019,
+    "query_id": "910818"
+  },
+  {
+    "query": 787,
+    "full_float_best_row": 764749,
+    "full_float_best_score": 0.8076606392860413,
+    "query_id": "741267"
+  },
+  {
+    "query": 788,
+    "full_float_best_row": 386682,
+    "full_float_best_score": 0.7409658432006836,
+    "query_id": "422152"
+  },
+  {
+    "query": 789,
+    "full_float_best_row": 294816,
+    "full_float_best_score": 0.8181796073913574,
+    "query_id": "173391"
+  },
+  {
+    "query": 790,
+    "full_float_best_row": 255759,
+    "full_float_best_score": 0.8293501138687134,
+    "query_id": "1025270"
+  },
+  {
+    "query": 791,
+    "full_float_best_row": 222375,
+    "full_float_best_score": 0.6672073602676392,
+    "query_id": "1058952"
+  },
+  {
+    "query": 792,
+    "full_float_best_row": 264020,
+    "full_float_best_score": 0.8982048630714417,
+    "query_id": "97972"
+  },
+  {
+    "query": 793,
+    "full_float_best_row": 48802,
+    "full_float_best_score": 0.8658384084701538,
+    "query_id": "885081"
+  },
+  {
+    "query": 794,
+    "full_float_best_row": 902222,
+    "full_float_best_score": 0.7541738748550415,
+    "query_id": "997044"
+  },
+  {
+    "query": 795,
+    "full_float_best_row": 473639,
+    "full_float_best_score": 0.6823303699493408,
+    "query_id": "621419"
+  },
+  {
+    "query": 796,
+    "full_float_best_row": 414831,
+    "full_float_best_score": 0.7880879640579224,
+    "query_id": "580450"
+  },
+  {
+    "query": 797,
+    "full_float_best_row": 653349,
+    "full_float_best_score": 0.7690701484680176,
+    "query_id": "1087269"
+  },
+  {
+    "query": 798,
+    "full_float_best_row": 601139,
+    "full_float_best_score": 0.8558347225189209,
+    "query_id": "439731"
+  },
+  {
+    "query": 799,
+    "full_float_best_row": 218612,
+    "full_float_best_score": 0.8687230348587036,
+    "query_id": "1092557"
+  },
+  {
+    "query": 800,
+    "full_float_best_row": 820299,
+    "full_float_best_score": 0.7612998485565186,
+    "query_id": "472448"
+  },
+  {
+    "query": 801,
+    "full_float_best_row": 803536,
+    "full_float_best_score": 0.8144360780715942,
+    "query_id": "800243"
+  },
+  {
+    "query": 802,
+    "full_float_best_row": 662741,
+    "full_float_best_score": 0.7661518454551697,
+    "query_id": "185009"
+  },
+  {
+    "query": 803,
+    "full_float_best_row": 851544,
+    "full_float_best_score": 0.72579026222229,
+    "query_id": "1025624"
+  },
+  {
+    "query": 804,
+    "full_float_best_row": 215313,
+    "full_float_best_score": 0.7481883764266968,
+    "query_id": "1082117"
+  },
+  {
+    "query": 805,
+    "full_float_best_row": 417671,
+    "full_float_best_score": 0.7481968402862549,
+    "query_id": "278606"
+  },
+  {
+    "query": 806,
+    "full_float_best_row": 681446,
+    "full_float_best_score": 0.8293985724449158,
+    "query_id": "647687"
+  },
+  {
+    "query": 807,
+    "full_float_best_row": 67803,
+    "full_float_best_score": 0.7967017889022827,
+    "query_id": "1062233"
+  },
+  {
+    "query": 808,
+    "full_float_best_row": 255015,
+    "full_float_best_score": 0.837523341178894,
+    "query_id": "497757"
+  },
+  {
+    "query": 809,
+    "full_float_best_row": 399706,
+    "full_float_best_score": 0.7667990922927856,
+    "query_id": "1101211"
+  },
+  {
+    "query": 810,
+    "full_float_best_row": 82601,
+    "full_float_best_score": 0.7960660457611084,
+    "query_id": "289812"
+  },
+  {
+    "query": 811,
+    "full_float_best_row": 150526,
+    "full_float_best_score": 0.933682918548584,
+    "query_id": "125627"
+  },
+  {
+    "query": 812,
+    "full_float_best_row": 920642,
+    "full_float_best_score": 0.843122124671936,
+    "query_id": "29612"
+  },
+  {
+    "query": 813,
+    "full_float_best_row": 194141,
+    "full_float_best_score": 0.8976134061813354,
+    "query_id": "131873"
+  },
+  {
+    "query": 814,
+    "full_float_best_row": 316891,
+    "full_float_best_score": 0.865214467048645,
+    "query_id": "1092863"
+  },
+  {
+    "query": 815,
+    "full_float_best_row": 506435,
+    "full_float_best_score": 0.7802854776382446,
+    "query_id": "1056580"
+  },
+  {
+    "query": 816,
+    "full_float_best_row": 823617,
+    "full_float_best_score": 0.797222375869751,
+    "query_id": "1083361"
+  },
+  {
+    "query": 817,
+    "full_float_best_row": 209373,
+    "full_float_best_score": 0.8052619695663452,
+    "query_id": "674702"
+  },
+  {
+    "query": 818,
+    "full_float_best_row": 412750,
+    "full_float_best_score": 0.8697340488433838,
+    "query_id": "1102400"
+  },
+  {
+    "query": 819,
+    "full_float_best_row": 70950,
+    "full_float_best_score": 0.8009690046310425,
+    "query_id": "161418"
+  },
+  {
+    "query": 820,
+    "full_float_best_row": 389057,
+    "full_float_best_score": 0.7516867518424988,
+    "query_id": "439061"
+  },
+  {
+    "query": 821,
+    "full_float_best_row": 900215,
+    "full_float_best_score": 0.6713220477104187,
+    "query_id": "995654"
+  },
+  {
+    "query": 822,
+    "full_float_best_row": 127609,
+    "full_float_best_score": 0.9031357765197754,
+    "query_id": "1098698"
+  },
+  {
+    "query": 823,
+    "full_float_best_row": 440682,
+    "full_float_best_score": 0.805090069770813,
+    "query_id": "768133"
+  },
+  {
+    "query": 824,
+    "full_float_best_row": 857689,
+    "full_float_best_score": 0.8316708207130432,
+    "query_id": "279987"
+  },
+  {
+    "query": 825,
+    "full_float_best_row": 44186,
+    "full_float_best_score": 0.7730512022972107,
+    "query_id": "1095725"
+  },
+  {
+    "query": 826,
+    "full_float_best_row": 234612,
+    "full_float_best_score": 0.6841988563537598,
+    "query_id": "998381"
+  },
+  {
+    "query": 827,
+    "full_float_best_row": 700816,
+    "full_float_best_score": 0.8485239744186401,
+    "query_id": "253678"
+  },
+  {
+    "query": 828,
+    "full_float_best_row": 757645,
+    "full_float_best_score": 0.8296867609024048,
+    "query_id": "1088915"
+  },
+  {
+    "query": 829,
+    "full_float_best_row": 806080,
+    "full_float_best_score": 0.6683752536773682,
+    "query_id": "1096840"
+  },
+  {
+    "query": 830,
+    "full_float_best_row": 153122,
+    "full_float_best_score": 0.7868643999099731,
+    "query_id": "592672"
+  },
+  {
+    "query": 831,
+    "full_float_best_row": 972966,
+    "full_float_best_score": 0.7536466717720032,
+    "query_id": "1085456"
+  },
+  {
+    "query": 832,
+    "full_float_best_row": 412710,
+    "full_float_best_score": 0.8336820602416992,
+    "query_id": "1092751"
+  },
+  {
+    "query": 833,
+    "full_float_best_row": 372466,
+    "full_float_best_score": 0.8850688934326172,
+    "query_id": "961950"
+  },
+  {
+    "query": 834,
+    "full_float_best_row": 905307,
+    "full_float_best_score": 0.8620980978012085,
+    "query_id": "830040"
+  },
+  {
+    "query": 835,
+    "full_float_best_row": 507184,
+    "full_float_best_score": 0.7945910096168518,
+    "query_id": "780336"
+  },
+  {
+    "query": 836,
+    "full_float_best_row": 232324,
+    "full_float_best_score": 0.9147909283638,
+    "query_id": "108622"
+  },
+  {
+    "query": 837,
+    "full_float_best_row": 837382,
+    "full_float_best_score": 0.7748440504074097,
+    "query_id": "1100783"
+  },
+  {
+    "query": 838,
+    "full_float_best_row": 934150,
+    "full_float_best_score": 0.8343024253845215,
+    "query_id": "1100732"
+  },
+  {
+    "query": 839,
+    "full_float_best_row": 469733,
+    "full_float_best_score": 0.7612435221672058,
+    "query_id": "795951"
+  },
+  {
+    "query": 840,
+    "full_float_best_row": 128742,
+    "full_float_best_score": 0.8657968640327454,
+    "query_id": "1002585"
+  },
+  {
+    "query": 841,
+    "full_float_best_row": 735954,
+    "full_float_best_score": 0.7657700777053833,
+    "query_id": "1086917"
+  },
+  {
+    "query": 842,
+    "full_float_best_row": 611094,
+    "full_float_best_score": 0.8297416567802429,
+    "query_id": "408765"
+  },
+  {
+    "query": 843,
+    "full_float_best_row": 815684,
+    "full_float_best_score": 0.7934089303016663,
+    "query_id": "1022178"
+  },
+  {
+    "query": 844,
+    "full_float_best_row": 695354,
+    "full_float_best_score": 0.8715551495552063,
+    "query_id": "701663"
+  },
+  {
+    "query": 845,
+    "full_float_best_row": 529772,
+    "full_float_best_score": 0.7537408471107483,
+    "query_id": "1040532"
+  },
+  {
+    "query": 846,
+    "full_float_best_row": 901803,
+    "full_float_best_score": 0.7508500814437866,
+    "query_id": "1003213"
+  },
+  {
+    "query": 847,
+    "full_float_best_row": 246079,
+    "full_float_best_score": 0.7545510530471802,
+    "query_id": "225752"
+  },
+  {
+    "query": 848,
+    "full_float_best_row": 992808,
+    "full_float_best_score": 0.8668789863586426,
+    "query_id": "1026258"
+  },
+  {
+    "query": 849,
+    "full_float_best_row": 927014,
+    "full_float_best_score": 0.6871613264083862,
+    "query_id": "102695"
+  },
+  {
+    "query": 850,
+    "full_float_best_row": 326671,
+    "full_float_best_score": 0.739116907119751,
+    "query_id": "231482"
+  },
+  {
+    "query": 851,
+    "full_float_best_row": 401093,
+    "full_float_best_score": 0.8684650659561157,
+    "query_id": "703268"
+  },
+  {
+    "query": 852,
+    "full_float_best_row": 908100,
+    "full_float_best_score": 0.7265114784240723,
+    "query_id": "941865"
+  },
+  {
+    "query": 853,
+    "full_float_best_row": 787397,
+    "full_float_best_score": 0.8836658000946045,
+    "query_id": "320117"
+  },
+  {
+    "query": 854,
+    "full_float_best_row": 394493,
+    "full_float_best_score": 0.8580724000930786,
+    "query_id": "642352"
+  },
+  {
+    "query": 855,
+    "full_float_best_row": 377313,
+    "full_float_best_score": 0.7623010873794556,
+    "query_id": "459707"
+  },
+  {
+    "query": 856,
+    "full_float_best_row": 909102,
+    "full_float_best_score": 0.7174640893936157,
+    "query_id": "846438"
+  },
+  {
+    "query": 857,
+    "full_float_best_row": 49953,
+    "full_float_best_score": 0.8224503397941589,
+    "query_id": "1097223"
+  },
+  {
+    "query": 858,
+    "full_float_best_row": 130143,
+    "full_float_best_score": 0.8291015028953552,
+    "query_id": "761388"
+  },
+  {
+    "query": 859,
+    "full_float_best_row": 157470,
+    "full_float_best_score": 0.734826922416687,
+    "query_id": "862448"
+  },
+  {
+    "query": 860,
+    "full_float_best_row": 876693,
+    "full_float_best_score": 0.7067309021949768,
+    "query_id": "1003997"
+  },
+  {
+    "query": 861,
+    "full_float_best_row": 481597,
+    "full_float_best_score": 0.8524669408798218,
+    "query_id": "608557"
+  },
+  {
+    "query": 862,
+    "full_float_best_row": 962702,
+    "full_float_best_score": 0.8358423113822937,
+    "query_id": "1068924"
+  },
+  {
+    "query": 863,
+    "full_float_best_row": 164145,
+    "full_float_best_score": 0.8176001906394958,
+    "query_id": "1025895"
+  },
+  {
+    "query": 864,
+    "full_float_best_row": 853143,
+    "full_float_best_score": 0.8309841156005859,
+    "query_id": "113732"
+  },
+  {
+    "query": 865,
+    "full_float_best_row": 959705,
+    "full_float_best_score": 0.8333876729011536,
+    "query_id": "593732"
+  },
+  {
+    "query": 866,
+    "full_float_best_row": 34356,
+    "full_float_best_score": 0.8472342491149902,
+    "query_id": "412982"
+  },
+  {
+    "query": 867,
+    "full_float_best_row": 746327,
+    "full_float_best_score": 0.8352206945419312,
+    "query_id": "993544"
+  },
+  {
+    "query": 868,
+    "full_float_best_row": 263657,
+    "full_float_best_score": 0.7931088209152222,
+    "query_id": "1086326"
+  },
+  {
+    "query": 869,
+    "full_float_best_row": 441793,
+    "full_float_best_score": 0.757557213306427,
+    "query_id": "73853"
+  },
+  {
+    "query": 870,
+    "full_float_best_row": 811507,
+    "full_float_best_score": 0.9322300553321838,
+    "query_id": "571237"
+  },
+  {
+    "query": 871,
+    "full_float_best_row": 696797,
+    "full_float_best_score": 0.8440755605697632,
+    "query_id": "208339"
+  },
+  {
+    "query": 872,
+    "full_float_best_row": 437663,
+    "full_float_best_score": 0.7546268105506897,
+    "query_id": "1088800"
+  },
+  {
+    "query": 873,
+    "full_float_best_row": 495435,
+    "full_float_best_score": 0.7962530851364136,
+    "query_id": "888559"
+  },
+  {
+    "query": 874,
+    "full_float_best_row": 541621,
+    "full_float_best_score": 0.7742067575454712,
+    "query_id": "1072506"
+  },
+  {
+    "query": 875,
+    "full_float_best_row": 492780,
+    "full_float_best_score": 0.8576607704162598,
+    "query_id": "1015347"
+  },
+  {
+    "query": 876,
+    "full_float_best_row": 563335,
+    "full_float_best_score": 0.7282066941261292,
+    "query_id": "1089691"
+  },
+  {
+    "query": 877,
+    "full_float_best_row": 811722,
+    "full_float_best_score": 0.7385917901992798,
+    "query_id": "1048876"
+  },
+  {
+    "query": 878,
+    "full_float_best_row": 38080,
+    "full_float_best_score": 0.8264294862747192,
+    "query_id": "26334"
+  },
+  {
+    "query": 879,
+    "full_float_best_row": 444777,
+    "full_float_best_score": 0.8168641924858093,
+    "query_id": "285729"
+  },
+  {
+    "query": 880,
+    "full_float_best_row": 276886,
+    "full_float_best_score": 0.7879683375358582,
+    "query_id": "1090758"
+  },
+  {
+    "query": 881,
+    "full_float_best_row": 880683,
+    "full_float_best_score": 0.8032129406929016,
+    "query_id": "1101088"
+  },
+  {
+    "query": 882,
+    "full_float_best_row": 895491,
+    "full_float_best_score": 0.8568726181983948,
+    "query_id": "842223"
+  },
+  {
+    "query": 883,
+    "full_float_best_row": 971118,
+    "full_float_best_score": 0.7957367897033691,
+    "query_id": "991832"
+  },
+  {
+    "query": 884,
+    "full_float_best_row": 6766,
+    "full_float_best_score": 0.8630744218826294,
+    "query_id": "650378"
+  },
+  {
+    "query": 885,
+    "full_float_best_row": 901247,
+    "full_float_best_score": 0.858165979385376,
+    "query_id": "999637"
+  },
+  {
+    "query": 886,
+    "full_float_best_row": 55848,
+    "full_float_best_score": 0.8828595876693726,
+    "query_id": "1075156"
+  },
+  {
+    "query": 887,
+    "full_float_best_row": 416570,
+    "full_float_best_score": 0.7451751232147217,
+    "query_id": "644746"
+  },
+  {
+    "query": 888,
+    "full_float_best_row": 111022,
+    "full_float_best_score": 0.8482240438461304,
+    "query_id": "626318"
+  },
+  {
+    "query": 889,
+    "full_float_best_row": 989692,
+    "full_float_best_score": 0.8685850501060486,
+    "query_id": "1098226"
+  },
+  {
+    "query": 890,
+    "full_float_best_row": 136892,
+    "full_float_best_score": 0.8668180704116821,
+    "query_id": "728110"
+  },
+  {
+    "query": 891,
+    "full_float_best_row": 825600,
+    "full_float_best_score": 0.7206125259399414,
+    "query_id": "1034050"
+  },
+  {
+    "query": 892,
+    "full_float_best_row": 152334,
+    "full_float_best_score": 0.8266212940216064,
+    "query_id": "1095566"
+  },
+  {
+    "query": 893,
+    "full_float_best_row": 650272,
+    "full_float_best_score": 0.8085004091262817,
+    "query_id": "162662"
+  },
+  {
+    "query": 894,
+    "full_float_best_row": 904699,
+    "full_float_best_score": 0.8212669491767883,
+    "query_id": "1100640"
+  },
+  {
+    "query": 895,
+    "full_float_best_row": 238297,
+    "full_float_best_score": 0.9093629121780396,
+    "query_id": "545847"
+  },
+  {
+    "query": 896,
+    "full_float_best_row": 694875,
+    "full_float_best_score": 0.6824909448623657,
+    "query_id": "985653"
+  },
+  {
+    "query": 897,
+    "full_float_best_row": 749140,
+    "full_float_best_score": 0.8524309396743774,
+    "query_id": "794893"
+  },
+  {
+    "query": 898,
+    "full_float_best_row": 216741,
+    "full_float_best_score": 0.8596634864807129,
+    "query_id": "407131"
+  },
+  {
+    "query": 899,
+    "full_float_best_row": 623310,
+    "full_float_best_score": 0.7476907968521118,
+    "query_id": "1083627"
+  },
+  {
+    "query": 900,
+    "full_float_best_row": 887368,
+    "full_float_best_score": 0.693042516708374,
+    "query_id": "991419"
+  },
+  {
+    "query": 901,
+    "full_float_best_row": 700991,
+    "full_float_best_score": 0.7898801565170288,
+    "query_id": "399970"
+  },
+  {
+    "query": 902,
+    "full_float_best_row": 253510,
+    "full_float_best_score": 0.8458251953125,
+    "query_id": "1034446"
+  },
+  {
+    "query": 903,
+    "full_float_best_row": 682288,
+    "full_float_best_score": 0.7991134524345398,
+    "query_id": "669979"
+  },
+  {
+    "query": 904,
+    "full_float_best_row": 454819,
+    "full_float_best_score": 0.7979406118392944,
+    "query_id": "984774"
+  },
+  {
+    "query": 905,
+    "full_float_best_row": 622573,
+    "full_float_best_score": 0.8043866753578186,
+    "query_id": "731545"
+  },
+  {
+    "query": 906,
+    "full_float_best_row": 883278,
+    "full_float_best_score": 0.8544160723686218,
+    "query_id": "212796"
+  },
+  {
+    "query": 907,
+    "full_float_best_row": 292751,
+    "full_float_best_score": 0.8837577104568481,
+    "query_id": "997878"
+  },
+  {
+    "query": 908,
+    "full_float_best_row": 305099,
+    "full_float_best_score": 0.795809268951416,
+    "query_id": "860078"
+  },
+  {
+    "query": 909,
+    "full_float_best_row": 870530,
+    "full_float_best_score": 0.7119579911231995,
+    "query_id": "261098"
+  },
+  {
+    "query": 910,
+    "full_float_best_row": 990552,
+    "full_float_best_score": 0.7864037752151489,
+    "query_id": "1090842"
+  },
+  {
+    "query": 911,
+    "full_float_best_row": 220484,
+    "full_float_best_score": 0.7479369640350342,
+    "query_id": "618818"
+  },
+  {
+    "query": 912,
+    "full_float_best_row": 241693,
+    "full_float_best_score": 0.8100533485412598,
+    "query_id": "934134"
+  },
+  {
+    "query": 913,
+    "full_float_best_row": 296251,
+    "full_float_best_score": 0.6960346698760986,
+    "query_id": "1031456"
+  },
+  {
+    "query": 914,
+    "full_float_best_row": 791865,
+    "full_float_best_score": 0.7760122418403625,
+    "query_id": "249802"
+  },
+  {
+    "query": 915,
+    "full_float_best_row": 657597,
+    "full_float_best_score": 0.8249053955078125,
+    "query_id": "689851"
+  },
+  {
+    "query": 916,
+    "full_float_best_row": 323587,
+    "full_float_best_score": 0.8292362689971924,
+    "query_id": "1034587"
+  },
+  {
+    "query": 917,
+    "full_float_best_row": 163174,
+    "full_float_best_score": 0.7365981340408325,
+    "query_id": "694845"
+  },
+  {
+    "query": 918,
+    "full_float_best_row": 418074,
+    "full_float_best_score": 0.6987000107765198,
+    "query_id": "777297"
+  },
+  {
+    "query": 919,
+    "full_float_best_row": 110178,
+    "full_float_best_score": 0.7272666096687317,
+    "query_id": "1056446"
+  },
+  {
+    "query": 920,
+    "full_float_best_row": 467338,
+    "full_float_best_score": 0.7459526062011719,
+    "query_id": "185879"
+  },
+  {
+    "query": 921,
+    "full_float_best_row": 639108,
+    "full_float_best_score": 0.8615471124649048,
+    "query_id": "389385"
+  },
+  {
+    "query": 922,
+    "full_float_best_row": 966200,
+    "full_float_best_score": 0.7228797674179077,
+    "query_id": "203317"
+  },
+  {
+    "query": 923,
+    "full_float_best_row": 593114,
+    "full_float_best_score": 0.7969081997871399,
+    "query_id": "989963"
+  },
+  {
+    "query": 924,
+    "full_float_best_row": 582095,
+    "full_float_best_score": 0.8001037240028381,
+    "query_id": "695993"
+  },
+  {
+    "query": 925,
+    "full_float_best_row": 32901,
+    "full_float_best_score": 0.8532256484031677,
+    "query_id": "1089693"
+  },
+  {
+    "query": 926,
+    "full_float_best_row": 459504,
+    "full_float_best_score": 0.7836334705352783,
+    "query_id": "57270"
+  },
+  {
+    "query": 927,
+    "full_float_best_row": 475117,
+    "full_float_best_score": 0.8390734791755676,
+    "query_id": "735387"
+  },
+  {
+    "query": 928,
+    "full_float_best_row": 241264,
+    "full_float_best_score": 0.8256422877311707,
+    "query_id": "220761"
+  },
+  {
+    "query": 929,
+    "full_float_best_row": 243669,
+    "full_float_best_score": 0.7497459650039673,
+    "query_id": "690565"
+  },
+  {
+    "query": 930,
+    "full_float_best_row": 775995,
+    "full_float_best_score": 0.88739413022995,
+    "query_id": "244929"
+  },
+  {
+    "query": 931,
+    "full_float_best_row": 254152,
+    "full_float_best_score": 0.7269690036773682,
+    "query_id": "992652"
+  },
+  {
+    "query": 932,
+    "full_float_best_row": 969379,
+    "full_float_best_score": 0.7207742929458618,
+    "query_id": "555179"
+  },
+  {
+    "query": 933,
+    "full_float_best_row": 503982,
+    "full_float_best_score": 0.8921579122543335,
+    "query_id": "132359"
+  },
+  {
+    "query": 934,
+    "full_float_best_row": 516090,
+    "full_float_best_score": 0.7311016917228699,
+    "query_id": "521018"
+  },
+  {
+    "query": 935,
+    "full_float_best_row": 804728,
+    "full_float_best_score": 0.7378703951835632,
+    "query_id": "900164"
+  },
+  {
+    "query": 936,
+    "full_float_best_row": 519098,
+    "full_float_best_score": 0.8241924047470093,
+    "query_id": "915762"
+  },
+  {
+    "query": 937,
+    "full_float_best_row": 773157,
+    "full_float_best_score": 0.7487653493881226,
+    "query_id": "991342"
+  },
+  {
+    "query": 938,
+    "full_float_best_row": 976975,
+    "full_float_best_score": 0.7428948879241943,
+    "query_id": "1028098"
+  },
+  {
+    "query": 939,
+    "full_float_best_row": 271609,
+    "full_float_best_score": 0.8087649941444397,
+    "query_id": "968310"
+  },
+  {
+    "query": 940,
+    "full_float_best_row": 856379,
+    "full_float_best_score": 0.7850435972213745,
+    "query_id": "1101394"
+  },
+  {
+    "query": 941,
+    "full_float_best_row": 740462,
+    "full_float_best_score": 0.8164901733398438,
+    "query_id": "1092441"
+  },
+  {
+    "query": 942,
+    "full_float_best_row": 220081,
+    "full_float_best_score": 0.8397524952888489,
+    "query_id": "836640"
+  },
+  {
+    "query": 943,
+    "full_float_best_row": 945036,
+    "full_float_best_score": 0.7068014144897461,
+    "query_id": "1101977"
+  },
+  {
+    "query": 944,
+    "full_float_best_row": 358495,
+    "full_float_best_score": 0.8286721110343933,
+    "query_id": "1082668"
+  },
+  {
+    "query": 945,
+    "full_float_best_row": 788982,
+    "full_float_best_score": 0.6913731694221497,
+    "query_id": "1040099"
+  },
+  {
+    "query": 946,
+    "full_float_best_row": 491410,
+    "full_float_best_score": 0.828217089176178,
+    "query_id": "77491"
+  },
+  {
+    "query": 947,
+    "full_float_best_row": 660066,
+    "full_float_best_score": 0.8918726444244385,
+    "query_id": "1017971"
+  },
+  {
+    "query": 948,
+    "full_float_best_row": 694840,
+    "full_float_best_score": 0.6784456968307495,
+    "query_id": "1094693"
+  },
+  {
+    "query": 949,
+    "full_float_best_row": 406401,
+    "full_float_best_score": 0.7964264154434204,
+    "query_id": "1087870"
+  },
+  {
+    "query": 950,
+    "full_float_best_row": 524439,
+    "full_float_best_score": 0.8342247605323792,
+    "query_id": "32642"
+  },
+  {
+    "query": 951,
+    "full_float_best_row": 831628,
+    "full_float_best_score": 0.8193117380142212,
+    "query_id": "1094249"
+  },
+  {
+    "query": 952,
+    "full_float_best_row": 536222,
+    "full_float_best_score": 0.8546853065490723,
+    "query_id": "755040"
+  },
+  {
+    "query": 953,
+    "full_float_best_row": 317202,
+    "full_float_best_score": 0.8396312594413757,
+    "query_id": "1086424"
+  },
+  {
+    "query": 954,
+    "full_float_best_row": 877309,
+    "full_float_best_score": 0.7836439609527588,
+    "query_id": "689885"
+  },
+  {
+    "query": 955,
+    "full_float_best_row": 695086,
+    "full_float_best_score": 0.8877145051956177,
+    "query_id": "222954"
+  },
+  {
+    "query": 956,
+    "full_float_best_row": 39471,
+    "full_float_best_score": 0.8894956111907959,
+    "query_id": "581521"
+  },
+  {
+    "query": 957,
+    "full_float_best_row": 43740,
+    "full_float_best_score": 0.8205868005752563,
+    "query_id": "212634"
+  },
+  {
+    "query": 958,
+    "full_float_best_row": 476768,
+    "full_float_best_score": 0.8481067419052124,
+    "query_id": "397090"
+  },
+  {
+    "query": 959,
+    "full_float_best_row": 677003,
+    "full_float_best_score": 0.8953118920326233,
+    "query_id": "322211"
+  },
+  {
+    "query": 960,
+    "full_float_best_row": 238262,
+    "full_float_best_score": 0.8777455687522888,
+    "query_id": "30860"
+  },
+  {
+    "query": 961,
+    "full_float_best_row": 341517,
+    "full_float_best_score": 0.736324667930603,
+    "query_id": "1059045"
+  },
+  {
+    "query": 962,
+    "full_float_best_row": 706659,
+    "full_float_best_score": 0.718292236328125,
+    "query_id": "1085008"
+  },
+  {
+    "query": 963,
+    "full_float_best_row": 632960,
+    "full_float_best_score": 0.86163330078125,
+    "query_id": "424045"
+  },
+  {
+    "query": 964,
+    "full_float_best_row": 433333,
+    "full_float_best_score": 0.8397054672241211,
+    "query_id": "1021900"
+  },
+  {
+    "query": 965,
+    "full_float_best_row": 859448,
+    "full_float_best_score": 0.8146178126335144,
+    "query_id": "587674"
+  },
+  {
+    "query": 966,
+    "full_float_best_row": 490115,
+    "full_float_best_score": 0.6335489153862,
+    "query_id": "1089896"
+  },
+  {
+    "query": 967,
+    "full_float_best_row": 428985,
+    "full_float_best_score": 0.8122778534889221,
+    "query_id": "693152"
+  },
+  {
+    "query": 968,
+    "full_float_best_row": 536445,
+    "full_float_best_score": 0.8001071214675903,
+    "query_id": "1092311"
+  },
+  {
+    "query": 969,
+    "full_float_best_row": 868783,
+    "full_float_best_score": 0.7594713568687439,
+    "query_id": "1079815"
+  },
+  {
+    "query": 970,
+    "full_float_best_row": 605092,
+    "full_float_best_score": 0.7767874598503113,
+    "query_id": "854785"
+  },
+  {
+    "query": 971,
+    "full_float_best_row": 866134,
+    "full_float_best_score": 0.7630799412727356,
+    "query_id": "680250"
+  },
+  {
+    "query": 972,
+    "full_float_best_row": 896228,
+    "full_float_best_score": 0.8189934492111206,
+    "query_id": "422827"
+  },
+  {
+    "query": 973,
+    "full_float_best_row": 279318,
+    "full_float_best_score": 0.845632791519165,
+    "query_id": "1030215"
+  },
+  {
+    "query": 974,
+    "full_float_best_row": 521911,
+    "full_float_best_score": 0.8022738695144653,
+    "query_id": "727837"
+  },
+  {
+    "query": 975,
+    "full_float_best_row": 276861,
+    "full_float_best_score": 0.7961642742156982,
+    "query_id": "206806"
+  },
+  {
+    "query": 976,
+    "full_float_best_row": 895199,
+    "full_float_best_score": 0.6604012846946716,
+    "query_id": "1025714"
+  },
+  {
+    "query": 977,
+    "full_float_best_row": 321774,
+    "full_float_best_score": 0.828986644744873,
+    "query_id": "330640"
+  },
+  {
+    "query": 978,
+    "full_float_best_row": 631867,
+    "full_float_best_score": 0.7753803133964539,
+    "query_id": "122582"
+  },
+  {
+    "query": 979,
+    "full_float_best_row": 173841,
+    "full_float_best_score": 0.8068715333938599,
+    "query_id": "149670"
+  },
+  {
+    "query": 980,
+    "full_float_best_row": 118827,
+    "full_float_best_score": 0.8502406477928162,
+    "query_id": "944181"
+  },
+  {
+    "query": 981,
+    "full_float_best_row": 204131,
+    "full_float_best_score": 0.7427557706832886,
+    "query_id": "292225"
+  },
+  {
+    "query": 982,
+    "full_float_best_row": 995342,
+    "full_float_best_score": 0.7773048877716064,
+    "query_id": "344955"
+  },
+  {
+    "query": 983,
+    "full_float_best_row": 955177,
+    "full_float_best_score": 0.8045318126678467,
+    "query_id": "939104"
+  },
+  {
+    "query": 984,
+    "full_float_best_row": 233709,
+    "full_float_best_score": 0.7195327877998352,
+    "query_id": "977952"
+  },
+  {
+    "query": 985,
+    "full_float_best_row": 923588,
+    "full_float_best_score": 0.8583351969718933,
+    "query_id": "453175"
+  },
+  {
+    "query": 986,
+    "full_float_best_row": 260452,
+    "full_float_best_score": 0.7463887333869934,
+    "query_id": "47716"
+  },
+  {
+    "query": 987,
+    "full_float_best_row": 100748,
+    "full_float_best_score": 0.7917710542678833,
+    "query_id": "1031999"
+  },
+  {
+    "query": 988,
+    "full_float_best_row": 473914,
+    "full_float_best_score": 0.8119505643844604,
+    "query_id": "672433"
+  },
+  {
+    "query": 989,
+    "full_float_best_row": 252685,
+    "full_float_best_score": 0.8299645185470581,
+    "query_id": "64711"
+  },
+  {
+    "query": 990,
+    "full_float_best_row": 734,
+    "full_float_best_score": 0.7719736099243164,
+    "query_id": "1085658"
+  },
+  {
+    "query": 991,
+    "full_float_best_row": 433681,
+    "full_float_best_score": 0.8682036399841309,
+    "query_id": "933236"
+  },
+  {
+    "query": 992,
+    "full_float_best_row": 652184,
+    "full_float_best_score": 0.6599496603012085,
+    "query_id": "989108"
+  },
+  {
+    "query": 993,
+    "full_float_best_row": 840257,
+    "full_float_best_score": 0.8458913564682007,
+    "query_id": "1003557"
+  },
+  {
+    "query": 994,
+    "full_float_best_row": 275088,
+    "full_float_best_score": 0.761642336845398,
+    "query_id": "160562"
+  },
+  {
+    "query": 995,
+    "full_float_best_row": 261534,
+    "full_float_best_score": 0.869483470916748,
+    "query_id": "537505"
+  },
+  {
+    "query": 996,
+    "full_float_best_row": 333790,
+    "full_float_best_score": 0.8800048828125,
+    "query_id": "1090364"
+  },
+  {
+    "query": 997,
+    "full_float_best_row": 454425,
+    "full_float_best_score": 0.8449063301086426,
+    "query_id": "1095798"
+  },
+  {
+    "query": 998,
+    "full_float_best_row": 771089,
+    "full_float_best_score": 0.7805761098861694,
+    "query_id": "1046750"
+  },
+  {
+    "query": 999,
+    "full_float_best_row": 862009,
+    "full_float_best_score": 0.789000391960144,
+    "query_id": "709559"
+  }
+]

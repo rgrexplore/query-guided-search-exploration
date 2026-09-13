@@ -1,0 +1,25 @@
+[
+  {
+    "name": "nomic-msmarco-d768-focused",
+    "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d768-focused",
+    "file_hashes": {
+      "configuration.json": "952369b390b01356cacb3a8097774b522e3639473e53df78f70cd38ed2399f23",
+      "inputs-manifest.json": "2a614e2ba82918a24763f8f34aa0d3285a958caae45fd2ce985688e52ded1343",
+      "main/settings.json": "a6f01887f2572d1b90fe20ec987853d871a9698dd84b025e5903ecb98f04c332",
+      "repeat/settings.json": "c94784348432b4ae5bbeedec8aa694b8bec5429e96790b622aef673d7ff1882a",
+      "main/cases/main-j0000-part000/run/result.json": "3dafd4abfd8f7bad66be8936d23decb4e76fc295780186220713841161457a9c",
+      "main/cases/main-j0001-part000/run/result.json": "2dc53e0fba067d811af83a791e8037a50b973500eb12aa8a21cceae68ff7c0f8",
+      "main/cases/main-j0001-part001/run/result.json": "bf0507b060846c261f645a0b787b506eb0f896b50f9744f008ba40b418d3bf09",
+      "main/cases/main-j0002-part000/run/result.json": "8fdd9ef3935a70398ed891e44143d8f43b884c2393bf29e8b6f5a060ac444bf1",
+      "main/cases/main-j0003-part000/run/result.json": "4870532ddb268607ac00a846d9800f4bd2d6c59852fffe747f7f7babbc72e981",
+      "main/cases/main-j0004-part000/run/result.json": "f24dae2df83550f4aecda0bb86c023306ba9007858c27d5ad21ddb563829a307",
+      "main/cases/main-j0005-part000/run/result.json": "09cd56c7341be57cc5e3df360533c56faba94e3da0a5baf3a49b10dcf5c2c56c",
+      "main/cases/main-j0006-part000/run/result.json": "3bb054faf620075c095c9fe1ca981d1e020b92bfee99748bfb3c5671f5daee9d",
+      "main/cases/main-j0007-part000/run/result.json": "e6196d622f6174aaa86a944a56646e5ed2993bba5174d4a0808f1fbf68656bd4",
+      "main/cases/main-j0008-part000/run/result.json": "22e629f82d9cbc6decc9c2683405d07aadfbeca8c87d974eee4b3900c66e755e",
+      "main/cases/main-j0009-part000/run/result.json": "d79e66c63e443fa295facc04f57da0df954956b75324f0a896d3f976c00ef6fb",
+      "main/cases/main-j0010-part000/run/result.json": "54210b5c05aafc4ba613a4d15f02e7ef0902fb6fc417d506e99a9979946517b9",
+      "main/cases/main-j0011-part000/run/result.json": "4307dc3805a596136fcc3e54bbf6762ac7a8110efcf04ca40f654630b86f7681"
+    }
+  }
+]

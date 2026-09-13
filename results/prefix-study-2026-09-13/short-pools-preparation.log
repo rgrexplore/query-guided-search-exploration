@@ -1,0 +1,95 @@
+Reference 25/1000 queries: 0.06s for this chunk
+Reference 50/1000 queries: 0.06s for this chunk
+Reference 75/1000 queries: 0.06s for this chunk
+Reference 100/1000 queries: 0.06s for this chunk
+Reference 125/1000 queries: 0.06s for this chunk
+Reference 150/1000 queries: 0.06s for this chunk
+Reference 175/1000 queries: 0.06s for this chunk
+Reference 200/1000 queries: 0.06s for this chunk
+Reference 225/1000 queries: 0.06s for this chunk
+Reference 250/1000 queries: 0.06s for this chunk
+Reference 275/1000 queries: 0.06s for this chunk
+Reference 300/1000 queries: 0.06s for this chunk
+Reference 325/1000 queries: 0.06s for this chunk
+Reference 350/1000 queries: 0.06s for this chunk
+Reference 375/1000 queries: 0.06s for this chunk
+Reference 400/1000 queries: 0.06s for this chunk
+Reference 425/1000 queries: 0.06s for this chunk
+Reference 450/1000 queries: 0.06s for this chunk
+Reference 475/1000 queries: 0.06s for this chunk
+Reference 500/1000 queries: 0.06s for this chunk
+Reference 525/1000 queries: 0.06s for this chunk
+Reference 550/1000 queries: 0.06s for this chunk
+Reference 575/1000 queries: 0.06s for this chunk
+Reference 600/1000 queries: 0.06s for this chunk
+Reference 625/1000 queries: 0.06s for this chunk
+Reference 650/1000 queries: 0.06s for this chunk
+Reference 675/1000 queries: 0.06s for this chunk
+Reference 700/1000 queries: 0.06s for this chunk
+Reference 725/1000 queries: 0.06s for this chunk
+Reference 750/1000 queries: 0.06s for this chunk
+Reference 775/1000 queries: 0.06s for this chunk
+Reference 800/1000 queries: 0.06s for this chunk
+Reference 825/1000 queries: 0.06s for this chunk
+Reference 850/1000 queries: 0.06s for this chunk
+Reference 875/1000 queries: 0.06s for this chunk
+Reference 900/1000 queries: 0.06s for this chunk
+Reference 925/1000 queries: 0.06s for this chunk
+Reference 950/1000 queries: 0.06s for this chunk
+Reference 975/1000 queries: 0.06s for this chunk
+Reference 1000/1000 queries: 0.06s for this chunk
+POOL COMPLETE {"name": "qwen-quora-d32", "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32", "documents": 522931, "queries": 1000, "dimensions": 32, "reference_seconds": 2.557034879009734, "preparation_seconds": 4.010681416002626, "manifest_sha256": "424105f30f111b8da05ffbc3fe03cd78def2931593ad465cf8fcfef03180cff4"}
+Reference 25/1000 queries: 0.21s for this chunk
+Reference 50/1000 queries: 0.21s for this chunk
+Reference 75/1000 queries: 0.21s for this chunk
+Reference 100/1000 queries: 0.21s for this chunk
+Reference 125/1000 queries: 0.21s for this chunk
+Reference 150/1000 queries: 0.21s for this chunk
+Reference 175/1000 queries: 0.21s for this chunk
+Reference 200/1000 queries: 0.21s for this chunk
+Reference 225/1000 queries: 0.21s for this chunk
+Reference 250/1000 queries: 0.21s for this chunk
+Reference 275/1000 queries: 0.21s for this chunk
+Reference 300/1000 queries: 0.21s for this chunk
+Reference 325/1000 queries: 0.21s for this chunk
+Reference 350/1000 queries: 0.21s for this chunk
+Reference 375/1000 queries: 0.21s for this chunk
+Reference 400/1000 queries: 0.21s for this chunk
+Reference 425/1000 queries: 0.21s for this chunk
+Reference 450/1000 queries: 0.21s for this chunk
+Reference 475/1000 queries: 0.21s for this chunk
+Reference 500/1000 queries: 0.21s for this chunk
+Reference 525/1000 queries: 0.21s for this chunk
+Reference 550/1000 queries: 0.21s for this chunk
+Reference 575/1000 queries: 0.21s for this chunk
+Reference 600/1000 queries: 0.21s for this chunk
+Reference 625/1000 queries: 0.21s for this chunk
+Reference 650/1000 queries: 0.21s for this chunk
+Reference 675/1000 queries: 0.21s for this chunk
+Reference 700/1000 queries: 0.21s for this chunk
+Reference 725/1000 queries: 0.21s for this chunk
+Reference 750/1000 queries: 0.21s for this chunk
+Reference 775/1000 queries: 0.21s for this chunk
+Reference 800/1000 queries: 0.21s for this chunk
+Reference 825/1000 queries: 0.21s for this chunk
+Reference 850/1000 queries: 0.21s for this chunk
+Reference 875/1000 queries: 0.21s for this chunk
+Reference 900/1000 queries: 0.21s for this chunk
+Reference 925/1000 queries: 0.21s for this chunk
+Reference 950/1000 queries: 0.21s for this chunk
+Reference 975/1000 queries: 0.21s for this chunk
+Reference 1000/1000 queries: 0.21s for this chunk
+POOL COMPLETE {"name": "nomic-msmarco-d64", "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64", "documents": 1000000, "queries": 1000, "dimensions": 64, "reference_seconds": 8.44661120598903, "preparation_seconds": 10.973165958999743, "manifest_sha256": "e26439f36a7da09158131462cde1518f71ed63d26a8f578a4b91d55606ce60f8"}
+ANALYSIS COMPLETE {"pool": "qwen-quora-d32", "analysis": "geometry", "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/geometry/qwen-quora-d32", "status": "created", "seconds": 0.18023070900017046}
+ANALYSIS COMPLETE {"pool": "qwen-quora-d32", "analysis": "bounds", "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/bounds/qwen-quora-d32", "status": "created", "seconds": 0.07106279199797427}
+ANALYSIS COMPLETE {"pool": "qwen-quora-d256", "analysis": "geometry", "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/geometry/qwen-quora-d256", "status": "created", "seconds": 0.43249179199847276}
+ANALYSIS COMPLETE {"pool": "qwen-quora-d256", "analysis": "bounds", "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/bounds/qwen-quora-d256", "status": "created", "seconds": 0.3302602500007197}
+ANALYSIS COMPLETE {"pool": "qwen-quora-d1024", "analysis": "geometry", "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/geometry/qwen-quora-d1024", "status": "created", "seconds": 1.3755776660000265}
+ANALYSIS COMPLETE {"pool": "qwen-quora-d1024", "analysis": "bounds", "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/bounds/qwen-quora-d1024", "status": "created", "seconds": 1.2037670419995266}
+ANALYSIS COMPLETE {"pool": "nomic-msmarco-d64", "analysis": "geometry", "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/geometry/nomic-msmarco-d64", "status": "created", "seconds": 0.30101545800062013}
+ANALYSIS COMPLETE {"pool": "nomic-msmarco-d64", "analysis": "bounds", "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/bounds/nomic-msmarco-d64", "status": "created", "seconds": 0.17065779099721112}
+ANALYSIS COMPLETE {"pool": "nomic-msmarco-d256", "analysis": "geometry", "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/geometry/nomic-msmarco-d256", "status": "created", "seconds": 0.7127274589984154}
+ANALYSIS COMPLETE {"pool": "nomic-msmarco-d256", "analysis": "bounds", "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/bounds/nomic-msmarco-d256", "status": "created", "seconds": 0.5841174170018348}
+ANALYSIS COMPLETE {"pool": "nomic-msmarco-d768", "analysis": "geometry", "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/geometry/nomic-msmarco-d768", "status": "created", "seconds": 1.8737838749984803}
+ANALYSIS COMPLETE {"pool": "nomic-msmarco-d768", "analysis": "bounds", "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/bounds/nomic-msmarco-d768", "status": "created", "seconds": 1.642388166001183}
+ALL SHORT POOLS AND GEOMETRY/BOUNDS COMPLETE; READY MARKER HELD

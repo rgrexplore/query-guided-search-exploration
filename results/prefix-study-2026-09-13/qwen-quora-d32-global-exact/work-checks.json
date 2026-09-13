@@ -1,0 +1,138 @@
+{
+  "storage": [
+    {
+      "job_id": "qwen-quora-d32-global-exact-main-j0000-part000",
+      "clusters": 1,
+      "method": "scan",
+      "expected": {
+        "codes_bytes": 4183448,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 8366896
+      },
+      "reported": {
+        "codes_bytes": 4183448,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 8366896
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "qwen-quora-d32-global-exact-main-j0001-part000",
+      "clusters": 1,
+      "method": "branch",
+      "expected": {
+        "codes_bytes": 4183448,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 2091776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 10458672
+      },
+      "reported": {
+        "codes_bytes": 4183448,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 2091776,
+        "prefix_keys_bytes": 0,
+        "logical_bytes": 10458672
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "qwen-quora-d32-global-exact-main-j0002-part000",
+      "clusters": 1,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 4183448,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 2091724,
+        "logical_bytes": 10458620
+      },
+      "reported": {
+        "codes_bytes": 4183448,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 2091724,
+        "logical_bytes": 10458620
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "qwen-quora-d32-global-exact-main-j0002-part001",
+      "clusters": 1,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 4183448,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 2091724,
+        "logical_bytes": 10458620
+      },
+      "reported": {
+        "codes_bytes": 4183448,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 2091724,
+        "logical_bytes": 10458620
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "qwen-quora-d32-global-exact-main-j0002-part002",
+      "clusters": 1,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 4183448,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 2091724,
+        "logical_bytes": 10458620
+      },
+      "reported": {
+        "codes_bytes": 4183448,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 2091724,
+        "logical_bytes": 10458620
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    },
+    {
+      "job_id": "qwen-quora-d32-global-exact-main-j0002-part003",
+      "clusters": 1,
+      "method": "prefix",
+      "expected": {
+        "codes_bytes": 4183448,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 2091724,
+        "logical_bytes": 10458620
+      },
+      "reported": {
+        "codes_bytes": 4183448,
+        "row_ids_bytes": 4183448,
+        "bitplanes_bytes": 0,
+        "prefix_keys_bytes": 2091724,
+        "logical_bytes": 10458620
+      },
+      "matches": true,
+      "scope": "Native logical fields only; router, unused capacity and process RAM are separate."
+    }
+  ],
+  "checked_query_counts": {
+    "documents_scored": 3005,
+    "all_mask_words": 1000,
+    "prefix_levels": 4000,
+    "prefix_lookups": 4000
+  },
+  "failures": [],
+  "scope": "Exact logical field sizes include cluster padding. Query checks compare loop counts, not elapsed-time predictions. Only complete processes are checked. This does not measure every allocation or establish a constant cost per CPU operation."
+}

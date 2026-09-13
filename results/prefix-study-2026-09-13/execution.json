@@ -1,0 +1,32 @@
+[
+  {
+    "pool": "qwen-quora-d256",
+    "stage": "run",
+    "seconds": 2487.833007541
+  },
+  {
+    "pool": "qwen-quora-d256",
+    "stage": "summarize",
+    "seconds": 3.026821249999557
+  },
+  {
+    "pool": "qwen-quora-d256",
+    "stage": "repeat",
+    "seconds": 92.39343083399945
+  },
+  {
+    "pool": "nomic-msmarco-d256",
+    "stage": "run",
+    "seconds": 4501.654926583001
+  },
+  {
+    "pool": "nomic-msmarco-d256",
+    "stage": "summarize",
+    "seconds": 2.5029017080014455
+  },
+  {
+    "pool": "nomic-msmarco-d256",
+    "stage": "repeat",
+    "seconds": 431.18954929199936
+  }
+]

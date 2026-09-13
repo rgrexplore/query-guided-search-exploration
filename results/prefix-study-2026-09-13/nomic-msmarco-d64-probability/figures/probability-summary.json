@@ -1,0 +1,271 @@
+{
+  "groups": [
+    {
+      "top_k": 1,
+      "node_budget": 128,
+      "probability": 0,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64/routers/ivf-1024-seed42",
+      "probes": 114,
+      "leaf_size": 2048,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 95.0,
+      "recall_percent_min": 95.0,
+      "recall_percent_max": 95.0,
+      "query_ms_median": 1.0369170013291296,
+      "query_ms_min": 1.0169164979743073,
+      "query_ms_max": 1.0385210007370915
+    },
+    {
+      "top_k": 1,
+      "node_budget": 128,
+      "probability": 0.1,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64/routers/ivf-1024-seed42",
+      "probes": 114,
+      "leaf_size": 2048,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 95.0,
+      "recall_percent_min": 95.0,
+      "recall_percent_max": 95.0,
+      "query_ms_median": 1.034229000651976,
+      "query_ms_min": 1.0241875006613554,
+      "query_ms_max": 1.0372705000918359
+    },
+    {
+      "top_k": 1,
+      "node_budget": 128,
+      "probability": 0.2,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64/routers/ivf-1024-seed42",
+      "probes": 114,
+      "leaf_size": 2048,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 95.0,
+      "recall_percent_min": 95.0,
+      "recall_percent_max": 95.0,
+      "query_ms_median": 1.0268959995300975,
+      "query_ms_min": 1.0054585000034422,
+      "query_ms_max": 1.0340419994463446
+    },
+    {
+      "top_k": 1,
+      "node_budget": 8192,
+      "probability": 0,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64/routers/ivf-1024-seed42",
+      "probes": 114,
+      "leaf_size": 2048,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 95.0,
+      "recall_percent_min": 95.0,
+      "recall_percent_max": 95.0,
+      "query_ms_median": 1.015125002595596,
+      "query_ms_min": 1.0038750006060582,
+      "query_ms_max": 1.025062501867069
+    },
+    {
+      "top_k": 1,
+      "node_budget": 8192,
+      "probability": 0.1,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64/routers/ivf-1024-seed42",
+      "probes": 114,
+      "leaf_size": 2048,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 95.0,
+      "recall_percent_min": 95.0,
+      "recall_percent_max": 95.0,
+      "query_ms_median": 1.0361249987909105,
+      "query_ms_min": 1.033207998261787,
+      "query_ms_max": 1.036562500303262
+    },
+    {
+      "top_k": 1,
+      "node_budget": 8192,
+      "probability": 0.2,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64/routers/ivf-1024-seed42",
+      "probes": 114,
+      "leaf_size": 2048,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 95.0,
+      "recall_percent_min": 95.0,
+      "recall_percent_max": 95.0,
+      "query_ms_median": 1.014313000268885,
+      "query_ms_min": 0.9991460010496667,
+      "query_ms_max": 1.0356875009165378
+    },
+    {
+      "top_k": 100,
+      "node_budget": 128,
+      "probability": 0,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64/routers/ivf-1024-seed42",
+      "probes": 287,
+      "leaf_size": 2048,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 85.747,
+      "recall_percent_min": 85.747,
+      "recall_percent_max": 85.747,
+      "query_ms_median": 1.2305839991313405,
+      "query_ms_min": 1.2266044977877755,
+      "query_ms_max": 1.2324580002314178
+    },
+    {
+      "top_k": 100,
+      "node_budget": 128,
+      "probability": 0.1,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64/routers/ivf-1024-seed42",
+      "probes": 287,
+      "leaf_size": 2048,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 85.287,
+      "recall_percent_min": 85.219,
+      "recall_percent_max": 85.34,
+      "query_ms_median": 1.2185829982627183,
+      "query_ms_min": 1.2104165016353363,
+      "query_ms_max": 1.2279795009817462
+    },
+    {
+      "top_k": 100,
+      "node_budget": 128,
+      "probability": 0.2,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64/routers/ivf-1024-seed42",
+      "probes": 287,
+      "leaf_size": 2048,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 84.72233333333334,
+      "recall_percent_min": 84.641,
+      "recall_percent_max": 84.85000000000001,
+      "query_ms_median": 1.2309585017646896,
+      "query_ms_min": 1.2304374995437684,
+      "query_ms_max": 1.2354579994280357
+    },
+    {
+      "top_k": 100,
+      "node_budget": 8192,
+      "probability": 0,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64/routers/ivf-1024-seed42",
+      "probes": 287,
+      "leaf_size": 2048,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 95.014,
+      "recall_percent_min": 95.014,
+      "recall_percent_max": 95.014,
+      "query_ms_median": 2.592791499409941,
+      "query_ms_min": 2.5870000026770867,
+      "query_ms_max": 2.6072499986184994
+    },
+    {
+      "top_k": 100,
+      "node_budget": 8192,
+      "probability": 0.1,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64/routers/ivf-1024-seed42",
+      "probes": 287,
+      "leaf_size": 2048,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 95.014,
+      "recall_percent_min": 95.014,
+      "recall_percent_max": 95.014,
+      "query_ms_median": 2.5909995019901544,
+      "query_ms_min": 2.5821459985309048,
+      "query_ms_max": 2.6123119987460086
+    },
+    {
+      "top_k": 100,
+      "node_budget": 8192,
+      "probability": 0.2,
+      "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d64/routers/ivf-1024-seed42",
+      "probes": 287,
+      "leaf_size": 2048,
+      "seeds_found": [
+        7,
+        23,
+        42
+      ],
+      "missing_seeds": [],
+      "unqualified_seeds": [],
+      "plotted": true,
+      "recall_percent_mean": 95.014,
+      "recall_percent_min": 95.014,
+      "recall_percent_max": 95.014,
+      "query_ms_median": 2.6209169991489034,
+      "query_ms_min": 2.594145998955355,
+      "query_ms_max": 2.6258545003656764
+    }
+  ],
+  "omitted": [],
+  "source": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d64-probability",
+  "scope": "Recall points are means across three seeds. Time points are medians of the three seed median query times. Bars show the minimum to maximum seed range, not a confidence interval. Only complete, qualified three-seed groups are plotted; gaps remain in the saved summary."
+}

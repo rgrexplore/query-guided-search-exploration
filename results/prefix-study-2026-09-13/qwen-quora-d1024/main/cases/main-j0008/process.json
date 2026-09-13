@@ -1,0 +1,8 @@
+{
+  "status": "timeout",
+  "pid": 39008,
+  "started_at": 1789247582.607195,
+  "seconds": 507.9606030420018,
+  "returncode": -9,
+  "parent_sampled_peak": 202162176
+}

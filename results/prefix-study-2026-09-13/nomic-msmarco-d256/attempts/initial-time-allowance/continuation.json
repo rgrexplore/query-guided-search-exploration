@@ -1,0 +1,6 @@
+{
+  "time": 1789244819.086124,
+  "reason": "The original75-minute total quota stopped one batch and left one unstarted. Preserve this attempt and its initial repeats. Explicit continuation will rerun the stopped batch and run the unstarted one with unchanged inputs and native build; then select and repeat from all completed settings.",
+  "next_global_seconds": 6900,
+  "native_build_unchanged": true
+}

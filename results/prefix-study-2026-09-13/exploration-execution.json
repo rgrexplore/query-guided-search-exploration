@@ -1,0 +1,203 @@
+[
+  {
+    "arguments": [
+      "experiments.prefix_exploration_v2",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/configs/prefix-study-v2/qwen-quora-d32.json",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d32"
+    ],
+    "seconds": 22.757199124996987
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "run",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d32"
+    ],
+    "seconds": 340.2247492919996
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "summarize",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d32"
+    ],
+    "seconds": 3.1118430839997018
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "repeat",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d32"
+    ],
+    "seconds": 48.22923704200002
+  },
+  {
+    "arguments": [
+      "experiments.prefix_exploration_v2",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/configs/prefix-study-v2/nomic-msmarco-d64.json",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d64"
+    ],
+    "seconds": 43.35924383300153
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "run",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d64"
+    ],
+    "seconds": 1621.3845288750017
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "summarize",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d64"
+    ],
+    "seconds": 3.133751957997447
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "repeat",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d64"
+    ],
+    "seconds": 142.7795112499989
+  },
+  {
+    "arguments": [
+      "experiments.prefix_exploration_v2",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/configs/prefix-study-v2/nomic-msmarco-d768-focused.json",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d768-focused"
+    ],
+    "seconds": 5.969575417002488
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "run",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d768-focused"
+    ],
+    "seconds": 1803.7273519580012
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "summarize",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d768-focused"
+    ],
+    "seconds": 0.6213952910002263
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "repeat",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d768-focused"
+    ],
+    "seconds": 544.6141930839985
+  },
+  {
+    "arguments": [
+      "experiments.prefix_followups_v2",
+      "prepare",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d256",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d256-followup",
+      "--seconds",
+      "900"
+    ],
+    "seconds": 1.6458063329992
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "run",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d256-followup"
+    ],
+    "seconds": 223.77293983300115
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "summarize",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d256-followup"
+    ],
+    "seconds": 0.6986738750019867
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "repeat",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d256-followup"
+    ],
+    "seconds": 79.12169320799876
+  },
+  {
+    "arguments": [
+      "experiments.prefix_followups_v2",
+      "prepare",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d256",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d256-followup",
+      "--seconds",
+      "900"
+    ],
+    "seconds": 2.2057715829978406
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "run",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d256-followup"
+    ],
+    "seconds": 129.6997903750016
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "summarize",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d256-followup"
+    ],
+    "seconds": 0.6790251669990539
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "repeat",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/nomic-msmarco-d256-followup"
+    ],
+    "seconds": 219.1638545420028
+  },
+  {
+    "arguments": [
+      "experiments.prefix_followups_v2",
+      "prepare",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d1024",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d1024-followup",
+      "--seconds",
+      "900"
+    ],
+    "seconds": 3.6210502089998045
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "run",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d1024-followup"
+    ],
+    "seconds": 520.0177339170004
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "summarize",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d1024-followup"
+    ],
+    "seconds": 0.672486666997429
+  },
+  {
+    "arguments": [
+      "experiments.prefix_study_v2",
+      "repeat",
+      "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/optima-study/results/prefix-study-2026-09-13/qwen-quora-d1024-followup"
+    ],
+    "seconds": 274.81957837499795
+  }
+]
