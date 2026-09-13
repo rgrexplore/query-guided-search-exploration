@@ -1,0 +1,28 @@
+{
+  "setup": {
+    "name": "nomic-msmarco-d256-scan-routing",
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256",
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42",
+    "top_k": 100,
+    "dimensions": 256,
+    "clusters": 4096,
+    "probes": 1414,
+    "source_setting": "nomic-msmarco-d256::main-s00406",
+    "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/same-clusters-2026-09-13/nomic-msmarco-d256-scan-routing",
+    "queries": 1000,
+    "documents": 1000000,
+    "input_hashes": {
+      "data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/codes.npy": "14c1f435857b13ab177c22c0e74aecf1432630e1ba67289686bf8a1159273d0e",
+      "data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/queries.npy": "f07ea1bc88dd659b25646577cf0dca0cc3270b3786bd705c314b7a4c17b30ecf",
+      "data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/reference.npy": "5fc9838a7afa7c94c567d3d190faf702076ee3038c5c5490e029aae0c936b1c9",
+      "data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42/assignments.npy": "75ca48119677b158e27f7c1652c42782e996a76d942dd516c50314e08f61da71",
+      "data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42/centroids.npy": "42f323f9ffd8ea0e2b1d4feb1fb8ddcb2de4e2286a648f977d8abc99cd688da1",
+      "data/prefix-study-2026-09-13/pools/nomic-msmarco-d256/routers/ivf-4096-seed42/labels.npy": "d6f654147cde165cd29348ff442421bd5f7428648f32a823ae7b0744da17991c",
+      "data/same-clusters-2026-09-13/nomic-msmarco-d256-scan-routing/selected.npy": "914e6cb2050e3ef459febc171882e216b668c047c4bef874aa2890c9efe7929c",
+      "data/same-clusters-2026-09-13/nomic-msmarco-d256-scan-routing/local-reference.npy": "009c8f9a47e815821a704470215911d91b26b036a6b400b19d7c83f9a9fceb79",
+      "data/same-clusters-2026-09-13/nomic-msmarco-d256-scan-routing/opened-rows.npy": "c286099c1570e4b19cb6df8de13150a208fef94219390f5ae72011c8de8bc9e0"
+    }
+  },
+  "method": "scan",
+  "repeat": 1
+}

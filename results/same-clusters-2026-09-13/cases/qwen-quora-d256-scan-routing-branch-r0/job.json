@@ -1,0 +1,28 @@
+{
+  "setup": {
+    "name": "qwen-quora-d256-scan-routing",
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d256",
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d256/routers/ivf-4096-seed42",
+    "top_k": 100,
+    "dimensions": 256,
+    "clusters": 4096,
+    "probes": 668,
+    "source_setting": "qwen-quora-d256::main-s00406",
+    "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/same-clusters-2026-09-13/qwen-quora-d256-scan-routing",
+    "queries": 1000,
+    "documents": 522931,
+    "input_hashes": {
+      "data/prefix-study-2026-09-13/pools/qwen-quora-d256/codes.npy": "3c42f17d5aa4b29fe8ba461c300cc982f28f12be3f41971a6a481dbe39aeb34c",
+      "data/prefix-study-2026-09-13/pools/qwen-quora-d256/queries.npy": "ca64f76f675e3120da27ea82f738bc4ba788af76614254a20d396805de47e7c6",
+      "data/prefix-study-2026-09-13/pools/qwen-quora-d256/reference.npy": "1a2fc0d2189487492bb4568b34ed529cfadc7cb820a759f44867e9b4ac9b06ae",
+      "data/prefix-study-2026-09-13/pools/qwen-quora-d256/routers/ivf-4096-seed42/assignments.npy": "098b5441398c1868011bb4bb6e760a05a6626a278a92009c2f5dc9f4af0cd3c5",
+      "data/prefix-study-2026-09-13/pools/qwen-quora-d256/routers/ivf-4096-seed42/centroids.npy": "809b71e9d6ee53f2854a62ffceb28fb860be1d31f839946dbb783387a30c90ac",
+      "data/prefix-study-2026-09-13/pools/qwen-quora-d256/routers/ivf-4096-seed42/labels.npy": "d6f654147cde165cd29348ff442421bd5f7428648f32a823ae7b0744da17991c",
+      "data/same-clusters-2026-09-13/qwen-quora-d256-scan-routing/selected.npy": "c17a5aebd2ab6005f6279f81127f113d3d432e259891f082cad9fb7a03ed9914",
+      "data/same-clusters-2026-09-13/qwen-quora-d256-scan-routing/local-reference.npy": "28c0c374d1e89990b4a34e4cad887e56251702d8820ab06d86553bb979d56eb9",
+      "data/same-clusters-2026-09-13/qwen-quora-d256-scan-routing/opened-rows.npy": "5c3fd84fb81ec60b176764021945233ada56b22476f0626b16fb391ec131e8ff"
+    }
+  },
+  "method": "branch",
+  "repeat": 0
+}

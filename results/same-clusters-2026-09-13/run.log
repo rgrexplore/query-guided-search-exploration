@@ -1,0 +1,51 @@
+Prepared qwen-quora-d32-scan-routing opened rows: 24181.1
+Prepared qwen-quora-d32-branch-routing opened rows: 295031.4
+Prepared qwen-quora-d32-prefix-routing opened rows: 41147.5
+Prepared qwen-quora-d256-scan-routing opened rows: 86503.8
+Prepared nomic-msmarco-d256-scan-routing opened rows: 345279.3
+Running qwen-quora-d32-scan-routing-scan-r0
+Running qwen-quora-d32-scan-routing-branch-r0
+Running qwen-quora-d32-scan-routing-prefix-r0
+Running qwen-quora-d32-branch-routing-scan-r0
+Running qwen-quora-d32-branch-routing-branch-r0
+Running qwen-quora-d32-branch-routing-prefix-r0
+Running qwen-quora-d32-prefix-routing-scan-r0
+Running qwen-quora-d32-prefix-routing-branch-r0
+Running qwen-quora-d32-prefix-routing-prefix-r0
+Running qwen-quora-d256-scan-routing-scan-r0
+Running qwen-quora-d256-scan-routing-branch-r0
+Running qwen-quora-d256-scan-routing-prefix-r0
+Running nomic-msmarco-d256-scan-routing-scan-r0
+Running nomic-msmarco-d256-scan-routing-branch-r0
+Running nomic-msmarco-d256-scan-routing-prefix-r0
+Running qwen-quora-d32-scan-routing-branch-r1
+Running qwen-quora-d32-scan-routing-prefix-r1
+Running qwen-quora-d32-scan-routing-scan-r1
+Running qwen-quora-d32-branch-routing-branch-r1
+Running qwen-quora-d32-branch-routing-prefix-r1
+Running qwen-quora-d32-branch-routing-scan-r1
+Running qwen-quora-d32-prefix-routing-branch-r1
+Running qwen-quora-d32-prefix-routing-prefix-r1
+Running qwen-quora-d32-prefix-routing-scan-r1
+Running qwen-quora-d256-scan-routing-branch-r1
+Running qwen-quora-d256-scan-routing-prefix-r1
+Running qwen-quora-d256-scan-routing-scan-r1
+Running nomic-msmarco-d256-scan-routing-branch-r1
+Running nomic-msmarco-d256-scan-routing-prefix-r1
+Running nomic-msmarco-d256-scan-routing-scan-r1
+Running qwen-quora-d32-scan-routing-prefix-r2
+Running qwen-quora-d32-scan-routing-scan-r2
+Running qwen-quora-d32-scan-routing-branch-r2
+Running qwen-quora-d32-branch-routing-prefix-r2
+Running qwen-quora-d32-branch-routing-scan-r2
+Running qwen-quora-d32-branch-routing-branch-r2
+Running qwen-quora-d32-prefix-routing-prefix-r2
+Running qwen-quora-d32-prefix-routing-scan-r2
+Running qwen-quora-d32-prefix-routing-branch-r2
+Running qwen-quora-d256-scan-routing-prefix-r2
+Running qwen-quora-d256-scan-routing-scan-r2
+Running qwen-quora-d256-scan-routing-branch-r2
+Running nomic-msmarco-d256-scan-routing-prefix-r2
+Running nomic-msmarco-d256-scan-routing-scan-r2
+Running nomic-msmarco-d256-scan-routing-branch-r2
+Complete: /Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/same-clusters-2026-09-13/summary.json

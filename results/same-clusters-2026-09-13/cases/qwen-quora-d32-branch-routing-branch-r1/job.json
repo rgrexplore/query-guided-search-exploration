@@ -1,0 +1,28 @@
+{
+  "setup": {
+    "name": "qwen-quora-d32-branch-routing",
+    "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32",
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-16-seed42",
+    "top_k": 1,
+    "dimensions": 32,
+    "clusters": 16,
+    "probes": 9,
+    "source_setting": "qwen-quora-d32-binary::qwen-quora-d32-binary-main-s00027",
+    "folder": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/same-clusters-2026-09-13/qwen-quora-d32-branch-routing",
+    "queries": 1000,
+    "documents": 522931,
+    "input_hashes": {
+      "data/prefix-study-2026-09-13/pools/qwen-quora-d32/codes.npy": "9a8f1acd712f85e103898098dd51248c8be24d09055ba12aa4de0e68d099ece2",
+      "data/prefix-study-2026-09-13/pools/qwen-quora-d32/queries.npy": "7b8dad9bbf85eee39c42d5361e6047aa5752e09fd8a1bf0bcac40c24e11d384d",
+      "data/prefix-study-2026-09-13/pools/qwen-quora-d32/reference.npy": "975e40f0777adc74aaba98b16635b31e93e5eb3fdd358bbfb63c8b8ab8fd067e",
+      "data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-16-seed42/assignments.npy": "b714f9efa8ea11622bc8c6096d186eef5d7d13b7c97e1642f74830f5dcd7285f",
+      "data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-16-seed42/centroids.npy": "24d4df8e25c25963942db6341907b2c157794ea1c6cfd5fdf173e17df00bd858",
+      "data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-16-seed42/labels.npy": "41ab14437a68231a24825086c1458c38d7f2273fa6143b754ee58336d4df46e1",
+      "data/same-clusters-2026-09-13/qwen-quora-d32-branch-routing/selected.npy": "acec7c948c7683e3c2c7207666895ac4cfc9521930a78fa03ee0a7a109204806",
+      "data/same-clusters-2026-09-13/qwen-quora-d32-branch-routing/local-reference.npy": "02aef83a1b47753a3d3ed87a1bf44f6283c9aa72e2e32bc1c1e2bd4a9bf2a0bb",
+      "data/same-clusters-2026-09-13/qwen-quora-d32-branch-routing/opened-rows.npy": "0af06f0f4b38b0e18dcc39b77ee21c79695bbc96ae4845e152186eb73cba44ab"
+    }
+  },
+  "method": "branch",
+  "repeat": 1
+}

@@ -1,0 +1,34 @@
+{
+  "status": "complete",
+  "measurements": 2000,
+  "storage": {
+    "documents": 522931,
+    "dimensions": 32,
+    "buckets": 4096,
+    "codes_bytes": 4183448,
+    "bitplanes_bytes": 0,
+    "row_ids_bytes": 4183448,
+    "prefix_keys_bytes": 2091724,
+    "array_capacity_bytes": 12301412,
+    "key_directory_payload_bytes": 0,
+    "occupied_keys": 0,
+    "directory_slots": 0,
+    "logical_bytes": 10458620,
+    "max_prefix_bits": 32
+  },
+  "lifetime_peak_bytes": 78053376,
+  "rss_after": 77922304,
+  "power_before": {
+    "available": true,
+    "source": "AC Power",
+    "settings": "Battery Power:\n Sleep On Power Button 1\n powermode            1\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         2\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            10\nAC Power:\n Sleep On Power Button 1\n powermode            2\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 1\n networkoversleep     0\n sleep                1\n tcpkeepalive         1\n disksleep            10"
+  },
+  "power_after": {
+    "available": true,
+    "source": "AC Power",
+    "settings": "Battery Power:\n Sleep On Power Button 1\n powermode            1\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         2\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            10\nAC Power:\n Sleep On Power Button 1\n powermode            2\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 1\n networkoversleep     0\n sleep                1\n tcpkeepalive         1\n disksleep            10"
+  },
+  "pid": 79390,
+  "native_sha256": "0cb844dce540b8f8e6794e89b8a6ec6fe8e382e223ba80a9a9268e6c25f56068",
+  "worker_sha256": "8e4d6083242175972fe27f196d01450f18b4e872b652996faf3b095a51949fc8"
+}
