@@ -16,12 +16,17 @@ FOLDER = OUTPUT / "refinement"
 def prepare():
     source = OUTPUT / "sweep"
     config = read_json(source / "configuration.json")
-    rows = read_json(source / "main/settings.json")
+    rows = [dict(row, source_study=str(source)) for row in read_json(source / "main/settings.json")]
+    extra = OUTPUT / "extra-k"
+    if (extra / "main/settings.json").exists():
+        assert read_json(extra / "inputs-manifest.json") == read_json(source / "inputs-manifest.json")
+        rows += [dict(row, source_study=str(extra)) for row in read_json(extra / "main/settings.json")]
+    ks = sorted({row["top_k"] for row in rows})
     chosen = defaultdict(set)
     reasons = []
     # Select routing layouts around the 90% and 99% comparisons. The lower-target
     # baseline settings remain available from the original sweep.
-    for k in KS:
+    for k in ks:
         for target in [.9, .99]:
             for method in ["scan", "branch", "prefix"]:
                 eligible = [r for r in rows if r["top_k"]==k and r["method"]==method
@@ -33,10 +38,10 @@ def prepare():
                 for nearby in [probes, min(clusters, max(probes+1, int(np.ceil(probes*1.5))))]:
                     chosen[(clusters,best["router"],k)].add(nearby)
                 reasons.append(dict(top_k=k,target=target,method=method,
-                                    source_setting_id=best["setting_id"]))
+                                    source_setting_id=best["setting_id"],source_study=best["source_study"]))
     FOLDER.mkdir()
     (FOLDER / "main").mkdir()
-    save_json(FOLDER / "configuration.json",dict(config,global_seconds=7200,job_seconds=240,
+    save_json(FOLDER / "configuration.json",dict(config,top_ks=ks,global_seconds=7200,job_seconds=240,
         scope="Selected routing choices and 1.5x probes, shared by all methods. C also tests approximate count stops."))
     for name in ["inputs-manifest.json","layouts.json"]:
         save_json(FOLDER/name,read_json(source/name))

@@ -2,6 +2,7 @@
 
 import argparse
 import csv
+import gzip
 import json
 from collections import defaultdict
 from pathlib import Path
@@ -14,7 +15,7 @@ import numpy as np
 from experiments.fixed_data_comparison import save_json
 from experiments.k_prefix_study import KS, OUTPUT, TARGETS
 from experiments.prefix_study_v2 import read_json
-from experiments.prefix_depth_study import FOLDER, STARTS, write_csv
+from experiments.prefix_depth_study import FOLDER, STARTS, write_csv, allows_stop
 
 METHODS = [("scan", "A: scan", "#286493"),
            ("branch", "B: Bitplanes", "#C36620"),
@@ -31,7 +32,7 @@ def comparisons(folders):
                 for row in read_json(path):
                     target[(str(folder), row["setting_id"])] = dict(row, study=str(folder))
     comparisons = []
-    for k in KS:
+    for k in sorted({row["top_k"] for row in initial.values()}):
         for target in TARGETS:
             for method, _, _ in METHODS:
                 eligible = [(key,row) for key,row in initial.items()
@@ -39,7 +40,8 @@ def comparisons(folders):
                             and row["qualified"] and row["recall"]>=target]
                 if not eligible:
                     continue
-                key, selected = min(eligible, key=lambda item:item[1]["p50_ms"])
+                # Match the runner when two measured medians are exactly equal.
+                key, selected = min(eligible, key=lambda item:(item[1]["p50_ms"], item[0]))
                 result = repeated.get(key)
                 if result is None or not result["qualified"] or result["recall"]<target:
                     comparisons.append(dict(top_k=k, target=target, method=method,
@@ -52,21 +54,28 @@ def comparisons(folders):
 
 
 def plot_k(rows):
+    ks = sorted({row["top_k"] for row in rows})
     fig, axes = plt.subplots(2,2,figsize=(12,8),constrained_layout=True)
     for axis,target in zip(axes.flat,TARGETS):
         for method,label,color in METHODS:
             own={r["top_k"]:r for r in rows if r["method"]==method and r["target"]==target and r["status"]=="complete"}
-            y=[own[k]["process_p50_median_ms"] if k in own else np.nan for k in KS]
-            low=[own[k]["process_p50_min_ms"] if k in own else np.nan for k in KS]
-            high=[own[k]["process_p50_max_ms"] if k in own else np.nan for k in KS]
-            axis.plot(range(len(KS)),y,"o-",label=label,color=color)
-            axis.fill_between(range(len(KS)),low,high,color=color,alpha=.12)
+            y=[own[k]["process_p50_median_ms"] if k in own else np.nan for k in ks]
+            low=[own[k]["process_p50_min_ms"] if k in own else np.nan for k in ks]
+            high=[own[k]["process_p50_max_ms"] if k in own else np.nan for k in ks]
+            axis.plot(range(len(ks)),y,"o-",label=label,color=color)
+            axis.fill_between(range(len(ks)),low,high,color=color,alpha=.12)
+            # A fast fallback must not look like a successful pruning strategy.
+            plain = [i for i,k in enumerate(ks) if k in own and (
+                (method == "branch" and own[k]["mean_bitplane_words"] == 0)
+                or (method == "prefix" and own[k]["start_depth"] == 0))]
+            axis.plot(plain,[y[i] for i in plain],"o",color=color,markerfacecolor="white")
         axis.set(title=f"At least {target:.0%} average recall",xlabel="Results requested per query (K)",
-                 ylabel="Median query time (ms)",xticks=range(len(KS)),xticklabels=KS)
+                 ylabel="Median query time (ms)",xticks=range(len(ks)),xticklabels=ks)
         axis.grid(alpha=.2)
     axes[0,0].legend()
     fig.suptitle("Same 522,931 documents and 1,000 queries, Qwen 32-bit binary index\n"
-                 "Each method chooses its fastest tested qualifying setting; bands show three repeats",fontsize=13)
+                 "Fastest tested settings meeting each target; bands show three repeats\n"
+                 "Hollow B points: no bit splits. Hollow C points: depth 0, a full scan.",fontsize=12)
     for extension in ["png","pdf"]:
         fig.savefig(OUTPUT / f"k-latency.{extension}",dpi=170)
     plt.close(fig)
@@ -136,7 +145,8 @@ def plot_depth(local):
             mean_extra_scoring=float(extra.mean()),median_extra_scoring=float(np.median(extra)),
             p90_extra_scoring=float(np.percentile(extra,90)),
             mean_correct_depth=float(np.mean([r["correct_depth"] for r in own])),
-            mean_stop_depth=float(np.mean([r["stop_depth"] for r in own]))))
+            mean_stop_depth=float(np.mean([r["stop_depth"] for r in own])),
+            fraction_correct_only_at_root=float(np.mean([r["correct_depth"]==0 for r in own]))))
     axes[1].bar(range(len(KS)),[r["mean_extra_scoring"] for r in gap_summary],color="#C36620")
     axes[1].set(xticks=range(len(KS)),xticklabels=KS,xlabel="Results requested (K)",
                 ylabel="Mean additional documents scored",
@@ -161,13 +171,62 @@ def plot_depth(local):
     plt.close(fig)
 
 
+def write_query_examples():
+    gaps=numeric_csv(FOLDER/"query-stopping-gaps.csv")
+    own=[r for r in gaps if r["top_k"]==1]
+    nonzero=[r for r in own if r["extra_documents_scored"]>0]
+    median=float(np.median([r["extra_documents_scored"] for r in nonzero]))
+    delayed=min(nonzero,key=lambda r:(abs(r["extra_documents_scored"]-median),r["query"]))
+    immediate=min((r for r in own if r["stop_depth"]==32),key=lambda r:r["query"])
+    chosen={int(r["query"]):r for r in [immediate,delayed]}
+    text=["# Two measured prefix paths", "",
+          "Both examples use K = 1 and the same fixed 78 clusters. The correct-answer column is calculated afterward; it is not available to the live search.", "",
+          "The first example is the lowest query ID that permits an exact stop at depth 32. The second is the query nearest the median nonzero extra-scoring count. Neither is selected for winning a timing comparison.", ""]
+    empty_work=[]
+    with gzip.open(FOLDER/"query-traces.jsonl.gz","rt") as source:
+        for line in source:
+            row=json.loads(line)
+            query=np.array(row["query_values"],dtype=np.float64)
+            l1=float(np.abs(query).sum())
+            steps=row["steps"]
+            for k in KS:
+                stop=next(s for s in steps if allows_stop(s,l1,len(query),k))
+                visited=[s for s in steps if s["depth"]>=stop["depth"]]
+                empty_work.append(dict(query=row["query"],top_k=k,
+                    empty_depths=sum(s["new_documents_scored"]==0 for s in visited),
+                    lookups_at_empty_depths=sum(s["new_prefix_lookups"] for s in visited if s["new_documents_scored"]==0),
+                    total_lookups=stop["prefix_lookups"]))
+            if row["query"] not in chosen:
+                continue
+            gap=chosen[row["query"]]
+            keep={32,24,16,8,4,3,2,1,0,int(gap["correct_depth"]),int(gap["stop_depth"])}
+            pattern="".join("1" if q>=0 else "0" for q in query)
+            text += [f"## Query {row['query']}","",
+                     f"Ideal code: `{pattern}`. Q = {l1:.6f}. The exact local best document ID is {row['local_reference'][0]}.","",
+                     "Selected depths are shown below. The normal search stops at the final row shown; the diagnostic continued to the root only to check the answers.","",
+                     "| Depth | New rows at this depth | Total scored | Correct / 1 | Best score so far | Unseen score bound | Decision |",
+                     "|---:|---:|---:|---:|---:|---:|---|"]
+            for step in steps:
+                if step["depth"] not in keep or step["depth"]<gap["stop_depth"]:
+                    continue
+                correct=int(step["rows"][:1]==row["local_reference"][:1])
+                score=f"{step['scores'][0]:.6f}" if step["scores"] else "No result"
+                bound=f"{step['upper_bound']:.6f}" if step["upper_bound"] is not None else "No unseen rows"
+                decision="Stop" if allows_stop(step,l1,len(query),1) else "Broaden"
+                text.append(f"| {step['depth']} | {step['new_documents_scored']} | {step['documents_scored']} | {correct} | {score} | {bound} | {decision} |")
+            text += ["",f"The correct answer first appeared at depth {int(gap['correct_depth'])}; the normal exact search stopped at depth {int(gap['stop_depth'])}. It scored {int(gap['extra_documents_scored']):,} additional documents between those points.",""]
+    (FOLDER/"QUERY_EXAMPLES.md").write_text("\n".join(text)+"\n")
+    write_csv(FOLDER/"empty-depth-work.csv",empty_work)
+
+
 def results_note(rows):
+    ks = sorted({row["top_k"] for row in rows})
     text=["# K and prefix experiment results", "", "Same Quora documents, queries and Qwen 32-bit binary score. These results are separate from the paper.", ""]
     for target in TARGETS:
         text += [f"## Required average recall: {target:.0%}","",
                  "Each cell is median ms / achieved recall. Times include routing. Selected configurations were repeated three times.","",
                  "| K | A: scan | B: Bitplanes | C: Backward Walk |", "|---:|---:|---:|---:|"]
-        for k in KS:
+        for k in ks:
             cells=[]
             for method,_,_ in METHODS:
                 r=next((r for r in rows if r["top_k"]==k and r["target"]==target and r["method"]==method and r["status"]=="complete"),None)
@@ -190,6 +249,7 @@ def main():
     results_note(rows)
     if args.depth:
         plot_depth(summarize_local())
+        write_query_examples()
 
 
 if __name__=="__main__":

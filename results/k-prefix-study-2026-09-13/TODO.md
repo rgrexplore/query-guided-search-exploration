@@ -4,12 +4,14 @@
 - [x] Add optional prefix-depth snapshots and pass 77 focused checks: `92273e5`.
 - [x] Prepare unchanged inputs and 3,120 settings: `d8aa78c`.
 - [x] Run the 24-setting pilot on all 1,000 queries.
-- [ ] Complete the main sweep for K = 1, 2, 3, 5, 10, 20, 50, 100.
-- [ ] Repeat selected configurations three times.
-- [ ] Check the depth diagnostic script and record all 33 depths.
-- [ ] Time A, B and C on identical selected clusters.
-- [ ] Compare deeper C starts and approximate count stopping.
+- [x] Complete the main sweep for K = 1, 2, 3, 5, 10, 20, 50, 100.
+- [x] Repeat selected configurations three times.
+- [x] Check the depth diagnostic script and record all 33 depths.
+- [x] Time A, B and C on identical selected clusters.
+- [x] Compare deeper C starts and approximate count stopping on the fixed layout.
+- [x] Run the extra K = 7, 15, 30, 75 sweep and repeats.
 - [ ] Refine competitive global settings and any crossover interval.
+- [ ] Extend the common clustering grid around current winners, including a finer 8,192-cluster scan baseline.
 - [ ] Run a targeted 256-bit comparison if time permits.
 - [ ] Verify counts, recall, unchanged inputs, power and repeat spread.
 - [ ] Inspect the final graphs and explain the measured results.
