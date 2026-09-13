@@ -1,97 +1,172 @@
-\section{Deriving Optima}
-For each prepared pool and result count $K$, we want the lowest whole-query time that meets the recall and RAM limits. The Experiment section declares the unchanged inputs, parameter grid and limits.
+\section{When can B or C win?}
+From the previous section, we already have an approximate time model for each method. We can now ask: under what conditions can Bitplanes or Backward Walk actually be faster than a full scan?
 
-\subsection{Original method}
-A reference document in the router's fifth cluster is scored when we open $P\ge5$ clusters. Let $C$ be total clusters, $n_q$ the query count, $K$ the result count and $\rho$ the required average recall. Write $s_{qi}^{(C)}$ for the cluster rank of reference result $i$ for query $q$. The smallest probe count meeting the target is
+The methods still need to meet the same recall requirement and fit within the same available memory. Let $\rho$ be the required average recall and $B_{\max}$ the RAM budget in bytes. The budget is a parameter, not an intrinsic 32 GB limit: we can use 64 GB, 128 GB, or another allowance. Section 4 reports the limit and memory use of the runs actually performed.
 
+The math will not directly give every final parameter. How many branches we visit, or how many reference documents lie behind a prefix, depends on the embeddings and queries. What we can derive is a \emph{break-even condition}: the point where time saved from scoring fewer documents exceeds the additional index work.
+
+For the first comparisons, assume equal-sized clusters with $n=N/C$ rows each. We also use one approximate time $a$ to score a document and update the results. The actual row-access costs can differ, even with a shared scoring function, so we return to separate values $a_A,a_B,a_C$ when that matters.
+
+\subsection{Find the best scan first}
+A gives us the baseline that B and C need to beat. For a fixed cluster count $C$, fewer probes mean fewer opened documents, but possibly lower recall. We first find the smallest probe count that reaches the target:
 \[
- P_A(C,\rho)=\min\left\{P:
- \frac{1}{n_qK}\sum_{q=1}^{n_q}\sum_{i=1}^{K}
- \mathbf 1[s_{qi}^{(C)}\le P]\ge\rho\right\}.
+ \boxed{P_A(C,\rho)=\min\{P:\overline R_A(C,P)\ge\rho\}.}
 \]
-The indicator $\mathbf 1$ counts an ID when its cluster is open. We increase the cutoff if it splits tied centroid scores, repeating until no query has a tie across the boundary. Every method receives the same probe choices for a comparison. A one-cluster scan provides an exhaustive reference.
+$\overline R_A$ is average recall over the fixed queries. For example, if a reference result is assigned to the fifth cluster in a query's routing order, we recover it only when $P\ge5$.
 
-These ranks require actual queries, centroids and document assignments. Document and cluster counts alone cannot determine the cutoff. We calculate it separately for each declared $K$ using all cached queries.
-
-For a conditional derivative, suppose clusters are equal and $P$ stays fixed. Let $\alpha$ be routing time per centroid, $\beta$ time per full score and result update, and $T_{\rm fixed}$ the setup and final sorting time held constant here. With $N$ documents,
-
+We can count those ranks before timing the search. Let $n_q$ be the number of queries, $K$ the requested results, and $s_{qi}^{(C)}$ the cluster rank of reference result $i$ for query $q$. Then
 \[
- T_A(C)\approx T_{\rm fixed}+\alpha C+\beta NP/C,\qquad
- \frac{dT_A}{dC}=\alpha-\frac{\beta NP}{C^2},\qquad
- C^*=\sqrt{\frac{\beta NP}{\alpha}}.
+ \overline R_A(C,P)=\frac{1}{n_qK}
+ \sum_{q=1}^{n_q}\sum_{i=1}^{K}\mathbf 1[s_{qi}^{(C)}\le P].
 \]
-Setting the derivative to zero gives $C^*$. At fixed recall, however, $P_A(C,\rho)$ can change with $C$, so this is only a conditional balance. We compare allowed cluster counts using actual sizes and probe choices.
+The indicator counts a reference ID when its cluster is open. If a cutoff splits tied centroid scores, I increase it until no query has a tie across that boundary. Every method receives the same available probe choices for that layout.
 
-\subsection{Bitplanes}
-A 6400-document mask occupies 100 words. Avoiding 100 of the remaining scores saves 100 full-score calculations but adds 100 split-word visits. For $n$ documents, let $W=\ceil{n/64}$ be mask width, $\Delta F$ scores avoided, $a_B$ time per score and result update, and $b$ time per split-word visit. With added queue and final-mask time $\Delta T_{\rm other,B}$, splitting helps when
-
+\textbf{How many clusters?}
+Suppose routing costs $\alpha C$, where $\alpha$ is time per centroid, and processing a selected row costs $\beta$. Holding $P$ and the remaining setup time $T_{\rm fixed}$ constant gives
 \[
- \boxed{\Delta F\,a_B>Wb+\Delta T_{\rm other,B}.}
+ T_A(C)\approx T_{\rm fixed}+\alpha C+\beta\frac{NP}{C}.
 \]
-The saved time must exceed the added work while preserving the required recall. Suppose every cut halves one followed set and other branch costs stay fixed. After $j$ cuts, about $n2^{-j}$ rows remain, giving
-
+Differentiating and setting the result to zero,
 \[
- T_B(j)\approx T_0+jWb+n2^{-j}a_B+T_{\rm other,B},\qquad
- j^*=\log_2\!\left(\frac{n\ln(2)a_B}{Wb}\right).
+ \frac{dT_A}{dC}=\alpha-\frac{\beta NP}{C^2}=0,
+ \qquad \boxed{C^*=\sqrt{\frac{\beta NP}{\alpha}}.}
 \]
-Here $T_0$ is routing, common setup and final sorting time. Differentiating gives the candidate depth $j^*$; $\ln$ denotes the natural logarithm. Real cuts may remove no rows, and waiting branches add work, so we test the declared leaf sizes and node budgets rather than treating $j^*$ as a recall guarantee.
+Too few clusters leave a large scan inside each one. Too many make routing more expensive. The derivative describes that balance only while $P$ is fixed. At fixed recall, $P_A(C,\rho)$ can change with $C$, and both quantities are integers. We therefore compare the actual cluster layouts and their qualifying probe counts rather than treating $C^*$ as the final answer.
 
-A node budget counts visited sets, including leaves. A leaf limit at least as large as a cluster lets us score it immediately. B receives all of A's routing choices, but its local limits can lose additional reference IDs. We therefore record the work counts and check the returned IDs.
+We also compare the router choices available to every method, such as clusters trained from float vectors or binary document signs. The baseline we want is A's fastest qualifying tested setting, not one convenient cluster count that happens to make B or C look good.
 
-\subsection{Backward Walk}
+\subsection{When do Bitplanes help?}
+First let A and B open the same $P$ clusters. A fully scores $Pn$ rows. B performs an average of $S$ splits per cluster and fully scores a fraction $f_B$ of those rows. Each mask has $W=\ceil{n/64}$ words, and one split-word visit takes average time $b$.
+
+Removing the common time $T_0$ from both methods gives
+\[
+ T_A-T_0\approx Pna,
+ \qquad
+ T_B-T_0\approx PSWb+f_BPna+T_{\mathrm{other},B}.
+\]
+$T_{\mathrm{other},B}$ includes query ordering, initial masks, queues and final-mask reads. B wins locally when
+\[
+ PSWb+f_BPna+T_{\mathrm{other},B}<Pna.
+\]
+Move its scoring term to the other side, then divide by the $Pn$ opened rows:
+\[
+ (1-f_B)Pna>PSWb+T_{\mathrm{other},B},
+\]
+\[
+ \boxed{(1-f_B)a>\frac{SW}{n}b+
+                  \frac{T_{\mathrm{other},B}}{Pn}.}
+\]
+The left side is scoring time saved per opened row. The right side is additional bitmap and branch work per opened row. If $n$ is large enough that word padding is negligible, $W/n\approx1/64$, giving the simpler form
+\[
+ (1-f_B)a>\frac{Sb}{64}+\frac{T_{\mathrm{other},B}}{Pn}.
+\]
+Equivalently, the surviving fraction must satisfy
+\[
+ \boxed{f_B<1-\frac{SWb}{na}-\frac{T_{\mathrm{other},B}}{Pna}.}
+\]
+If the right side is 0.6, for example, B must score less than 60\% of the opened documents to pay for its extra work. If it is zero or negative, even avoiding every full score would not pay for the work assumed in this calculation.
+
+\textbf{How many splits?}
+For a first estimate, suppose each split halves one followed set in each cluster. After $j$ splits, its remaining fraction is $2^{-j}$. Hold other branch costs constant for this calculation:
+\[
+ T_B(j)-T_0\approx P\left(jWb+n2^{-j}a\right)+T_{\mathrm{other},B}.
+\]
+The derivative is
+\[
+ \frac{dT_B}{dj}=P\left(Wb-na\ln(2)2^{-j}\right).
+\]
+Setting it to zero gives
+\[
+ \boxed{j^*=\log_2\!\left(\frac{na\ln(2)}{Wb}\right)
+       \approx\log_2\!\left(\frac{64a\ln(2)}{b}\right).}
+\]
+The approximation on the right again ignores word padding. We would test nearby integer depths within $0\le j\le d$; a negative answer suggests no splitting under this model. This estimate describes one halving path, not a full branching search. Real splits may remove no rows, and exploring alternatives adds work, so it cannot supply a recall guarantee or directly choose the node budget.
+
+The cancellation of $n$ explains why smaller clusters are not automatically better for B. Both the scan and a dense bitmap pass grow roughly linearly with cluster size. Smaller clusters can still change the branch counts, routing recall and cache behavior, and padding matters for very small clusters. Those effects appear in the measured $S$, $f_B$ and time per operation.
+
+With actual cluster sizes and different row-access costs, the local condition is
+\[
+ \boxed{F_Aa_A-F_Ba_B>
+       b\sum_{c\in\mathcal O}J_cW_c+T_{\mathrm{other},B}.}
+\]
+Here $\mathcal O$ is the common opened set, $J_c$ its split counts and $W_c$ its mask widths. This is what we inspect in the experiment: how many scores were avoided, and how much mask and branch work was needed to avoid them.
+
+\subsection{When does Backward Walk help?}
 \label{sec:prefix-optima}
-Alongside $C$ and $P$, we choose starting depth $x$ and candidate target $M$. With $h$ stored key bits, $0\le x\le h\le\min(d,32)$; full scores use all $d$ document bits. A deeper start selects fewer or the same rows, but may need more widening steps.
-
-Let $F_A=\sum_{c\in\mathcal O}n_c$ count opened rows. Under independent, equally likely signs, a fixed prefix of depth $x$ would contain $F_A/2^x$ rows on average. For $M>0$, matching this count to $M$ gives $x\approx\log_2(F_A/M)$, with $F_A\approx PN/C$ if clusters are equal. That is a row-count estimate, not a prediction of reference membership or adaptive stopping. We check actual counts and recall for the declared settings.
-
-At fixed routing, widening grows the scored set, so full-score recall cannot decrease. It adds new scores and range checks, with two binary searches per cluster at each nonzero depth. A zero target reaches depth zero, whose whole-cluster range needs no binary search.
-
-In the three-row example, C avoids one of A's three scores but performs four binary searches and builds a query key. Using the previous section's time terms, it saves time when
-
+Again, start with the same opened clusters. Let $F_C=f_CPn$ be the distinct rows C scores, where $f_C$ is their fraction of the opened set. Its additional costs are building the query key, finding prefix ranges and updating the newly exposed slices:
 \[
-\boxed{F_Aa_A-F_Ca_C>
- T_{\rm key}+2L_+t_b\sum_{c\in\mathcal O}\log_2(n_c+1)+T_{\rm ranges}.}
+ T_C-T_0\approx T_{\mathrm{key}}+
+ 2PL_+\log_2(n+1)t_b+f_CPna+T_{\mathrm{ranges}}.
 \]
-$F_C$ counts C's scores; $a_A$ and $a_C$ include scoring and result updates. $T_{\rm key}$ builds the query key once, $L_+$ counts nonzero depths, $t_b$ estimates comparison time, and $T_{\rm ranges}$ covers range bookkeeping. Whether the inequality holds depends on measured costs and the required recall.
+$L_+$ counts visited nonzero depths and $t_b$ is time per binary-search comparison. Depth zero needs no boundary search. Requiring $T_C<T_A$, then moving the scoring term, gives
+\[
+ (1-f_C)Pna>T_{\mathrm{key}}+
+ 2PL_+\log_2(n+1)t_b+T_{\mathrm{ranges}}.
+\]
+Divide by $P$ to see the average cost per opened cluster:
+\[
+ \boxed{(1-f_C)na>2L_+\log_2(n+1)t_b+
+       \frac{T_{\mathrm{key}}+T_{\mathrm{ranges}}}{P}.}
+\]
+The left side is the scan time avoided; the right side is the prefix work added. Unlike a dense bitmap pass, each binary search grows logarithmically with $n$. Its cost relative to a full scan contains $\log(n+1)/n$, which falls as the cluster grows. That helps only if C can still stop with a small $f_C$. A larger cluster may instead force it to score many more documents.
 
-\textbf{Stopping with a score bound.} There is another way to stop the same walk. After scoring a whole prefix range, we can sometimes prove that no document outside it can enter the results. Let $Q=\sum_{i=1}^d|q_i|$ be the ideal binary score, and let $\tau$ be the smallest of the $K$ scores we have kept. At a positive depth $\ell$, any unseen row must disagree with at least one of the first $\ell$ query signs. Its highest possible score is therefore
+For unequal cluster sizes or different scoring costs, we retain the full condition:
+\[
+ \boxed{F_Aa_A-F_Ca_C>T_{\mathrm{key}}+
+ 2L_+t_b\sum_{c\in\mathcal O}\log_2(n_c+1)+T_{\mathrm{ranges}}.}
+\]
+Each wider range contains the previous one, so only newly exposed rows contribute to $F_C$. If the walk reaches the root, it scores the whole opened set and loses that saving.
+
+\textbf{Where should the walk start?}
+Let $x$ be starting depth, $\ell$ ending depth and $M>0$ the candidate target. Under independent, balanced signs within the opened clusters, a \emph{fixed} depth $\ell$ would expose about $Pn/2^\ell$ rows. Matching that count to $M$ gives
+\[
+ \frac{Pn}{2^\ell}\approx M
+ \quad\Longrightarrow\quad
+ \boxed{\ell\approx\log_2\!\left(\frac{Pn}{M}\right).}
+\]
+For one million opened rows and about 100 candidates, this is $\log_2(10{,}000)\approx13.3$. Depths around 13 or 14 are therefore worth inspecting under that model; we could begin deeper and widen toward them. The stored key limits the available depths: $0\le x\le h\le\min(d,32)$ in this implementation.
+
+This estimates a count, not whether those rows contain the best results. Correlated signs and clustering can make the count inaccurate too. We measure actual prefix sizes and reference membership rather than turning this estimate into a recall prediction.
+
+\textbf{When can the walk stop exactly?}
+After scoring a whole prefix range, we can sometimes prove that no unseen row can enter the results. Let $Q=\sum_{i=1}^{d}|q_i|$ be the ideal binary score and $\tau$ the worst of the $K$ scores currently kept. At positive depth $\ell$, an unseen row must disagree with at least one retained sign, so its score is at most
 \[
  u_\ell=Q-2\min_{1\le i\le\ell}|q_i|,
  \qquad \boxed{\text{stop if }\tau>u_\ell.}
 \]
-The smallest weight appears because the best unseen row would choose the least costly sign to get wrong. If we have $K$ retained results and this inequality holds, the answer is exact within the opened clusters.
+The minimum appears because the best unseen row would choose the cheapest sign to get wrong. In our three-document example, prefix \texttt{1100*} contains scores 2.5 and 1.9. Its four weights are 0.7, 0.5, 0.4 and 0.6. An unseen row scores at most $2.5-2(0.4)=1.7$, below both retained scores, so we can stop after two rows.
 
-In our three-document example, the prefix \texttt{1100*} contains scores 2.5 and 1.9. The four prefix weights are 0.7, 0.5, 0.4 and 0.6, so an unseen row can score at most $2.5-2(0.4)=1.7$. Both retained scores are higher. C can stop after scoring two rows, even when the candidate target is zero.
+The optional \texttt{stop\_when\_exact} setting implements this check with a rounding margin and keeps score ties alive. With candidate target zero, C stops when the bound proves the answer or when it reaches the root. A positive target can still stop approximately. The proof covers opened clusters; routing may exclude a global result.
 
-I added this as the optional \texttt{stop\_when\_exact} setting. With candidate target zero, the walk continues until this bound proves the answer or until it reaches depth zero. A positive candidate target can still stop approximately. The default behavior is unchanged. The code keeps a small rounding margin and does not discard score ties.
+The query sum and prefix minima take $O(d+x)$ setup work and $8x+8$ named query bytes, with constant work per later bound check. They add to $T_{\mathrm{key}}$ and $T_{\mathrm{ranges}}$, but do not change the stored index.
 
-The query sum and prefix minima take $O(d+x)$ setup work for starting depth $x$. Each later bound check is constant work. The minima use $8x$ bytes and the sum uses eight bytes; the stored index does not grow. These costs are added to $T_{\rm key}$ and $T_{\rm ranges}$ in the time formula above.
-
-This also gives us a count prediction to test. Suppose we already know the exact $K$th score for the opened set, calling it $\tau_q^*$. Let $y_q$ be the deepest stored prefix whose unseen bound is below that score, or zero if none exists. We use the same rounding margin as the code. With no candidate-count stop, a walk starting at $x$ ends at
+We can test this stopping logic mathematically. Let $\tau_q^*$ be the true $K$th score in the opened set, and $y_q$ the deepest stored prefix whose unseen bound is below it, using the code's rounding margin. Set $y_q=0$ if no positive depth qualifies. With no candidate-count stop, a walk starting at $x$ ends at
 \[
- \ell_q=\min(x,y_q),\qquad L_q=x-\ell_q+1.
+ \boxed{\ell_q=\min(x,y_q),\qquad L_q=x-\ell_q+1.}
 \]
-Every true top-$K$ row must lie inside a prefix with such a bound. Scoring that range therefore produces the required score and lets the actual search stop there. Starting deeper than $y_q$ adds lookups while reaching the same final range; starting shallower may score more rows. I use the saved reference scores to check this prediction offline. The search itself uses only the scores it has found.
+Every true top-$K$ row must lie in a prefix with such a bound. Scoring that range therefore supplies the score needed to stop there. Starting deeper than $y_q$ adds lookups before reaching the same range; starting shallower may score more rows. The reference score is used only for this offline prediction. Actual search uses the scores it has found.
 
-\subsection{Comparison}
-I keep the collection, embedding model and code length fixed for this comparison. For method $a$, let $\Theta_a$ be its tested settings and $\theta$ one choice. $T_{a,\rm measured}$ is median whole-query time, $\overline R_a$ average recall, and $M_{a,\rm process}$ the reported process-memory bound. With required recall $\rho$ and RAM limit $B_{\max}$ in bytes, we choose the qualifying setting with the smallest time:
+\subsection{Choose each method's settings}
+The local conditions above hold routing fixed so we can understand one change at a time. In the final comparison, each method can choose different clusters and probes. Its routing time then changes too, so we compare complete queries rather than cancelling $T_0$.
 
+For method $m$, let $\Theta_m$ be its tested settings and $\theta$ one complete choice. We select
 \[
- \theta_a^*=\underset{\theta\in\Theta_a}{\operatorname{argmin}}\;
- T_{a,\rm measured}(\theta)
+ \boxed{\theta_m^*=\underset{\theta\in\Theta_m}{\operatorname{argmin}}\,
+ T_{m,\mathrm{measured}}(\theta)}
  \quad\text{subject to}\quad
- \overline R_a(\theta)\ge\rho,\qquad
- M_{a,\rm process}(\theta)\le B_{\max}.
+ \overline R_m(\theta)\ge\rho,\quad
+ M_{m,\mathrm{process}}(\theta)\le B_{\max}.
 \]
+$T_{m,\mathrm{measured}}$ is median whole-query time, $\overline R_m$ average recall, and $M_{m,\mathrm{process}}$ the recorded process-memory peak. The same dataset, query vectors, score, reference IDs, recall target and memory allowance apply to every method.
+
 \begin{center}\small
 \begin{tabularx}{\linewidth}{@{}lYY@{}}\toprule
-Method & Adjustable settings & Work that may be reduced\\\midrule
-Original method & Cluster count $C$ and probes $P$ & Documents reaching the scorer\\
-Bitplanes & $C$, $P$, leaf size and node budget & Scores, at the cost of mask and branch work\\
-Backward Walk & $C$, $P$, starting depth $x$, candidate target $M$, exact-stop option & Scores, at the cost of prefix lookups and new ranges\\\bottomrule
-\end{tabularx}\normalsize
+Method & Settings to vary & What must improve\\\midrule
+Original method & Cluster layout, cluster count $C$, probes $P$ & Open fewer rows while retaining enough reference IDs\\
+Bitplanes & Routing, leaf size, node budget, visit order & Saved scores must pay for mask and branch work\\
+Backward Walk & Routing, starting depth $x$, candidate target $M$, exact-stop option & Saved scores must pay for prefix and range work\\\bottomrule
+\end{tabularx}
 \end{center}
-Here $C$ is cluster count, $P$ opened clusters, $x$ starting depth and $M$ candidate target. For each method, I choose its fastest qualifying setting using the same pool, $K$ and recall target. We retain failed settings and repeat selected ones in fresh processes. The comparison is limited to the declared grid.
+B establishes a measured advantage only if $T_B(\theta_B^*)<T_A(\theta_A^*)$ under those constraints; C must meet the same comparison. These are the best settings we tested, not a proof of the best possible configuration.
 
-
-A larger collection does not automatically make B faster. The full-score term grows with the number of opened documents, but each dense mask pass grows with that number too. If B needs many alternative branches to preserve recall, those mask passes can cost more than the scores they avoid. Larger collections can also change how much pruning is possible, so we measure the work at the tested settings instead of assuming that the two latency curves must cross.
+A larger RAM allowance can admit an index that did not fit before. It does not by itself remove bitmap passes or prefix lookups from an index that already fits. The next section therefore shows both the selected timings and the work counts behind them.

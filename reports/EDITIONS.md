@@ -4,7 +4,7 @@ All eight PDFs are retained under `output/pdf/`.
 
 The current [prefix Backward Walk report](../output/pdf/search-methods-prefix-v2.pdf)
 contains the implemented prefix search, time and memory calculations, and experiments
-on six real embedding pools. It has 29 pages, with Python examples and measured
+on six real embedding pools. It has 31 pages, with Python examples and measured
 A/B/C comparisons. The [source guide](search-math-prefix-v2/README.md) links the
 implementation and [saved measurements](../results/prefix-study-2026-09-13/README.md).
 The earlier prefix proposal remains in Git at checkpoint `570b51e`.

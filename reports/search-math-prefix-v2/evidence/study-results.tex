@@ -1,16 +1,17 @@
-% Sources: comparison-final/*/comparison-table.json and matching repeat/settings.json;
-% representation/*/summary.csv; exact-code-groups/group-summary.csv and selection-provenance.json.
-The clearest bitplane result is Quora with 32-bit Qwen codes and one returned result. After giving all methods clusters trained on the binary document vectors, B takes 0.081 ms at 99.2\% recall, compared with A's 0.195 ms and C's 0.169 ms at 99.0\%. These are repeated times for the exact settings selected in the main runs, using all 1,000 queries.
+% Timing and work values come from comparison-final/qwen-quora-d32 and its repeats.
+The first table shows Qwen32 on all 522,931 Quora documents, returning one result. Each cell gives the repeated median query time and achieved recall. Bold marks the lowest median among methods that meet the row's requirement.
 
 \begin{center}\small
-\begin{tabularx}{\linewidth}{@{}lrrYrrr@{}}\toprule
-Method & Clusters & Probes & Local setting & Recall & ms & Rows scored\\\midrule
-A & 4096 & 180 & Scan opened rows & 99.00\% & 0.195 & 24,181.1\\
-B & 16 & 9 & Leaf 128; budget 8192; deeper ties & 99.20\% & 0.081 & 817.8\\
-C & 1024 & 78 & Start 4; target 0; exact stop & 99.00\% & 0.169 & 26,153.5\\\bottomrule
-\end{tabularx}
+\begin{tabular}{@{}rrrrl@{}}\toprule
+Required recall & A (ms / recall) & B (ms / recall) & C (ms / recall) & Lowest median\\\midrule
+80\% & 0.0308 / 80.3\% & \textbf{0.0295} / 81.9\% & 0.0318 / 80.3\% & B\\
+90\% & 0.0498 / 90.1\% & \textbf{0.0432} / 90.6\% & 0.0497 / 90.1\% & B\\
+95\% & 0.0805 / 95.0\% & \textbf{0.0520} / 95.3\% & 0.0799 / 95.0\% & B\\
+99\% & 0.1948 / 99.0\% & \textbf{0.0809} / 99.2\% & 0.1688 / 99.0\% & B\\
+\bottomrule
+\end{tabular}
 \end{center}
-Rows scored is the mean per query; time is the median over the three repeated processes' 3,000 query observations. B opens clusters containing about 295,031 rows but scores only 818 of them, while visiting about 53,693 split-mask words. Its three process medians range from 0.08025 to 0.08167 ms, below A's 0.19223--0.19708 ms and C's 0.16781--0.16994 ms. B's finite budget still makes this an approximate setting: 99.2\% is the observed recall, not an exactness guarantee. C's bound proves the answer within its opened clusters; routing can still exclude a global neighbor.
+B has the lowest repeated median at these four targets. The strongest difference is at 99\%: 0.0809 ms for B versus 0.1948 ms for A, about 2.4 times faster. These recalls measure the 32-bit ranking. Even its exact top-1 answer agrees with the full-float best score on only 14\% of queries; the code-length comparison below measures that separate quality tradeoff.
 
 \begin{figure}[htbp]
 \centering
@@ -19,6 +20,34 @@ Rows scored is the mean per query; time is the median over the three repeated pr
 \label{fig:qwen32-comparison}
 \end{figure}
 
+\subsection{Parameters and work}
+At the 99\% target, each method chooses a different routing layout. The selected configurations are:
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}lrrYrr@{}}\toprule
+Method & Clusters & Probes & Local setting & Recall & ms\\\midrule
+A & 4096 & 180 & Scan opened rows & 99.00\% & 0.1948\\
+B & 16 & 9 & Leaf 128; budget 8192; deeper ties & 99.20\% & 0.0809\\
+C & 1024 & 78 & Start 4; target 0; exact stop & 99.00\% & 0.1688\\\bottomrule
+\end{tabularx}
+\end{center}
+Time is the median over the three repeated processes' 3,000 query observations. B's process medians range from 0.08025 to 0.08167 ms, below A's 0.19223--0.19708 ms and C's 0.16781--0.16994 ms. B's finite budget gives measured 99.2\% recall, not an exactness guarantee. C proves the answer within its opened clusters, but routing can still miss a global neighbor.
+
+Now we can inspect the work behind those times. The entries below are mean counts per query; a dash means the operation is not used.
+\begin{center}\small
+\begin{tabular}{@{}lrrrrrr@{}}\toprule
+Method & \shortstack{Opened\\rows} & \shortstack{Rows\\scored} & \shortstack{Split-mask\\words} & \shortstack{Leaf-mask\\words} & \shortstack{Prefix\\depths} & \shortstack{Boundary\\searches}\\\midrule
+A & 24,181 & 24,181 & --- & --- & --- & ---\\
+B & 295,031 & 818 & 53,693 & 5,838 & --- & ---\\
+C & 41,147 & 26,153 & --- & --- & 3.511 & 494.988\\\bottomrule
+\end{tabular}
+\end{center}
+B opens a much larger set than A, but scores only about 0.28\% of those rows across the query batch. It visits about 116 candidate sets per query, including splits and leaves. The extra bitmap work therefore accompanies a large reduction in full scoring, and the complete query is faster even than A's separately chosen layout.
+
+C scores about 63.6\% of its own opened rows. It is faster than A here despite scoring slightly more rows than A's selected configuration. That comparison also changes routing: C has 1024 clusters and 78 probes, versus A's 4096 and 180. We cannot attribute the whole time difference to prefix pruning alone. The same-routing inequalities in Section 3 and the independently selected end-to-end settings answer different parts of the question.
+
+The stored timers measure routing and complete index search, but do not separately time scoring, each mask pass and queue maintenance. I therefore report the actual work counts rather than inventing a millisecond breakdown for those terms. One mask word, one full score and one boundary search are different operations. These results show the net speed advantage; they do not independently fit every coefficient in the break-even equations.
+
+\subsection{Where does the result change?}
 If we ask for 100 results, the conclusion changes. The table below uses the same 99\% recall requirement for every method and reports the repeated median of its selected setting.
 
 \begin{center}\small

@@ -30,7 +30,7 @@ B & 10.463 & 72.139\\
 C & 10.598 & 77.529\\\bottomrule
 \end{tabular}
 \end{center}
-MB here means one million bytes. The field count includes codes, IDs, bitplanes or prefix keys, and router centroids and labels. It excludes unused capacity and other process memory, so it must not be confused with the measured peak. Even the selected Nomic768 B setting uses 225.1 MB of stored fields and a 505.6 MB process peak. The common 32 GB cap does not determine these selected winners.
+MB here means one million bytes. The field count includes codes, IDs, bitplanes or prefix keys, and router centroids and labels. It excludes unused capacity and other process memory, so it must not be confused with the measured peak. Even the selected Nomic768 B setting uses 225.1 MB of stored fields and a 505.6 MB process peak. The 505.6 MB peak is the largest across all selected repeated settings. Every one also fits a 64 GB or 128 GB allowance, so raising the feasibility limit alone leaves these recorded comparisons unchanged. This does not predict the performance of a larger, untested index.
 
 \textbf{Random visits.}
 I also held the Qwen32 layout at 64 float-trained clusters, opened 16, and kept leaf size 32 while varying B's exploration probability. The following top-1 results use three seeds per probability. Recall is their mean and time is the median of their query-time medians.
