@@ -3,15 +3,15 @@ So far, we have only looked at the methods mathematically.
 
 The calculations tell us what \emph{could} make Bitplanes or Backward Walk faster, but they cannot tell us whether that actually happens on real embeddings.
 
-In this section, I will test the three methods directly.
+In this section, we will compare the three methods directly.
 
 There are two things I want to understand.
 
-First, I want to compare the search methods under the \textbf{same cluster selection}. In other words, if A, B and C are all given exactly the same documents to search, does Bitplanes or Backward Walk actually search those documents faster than simply scanning them?
+First, we will compare the search methods under the \textbf{same cluster selection}. In other words, if A, B and C are all given exactly the same documents to search, does Bitplanes or Backward Walk actually search those documents faster than simply scanning them?
 
 After that, I will allow each method to choose its own cluster settings and search parameters. This answers the more practical question: if I were actually building the fastest version of each method, which one would be faster at the same recall?
 
-Finally, I will look at cases where the result changes, such as returning one document versus returning 100 documents. This helps us understand not only \textbf{which method wins}, but also \textbf{when and why}.
+Finally, we will look at cases where the result changes, such as returning one document versus returning 100 documents. This helps us understand not only \textbf{which method wins}, but also \textbf{when and why}.
 
 \subsection{Experiment setup}
 I use two document collections:
@@ -96,7 +96,7 @@ This lets us answer not only \textbf{Which method is faster?} but also \textbf{W
 
 The machine is an Apple M5 Max with 128 GiB physical memory. Each search runs one native query at a time. The complete-query experiments use one Faiss routing thread. The earlier sweep used a 32 GB process cap; the new local comparison uses a common 64 GB cap. Actual peaks are reported separately, so these limits are not assumed to determine the outcome.
 
-\subsection{How do I know whether a result is correct?}
+\subsection{How do we know whether a result is correct?}
 Before testing A, B or C, I first calculate the exact binary result for every query.
 
 For one query, I score \textbf{every document in the collection} using the same binary score described earlier.
@@ -111,7 +111,7 @@ I repeat this over all 1,000 queries and report the average recall. Equal scores
 
 So when I say \textbf{99\% recall} for the whole-collection comparison, I specifically mean: the method recovers 99\% of the exact top-$K$ document IDs under the binary score being tested, on average.
 
-It does \textbf{not} mean 99\% human relevance, and it does not necessarily mean 99\% agreement with the original full embedding. I will look at that distinction separately later.
+It does \textbf{not} mean 99\% human relevance, and it does not necessarily mean 99\% agreement with the original full embedding. We will look at that distinction separately later.
 
 \subsection{Experiment 1: give every method the same clusters}
 \label{sec:same-clusters}
@@ -154,7 +154,7 @@ Both results are useful, but I want to separate them.
 \subsubsection{Local recall}
 In this experiment, I also calculate a second type of recall.
 
-Imagine the selected clusters contain 50,000 documents. I can fully scan those 50,000 documents and find their exact top-$K$. That becomes the \textbf{local reference}.
+Imagine the selected clusters contain 50,000 documents. We can fully scan those 50,000 documents and find their exact top-$K$. That becomes the \textbf{local reference}.
 
 Then:
 \begin{itemize}\setlength{\itemsep}{1pt}
@@ -181,7 +181,7 @@ The normal global recall still matters for the final system, but local recall ma
 \subsection{Experiment 2: let each method choose its own settings}
 The first experiment intentionally fixes the clusters. But this may not be the best way to actually use B or C.
 
-For example, Bitplanes may work better if I use \textbf{larger clusters}. A larger cluster means more documents arrive at the local search stage, which would normally make A slower. But B may be able to cheaply remove most of those documents before fully scoring them.
+For example, Bitplanes may work better if we use \textbf{larger clusters}. A larger cluster means more documents arrive at the local search stage, which would normally make A slower. But B may be able to cheaply remove most of those documents before fully scoring them.
 
 So for the second experiment, I let each method choose the configuration that works best for it.
 
@@ -210,12 +210,12 @@ For each target recall, such as 80\%, 90\%, 95\%, 99\%, I choose the fastest tes
 
 This gives us the practical comparison:
 
-\textbf{If I were actually deploying the fastest tested version of A, B and C, which one would be fastest at the same recall?}
+\textbf{If we were actually deploying the fastest tested version of A, B and C, which one would be fastest at the same recall?}
 
 I repeat the selected settings in three fresh processes with varied run order. The reported medians combine the repeated query times. This sweep contains 3,679 qualified A/B/C settings from 4,024 scheduled settings, with three grids partial under saved time limits. Every completed setting uses all 1,000 queries. This is a tested parameter grid, not a proof of a global optimum.
 
 \subsection{Main result: Qwen 32-bit, return one document}
-I will first look at Qwen with 32-bit binary documents and $K=1$, because this is the clearest case where the three methods behave differently.
+Let's first look at Qwen with 32-bit binary documents and $K=1$, because this is the clearest case where the three methods behave differently.
 
 The fastest qualifying configurations are:
 \begin{center}\small
@@ -256,7 +256,7 @@ B & 16 & 9 & leaf 128, budget 8192, deeper-first ties\\
 C & 1024 & 78 & start depth 4, target zero, exact stop\\\bottomrule
 \end{tabularx}
 \end{center}
-Now look at how many documents each method actually touches:
+Now we can look at how many documents each method actually touches:
 \begin{center}\small
 \begin{tabular}{@{}lrr@{}}\toprule
 Method & Documents inside opened clusters & Documents fully scored\\\midrule

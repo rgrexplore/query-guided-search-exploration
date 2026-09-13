@@ -122,9 +122,19 @@ Current PDF: 35 pages. Editor-generated root-level LaTeX outputs are left untouc
 - [x] Save local/global recall, local-only timing, full returned IDs, work counters and power/input checks.
 - [x] Rewrite the experiment in LaTeX with the measured local results and existing complete-query results kept distinct.
 - [x] Build and inspect an experiment-only preview while manual calculation edits continue.
-- [ ] Rebuild the combined PDF/source archive after the calculation editor confirms readiness.
+- [x] Rebuild the combined PDF/source archive after the calculation editor confirms readiness.
 
 The new local study is `results/same-clusters-2026-09-13/`.
 The experiment preview is `output/pdf/search-experiments-preview.pdf`.
 Calculation-section edits and the combined PDF/source ZIP changed concurrently in
 another editor; they are left untouched and excluded from this experiment commit.
+
+## Combined export and balanced voice
+
+- [x] Use the committed calculation edits from `ca8015e` after readiness was confirmed.
+- [x] Rebuild the full 47-page v3 report with the new experiment section and local results.
+- [x] Keep `reports/search-math-prefix-v3/report.pdf` and the exported PDF synchronized in build.sh.
+- [x] Use “I” for experiment choices and actions, and “we” for reader-facing examples and interpretation.
+- [x] Refresh the 14-file source archive and verify that it rebuilds identical extracted text.
+
+No calculation wording or numerical results changed during this export.

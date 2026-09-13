@@ -37,6 +37,9 @@ Output: `output/pdf/search-methods-prefix-v3.pdf`. Diagrams are drawn by LaTeX;
 charts are included as PDF assets. The source archive can rebuild the document
 without downloading the corpus or installing the search library.
 
+The build also refreshes `report.pdf` beside the LaTeX source, so the editor preview
+and exported PDF show the same document.
+
 ## Scope of the numbers
 
 All methods in one comparison use the same document codes, query vectors and

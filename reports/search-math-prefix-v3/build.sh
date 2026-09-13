@@ -10,4 +10,5 @@ for pass in 1 2 3; do
     exit 1
   fi
 done
+cp build/report.pdf "$REPORT_DIR/report.pdf"
 cp build/report.pdf "$PROJECT_DIR/output/pdf/search-methods-prefix-v3.pdf"
