@@ -1,0 +1,15 @@
+study,phase,settings,qualified,query_measurements
+pilot,main,24,24,24000
+sweep,main,3120,3120,3120000
+sweep,repeat,96,96,288000
+extra-k,main,1560,1560,1560000
+extra-k,repeat,48,48,144000
+refinement,main,2376,2376,2376000
+refinement,repeat,77,77,231000
+clusters,main,3530,3530,3530000
+clusters,repeat,144,144,432000
+final,repeat,144,144,432000
+final-check,repeat,144,144,432000
+qwen-256,main,336,336,336000
+qwen-256,repeat,48,48,144000
+probability,repeat,24,24,72000

@@ -10,14 +10,18 @@
 - [x] Time A, B and C on identical selected clusters.
 - [x] Compare deeper C starts and approximate count stopping on the fixed layout.
 - [x] Run the extra K = 7, 15, 30, 75 sweep and repeats.
-- [ ] Refine competitive global settings and any crossover interval.
-- [ ] Extend the common clustering grid around current winners, including a finer 8,192-cluster scan baseline.
-- [ ] Run a targeted 256-bit comparison if time permits.
-- [ ] Verify counts, recall, unchanged inputs, power and repeat spread.
-- [ ] Inspect the final graphs and explain the measured results.
-- [ ] Save code/results checkpoints and update memory.
+- [x] Refine competitive global settings and any crossover interval.
+- [x] Extend the common clustering grid around current winners, including a finer 8,192-cluster scan baseline.
+- [x] Run a targeted 256-bit comparison, 336 settings and 48 repeated selections.
+- [x] Compare branch probabilities 0 and 0.1 at fixed budgets with three seeds.
+- [x] Verify counts, recall, unchanged inputs, power and repeat spread.
+- [x] Repeat all 144 final configurations together in a second shared timing round.
+- [x] Independently audit 144,000 selected query results and their scores.
+- [x] Inspect the final graphs and explain the measured results.
+- [x] Pass the full test suite, 406 tests.
+- [ ] Save final code/results checkpoint and update memory.
 
-The report remains unchanged. The complete plan is in the workspace's
+This experiment did not edit the report. Separate report/publication edits were preserved. The complete plan is in the workspace's
 `docs/superpowers/plans/2026-09-13-search-k-and-prefix-experiments.md`.
 
 Use `status.json` and completed `process.json` files for live progress. Timing workers
