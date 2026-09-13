@@ -78,3 +78,14 @@ it does not change any algorithm or rerun the benchmark.
 
 Current output: `output/pdf/search-methods-prefix-v3.pdf` (28 pages).
 The old v2 PDF and source remain separate files.
+
+
+## Contents and experiment highlight
+
+- [x] Add a linked contents page at the start of v3, including References.
+- [x] Highlight the inside-cluster A/B/C search in green in Figure 1.
+- [x] Show reranking separately and update only the figure caption.
+- [x] Verify all introductory prose and other report paragraphs are unchanged.
+
+The current PDF is 29 pages. The v3 Section 1 hash changes only because of the
+explicitly requested Figure 1/caption edit; v2 retains its original hash.

@@ -25,19 +25,20 @@ selection. The two new approaches introduced later, Bitplanes and Backward Walk,
 this step while keeping the rest of the pipeline largely the same.
 
 \begin{figure}[H]\centering
-\begin{tikzpicture}[node distance=6mm]
-\node[box,text width=24mm] (doc) {Document text};
-\node[box,text width=32mm,right=of doc] (embed) {Matryoshka\\embedding};
-\node[box,text width=27mm,right=of embed] (bits) {Keep $d$ values\\and pack signs};
-\node[box,text width=25mm,right=of bits] (store) {Assign clusters\\and build index};
+\begin{tikzpicture}[node distance=4mm]
+\node[box,text width=18mm] (doc) {Document\\text};
+\node[box,text width=26mm,right=of doc] (embed) {Matryoshka\\embedding};
+\node[box,text width=23mm,right=of embed] (bits) {Keep $d$ values\\and pack signs};
+\node[box,text width=30mm,right=of bits] (store) {Assign clusters\\and build index};
 \draw[arr](doc)--(embed);\draw[arr](embed)--(bits);\draw[arr](bits)--(store);
-\node[box,text width=24mm,below=10mm of doc] (q) {Query text};
-\node[box,text width=32mm,right=of q] (qe) {Floating-point\\query};
-\node[box,text width=27mm,right=of qe] (route) {Select nearby\\clusters};
-\node[scan,text width=25mm,right=of route] (scan) {Score documents\\then rerank};
-\draw[arr](q)--(qe);\draw[arr](qe)--(route);\draw[arr](route)--(scan);
+\node[box,text width=18mm,below=11mm of doc] (q) {Query text};
+\node[box,text width=26mm,right=of q] (qe) {Floating-point\\query};
+\node[box,text width=23mm,right=of qe] (route) {Select nearby\\clusters};
+\node[box,text width=30mm,draw=ForestGreen!80!black,fill=ForestGreen!14,line width=1.1pt,right=of route] (search) {\textbf{Test A / B / C}\\Search inside\\selected clusters};
+\node[box,text width=23mm,right=of search] (rerank) {Rerank using\\full vectors};
+\draw[arr](q)--(qe);\draw[arr](qe)--(route);\draw[arr](route)--(search);\draw[arr](search)--(rerank);
 \end{tikzpicture}
-\caption{The baseline pipeline; B and C change document search inside the selected clusters.}
+\caption{Green marks the part we aim to improve: document search inside the selected clusters, using A, B or C. Reranking is shown as a separate step.}
 \end{figure}
 
 \subsection{Idea background}
