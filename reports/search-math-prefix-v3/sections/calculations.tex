@@ -1091,14 +1091,17 @@ So we also need to understand where recall can be lost.
 
 For query $q$:
 \begin{itemize}\setlength{\itemsep}{1pt}
+\item $K$ is how many results we want, for example, $K=10$ means the best 10 documents;
 \item $G_q$ is the exact global top-$K$;
 \item $O_{a,q}$ is the result returned by method $a$.
 \end{itemize}
+Here, $G_q$ contains the document IDs we would get by scoring the whole collection with the same binary score. The letter $a$ identifies Method A, B or C; $\cap$ means the IDs found in both sets, and $|\cdot|$ counts those IDs.
 Average recall is:
 \[
 R_a=\frac{\sum_q|G_q\cap O_{a,q}|}{n_qK}.
 \]
 Here $n_q$ is the number of queries. The reference and returned results use the same score and document-ID tie rule.
+The value $R_a$ is the method's average recall across those queries, while $R_{a,q}$ is its recall for just one query $q$.
 
 For example:
 \begin{center}
@@ -1137,6 +1140,8 @@ Because A scores every document inside those clusters, all $g_q$ of those docume
 \[
 R_{A,q}=\frac{g_q}{K}.
 \]
+Here, $R_{A,q}$ is A's recall for query $q$, and $K$ is how many results we want. Capital $G_q$ is the set of correct document IDs; lowercase $g_q$ counts how many of them are inside the clusters opened for this query.
+
 In other words:
 
 A can lose a correct document because cluster selection missed it, but once the document is inside an opened cluster, A will not lose it during local search.
@@ -1148,6 +1153,8 @@ Then:
 \[
 R_{B,q}=\frac{g_q}{K}r_{B,q}.
 \]
+Here, $R_{B,q}$ is B's overall recall for this query. Lowercase $r_{B,q}$ measures only how many of the $g_q$ correct documents in the opened clusters B recovers, divided by $g_q$.
+
 If $g_q=0$, recall is zero.
 
 For example, imagine:
@@ -1173,6 +1180,8 @@ Then:
 \[
 R_{C,q}=\frac{|G_q\cap D_{q,\ell}|}{K}.
 \]
+Here, $R_{C,q}$ is C's recall for query $q$, and $\ell$ is how many prefix bits remain when we stop. The set $D_{q,\ell}$ contains the document IDs exposed and scored inside the opened clusters; $|G_q\cap D_{q,\ell}|$ counts how many belong to the correct global top-$K$. Dividing that count by $K$ gives recall.
+
 The important thing here is that \textbf{candidate count and recall are not the same thing}.
 
 Finding 100 documents does not mean that we found the correct 100 documents.
@@ -1187,6 +1196,8 @@ Their scores are:
 \[
 S(10)=-0.8,\qquad S(01)=0.8.
 \]
+Here, $S(10)$ means the score of document \texttt{10} for this query: $0.1-0.9=-0.8$. Similarly, $S(01)=-0.1+0.9=0.8$; a higher score is better.
+
 If we search prefix \texttt{1*}, we find \texttt{10}.
 
 However, the better document is \texttt{01}, which is outside that prefix.
@@ -1204,18 +1215,18 @@ C is exact locally only when:
 \Needspace{6\baselineskip}
 \begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR, C recall:} A large prefix range does not automatically mean high recall. Backward Walk can safely stop only when it has either searched every document or mathematically proved that the unseen documents cannot win.}}\end{center}
 
-\subsection{Summary}
-The whole calculation section can be summarized with one simple idea:
-\begin{center}\small
-\begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
-Method & What it does\\\midrule
-A & Score every document inside the opened clusters\\
-B & Spend Bitplane work to avoid some "query-document dot product"\\
-C & Spend prefix-lookup work to avoid some "query-document dot product"\\\bottomrule
-\end{tabularx}
-\end{center}
-So:
+% \subsection{Summary}
+% The whole calculation section can be summarized with one simple idea:
+% \begin{center}\small
+% \begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
+% Method & What it does\\\midrule
+% A & Score every document inside the opened clusters\\
+% B & Spend Bitplane work to avoid some "query-document dot product"\\
+% C & Spend prefix-lookup work to avoid some "query-document dot product"\\\bottomrule
+% \end{tabularx}
+% \end{center}
+% So:
 
-\textbf{A just pays for "query-document dot product". B and C deliberately add extra search work, hoping that this lets them avoid enough "query-document dot product" to make the total query faster.}
+% \textbf{A just pays for "query-document dot product". B and C deliberately add extra search work, hoping that this lets them avoid enough "query-document dot product" to make the total query faster.}
 
 The experiment in the next section will tell us whether that actually happens on real embeddings.

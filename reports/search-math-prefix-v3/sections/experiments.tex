@@ -1,15 +1,15 @@
 \usetikzlibrary{plotmarks}
 \section{Experiments}
 \label{sec:experiments}
-So far, we have only looked at the three methods mathematically.
+So far, we have only looked at the three methods mathematically (and observe what \emph{could} make Method B and C faster) and we want to see the actual result that depends on document and queries.
 
-The calculations tell us what \emph{could} make Bitplanes or Backward Walk faster, but the actual result depends on the documents, the queries, and how much work each method ends up doing.
+% The calculations tell us what \emph{could} make Bitplanes or Backward Walk faster, but the actual result depends on the documents, the queries, and how much work each method ends up doing.
 
 So the experiment is simple:
 
 \textbf{For the same search problem and the same recall requirement, what is the fastest configuration I can find for A, B and C?}
 
-Each method is allowed to choose the parameters that make sense for it.
+Each method is allowed to choose the parameters that "make sense for it".
 
 Method A can choose its cluster count and how many clusters to open.
 
@@ -17,9 +17,8 @@ Method B can choose those same cluster settings, together with its leaf size and
 
 Method C can choose the cluster settings, starting prefix depth and stopping rule.
 
-The documents, queries, binary scoring function and correct answers remain unchanged.
 
-This is important because B and C do not necessarily work best with the same cluster layout as A. For example, Bitplanes may be able to open a much larger group of documents and then remove most of them before the "query-document dot product" operation.
+Note: B and C do not necessarily work best with the same cluster layout as A. For example, Bitplanes may be able to open a much larger group of documents and then remove most of them before the "query-document dot product" operation.
 
 \subsection{Setup}
 I use two collections:
