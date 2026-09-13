@@ -5,6 +5,7 @@ Usage:
   python -m experiments.prefix_study_v2 run NEW_OUTPUT
   python -m experiments.prefix_study_v2 summarize NEW_OUTPUT
   python -m experiments.prefix_study_v2 repeat NEW_OUTPUT
+  python -m experiments.prefix_probability_v2 plot FINISHED_STUDY FIGURE_OUTPUT
 
 The existing controller shares one 300-second allowance across main and repeat.
 This compares B's probability settings; it is not a new A/B/C comparison.
@@ -16,6 +17,12 @@ import json
 from pathlib import Path
 import random
 import re
+from statistics import mean, median
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+from matplotlib.ticker import ScalarFormatter
 
 from experiments import prefix_study_v2 as study
 from experiments.prefix_exploration_v2 import split_schedule
@@ -120,13 +127,109 @@ def prepare(source, output):
                 omitted=evidence["omitted"], timing_budget_seconds=300)
 
 
+def group_probability_rows(rows, selection):
+    """Summarize all declared groups, keeping missing or unqualified seeds visible."""
+    expected = selection["seeds"]
+    groups = []
+    for chosen in selection["selected"]:
+        fixed = [row for row in rows if row["method"] == "branch" and row["top_k"] == chosen["top_k"]
+                 and all(row.get(name) == chosen[name]
+                         for name in ("source_setting_id", "router", "probes", "leaf_size"))
+                 and row.get("prefer_deeper_ties", False) == chosen.get("prefer_deeper_ties", False)]
+        for budget, probability in product(chosen["node_budgets"], selection["probabilities"]):
+            own = [row for row in fixed if row["node_budget"] == budget
+                   and row["exploration"] == probability and row["seed"] in expected]
+            found = sorted({row["seed"] for row in own})
+            invalid = sorted({row["seed"] for row in own if not row.get("complete")
+                              or not row.get("qualified") or row.get("recall") is None
+                              or row.get("p50_ms") is None})
+            ready = len(expected) == len(own) == 3 and set(found) == set(expected) and not invalid
+            group = dict(top_k=chosen["top_k"], node_budget=budget, probability=probability,
+                router=chosen["router"], probes=chosen["probes"], leaf_size=chosen["leaf_size"],
+                seeds_found=found, missing_seeds=[seed for seed in expected if seed not in found],
+                unqualified_seeds=invalid, plotted=bool(ready),
+                recall_percent_mean=None, recall_percent_min=None, recall_percent_max=None,
+                query_ms_median=None, query_ms_min=None, query_ms_max=None)
+            if ready:
+                recalls = [100 * row["recall"] for row in own]
+                times = [row["p50_ms"] for row in own]
+                group.update(recall_percent_mean=mean(recalls), recall_percent_min=min(recalls),
+                    recall_percent_max=max(recalls), query_ms_median=median(times),
+                    query_ms_min=min(times), query_ms_max=max(times))
+            groups.append(group)
+    return groups
+
+
+def plot(source, output):
+    """Draw finished studies from settings and selection metadata, without raw-query reads."""
+    source, output = Path(source).resolve(), Path(output).resolve()
+    selection = study.read_json(source / "probability-selection.json")
+    groups = group_probability_rows(study.read_json(source / "main/settings.json"), selection)
+    output.mkdir(parents=True, exist_ok=True)
+    scope = ("Recall points are means across three seeds. Time points are medians of the three seed "
+             "median query times. Bars show the minimum to maximum seed range, not a confidence interval. "
+             "Only complete, qualified three-seed groups are plotted; gaps remain in the saved summary.")
+    study.save_json(output / "probability-summary.json", dict(groups=groups,
+        omitted=selection.get("omitted", []), source=str(source), scope=scope))
+    if groups:
+        study.write_csv(output / "probability-summary.csv", groups)
+    else:
+        (output / "probability-summary.csv").write_text("")
+    plots = []
+    for chosen in selection["selected"]:
+        k = chosen["top_k"]
+        fig, axes = plt.subplots(1, 2, figsize=(9.4, 4.7))
+        fig.subplots_adjust(left=.08, right=.98, bottom=.22, top=.78, wspace=.28)
+        x = [100 * value for value in selection["probabilities"]]
+        for budget in chosen["node_budgets"]:
+            own = [group for group in groups if group["top_k"] == k and group["node_budget"] == budget]
+            if not any(group["plotted"] for group in own):
+                continue
+            label = "Unlimited nodes" if budget == 0 else f"{budget:,} nodes"
+            for axis, middle, lower, upper in (
+                (axes[0], "recall_percent_mean", "recall_percent_min", "recall_percent_max"),
+                (axes[1], "query_ms_median", "query_ms_min", "query_ms_max")):
+                values = [row[middle] if row["plotted"] else float("nan") for row in own]
+                errors = [[row[middle] - row[lower] if row["plotted"] else float("nan") for row in own],
+                          [row[upper] - row[middle] if row["plotted"] else float("nan") for row in own]]
+                axis.errorbar(x, values, yerr=errors, fmt="o-", capsize=3, linewidth=1.5, label=label)
+        for axis, title, ylabel in zip(axes, ("Recall", "Query time"),
+                                       ("Mean recall across seeds (%)", "Median query time (ms)")):
+            axis.set(xlabel="Exploration probability (%)", ylabel=ylabel, title=title)
+            axis.set_xticks(x, [f"{value:g}" for value in x])
+            formatter = ScalarFormatter(useOffset=False); formatter.set_scientific(False)
+            axis.yaxis.set_major_formatter(formatter)
+            axis.spines[["top", "right"]].set_visible(False)
+            axis.grid(alpha=.2)
+            if axis.get_legend_handles_labels()[0]:
+                axis.legend(frameon=False, fontsize=9)
+            else:
+                axis.text(.5, .5, "No complete, qualified\nthree-seed group", transform=axis.transAxes,
+                          ha="center", va="center")
+        axes[0].set_ylim(0, 100)
+        router = Path(chosen["router"]).name if chosen["router"] else "Global cluster"
+        name = Path(selection.get("source", source.name)).name
+        fig.suptitle(f"{name}: Method B, K={k}\n{router}; {chosen['probes']:,} clusters opened; leaf {chosen['leaf_size']:,}", fontsize=11)
+        fig.text(.5, .045, "Points: mean recall and median of seed median times.\n"
+                 "Bars: range across three seeds (minimum to maximum), not a confidence interval.",
+                 ha="center", fontsize=9)
+        for extension in ("png", "pdf"):
+            path = output / f"probability-k{k}.{extension}"
+            fig.savefig(path, dpi=180)
+            plots.append(str(path))
+        plt.close(fig)
+    return dict(output=str(output), plots=plots, groups=len(groups),
+                plotted_groups=sum(group["plotted"] for group in groups))
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("stage", choices=("prepare",))
+    parser.add_argument("stage", choices=("prepare", "plot"))
     parser.add_argument("source", type=Path)
     parser.add_argument("output", type=Path)
     args = parser.parse_args()
-    print(json.dumps(prepare(args.source, args.output)), flush=True)
+    action = prepare if args.stage == "prepare" else plot
+    print(json.dumps(action(args.source, args.output)), flush=True)
 
 
 if __name__ == "__main__":
