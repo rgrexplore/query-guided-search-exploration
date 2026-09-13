@@ -2,10 +2,12 @@
 I study three ways to search binary document vectors after selecting clusters: a full scan,
 Bitplanes, and Backward Walk. I compare their work, memory use and retrieval time using the
 same documents and queries. The experiments examine when the extra index work saves enough
-full document scores to reduce latency at a required recall.
+document scoring operations to reduce latency at a required recall.
 \end{abstract}
 
 \section{Introduction}
+Throughout this report, a document scoring operation is the computation; its score value is the resulting number, such as 1.9.
+
 \subsection{Exa method and end to end pipeline}
 Let's first understand the ``original'' pipeline that I am trying to improve upon.
 
@@ -17,7 +19,7 @@ described in that article as the original baseline that we compare against.
 Detail: In this pipeline, document embeddings are first shortened using Matryoshka
 representations, converted into binary signs, and assigned to clusters. At query time,
 the query is encoded, a subset of nearby clusters is selected, and the documents inside
-those clusters are scored using the floating-point query. The top candidates can then be
+those clusters undergo scoring operations using the floating-point query. The top candidates can then be
 reranked using the original uncompressed vectors.
 
 The main part that I am trying to improve in this report is the search stage after cluster
@@ -54,8 +56,8 @@ For example:
 \[
 \text{Document}=\texttt{11000}
 \]
-The score is calculated by taking the dot product between the query values and the document
-signs. So for \texttt{11000}, the score is
+The score value is calculated by taking the dot product between the query values and the document
+signs. So for \texttt{11000}, the score value is
 \[
 0.7(+1)+0.5(+1)+(-0.4)(-1)+(-0.6)(-1)+0.3(-1)=1.9.
 \]
@@ -68,33 +70,33 @@ above, the ideal binary pattern is
 \[
 \texttt{11001}.
 \]
-This document would achieve the maximum possible score:
+This document would achieve the maximum possible score value:
 \[
 0.7+0.5+0.4+0.6+0.3=2.5.
 \]
 From here, we can think about every other document in terms of how far it is from this ideal
 pattern. More importantly, not every mismatch has the same cost. If we mismatch the first
-coordinate, where $|q_1|=0.7$, the score decreases by 1.4. But if we mismatch the last
-coordinate, where $|q_5|=0.3$, the score only decreases by 0.6.
+coordinate, where $|q_1|=0.7$, the score value decreases by 1.4. But if we mismatch the last
+coordinate, where $|q_5|=0.3$, the score value only decreases by 0.6.
 
 In more formal terms, let
 \[
 Q=\sum_i|q_i|
 \]
-be the score of the ideal binary pattern. If a document $b$ disagrees with the query sign
+be the score value of the ideal binary pattern. If a document $b$ disagrees with the query sign
 at some coordinates, define its mismatch penalty as
 \[
 p=\sum_{i:b_i\ne\operatorname{sign}(q_i)}|q_i|.
 \]
-Then its score can be written as
+Then its score value can be written as
 \begin{equation}
 S(q,b)=Q-2p.
 \label{eq:score}
 \end{equation}
 This observation is the main idea behind the approaches explored in this report. Instead
-of treating every binary document equally and scoring all of them one by one, can we use
+of treating every binary document equally and performing a scoring operation for each one, can we use
 the query itself to guide the search toward documents that are closer to its ideal binary
-pattern, while avoiding unnecessary full-score calculations?
+pattern, while avoiding unnecessary document scoring operations?
 
 \subsection{Exploring new methods}
 From the previous section, we know two useful things before we even start searching:
@@ -219,7 +221,7 @@ Document B: 1000
 If we greedily start with the first bit, the query prefers 1. We would therefore keep
 Document B and throw away Document A.
 
-But their complete scores are:
+But their complete score values are:
 \[
 S(A)=-0.6+0.5+0.4+0.3=0.6
 \]
@@ -244,12 +246,12 @@ recursive search tree rather than one greedy path.
 \begin{figure}[H]\centering
 \begin{tikzpicture}
 \node[branch,text width=43mm] (root) at (0,0) {2 documents\\$p=0$, bound $1.8$};
-\node[branch,text width=48mm] (yes) at (-3.3,-1.6) {Bit 1 = 1: document B\\$p=0$, bound $1.8$\\Full score $-0.6$};
-\node[box,text width=48mm] (no) at (3.3,-1.6) {Bit 1 = 0: document A\\$p=0.6$, bound $0.6$\\Full score $0.6$};
+\node[branch,text width=48mm] (yes) at (-3.3,-1.6) {Bit 1 = 1: document B\\$p=0$, bound $1.8$\\Full score value $-0.6$};
+\node[box,text width=48mm] (no) at (3.3,-1.6) {Bit 1 = 0: document A\\$p=0.6$, bound $0.6$\\Full score value $0.6$};
 \draw[arr](root)--(yes);\draw[arr](root)--(no);
-\node[align=center,font=\small] at (0,-3.2) {After scoring B, the other bound is $0.6>-0.6$.\\We must explore A; the first choice was not enough.};
+\node[align=center,font=\small] at (0,-3.2) {After the scoring operation for B, the other bound is $0.6>-0.6$.\\We must explore A; the first choice was not enough.};
 \end{tikzpicture}
-\caption{Keep the alternative until its score bound proves it cannot improve the result.}
+\caption{Keep the alternative until its bound on score values proves it cannot improve the result.}
 \end{figure}
 
 \textbf{Stopping condition}\par
@@ -264,12 +266,12 @@ Therefore,
 \[
 U_{\rm branch}=Q-2p
 \]
-is an upper bound on the score of every document inside that branch.
+is an upper bound on the score value of every document inside that branch.
 
 For example, suppose $Q=2.5$ and we are looking for the top two results. We have already
 found 2.5 and 1.9, where 1.9 is the current top-2 threshold.
 
-Now consider an unexplored branch with $p=0.5$. Its absolute best possible score is
+Now consider an unexplored branch with $p=0.5$. Its absolute best possible score value is
 \[
 2.5-2(0.5)=1.5.
 \]
@@ -278,7 +280,7 @@ discard the entire subtree.
 
 So:
 \[
-\boxed{Q-2p<\text{current }K\text{th score}\quad\Rightarrow\quad\text{prune branch}}
+\boxed{Q-2p<\text{current }K\text{th score value}\quad\Rightarrow\quad\text{prune branch}}
 \]
 
 \begin{figure}[H]\centering
@@ -290,7 +292,7 @@ So:
 \node[box,fill=gray!15,text=gray,text width=22mm] (right) at (7.4,-1.3) {unvisited rows};
 \draw[arr,dashed](skip)--(left);\draw[arr,dashed](skip)--(right);
 \end{tikzpicture}
-\caption{The whole gray subtree can be skipped because even its best possible score is too low.}
+\caption{The whole gray subtree can be skipped because even its best possible score value is too low.}
 \end{figure}
 
 If the best remaining branch in the queue already fails this test, then every other branch
@@ -372,14 +374,14 @@ still be 100 words wide. So the next split may still need to process those same 
 \textbf{Bitmap traversal cost.} In general, for a cluster containing $n$ documents, one dense
 bitplane operation costs roughly $O(\ceil{n/64})$ word operations. If we visit $J$ split
 nodes, this becomes approximately $O(J\ceil{n/64})$, before even counting queue operations
-and the final document scoring. This was one of the important findings from the earlier
-experiments: reducing the number of fully scored documents does not automatically mean
+and the final document scoring operations. This was one of the important findings from the earlier
+experiments: reducing the number of documents that undergo a scoring operation does not automatically mean
 reducing total query time, because the bitmap traversal itself can become expensive.
 
 \textbf{Solution 1: Parameter tuning.} This problem is technically something we can optimize.
 For example, we can tune cluster size during coarse routing; number of clusters probed;
-how deep we split; leaf size; when we switch back to ordinary full scoring. So Bitplanes
-is not fundamentally broken. The question is finding the point where scores avoided are
+how deep we split; leaf size; when we switch back to ordinary document scoring operations. So Bitplanes
+is not fundamentally broken. The question is finding the point where scoring operations avoided are
 worth more than additional bitmap traversal.
 
 \textbf{Solution 2: Other approach.} However, thinking about this cost led me to a second idea.
@@ -409,21 +411,21 @@ During index construction, documents sharing this prefix are placed in the same 
 contiguous range.
 
 At query time, we directly look up this prefix. If it contains enough useful documents, we
-score them using the complete 256-bit score. If it is empty, or contains too few candidates,
+perform their scoring operations using the complete 256-bit scoring function. If it is empty, or contains too few candidates,
 we remove one constraint:
 
 \begin{figure}[H]\centering
 \begin{tikzpicture}[node distance=8mm]
 \node[keys,text width=62mm] (p16) {\texttt{1011010010110101}\\12 documents found};
-\node[keys,text width=62mm,below=of p16] (p15) {\texttt{101101001011010*}\\31 total; score only 19 new rows};
-\node[keys,text width=62mm,below=of p15] (p14) {\texttt{10110100101101**}\\66 total; score only 35 new rows};
-\node[keys,text width=62mm,below=of p14] (p13) {\texttt{1011010010110***}\\136 total; score only 70 new rows};
+\node[keys,text width=62mm,below=of p16] (p15) {\texttt{101101001011010*}\\31 total; 19 new scoring operations};
+\node[keys,text width=62mm,below=of p15] (p14) {\texttt{10110100101101**}\\66 total; 35 new scoring operations};
+\node[keys,text width=62mm,below=of p14] (p13) {\texttt{1011010010110***}\\136 total; 70 new scoring operations};
 \draw[arr](p16)--node[right,font=\small]{too few}(p15);
 \draw[arr](p15)--node[right,font=\small]{too few}(p14);
 \draw[arr](p14)--node[right,font=\small]{too few}(p13);
 \node[align=left,font=\small,right=12mm of p14,text width=40mm] {Each $*$ removes a bit constraint.\\Old rows stay inside the larger range.};
 \end{tikzpicture}
-\caption{Illustrative counts: $12+19+35+70=136$ distinct rows scored, not $12+31+66+136$.}
+\caption{Illustrative counts: $12+19+35+70=136$ distinct document scoring operations, not $12+31+66+136$.}
 \end{figure}
 
 Every step moves to a larger candidate set.
@@ -459,7 +461,7 @@ def backward_walk(query, clusters, k, start_depth, candidate_target):
                 new_ranges = [(left, right)]
             else:
                 old_left, old_right = previous[index]
-                # Only the new rows beside the old range need scores.
+                # Only the new rows beside the old range need scoring operations.
                 new_ranges = [(left, old_left), (old_right, right)]
             for start, stop in new_ranges:
                 for row_id, code in cluster.rows_in_range(start, stop):
@@ -481,7 +483,7 @@ stopping rule. It does not mathematically prove that a better document does not 
 outside the current prefix.
 
 Therefore, in the experiments, recall still needs to be measured against the same exact
-reference results. An exact version would require a valid upper bound on the scores of
+reference results. An exact version would require a valid upper bound on the score values of
 documents outside the currently visited prefix.
 
 \textbf{Relationship to HNSW}\par

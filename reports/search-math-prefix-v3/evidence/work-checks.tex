@@ -1,30 +1,30 @@
 \label{sec:prefix-check}
 % Sources: */work-checks.json; bounds/*/bounds.json; exact-predictions/qwen-quora-d32;
 % comparison-final selected repeat rows; *-probability/figures/probability-summary.csv.
-I checked stored field sizes and operation counts separately from the timings. Across 13 saved work-check reports, all 890 index-storage checks match the formulas, including padding at cluster boundaries; the saved query-count checks report no failures. These checks do not assign a constant time to a mask word or document score.
+I checked stored field sizes and operation counts separately from the timings. Across 13 saved work-check reports, all 890 index-storage checks match the formulas, including padding at cluster boundaries; the saved query-count checks report no failures. These checks do not assign a constant time to a mask word or document scoring operation.
 
-The score gap helps explain why short codes behave differently. For each Qwen query, I divide the gap between the ideal binary score $Q$ and the true best score by $Q$. The median gap is 2.60\% at 32 bits, 14.48\% at 256 bits and 16.15\% at 1024 bits. When a retained score is close to $Q$, a smaller mismatch penalty can rule out a branch. The short-code result makes such pruning possible earlier; the representation table shows the separate cost of changing the ranking problem.
+The score value gap helps explain why short codes behave differently. For each Qwen query, I divide the gap between the ideal binary score value $Q$ and the true best score value by $Q$. The median gap is 2.60\% at 32 bits, 14.48\% at 256 bits and 16.15\% at 1024 bits. When a retained score value is close to $Q$, a smaller mismatch penalty can rule out a branch. The short-code result makes such pruning possible earlier; the representation table shows the separate cost of changing the ranking problem.
 
-At the other extreme, one completed global Nomic768 setting with $K=100$, leaf 2048 and budget 8192 scores all one million rows. It also visits 21.57 million split-mask words and 21.46 million final-mask words per query on average: about 43.03 million word visits without avoiding a full score. More available RAM would not remove that work.
+At the other extreme, one completed global Nomic768 setting with $K=100$, leaf 2048 and budget 8192 performs one million document scoring operations. It also visits 21.57 million split-mask words and 21.46 million final-mask words per query on average: about 43.03 million word visits without avoiding a document scoring operation. More available RAM would not remove that work.
 
 \textbf{Stopping depth.}
-The exact-stop option uses the ideal score $Q=\sum_i|q_i|$ and the worst of the $K$ retained scores, $\tau$. At positive prefix depth $\ell$, every unseen opened row disagrees with at least one retained sign. Its score is therefore at most
+The exact-stop option uses the ideal score value $Q=\sum_i|q_i|$ and the worst of the $K$ retained score values, $\tau$. At positive prefix depth $\ell$, every unseen opened row disagrees with at least one retained sign. Its score value is therefore at most
 \[
  u_\ell=Q-2\min_{1\le i\le\ell}|q_i|.
 \]
 C can stop when $\tau>u_\ell$, with the code's rounding margin and tie rule. This proves the result within the opened clusters; it does not correct routing misses.
 
-For the global Qwen32 exact-stop runs, let $y_q$ be the deepest stored prefix whose unseen bound is below the saved exact best score, or zero if none qualifies. A walk starting at $x$ then ends at $\ell_q=\min(x,y_q)$. Counting the corresponding sorted prefix range gives the number of scored rows; the visited-depth and lookup counts follow from $x-\ell_q+1$. All four predictions match all 3,000 query records: the same 1,000 queries at starts 1, 4 and 32.
+For the global Qwen32 exact-stop runs, let $y_q$ be the deepest stored prefix whose unseen bound is below the saved exact best score value, or zero if none qualifies. A walk starting at $x$ then ends at $\ell_q=\min(x,y_q)$. Counting the corresponding sorted prefix range gives the number of document scoring operations; the visited-depth and lookup counts follow from $x-\ell_q+1$. All four predictions match all 3,000 query records: the same 1,000 queries at starts 1, 4 and 32.
 
 \begin{center}\small
 \begin{tabular}{@{}rrrrr@{}}\toprule
-Start $x$ & \shortstack{Mean final\\depth} & \shortstack{Mean rows\\scored} & \shortstack{Mean visited\\depths} & \shortstack{Mean boundary\\searches}\\\midrule
+Start $x$ & \shortstack{Mean final\\depth} & \shortstack{Mean scoring\\operations} & \shortstack{Mean visited\\depths} & \shortstack{Mean boundary\\searches}\\\midrule
 1 & 0.665 & 353,270.1 & 1.335 & 2.000\\
 4 & 1.497 & 290,211.1 & 3.503 & 6.336\\
 32 & 4.505 & 278,316.6 & 28.495 & 56.320\\\bottomrule
 \end{tabular}
 \end{center}
-For $K=1$, 665 queries prove a stop above the root. Starting at 32 reduces the mean number of scores, but requires many more boundary searches. The prediction uses reference scores only in this offline check; actual search uses the scores it has found. The saved $K=100$ predictions were not measured in this global run, so they are not included in the 3,000 matching records.
+For $K=1$, 665 queries prove a stop above the root. Starting at 32 reduces the mean number of scoring operations, but requires many more boundary searches. The prediction uses reference score values only in this offline check; actual search uses the score values it has found. The saved $K=100$ predictions were not measured in this global run, so they are not included in the 3,000 matching records.
 
 \textbf{Memory at the selected settings.}
 For the Qwen32 top-1 settings, the verified native fields plus router storage and the largest repeated-process memory peak are:

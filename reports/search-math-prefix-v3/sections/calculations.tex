@@ -2,17 +2,23 @@
 % Figure directions are rendered as diagrams; editorial closing note omitted.
 \section{Preliminary calculations}
 
-Before running the experiments, let’s first break down where each method actually spends its work.
+Before running the experiments, let’s first break down what's the time/memory complexity for each method.
 
-The idea is simple. Method A scores every document inside the opened clusters. Method B tries to avoid some of those scores by filtering with Bitplanes first. Method C tries to avoid starting from a large set of documents at all by looking up a specific prefix and broadening it only when necessary.
+to recap:
+\begin{itemize}
+  \item Method A performs a document scoring operation for every document inside the opened clusters.
+  \item Method B avoids some document scoring operations by filtering with Bitplanes first.
+  \item Method C avoids starting with a large document set by looking up a specific prefix, then broadening only when needed.
+\end{itemize}
 
 So for each method, I mainly want to understand two things:
 
-\textbf{What additional work does this method introduce, and how many full document scores can that work potentially save?}
+\begin{itemize}
+  \item What additional work do Methods B and C introduce?
+  \item How many document scoring operations can Methods B and C potentially save?
+\end{itemize}
 
-I will use the same small example throughout this section and then generalize it into the formulas that we will later compare with the experiments.
-
-Throughout this section:
+Let's use this as variables:
 
 \begin{center}
 \begin{minipage}{\linewidth}
@@ -24,11 +30,11 @@ Symbol & Meaning\\
 \midrule
 \(N\) & Total number of documents\\
 \(C\) & Total number of clusters\\
-\(P\) & Number of clusters opened for one query\\
+\(P\) & Number of clusters opened for one query (P is for "probes")\\
 \(d\) & Number of binary dimensions\\
 \(K\) & Number of results we want to return\\
 \(n_c\) & Number of documents inside cluster \(c\)\\
-\(F_A,F_B,F_C\) & Number of documents that receive the full score under A, B and C\\
+\(F_A,F_B,F_C\) & Number of documents that undergo a document scoring operation under A, B and C\\
 \bottomrule
 \end{tabular}
 \end{minipage}
@@ -51,15 +57,13 @@ So if we open \(P\) clusters, we expose roughly
 
 documents.
 
-This is only an approximation for intuition. The experiments later use the actual number of documents inside the opened clusters.
 
 
 
 \subsection{Query-time work}
 
-Let’s use one tiny example so that we can see exactly what each method is doing.
 
-Suppose one opened cluster contains three documents:
+Let's try to imagine this using example. Suppose one opened cluster contains three documents:
 
 \begin{center}
 \begin{minipage}{\linewidth}
@@ -67,7 +71,7 @@ Suppose one opened cluster contains three documents:
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{@{}p{.16\linewidth}p{.42\linewidth}p{.34\linewidth}@{}}
 \toprule
-ID & Binary document & Full score\\
+ID & Binary document & Full score value\\
 \midrule
 0 & \texttt{10100} & 0.1\\
 1 & \texttt{11001} & 2.5\\
@@ -102,7 +106,7 @@ For this example:
 N=3,\qquad C=P=1,\qquad d=5.
 \]
 
-The example is intentionally small. The actual experiments later contain hundreds of thousands or millions of documents.
+*note: the actual experiments later contain hundreds of thousands or millions of documents.
 
 
 
@@ -110,10 +114,10 @@ The example is intentionally small. The actual experiments later contain hundred
 
 Method A is the easiest one to understand.
 
-Once cluster selection has decided which clusters to open, \textbf{every document inside those clusters receives the full score}.
+Once cluster selection (prefilter) has decided which clusters to open, \textbf{for every document inside those clusters, we will do a scoring operation}.
 
 \Needspace{4\baselineskip}
-\textbf{Step 1: how many documents do we need to score?}\par
+\textbf{Step 1: how many document scoring operations do we need?}\par
 
 In our example, the only opened cluster contains:
 
@@ -133,7 +137,7 @@ F_A=\sum_{c\in O}n_c
 }
 \]
 
-is the number of documents A fully scores.
+is the number of documents for which A performs scoring operations.
 
 If the clusters are roughly balanced:
 
@@ -151,12 +155,12 @@ So for A, this is already the most important number: \textbf{how many documents 
 \node[scan,text width=16mm] (q) at (0,0) {Query};
 \node[scan,text width=24mm] (p) at (29mm,0) {Select $P$\\clusters};
 \node[scan,text width=29mm] (rows) at (65mm,0) {$F_A$ documents\\\texttt{10100}\\\texttt{11001}\\\texttt{11000}};
-\node[scan,text width=29mm] (score) at (104mm,0) {Full score\\every document};
+\node[scan,text width=29mm] (score) at (104mm,0) {Scoring operation\\for every document};
 \node[scan,text width=16mm] (top) at (138mm,0) {Top $K$};
 \draw[arr] (q)--(p); \draw[arr] (p)--(rows); \draw[arr] (rows)--(score); \draw[arr] (score)--(top);
 
 \end{tikzpicture}
-\caption{Method A performs no additional filtering after cluster selection. Every document inside the opened clusters receives the full score.}
+\caption{Method A performs no additional filtering after cluster selection. Every document inside the opened clusters undergoes a document scoring operation.}
 \end{figure}
 
 
@@ -164,11 +168,11 @@ So for A, this is already the most important number: \textbf{how many documents 
 
 
 \Needspace{4\baselineskip}
-\textbf{Step 2: what does one full score cost?}\par
+\textbf{Step 2: what does one document scoring operation cost?}\par
 
 The scorer used here follows the four-sign lookup-table approach described in Exa’s article.
 
-Instead of multiplying every query value with every document bit individually, the query is divided into groups of four.
+Instead of multiplying every query value with every document bit individually, the query is divided into groups (or subvectors) of four.
 
 For our five-dimensional example:
 
@@ -198,7 +202,7 @@ In general, the number of groups is
 G=\left\lceil\frac d4\right\rceil.
 \]
 
-One document score therefore reads \(G\) table entries.
+One document scoring operation therefore reads \(G\) table entries.
 
 For our example:
 
@@ -226,14 +230,14 @@ Since \(G\) grows with \(d\),
 T_{\text{score},A}=O(F_Ad).
 \]
 
-For a fixed binary dimension, this is basically linear in the number of documents we score.
+For a fixed binary dimension, this is basically linear in the number of documents for which we perform scoring operations.
 
 
 
 \Needspace{4\baselineskip}
 \textbf{Step 3: keep only the best K}\par
 
-As scores are produced, we only need to keep the best \(K\).
+As score values are produced, we only need to keep the best \(K\).
 
 For our example:
 
@@ -255,9 +259,9 @@ O(F_A\log(K+1)).
 \Needspace{4\baselineskip}
 \textbf{Total cost for A}\par
 
-Let \(T_{\text{base}}\) contain the work before full document scoring, such as cluster selection and score-table preparation.
+Let \(T_{\text{base}}\) contain the work before document scoring operations, such as cluster selection and lookup-table preparation.
 
-Let \(a_A\) be the average measured time needed to fully process one document, including its score and the top-\(K\) update.
+Let \(a_A\) be the average measured time needed to fully process one document, including its scoring operation and the top-\(K\) update.
 
 Then:
 
@@ -283,15 +287,15 @@ The main tradeoff is straightforward.
 Using more clusters usually makes each cluster smaller, so each opened cluster contains fewer documents. However, we may then need to open more clusters to maintain the same recall.
 
 \Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- Method A:} A’s cost is mainly determined by how many documents cluster selection leaves behind. Fewer opened documents means fewer full scores, but opening too few clusters can hurt recall.}}\end{center}
+\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- Method A:} A’s cost is mainly determined by how many documents cluster selection leaves behind. Fewer opened documents means fewer document scoring operations, but opening too few clusters can hurt recall.}}\end{center}
 
 
 
 \subsubsection{Method B: Bitplanes}
 
-Bitplanes try to reduce the number of documents that receive the full score.
+Bitplanes try to reduce the number of documents that undergo a document scoring operation.
 
-Instead of immediately scoring every document inside the opened clusters, B first uses Bitplanes to filter the documents.
+Instead of immediately performing a scoring operation for every document inside the opened clusters, B first uses Bitplanes to filter the documents.
 
 So B has two main costs:
 
@@ -299,18 +303,18 @@ So B has two main costs:
 \boxed{
 \text{Bitplane work}
 +
-\text{full scoring of the documents that survive}
+\text{scoring operations for the documents that survive}
 }
 \]
 
-The whole idea only makes sense if the full scores we avoid are more expensive than the Bitplane work required to avoid them.
+The whole idea only makes sense if the document scoring operations we avoid are more expensive than the Bitplane work required to avoid them.
 
 
 
 \Needspace{4\baselineskip}
 \textbf{Step 1: inspect the important query bits first}\par
 
-B uses the same cluster selection and the same full-score table as A.
+B uses the same cluster selection and the same lookup table as A.
 
 The additional step is to order the query bits by decreasing \(|q_i|\).
 
@@ -329,7 +333,7 @@ the order is:
 \foreach \i/\j in {0/1,1/2,2/3,3/4} {\draw[arr](b\i)--(b\j);}
 \end{tikzpicture}\end{center}
 
-We inspect the larger values first because mismatching them hurts the score more.
+We inspect the larger values first because mismatching them hurts the score value more.
 
 Sorting these positions costs
 
@@ -337,7 +341,7 @@ Sorting these positions costs
 O(d\log d).
 \]
 
-We also calculate the ideal score:
+We also calculate the ideal score value:
 
 \[
 Q=\sum_i|q_i|=2.5.
@@ -458,13 +462,11 @@ p=|q_2|=0.5.
 
 
 \Needspace{4\baselineskip}
-\textbf{Step 4: why Bitplane filtering is not free}\par
+\textbf{Step 4: why Bitplane filtering is not O(1) - it's not free! :(}\par
 
-At first, a bitwise AND sounds almost free.
+At first, a bitwise AND seems like it's O(1).
 
-But that is only true for one machine word.
-
-Suppose one cluster contains:
+But actually it's not. Example -> If one cluster contains:
 
 \[
 6,400
@@ -472,7 +474,7 @@ Suppose one cluster contains:
 
 documents.
 
-One mask then needs:
+Then, for every one mask we need:
 
 \[
 6400/64=100
@@ -480,15 +482,11 @@ One mask then needs:
 
 machine words.
 
-So one split does not perform one AND. It loops across roughly 100 word positions.
+So one split does not perform one AND, as we need to loop across roughly 100 word positions.
 
 There is another important detail: \textbf{the mask does not physically get shorter when fewer documents remain active.}
 
-For example, suppose only 80 documents survive after several splits.
-
-The mask can still be 100 words wide.
-
-So another split may still need to scan all 100 words.
+For example, suppose only 80 documents survive after several splits. But in this case, the mask can still be 100 words wide.
 
 
 \begin{figure}[htbp]
@@ -510,9 +508,9 @@ So another split may still need to scan all 100 words.
 \caption{The number of active documents can become much smaller while the physical bitmap stays the same size.}
 \end{figure}
 
+\pagebreak  
 
 
-This is the main cost that B introduces.
 
 
 
@@ -547,11 +545,9 @@ PS
 
 
 \Needspace{4\baselineskip}
-\textbf{Step 6: eventually stop splitting and score the documents}\par
+\textbf{Step 6: eventually stop splitting and perform scoring operations}\par
 
-B does not split forever.
-
-Once a branch contains few enough documents, it becomes a \textbf{leaf}, and B fully scores the documents inside it.
+After a branch contains few enough documents, we treat this as a \textbf{leaf}, and in this case, method B will perform document scoring operations for the documents inside it.
 
 Suppose our leaf size is two.
 
@@ -561,7 +557,7 @@ The preferred branch:
 
 contains exactly IDs 1 and 2.
 
-So B calculates:
+So B performs these document scoring operations:
 
 \begin{center}\begingroup\small\ttfamily\begin{tabular}{l}
 ID 1 \(\rightarrow\) 2.5\\ \relax ID 2 \(\rightarrow\) 1.9
@@ -573,18 +569,14 @@ Therefore:
 F_B=2.
 \]
 
-Method A would have scored all three documents.
+*in this case, if we do a comparison, method A would have performed three document scoring operations.
 
 
 
 \Needspace{4\baselineskip}
-\textbf{Leaf masks still need to be read}\par
+\textbf{another little cost: we still need to read leaf masks}\par
 
-Before B can extract the surviving document positions, it still has to scan the leaf mask.
-
-Let \(H_c\) be the number of leaf masks read in cluster \(c\).
-
-Then:
+Before B can extract the surviving document positions, it still has to scan the leaf mask. Let \(H_c\) be the number of leaf masks read in cluster \(c\).
 
 \[
 \boxed{
@@ -594,22 +586,21 @@ V_{\text{leaf}}
 }
 \]
 
-I keep split-mask work and leaf-mask work separate because the implementation measures both separately.
 
 
 
 \Needspace{4\baselineskip}
-\textbf{Step 7: can we skip the waiting branch?}\par
+\textbf{Step 7: the un-explored branch that is still in the queue}\par
 
-ID 0 is still waiting.
+Remember when we consider 'branching' to catch all cases because we are worried that we might miss the ideal case due to branching? Imagine that: ID 0 is still waiting to be explored.
 
-Its known mismatch penalty is:
+We can calculate the known mismatch penalty, which is:
 
 \[
 p=0.5.
 \]
 
-The best possible score inside that branch is:
+However, we can take a look that the best possible score value inside that branch is:
 
 \[
 Q-2p
@@ -619,7 +610,7 @@ Q-2p
 1.5.
 \]
 
-Our current top two scores are:
+Meanwhile, our current top two score values are already:
 
 \[
 2.5,\qquad1.9.
@@ -631,22 +622,20 @@ Since:
 1.5<1.9,
 \]
 
-nothing inside the waiting branch can enter the current top two.
-
-So B can safely skip it.
+We can make conclusion: nothing inside the waiting branch can enter the current top two. So the good news is that, we can safely skip it!
 
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
 
-\node[box,draw=gray!65,fill=gray!7,dashed,text width=49mm,minimum height=24mm] (wait) at (0,0) {Waiting branch\\penalty = 0.5\\best possible score = 1.5};
+\node[box,draw=gray!65,fill=gray!7,dashed,text width=49mm,minimum height=24mm] (wait) at (0,0) {Waiting branch\\penalty = 0.5\\best possible score value = 1.5};
 \node[branch,text width=35mm,minimum height=24mm] (best) at (82mm,0) {Current top-2\\2.5\\1.9};
 \draw[arr] (wait)--node[above,font=\small]{$1.5<1.9$}(best);
 \node[font=\small\bfseries,text=Branch] at (41mm,-23mm) {$\rightarrow$ skip branch};
 
 \end{tikzpicture}
-\caption{Once the best possible score of a branch falls below the current top-\(K\) threshold, the whole branch can be skipped.}
+\caption{Once the best possible score value of a branch falls below the current top-\(K\) threshold, the whole branch can be skipped.}
 \end{figure}
 
 
@@ -663,7 +652,7 @@ B therefore pays for:
 \item reading split masks;
 \item reading leaf masks;
 \item maintaining the waiting branches;
-\item fully scoring \(F_B\) documents.
+\item performing \(F_B\) document scoring operations.
 \end{itemize}
 
 Let:
@@ -697,7 +686,7 @@ The key condition is:
 
 \[
 \boxed{
-\text{full-score work avoided}
+\text{document scoring work avoided}
 >
 \text{Bitplane work added}.
 }
@@ -708,7 +697,7 @@ A smaller leaf size may reduce \(F_B\), because B keeps filtering longer. Howeve
 A larger node budget can also improve recall, but again it allows B to search more branches.
 
 \Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- Bitplanes:} B is useful when a relatively small amount of bitmap work can eliminate a large number of full document scores. Scoring fewer documents alone is not enough; the bitmap work also has to be cheap enough.}}\end{center}
+\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- Bitplanes:} B is useful when a relatively small amount of bitmap work can eliminate a large number of document scoring operations. Performing fewer document scoring operations alone is not enough; the bitmap work also has to be cheap enough.}}\end{center}
 
 
 
@@ -728,7 +717,7 @@ So C mainly pays for:
 \boxed{
 \text{prefix lookups}
 +
-\text{full scoring of the documents that become visible}
+\text{scoring operations for the documents that become visible}
 }
 \]
 
@@ -779,7 +768,7 @@ The result is:
 
 which contains only ID 1.
 
-So C scores:
+So C performs these document scoring operations:
 
 \begin{center}\begingroup\small\ttfamily\begin{tabular}{l}
 ID 1 \(\rightarrow\) 2.5
@@ -804,9 +793,9 @@ The new range is:
 
 which contains IDs 2 and 1.
 
-ID 1 was already scored.
+ID 1 already had its scoring operation.
 
-So C only needs to score the newly added document:
+So C needs a scoring operation only for the newly added document:
 
 \texttt{ID 2 \(\rightarrow\) 1.9}.
 
@@ -827,7 +816,7 @@ Now C has two results.
 \draw[arr,draw=Keys] (40mm,19mm)--node[right,font=\small]{new row}(d2.north);
 
 \end{tikzpicture}
-\caption{A broader prefix already contains the documents found at the previous depth, so only the newly exposed rows need to be scored.}
+\caption{A broader prefix already contains the documents found at the previous depth, so only the newly exposed rows need a scoring operation.}
 \end{figure}
 
 
@@ -890,7 +879,7 @@ So the lookup work is approximately:
 
 
 \Needspace{4\baselineskip}
-\textbf{Step 5: how many documents end up receiving the full score?}\par
+\textbf{Step 5: how many documents end up undergoing a document scoring operation?}\par
 
 Let:
 
@@ -900,9 +889,9 @@ F_C
 
 be the total number of distinct documents exposed before C stops.
 
-Because every broader prefix contains the previous range, each document is scored at most once.
+Because every broader prefix contains the previous range, each document undergoes at most one scoring operation.
 
-So the full-score part is simply:
+So the document scoring part is simply:
 
 \[
 F_Ca_C.
@@ -1028,7 +1017,7 @@ So this version can lose recall.
 \Needspace{4\baselineskip}
 \textbf{Exact stopping inside the opened clusters}\par
 
-We can also use the score equation to prove that no unseen document can beat the current results.
+We can also use the scoring equation to prove that no unseen document can beat the current results.
 
 Suppose C has fully searched a prefix of length \(\ell\).
 
@@ -1042,7 +1031,7 @@ m_\ell
 \min_{1\le i\le\ell}|q_i|.
 \]
 
-Therefore the highest possible score of any unseen document is:
+Therefore the highest possible score value of any unseen document is:
 
 \[
 \boxed{
@@ -1052,7 +1041,7 @@ Q-2m_\ell.
 }
 \]
 
-Let \(\tau\) be the worst score currently inside the top-\(K\).
+Let \(\tau\) be the worst score value currently inside the top-\(K\).
 
 If:
 
@@ -1085,7 +1074,7 @@ Let:
 \toprule
 Symbol & Meaning\\
 \midrule
-\(T_{\text{key}}\) & Preparing the query prefix and score-bound data\\
+\(T_{\text{key}}\) & Preparing the query prefix and data for bounds on score values\\
 \(t_b\) & Average time for one binary-search comparison\\
 \(T_{\text{ranges}}\) & Updating prefix ranges and identifying new rows\\
 \(a_C\) & Average time to fully process one exposed document\\
@@ -1105,7 +1094,7 @@ The key condition is:
 
 \[
 \boxed{
-\text{full-score work avoided}
+\text{document scoring work avoided}
 >
 \text{prefix lookup work added}.
 }
@@ -1125,7 +1114,7 @@ But if C has to relax all the way to depth zero:
 F_C=F_A,
 \]
 
-so it does all of A’s scoring \textbf{plus} the additional prefix lookups.
+so it does all of A’s scoring operations \textbf{plus} the additional prefix lookups.
 
 \Needspace{6\baselineskip}
 \begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- Backward Walk:} C works best when a fairly specific query prefix already contains the documents we need. If it has to keep broadening until almost the whole cluster is visible, then the prefix index does not help.}}\end{center}
@@ -1144,9 +1133,9 @@ At this point, the difference between the methods can be summarized very simply.
 \toprule
 Method & What it spends time on\\
 \midrule
-A & Score every document inside the opened clusters\\
-B & Bitplane filtering + score the documents that survive\\
-C & Prefix lookups + score the documents that become visible\\
+A & Perform a scoring operation for every document inside the opened clusters\\
+B & Bitplane filtering + perform scoring operations for the documents that survive\\
+C & Prefix lookups + perform scoring operations for the documents that become visible\\
 \bottomrule
 \end{tabular}
 \end{minipage}
@@ -1199,9 +1188,9 @@ T_{\text{lookup}}
 The overall question is therefore:
 
 \begin{center}\begin{tikzpicture}
-\node[scan,text width=42mm,minimum height=25mm] at (0,0) {\textbf{Method A}\\just score the documents};
+\node[scan,text width=42mm,minimum height=25mm] at (0,0) {\textbf{Method A}\\perform document\\scoring operations};
 \node[font=\small] at (38mm,0) {versus};
-\node[box,draw=Branch,text width=56mm,minimum height=25mm] at (87mm,0) {\textbf{Method B / C}\\do extra search work\\$\downarrow$\\avoid some full scores};
+\node[box,draw=Branch,text width=56mm,minimum height=25mm] at (87mm,0) {\textbf{Method B / C}\\do extra search work\\$\downarrow$\\avoid some document scoring operations};
 \end{tikzpicture}\end{center}
 
 The new method is only worthwhile if the second path ends up cheaper.
@@ -1272,7 +1261,7 @@ During one query, A also keeps:
 
 \begin{itemize}\setlength{\itemsep}{1pt}
 \item the floating-point query;
-\item the score table;
+\item the lookup table;
 \item the current top-\(K\);
 \item small routing state.
 \end{itemize}
@@ -1350,7 +1339,7 @@ The priority queue and node information require additional memory.
 \begin{tikzpicture}
 
 \node[box,text width=38mm,minimum height=35mm] (stored) at (0,0) {\textbf{Stored once}\\Packed documents\\IDs\\Bitplanes};
-\node[box,text width=38mm,minimum height=35mm] (common) at (47mm,0) {\textbf{Common query}\\Query\\Score table\\Top $K$};
+\node[box,text width=38mm,minimum height=35mm] (common) at (47mm,0) {\textbf{Common query}\\Query\\Lookup table\\Top $K$};
 \node[branch,text width=42mm,minimum height=35mm] (masks) at (96mm,0) {\textbf{B-specific query}\\\phantom{Mask}\\\phantom{Mask}\\\phantom{Mask}\\$\cdots$};
 \foreach \y in {4,-2,-8} {\node[branch,text width=28mm,minimum height=4mm,font=\small] at (96mm,\y mm) {Mask};}
 
@@ -1432,7 +1421,7 @@ So its temporary search state is relatively small compared with B.
 \toprule
 Method & Persistent index & Main temporary query memory\\
 \midrule
-A & Binary documents + IDs + router & Query, score table, top-\(K\)\\
+A & Binary documents + IDs + router & Query, lookup table, top-\(K\)\\
 B & A + Bitplanes & Waiting branch masks\\
 C & A + prefix keys & Previous prefix ranges\\
 \bottomrule
@@ -1525,7 +1514,7 @@ g_q
 
 be the number of global reference documents whose clusters were opened.
 
-A scores every document in those clusters.
+A performs a document scoring operation for every document in those clusters.
 
 So all \(g_q\) of those reference documents are recovered locally.
 
@@ -1583,7 +1572,7 @@ Recall
 60\%.
 \]
 
-If B performs a complete branch-and-bound search using valid score bounds, then:
+If B performs a complete branch-and-bound search using valid bounds on score values, then:
 
 \[
 r_{B,q}=1.
@@ -1606,7 +1595,7 @@ D_{q,\ell}
 
 be all documents exposed when Backward Walk stops at prefix depth \(\ell\).
 
-Every document in that set has received the full score.
+Every document in that set has undergone a document scoring operation.
 
 So:
 
@@ -1648,7 +1637,7 @@ and:
 
 \texttt{01}.
 
-Their scores are:
+Their score values are:
 
 \[
 S(10)=0.1-0.9=-0.8,
@@ -1691,7 +1680,7 @@ m_\ell
 \min_{1\le i\le\ell}|q_i|.
 \]
 
-So the best possible score of any unseen document is:
+So the best possible score value of any unseen document is:
 
 \[
 \boxed{
@@ -1701,7 +1690,7 @@ Q-2m_\ell.
 }
 \]
 
-Let \(\tau\) be the worst score currently inside the top-\(K\).
+Let \(\tau\) be the worst score value currently inside the top-\(K\).
 
 If:
 
@@ -1803,7 +1792,7 @@ C & \(M_0+M_{\text{prefix}}\) & \(Q_0+Q_C\)\\
 \toprule
 Method & Per-query recall & When local search is exact\\
 \midrule
-A & \(g_q/K\) & Always, because every opened document is scored\\
+A & \(g_q/K\) & Always, because every opened document undergoes a scoring operation\\
 B & \((g_q/K)r_{B,q}\) & Complete safe Bitplane search\\
 C & \(|G_q\cap D_{q,\ell}|/K\) & Reach depth zero or prove unseen documents cannot win\\
 \bottomrule
@@ -1835,7 +1824,7 @@ Symbol & Meaning\\
 \(d\) & Binary dimensions\\
 \(K\) & Number of requested results\\
 \(O\) & Set of opened clusters\\
-\(F_A\) & Documents fully scored by A\\
+\(F_A\) & \shortstack{Scoring\\operations} by A\\
 \bottomrule
 \end{tabular}
 \end{minipage}
@@ -1858,7 +1847,7 @@ Symbol & Meaning\\
 \(H_c\) & Number of leaf masks read in cluster \(c\)\\
 \(V_{\text{split}}\) & Total split-mask word reads\\
 \(V_{\text{leaf}}\) & Total leaf-mask word reads\\
-\(F_B\) & Documents fully scored by B\\
+\(F_B\) & \shortstack{Scoring\\operations} by B\\
 \bottomrule
 \end{tabular}
 \end{minipage}
@@ -1879,7 +1868,7 @@ Symbol & Meaning\\
 \(x\) & Starting prefix depth\\
 \(\ell\) & Final prefix depth\\
 \(L_+\) & Number of positive prefix depths searched\\
-\(F_C\) & Distinct documents fully scored by C\\
+\(F_C\) & Distinct documents with a scoring operation under C\\
 \(D_{q,\ell}\) & Documents exposed at the final prefix depth\\
 \bottomrule
 \end{tabular}
@@ -1890,4 +1879,4 @@ Symbol & Meaning\\
 The main idea from the entire section is therefore simple:
 
 \Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{A just pays for full scores. B and C spend some extra work in an attempt to avoid those scores. The experiment will tell us whether the scores they avoid are actually expensive enough to make that extra work worthwhile.}}}\end{center}
+\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{A just pays for document scoring operations. B and C spend some extra work in an attempt to avoid those scoring operations. The experiment will tell us whether the scoring operations they avoid are actually expensive enough to make that extra work worthwhile.}}}\end{center}

@@ -5,7 +5,7 @@ B used leaf size 128, node budget 8192 and deeper-first ties. C started at depth
 
 \begin{center}\small
 \begin{tabular}{@{}lrrrr@{}}\toprule
-Local search & Rows fully scored & Local recall & Global recall & Local time (ms)\\\midrule
+Local search & \shortstack{Scoring\\operations} & Local recall & Global recall & Local time (ms)\\\midrule
 \multicolumn{5}{@{}l}{\textbf{4096 clusters, 180 opened: the same 24,181 rows per query}}\\[3pt]
 A: scan & 24,181 & 100\% & 99.0\% & 0.0978\\
 B: Bitplanes & 17,936 & 100\% & 99.0\% & 0.1297\\
@@ -22,9 +22,9 @@ C: Backward Walk & 26,153 & 100\% & 99.0\% & 0.1103\\\bottomrule
 \end{center}
 Rows are means over the 1,000 queries; times are medians over all 3,000 repeated observations. Every method in a three-row block received identical cluster IDs and recovered every local top-1 reference in these runs.
 
-The large-cluster result answers the question directly. Scanning the same 295,031 documents took 0.9402 ms, while B took 0.0565 ms and scored only 818. B's three process medians were 0.0525--0.0609 ms, compared with A's 0.9301--0.9525 ms. The reduction is therefore a local-search benefit, not merely a different routing choice.
+The large-cluster result answers the question directly. Scanning the same 295,031 documents took 0.9402 ms, while B took 0.0565 ms and performed only 818 document scoring operations. B's three process medians were 0.0525--0.0609 ms, compared with A's 0.9301--0.9525 ms. The reduction is therefore a local-search benefit, not merely a different routing choice.
 
-C also helped on those large clusters: it reduced the scored rows to 169,362 and took 0.4806 ms. B was still faster. With the intermediate layout, B and C were close to each other and both faster than A. Their repeat ranges overlap, so the small B/C difference is not a clear winner.
+C also helped on those large clusters: it reduced the document scoring operations to 169,362 and took 0.4806 ms. B was still faster. With the intermediate layout, B and C were close to each other and both faster than A. Their repeat ranges overlap, so the small B/C difference is not a clear winner.
 
 With many small clusters, B's filtering cost more than it saved. C's local time was close to A's, with overlapping repeat ranges. The benefit therefore depends on the selected documents and cluster sizes, even when the query and binary representation stay fixed.
 
@@ -34,7 +34,7 @@ I also repeated the local comparison with 256-bit codes and $K=100$, which is cl
 The same B and C local settings were used as above:
 \begin{center}\small
 \begin{tabular}{@{}llrrr@{}}\toprule
-Collection & Method & Rows scored & Local recall & Local time (ms)\\\midrule
+Collection & Method & \shortstack{Scoring\\operations} & Local recall & Local time (ms)\\\midrule
 Qwen256 & A & 86,504 & 100\% & 2.3576\\
  & B, leaf 128 & 86,504 & 100\% & 2.7690\\
  & C, start 4 & 86,504 & 100\% & 2.7649\\\midrule

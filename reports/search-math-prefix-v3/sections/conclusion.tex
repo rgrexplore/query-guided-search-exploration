@@ -1,5 +1,5 @@
 \section{Limitations and next steps}
-The timings describe this CPU implementation. All three methods reuse the same C++ lookup-table scorer, which adds entries using float64. Exa's production system and its SIMD kernels are not reproduced here. A faster scoring kernel can change the balance between scoring documents and maintaining an index search.
+The timings describe this CPU implementation. All three methods reuse the same C++ lookup-table scorer, which adds entries using float64. Exa's production system and its SIMD kernels are not reproduced here. A faster scoring kernel can change the balance between document scoring operations and maintaining an index search.
 
 I hold the collection, model and code length fixed when choosing each method's parameters. Shorter codes change the reference ranking, so their binary recall does not establish the same retrieval quality as a longer representation. The source datasets provide human relevance labels for that separate evaluation.
 
