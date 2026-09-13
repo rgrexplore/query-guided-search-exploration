@@ -1,6 +1,6 @@
 # Report editions
 
-All nine PDFs are retained under `output/pdf/`.
+All ten PDFs are retained under `output/pdf/`.
 
 The current [prefix Backward Walk report](../output/pdf/search-methods-prefix-v3.pdf)
 is the 29-page edition, with a linked table of contents. It goes directly from the methods and preliminary calculations
@@ -37,3 +37,11 @@ builds separately from the editions below.
 The formal editions use abstracts and formal prose while keeping definitions and worked
 examples. Each edition has a separate source directory and build script. The source archives
 are stored beside the PDFs; building them does not rerun the experiments.
+
+
+## Recovered fixed-data study
+
+The [fixed-data report](../output/pdf/search-methods-fixed-data.pdf) and its
+[source](search-fixed-data/README.md) are retained from the earlier parallel study.
+Its C method uses weighted key search, not the prefix Backward Walk in the current
+v3 report. Its measurements remain separate under `results/fixed-data-2026-09-12/`.

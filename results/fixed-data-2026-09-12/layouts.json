@@ -1,0 +1,128 @@
+[
+  {
+    "clusters": 1,
+    "router": null,
+    "probes": 1,
+    "target": null
+  },
+  {
+    "clusters": 64,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-64-seed42",
+    "probes": 6,
+    "target": 0.8
+  },
+  {
+    "clusters": 64,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-64-seed42",
+    "probes": 11,
+    "target": 0.9
+  },
+  {
+    "clusters": 64,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-64-seed42",
+    "probes": 18,
+    "target": 0.95
+  },
+  {
+    "clusters": 64,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-64-seed42",
+    "probes": 37,
+    "target": 0.99
+  },
+  {
+    "clusters": 256,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-256-seed42",
+    "probes": 12,
+    "target": 0.8
+  },
+  {
+    "clusters": 256,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-256-seed42",
+    "probes": 29,
+    "target": 0.9
+  },
+  {
+    "clusters": 256,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-256-seed42",
+    "probes": 52,
+    "target": 0.95
+  },
+  {
+    "clusters": 256,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-256-seed42",
+    "probes": 119,
+    "target": 0.99
+  },
+  {
+    "clusters": 1024,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-1024-seed42",
+    "probes": 31,
+    "target": 0.8
+  },
+  {
+    "clusters": 1024,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-1024-seed42",
+    "probes": 84,
+    "target": 0.9
+  },
+  {
+    "clusters": 1024,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-1024-seed42",
+    "probes": 164,
+    "target": 0.95
+  },
+  {
+    "clusters": 1024,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-1024-seed42",
+    "probes": 420,
+    "target": 0.99
+  },
+  {
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-4096-seed42",
+    "probes": 72,
+    "target": 0.8
+  },
+  {
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-4096-seed42",
+    "probes": 211,
+    "target": 0.9
+  },
+  {
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-4096-seed42",
+    "probes": 467,
+    "target": 0.95
+  },
+  {
+    "clusters": 4096,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-4096-seed42",
+    "probes": 1330,
+    "target": 0.99
+  },
+  {
+    "clusters": 8192,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-8192-seed42",
+    "probes": 127,
+    "target": 0.8
+  },
+  {
+    "clusters": 8192,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-8192-seed42",
+    "probes": 353,
+    "target": 0.9
+  },
+  {
+    "clusters": 8192,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-8192-seed42",
+    "probes": 778,
+    "target": 0.95
+  },
+  {
+    "clusters": 8192,
+    "router": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/.worktrees/claude-report/data/real-scale-2026-09-10/n1000000/routers/ivf-8192-seed42",
+    "probes": 2440,
+    "target": 0.99
+  }
+]

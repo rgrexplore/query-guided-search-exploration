@@ -1,0 +1,53 @@
+\section{Limitations and next steps}
+The result holds for one dataset, one embedding model and one code width. The two
+properties that decided it, how much weight a query puts on its heaviest positions and how
+often documents share the query's sign there, are properties of the embedding model. A
+model whose queries concentrate their weight in a few positions, or a code whose bits are
+closer to balanced, would move the dataset in Table~\ref{tab:conditions} and could change
+the winner. The natural next step is to measure those two properties for other embedding
+models before building any index; both take minutes on a sample and Section~3 shows how to
+read them.
+
+The time formula for method B is exact in its counts but optimistic in its constants when
+clusters are wide, because the per-word cost depends on cache behaviour. A model that
+prices cold masks separately would fit better; it would make splitting look worse, not
+better. The single-thread, single-query measurement also leaves out batching and
+multi-core effects that a production system would have.
+
+Some design choices were not explored. Method C used contiguous key positions; choosing the
+positions with the largest average weight is possible but, on this dataset, still leaves
+the key well below the gap. Method B could store sparse masks instead of full-width ones,
+which would lower its constant but not create documents to skip. Finally, all results are
+for $K=100$; a smaller $K$ makes the gap smaller and pruning slightly easier, but not by
+enough to cross the threshold here.
+
+\section{Conclusion}
+We compared Exa's cluster-then-scan search with two additions that try to skip scoring
+work, on one fixed dataset with only the index parameters varied. The calculations of
+Section~2 describe the code exactly: every predicted operation count matched the recorded
+one. The derivation of Section~3 predicted that neither addition can skip anything on this
+dataset, because a single sign bit removes only 14\% to 22\% of the documents and no group
+or key ever exceeds the gap that would let the ceiling rule drop it. The measurements of
+Section~4 confirmed the prediction: the original method was fastest at every recall target,
+Bitplanes was 1\% to 4\% slower with its best setting being ``no splits'', and Backward
+Walk was 9\% to 28\% slower with its narrowest key.
+
+The methods are not useless; they are aimed at a different kind of data. Bitplanes win
+when a few heavy query positions exceed the gap and split the documents evenly, and Backward
+Walk wins when, in addition, those positions are the same for every query. The formulas
+give those conditions in a form that can be checked on a sample before an index is built,
+which is the practical outcome of this study.
+
+\begin{thebibliography}{9}\small\raggedright
+\bibitem{exa} Exa Team. \emph{How we built a web-scale vector database}. 2024.
+\url{https://exa.ai/blog/building-web-scale-vector-db}.
+\bibitem{mrl} A.~Kusupati et al. \emph{Matryoshka Representation Learning}. NeurIPS 2022.
+\url{https://arxiv.org/abs/2205.13147}.
+\bibitem{nomic} Z.~Nussbaum, J.~X.~Morris, B.~Duderstadt and A.~Mulyar. \emph{Nomic Embed:
+Training a Reproducible Long Context Text Embedder}. 2024.
+\url{https://arxiv.org/abs/2402.01613}.
+\bibitem{msmarco} P.~Bajaj et al. \emph{MS MARCO: A Human Generated MAchine Reading
+COmprehension Dataset}. 2016. \url{https://arxiv.org/abs/1611.09268}.
+\bibitem{faiss} M.~Douze et al. \emph{The Faiss library}. 2024.
+\url{https://arxiv.org/abs/2401.08281}.
+\end{thebibliography}

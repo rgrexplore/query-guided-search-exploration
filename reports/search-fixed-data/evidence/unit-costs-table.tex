@@ -1,0 +1,14 @@
+\begin{tabular}{@{}llrrr@{}}\toprule
+Method & Cost & Microseconds & Settings & Median error\\\midrule
+A: original & per call, $c_{\rm call}$ & 45.8228 & 21 & 1.7\%\\
+ & per scored document, $c_{\rm score}$ & 0.0260 & & \\
+B: bitplanes & per call, $c_{\rm call}$ & 9.2597 & 105 & 13.7\%\\
+ & per scored document, $c_{\rm score}$ & 0.0295 & & \\
+ & per split word, $c_{\rm split}$ & 0.0003 & & \\
+ & per leaf word, $c_{\rm leaf}$ & 0.0032 & & \\
+ & per group taken from the queue, $c_{\rm group}$ & 0.2394 & & \\
+C: backward walk & per call, $c_{\rm call}$ & 11.0438 & 63 & 8.0\%\\
+ & per scored document, $c_{\rm score}$ & 0.0308 & & \\
+ & per directory lookup, $c_{\rm lookup}$ & 0.0132 & & \\
+ & per key generated, $c_{\rm key}$ & 0.0000 & & \\
+\bottomrule\end{tabular}

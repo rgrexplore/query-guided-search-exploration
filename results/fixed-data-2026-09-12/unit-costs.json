@@ -1,0 +1,51 @@
+{
+  "scan": {
+    "features": [
+      "call",
+      "documents_scored"
+    ],
+    "ms_per_unit": {
+      "call": 0.04582284539300647,
+      "documents_scored": 2.6007729508375878e-05
+    },
+    "settings": 21,
+    "median_abs_error_percent": 1.718450709436737,
+    "max_abs_error_percent": 7.856627404607489
+  },
+  "branch": {
+    "features": [
+      "call",
+      "documents_scored",
+      "split_words",
+      "leaf_words",
+      "nodes"
+    ],
+    "ms_per_unit": {
+      "call": 0.009259676568188602,
+      "documents_scored": 2.9506090390415715e-05,
+      "split_words": 3.480693032469486e-07,
+      "leaf_words": 3.2300347380886733e-06,
+      "nodes": 0.00023943161199560704
+    },
+    "settings": 105,
+    "median_abs_error_percent": 13.721171777321535,
+    "max_abs_error_percent": 74.55456121352361
+  },
+  "keys": {
+    "features": [
+      "call",
+      "documents_scored",
+      "key_lookups",
+      "keys"
+    ],
+    "ms_per_unit": {
+      "call": 0.011043810235213287,
+      "documents_scored": 3.077518416588504e-05,
+      "key_lookups": 1.3157983645179917e-05,
+      "keys": 0.0
+    },
+    "settings": 63,
+    "median_abs_error_percent": 8.022991214462914,
+    "max_abs_error_percent": 37.964384565952486
+  }
+}

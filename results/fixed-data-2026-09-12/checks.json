@@ -1,0 +1,5000 @@
+[
+  {
+    "setting_id": "s157",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 127,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s185",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 2440,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s108",
+    "method": "scan",
+    "clusters": 1024,
+    "probes": 420,
+    "documents_scored": {
+      "predicted": 412040.445,
+      "measured": 412040.445
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s105",
+    "method": "keys",
+    "clusters": 1024,
+    "probes": 164,
+    "documents_scored": {
+      "predicted": 160583.65,
+      "measured": 160583.65
+    },
+    "recall": {
+      "predicted": 0.95,
+      "measured": 0.95
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 2624,
+      "measured": 2624.0
+    },
+    "directory_bytes": {
+      "predicted": 138360,
+      "measured": 138360
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s172",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 778,
+    "documents_scored": {
+      "predicted": 93930.33,
+      "measured": 93930.33
+    },
+    "recall": {
+      "predicted": 0.95,
+      "measured": 0.95
+    },
+    "leaf_words": {
+      "predicted": 1849.395,
+      "measured": 1849.395
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s150",
+    "method": "keys",
+    "clusters": 4096,
+    "probes": 1330,
+    "documents_scored": {
+      "predicted": 325353.42,
+      "measured": 325353.42
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 21280,
+      "measured": 21280.0
+    },
+    "directory_bytes": {
+      "predicted": 460980,
+      "measured": 460980
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s159",
+    "method": "keys",
+    "clusters": 8192,
+    "probes": 127,
+    "documents_scored": {
+      "predicted": 15614.785,
+      "measured": 15614.785
+    },
+    "recall": {
+      "predicted": 0.8004,
+      "measured": 0.8004
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 2032,
+      "measured": 2032.0
+    },
+    "directory_bytes": {
+      "predicted": 812440,
+      "measured": 812440
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s128",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 211,
+    "documents_scored": {
+      "predicted": 52163.9,
+      "measured": 52163.9
+    },
+    "recall": {
+      "predicted": 0.9,
+      "measured": 0.9
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s130",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 211,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s043",
+    "method": "keys",
+    "clusters": 64,
+    "probes": 37,
+    "documents_scored": {
+      "predicted": 580487.105,
+      "measured": 580487.105
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 9472,
+      "measured": 9472.0
+    },
+    "directory_bytes": {
+      "predicted": 137440,
+      "measured": 137440
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s047",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 12,
+    "documents_scored": {
+      "predicted": 50005.31,
+      "measured": 50005.31
+    },
+    "recall": {
+      "predicted": 0.8055,
+      "measured": 0.8055
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s145",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 1330,
+    "documents_scored": {
+      "predicted": 325353.42,
+      "measured": 325353.42
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "leaf_words": {
+      "predicted": 5731.67,
+      "measured": 5731.67
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s175",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 778,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s087",
+    "method": "keys",
+    "clusters": 1024,
+    "probes": 31,
+    "documents_scored": {
+      "predicted": 30625.575,
+      "measured": 30625.575
+    },
+    "recall": {
+      "predicted": 0.80075,
+      "measured": 0.80075
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 496,
+      "measured": 496.0
+    },
+    "directory_bytes": {
+      "predicted": 138360,
+      "measured": 138360
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s058",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 29,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s034",
+    "method": "keys",
+    "clusters": 64,
+    "probes": 18,
+    "documents_scored": {
+      "predicted": 286891.74,
+      "measured": 286891.74
+    },
+    "recall": {
+      "predicted": 0.9537,
+      "measured": 0.9537
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 4608,
+      "measured": 4608.0
+    },
+    "directory_bytes": {
+      "predicted": 137440,
+      "measured": 137440
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s168",
+    "method": "keys",
+    "clusters": 8192,
+    "probes": 353,
+    "documents_scored": {
+      "predicted": 42847.11,
+      "measured": 42847.11
+    },
+    "recall": {
+      "predicted": 0.9002,
+      "measured": 0.9002
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 5648,
+      "measured": 5648.0
+    },
+    "directory_bytes": {
+      "predicted": 812440,
+      "measured": 812440
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s070",
+    "method": "keys",
+    "clusters": 256,
+    "probes": 52,
+    "documents_scored": {
+      "predicted": 211418.835,
+      "measured": 211418.835
+    },
+    "recall": {
+      "predicted": 0.95025,
+      "measured": 0.95025
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 13312,
+      "measured": 13312.0
+    },
+    "directory_bytes": {
+      "predicted": 425820,
+      "measured": 425820
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s090",
+    "method": "scan",
+    "clusters": 1024,
+    "probes": 84,
+    "documents_scored": {
+      "predicted": 82157.245,
+      "measured": 82157.245
+    },
+    "recall": {
+      "predicted": 0.9005,
+      "measured": 0.9005
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s069",
+    "method": "keys",
+    "clusters": 256,
+    "probes": 52,
+    "documents_scored": {
+      "predicted": 211418.835,
+      "measured": 211418.835
+    },
+    "recall": {
+      "predicted": 0.95025,
+      "measured": 0.95025
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 832,
+      "measured": 832.0
+    },
+    "directory_bytes": {
+      "predicted": 38700,
+      "measured": 38700
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s137",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 467,
+    "documents_scored": {
+      "predicted": 114476.795,
+      "measured": 114476.795
+    },
+    "recall": {
+      "predicted": 0.95005,
+      "measured": 0.95005
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s141",
+    "method": "keys",
+    "clusters": 4096,
+    "probes": 467,
+    "documents_scored": {
+      "predicted": 114476.795,
+      "measured": 114476.795
+    },
+    "recall": {
+      "predicted": 0.95005,
+      "measured": 0.95005
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 7472,
+      "measured": 7472.0
+    },
+    "directory_bytes": {
+      "predicted": 460980,
+      "measured": 460980
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s063",
+    "method": "scan",
+    "clusters": 256,
+    "probes": 52,
+    "documents_scored": {
+      "predicted": 211418.835,
+      "measured": 211418.835
+    },
+    "recall": {
+      "predicted": 0.95025,
+      "measured": 0.95025
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s005",
+    "method": "branch",
+    "clusters": 1,
+    "probes": 1,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    }
+  },
+  {
+    "setting_id": "s160",
+    "method": "keys",
+    "clusters": 8192,
+    "probes": 127,
+    "documents_scored": {
+      "predicted": 15614.785,
+      "measured": 15614.785
+    },
+    "recall": {
+      "predicted": 0.8004,
+      "measured": 0.8004
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 32512,
+      "measured": 32512.0
+    },
+    "directory_bytes": {
+      "predicted": 4062680,
+      "measured": 4062680
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s125",
+    "method": "keys",
+    "clusters": 4096,
+    "probes": 72,
+    "documents_scored": {
+      "predicted": 18106.705,
+      "measured": 18106.705
+    },
+    "recall": {
+      "predicted": 0.80005,
+      "measured": 0.80005
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 294912,
+      "measured": 294912.0
+    },
+    "directory_bytes": {
+      "predicted": 7694100,
+      "measured": 7694100
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s067",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 52,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s006",
+    "method": "keys",
+    "clusters": 1,
+    "probes": 1,
+    "documents_scored": {
+      "predicted": 1000000.0,
+      "measured": 1000000.0
+    },
+    "recall": {
+      "predicted": 1.0,
+      "measured": 1.0
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "directory_bytes": {
+      "predicted": 160,
+      "measured": 160
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s026",
+    "method": "keys",
+    "clusters": 64,
+    "probes": 11,
+    "documents_scored": {
+      "predicted": 178239.105,
+      "measured": 178239.105
+    },
+    "recall": {
+      "predicted": 0.9085,
+      "measured": 0.9085
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 45056,
+      "measured": 45056.0
+    },
+    "directory_bytes": {
+      "predicted": 1124940,
+      "measured": 1124940
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s019",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 11,
+    "documents_scored": {
+      "predicted": 178239.105,
+      "measured": 178239.105
+    },
+    "recall": {
+      "predicted": 0.9085,
+      "measured": 0.9085
+    },
+    "leaf_words": {
+      "predicted": 2790.705,
+      "measured": 2790.705
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s180",
+    "method": "scan",
+    "clusters": 8192,
+    "probes": 2440,
+    "documents_scored": {
+      "predicted": 295858.36,
+      "measured": 295858.36
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s032",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 18,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s050",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 12,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s134",
+    "method": "keys",
+    "clusters": 4096,
+    "probes": 211,
+    "documents_scored": {
+      "predicted": 52163.9,
+      "measured": 52163.9
+    },
+    "recall": {
+      "predicted": 0.9,
+      "measured": 0.9
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 864256,
+      "measured": 864256.0
+    },
+    "directory_bytes": {
+      "predicted": 7694100,
+      "measured": 7694100
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s018",
+    "method": "scan",
+    "clusters": 64,
+    "probes": 11,
+    "documents_scored": {
+      "predicted": 178239.105,
+      "measured": 178239.105
+    },
+    "recall": {
+      "predicted": 0.9085,
+      "measured": 0.9085
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s103",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 164,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s028",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 18,
+    "documents_scored": {
+      "predicted": 286891.74,
+      "measured": 286891.74
+    },
+    "recall": {
+      "predicted": 0.9537,
+      "measured": 0.9537
+    },
+    "leaf_words": {
+      "predicted": 4491.88,
+      "measured": 4491.88
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s131",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 211,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s009",
+    "method": "scan",
+    "clusters": 64,
+    "probes": 6,
+    "documents_scored": {
+      "predicted": 98609.57,
+      "measured": 98609.57
+    },
+    "recall": {
+      "predicted": 0.8255,
+      "measured": 0.8255
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s163",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 353,
+    "documents_scored": {
+      "predicted": 42847.11,
+      "measured": 42847.11
+    },
+    "recall": {
+      "predicted": 0.9002,
+      "measured": 0.9002
+    },
+    "leaf_words": {
+      "predicted": 842.46,
+      "measured": 842.46
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s037",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 37,
+    "documents_scored": {
+      "predicted": 580487.105,
+      "measured": 580487.105
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "leaf_words": {
+      "predicted": 9088.465,
+      "measured": 9088.465
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s036",
+    "method": "scan",
+    "clusters": 64,
+    "probes": 37,
+    "documents_scored": {
+      "predicted": 580487.105,
+      "measured": 580487.105
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s143",
+    "method": "keys",
+    "clusters": 4096,
+    "probes": 467,
+    "documents_scored": {
+      "predicted": 114476.795,
+      "measured": 114476.795
+    },
+    "recall": {
+      "predicted": 0.95005,
+      "measured": 0.95005
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 1912832,
+      "measured": 1912832.0
+    },
+    "directory_bytes": {
+      "predicted": 7694100,
+      "measured": 7694100
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s140",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 467,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s111",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 420,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s016",
+    "method": "keys",
+    "clusters": 64,
+    "probes": 6,
+    "documents_scored": {
+      "predicted": 98609.57,
+      "measured": 98609.57
+    },
+    "recall": {
+      "predicted": 0.8255,
+      "measured": 0.8255
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 1536,
+      "measured": 1536.0
+    },
+    "directory_bytes": {
+      "predicted": 137440,
+      "measured": 137440
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s060",
+    "method": "keys",
+    "clusters": 256,
+    "probes": 29,
+    "documents_scored": {
+      "predicted": 118453.375,
+      "measured": 118453.375
+    },
+    "recall": {
+      "predicted": 0.90195,
+      "measured": 0.90195
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 464,
+      "measured": 464.0
+    },
+    "directory_bytes": {
+      "predicted": 38700,
+      "measured": 38700
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s158",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 127,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s064",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 52,
+    "documents_scored": {
+      "predicted": 211418.835,
+      "measured": 211418.835
+    },
+    "recall": {
+      "predicted": 0.95025,
+      "measured": 0.95025
+    },
+    "leaf_words": {
+      "predicted": 3329.845,
+      "measured": 3329.845
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s001",
+    "method": "branch",
+    "clusters": 1,
+    "probes": 1,
+    "documents_scored": {
+      "predicted": 1000000.0,
+      "measured": 1000000.0
+    },
+    "recall": {
+      "predicted": 1.0,
+      "measured": 1.0
+    },
+    "leaf_words": {
+      "predicted": 15625.0,
+      "measured": 15625.0
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    }
+  },
+  {
+    "setting_id": "s092",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 84,
+    "documents_scored": {
+      "predicted": 82157.245,
+      "measured": 82157.245
+    },
+    "recall": {
+      "predicted": 0.9005,
+      "measured": 0.9005
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s049",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 12,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s015",
+    "method": "keys",
+    "clusters": 64,
+    "probes": 6,
+    "documents_scored": {
+      "predicted": 98609.57,
+      "measured": 98609.57
+    },
+    "recall": {
+      "predicted": 0.8255,
+      "measured": 0.8255
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 96,
+      "measured": 96.0
+    },
+    "directory_bytes": {
+      "predicted": 10140,
+      "measured": 10140
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s000",
+    "method": "scan",
+    "clusters": 1,
+    "probes": 1,
+    "documents_scored": {
+      "predicted": 1000000.0,
+      "measured": 1000000.0
+    },
+    "recall": {
+      "predicted": 1.0,
+      "measured": 1.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s115",
+    "method": "keys",
+    "clusters": 1024,
+    "probes": 420,
+    "documents_scored": {
+      "predicted": 412040.445,
+      "measured": 412040.445
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 107520,
+      "measured": 107520.0
+    },
+    "directory_bytes": {
+      "predicted": 1175340,
+      "measured": 1175340
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s044",
+    "method": "keys",
+    "clusters": 64,
+    "probes": 37,
+    "documents_scored": {
+      "predicted": 580487.105,
+      "measured": 580487.105
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 151552,
+      "measured": 151552.0
+    },
+    "directory_bytes": {
+      "predicted": 1124940,
+      "measured": 1124940
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s031",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 18,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s161",
+    "method": "keys",
+    "clusters": 8192,
+    "probes": 127,
+    "documents_scored": {
+      "predicted": 15614.785,
+      "measured": 15614.785
+    },
+    "recall": {
+      "predicted": 0.8004,
+      "measured": 0.8004
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 520192,
+      "measured": 520192.0
+    },
+    "directory_bytes": {
+      "predicted": 9392520,
+      "measured": 9392520
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s186",
+    "method": "keys",
+    "clusters": 8192,
+    "probes": 2440,
+    "documents_scored": {
+      "predicted": 295858.36,
+      "measured": 295858.36
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 39040,
+      "measured": 39040.0
+    },
+    "directory_bytes": {
+      "predicted": 812440,
+      "measured": 812440
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s178",
+    "method": "keys",
+    "clusters": 8192,
+    "probes": 778,
+    "documents_scored": {
+      "predicted": 93930.33,
+      "measured": 93930.33
+    },
+    "recall": {
+      "predicted": 0.95,
+      "measured": 0.95
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 199168,
+      "measured": 199168.0
+    },
+    "directory_bytes": {
+      "predicted": 4062680,
+      "measured": 4062680
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s138",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 467,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s022",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 11,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s104",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 164,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s171",
+    "method": "scan",
+    "clusters": 8192,
+    "probes": 778,
+    "documents_scored": {
+      "predicted": 93930.33,
+      "measured": 93930.33
+    },
+    "recall": {
+      "predicted": 0.95,
+      "measured": 0.95
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s097",
+    "method": "keys",
+    "clusters": 1024,
+    "probes": 84,
+    "documents_scored": {
+      "predicted": 82157.245,
+      "measured": 82157.245
+    },
+    "recall": {
+      "predicted": 0.9005,
+      "measured": 0.9005
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 21504,
+      "measured": 21504.0
+    },
+    "directory_bytes": {
+      "predicted": 1175340,
+      "measured": 1175340
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s072",
+    "method": "scan",
+    "clusters": 256,
+    "probes": 119,
+    "documents_scored": {
+      "predicted": 480127.3,
+      "measured": 480127.3
+    },
+    "recall": {
+      "predicted": 0.9903,
+      "measured": 0.9903
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s173",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 778,
+    "documents_scored": {
+      "predicted": 93930.33,
+      "measured": 93930.33
+    },
+    "recall": {
+      "predicted": 0.95,
+      "measured": 0.95
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s085",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 31,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s093",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 84,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s144",
+    "method": "scan",
+    "clusters": 4096,
+    "probes": 1330,
+    "documents_scored": {
+      "predicted": 325353.42,
+      "measured": 325353.42
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s094",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 84,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s152",
+    "method": "keys",
+    "clusters": 4096,
+    "probes": 1330,
+    "documents_scored": {
+      "predicted": 325353.42,
+      "measured": 325353.42
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 5447680,
+      "measured": 5447680.0
+    },
+    "directory_bytes": {
+      "predicted": 7694100,
+      "measured": 7694100
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s155",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 127,
+    "documents_scored": {
+      "predicted": 15614.785,
+      "measured": 15614.785
+    },
+    "recall": {
+      "predicted": 0.8004,
+      "measured": 0.8004
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s126",
+    "method": "scan",
+    "clusters": 4096,
+    "probes": 211,
+    "documents_scored": {
+      "predicted": 52163.9,
+      "measured": 52163.9
+    },
+    "recall": {
+      "predicted": 0.9,
+      "measured": 0.9
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s132",
+    "method": "keys",
+    "clusters": 4096,
+    "probes": 211,
+    "documents_scored": {
+      "predicted": 52163.9,
+      "measured": 52163.9
+    },
+    "recall": {
+      "predicted": 0.9,
+      "measured": 0.9
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 3376,
+      "measured": 3376.0
+    },
+    "directory_bytes": {
+      "predicted": 460980,
+      "measured": 460980
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s182",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 2440,
+    "documents_scored": {
+      "predicted": 295858.36,
+      "measured": 295858.36
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s179",
+    "method": "keys",
+    "clusters": 8192,
+    "probes": 778,
+    "documents_scored": {
+      "predicted": 93930.33,
+      "measured": 93930.33
+    },
+    "recall": {
+      "predicted": 0.95,
+      "measured": 0.95
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 3186688,
+      "measured": 3186688.0
+    },
+    "directory_bytes": {
+      "predicted": 9392520,
+      "measured": 9392520
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s002",
+    "method": "branch",
+    "clusters": 1,
+    "probes": 1,
+    "documents_scored": {
+      "predicted": 1000000.0,
+      "measured": 999999.505
+    },
+    "recall": {
+      "predicted": 1.0,
+      "measured": 1.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    }
+  },
+  {
+    "setting_id": "s164",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 353,
+    "documents_scored": {
+      "predicted": 42847.11,
+      "measured": 42847.11
+    },
+    "recall": {
+      "predicted": 0.9002,
+      "measured": 0.9002
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s048",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 12,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s166",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 353,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s102",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 164,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s149",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 1330,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s075",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 119,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s096",
+    "method": "keys",
+    "clusters": 1024,
+    "probes": 84,
+    "documents_scored": {
+      "predicted": 82157.245,
+      "measured": 82157.245
+    },
+    "recall": {
+      "predicted": 0.9005,
+      "measured": 0.9005
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 1344,
+      "measured": 1344.0
+    },
+    "directory_bytes": {
+      "predicted": 138360,
+      "measured": 138360
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s004",
+    "method": "branch",
+    "clusters": 1,
+    "probes": 1,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    }
+  },
+  {
+    "setting_id": "s033",
+    "method": "keys",
+    "clusters": 64,
+    "probes": 18,
+    "documents_scored": {
+      "predicted": 286891.74,
+      "measured": 286891.74
+    },
+    "recall": {
+      "predicted": 0.9537,
+      "measured": 0.9537
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 288,
+      "measured": 288.0
+    },
+    "directory_bytes": {
+      "predicted": 10140,
+      "measured": 10140
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s100",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 164,
+    "documents_scored": {
+      "predicted": 160583.65,
+      "measured": 160583.65
+    },
+    "recall": {
+      "predicted": 0.95,
+      "measured": 0.95
+    },
+    "leaf_words": {
+      "predicted": 2590.795,
+      "measured": 2590.795
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s136",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 467,
+    "documents_scored": {
+      "predicted": 114476.795,
+      "measured": 114476.795
+    },
+    "recall": {
+      "predicted": 0.95005,
+      "measured": 0.95005
+    },
+    "leaf_words": {
+      "predicted": 2016.035,
+      "measured": 2016.035
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s020",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 11,
+    "documents_scored": {
+      "predicted": 178239.105,
+      "measured": 178239.105
+    },
+    "recall": {
+      "predicted": 0.9085,
+      "measured": 0.9085
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s129",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 211,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s030",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 18,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s007",
+    "method": "keys",
+    "clusters": 1,
+    "probes": 1,
+    "documents_scored": {
+      "predicted": 1000000.0,
+      "measured": 1000000.0
+    },
+    "recall": {
+      "predicted": 1.0,
+      "measured": 1.0
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "directory_bytes": {
+      "predicted": 2560,
+      "measured": 2560
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s077",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 119,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s117",
+    "method": "scan",
+    "clusters": 4096,
+    "probes": 72,
+    "documents_scored": {
+      "predicted": 18106.705,
+      "measured": 18106.705
+    },
+    "recall": {
+      "predicted": 0.80005,
+      "measured": 0.80005
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s013",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 6,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s057",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 29,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s177",
+    "method": "keys",
+    "clusters": 8192,
+    "probes": 778,
+    "documents_scored": {
+      "predicted": 93930.33,
+      "measured": 93930.33
+    },
+    "recall": {
+      "predicted": 0.95,
+      "measured": 0.95
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 12448,
+      "measured": 12448.0
+    },
+    "directory_bytes": {
+      "predicted": 812440,
+      "measured": 812440
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s174",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 778,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s068",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 52,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s148",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 1330,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s080",
+    "method": "keys",
+    "clusters": 256,
+    "probes": 119,
+    "documents_scored": {
+      "predicted": 480127.3,
+      "measured": 480127.3
+    },
+    "recall": {
+      "predicted": 0.9903,
+      "measured": 0.9903
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 487424,
+      "measured": 487424.0
+    },
+    "directory_bytes": {
+      "predicted": 2425020,
+      "measured": 2425020
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s065",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 52,
+    "documents_scored": {
+      "predicted": 211418.835,
+      "measured": 211418.835
+    },
+    "recall": {
+      "predicted": 0.95025,
+      "measured": 0.95025
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s011",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 6,
+    "documents_scored": {
+      "predicted": 98609.57,
+      "measured": 98609.57
+    },
+    "recall": {
+      "predicted": 0.8255,
+      "measured": 0.8255
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s055",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 29,
+    "documents_scored": {
+      "predicted": 118453.375,
+      "measured": 118453.375
+    },
+    "recall": {
+      "predicted": 0.90195,
+      "measured": 0.90195
+    },
+    "leaf_words": {
+      "predicted": 1865.415,
+      "measured": 1865.415
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s098",
+    "method": "keys",
+    "clusters": 1024,
+    "probes": 84,
+    "documents_scored": {
+      "predicted": 82157.245,
+      "measured": 82157.245
+    },
+    "recall": {
+      "predicted": 0.9005,
+      "measured": 0.9005
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 344064,
+      "measured": 344064.0
+    },
+    "directory_bytes": {
+      "predicted": 4665280,
+      "measured": 4665280
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s110",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 420,
+    "documents_scored": {
+      "predicted": 412040.445,
+      "measured": 412040.445
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s113",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 420,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s116",
+    "method": "keys",
+    "clusters": 1024,
+    "probes": 420,
+    "documents_scored": {
+      "predicted": 412040.445,
+      "measured": 412040.445
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 1720320,
+      "measured": 1720320.0
+    },
+    "directory_bytes": {
+      "predicted": 4665280,
+      "measured": 4665280
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s101",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 164,
+    "documents_scored": {
+      "predicted": 160583.65,
+      "measured": 160583.65
+    },
+    "recall": {
+      "predicted": 0.95,
+      "measured": 0.95
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s124",
+    "method": "keys",
+    "clusters": 4096,
+    "probes": 72,
+    "documents_scored": {
+      "predicted": 18106.705,
+      "measured": 18106.705
+    },
+    "recall": {
+      "predicted": 0.80005,
+      "measured": 0.80005
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 18432,
+      "measured": 18432.0
+    },
+    "directory_bytes": {
+      "predicted": 2797700,
+      "measured": 2797700
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s169",
+    "method": "keys",
+    "clusters": 8192,
+    "probes": 353,
+    "documents_scored": {
+      "predicted": 42847.11,
+      "measured": 42847.11
+    },
+    "recall": {
+      "predicted": 0.9002,
+      "measured": 0.9002
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 90368,
+      "measured": 90368.0
+    },
+    "directory_bytes": {
+      "predicted": 4062680,
+      "measured": 4062680
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s187",
+    "method": "keys",
+    "clusters": 8192,
+    "probes": 2440,
+    "documents_scored": {
+      "predicted": 295858.36,
+      "measured": 295858.36
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 624640,
+      "measured": 624640.0
+    },
+    "directory_bytes": {
+      "predicted": 4062680,
+      "measured": 4062680
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s084",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 31,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s040",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 37,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s052",
+    "method": "keys",
+    "clusters": 256,
+    "probes": 12,
+    "documents_scored": {
+      "predicted": 50005.31,
+      "measured": 50005.31
+    },
+    "recall": {
+      "predicted": 0.8055,
+      "measured": 0.8055
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 3072,
+      "measured": 3072.0
+    },
+    "directory_bytes": {
+      "predicted": 425820,
+      "measured": 425820
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s088",
+    "method": "keys",
+    "clusters": 1024,
+    "probes": 31,
+    "documents_scored": {
+      "predicted": 30625.575,
+      "measured": 30625.575
+    },
+    "recall": {
+      "predicted": 0.80075,
+      "measured": 0.80075
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 7936,
+      "measured": 7936.0
+    },
+    "directory_bytes": {
+      "predicted": 1175340,
+      "measured": 1175340
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s188",
+    "method": "keys",
+    "clusters": 8192,
+    "probes": 2440,
+    "documents_scored": {
+      "predicted": 295858.36,
+      "measured": 295858.36
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 9994240,
+      "measured": 9994240.0
+    },
+    "directory_bytes": {
+      "predicted": 9392520,
+      "measured": 9392520
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s167",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 353,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s086",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 31,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s061",
+    "method": "keys",
+    "clusters": 256,
+    "probes": 29,
+    "documents_scored": {
+      "predicted": 118453.375,
+      "measured": 118453.375
+    },
+    "recall": {
+      "predicted": 0.90195,
+      "measured": 0.90195
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 7424,
+      "measured": 7424.0
+    },
+    "directory_bytes": {
+      "predicted": 425820,
+      "measured": 425820
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s076",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 119,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s114",
+    "method": "keys",
+    "clusters": 1024,
+    "probes": 420,
+    "documents_scored": {
+      "predicted": 412040.445,
+      "measured": 412040.445
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 6720,
+      "measured": 6720.0
+    },
+    "directory_bytes": {
+      "predicted": 138360,
+      "measured": 138360
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s095",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 84,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s062",
+    "method": "keys",
+    "clusters": 256,
+    "probes": 29,
+    "documents_scored": {
+      "predicted": 118453.375,
+      "measured": 118453.375
+    },
+    "recall": {
+      "predicted": 0.90195,
+      "measured": 0.90195
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 118784,
+      "measured": 118784.0
+    },
+    "directory_bytes": {
+      "predicted": 2425020,
+      "measured": 2425020
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s078",
+    "method": "keys",
+    "clusters": 256,
+    "probes": 119,
+    "documents_scored": {
+      "predicted": 480127.3,
+      "measured": 480127.3
+    },
+    "recall": {
+      "predicted": 0.9903,
+      "measured": 0.9903
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 1904,
+      "measured": 1904.0
+    },
+    "directory_bytes": {
+      "predicted": 38700,
+      "measured": 38700
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s081",
+    "method": "scan",
+    "clusters": 1024,
+    "probes": 31,
+    "documents_scored": {
+      "predicted": 30625.575,
+      "measured": 30625.575
+    },
+    "recall": {
+      "predicted": 0.80075,
+      "measured": 0.80075
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s181",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 2440,
+    "documents_scored": {
+      "predicted": 295858.36,
+      "measured": 295858.36
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "leaf_words": {
+      "predicted": 5820.08,
+      "measured": 5820.08
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s162",
+    "method": "scan",
+    "clusters": 8192,
+    "probes": 353,
+    "documents_scored": {
+      "predicted": 42847.11,
+      "measured": 42847.11
+    },
+    "recall": {
+      "predicted": 0.9002,
+      "measured": 0.9002
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s008",
+    "method": "keys",
+    "clusters": 1,
+    "probes": 1,
+    "documents_scored": {
+      "predicted": 1000000.0,
+      "measured": 1000000.0
+    },
+    "recall": {
+      "predicted": 1.0,
+      "measured": 1.0
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "directory_bytes": {
+      "predicted": 40720,
+      "measured": 40720
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s112",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 420,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s024",
+    "method": "keys",
+    "clusters": 64,
+    "probes": 11,
+    "documents_scored": {
+      "predicted": 178239.105,
+      "measured": 178239.105
+    },
+    "recall": {
+      "predicted": 0.9085,
+      "measured": 0.9085
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 176,
+      "measured": 176.0
+    },
+    "directory_bytes": {
+      "predicted": 10140,
+      "measured": 10140
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s156",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 127,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s133",
+    "method": "keys",
+    "clusters": 4096,
+    "probes": 211,
+    "documents_scored": {
+      "predicted": 52163.9,
+      "measured": 52163.9
+    },
+    "recall": {
+      "predicted": 0.9,
+      "measured": 0.9
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 54016,
+      "measured": 54016.0
+    },
+    "directory_bytes": {
+      "predicted": 2797700,
+      "measured": 2797700
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s041",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 37,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s153",
+    "method": "scan",
+    "clusters": 8192,
+    "probes": 127,
+    "documents_scored": {
+      "predicted": 15614.785,
+      "measured": 15614.785
+    },
+    "recall": {
+      "predicted": 0.8004,
+      "measured": 0.8004
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s021",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 11,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s073",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 119,
+    "documents_scored": {
+      "predicted": 480127.3,
+      "measured": 480127.3
+    },
+    "recall": {
+      "predicted": 0.9903,
+      "measured": 0.9903
+    },
+    "leaf_words": {
+      "predicted": 7562.63,
+      "measured": 7562.63
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s014",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 6,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s012",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 6,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s051",
+    "method": "keys",
+    "clusters": 256,
+    "probes": 12,
+    "documents_scored": {
+      "predicted": 50005.31,
+      "measured": 50005.31
+    },
+    "recall": {
+      "predicted": 0.8055,
+      "measured": 0.8055
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 192,
+      "measured": 192.0
+    },
+    "directory_bytes": {
+      "predicted": 38700,
+      "measured": 38700
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s165",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 353,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s119",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 72,
+    "documents_scored": {
+      "predicted": 18106.705,
+      "measured": 18106.705
+    },
+    "recall": {
+      "predicted": 0.80005,
+      "measured": 0.80005
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s107",
+    "method": "keys",
+    "clusters": 1024,
+    "probes": 164,
+    "documents_scored": {
+      "predicted": 160583.65,
+      "measured": 160583.65
+    },
+    "recall": {
+      "predicted": 0.95,
+      "measured": 0.95
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 671744,
+      "measured": 671744.0
+    },
+    "directory_bytes": {
+      "predicted": 4665280,
+      "measured": 4665280
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s184",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 2440,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s029",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 18,
+    "documents_scored": {
+      "predicted": 286891.74,
+      "measured": 286891.74
+    },
+    "recall": {
+      "predicted": 0.9537,
+      "measured": 0.9537
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s091",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 84,
+    "documents_scored": {
+      "predicted": 82157.245,
+      "measured": 82157.245
+    },
+    "recall": {
+      "predicted": 0.9005,
+      "measured": 0.9005
+    },
+    "leaf_words": {
+      "predicted": 1325.785,
+      "measured": 1325.785
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s106",
+    "method": "keys",
+    "clusters": 1024,
+    "probes": 164,
+    "documents_scored": {
+      "predicted": 160583.65,
+      "measured": 160583.65
+    },
+    "recall": {
+      "predicted": 0.95,
+      "measured": 0.95
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 41984,
+      "measured": 41984.0
+    },
+    "directory_bytes": {
+      "predicted": 1175340,
+      "measured": 1175340
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s151",
+    "method": "keys",
+    "clusters": 4096,
+    "probes": 1330,
+    "documents_scored": {
+      "predicted": 325353.42,
+      "measured": 325353.42
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 340480,
+      "measured": 340480.0
+    },
+    "directory_bytes": {
+      "predicted": 2797700,
+      "measured": 2797700
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s042",
+    "method": "keys",
+    "clusters": 64,
+    "probes": 37,
+    "documents_scored": {
+      "predicted": 580487.105,
+      "measured": 580487.105
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 592,
+      "measured": 592.0
+    },
+    "directory_bytes": {
+      "predicted": 10140,
+      "measured": 10140
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s054",
+    "method": "scan",
+    "clusters": 256,
+    "probes": 29,
+    "documents_scored": {
+      "predicted": 118453.375,
+      "measured": 118453.375
+    },
+    "recall": {
+      "predicted": 0.90195,
+      "measured": 0.90195
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s120",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 72,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s035",
+    "method": "keys",
+    "clusters": 64,
+    "probes": 18,
+    "documents_scored": {
+      "predicted": 286891.74,
+      "measured": 286891.74
+    },
+    "recall": {
+      "predicted": 0.9537,
+      "measured": 0.9537
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 73728,
+      "measured": 73728.0
+    },
+    "directory_bytes": {
+      "predicted": 1124940,
+      "measured": 1124940
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s154",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 127,
+    "documents_scored": {
+      "predicted": 15614.785,
+      "measured": 15614.785
+    },
+    "recall": {
+      "predicted": 0.8004,
+      "measured": 0.8004
+    },
+    "leaf_words": {
+      "predicted": 306.605,
+      "measured": 306.605
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s147",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 1330,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s045",
+    "method": "scan",
+    "clusters": 256,
+    "probes": 12,
+    "documents_scored": {
+      "predicted": 50005.31,
+      "measured": 50005.31
+    },
+    "recall": {
+      "predicted": 0.8055,
+      "measured": 0.8055
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s066",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 52,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s025",
+    "method": "keys",
+    "clusters": 64,
+    "probes": 11,
+    "documents_scored": {
+      "predicted": 178239.105,
+      "measured": 178239.105
+    },
+    "recall": {
+      "predicted": 0.9085,
+      "measured": 0.9085
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 2816,
+      "measured": 2816.0
+    },
+    "directory_bytes": {
+      "predicted": 137440,
+      "measured": 137440
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s142",
+    "method": "keys",
+    "clusters": 4096,
+    "probes": 467,
+    "documents_scored": {
+      "predicted": 114476.795,
+      "measured": 114476.795
+    },
+    "recall": {
+      "predicted": 0.95005,
+      "measured": 0.95005
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 119552,
+      "measured": 119552.0
+    },
+    "directory_bytes": {
+      "predicted": 2797700,
+      "measured": 2797700
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s083",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 31,
+    "documents_scored": {
+      "predicted": 30625.575,
+      "measured": 30625.575
+    },
+    "recall": {
+      "predicted": 0.80075,
+      "measured": 0.80075
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s039",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 37,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s082",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 31,
+    "documents_scored": {
+      "predicted": 30625.575,
+      "measured": 30625.575
+    },
+    "recall": {
+      "predicted": 0.80075,
+      "measured": 0.80075
+    },
+    "leaf_words": {
+      "predicted": 494.11,
+      "measured": 494.11
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s056",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 29,
+    "documents_scored": {
+      "predicted": 118453.375,
+      "measured": 118453.375
+    },
+    "recall": {
+      "predicted": 0.90195,
+      "measured": 0.90195
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s139",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 467,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s010",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 6,
+    "documents_scored": {
+      "predicted": 98609.57,
+      "measured": 98609.57
+    },
+    "recall": {
+      "predicted": 0.8255,
+      "measured": 0.8255
+    },
+    "leaf_words": {
+      "predicted": 1543.98,
+      "measured": 1543.98
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s135",
+    "method": "scan",
+    "clusters": 4096,
+    "probes": 467,
+    "documents_scored": {
+      "predicted": 114476.795,
+      "measured": 114476.795
+    },
+    "recall": {
+      "predicted": 0.95005,
+      "measured": 0.95005
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s053",
+    "method": "keys",
+    "clusters": 256,
+    "probes": 12,
+    "documents_scored": {
+      "predicted": 50005.31,
+      "measured": 50005.31
+    },
+    "recall": {
+      "predicted": 0.8055,
+      "measured": 0.8055
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 49152,
+      "measured": 49152.0
+    },
+    "directory_bytes": {
+      "predicted": 2425020,
+      "measured": 2425020
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s038",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 37,
+    "documents_scored": {
+      "predicted": 580487.105,
+      "measured": 580487.105
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s003",
+    "method": "branch",
+    "clusters": 1,
+    "probes": 1,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    }
+  },
+  {
+    "setting_id": "s118",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 72,
+    "documents_scored": {
+      "predicted": 18106.705,
+      "measured": 18106.705
+    },
+    "recall": {
+      "predicted": 0.80005,
+      "measured": 0.80005
+    },
+    "leaf_words": {
+      "predicted": 317.625,
+      "measured": 317.625
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s176",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 778,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s127",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 211,
+    "documents_scored": {
+      "predicted": 52163.9,
+      "measured": 52163.9
+    },
+    "recall": {
+      "predicted": 0.9,
+      "measured": 0.9
+    },
+    "leaf_words": {
+      "predicted": 917.5,
+      "measured": 917.5
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s059",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 29,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s074",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 119,
+    "documents_scored": {
+      "predicted": 480127.3,
+      "measured": 480127.3
+    },
+    "recall": {
+      "predicted": 0.9903,
+      "measured": 0.9903
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s023",
+    "method": "branch",
+    "clusters": 64,
+    "probes": 11,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32065536,
+      "measured": 32065536
+    }
+  },
+  {
+    "setting_id": "s121",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 72,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s170",
+    "method": "keys",
+    "clusters": 8192,
+    "probes": 353,
+    "documents_scored": {
+      "predicted": 42847.11,
+      "measured": 42847.11
+    },
+    "recall": {
+      "predicted": 0.9002,
+      "measured": 0.9002
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 1445888,
+      "measured": 1445888.0
+    },
+    "directory_bytes": {
+      "predicted": 9392520,
+      "measured": 9392520
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s109",
+    "method": "branch",
+    "clusters": 1024,
+    "probes": 420,
+    "documents_scored": {
+      "predicted": 412040.445,
+      "measured": 412040.445
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "leaf_words": {
+      "predicted": 6644.99,
+      "measured": 6644.99
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 33024000,
+      "measured": 33024000
+    }
+  },
+  {
+    "setting_id": "s146",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 1330,
+    "documents_scored": {
+      "predicted": 325353.42,
+      "measured": 325353.42
+    },
+    "recall": {
+      "predicted": 0.99,
+      "measured": 0.99
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s099",
+    "method": "scan",
+    "clusters": 1024,
+    "probes": 164,
+    "documents_scored": {
+      "predicted": 160583.65,
+      "measured": 160583.65
+    },
+    "recall": {
+      "predicted": 0.95,
+      "measured": 0.95
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s046",
+    "method": "branch",
+    "clusters": 256,
+    "probes": 12,
+    "documents_scored": {
+      "predicted": 50005.31,
+      "measured": 50005.31
+    },
+    "recall": {
+      "predicted": 0.8055,
+      "measured": 0.8055
+    },
+    "leaf_words": {
+      "predicted": 787.3,
+      "measured": 787.3
+    },
+    "split_words": {
+      "predicted": 0.0,
+      "measured": 0.0
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 32272384,
+      "measured": 32272384
+    }
+  },
+  {
+    "setting_id": "s122",
+    "method": "branch",
+    "clusters": 4096,
+    "probes": 72,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 36110336,
+      "measured": 36110336
+    }
+  },
+  {
+    "setting_id": "s027",
+    "method": "scan",
+    "clusters": 64,
+    "probes": 18,
+    "documents_scored": {
+      "predicted": 286891.74,
+      "measured": 286891.74
+    },
+    "recall": {
+      "predicted": 0.9537,
+      "measured": 0.9537
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s089",
+    "method": "keys",
+    "clusters": 1024,
+    "probes": 31,
+    "documents_scored": {
+      "predicted": 30625.575,
+      "measured": 30625.575
+    },
+    "recall": {
+      "predicted": 0.80075,
+      "measured": 0.80075
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 126976,
+      "measured": 126976.0
+    },
+    "directory_bytes": {
+      "predicted": 4665280,
+      "measured": 4665280
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s183",
+    "method": "branch",
+    "clusters": 8192,
+    "probes": 2440,
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    },
+    "bitplanes_bytes": {
+      "predicted": 40310784,
+      "measured": 40310784
+    }
+  },
+  {
+    "setting_id": "s079",
+    "method": "keys",
+    "clusters": 256,
+    "probes": 119,
+    "documents_scored": {
+      "predicted": 480127.3,
+      "measured": 480127.3
+    },
+    "recall": {
+      "predicted": 0.9903,
+      "measured": 0.9903
+    },
+    "keys": {
+      "predicted": 256,
+      "measured": 256.0
+    },
+    "key_lookups": {
+      "predicted": 30464,
+      "measured": 30464.0
+    },
+    "directory_bytes": {
+      "predicted": 425820,
+      "measured": 425820
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s071",
+    "method": "keys",
+    "clusters": 256,
+    "probes": 52,
+    "documents_scored": {
+      "predicted": 211418.835,
+      "measured": 211418.835
+    },
+    "recall": {
+      "predicted": 0.95025,
+      "measured": 0.95025
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 212992,
+      "measured": 212992.0
+    },
+    "directory_bytes": {
+      "predicted": 2425020,
+      "measured": 2425020
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s017",
+    "method": "keys",
+    "clusters": 64,
+    "probes": 6,
+    "documents_scored": {
+      "predicted": 98609.57,
+      "measured": 98609.57
+    },
+    "recall": {
+      "predicted": 0.8255,
+      "measured": 0.8255
+    },
+    "keys": {
+      "predicted": 4096,
+      "measured": 4096.0
+    },
+    "key_lookups": {
+      "predicted": 24576,
+      "measured": 24576.0
+    },
+    "directory_bytes": {
+      "predicted": 1124940,
+      "measured": 1124940
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  },
+  {
+    "setting_id": "s123",
+    "method": "keys",
+    "clusters": 4096,
+    "probes": 72,
+    "documents_scored": {
+      "predicted": 18106.705,
+      "measured": 18106.705
+    },
+    "recall": {
+      "predicted": 0.80005,
+      "measured": 0.80005
+    },
+    "keys": {
+      "predicted": 16,
+      "measured": 16.0
+    },
+    "key_lookups": {
+      "predicted": 1152,
+      "measured": 1152.0
+    },
+    "directory_bytes": {
+      "predicted": 460980,
+      "measured": 460980
+    },
+    "codes_bytes": {
+      "predicted": 32000000,
+      "measured": 32000000
+    },
+    "row_ids_bytes": {
+      "predicted": 8000000,
+      "measured": 8000000
+    }
+  }
+]
