@@ -19,7 +19,7 @@
 - [x] Independently audit 144,000 selected query results and their scores.
 - [x] Inspect the final graphs and explain the measured results.
 - [x] Pass the full test suite, 406 tests.
-- [ ] Save final code/results checkpoint and update memory.
+- [x] Save final code/results checkpoint and update memory.
 
 This experiment did not edit the report. Separate report/publication edits were preserved. The complete plan is in the workspace's
 `docs/superpowers/plans/2026-09-13-search-k-and-prefix-experiments.md`.
