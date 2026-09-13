@@ -89,3 +89,13 @@ The old v2 PDF and source remain separate files.
 
 The current PDF is 29 pages. The v3 Section 1 hash changes only because of the
 explicitly requested Figure 1/caption edit; v2 retains its original hash.
+
+
+## Measured recall explanation
+
+- [x] Add “How recall is calculated” to the experiment section and contents.
+- [x] Explain the exhaustive binary reference, five-result overlap example and query average.
+- [x] Distinguish binary-ranking recall from full-float agreement and human relevance.
+- [x] Explain that the current metric includes both routing and local-search losses.
+- [x] State how a same-selected-clusters reference would isolate local search, without claiming it is already reported.
+- [x] Add the same explanation to the README; leave existing report prose, code and results unchanged.

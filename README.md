@@ -107,6 +107,17 @@ Recall here means agreement with the exhaustive binary ranking. Recovering 95 of
 the text query. Changing the code length changes that reference ranking and starts a
 separate comparison.
 
+For example, if the exact top 5 is `[12, 7, 91, 4, 30]` and a method returns
+`[12, 7, 91, 4, 85]`, it recovers four reference IDs: recall is `4 / 5 = 80%`.
+The reported value averages this measured overlap across all 1,000 queries; it is
+not estimated from a distribution. At top 1, 990 correct IDs out of 1,000 queries
+means 99% recall.
+
+The reference scan covers **the whole collection**, so a miss can come from an
+unopened cluster or from skipping a row inside an opened cluster. To isolate only
+inside-cluster search, the reference would instead scan the **same selected clusters**.
+That is a different reference from the one used in the current result tables.
+
 Query latency includes selecting clusters and searching them, with the query embedding
 already cached. Stored field sizes and peak process RAM are reported separately.
 The saved configurations, input hashes, per-query records and repeats make the choices

@@ -33,6 +33,32 @@ The machine is an Apple M5 Max with 128 GiB of memory. I use one native search q
 \caption{Only index and search settings differ within a pool. Changing the code length creates a new pool with its own reference ranking.}
 \end{figure}
 
+\subsection{How recall is calculated}
+The recall in these experiments is measured from returned document IDs. It is not estimated by assuming a normal distribution or independent bits.
+
+For each query, I first score every document in the collection using the floating-point query and binary document codes. I keep the best $K$ IDs as the reference, resolving equal scores by document ID. A, B and C are then compared with that same reference.
+
+For example, suppose we ask for five results:
+\begin{center}
+\begin{tabular}{@{}ll@{}}\toprule
+Exact scan's top 5 & \texttt{[12, 7, 91, 4, 30]}\\
+Method returns & \texttt{[12, 7, 91, 4, 85]}\\
+Reference IDs recovered & \texttt{[12, 7, 91, 4]}\\\bottomrule
+\end{tabular}
+\end{center}
+We recovered four of the five reference IDs, so
+\[
+ \mathrm{Recall@}K=\frac{\text{reference IDs recovered}}{K},
+ \qquad \mathrm{Recall@}5=\frac45=80\%.
+\]
+The table values average this calculation over all 1,000 queries. For $K=1$, recovering the exact best ID on 990 of those queries gives 99\% recall. Result order does not affect this overlap count.
+
+\textbf{What does that percentage mean?} A value of 99\% means recovering 99\% of the exact binary top-$K$ IDs on average. It does not mean finding 99\% of all human-relevant documents, and it does not establish agreement with the original full-float embedding. Those are separate evaluations. Each code length has its own binary reference.
+
+\textbf{Does it measure only search inside a cluster?} The current reference covers the whole collection. A reference document counts as missed whether its cluster was never opened or the local search skipped it after opening that cluster. The reported recall therefore includes both sources of loss.
+
+To isolate search inside selected clusters, we would instead obtain the reference by scanning those same selected clusters completely. B and C could then be compared against that local reference. The existing tables use the whole-collection reference, not this isolated measurement.
+
 \subsection{Parameter search}
 For A, I vary the cluster layout, cluster count $C$ and probes $P$. The reference-cluster ranks give probe choices at the required recall targets. B receives those choices along with leaf sizes and node budgets. C receives them along with starting depths, candidate targets and the optional exact-stop rule.
 
