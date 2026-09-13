@@ -1,13 +1,14 @@
 % Author wording: attachment 5d87e492-ea14-4fe2-922b-d6922a14a7c0.
 % Figure directions are rendered as diagrams; editorial closing note omitted.
 \section{Preliminary calculations}
+[Note: this part is quite long, if you are interested in the \hyperref[sec:experiments]{experiment result}, you can skip this section] \\
 
 Before running the experiments, let’s first break down what's the time/memory complexity for each method.
 
 to recap:
 \begin{itemize}
-  \item Method A performs a document scoring operation for every document inside the opened clusters.
-  \item Method B avoids some document scoring operations by filtering with Bitplanes first.
+  \item Method A performs a "query-document dot product" operation for every document inside the opened clusters.
+  \item Method B avoids some "query-document dot product" operations by filtering with Bitplanes first.
   \item Method C avoids starting with a large document set by looking up a specific prefix, then broadening only when needed.
 \end{itemize}
 
@@ -15,7 +16,7 @@ So for each method, I mainly want to understand two things:
 
 \begin{itemize}
   \item What additional work do Methods B and C introduce?
-  \item How many document scoring operations can Methods B and C potentially save?
+  \item How many "query-document dot product" operations can Methods B and C potentially save?
 \end{itemize}
 
 Let's use this as variables:
@@ -34,7 +35,7 @@ Symbol & Meaning\\
 \(d\) & Number of binary dimensions\\
 \(K\) & Number of results we want to return\\
 \(n_c\) & Number of documents inside cluster \(c\)\\
-\(F_A,F_B,F_C\) & Number of documents that undergo a document scoring operation under A, B and C\\
+\(F_A,F_B,F_C\) & Number of documents that undergo a "query-document dot product" operation under A, B and C\\
 \bottomrule
 \end{tabular}
 \end{minipage}
@@ -114,10 +115,10 @@ N=3,\qquad C=P=1,\qquad d=5.
 
 Method A is the easiest one to understand.
 
-Once cluster selection (prefilter) has decided which clusters to open, \textbf{for every document inside those clusters, we will do a scoring operation}.
+Once cluster selection (prefilter) has decided which clusters to open, \textbf{for every document inside those clusters, we will do a "query-document dot product" operation}.
 
 \Needspace{4\baselineskip}
-\textbf{Step 1: how many document scoring operations do we need?}\par
+\textbf{Step 1: how many "query-document dot product" operations do we need?}\par
 
 In our example, the only opened cluster contains:
 
@@ -137,7 +138,7 @@ F_A=\sum_{c\in O}n_c
 }
 \]
 
-is the number of documents for which A performs scoring operations.
+is the number of documents for which A performs "query-document dot product" operations.
 
 If the clusters are roughly balanced:
 
@@ -155,12 +156,12 @@ So for A, this is already the most important number: \textbf{how many documents 
 \node[scan,text width=16mm] (q) at (0,0) {Query};
 \node[scan,text width=24mm] (p) at (29mm,0) {Select $P$\\clusters};
 \node[scan,text width=29mm] (rows) at (65mm,0) {$F_A$ documents\\\texttt{10100}\\\texttt{11001}\\\texttt{11000}};
-\node[scan,text width=29mm] (score) at (104mm,0) {Scoring operation\\for every document};
+\node[scan,text width=29mm] (score) at (104mm,0) {"query-document dot product" operation\\for every document};
 \node[scan,text width=16mm] (top) at (138mm,0) {Top $K$};
 \draw[arr] (q)--(p); \draw[arr] (p)--(rows); \draw[arr] (rows)--(score); \draw[arr] (score)--(top);
 
 \end{tikzpicture}
-\caption{Method A performs no additional filtering after cluster selection. Every document inside the opened clusters undergoes a document scoring operation.}
+\caption{Method A performs no additional filtering after cluster selection. Every document inside the opened clusters undergoes a "query-document dot product" operation.}
 \end{figure}
 
 
@@ -168,7 +169,7 @@ So for A, this is already the most important number: \textbf{how many documents 
 
 
 \Needspace{4\baselineskip}
-\textbf{Step 2: what does one document scoring operation cost?}\par
+\textbf{Step 2: what does one "query-document dot product" operation cost?}\par
 
 The scorer used here follows the four-sign lookup-table approach described in Exa’s article.
 
@@ -202,7 +203,7 @@ In general, the number of groups is
 G=\left\lceil\frac d4\right\rceil.
 \]
 
-One document scoring operation therefore reads \(G\) table entries.
+One "query-document dot product" operation therefore reads \(G\) table entries.
 
 For our example:
 
@@ -230,7 +231,7 @@ Since \(G\) grows with \(d\),
 T_{\text{score},A}=O(F_Ad).
 \]
 
-For a fixed binary dimension, this is basically linear in the number of documents for which we perform scoring operations.
+For a fixed binary dimension, this is basically linear in the number of documents for which we perform "query-document dot product" operations.
 
 
 
@@ -259,9 +260,9 @@ O(F_A\log(K+1)).
 \Needspace{4\baselineskip}
 \textbf{Total cost for A}\par
 
-Let \(T_{\text{base}}\) contain the work before document scoring operations, such as cluster selection and lookup-table preparation.
+Let \(T_{\text{base}}\) contain the work before "query-document dot product" operations, such as cluster selection and lookup-table preparation.
 
-Let \(a_A\) be the average measured time needed to fully process one document, including its scoring operation and the top-\(K\) update.
+Let \(a_A\) be the average measured time needed to fully process one document, including its "query-document dot product" operation and the top-\(K\) update.
 
 Then:
 
@@ -287,15 +288,15 @@ The main tradeoff is straightforward.
 Using more clusters usually makes each cluster smaller, so each opened cluster contains fewer documents. However, we may then need to open more clusters to maintain the same recall.
 
 \Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- Method A:} A’s cost is mainly determined by how many documents cluster selection leaves behind. Fewer opened documents means fewer document scoring operations, but opening too few clusters can hurt recall.}}\end{center}
+\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR, Method A:} A’s cost is mainly determined by how many documents cluster selection leaves behind. Fewer opened documents means fewer "query-document dot product" operations, but opening too few clusters can hurt recall.}}\end{center}
 
 
 
 \subsubsection{Method B: Bitplanes}
 
-Bitplanes try to reduce the number of documents that undergo a document scoring operation.
+Bitplanes try to reduce the number of documents that undergo a "query-document dot product" operation.
 
-Instead of immediately performing a scoring operation for every document inside the opened clusters, B first uses Bitplanes to filter the documents.
+Instead of immediately performing a "query-document dot product" operation for every document inside the opened clusters, B first uses Bitplanes to filter the documents.
 
 So B has two main costs:
 
@@ -303,11 +304,11 @@ So B has two main costs:
 \boxed{
 \text{Bitplane work}
 +
-\text{scoring operations for the documents that survive}
+\text{"query-document dot product" operations for the documents that survive}
 }
 \]
 
-The whole idea only makes sense if the document scoring operations we avoid are more expensive than the Bitplane work required to avoid them.
+The whole idea only makes sense if the "query-document dot product" operations we avoid are more expensive than the Bitplane work required to avoid them.
 
 
 
@@ -462,7 +463,7 @@ p=|q_2|=0.5.
 
 
 \Needspace{4\baselineskip}
-\textbf{Step 4: why Bitplane filtering is not O(1) - it's not free! :(}\par
+\textbf{Step 4: why Bitplane filtering is not O(1), it's not free! :(}\par
 
 At first, a bitwise AND seems like it's O(1).
 
@@ -545,9 +546,9 @@ PS
 
 
 \Needspace{4\baselineskip}
-\textbf{Step 6: eventually stop splitting and perform scoring operations}\par
+\textbf{Step 6: eventually stop splitting and perform "query-document dot product" operations}\par
 
-After a branch contains few enough documents, we treat this as a \textbf{leaf}, and in this case, method B will perform document scoring operations for the documents inside it.
+After a branch contains few enough documents, we treat this as a \textbf{leaf}, and in this case, method B will perform "query-document dot product" operations for the documents inside it.
 
 Suppose our leaf size is two.
 
@@ -557,7 +558,7 @@ The preferred branch:
 
 contains exactly IDs 1 and 2.
 
-So B performs these document scoring operations:
+So B performs these "query-document dot product" operations:
 
 \begin{center}\begingroup\small\ttfamily\begin{tabular}{l}
 ID 1 \(\rightarrow\) 2.5\\ \relax ID 2 \(\rightarrow\) 1.9
@@ -569,7 +570,7 @@ Therefore:
 F_B=2.
 \]
 
-*in this case, if we do a comparison, method A would have performed three document scoring operations.
+*in this case, if we do a comparison, method A would have performed three "query-document dot product" operations.
 
 
 
@@ -652,7 +653,7 @@ B therefore pays for:
 \item reading split masks;
 \item reading leaf masks;
 \item maintaining the waiting branches;
-\item performing \(F_B\) document scoring operations.
+\item performing \(F_B\) "query-document dot product" operations.
 \end{itemize}
 
 Let:
@@ -686,7 +687,7 @@ The key condition is:
 
 \[
 \boxed{
-\text{document scoring work avoided}
+\text{"query-document dot product" work avoided}
 >
 \text{Bitplane work added}.
 }
@@ -697,7 +698,7 @@ A smaller leaf size may reduce \(F_B\), because B keeps filtering longer. Howeve
 A larger node budget can also improve recall, but again it allows B to search more branches.
 
 \Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- Bitplanes:} B is useful when a relatively small amount of bitmap work can eliminate a large number of document scoring operations. Performing fewer document scoring operations alone is not enough; the bitmap work also has to be cheap enough.}}\end{center}
+\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR, Bitplanes:} It is fast when a few Bitplane splits can filter out most documents before the "query-document dot products" operations. If the search needs many splits, or the masks remain wide, the bitmap work grows and can cancel out the savings from scoring fewer documents.}}\end{center}
 
 
 
@@ -717,7 +718,7 @@ Backward Walk instead asks:
 So C mainly pays for two things:
 \begin{itemize}\setlength{\itemsep}{1pt}
 \item looking up different prefixes;
-\item performing scoring operations for the documents exposed by those prefixes.
+\item performing "query-document dot product" operations for the documents exposed by those prefixes.
 \end{itemize}
 
 \Needspace{4\baselineskip}
@@ -745,7 +746,7 @@ Two binary searches find the beginning and the end of this range.
 
 In our example, the result is $[2,3)$, which contains only ID 1.
 
-So we perform one scoring operation: ID 1 $\to$ 2.5.
+So we perform one "query-document dot product" operation: ID 1 $\to$ 2.5.
 
 However, remember that we want the top two results. Right now we only have one document.
 
@@ -782,7 +783,7 @@ Now we have two results.
 \draw[Keys,thick] (-19mm,-21mm)--(-19mm,-24mm)--(63mm,-24mm)--(63mm,-21mm);
 \node[font=\small,text=Keys] at (22mm,-28mm) {\texttt{1100*}};
 \end{tikzpicture}
-\caption{The broader prefix contains the previous range. ID 1 is already scored, so only the newly included document, ID 2, needs a scoring operation.}
+\caption{The broader prefix contains the previous range. ID 1 is already scored, so only the newly included document, ID 2, needs a "query-document dot product" operation.}
 \end{figure}
 
 \Needspace{4\baselineskip}
@@ -820,13 +821,13 @@ The idea is simply:
 \textbf{Step 5: how many documents do we eventually score?}\par
 Let $F_C$ be the total number of distinct documents that become visible before we stop.
 
-Because each broader prefix contains the previous prefix, a document that was already scored does not need another scoring operation.
+Because each broader prefix contains the previous prefix, a document that was already scored does not need another "query-document dot product" operation.
 
 So C's document-scoring work is simply:
 \[
 F_Ca_C.
 \]
-Here $a_C$ is the average time for a document scoring operation and its top-$K$ update.
+Here $a_C$ is the average time for a "query-document dot product" operation and its top-$K$ update.
 
 This means the main question for Backward Walk is actually:
 
@@ -949,7 +950,7 @@ Backward Walk therefore pays for:
 \item building the query prefix;
 \item performing prefix lookups;
 \item updating the current prefix ranges;
-\item performing scoring operations for $F_C$ exposed documents.
+\item performing "query-document dot product" operations for $F_C$ exposed documents.
 \end{itemize}
 We can summarize this as:
 \[
@@ -965,14 +966,14 @@ Again, the exact symbols are not the most important part.
 
 The important condition is:
 \[
-\boxed{\text{document scoring work avoided}>\text{prefix lookup work added}}
+\boxed{\text{"query-document dot product" work avoided}>\text{prefix lookup work added}}
 \]
 If C can stop at a fairly deep prefix, then $F_C\ll F_A$, and we may save a lot of scoring work.
 
-However, if C has to broaden the prefix all the way to depth zero, $F_C=F_A$, then C ends up doing all of A's scoring operations \textbf{plus} the additional prefix lookups.
+However, if C has to broaden the prefix all the way to depth zero, $F_C=F_A$, then C ends up doing all of A's "query-document dot product" operations \textbf{plus} the additional prefix lookups.
 
 \Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- Backward Walk:} Backward Walk works best when a fairly specific prefix already contains the documents we need. If we have to keep broadening until almost the whole cluster becomes visible, then the prefix lookup has not saved us anything.}}\end{center}
+\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR, Backward Walk:} It is fast when a specific prefix already contains the documents we need. Otherwise, it must keep relaxing the prefix and expanding the searched range; if this goes too far, Backward Walk approaches a full scan while also paying the extra binary-search cost for each new prefix range.}}\end{center}
 
 \subsection{Memory complexity}
 So far, we have only talked about query time.
@@ -1004,12 +1005,9 @@ M_{A,\text{rows}}=N\left(8\left\lceil\frac d{64}\right\rceil+8\right).
 \]
 During a query, A also keeps the query values, the lookup table and the current top-$K$.
 
-This is our baseline.
-
 \subsubsection{Method B memory}
-B keeps everything A needs.
-
-However, it adds two things. First, it stores the Bitplanes.
+B also uses what A has been used, and additional two more things.
+First, it stores the Bitplanes.
 
 For each cluster, every binary dimension needs one bitmap spanning all document positions in that cluster.
 
@@ -1046,8 +1044,8 @@ Q_{\text{masks}}=8\max_t\sum_c A_c(t)W_c.
 \caption{B stores Bitplanes alongside its packed documents. During a query, several full-width masks may also remain alive in the branch queue.}
 \end{figure}
 
-\Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- B memory:} Bitplanes need extra persistent memory because we store another arrangement of the document bits. During search, B can also temporarily hold several full-width branch masks at the same time.}}\end{center}
+% \Needspace{6\baselineskip}
+% \begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR, B memory:} Bitplanes need extra persistent memory because we store another arrangement of the document bits. During search, B can also temporarily hold several full-width branch masks at the same time.}}\end{center}
 
 \subsubsection{Method C memory}
 C also keeps the normal packed documents and IDs.
@@ -1079,10 +1077,10 @@ For example, \texttt{11001}, \texttt{1100*}, \texttt{110**} all refer to differe
 
 During the query, C mainly needs to remember the previous range for every opened cluster.
 
-So compared with B, its temporary search state is relatively small. Actual byte totals still depend on the selected parameters and number of live branches.
+So compared with B, method C's temporary search state is relatively small. 
 
-\Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- C memory:} Backward Walk adds a small prefix key per document, but it does not need full-width masks for many waiting branches.}}\end{center}
+% \Needspace{6\baselineskip}
+% \begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR, C memory:} Backward Walk adds a small prefix key per document, but it does not need full-width masks for many waiting branches.}}\end{center}
 
 \subsection{Recall}
 Now we know roughly how much work each method performs.
@@ -1166,7 +1164,7 @@ If B performs a complete branch-and-bound search using valid score bounds, then 
 However, if we impose a finite node budget, B may stop early.
 
 \Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- B recall:} B can lose recall in two places: cluster selection can miss the document before B starts, and a limited Bitplane search can miss a document even after its cluster has been opened.}}\end{center}
+\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR, B recall:} B can lose recall in two places: cluster selection can miss the document before B starts, and a limited Bitplane search can miss a document even after its cluster has been opened.}}\end{center}
 
 \subsubsection{Recall for Backward Walk}
 For Backward Walk, let $D_{q,\ell}$ be all documents exposed when the search stops at prefix depth $\ell$.
@@ -1204,7 +1202,7 @@ C is exact locally only when:
 \end{enumerate}
 
 \Needspace{6\baselineskip}
-\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR --- C recall:} A large prefix range does not automatically mean high recall. Backward Walk can safely stop only when it has either searched every document or mathematically proved that the unseen documents cannot win.}}\end{center}
+\begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR, C recall:} A large prefix range does not automatically mean high recall. Backward Walk can safely stop only when it has either searched every document or mathematically proved that the unseen documents cannot win.}}\end{center}
 
 \subsection{Summary}
 The whole calculation section can be summarized with one simple idea:
@@ -1212,12 +1210,12 @@ The whole calculation section can be summarized with one simple idea:
 \begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
 Method & What it does\\\midrule
 A & Score every document inside the opened clusters\\
-B & Spend Bitplane work to avoid some document scoring\\
-C & Spend prefix-lookup work to avoid some document scoring\\\bottomrule
+B & Spend Bitplane work to avoid some "query-document dot product"\\
+C & Spend prefix-lookup work to avoid some "query-document dot product"\\\bottomrule
 \end{tabularx}
 \end{center}
 So:
 
-\textbf{A just pays for document scoring. B and C deliberately add extra search work, hoping that this lets them avoid enough document scoring to make the total query faster.}
+\textbf{A just pays for "query-document dot product". B and C deliberately add extra search work, hoping that this lets them avoid enough "query-document dot product" to make the total query faster.}
 
 The experiment in the next section will tell us whether that actually happens on real embeddings.

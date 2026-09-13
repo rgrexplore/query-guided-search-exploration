@@ -22,7 +22,7 @@ C: Backward Walk & 26,153 & 100\% & 99.0\% & 0.1103\\\bottomrule
 \end{center}
 Rows are means over the 1,000 queries; times are medians over all 3,000 repeated observations. Every method in a three-row block received identical cluster IDs and recovered every local top-1 reference in these runs.
 
-The large-cluster result answers the question directly. Scanning the same 295,031 documents took 0.9402 ms, while B took 0.0565 ms and performed only 818 document scoring operations. B's three process medians were 0.0525--0.0609 ms, compared with A's 0.9301--0.9525 ms. The reduction is therefore a local-search benefit, not merely a different routing choice.
+The large-cluster result answers the question directly. Scanning the same 295,031 documents took 0.9402 ms, while B took 0.0565 ms and performed only 818 document scoring operations. B's three process medians were 0.0525 to 0.0609 ms, compared with A's 0.9301 to 0.9525 ms. The reduction is therefore a local-search benefit, not merely a different routing choice.
 
 C also helped on those large clusters: it reduced the document scoring operations to 169,362 and took 0.4806 ms. B was still faster. With the intermediate layout, B and C were close to each other and both faster than A. Their repeat ranges overlap, so the small B/C difference is not a clear winner.
 

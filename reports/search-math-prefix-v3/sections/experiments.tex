@@ -1,5 +1,6 @@
 \usetikzlibrary{plotmarks}
 \section{Experiments}
+\label{sec:experiments}
 So far, we have only looked at the three methods mathematically.
 
 The calculations tell us what \emph{could} make Bitplanes or Backward Walk faster, but the actual result depends on the documents, the queries, and how much work each method ends up doing.
@@ -18,7 +19,7 @@ Method C can choose the cluster settings, starting prefix depth and stopping rul
 
 The documents, queries, binary scoring function and correct answers remain unchanged.
 
-This is important because B and C do not necessarily work best with the same cluster layout as A. For example, Bitplanes may be able to open a much larger group of documents and then remove most of them before the document scoring operation.
+This is important because B and C do not necessarily work best with the same cluster layout as A. For example, Bitplanes may be able to open a much larger group of documents and then remove most of them before the "query-document dot product" operation.
 
 \subsection{Setup}
 I use two collections:
@@ -87,15 +88,11 @@ Four of the five correct IDs were recovered, so:
 \]
 I repeat this over all 1,000 queries.
 
-Therefore, when I say \textbf{99\% recall}, I mean that the method recovers 99\% of the exact binary top-$K$ document IDs on average.
-
-This is the quality requirement used when comparing the search methods.
-
-It does not mean 99\% human relevance, and it does not necessarily mean 99\% agreement with the original uncompressed embedding. That is a separate representation-quality question discussed later.
+Therefore, in this document, if it's written as \textbf{99\% recall}, we mean that the method recovers 99\% of the exact binary top-$K$ document IDs on average.
 
 \Needspace{4\baselineskip}
 \textbf{Choosing the parameters}\par
-For every method, I try multiple configurations.
+For every method, we try multiple configurations.
 
 For A:
 \begin{itemize}\setlength{\itemsep}{1pt}
@@ -136,7 +133,6 @@ So the comparison is:
 \caption{At each recall target, compare the fastest tested configuration for each method that meets the requirement. Measurements below the target remain in the saved results, but cannot win that comparison.}
 \end{figure}
 
-This is the main experiment used throughout the section. The times reported below are medians from three repeated runs of each selected configuration, using the same 1,000 queries.
 
 \subsection{Main result}
 Let's first look at Qwen with 32-bit binary documents while returning one result: $K=1$.
@@ -173,9 +169,8 @@ So in this setting, B is approximately $2.4\times$ faster than the original meth
 \end{figure}
 
 \subsection{Why is Bitplanes faster?}
-The latency result by itself does not tell us what happened.
 
-So let's look at the 99\% settings chosen by each method.
+let's look at the recall 99\% settings chosen by each method.
 \begin{center}\small
 \begin{tabularx}{\linewidth}{@{}lrrYrr@{}}\toprule
 Method & Clusters & Clusters opened & Search setting & Recall & Time (ms)\\\midrule
@@ -184,11 +179,10 @@ B & 16 & 9 & Leaf 128, budget 8192 & 99.2\% & 0.0809\\
 C & 1024 & 78 & Start depth 4, exact stop & 99.0\% & 0.1688\\\bottomrule
 \end{tabularx}
 \end{center}
-B uses deeper-first ties, and C uses candidate target zero with its exact-stop rule.
 
 The first interesting thing is that the methods choose very different cluster layouts.
 
-Now look at how many documents reach the search stage and how many of them undergo a document scoring operation:
+Now we can also observe how many documents reach the search stage and how many of them undergo a "query-document dot product" operation:
 \begin{center}\small
 \begin{tabular}{@{}lrr@{}}\toprule
 Method & Documents inside opened clusters & \shortstack{Scoring\\operations}\\\midrule
@@ -197,7 +191,7 @@ B & 295,031 & 818\\
 C & 41,147 & 26,153\\\bottomrule
 \end{tabular}
 \end{center}
-These are average values per query. This is the most important part of the result.
+We can observe the following:
 
 \textbf{Method A}\par
 A uses very selective cluster selection:
@@ -210,7 +204,7 @@ B does almost the opposite:
 \begin{aligned}
 &\text{select much larger clusters}\ \to\ 295{,}031\text{ documents}\\
 &\hspace{35mm}\downarrow\ \text{Bitplanes}\\
-&\hspace{35mm}818\text{ document scoring operations}.
+&\hspace{35mm}818\text{ "query-document dot product" operations}.
 \end{aligned}
 \]
 B therefore performs scoring operations for only
@@ -219,7 +213,7 @@ B therefore performs scoring operations for only
 \]
 of the documents inside its opened clusters.
 
-This is exactly the tradeoff described in Section 2. B performs extra bitmap work, but in this case that work removes so many document scoring operations that the complete query becomes faster.
+This is exactly the tradeoff described in Section 2. B performs extra bitmap work, but in this case that work removes so many "query-document dot product" operations that the complete query becomes faster.
 
 \begin{figure}[htbp]\centering
 \begin{tikzpicture}
@@ -242,12 +236,14 @@ This is exactly the tradeoff described in Section 2. B performs extra bitmap wor
 \node[anchor=west,font=\small]at(80mm,-59mm){\shortstack{Scoring\\operations}};
 \node[font=\small]at(67mm,-69mm){The bars use the same document-count scale};
 \end{tikzpicture}
-\caption{At the selected 99\% setting, A opens a small set of documents and performs scoring operations for all of them. B opens a much larger set but uses Bitplanes to reduce roughly 295,000 documents to only 818 document scoring operations.}
+\caption{At the selected 99\% setting, A opens a small set of documents and performs scoring operations for all of them. B opens a much larger set but uses Bitplanes to reduce roughly 295,000 documents to only 818 "query-document dot product" operations.}
 \end{figure}
+
+\pagebreak
 
 \Needspace{4\baselineskip}
 \textbf{What about C?}\par
-Backward Walk also removes some document scoring operations:
+Backward Walk also removes some "query-document dot product" operations:
 \begin{figure}[htbp]\centering
 \begin{tikzpicture}[node distance=6mm]
 \node[keys,text width=40mm] (opened) {41,147 documents\\inside opened clusters};
@@ -255,14 +251,14 @@ Backward Walk also removes some document scoring operations:
 \node[keys,text width=38mm,right=of walk] (scored) {26,153\\scoring operations};
 \draw[arr](opened)--(walk);\draw[arr](walk)--(scored);
 \end{tikzpicture}
-\caption{C reduces the number of document scoring operations, but exposes a larger fraction of its selected documents than B does.}
+\caption{C reduces the number of "query-document dot product" operations, but exposes a larger fraction of its selected documents than B does.}
 \end{figure}
 
 However, the reduction is much smaller than B's. C also needs to perform prefix lookups while progressively broadening the query prefix.
 
 At this setting, C visits around 3.5 prefix depths and performs around 495 boundary searches per query.
 
-Its final time is $0.1688$ ms, which is better than A in this particular comparison, but still much slower than B. These are complete-configuration timings, so the difference also includes each method's routing choice.
+Its final time is $0.1688$ ms, which is better than A in this particular comparison, but still much slower than B. 
 
 So the three methods are effectively making three different choices:
 \begin{center}\small
@@ -272,12 +268,9 @@ B & Use coarse cluster selection, then aggressively prune with Bitplanes\\
 C & Use medium cluster selection, then progressively broaden a prefix\\\bottomrule
 \end{tabularx}
 \end{center}
-That is the central result of the experiment.
 
 \subsection{Does this advantage always happen?}
-No.
-
-The previous result asks for only one final result: $K=1$. Now increase the number of requested results to $K=100$.
+TLDR: Not really. The previous result asks for only one final result: $K=1$. Now let's say, we increase the number of requested results to $K=100$.
 
 At the 99\% binary recall target:
 \begin{center}\small
@@ -293,7 +286,7 @@ Qwen 1024 & \textbf{22.863 ms} & 23.098 ms & 22.930 ms\\\bottomrule
 \end{center}
 In these selected settings, B performs no useful splitting and C starts from depth zero. In other words, both methods effectively fall back toward the original scan.
 
-C's slightly lower median on Nomic64 is a scan-like timing difference; it does not come from avoiding document scoring operations.
+C's slightly lower median on Nomic64 is a scan-like timing difference; it does not come from avoiding "query-document dot product" operations.
 
 This also makes intuitive sense. When we only need one result, B can search the most promising branches and safely ignore many alternatives.
 
@@ -305,41 +298,40 @@ Eventually, the cost of pruning is no longer worth it.
 
 This is a measured result for the tested settings, not a guarantee that B can never help for larger $K$.
 
-\subsection{One important note about binary dimension}
-The very fast result above uses Qwen with only 32 binary dimensions.
+% \subsection{One important note about binary dimension}
+% The very fast result above uses Qwen with only 32 binary dimensions.
 
-That is a different representation from Qwen 256 or Qwen 1024. Therefore, 99\% recall for Qwen32 means:
+% That is a different representation from Qwen 256 or Qwen 1024. Therefore, 99\% recall for Qwen32 means:
 
-\textbf{99\% agreement with the exact Qwen32 binary ranking.}
+% \textbf{99\% agreement with the exact Qwen32 binary ranking.}
 
-It does not mean 99\% agreement with the original full Qwen embedding.
+% It does not mean 99\% agreement with the original full Qwen embedding.
 
-To see how much the binary representation itself changes the ranking:
-\begin{center}\small
-\begin{tabular}{@{}lrr@{}}\toprule
-Representation & \shortstack{Binary top-1 agrees\\with full-vector best} & \shortstack{Full-vector best appears\\in binary top-100}\\\midrule
-Qwen 32 & 14.0\% & 73.0\%\\
-Qwen 256 & 75.8\% & 100.0\%\\
-Qwen 1024 & 88.6\% & 100.0\%\\
-Nomic 64 & 17.6\% & 65.6\%\\
-Nomic 256 & 48.0\% & 97.2\%\\
-Nomic 768 & 70.2\% & 99.9\%\\\bottomrule
-\end{tabular}
-\end{center}
-Agreement here means a full-vector score value within $10^{-5}$ of the exact best score value. Different document IDs can tie. The top-100 column rescores the exact binary candidates.
+% To see how much the binary representation itself changes the ranking:
+% \begin{center}\small
+% \begin{tabular}{@{}lrr@{}}\toprule
+% Representation & \shortstack{Binary top-1 agrees\\with full-vector best} & \shortstack{Full-vector best appears\\in binary top-100}\\\midrule
+% Qwen 32 & 14.0\% & 73.0\%\\
+% Qwen 256 & 75.8\% & 100.0\%\\
+% Qwen 1024 & 88.6\% & 100.0\%\\
+% Nomic 64 & 17.6\% & 65.6\%\\
+% Nomic 256 & 48.0\% & 97.2\%\\
+% Nomic 768 & 70.2\% & 99.9\%\\\bottomrule
+% \end{tabular}
+% \end{center}
+% Agreement here means a full-vector score value within $10^{-5}$ of the exact best score value. Different document IDs can tie. The top-100 column rescores the exact binary candidates.
 
-So there are really two separate questions:
+% So there are really two separate questions:
 
-\textbf{How fast can we search this binary representation?}
+% \textbf{How fast can we search this binary representation?}
 
-versus
+% versus
 
-\textbf{How well does this binary representation preserve the original embedding ranking?}
+% \textbf{How well does this binary representation preserve the original embedding ranking?}
 
-The A/B/C experiment answers the first question. The table above gives some context for the second.
+% The A/B/C experiment answers the first question. The table above gives some context for the second.
 
 \subsection{Summary}
-The experiment gives a fairly simple picture.
 
 For Qwen32 with one requested result, Bitplanes are clearly faster in the tested search setup.
 
@@ -351,20 +343,18 @@ At 99\% binary recall:
 \end{itemize}
 B is therefore about $2.4\times$ faster than A.
 
-The interesting part is \textbf{why}.
+\textbf{Why?}.
 
 A selects a relatively small number of documents and then performs scoring operations for all of them.
 
-B selects a much larger number of documents, but its Bitplane search reduces roughly 295,000 opened documents to only around 818 document scoring operations.
+B selects a much larger number of documents, but its Bitplane search reduces roughly 295,000 opened documents to only around 818 "query-document dot product" operations.
 
-In this setting, the document scoring work avoided is large enough to repay the extra bitmap work.
+In this setting, the "query-document dot product" work avoided is large enough to repay the extra bitmap work.
 
 However, this does not happen everywhere. When the result count increases to $K=100$, B and C become much closer to ordinary scanning and the advantage disappears in the tested settings.
 
-So the result is not: \textbf{Bitplanes are always faster.}
+% So the result is not: \textbf{Bitplanes are always faster.}
 
-It is: \textbf{Bitplanes can be faster when the query only needs a small number of results and the query bits allow a large fraction of the opened documents to be ruled out before document scoring operations.}
+% \textbf{"Bitplanes can be faster when the query only needs a small number of results and the query bits allow a large fraction of the opened documents to be ruled out before the leaf node's "query-document dot product" operations."}
 
 Backward Walk shows the same general tradeoff, but in the tested data it does not reduce the scoring work as aggressively as Bitplanes.
-
-That is the main conclusion the experiment needs to communicate.

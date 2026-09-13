@@ -1,12 +1,13 @@
 \begin{abstract}
-I study three ways to search binary document vectors after selecting clusters: a full scan,
-Bitplanes, and Backward Walk. I compare their work, memory use and retrieval time using the
-same documents and queries. The experiments examine when the extra index work saves enough
-document scoring operations to reduce latency at a required recall.
+Following Exa’s published work on binary embedding search, this report looks at the stage after nearby clusters have already been selected, where a floating-point query is compared against binary document vectors inside those clusters.
+
+The key observation is that, from the query itself, we already know what the ideal binary document would look like and how costly each bit mismatch is. This raises a simple question: can we use that information to search the selected documents more efficiently than just scoring all of them?
+
+I compare the original full scan with two alternatives: \textbf{Bitplanes}, which filters documents using the most important query bits, and \textbf{Backward Walk}, which starts from a specific binary prefix and broadens the search backwards. The goal is to see whether the extra search work can save enough query-document dot product operations to reduce latency at the same recall.
 \end{abstract}
 
 \section{Introduction}
-Throughout this report, a document scoring operation is the computation; its score value is the resulting number, such as 1.9.
+% Throughout this report, a query-document dot product operation is the computation; its score value is the resulting number, such as 1.9.
 
 \subsection{Exa method and end to end pipeline}
 Let's first understand the ``original'' pipeline that I am trying to improve upon.
@@ -24,7 +25,7 @@ reranked using the original uncompressed vectors.
 
 The main part that I am trying to improve in this report is the search stage after cluster
 selection. The two new approaches introduced later, Bitplanes and Backward Walk, replace
-this step while keeping the rest of the pipeline largely the same.
+this step while keeping the rest of the pipeline largely the same (maybe the difference is in the "hyperparameter" used during the experiments).
 
 \begin{figure}[H]\centering
 \begin{tikzpicture}[node distance=4mm]
@@ -40,7 +41,7 @@ this step while keeping the rest of the pipeline largely the same.
 \node[box,text width=23mm,right=of search] (rerank) {Rerank using\\full vectors};
 \draw[arr](q)--(qe);\draw[arr](qe)--(route);\draw[arr](route)--(search);\draw[arr](search)--(rerank);
 \end{tikzpicture}
-\caption{Green marks the part we aim to improve: document search inside the selected clusters, using A, B or C. Reranking is shown as a separate step.}
+\caption{Green marks the part we aim to improve. Method A is the original method (normal scan) }
 \end{figure}
 
 \subsection{Idea background}
@@ -96,7 +97,7 @@ S(q,b)=Q-2p.
 This observation is the main idea behind the approaches explored in this report. Instead
 of treating every binary document equally and performing a scoring operation for each one, can we use
 the query itself to guide the search toward documents that are closer to its ideal binary
-pattern, while avoiding unnecessary document scoring operations?
+pattern, while avoiding unnecessary query-document dot product operations?
 
 \subsection{Exploring new methods}
 From the previous section, we know two useful things before we even start searching:
@@ -116,7 +117,7 @@ narrows it down using the query.
 
 The second, Backward Walk, approaches the problem from the opposite direction: it starts
 from a very specific binary pattern and progressively relaxes the constraints until enough
-useful candidates are found.
+useful candidates are found (or, fulfill the estimated recall target).
 
 \subsubsection{Bitplanes}
 Now that we know what the ideal document looks like based on the query, one idea is to
@@ -124,16 +125,16 @@ build a data structure that makes filtering by individual bits very cheap.
 
 Normally, binary documents are stored row by row:
 \begin{verbatim}
-ID 2: 10100
-ID 3: 11001
-ID 4: 11000
+Document ID 2: 10100
+Document ID 3: 11001
+Document ID 4: 11000
 \end{verbatim}
 Instead, we can additionally store an inverted representation of the same bits:
 
 \begin{figure}[H]\centering
 \begin{tikzpicture}
 \node[box,text width=30mm] (q) at (4.7,.25) {$|q|$ priority\\$1\to4\to2\to3\to5$};
-\node[align=left,font=\small] (rows) at (0,-2) {Packed documents\\ID 2: \texttt{10100}\\ID 3: \texttt{11001}\\ID 4: \texttt{11000}};
+\node[align=left,font=\small] (rows) at (0,-2) {Packed documents\\Doc ID 2: \texttt{10100}\\Doc ID 3: \texttt{11001}\\Doc ID 4: \texttt{11000}};
 \node[align=center,font=\small] (planes) at (4.7,-2) {\begin{tabular}{c|ccc}
  & ID 2 & ID 3 & ID 4\\\hline
 Bit 1 &1&1&1\\
@@ -177,7 +178,7 @@ so keeping the documents that match the query is simply
 We immediately reduce the candidate set to IDs 3 and 4.
 
 This is attractive because the filtering itself consists mostly of bitwise operations,
-which modern CPUs can perform very efficiently.
+which modern CPUs can perform very efficiently (and maybe can be optimized using SIMD/auto-vectorization by compiler in the future).
 
 A simplified first version of the idea might therefore look like:
 
@@ -374,15 +375,15 @@ still be 100 words wide. So the next split may still need to process those same 
 \textbf{Bitmap traversal cost.} In general, for a cluster containing $n$ documents, one dense
 bitplane operation costs roughly $O(\ceil{n/64})$ word operations. If we visit $J$ split
 nodes, this becomes approximately $O(J\ceil{n/64})$, before even counting queue operations
-and the final document scoring operations. This was one of the important findings from the earlier
+and the final query-document dot product operations. This was one of the important findings from the earlier
 experiments: reducing the number of documents that undergo a scoring operation does not automatically mean
 reducing total query time, because the bitmap traversal itself can become expensive.
 
 \textbf{Solution 1: Parameter tuning.} This problem is technically something we can optimize.
 For example, we can tune cluster size during coarse routing; number of clusters probed;
-how deep we split; leaf size; when we switch back to ordinary document scoring operations. So Bitplanes
+how deep we split; leaf size; when we switch back to ordinary query-document dot product operations. So Bitplanes
 is not fundamentally broken. The question is finding the point where scoring operations avoided are
-worth more than additional bitmap traversal.
+worth more than additional bitmap traversal. (This will be explored more in the experiments section later)
 
 \textbf{Solution 2: Other approach.} However, thinking about this cost led me to a second idea.
 Bitplanes starts with a large set of documents and repeatedly narrows it down. What if we
@@ -425,7 +426,7 @@ we remove one constraint:
 \draw[arr](p14)--node[right,font=\small]{too few}(p13);
 \node[align=left,font=\small,right=12mm of p14,text width=40mm] {Each $*$ removes a bit constraint.\\Old rows stay inside the larger range.};
 \end{tikzpicture}
-\caption{Illustrative counts: $12+19+35+70=136$ distinct document scoring operations, not $12+31+66+136$.}
+\caption{Illustrative counts: $12+19+35+70=136$ distinct query-document dot product operations, not $12+31+66+136$.}
 \end{figure}
 
 Every step moves to a larger candidate set.
@@ -434,7 +435,7 @@ This is why I call the method Backward Walk: instead of progressively adding con
 to a large candidate set, we begin from a very specific location and progressively walk
 backward toward more general prefixes.
 
-Note that this bit prefix already has an exponential property: if the bits are independent
+Although obvious, I also want to quickly note that this bit prefix already has an exponential property: if the bits are independent
 and equally likely to be 0 or 1, each removed bit doubles the expected number of matching documents.
 
 \begin{figure}[H]\centering
@@ -490,32 +491,32 @@ documents outside the currently visited prefix.
 At first glance, this approach may sound somewhat similar to HNSW because both methods use
 a hierarchy to progressively change the search space.
 
-However, the hierarchy is being used differently.
+However, I think that the hierarchy is being used differently.
 
-HNSW builds a proximity graph. During a query, it begins from sparse upper layers, navigates
+[top -> bottom] HNSW builds a proximity graph. During a query, it begins from sparse upper layers, navigates
 toward promising neighbors, and progressively descends toward the denser bottom layer~\cite{hnsw}.
 
-Backward Walk does not need to navigate between neighboring document vectors. The query
+[bottom -> top] Backward Walk does not need to navigate between neighboring document vectors. The query
 itself directly tells us where to begin:
 \[
 \text{query}\to\text{binary prefix}\to\text{exact prefix lookup}
 \]
-We then broaden that prefix only when necessary.
+We then broaden that prefix only when necessary ("from the bottom, going to the top").
 
-So conceptually:
-\begin{center}\small
-\begin{tabularx}{\linewidth}{@{}lYY@{}}\toprule
- & HNSW & Backward Walk\\\midrule
-Index & Proximity graph & Prefix / key hierarchy\\
-Query start & Sparse graph layer & Query's own binary prefix\\
-Movement & Neighbor $\to$ neighbor & Specific prefix $\to$ broader prefix\\
-Index insertion & Find neighbors + maintain edges & Compute prefix + insert into bucket/range\\
-Search signal & Vector distance & Prefix agreement\\\bottomrule
-\end{tabularx}
-\end{center}
+% So conceptually:
+% \begin{center}\small
+% \begin{tabularx}{\linewidth}{@{}lYY@{}}\toprule
+%  & HNSW & Backward Walk\\\midrule
+% Index & Proximity graph & Prefix / key hierarchy\\
+% Query start & Sparse graph layer & Query's own binary prefix\\
+% Movement & Neighbor $\to$ neighbor & Specific prefix $\to$ broader prefix\\
+% Index insertion & Find neighbors + maintain edges & Compute prefix + insert into bucket/range\\
+% Search signal & Vector distance & Prefix agreement\\\bottomrule
+% \end{tabularx}
+% \end{center}
 
 \textbf{Potential advantage 1: cheaper index construction and updates}\par
-One possible advantage that I would like to investigate further is the cost of adding new documents.
+One possible advantage that I think might happen (and would like to investigate further) is the cost of adding new documents.
 
 For HNSW, inserting a new vector generally requires searching the existing graph to find
 suitable neighbors and then creating or updating graph connections.
@@ -527,11 +528,11 @@ For Backward Walk, the conceptual insertion process is much simpler:
 There is no nearest-neighbor graph that needs to be constructed for each new document.
 So Backward Walk may be attractive for a search index that changes frequently.
 
-I would frame this as a hypothesis to verify, because the actual insertion cost still
+Future work: I think we can do further experiments and treat this as a hypothesis to verify, because the actual insertion cost still
 depends on how the buckets, ranges and on-disk/in-memory index are implemented.
 
-\textbf{Potential advantage 2: Matryoshka prefixes give the relaxation some meaning}\par
-There is also a useful connection with Matryoshka embeddings.
+\textbf{Potential advantage 2: Matryoshka prefixes give the relaxation some "meaning"}\par
+In the method C, I also think that there is also a useful connection with Matryoshka embeddings.
 
 A Matryoshka model is trained so that shorter prefixes of the embedding remain useful
 representations~\cite{mrl}.
@@ -541,9 +542,6 @@ is not simply dropping arbitrary dimensions from an ordinary embedding. We are p
 moving to shorter prefixes of a representation that was specifically trained to retain
 useful information at multiple prefix lengths.
 
-However, this does not mean that the first coordinate is always more important than the
-second, or that the nearest neighbor under 16 dimensions must remain the nearest neighbor
-under 15 dimensions.
+So, this gives us a "reasonable reason" to do Method C, as shorter prefixes remain meaningful, however, of course, the actual recall of each prefix still has to be measured.
 
-Matryoshka training gives us a reason to believe that shorter prefixes remain meaningful;
-the actual recall of each prefix still has to be measured.
+Future work: one optimization that we can do in the future is to find the best balance between number of prefix bits (which is connected to latency) and the recall performance.

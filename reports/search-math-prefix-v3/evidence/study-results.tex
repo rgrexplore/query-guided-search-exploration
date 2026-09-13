@@ -30,15 +30,15 @@ B & 16 & 9 & Leaf 128; budget 8192; deeper ties & 99.20\% & 0.0809\\
 C & 1024 & 78 & Start 4; target 0; exact stop & 99.00\% & 0.1688\\\bottomrule
 \end{tabularx}
 \end{center}
-Time is the median over the three repeated processes' 3,000 query observations. B's process medians range from 0.08025 to 0.08167 ms, below A's 0.19223--0.19708 ms and C's 0.16781--0.16994 ms. B's finite budget gives measured 99.2\% recall, not an exactness guarantee. C proves the answer within its opened clusters, but routing can still miss a global neighbor.
+Time is the median over the three repeated processes' 3,000 query observations. B's process medians range from 0.08025 to 0.08167 ms, below A's 0.19223 to 0.19708 ms and C's 0.16781 to 0.16994 ms. B's finite budget gives measured 99.2\% recall, not an exactness guarantee. C proves the answer within its opened clusters, but routing can still miss a global neighbor.
 
 Now we can inspect the work behind those times. The entries below are mean counts per query; a dash means the operation is not used.
 \begin{center}\small
 \begin{tabular}{@{}lrrrrrr@{}}\toprule
 Method & \shortstack{Opened\\rows} & \shortstack{Scoring\\operations} & \shortstack{Split-mask\\words} & \shortstack{Leaf-mask\\words} & \shortstack{Prefix\\depths} & \shortstack{Boundary\\searches}\\\midrule
-A & 24,181 & 24,181 & --- & --- & --- & ---\\
-B & 295,031 & 818 & 53,693 & 5,838 & --- & ---\\
-C & 41,147 & 26,153 & --- & --- & 3.511 & 494.988\\\bottomrule
+A & 24,181 & 24,181 & n/a & n/a & n/a & n/a\\
+B & 295,031 & 818 & 53,693 & 5,838 & n/a & n/a\\
+C & 41,147 & 26,153 & n/a & n/a & 3.511 & 494.988\\\bottomrule
 \end{tabular}
 \end{center}
 B opens a much larger set than A, but performs scoring operations for only about 0.28\% of those rows across the query batch. It visits about 116 candidate sets per query, including splits and leaves. The extra bitmap work therefore accompanies a large reduction in document scoring operations, and the complete query is faster even than A's separately chosen layout.

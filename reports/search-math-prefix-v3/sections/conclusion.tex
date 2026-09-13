@@ -1,7 +1,7 @@
 \section{Limitations and next steps}
 \Needspace{4\baselineskip}
 \textbf{Environment might be different.}\par
-In this experiment, all three methods are tested using the same CPU implementation and the same document scoring code. This gives us a fair comparison inside this report, but a production system may behave differently. For example, Exa may use a more optimized scorer, different SIMD kernels, or a different memory layout. If document scoring becomes much cheaper, then avoiding a scoring operation also becomes less valuable. One useful extension would be to test the same methods in a more production-like environment, or against an implementation closer to the system described by Exa.
+In this experiment, all three methods are tested using the same CPU implementation and the same "query-document dot product" code. This gives us a fair comparison inside this report, but a production system may behave differently. For example, Exa may use a more optimized scorer, different SIMD kernels, or a different memory layout. If "query-document dot product" becomes much cheaper, then avoiding a scoring operation also becomes less valuable. One useful extension would be to test the same methods in a more production-like environment, or against an implementation closer to the system described by Exa.
 
 \Needspace{5\baselineskip}
 \textbf{Bitplanes are effective for small $K$, but the benefit becomes less predictable as $K$ grows.}\par
