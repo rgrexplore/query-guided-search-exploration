@@ -8,10 +8,18 @@ In this experiment, all three methods are tested using the same CPU implementati
 In the experiments, Bitplanes perform very well when we only need a small number of results. The reason is that many branches can be ignored once we already have a strong top result. However, when $K$ becomes larger, more branches may still contain one of the required documents, so B has to keep exploring and the extra bitmap work can start to dominate. One possible direction for future work is to predict, from the query and the requested $K$, whether Bitplanes are likely to be useful before running them.
 
 \Needspace{4\baselineskip}
+\textbf{Method B: Exploring other values of K}\par
+So far, this report compares $K=1$ and $K=100$. We can also try values in between, such as $K=5$, $10$, $20$ and $50$, to find where Bitplanes starts becoming slower than Method A. As $K$ increases, the current $K$th score value can decrease, so fewer branches can be pruned using their score bounds. B may therefore need more bitmap traversal before performing the ``query-document dot product'' operations for the surviving documents. As discussed in Section~2, this only helps if the operations avoided are more expensive than the additional Bitplane work. By recording $F_B$, split-mask word visits and leaf-mask word visits, we can identify where that balance changes. Each method should use its best tested settings at the same recall requirement, with the documents and queries kept fixed.
+
+\Needspace{4\baselineskip}
 \textbf{Backward Walk still needs further investigation.}\par
 The current version works best when a fairly specific query prefix already contains useful documents. If that prefix is too restrictive, the method has to keep broadening it, and eventually it may expose a large part of the opened clusters. A useful next step would be to study better ways of choosing the starting prefix, the order of the prefix bits, or when to stop broadening.
 
 \Needspace{4\baselineskip}
+\textbf{Method C: Prefix depth}\par
+We can also explore how the starting prefix depth $x$ affects Backward Walk's query time. For example, we can start from 4, 8, 16 or 32 bits, then record the final depth $\ell$, the prefix lookups and the number of ``query-document dot product'' operations, $F_C$. A deeper start exposes fewer documents initially, but it may still need to broaden to the same final prefix. Suppose the opened clusters stay fixed, and both $x=16$ and $x=4$ stop at $\ell=2$. Both perform the same number of ``query-document dot product'' operations, but the first visits 15 prefix depths while the second visits only three. We can also compare the intermediate results with the exact reference to check whether C broadens to find missing results, or continues because the upper bound on unseen score values is still above the current $K$th score value. This would help identify when a deeper start saves enough ``query-document dot product'' operations to repay its additional prefix lookups.
+
+\Needspace{8\baselineskip}
 \textbf{Real retrieval quality still needs to be investigated.}\par
 The recall measured in this report is based on the exact ranking of the binary index being tested. For example, 99\% recall with a 32-bit representation means recovering 99\% of the exact 32-bit binary results. It does not necessarily mean that those results match the original full embedding or the documents that are most relevant to a user. A more complete evaluation should also compare against the full embedding and, where possible, human relevance labels.
 
