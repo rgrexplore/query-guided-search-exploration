@@ -1,0 +1,2470 @@
+[
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-8-seed42",
+    "clusters": 8,
+    "hashes": {
+      "router.json": "988a96e0019f535c5df5bfdc4816618208ac87227ae788e93f960e595c65d217",
+      "assignments.npy": "9fe78c438198f1c2a74b183d76c211aed8931722c39b5fab7989432fa72234ca",
+      "centroids.npy": "0ac2fbd5a470a59e8bf1b15917f20364006b22545fdadc455e06ebaeed620305",
+      "labels.npy": "13f00e7bb2cd8bd0bb6b10f7f544211f9e1fb916222f247790400a7c4af475ef"
+    },
+    "probes": {
+      "1": [
+        2,
+        3,
+        4,
+        6,
+        7,
+        8
+      ],
+      "2": [
+        2,
+        3,
+        4,
+        6,
+        7,
+        8
+      ],
+      "3": [
+        2,
+        3,
+        4,
+        6,
+        7,
+        8
+      ],
+      "5": [
+        2,
+        3,
+        4,
+        6,
+        7,
+        8
+      ],
+      "7": [
+        2,
+        3,
+        4,
+        6,
+        7,
+        8
+      ],
+      "10": [
+        2,
+        3,
+        4,
+        6,
+        7,
+        8
+      ],
+      "15": [
+        2,
+        3,
+        4,
+        6,
+        7,
+        8
+      ],
+      "20": [
+        2,
+        3,
+        4,
+        6,
+        8
+      ],
+      "30": [
+        2,
+        3,
+        4,
+        6,
+        8
+      ],
+      "50": [
+        2,
+        3,
+        4,
+        6,
+        8
+      ],
+      "75": [
+        3,
+        4,
+        6,
+        8
+      ],
+      "100": [
+        3,
+        4,
+        6,
+        8
+      ]
+    },
+    "cutoffs": {
+      "1": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 2,
+          "probes": 2,
+          "routing_recall": 0.83
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 3,
+          "probes": 3,
+          "routing_recall": 0.918
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.963
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.997
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 7,
+          "probes": 7,
+          "routing_recall": 1.0
+        }
+      ],
+      "2": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 2,
+          "probes": 2,
+          "routing_recall": 0.83
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 3,
+          "probes": 3,
+          "routing_recall": 0.92
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.9655
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.9955
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 7,
+          "probes": 7,
+          "routing_recall": 0.9995
+        }
+      ],
+      "3": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 2,
+          "probes": 2,
+          "routing_recall": 0.8283333333333334
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 3,
+          "probes": 3,
+          "routing_recall": 0.9196666666666666
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.966
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.9963333333333333
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 7,
+          "probes": 7,
+          "routing_recall": 0.9996666666666667
+        }
+      ],
+      "5": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 2,
+          "probes": 2,
+          "routing_recall": 0.829
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 3,
+          "probes": 3,
+          "routing_recall": 0.9208
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.9654
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.9962
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 7,
+          "probes": 7,
+          "routing_recall": 0.9998
+        }
+      ],
+      "7": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 2,
+          "probes": 2,
+          "routing_recall": 0.822
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 3,
+          "probes": 3,
+          "routing_recall": 0.9197142857142857
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.9662857142857143
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.9954285714285714
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 7,
+          "probes": 7,
+          "routing_recall": 0.9994285714285714
+        }
+      ],
+      "10": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 2,
+          "probes": 2,
+          "routing_recall": 0.8206
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 3,
+          "probes": 3,
+          "routing_recall": 0.9195
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.9665
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.9953
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 7,
+          "probes": 7,
+          "routing_recall": 0.9994
+        }
+      ],
+      "15": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 2,
+          "probes": 2,
+          "routing_recall": 0.8138
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 3,
+          "probes": 3,
+          "routing_recall": 0.9133333333333333
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.9629333333333333
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.9948666666666667
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 7,
+          "probes": 7,
+          "routing_recall": 0.9992
+        }
+      ],
+      "20": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 2,
+          "probes": 2,
+          "routing_recall": 0.81365
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 3,
+          "probes": 3,
+          "routing_recall": 0.9123
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.9622
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.9944
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 8,
+          "probes": 8,
+          "routing_recall": 1.0
+        }
+      ],
+      "30": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 2,
+          "probes": 2,
+          "routing_recall": 0.8079333333333333
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 3,
+          "probes": 3,
+          "routing_recall": 0.9076
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.9593666666666667
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.9940333333333333
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 8,
+          "probes": 8,
+          "routing_recall": 1.0
+        }
+      ],
+      "50": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 2,
+          "probes": 2,
+          "routing_recall": 0.80056
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 3,
+          "probes": 3,
+          "routing_recall": 0.90348
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.95758
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.99362
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 8,
+          "probes": 8,
+          "routing_recall": 1.0
+        }
+      ],
+      "75": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 3,
+          "probes": 3,
+          "routing_recall": 0.9006266666666667
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 3,
+          "probes": 3,
+          "routing_recall": 0.9006266666666667
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.9564666666666667
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.99328
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 8,
+          "probes": 8,
+          "routing_recall": 1.0
+        }
+      ],
+      "100": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 3,
+          "probes": 3,
+          "routing_recall": 0.89793
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.95535
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.95535
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.9931
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 8,
+          "probes": 8,
+          "routing_recall": 1.0
+        }
+      ]
+    },
+    "training_representation": "binary"
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-32-seed42",
+    "clusters": 32,
+    "hashes": {
+      "router.json": "fc9c66f56065345f94181b6f23a8d15567769881f520d4599da59f7f1c2c891f",
+      "assignments.npy": "36209d169c3ceafb6c333fed5d45919938f23b01453eb9b0cd0a54e68dc9e48e",
+      "centroids.npy": "4407559684f09953207cb407495a32c76d762c8f05b6c843b0cac0cd605aa26d",
+      "labels.npy": "d7e613f1090f555b5641f2b446191b4b16b191e7a4ebfee85716049073143863"
+    },
+    "probes": {
+      "1": [
+        4,
+        6,
+        9,
+        15,
+        21,
+        32
+      ],
+      "2": [
+        4,
+        6,
+        8,
+        14,
+        21,
+        32
+      ],
+      "3": [
+        4,
+        6,
+        8,
+        14,
+        24,
+        32
+      ],
+      "5": [
+        4,
+        6,
+        8,
+        14,
+        24,
+        32
+      ],
+      "7": [
+        4,
+        6,
+        8,
+        14,
+        22,
+        32
+      ],
+      "10": [
+        4,
+        6,
+        9,
+        15,
+        23,
+        32
+      ],
+      "15": [
+        4,
+        6,
+        9,
+        15,
+        23,
+        32
+      ],
+      "20": [
+        4,
+        6,
+        9,
+        15,
+        22,
+        32
+      ],
+      "30": [
+        4,
+        7,
+        9,
+        15,
+        22,
+        32
+      ],
+      "50": [
+        4,
+        7,
+        9,
+        16,
+        23,
+        32
+      ],
+      "75": [
+        4,
+        7,
+        10,
+        16,
+        23,
+        32
+      ],
+      "100": [
+        5,
+        7,
+        10,
+        16,
+        23,
+        32
+      ]
+    },
+    "cutoffs": {
+      "1": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.833
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.917
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 9,
+          "probes": 9,
+          "routing_recall": 0.959
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 15,
+          "probes": 15,
+          "routing_recall": 0.99
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 21,
+          "probes": 21,
+          "routing_recall": 0.999
+        }
+      ],
+      "2": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.8415
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.9195
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 8,
+          "probes": 8,
+          "routing_recall": 0.9535
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 14,
+          "probes": 14,
+          "routing_recall": 0.9905
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 21,
+          "probes": 21,
+          "routing_recall": 0.999
+        }
+      ],
+      "3": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.8446666666666667
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.921
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 8,
+          "probes": 8,
+          "routing_recall": 0.9546666666666667
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 14,
+          "probes": 14,
+          "routing_recall": 0.9903333333333333
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 24,
+          "probes": 24,
+          "routing_recall": 0.999
+        }
+      ],
+      "5": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.8426
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.9142
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 8,
+          "probes": 8,
+          "routing_recall": 0.9524
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 14,
+          "probes": 14,
+          "routing_recall": 0.9904
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 24,
+          "probes": 24,
+          "routing_recall": 0.9992
+        }
+      ],
+      "7": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.8414285714285714
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.9128571428571428
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 8,
+          "probes": 8,
+          "routing_recall": 0.9507142857142857
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 14,
+          "probes": 14,
+          "routing_recall": 0.9904285714285714
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 22,
+          "probes": 22,
+          "routing_recall": 0.999
+        }
+      ],
+      "10": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.8377
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.9088
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 9,
+          "probes": 9,
+          "routing_recall": 0.9579
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 15,
+          "probes": 15,
+          "routing_recall": 0.993
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 23,
+          "probes": 23,
+          "routing_recall": 0.9993
+        }
+      ],
+      "15": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.8311333333333333
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.9056
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 9,
+          "probes": 9,
+          "routing_recall": 0.9570666666666666
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 15,
+          "probes": 15,
+          "routing_recall": 0.9917333333333334
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 23,
+          "probes": 23,
+          "routing_recall": 0.9992
+        }
+      ],
+      "20": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.8262
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.90315
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 9,
+          "probes": 9,
+          "routing_recall": 0.95625
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 15,
+          "probes": 15,
+          "routing_recall": 0.99155
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 22,
+          "probes": 22,
+          "routing_recall": 0.99915
+        }
+      ],
+      "30": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.8198666666666666
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 7,
+          "probes": 7,
+          "routing_recall": 0.9234
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 9,
+          "probes": 9,
+          "routing_recall": 0.954
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 15,
+          "probes": 15,
+          "routing_recall": 0.9911
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 22,
+          "probes": 22,
+          "routing_recall": 0.9992333333333333
+        }
+      ],
+      "50": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.81052
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 7,
+          "probes": 7,
+          "routing_recall": 0.91878
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 9,
+          "probes": 9,
+          "routing_recall": 0.95074
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 16,
+          "probes": 16,
+          "routing_recall": 0.9919
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 23,
+          "probes": 23,
+          "routing_recall": 0.99938
+        }
+      ],
+      "75": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.8039066666666667
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 7,
+          "probes": 7,
+          "routing_recall": 0.9146666666666666
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 10,
+          "probes": 10,
+          "routing_recall": 0.95992
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 16,
+          "probes": 16,
+          "routing_recall": 0.9909466666666666
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 23,
+          "probes": 23,
+          "routing_recall": 0.9991333333333333
+        }
+      ],
+      "100": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 5,
+          "probes": 5,
+          "routing_recall": 0.84978
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 7,
+          "probes": 7,
+          "routing_recall": 0.91128
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 10,
+          "probes": 10,
+          "routing_recall": 0.95769
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 16,
+          "probes": 16,
+          "routing_recall": 0.99027
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 23,
+          "probes": 23,
+          "routing_recall": 0.99906
+        }
+      ]
+    },
+    "training_representation": "binary"
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-128-seed42",
+    "clusters": 128,
+    "hashes": {
+      "router.json": "7797a4bc5b0860709da191baba98808e947e47219e87da759d6c64be63b8ea6a",
+      "assignments.npy": "b7be5d54755d05cc6001f06a2b1c1c0f87a05d6491813ad15fa3d21c487ce56a",
+      "centroids.npy": "4e069dcf8446bab1f83fd8a90854ed338150842cb6fca111421e41fbabbc92c5",
+      "labels.npy": "384b73789fda94f946b5b2e1d02a26d749024460bccef47e00a20042b00aee1d"
+    },
+    "probes": {
+      "1": [
+        6,
+        10,
+        17,
+        37,
+        70,
+        128
+      ],
+      "2": [
+        6,
+        10,
+        17,
+        35,
+        70,
+        128
+      ],
+      "3": [
+        6,
+        11,
+        16,
+        33,
+        61,
+        128
+      ],
+      "5": [
+        6,
+        11,
+        17,
+        35,
+        66,
+        128
+      ],
+      "7": [
+        6,
+        12,
+        17,
+        36,
+        68,
+        128
+      ],
+      "10": [
+        7,
+        12,
+        18,
+        36,
+        69,
+        128
+      ],
+      "15": [
+        7,
+        12,
+        18,
+        36,
+        69,
+        128
+      ],
+      "20": [
+        7,
+        12,
+        19,
+        37,
+        69,
+        128
+      ],
+      "30": [
+        7,
+        13,
+        19,
+        37,
+        68,
+        128
+      ],
+      "50": [
+        8,
+        13,
+        20,
+        39,
+        69,
+        128
+      ],
+      "75": [
+        8,
+        14,
+        22,
+        41,
+        69,
+        128
+      ],
+      "100": [
+        8,
+        15,
+        22,
+        42,
+        71,
+        128
+      ]
+    },
+    "cutoffs": {
+      "1": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.825
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 10,
+          "probes": 10,
+          "routing_recall": 0.901
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 17,
+          "probes": 17,
+          "routing_recall": 0.956
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 37,
+          "probes": 37,
+          "routing_recall": 0.99
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 70,
+          "probes": 70,
+          "routing_recall": 0.999
+        }
+      ],
+      "2": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.823
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 10,
+          "probes": 10,
+          "routing_recall": 0.901
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 17,
+          "probes": 17,
+          "routing_recall": 0.955
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 35,
+          "probes": 35,
+          "routing_recall": 0.99
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 70,
+          "probes": 70,
+          "routing_recall": 0.999
+        }
+      ],
+      "3": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.8223333333333334
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 11,
+          "probes": 11,
+          "routing_recall": 0.908
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 16,
+          "probes": 16,
+          "routing_recall": 0.9523333333333334
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 33,
+          "probes": 33,
+          "routing_recall": 0.9903333333333333
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 61,
+          "probes": 61,
+          "routing_recall": 0.999
+        }
+      ],
+      "5": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.8124
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 11,
+          "probes": 11,
+          "routing_recall": 0.9032
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 17,
+          "probes": 17,
+          "routing_recall": 0.9542
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 35,
+          "probes": 35,
+          "routing_recall": 0.9902
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 66,
+          "probes": 66,
+          "routing_recall": 0.999
+        }
+      ],
+      "7": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.8031428571428572
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 12,
+          "probes": 12,
+          "routing_recall": 0.9101428571428571
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 17,
+          "probes": 17,
+          "routing_recall": 0.9515714285714286
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 36,
+          "probes": 36,
+          "routing_recall": 0.9907142857142858
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 68,
+          "probes": 68,
+          "routing_recall": 0.999
+        }
+      ],
+      "10": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 7,
+          "probes": 7,
+          "routing_recall": 0.8242
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 12,
+          "probes": 12,
+          "routing_recall": 0.9082
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 18,
+          "probes": 18,
+          "routing_recall": 0.954
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 36,
+          "probes": 36,
+          "routing_recall": 0.9904
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 69,
+          "probes": 69,
+          "routing_recall": 0.999
+        }
+      ],
+      "15": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 7,
+          "probes": 7,
+          "routing_recall": 0.8214
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 12,
+          "probes": 12,
+          "routing_recall": 0.9062666666666667
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 18,
+          "probes": 18,
+          "routing_recall": 0.9516666666666667
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 36,
+          "probes": 36,
+          "routing_recall": 0.9902
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 69,
+          "probes": 69,
+          "routing_recall": 0.9991333333333333
+        }
+      ],
+      "20": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 7,
+          "probes": 7,
+          "routing_recall": 0.8148
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 12,
+          "probes": 12,
+          "routing_recall": 0.902
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 19,
+          "probes": 19,
+          "routing_recall": 0.9542
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 37,
+          "probes": 37,
+          "routing_recall": 0.99045
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 69,
+          "probes": 69,
+          "routing_recall": 0.99915
+        }
+      ],
+      "30": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 7,
+          "probes": 7,
+          "routing_recall": 0.8073333333333333
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 13,
+          "probes": 13,
+          "routing_recall": 0.9085666666666666
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 19,
+          "probes": 19,
+          "routing_recall": 0.9517
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 37,
+          "probes": 37,
+          "routing_recall": 0.9900333333333333
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 68,
+          "probes": 68,
+          "routing_recall": 0.9990333333333333
+        }
+      ],
+      "50": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 8,
+          "probes": 8,
+          "routing_recall": 0.81988
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 13,
+          "probes": 13,
+          "routing_recall": 0.90034
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 20,
+          "probes": 20,
+          "routing_recall": 0.95042
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 39,
+          "probes": 39,
+          "routing_recall": 0.99026
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 69,
+          "probes": 69,
+          "routing_recall": 0.99918
+        }
+      ],
+      "75": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 8,
+          "probes": 8,
+          "routing_recall": 0.8106533333333333
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 14,
+          "probes": 14,
+          "routing_recall": 0.90156
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 22,
+          "probes": 22,
+          "routing_recall": 0.9534133333333333
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 41,
+          "probes": 41,
+          "routing_recall": 0.9903333333333333
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 69,
+          "probes": 69,
+          "routing_recall": 0.9990933333333334
+        }
+      ],
+      "100": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 8,
+          "probes": 8,
+          "routing_recall": 0.80257
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 15,
+          "probes": 15,
+          "routing_recall": 0.90614
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 22,
+          "probes": 22,
+          "routing_recall": 0.95024
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 42,
+          "probes": 42,
+          "routing_recall": 0.99041
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 71,
+          "probes": 71,
+          "routing_recall": 0.99914
+        }
+      ]
+    },
+    "training_representation": "binary"
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-512-seed42",
+    "clusters": 512,
+    "hashes": {
+      "router.json": "2d6517596d209af4688bbd7923f19379c2d80523e6924a7b9741a926db06976b",
+      "assignments.npy": "df6fe9a6a08dffa4a541288513be8109082fa5a19b2dbfd4534be7f4c7e25e55",
+      "centroids.npy": "7c2a50f11377cf673fb1646facf28c3acd65aaf66e1a253dca340744c029de6d",
+      "labels.npy": "b3da016722d9659ca1406b512c68a7f4562fa13695e524997a96d22d4d33b6a4"
+    },
+    "probes": {
+      "1": [
+        8,
+        16,
+        30,
+        63,
+        111,
+        512
+      ],
+      "2": [
+        9,
+        16,
+        31,
+        68,
+        123,
+        512
+      ],
+      "3": [
+        9,
+        17,
+        32,
+        71,
+        134,
+        512
+      ],
+      "5": [
+        9,
+        18,
+        33,
+        75,
+        139,
+        512
+      ],
+      "7": [
+        10,
+        19,
+        34,
+        75,
+        146,
+        512
+      ],
+      "10": [
+        10,
+        20,
+        35,
+        82,
+        154,
+        512
+      ],
+      "15": [
+        11,
+        21,
+        37,
+        86,
+        171,
+        512
+      ],
+      "20": [
+        11,
+        22,
+        38,
+        87,
+        172,
+        512
+      ],
+      "30": [
+        12,
+        24,
+        40,
+        89,
+        179,
+        512
+      ],
+      "50": [
+        13,
+        26,
+        44,
+        97,
+        185,
+        512
+      ],
+      "75": [
+        14,
+        28,
+        47,
+        102,
+        191,
+        512
+      ],
+      "100": [
+        15,
+        30,
+        50,
+        107,
+        200,
+        512
+      ]
+    },
+    "cutoffs": {
+      "1": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 8,
+          "probes": 8,
+          "routing_recall": 0.814
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 16,
+          "probes": 16,
+          "routing_recall": 0.904
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 30,
+          "probes": 30,
+          "routing_recall": 0.951
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 63,
+          "probes": 63,
+          "routing_recall": 0.99
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 111,
+          "probes": 111,
+          "routing_recall": 0.999
+        }
+      ],
+      "2": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 9,
+          "probes": 9,
+          "routing_recall": 0.824
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 16,
+          "probes": 16,
+          "routing_recall": 0.9015
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 31,
+          "probes": 31,
+          "routing_recall": 0.9525
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 68,
+          "probes": 68,
+          "routing_recall": 0.99
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 123,
+          "probes": 123,
+          "routing_recall": 0.999
+        }
+      ],
+      "3": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 9,
+          "probes": 9,
+          "routing_recall": 0.8116666666666666
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 17,
+          "probes": 17,
+          "routing_recall": 0.9003333333333333
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 32,
+          "probes": 32,
+          "routing_recall": 0.9503333333333334
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 71,
+          "probes": 71,
+          "routing_recall": 0.99
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 134,
+          "probes": 134,
+          "routing_recall": 0.999
+        }
+      ],
+      "5": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 9,
+          "probes": 9,
+          "routing_recall": 0.8046
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 18,
+          "probes": 18,
+          "routing_recall": 0.9014
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 33,
+          "probes": 33,
+          "routing_recall": 0.9528
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 74,
+          "probes": 75,
+          "routing_recall": 0.9908
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 139,
+          "probes": 139,
+          "routing_recall": 0.999
+        }
+      ],
+      "7": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 10,
+          "probes": 10,
+          "routing_recall": 0.8142857142857143
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 19,
+          "probes": 19,
+          "routing_recall": 0.9027142857142857
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 34,
+          "probes": 34,
+          "routing_recall": 0.9504285714285714
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 75,
+          "probes": 75,
+          "routing_recall": 0.9901428571428571
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 146,
+          "probes": 146,
+          "routing_recall": 0.999
+        }
+      ],
+      "10": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 10,
+          "probes": 10,
+          "routing_recall": 0.8083
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 20,
+          "probes": 20,
+          "routing_recall": 0.9031
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 35,
+          "probes": 35,
+          "routing_recall": 0.9507
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 82,
+          "probes": 82,
+          "routing_recall": 0.9902
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 154,
+          "probes": 154,
+          "routing_recall": 0.999
+        }
+      ],
+      "15": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 11,
+          "probes": 11,
+          "routing_recall": 0.8112
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 21,
+          "probes": 21,
+          "routing_recall": 0.9011333333333333
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 37,
+          "probes": 37,
+          "routing_recall": 0.9504666666666667
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 86,
+          "probes": 86,
+          "routing_recall": 0.9904666666666667
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 171,
+          "probes": 171,
+          "routing_recall": 0.999
+        }
+      ],
+      "20": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 11,
+          "probes": 11,
+          "routing_recall": 0.80405
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 22,
+          "probes": 22,
+          "routing_recall": 0.90115
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 38,
+          "probes": 38,
+          "routing_recall": 0.95015
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 87,
+          "probes": 87,
+          "routing_recall": 0.99005
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 172,
+          "probes": 172,
+          "routing_recall": 0.999
+        }
+      ],
+      "30": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 12,
+          "probes": 12,
+          "routing_recall": 0.8081
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 24,
+          "probes": 24,
+          "routing_recall": 0.9037666666666667
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 40,
+          "probes": 40,
+          "routing_recall": 0.9505
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 89,
+          "probes": 89,
+          "routing_recall": 0.9900666666666667
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 179,
+          "probes": 179,
+          "routing_recall": 0.9990333333333333
+        }
+      ],
+      "50": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 13,
+          "probes": 13,
+          "routing_recall": 0.80394
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 26,
+          "probes": 26,
+          "routing_recall": 0.90128
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 44,
+          "probes": 44,
+          "routing_recall": 0.95022
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 97,
+          "probes": 97,
+          "routing_recall": 0.99008
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 185,
+          "probes": 185,
+          "routing_recall": 0.99902
+        }
+      ],
+      "75": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 14,
+          "probes": 14,
+          "routing_recall": 0.8037866666666666
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 28,
+          "probes": 28,
+          "routing_recall": 0.9005733333333333
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 47,
+          "probes": 47,
+          "routing_recall": 0.9509333333333333
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 102,
+          "probes": 102,
+          "routing_recall": 0.9900933333333334
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 191,
+          "probes": 191,
+          "routing_recall": 0.999
+        }
+      ],
+      "100": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 15,
+          "probes": 15,
+          "routing_recall": 0.80276
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 30,
+          "probes": 30,
+          "routing_recall": 0.90173
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 50,
+          "probes": 50,
+          "routing_recall": 0.9514
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 107,
+          "probes": 107,
+          "routing_recall": 0.99017
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 200,
+          "probes": 200,
+          "routing_recall": 0.99904
+        }
+      ]
+    },
+    "training_representation": "binary"
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32/routers/ivf-binary-8192-seed42",
+    "clusters": 8192,
+    "hashes": {
+      "router.json": "97b738582d1f2b1875344c834e90b2e5951341ef8c2fdd050bd506ba8ec84084",
+      "assignments.npy": "7ccb3167364d52ec1cc4960b1368c35751df0b32bc830852361a674d92dfe051",
+      "centroids.npy": "45c496887739cc4811287d41f0cb465d732d3113b81b079cfa5fd0a9d8178724",
+      "labels.npy": "bafe786d30e6daa96194badfc0e797b656791f4ab8b20afe826e1267336c04ca"
+    },
+    "probes": {
+      "1": [
+        17,
+        39,
+        79,
+        216,
+        409,
+        8192
+      ],
+      "2": [
+        19,
+        41,
+        84,
+        311,
+        796,
+        8192
+      ],
+      "3": [
+        19,
+        44,
+        93,
+        304,
+        860,
+        8192
+      ],
+      "5": [
+        20,
+        50,
+        101,
+        353,
+        1058,
+        8192
+      ],
+      "7": [
+        22,
+        53,
+        108,
+        328,
+        1058,
+        8192
+      ],
+      "10": [
+        25,
+        58,
+        117,
+        362,
+        1066,
+        8192
+      ],
+      "15": [
+        27,
+        64,
+        128,
+        378,
+        1086,
+        8192
+      ],
+      "20": [
+        29,
+        68,
+        134,
+        401,
+        1156,
+        8192
+      ],
+      "30": [
+        33,
+        75,
+        145,
+        415,
+        1205,
+        8192
+      ],
+      "50": [
+        39,
+        88,
+        169,
+        475,
+        1256,
+        8192
+      ],
+      "75": [
+        46,
+        103,
+        192,
+        534,
+        1342,
+        8192
+      ],
+      "100": [
+        51,
+        113,
+        207,
+        558,
+        1362,
+        8192
+      ]
+    },
+    "cutoffs": {
+      "1": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 17,
+          "probes": 17,
+          "routing_recall": 0.802
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 39,
+          "probes": 39,
+          "routing_recall": 0.9
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 79,
+          "probes": 79,
+          "routing_recall": 0.952
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 216,
+          "probes": 216,
+          "routing_recall": 0.99
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 409,
+          "probes": 409,
+          "routing_recall": 0.999
+        }
+      ],
+      "2": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 19,
+          "probes": 19,
+          "routing_recall": 0.8105
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 41,
+          "probes": 41,
+          "routing_recall": 0.902
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 84,
+          "probes": 84,
+          "routing_recall": 0.95
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 311,
+          "probes": 311,
+          "routing_recall": 0.9905
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 796,
+          "probes": 796,
+          "routing_recall": 0.999
+        }
+      ],
+      "3": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 19,
+          "probes": 19,
+          "routing_recall": 0.803
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 44,
+          "probes": 44,
+          "routing_recall": 0.9006666666666666
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 93,
+          "probes": 93,
+          "routing_recall": 0.9503333333333334
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 304,
+          "probes": 304,
+          "routing_recall": 0.99
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 860,
+          "probes": 860,
+          "routing_recall": 0.999
+        }
+      ],
+      "5": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 20,
+          "probes": 20,
+          "routing_recall": 0.8004
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 50,
+          "probes": 50,
+          "routing_recall": 0.9012
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 101,
+          "probes": 101,
+          "routing_recall": 0.9502
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 353,
+          "probes": 353,
+          "routing_recall": 0.99
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 1058,
+          "probes": 1058,
+          "routing_recall": 0.9992
+        }
+      ],
+      "7": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 22,
+          "probes": 22,
+          "routing_recall": 0.8021428571428572
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 53,
+          "probes": 53,
+          "routing_recall": 0.9018571428571428
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 108,
+          "probes": 108,
+          "routing_recall": 0.9501428571428572
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 328,
+          "probes": 328,
+          "routing_recall": 0.99
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 1058,
+          "probes": 1058,
+          "routing_recall": 0.9991428571428571
+        }
+      ],
+      "10": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 25,
+          "probes": 25,
+          "routing_recall": 0.8049
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 58,
+          "probes": 58,
+          "routing_recall": 0.9008
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 117,
+          "probes": 117,
+          "routing_recall": 0.9502
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 362,
+          "probes": 362,
+          "routing_recall": 0.99
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 1065,
+          "probes": 1066,
+          "routing_recall": 0.999
+        }
+      ],
+      "15": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 27,
+          "probes": 27,
+          "routing_recall": 0.8026666666666666
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 64,
+          "probes": 64,
+          "routing_recall": 0.9018
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 128,
+          "probes": 128,
+          "routing_recall": 0.9506666666666667
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 378,
+          "probes": 378,
+          "routing_recall": 0.99
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 1086,
+          "probes": 1086,
+          "routing_recall": 0.999
+        }
+      ],
+      "20": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 29,
+          "probes": 29,
+          "routing_recall": 0.8013
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 68,
+          "probes": 68,
+          "routing_recall": 0.90015
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 134,
+          "probes": 134,
+          "routing_recall": 0.9505
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 401,
+          "probes": 401,
+          "routing_recall": 0.99
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 1156,
+          "probes": 1156,
+          "routing_recall": 0.99905
+        }
+      ],
+      "30": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 33,
+          "probes": 33,
+          "routing_recall": 0.8034333333333333
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 75,
+          "probes": 75,
+          "routing_recall": 0.9001333333333333
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 145,
+          "probes": 145,
+          "routing_recall": 0.9502333333333334
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 415,
+          "probes": 415,
+          "routing_recall": 0.99
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 1204,
+          "probes": 1205,
+          "routing_recall": 0.999
+        }
+      ],
+      "50": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 39,
+          "probes": 39,
+          "routing_recall": 0.80354
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 88,
+          "probes": 88,
+          "routing_recall": 0.9
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 169,
+          "probes": 169,
+          "routing_recall": 0.95028
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 475,
+          "probes": 475,
+          "routing_recall": 0.99002
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 1256,
+          "probes": 1256,
+          "routing_recall": 0.999
+        }
+      ],
+      "75": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 45,
+          "probes": 46,
+          "routing_recall": 0.8041333333333334
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 103,
+          "probes": 103,
+          "routing_recall": 0.9009866666666667
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 192,
+          "probes": 192,
+          "routing_recall": 0.95024
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 533,
+          "probes": 534,
+          "routing_recall": 0.9900533333333333
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 1342,
+          "probes": 1342,
+          "routing_recall": 0.9990133333333333
+        }
+      ],
+      "100": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 51,
+          "probes": 51,
+          "routing_recall": 0.80195
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 113,
+          "probes": 113,
+          "routing_recall": 0.90054
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 207,
+          "probes": 207,
+          "routing_recall": 0.95032
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 558,
+          "probes": 558,
+          "routing_recall": 0.99001
+        },
+        {
+          "target": 0.999,
+          "rank_cutoff": 1362,
+          "probes": 1362,
+          "routing_recall": 0.999
+        }
+      ]
+    },
+    "training_representation": "binary"
+  }
+]

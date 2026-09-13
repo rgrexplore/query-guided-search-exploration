@@ -1,0 +1,7 @@
+{
+  "original_jobs": 15,
+  "jobs": 260,
+  "settings": 1560,
+  "maximum_clustered_settings_per_job": 6,
+  "scope": "Same settings, documents and queries; smaller independent processes. A time-limited process is retained as incomplete, not a measured loss."
+}

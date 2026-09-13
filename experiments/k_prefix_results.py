@@ -83,7 +83,7 @@ def plot_k(rows):
 
 def summarize_local():
     groups=defaultdict(list)
-    for folder in sorted(FOLDER.glob("timing-*")):
+    for folder in sorted(path for path in FOLDER.glob("timing-*") if path.is_dir()):
         assert (folder/"complete.json").exists(),folder
         with (folder/"queries.jsonl").open() as source:
             for line in source:
@@ -105,6 +105,20 @@ def summarize_local():
                 item[field]=sum(r.get(field,0) for r in rows)/len(rows)
         summary.append(item)
     save_json(FOLDER/"timing-summary.json",summary)
+    # Use a search condition to define these cases, never whether a timing won.
+    deep = groups[("prefix", "prefix-k1-depth32-exact")]
+    immediate = {r["query"] for r in deep if r["repetition"]==0 and r["final_depth"]==32}
+    cases = []
+    for label, query_ids in [("All queries", set(range(1000))),
+                             ("Stop at the full 32-bit prefix", immediate),
+                             ("Needs a shorter prefix", set(range(1000))-immediate)]:
+        for start in [4,32]:
+            own = [r for r in groups[("prefix", f"prefix-k1-depth{start}-exact")] if r["query"] in query_ids]
+            times = [float(np.median([r["local_ms"] for r in own if r["repetition"]==rep])) for rep in range(3)]
+            cases.append(dict(group=label, queries=len(query_ids), start_depth=start,
+                median_ms=float(np.median(times)), min_ms=min(times), max_ms=max(times),
+                mean_documents_scored=float(np.mean([r["documents_scored"] for r in own]))))
+    write_csv(FOLDER/"full-prefix-cases.csv",cases)
     return summary
 
 

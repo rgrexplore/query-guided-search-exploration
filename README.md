@@ -1,127 +1,168 @@
-# Search binary embeddings
+# Reimagining Search Using the Query’s Ideal Bit Pattern
 
-This project compares three ways to search the same binary document codes:
+*Exploring Bitplanes and Backward Walk*
 
-| Method | What happens after selecting clusters |
-|---|---|
-| A: full scan | Score every document in the opened clusters. |
-| B: Bitplanes | Split document masks by query signs, keep alternative branches, and score the remaining rows. |
-| C: Backward Walk | Start with the query's sign prefix, shorten it one bit at a time, and score only newly included rows. |
+The query tells us which binary document pattern would give the highest score value,
+and how much each mismatched bit would reduce it. Can we use that information to find
+the best stored documents with fewer document scoring operations?
 
-The starting point is [Exa's vector database description](https://exa.ai/blog/building-web-scale-vector-db):
-binary document vectors, floating-point query vectors, and a lookup table for scoring.
-The code here is a CPU experiment using one common scorer for all three methods.
+This repository explores that question with a C++ implementation, Python experiments,
+and a report that follows the calculations through to measured results.
 
-Start with the [paper](output/pdf/search-methods-prefix-v3.pdf), then try the
-[three-document example](examples/prefix_search.py). It prints the returned IDs,
-document scores, mask work, prefix lookups and stored bytes. It needs no dataset download.
+**[Read the report](output/pdf/search-methods-prefix-v3.pdf)** ·
+**[Try the small example](examples/prefix_search.py)** ·
+**[Explore the results](results/prefix-study-2026-09-13/README.md)**
 
-## Install and run the example
+## The idea
 
-Use Python 3.12 and a C++20 compiler. On macOS, the Xcode command-line tools provide
-the compiler. `requirements.lock` records the tested Python environment.
+Consider this query:
+
+```text
+Query values:       [0.7, -0.2, 0.1]
+Ideal bit pattern:  [  1,    0,   1]
+```
+
+The document bit `1` means `+1`; `0` means `-1`. The pattern `101` therefore gives
+`0.7 + 0.2 + 0.1 = 1.0`, the highest possible score value for this query.
+Getting the first bit wrong reduces that value by `1.4`; getting the last bit wrong
+reduces it by only `0.2`.
+
+We know this before examining the documents. We can use it to choose which branches
+to visit, which prefixes to look up, and when an unexplored set cannot improve the
+results. The ideal pattern might not exist in the collection, so we still need to
+find the best documents that are actually stored.
+
+Here, **a document scoring operation** is the computation for one document;
+**a score value** is its numerical result.
+
+## Three ways to search
+
+All three methods start by selecting clusters. The difference is how they search
+the documents inside them.
+
+```mermaid
+flowchart TD
+    Q[Query embedding] --> R[Select clusters]
+    R --> A[A: full scan]
+    R --> B[B: Bitplanes]
+    R --> C[C: Backward Walk]
+    A --> AS[Scoring operations for every opened document]
+    B --> BS[Split masks, keep alternatives, and use score bounds]
+    BS --> BF[Scoring operations for surviving documents]
+    C --> CS[Look up a prefix, then shorten it when needed]
+    CS --> CF[Scoring operations for newly included documents]
+    AS --> K[Keep the best K results]
+    BF --> K
+    CF --> K
+    classDef scan fill:#eaf2f8,stroke:#286493,color:#17354b;
+    classDef bitplanes fill:#fff1e6,stroke:#c36620,color:#17354b;
+    classDef prefix fill:#f3edf9,stroke:#7850a4,color:#17354b;
+    class A,AS scan;
+    class B,BS,BF bitplanes;
+    class C,CS,CF prefix;
+```
+
+| Method | What it does | Additional work |
+|---|---|---|
+| **A: full scan** | Performs a scoring operation for every document in the opened clusters. | No additional filtering inside a cluster. |
+| **B: Bitplanes** | Uses query signs and magnitudes to split document masks, retain alternatives, and skip branches when possible. | Reading masks and managing branches. |
+| **C: Backward Walk** | Starts at the query’s sign prefix, shortens it one bit at a time, and processes only newly included documents. | Prefix lookups and range updates. |
+
+B and C reuse A’s full scoring function. Their additional search work is worthwhile
+only when the document scoring operations avoided save more time than that work costs.
+
+## Results in the report
+
+The broad study uses two collections and models, with **1,000 fixed queries per pool**:
+
+| Collection | Documents | Embedding model | Bits per document |
+|---|---:|---|---|
+| BEIR Quora | 522,931 | Qwen3-Embedding-0.6B | 32, 256, 1024 |
+| MS MARCO passages | 1,000,000 | Nomic embed-text-v1.5 | 64, 256, 768 |
+
+Within each pool, A, B and C receive the same documents, queries and exact reference
+results. Each method chooses its fastest tested settings that meet the same recall
+requirement and the same 32 GB process-memory limit. Queries run one at a time on an
+Apple M5 Max with 128 GiB RAM. Query embeddings are cached; the times below include
+cluster selection and index search.
+
+For **Quora with 32-bit Qwen embeddings, one returned result, and a 99% recall target**:
+
+| Method | Clusters / probes | Achieved recall | Repeated median time |
+|---|---|---:|---:|
+| A: full scan | 4096 / 180 | 99.0% | 0.195 ms |
+| B: Bitplanes | 16 / 9 | 99.2% | **0.081 ms** |
+| C: Backward Walk | 1024 / 78 | 99.0% | 0.169 ms |
+
+B is about **2.4 times faster than A** in this setup. It opens much larger clusters
+but performs only about 818 document scoring operations per query. The report also
+compares local search with the **same opened clusters** to separate that benefit
+from changes in routing.
+
+![Recall and query time for Qwen32, comparing one and 100 returned documents](reports/search-math-prefix-v3/figures/qwen32-comparison.png)
+
+The graph selects the fastest completed settings meeting each recall requirement;
+the table reports repeated measurements of the selected settings. The time axes
+use a logarithmic scale.
+
+C has a useful conditional case: in a separate global exact-search experiment,
+82 of 1,000 queries have an existing document with the query’s complete 32-bit
+pattern. C takes a median **4.875 microseconds** on those queries, but B remains
+faster across all 1,000. That subgroup is shown alongside the rest of the queries.
+
+At the **99% recall target with 100 returned results**, the selected B and C settings
+instead perform scans across all six pools. There is no general winner across
+every representation and search setting.
+
+**Shorter embeddings also change the ranking.** Qwen32’s exact binary top-1 result
+agrees with the full 1024-value embedding’s best score value on only **14% of queries**.
+High recall against a short binary reference is therefore not the same as preserving
+full-embedding quality, and neither measure is a human relevance judgment.
+
+The [results guide](results/prefix-study-2026-09-13/README.md) includes parameter
+settings, raw measurements, repeat ranges, memory use, and partial-run coverage.
+The [same-cluster comparison](results/same-clusters-2026-09-13/README.md) reports
+local search time and recall with the opened documents held fixed.
+
+## Try the three-document example
+
+Use Python 3.12, `uv`, and a C++20 compiler. On macOS, the Xcode command-line tools
+provide the compiler. The example needs no dataset or model download.
 
 ```sh
+git clone https://github.com/rgrexplore/query-guided-search-exploration.git
+cd query-guided-search-exploration
 uv venv --python 3.12
 uv pip install --python .venv/bin/python -e '.[test]'
 .venv/bin/python examples/prefix_search.py
 ```
 
-The example returns IDs 1 and 2 with all three methods. A scores three rows;
-B and C score two. B also visits three split words; C makes four boundary searches.
-Those are different kinds of work, so fewer document scores alone do not prove lower latency.
+All three methods return IDs 1 and 2. A performs three document scoring operations;
+B and C perform two. The output also shows their additional mask and prefix work.
+`requirements.lock` records the tested Python environment.
 
-## From the paper to the code
+## From the report to the code
 
-| Paper topic | Code |
+| Topic | Start here |
 |---|---|
-| Binary scoring and top-K results | [cpp/score.hpp](cpp/score.hpp) |
-| A: scan | [Index::scan in cpp/index.cpp](cpp/index.cpp) |
-| B: split masks and keep branches | [Index::search in cpp/index.cpp](cpp/index.cpp) |
-| C: sorted prefixes and newly included ranges | [cpp/prefix_index_v2.cpp](cpp/prefix_index_v2.cpp) |
+| Shared scoring function and top-K results | [cpp/score.hpp](cpp/score.hpp) |
+| A: scan and B: Bitplanes | [cpp/index.cpp](cpp/index.cpp) |
+| C: Backward Walk | [cpp/prefix_index_v2.cpp](cpp/prefix_index_v2.cpp) |
 | Python interface | [cpp/bindings.cpp](cpp/bindings.cpp) |
-| Small numerical example | [examples/prefix_search.py](examples/prefix_search.py) |
-| Encode and prepare exact references | [experiments/prepare_prefix_pools_v2.py](experiments/prepare_prefix_pools_v2.py) |
-| Time one index on the fixed query set | [experiments/prefix_batch_worker_v2.py](experiments/prefix_batch_worker_v2.py) |
-| Compare local search on the same selected clusters | [experiments/same_clusters.py](experiments/same_clusters.py) |
-| Prepare settings, run, summarize and repeat | [experiments/prefix_study_v2.py](experiments/prefix_study_v2.py) |
-| Check storage and loop formulas | [experiments/prefix_work_checks_v2.py](experiments/prefix_work_checks_v2.py) |
-| Measure prefix counts and sign agreement | [experiments/prefix_geometry_v2.py](experiments/prefix_geometry_v2.py) |
-| Draw recall and latency graphs | [experiments/prefix_figures_v2.py](experiments/prefix_figures_v2.py) |
-| LaTeX source | [reports/search-math-prefix-v3](reports/search-math-prefix-v3) |
+| Small worked example | [examples/prefix_search.py](examples/prefix_search.py) |
+| Experiment preparation, execution and repeats | [experiments/prefix_study_v2.py](experiments/prefix_study_v2.py) |
+| Local search in the same clusters | [experiments/same_clusters.py](experiments/same_clusters.py) |
+| Work and memory checks | [experiments/prefix_work_checks_v2.py](experiments/prefix_work_checks_v2.py) |
+| Report source and build command | [reports/search-math-prefix-v3](reports/search-math-prefix-v3) |
 
-## Run an experiment
+For larger experiments, follow [data and model preparation](docs/expanded-pool-preparation.md),
+then use the commands in the [results guide](results/prefix-study-2026-09-13/README.md).
+Large embedding arrays are kept in the ignored `data/` directory and must be prepared
+separately. Saved tables and figures can be read without those arrays.
 
-The flow is:
+## Acknowledgments
 
-**texts → cached embeddings → binary codes and exact references → cluster layouts → A/B/C searches → measurements**
-
-Data and model preparation are described in [expanded-pool-preparation.md](docs/expanded-pool-preparation.md)
-and [model-data-pilot.md](docs/model-data-pilot.md). Large arrays live under the ignored `data/` folder.
-Each completed pool contains document codes, query vectors, exact reference IDs and a manifest.
-
-Once the pool named in a configuration exists, run these commands from the project directory:
-
-```sh
-.venv/bin/python -m experiments.prefix_study_v2 prepare \
-  configs/prefix-study-v2/qwen-quora-d256.json results/my-quora-run
-.venv/bin/python -m experiments.prefix_study_v2 run results/my-quora-run
-.venv/bin/python -m experiments.prefix_study_v2 summarize results/my-quora-run
-.venv/bin/python -m experiments.prefix_study_v2 repeat results/my-quora-run
-.venv/bin/python -m experiments.prefix_figures_v2 results/my-quora-run
-```
-
-Use a new output folder for a new experiment. Running the `run` command again skips
-attempted batches; time-limited attempts stay recorded. The small-batch preparation
-command in [prefix_exploration_v2.py](experiments/prefix_exploration_v2.py) keeps the
-same settings but saves progress in smaller groups.
-
-## Parameters
-
-All methods can change the number of clusters and how many clusters a query opens
-(the probe count). `candidate_limit` is how many final IDs to return.
-
-B adds `leaf_size`, the row count at which a set is scored, and `node_budget`, how many
-sets can be visited. Budget zero means no visit limit. `explore_probability` changes
-which waiting branch is visited next; probability zero still keeps both branches.
-`prefer_deeper_ties` optionally visits the deeper set first when two penalties are equal.
-
-C adds `start_depth`, the first prefix length, and `candidate_target`, how many rows
-we want to score before stopping. It completes each depth across all opened clusters,
-so the count can exceed the target. Target zero continues to the whole opened set.
-Starting at depth zero skips widening. `max_prefix_bits` controls the stored key width,
-up to 32 bits; full scores still use every bit in the document code.
-
-With `candidate_target=0`, setting `stop_when_exact=True` lets C finish sooner when
-the current scores prove that no unseen row in the opened clusters can do better.
-A positive candidate target can still stop approximately. The stored index stays the same.
-
-## Reading the results
-
-The dated study is saved under [results/prefix-study-2026-09-13](results/prefix-study-2026-09-13).
-The [same-cluster follow-up](results/same-clusters-2026-09-13/README.md) separately
-measures local search time and local recall while keeping the opened clusters fixed.
-Within each collection, model and code length, all methods receive the same documents,
-queries and exact binary-score references. Each method can choose its fastest tested
-settings that reach the required recall and fit the common memory limit.
-
-Recall here means agreement with the exhaustive binary ranking. Recovering 95 of
-100 reference IDs gives 95% recall. It does not measure whether those documents answer
-the text query. Changing the code length changes that reference ranking and starts a
-separate comparison.
-
-For example, if the exact top 5 is `[12, 7, 91, 4, 30]` and a method returns
-`[12, 7, 91, 4, 85]`, it recovers four reference IDs: recall is `4 / 5 = 80%`.
-The reported value averages this measured overlap across all 1,000 queries; it is
-not estimated from a distribution. At top 1, 990 correct IDs out of 1,000 queries
-means 99% recall.
-
-The reference scan covers **the whole collection**, so a miss can come from an
-unopened cluster or from skipping a row inside an opened cluster. To isolate only
-inside-cluster search, the reference would instead scan the **same selected clusters**.
-That is a different reference from the one used in the current result tables.
-
-Query latency includes selecting clusters and searching them, with the query embedding
-already cached. Stored field sizes and peak process RAM are reported separately.
-The saved configurations, input hashes, per-query records and repeats make the choices
-traceable. Earlier studies remain in their own report and result folders.
+Special thanks to the [exa.ai](https://exa.ai) team for sharing their engineering work
+through the Exa blog. Their post on [building a web-scale vector database](https://exa.ai/blog/building-web-scale-vector-db)
+inspired this project and the experiments in the report. The implementation here
+is a local CPU experiment based on that public description.

@@ -1,0 +1,102 @@
+{
+  "pool": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d32",
+  "top_ks": [
+    1,
+    2,
+    3,
+    5,
+    7,
+    10,
+    15,
+    20,
+    30,
+    50,
+    75,
+    100
+  ],
+  "recall_targets": [
+    0.8,
+    0.9,
+    0.95,
+    0.99
+  ],
+  "cluster_counts": [
+    8,
+    32,
+    128,
+    512,
+    8192
+  ],
+  "probe_targets": [
+    0.8,
+    0.9,
+    0.95,
+    0.99,
+    0.999
+  ],
+  "include_all_clusters": true,
+  "repetitions": 1,
+  "ram_budget_bytes": 64000000000,
+  "worker_stop_bytes": 64000000000,
+  "global_seconds": 7200,
+  "job_seconds": 240,
+  "schedule_seed": 59,
+  "router_seed": 42,
+  "routing_representation": "binary",
+  "branch": {
+    "settings": [
+      {
+        "leaf_size": 128,
+        "node_budget": 8192,
+        "prefer_deeper_ties": true
+      },
+      {
+        "leaf_size": 512,
+        "node_budget": 8192,
+        "prefer_deeper_ties": true
+      },
+      {
+        "leaf_size": 2048,
+        "node_budget": 8192,
+        "prefer_deeper_ties": false
+      },
+      {
+        "leaf_size": 522931,
+        "node_budget": 0,
+        "prefer_deeper_ties": false
+      }
+    ],
+    "exploration": 0,
+    "seed": 42
+  },
+  "prefix": {
+    "max_prefix_bits": 32,
+    "settings": [
+      {
+        "start_depth": 0,
+        "candidate_target": 0,
+        "stop_when_exact": true
+      },
+      {
+        "start_depth": 4,
+        "candidate_target": 0,
+        "stop_when_exact": true
+      },
+      {
+        "start_depth": 16,
+        "candidate_target": 0,
+        "stop_when_exact": true
+      },
+      {
+        "start_depth": 16,
+        "candidate_target": 1000,
+        "stop_when_exact": true
+      },
+      {
+        "start_depth": 16,
+        "candidate_target": 10000,
+        "stop_when_exact": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "status": "complete",
+  "pid": 42001,
+  "started_at": 1789298888.523485,
+  "seconds": 0.2269829160068184,
+  "returncode": 0,
+  "parent_sampled_peak": 69812224
+}

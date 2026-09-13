@@ -811,9 +811,9 @@ So the total lookup work is approximately:
 \[
 2L_+\sum_{c\in O}\log_2(n_c+1).
 \]
-Again, the formula looks more complicated than the idea.
+% Again, the formula looks more complicated than the idea.
 
-The idea is simply:
+% The idea is simply:
 
 \textbf{Backward Walk cost grows with how many prefix depths we visit and how many clusters we search at each depth.}
 
@@ -879,16 +879,14 @@ We only remove \textbf{one bit} each time, but the number of matching documents 
 \draw[Keys,fill=Keys!25](0,-29.5mm)rectangle(48mm,-24.5mm);
 \draw[Keys,fill=Keys!25](0,-38.5mm)rectangle(96mm,-33.5mm);
 \end{tikzpicture}
-\caption{Under the independent 50/50-bit model, removing one prefix bit doubles the expected matching count. The labels are rounded; they describe document counts, not recall.}
+\caption{Under the independent 50/50-bit model, removing one prefix bit doubles the expected matching count. }
 \end{figure}
 
-However, we should remember that this is only an intuition.
+However, we should remember that this is only an intuition as the real embedding bits can be correlated, and once the documents have already been divided into clusters, the distribution can be even further from a perfect 50/50 split.
 
-Real embedding bits can be correlated, and once the documents have already been divided into clusters, the distribution can be even further from a perfect 50/50 split.
+% Most importantly:
 
-Most importantly:
-
-\textbf{This only estimates how many documents we might find. It does not tell us whether those documents are actually the correct top results.}
+% \textbf{This only estimates how many documents we might find. It does not tell us whether those documents are actually the correct top results.}
 
 \Needspace{4\baselineskip}
 \textbf{Step 7: when should Backward Walk stop?}\par
@@ -915,9 +913,7 @@ Finding 100 documents does not prove that the best unseen document is worse than
 So this stopping rule is approximate, and we need to measure its recall experimentally.
 
 \textbf{Exact stopping}\par
-Fortunately, we can also use the scoring equation to derive a safe bound.
-
-Suppose we have already searched all documents matching the first $\ell$ query signs inside the opened clusters.
+Fortunately,in this case, we can also use the scoring equation to derive a safe bound. Suppose we have already searched all documents matching the first $\ell$ query signs inside the opened clusters.
 
 Any unseen document in those clusters must disagree with the query on at least one of those first $\ell$ positions.
 
@@ -962,7 +958,6 @@ T_C\approx{}&T_{\text{base}}+T_{\text{key}}
 \]
 $T_{\text{key}}$ covers the query key and optional bound preparation; $t_b$ is time per binary-search comparison; $T_{\text{ranges}}$ covers range updates and stopping checks.
 
-Again, the exact symbols are not the most important part.
 
 The important condition is:
 \[
@@ -1078,16 +1073,12 @@ For example, \texttt{11001}, \texttt{1100*}, \texttt{110**} all refer to differe
 During the query, C mainly needs to remember the previous range for every opened cluster.
 
 So compared with B, method C's temporary search state is relatively small. 
-
+\pagebreak
 % \Needspace{6\baselineskip}
 % \begin{center}\setlength{\fboxsep}{9pt}\fcolorbox{Ink!25}{Soft}{\parbox{.91\linewidth}{\textbf{TL;DR, C memory:} Backward Walk adds a small prefix key per document, but it does not need full-width masks for many waiting branches.}}\end{center}
 
 \subsection{Recall}
-Now we know roughly how much work each method performs.
-
-However, none of those savings matter if we stop too early and return the wrong documents.
-
-So we also need to understand where recall can be lost.
+Now we know roughly how much work each method performs (and each method's computational saves), we also need to understand where recall can be lost.
 
 For query $q$:
 \begin{itemize}\setlength{\itemsep}{1pt}
@@ -1141,10 +1132,6 @@ Because A scores every document inside those clusters, all $g_q$ of those docume
 R_{A,q}=\frac{g_q}{K}.
 \]
 Here, $R_{A,q}$ is A's recall for query $q$, and $K$ is how many results we want. Capital $G_q$ is the set of correct document IDs; lowercase $g_q$ counts how many of them are inside the clusters opened for this query.
-
-In other words:
-
-A can lose a correct document because cluster selection missed it, but once the document is inside an opened cluster, A will not lose it during local search.
 
 \subsubsection{Recall for Bitplanes}
 Suppose $g_q$ correct documents reached the opened clusters, but B only recovers some fraction $r_{B,q}$ of them.

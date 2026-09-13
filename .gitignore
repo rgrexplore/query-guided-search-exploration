@@ -11,3 +11,13 @@ dist/
 /runs
 .DS_Store
 .worktrees/
+
+/results/k-prefix-study-2026-09-13/depth/timing-prefix-0/queries.jsonl
+/results/k-prefix-study-2026-09-13/depth/timing-prefix-1/queries.jsonl
+/results/k-prefix-study-2026-09-13/depth/timing-prefix-2/queries.jsonl
+/reports/search-math-prefix-v3/report.aux
+/reports/search-math-prefix-v3/report.fdb_latexmk
+/reports/search-math-prefix-v3/report.fls
+/reports/search-math-prefix-v3/report.log
+/reports/search-math-prefix-v3/report.synctex.gz
+/reports/search-math-prefix-v3/report.toc

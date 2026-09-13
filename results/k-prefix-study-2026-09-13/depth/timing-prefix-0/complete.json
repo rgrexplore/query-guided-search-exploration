@@ -1,0 +1,33 @@
+{
+  "method": "prefix",
+  "repetition": 0,
+  "power_before": {
+    "available": true,
+    "source": "AC Power",
+    "settings": "Battery Power:\n Sleep On Power Button 1\n powermode            1\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         2\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            10\nAC Power:\n Sleep On Power Button 1\n powermode            2\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 1\n networkoversleep     0\n sleep                1\n tcpkeepalive         1\n disksleep            10"
+  },
+  "native_sha256": "1a17732733ff039183995a65bbc6598e76d259da008ae92c538504db8f1d4df4",
+  "index": {
+    "documents": 522931,
+    "dimensions": 32,
+    "buckets": 1024,
+    "codes_bytes": 4183448,
+    "bitplanes_bytes": 0,
+    "row_ids_bytes": 4183448,
+    "prefix_keys_bytes": 2091724,
+    "array_capacity_bytes": 12425316,
+    "key_directory_payload_bytes": 0,
+    "occupied_keys": 0,
+    "directory_slots": 0,
+    "logical_bytes": 10458620,
+    "max_prefix_bits": 32
+  },
+  "memory_limit": 64000000000,
+  "timing": "local search and returned arrays; routing precomputed",
+  "power_after": {
+    "available": true,
+    "source": "AC Power",
+    "settings": "Battery Power:\n Sleep On Power Button 1\n powermode            1\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         2\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            10\nAC Power:\n Sleep On Power Button 1\n powermode            2\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 1\n networkoversleep     0\n sleep                1\n tcpkeepalive         1\n disksleep            10"
+  },
+  "peak_bytes": 148094976
+}

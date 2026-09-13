@@ -1,0 +1,431 @@
+[
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d256/routers/ivf-binary-64-seed42",
+    "clusters": 64,
+    "hashes": {
+      "router.json": "4bc36133c0e9e01ec38f50da86713476294b0a95fb0eceafe5b4a584f14b670c",
+      "assignments.npy": "12809eb9f69d91b38c543854e091574533e2dd0dbb8f8c47bffdad6f12b9acb8",
+      "centroids.npy": "e167ae0940df761fc660c441df2ce178d66f04b069f85dd86effc8e876b94e5b",
+      "labels.npy": "e59dc1dc4abcdbb6428e92a71180ae5aeb2747a990654bf1608a8a94ee96b5bd"
+    },
+    "probes": {
+      "1": [
+        2,
+        4,
+        6,
+        16
+      ],
+      "5": [
+        3,
+        5,
+        8,
+        19
+      ],
+      "10": [
+        3,
+        6,
+        9,
+        24
+      ],
+      "50": [
+        4,
+        8,
+        13,
+        31
+      ]
+    },
+    "cutoffs": {
+      "1": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 2,
+          "probes": 2,
+          "routing_recall": 0.814
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.912
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.956
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 16,
+          "probes": 16,
+          "routing_recall": 0.991
+        }
+      ],
+      "5": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 3,
+          "probes": 3,
+          "routing_recall": 0.8466
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 5,
+          "probes": 5,
+          "routing_recall": 0.9172
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 8,
+          "probes": 8,
+          "routing_recall": 0.958
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 19,
+          "probes": 19,
+          "routing_recall": 0.9902
+        }
+      ],
+      "10": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 3,
+          "probes": 3,
+          "routing_recall": 0.8251
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.9193
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 9,
+          "probes": 9,
+          "routing_recall": 0.9522
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 24,
+          "probes": 24,
+          "routing_recall": 0.9906
+        }
+      ],
+      "50": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.82698
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 8,
+          "probes": 8,
+          "routing_recall": 0.91058
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 13,
+          "probes": 13,
+          "routing_recall": 0.95068
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 31,
+          "probes": 31,
+          "routing_recall": 0.99034
+        }
+      ]
+    },
+    "training_representation": "binary"
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d256/routers/ivf-binary-1024-seed42",
+    "clusters": 1024,
+    "hashes": {
+      "router.json": "d2fd6a4b4bd75e37d8f094fff6f5febbd2185e5de6cd3f089f266f59777a52c2",
+      "assignments.npy": "96c388b592be3924d4b48788236a262a812419c20d09e74de11ee1f4c9aced61",
+      "centroids.npy": "4d8b1c0e4e96285411fe2f2da799e46c3687821c1c1dfaa60ab1a57593e20f3b",
+      "labels.npy": "27e2935cb98e5eb3fb0264594106564a3e83ce74e1ed36de78fe986cbd63fb9c"
+    },
+    "probes": {
+      "1": [
+        3,
+        5,
+        11,
+        38
+      ],
+      "5": [
+        4,
+        10,
+        25,
+        98
+      ],
+      "10": [
+        5,
+        13,
+        31,
+        133
+      ],
+      "50": [
+        8,
+        23,
+        58,
+        223
+      ]
+    },
+    "cutoffs": {
+      "1": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 3,
+          "probes": 3,
+          "routing_recall": 0.852
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 5,
+          "probes": 5,
+          "routing_recall": 0.902
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 11,
+          "probes": 11,
+          "routing_recall": 0.954
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 38,
+          "probes": 38,
+          "routing_recall": 0.99
+        }
+      ],
+      "5": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.8126
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 10,
+          "probes": 10,
+          "routing_recall": 0.9012
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 25,
+          "probes": 25,
+          "routing_recall": 0.9506
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 98,
+          "probes": 98,
+          "routing_recall": 0.9902
+        }
+      ],
+      "10": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 5,
+          "probes": 5,
+          "routing_recall": 0.8133
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 13,
+          "probes": 13,
+          "routing_recall": 0.9043
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 31,
+          "probes": 31,
+          "routing_recall": 0.9506
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 133,
+          "probes": 133,
+          "routing_recall": 0.99
+        }
+      ],
+      "50": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 8,
+          "probes": 8,
+          "routing_recall": 0.80506
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 23,
+          "probes": 23,
+          "routing_recall": 0.90104
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 58,
+          "probes": 58,
+          "routing_recall": 0.95034
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 223,
+          "probes": 223,
+          "routing_recall": 0.99006
+        }
+      ]
+    },
+    "training_representation": "binary"
+  },
+  {
+    "path": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/data/prefix-study-2026-09-13/pools/qwen-quora-d256/routers/ivf-binary-4096-seed42",
+    "clusters": 4096,
+    "hashes": {
+      "router.json": "1c0e1afa626c93809223868b8fb3cf0a52a9deb0fd2f504c1378e792fbd0f36e",
+      "assignments.npy": "fce76e1a0335946039b33ec7472a96076ca6fc0ce1d0b4437d61e34475bf35c6",
+      "centroids.npy": "15e35f5f186994575641dc9e9f01fc90eb2198f62e1cd420d890ae12965e1905",
+      "labels.npy": "d6f654147cde165cd29348ff442421bd5f7428648f32a823ae7b0744da17991c"
+    },
+    "probes": {
+      "1": [
+        2,
+        4,
+        9,
+        50
+      ],
+      "5": [
+        4,
+        12,
+        31,
+        232
+      ],
+      "10": [
+        6,
+        18,
+        50,
+        297
+      ],
+      "50": [
+        11,
+        39,
+        104,
+        508
+      ]
+    },
+    "cutoffs": {
+      "1": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 2,
+          "probes": 2,
+          "routing_recall": 0.815
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.908
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 9,
+          "probes": 9,
+          "routing_recall": 0.956
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 50,
+          "probes": 50,
+          "routing_recall": 0.99
+        }
+      ],
+      "5": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 4,
+          "probes": 4,
+          "routing_recall": 0.8174
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 12,
+          "probes": 12,
+          "routing_recall": 0.9028
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 31,
+          "probes": 31,
+          "routing_recall": 0.9506
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 232,
+          "probes": 232,
+          "routing_recall": 0.9902
+        }
+      ],
+      "10": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 6,
+          "probes": 6,
+          "routing_recall": 0.8167
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 18,
+          "probes": 18,
+          "routing_recall": 0.9001
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 50,
+          "probes": 50,
+          "routing_recall": 0.9503
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 297,
+          "probes": 297,
+          "routing_recall": 0.99
+        }
+      ],
+      "50": [
+        {
+          "target": 0.8,
+          "rank_cutoff": 11,
+          "probes": 11,
+          "routing_recall": 0.80086
+        },
+        {
+          "target": 0.9,
+          "rank_cutoff": 39,
+          "probes": 39,
+          "routing_recall": 0.90116
+        },
+        {
+          "target": 0.95,
+          "rank_cutoff": 104,
+          "probes": 104,
+          "routing_recall": 0.95016
+        },
+        {
+          "target": 0.99,
+          "rank_cutoff": 508,
+          "probes": 508,
+          "routing_recall": 0.99004
+        }
+      ]
+    },
+    "training_representation": "binary"
+  }
+]

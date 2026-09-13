@@ -1,0 +1,16 @@
+{
+  "queries": 1000,
+  "depths_per_query": 33,
+  "top_ks": [
+    1,
+    2,
+    3,
+    5,
+    10,
+    20,
+    50,
+    100
+  ],
+  "final_results_match_local_scan": true,
+  "note": "Trace latency is excluded. All depths contain the same 1000 queries."
+}

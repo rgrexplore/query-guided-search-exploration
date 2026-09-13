@@ -1,0 +1,506 @@
+[
+  {
+    "top_k": 1,
+    "target": 0.9,
+    "method": "scan",
+    "source_setting_id": "main-s02497",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 1,
+    "target": 0.9,
+    "method": "branch",
+    "source_setting_id": "main-s00057",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 1,
+    "target": 0.9,
+    "method": "prefix",
+    "source_setting_id": "main-s02886",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 1,
+    "target": 0.99,
+    "method": "scan",
+    "source_setting_id": "main-s02499",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 1,
+    "target": 0.99,
+    "method": "branch",
+    "source_setting_id": "main-s00071",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 1,
+    "target": 0.99,
+    "method": "prefix",
+    "source_setting_id": "main-s02273",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 2,
+    "target": 0.9,
+    "method": "scan",
+    "source_setting_id": "main-s02503",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 2,
+    "target": 0.9,
+    "method": "branch",
+    "source_setting_id": "main-s00099",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 2,
+    "target": 0.9,
+    "method": "prefix",
+    "source_setting_id": "main-s02915",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 2,
+    "target": 0.99,
+    "method": "scan",
+    "source_setting_id": "main-s02505",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 2,
+    "target": 0.99,
+    "method": "branch",
+    "source_setting_id": "main-s00113",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 2,
+    "target": 0.99,
+    "method": "prefix",
+    "source_setting_id": "main-s02926",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 3,
+    "target": 0.9,
+    "method": "scan",
+    "source_setting_id": "main-s02509",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 3,
+    "target": 0.9,
+    "method": "branch",
+    "source_setting_id": "main-s00765",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 3,
+    "target": 0.9,
+    "method": "prefix",
+    "source_setting_id": "main-s02945",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 3,
+    "target": 0.99,
+    "method": "scan",
+    "source_setting_id": "main-s02511",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 3,
+    "target": 0.99,
+    "method": "branch",
+    "source_setting_id": "main-s00155",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 3,
+    "target": 0.99,
+    "method": "prefix",
+    "source_setting_id": "main-s02955",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 5,
+    "target": 0.9,
+    "method": "scan",
+    "source_setting_id": "main-s02515",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 5,
+    "target": 0.9,
+    "method": "branch",
+    "source_setting_id": "main-s00184",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 5,
+    "target": 0.9,
+    "method": "prefix",
+    "source_setting_id": "main-s02975",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 5,
+    "target": 0.99,
+    "method": "scan",
+    "source_setting_id": "main-s02517",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 5,
+    "target": 0.99,
+    "method": "branch",
+    "source_setting_id": "main-s00198",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 5,
+    "target": 0.99,
+    "method": "prefix",
+    "source_setting_id": "main-s02985",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 7,
+    "target": 0.9,
+    "method": "scan",
+    "source_setting_id": "main-s01249",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 7,
+    "target": 0.9,
+    "method": "branch",
+    "source_setting_id": "main-s00346",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 7,
+    "target": 0.9,
+    "method": "prefix",
+    "source_setting_id": "main-s01445",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 7,
+    "target": 0.99,
+    "method": "scan",
+    "source_setting_id": "main-s01251",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 7,
+    "target": 0.99,
+    "method": "branch",
+    "source_setting_id": "main-s00047",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 7,
+    "target": 0.99,
+    "method": "prefix",
+    "source_setting_id": "main-s01455",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 10,
+    "target": 0.9,
+    "method": "scan",
+    "source_setting_id": "main-s02521",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 10,
+    "target": 0.9,
+    "method": "branch",
+    "source_setting_id": "main-s00849",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 10,
+    "target": 0.9,
+    "method": "prefix",
+    "source_setting_id": "main-s03005",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 10,
+    "target": 0.99,
+    "method": "scan",
+    "source_setting_id": "main-s02523",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 10,
+    "target": 0.99,
+    "method": "branch",
+    "source_setting_id": "main-s00239",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 10,
+    "target": 0.99,
+    "method": "prefix",
+    "source_setting_id": "main-s03015",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 15,
+    "target": 0.9,
+    "method": "scan",
+    "source_setting_id": "main-s01255",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 15,
+    "target": 0.9,
+    "method": "branch",
+    "source_setting_id": "main-s00700",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 15,
+    "target": 0.9,
+    "method": "prefix",
+    "source_setting_id": "main-s01475",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 15,
+    "target": 0.99,
+    "method": "scan",
+    "source_setting_id": "main-s01257",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 15,
+    "target": 0.99,
+    "method": "branch",
+    "source_setting_id": "main-s00090",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 15,
+    "target": 0.99,
+    "method": "prefix",
+    "source_setting_id": "main-s01485",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 20,
+    "target": 0.9,
+    "method": "scan",
+    "source_setting_id": "main-s02527",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 20,
+    "target": 0.9,
+    "method": "branch",
+    "source_setting_id": "main-s02766",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 20,
+    "target": 0.9,
+    "method": "prefix",
+    "source_setting_id": "main-s03035",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 20,
+    "target": 0.99,
+    "method": "scan",
+    "source_setting_id": "main-s02529",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 20,
+    "target": 0.99,
+    "method": "branch",
+    "source_setting_id": "main-s00284",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 20,
+    "target": 0.99,
+    "method": "prefix",
+    "source_setting_id": "main-s03045",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 30,
+    "target": 0.9,
+    "method": "scan",
+    "source_setting_id": "main-s01261",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 30,
+    "target": 0.9,
+    "method": "branch",
+    "source_setting_id": "main-s01369",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 30,
+    "target": 0.9,
+    "method": "prefix",
+    "source_setting_id": "main-s01505",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 30,
+    "target": 0.99,
+    "method": "scan",
+    "source_setting_id": "main-s01263",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 30,
+    "target": 0.99,
+    "method": "branch",
+    "source_setting_id": "main-s00133",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 30,
+    "target": 0.99,
+    "method": "prefix",
+    "source_setting_id": "main-s01515",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 50,
+    "target": 0.9,
+    "method": "scan",
+    "source_setting_id": "main-s02533",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 50,
+    "target": 0.9,
+    "method": "branch",
+    "source_setting_id": "main-s02808",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 50,
+    "target": 0.9,
+    "method": "prefix",
+    "source_setting_id": "main-s03065",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 50,
+    "target": 0.99,
+    "method": "scan",
+    "source_setting_id": "main-s02535",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 50,
+    "target": 0.99,
+    "method": "branch",
+    "source_setting_id": "main-s00324",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 50,
+    "target": 0.99,
+    "method": "prefix",
+    "source_setting_id": "main-s03075",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 75,
+    "target": 0.9,
+    "method": "scan",
+    "source_setting_id": "main-s01267",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 75,
+    "target": 0.9,
+    "method": "branch",
+    "source_setting_id": "main-s01409",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 75,
+    "target": 0.9,
+    "method": "prefix",
+    "source_setting_id": "main-s01535",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 75,
+    "target": 0.99,
+    "method": "scan",
+    "source_setting_id": "main-s01269",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 75,
+    "target": 0.99,
+    "method": "branch",
+    "source_setting_id": "main-s00174",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 75,
+    "target": 0.99,
+    "method": "prefix",
+    "source_setting_id": "main-s01545",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/extra-k"
+  },
+  {
+    "top_k": 100,
+    "target": 0.9,
+    "method": "scan",
+    "source_setting_id": "main-s02539",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 100,
+    "target": 0.9,
+    "method": "branch",
+    "source_setting_id": "main-s02849",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 100,
+    "target": 0.9,
+    "method": "prefix",
+    "source_setting_id": "main-s03095",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 100,
+    "target": 0.99,
+    "method": "scan",
+    "source_setting_id": "main-s02541",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 100,
+    "target": 0.99,
+    "method": "branch",
+    "source_setting_id": "main-s00365",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  },
+  {
+    "top_k": 100,
+    "target": 0.99,
+    "method": "prefix",
+    "source_setting_id": "main-s03105",
+    "source_study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/sweep"
+  }
+]

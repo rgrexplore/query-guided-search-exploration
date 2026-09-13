@@ -1,0 +1,1452 @@
+{
+  "selected_settings": 144,
+  "query_checks": 144000,
+  "returned_scores_match_direct_calculation": true,
+  "recall_matches_saved_measurements": true,
+  "input_hashes_unchanged": true,
+  "native_sha256": "1a17732733ff039183995a65bbc6598e76d259da008ae92c538504db8f1d4df4",
+  "returned_ids_file": "selected-returned-ids.jsonl.gz",
+  "returned_ids_sha256": "f230e0ac60e31a3ba2fc9126191390653b650a41fed184639ea3fbf5535ff908",
+  "settings": [
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0000",
+      "method": "scan",
+      "top_k": 1,
+      "queries": 1000,
+      "recall": 0.803,
+      "mean_documents_scored": 2166.455,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0003",
+      "method": "scan",
+      "top_k": 1,
+      "queries": 1000,
+      "recall": 0.901,
+      "mean_documents_scored": 4732.377,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0006",
+      "method": "scan",
+      "top_k": 1,
+      "queries": 1000,
+      "recall": 0.95,
+      "mean_documents_scored": 9044.784,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0009",
+      "method": "scan",
+      "top_k": 1,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 24181.137,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0012",
+      "method": "scan",
+      "top_k": 2,
+      "queries": 1000,
+      "recall": 0.8,
+      "mean_documents_scored": 2166.455,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0015",
+      "method": "scan",
+      "top_k": 2,
+      "queries": 1000,
+      "recall": 0.9025,
+      "mean_documents_scored": 4868.495,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0018",
+      "method": "scan",
+      "top_k": 2,
+      "queries": 1000,
+      "recall": 0.95,
+      "mean_documents_scored": 9044.784,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0021",
+      "method": "scan",
+      "top_k": 2,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 27934.374,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0024",
+      "method": "scan",
+      "top_k": 3,
+      "queries": 1000,
+      "recall": 0.805,
+      "mean_documents_scored": 2303.095,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0027",
+      "method": "scan",
+      "top_k": 3,
+      "queries": 1000,
+      "recall": 0.9,
+      "mean_documents_scored": 5003.783,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0030",
+      "method": "scan",
+      "top_k": 3,
+      "queries": 1000,
+      "recall": 0.95,
+      "mean_documents_scored": 9447.94,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0033",
+      "method": "scan",
+      "top_k": 3,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 27934.374,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0036",
+      "method": "scan",
+      "top_k": 5,
+      "queries": 1000,
+      "recall": 0.802,
+      "mean_documents_scored": 2436.542,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0039",
+      "method": "scan",
+      "top_k": 5,
+      "queries": 1000,
+      "recall": 0.901,
+      "mean_documents_scored": 5407.89,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0042",
+      "method": "scan",
+      "top_k": 5,
+      "queries": 1000,
+      "recall": 0.9502,
+      "mean_documents_scored": 9852.251,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0045",
+      "method": "scan",
+      "top_k": 5,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 29270.203,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0048",
+      "method": "scan",
+      "top_k": 7,
+      "queries": 1000,
+      "recall": 0.8027142857142857,
+      "mean_documents_scored": 2570.73,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0051",
+      "method": "scan",
+      "top_k": 7,
+      "queries": 1000,
+      "recall": 0.9008571428571429,
+      "mean_documents_scored": 5808.851,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0054",
+      "method": "scan",
+      "top_k": 7,
+      "queries": 1000,
+      "recall": 0.9507142857142857,
+      "mean_documents_scored": 10790.174,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0057",
+      "method": "scan",
+      "top_k": 7,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 29937.305,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0060",
+      "method": "scan",
+      "top_k": 10,
+      "queries": 1000,
+      "recall": 0.801,
+      "mean_documents_scored": 2705.636,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0063",
+      "method": "scan",
+      "top_k": 10,
+      "queries": 1000,
+      "recall": 0.9009,
+      "mean_documents_scored": 6077.925,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0066",
+      "method": "scan",
+      "top_k": 10,
+      "queries": 1000,
+      "recall": 0.95,
+      "mean_documents_scored": 11326.941,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0069",
+      "method": "scan",
+      "top_k": 10,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 32612.65,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0072",
+      "method": "scan",
+      "top_k": 15,
+      "queries": 1000,
+      "recall": 0.8005333333333333,
+      "mean_documents_scored": 2975.703,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0075",
+      "method": "scan",
+      "top_k": 15,
+      "queries": 1000,
+      "recall": 0.9013333333333333,
+      "mean_documents_scored": 6752.21,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0078",
+      "method": "scan",
+      "top_k": 15,
+      "queries": 1000,
+      "recall": 0.9500666666666666,
+      "mean_documents_scored": 12258.41,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0081",
+      "method": "scan",
+      "top_k": 15,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 36486.821,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0084",
+      "method": "scan",
+      "top_k": 20,
+      "queries": 1000,
+      "recall": 0.80445,
+      "mean_documents_scored": 3245.004,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0087",
+      "method": "scan",
+      "top_k": 20,
+      "queries": 1000,
+      "recall": 0.90055,
+      "mean_documents_scored": 7154.509,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0090",
+      "method": "scan",
+      "top_k": 20,
+      "queries": 1000,
+      "recall": 0.9502,
+      "mean_documents_scored": 13196.612,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0093",
+      "method": "scan",
+      "top_k": 20,
+      "queries": 1000,
+      "recall": 0.99005,
+      "mean_documents_scored": 37553.53,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0096",
+      "method": "scan",
+      "top_k": 30,
+      "queries": 1000,
+      "recall": 0.8015,
+      "mean_documents_scored": 3515.834,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0099",
+      "method": "scan",
+      "top_k": 30,
+      "queries": 1000,
+      "recall": 0.9012666666666667,
+      "mean_documents_scored": 7829.971,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0102",
+      "method": "scan",
+      "top_k": 30,
+      "queries": 1000,
+      "recall": 0.9503333333333334,
+      "mean_documents_scored": 14137.271,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0105",
+      "method": "scan",
+      "top_k": 30,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 39158.445,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0108",
+      "method": "scan",
+      "top_k": 50,
+      "queries": 1000,
+      "recall": 0.80312,
+      "mean_documents_scored": 4191.465,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0111",
+      "method": "scan",
+      "top_k": 50,
+      "queries": 1000,
+      "recall": 0.90092,
+      "mean_documents_scored": 9044.784,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0114",
+      "method": "scan",
+      "top_k": 50,
+      "queries": 1000,
+      "recall": 0.95036,
+      "mean_documents_scored": 16283.632,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0117",
+      "method": "scan",
+      "top_k": 50,
+      "queries": 1000,
+      "recall": 0.99004,
+      "mean_documents_scored": 43157.822,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0120",
+      "method": "scan",
+      "top_k": 75,
+      "queries": 1000,
+      "recall": 0.8022666666666667,
+      "mean_documents_scored": 4732.377,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0123",
+      "method": "scan",
+      "top_k": 75,
+      "queries": 1000,
+      "recall": 0.9016533333333333,
+      "mean_documents_scored": 10123.537,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0126",
+      "method": "scan",
+      "top_k": 75,
+      "queries": 1000,
+      "recall": 0.9501066666666667,
+      "mean_documents_scored": 18026.948,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0129",
+      "method": "scan",
+      "top_k": 75,
+      "queries": 1000,
+      "recall": 0.99004,
+      "mean_documents_scored": 47413.069,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0132",
+      "method": "scan",
+      "top_k": 100,
+      "queries": 1000,
+      "recall": 0.80108,
+      "mean_documents_scored": 5139.612,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0135",
+      "method": "scan",
+      "top_k": 100,
+      "queries": 1000,
+      "recall": 0.90087,
+      "mean_documents_scored": 11059.047,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0138",
+      "method": "scan",
+      "top_k": 100,
+      "queries": 1000,
+      "recall": 0.95032,
+      "mean_documents_scored": 19772.328,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0141",
+      "method": "scan",
+      "top_k": 100,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 50864.535,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0001",
+      "method": "branch",
+      "top_k": 1,
+      "queries": 1000,
+      "recall": 0.819,
+      "mean_documents_scored": 677.045,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0013",
+      "method": "branch",
+      "top_k": 2,
+      "queries": 1000,
+      "recall": 0.814,
+      "mean_documents_scored": 807.506,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0025",
+      "method": "branch",
+      "top_k": 3,
+      "queries": 1000,
+      "recall": 0.8056666666666666,
+      "mean_documents_scored": 929.993,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0037",
+      "method": "branch",
+      "top_k": 5,
+      "queries": 1000,
+      "recall": 0.803,
+      "mean_documents_scored": 1165.514,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0049",
+      "method": "branch",
+      "top_k": 7,
+      "queries": 1000,
+      "recall": 0.817,
+      "mean_documents_scored": 1485.791,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0061",
+      "method": "branch",
+      "top_k": 10,
+      "queries": 1000,
+      "recall": 0.8089,
+      "mean_documents_scored": 1748.493,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0076",
+      "method": "branch",
+      "top_k": 15,
+      "queries": 1000,
+      "recall": 0.906,
+      "mean_documents_scored": 3417.695,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0091",
+      "method": "branch",
+      "top_k": 20,
+      "queries": 1000,
+      "recall": 0.9521,
+      "mean_documents_scored": 5617.373,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0002",
+      "method": "prefix",
+      "top_k": 1,
+      "queries": 1000,
+      "recall": 0.803,
+      "mean_documents_scored": 1783.422,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0005",
+      "method": "prefix",
+      "top_k": 1,
+      "queries": 1000,
+      "recall": 0.901,
+      "mean_documents_scored": 3803.984,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0008",
+      "method": "prefix",
+      "top_k": 1,
+      "queries": 1000,
+      "recall": 0.95,
+      "mean_documents_scored": 7148.419,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0014",
+      "method": "prefix",
+      "top_k": 2,
+      "queries": 1000,
+      "recall": 0.8,
+      "mean_documents_scored": 2166.455,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0017",
+      "method": "prefix",
+      "top_k": 2,
+      "queries": 1000,
+      "recall": 0.9025,
+      "mean_documents_scored": 4868.495,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0020",
+      "method": "prefix",
+      "top_k": 2,
+      "queries": 1000,
+      "recall": 0.95,
+      "mean_documents_scored": 7572.215,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0023",
+      "method": "prefix",
+      "top_k": 2,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 22758.714,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0026",
+      "method": "prefix",
+      "top_k": 3,
+      "queries": 1000,
+      "recall": 0.805,
+      "mean_documents_scored": 2041.205,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0029",
+      "method": "prefix",
+      "top_k": 3,
+      "queries": 1000,
+      "recall": 0.9,
+      "mean_documents_scored": 5003.783,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0032",
+      "method": "prefix",
+      "top_k": 3,
+      "queries": 1000,
+      "recall": 0.95,
+      "mean_documents_scored": 9447.94,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0035",
+      "method": "prefix",
+      "top_k": 3,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 27934.374,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0038",
+      "method": "prefix",
+      "top_k": 5,
+      "queries": 1000,
+      "recall": 0.802,
+      "mean_documents_scored": 2436.542,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0041",
+      "method": "prefix",
+      "top_k": 5,
+      "queries": 1000,
+      "recall": 0.901,
+      "mean_documents_scored": 5407.89,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0044",
+      "method": "prefix",
+      "top_k": 5,
+      "queries": 1000,
+      "recall": 0.9502,
+      "mean_documents_scored": 9852.251,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0047",
+      "method": "prefix",
+      "top_k": 5,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 29270.203,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0050",
+      "method": "prefix",
+      "top_k": 7,
+      "queries": 1000,
+      "recall": 0.8027142857142857,
+      "mean_documents_scored": 2570.73,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0053",
+      "method": "prefix",
+      "top_k": 7,
+      "queries": 1000,
+      "recall": 0.9008571428571429,
+      "mean_documents_scored": 5808.851,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0056",
+      "method": "prefix",
+      "top_k": 7,
+      "queries": 1000,
+      "recall": 0.9507142857142857,
+      "mean_documents_scored": 10790.174,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0059",
+      "method": "prefix",
+      "top_k": 7,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 29937.305,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0062",
+      "method": "prefix",
+      "top_k": 10,
+      "queries": 1000,
+      "recall": 0.801,
+      "mean_documents_scored": 2705.636,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0065",
+      "method": "prefix",
+      "top_k": 10,
+      "queries": 1000,
+      "recall": 0.9009,
+      "mean_documents_scored": 6077.925,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0068",
+      "method": "prefix",
+      "top_k": 10,
+      "queries": 1000,
+      "recall": 0.95,
+      "mean_documents_scored": 11326.941,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0071",
+      "method": "prefix",
+      "top_k": 10,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 32612.65,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0074",
+      "method": "prefix",
+      "top_k": 15,
+      "queries": 1000,
+      "recall": 0.8005333333333333,
+      "mean_documents_scored": 2975.703,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0077",
+      "method": "prefix",
+      "top_k": 15,
+      "queries": 1000,
+      "recall": 0.9013333333333333,
+      "mean_documents_scored": 6752.21,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0080",
+      "method": "prefix",
+      "top_k": 15,
+      "queries": 1000,
+      "recall": 0.9500666666666666,
+      "mean_documents_scored": 12258.41,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0083",
+      "method": "prefix",
+      "top_k": 15,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 36486.821,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0086",
+      "method": "prefix",
+      "top_k": 20,
+      "queries": 1000,
+      "recall": 0.80445,
+      "mean_documents_scored": 3245.004,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0089",
+      "method": "prefix",
+      "top_k": 20,
+      "queries": 1000,
+      "recall": 0.90055,
+      "mean_documents_scored": 7154.509,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0092",
+      "method": "prefix",
+      "top_k": 20,
+      "queries": 1000,
+      "recall": 0.9502,
+      "mean_documents_scored": 13196.612,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0095",
+      "method": "prefix",
+      "top_k": 20,
+      "queries": 1000,
+      "recall": 0.99005,
+      "mean_documents_scored": 37553.53,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0098",
+      "method": "prefix",
+      "top_k": 30,
+      "queries": 1000,
+      "recall": 0.8015,
+      "mean_documents_scored": 3515.834,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0101",
+      "method": "prefix",
+      "top_k": 30,
+      "queries": 1000,
+      "recall": 0.9012666666666667,
+      "mean_documents_scored": 7829.971,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0104",
+      "method": "prefix",
+      "top_k": 30,
+      "queries": 1000,
+      "recall": 0.9503333333333334,
+      "mean_documents_scored": 14137.271,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0107",
+      "method": "prefix",
+      "top_k": 30,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 39158.445,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0110",
+      "method": "prefix",
+      "top_k": 50,
+      "queries": 1000,
+      "recall": 0.80312,
+      "mean_documents_scored": 4191.465,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0113",
+      "method": "prefix",
+      "top_k": 50,
+      "queries": 1000,
+      "recall": 0.90092,
+      "mean_documents_scored": 9044.784,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0116",
+      "method": "prefix",
+      "top_k": 50,
+      "queries": 1000,
+      "recall": 0.95036,
+      "mean_documents_scored": 16283.632,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0119",
+      "method": "prefix",
+      "top_k": 50,
+      "queries": 1000,
+      "recall": 0.99004,
+      "mean_documents_scored": 43157.822,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0122",
+      "method": "prefix",
+      "top_k": 75,
+      "queries": 1000,
+      "recall": 0.8022666666666667,
+      "mean_documents_scored": 4732.377,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0125",
+      "method": "prefix",
+      "top_k": 75,
+      "queries": 1000,
+      "recall": 0.9016533333333333,
+      "mean_documents_scored": 10123.537,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0128",
+      "method": "prefix",
+      "top_k": 75,
+      "queries": 1000,
+      "recall": 0.9501066666666667,
+      "mean_documents_scored": 18026.948,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0131",
+      "method": "prefix",
+      "top_k": 75,
+      "queries": 1000,
+      "recall": 0.99004,
+      "mean_documents_scored": 47413.069,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0134",
+      "method": "prefix",
+      "top_k": 100,
+      "queries": 1000,
+      "recall": 0.80108,
+      "mean_documents_scored": 5139.612,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0137",
+      "method": "prefix",
+      "top_k": 100,
+      "queries": 1000,
+      "recall": 0.90087,
+      "mean_documents_scored": 11059.047,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0140",
+      "method": "prefix",
+      "top_k": 100,
+      "queries": 1000,
+      "recall": 0.95032,
+      "mean_documents_scored": 19772.328,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0143",
+      "method": "prefix",
+      "top_k": 100,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 50864.535,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0004",
+      "method": "branch",
+      "top_k": 1,
+      "queries": 1000,
+      "recall": 0.913,
+      "mean_documents_scored": 438.079,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0007",
+      "method": "branch",
+      "top_k": 1,
+      "queries": 1000,
+      "recall": 0.953,
+      "mean_documents_scored": 517.706,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0010",
+      "method": "branch",
+      "top_k": 1,
+      "queries": 1000,
+      "recall": 0.992,
+      "mean_documents_scored": 817.826,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0016",
+      "method": "branch",
+      "top_k": 2,
+      "queries": 1000,
+      "recall": 0.909,
+      "mean_documents_scored": 588.812,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0019",
+      "method": "branch",
+      "top_k": 2,
+      "queries": 1000,
+      "recall": 0.966,
+      "mean_documents_scored": 777.623,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0022",
+      "method": "branch",
+      "top_k": 2,
+      "queries": 1000,
+      "recall": 0.993,
+      "mean_documents_scored": 1034.332,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0031",
+      "method": "branch",
+      "top_k": 3,
+      "queries": 1000,
+      "recall": 0.9516666666666667,
+      "mean_documents_scored": 814.459,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0034",
+      "method": "branch",
+      "top_k": 3,
+      "queries": 1000,
+      "recall": 0.9913333333333333,
+      "mean_documents_scored": 1226.244,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0040",
+      "method": "branch",
+      "top_k": 5,
+      "queries": 1000,
+      "recall": 0.9078,
+      "mean_documents_scored": 908.486,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0043",
+      "method": "branch",
+      "top_k": 5,
+      "queries": 1000,
+      "recall": 0.9672,
+      "mean_documents_scored": 1182.183,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0046",
+      "method": "branch",
+      "top_k": 5,
+      "queries": 1000,
+      "recall": 0.992,
+      "mean_documents_scored": 1544.457,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0058",
+      "method": "branch",
+      "top_k": 7,
+      "queries": 1000,
+      "recall": 0.991,
+      "mean_documents_scored": 1839.71,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0070",
+      "method": "branch",
+      "top_k": 10,
+      "queries": 1000,
+      "recall": 0.9913,
+      "mean_documents_scored": 2199.027,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0082",
+      "method": "branch",
+      "top_k": 15,
+      "queries": 1000,
+      "recall": 0.9912,
+      "mean_documents_scored": 2715.882,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0094",
+      "method": "branch",
+      "top_k": 20,
+      "queries": 1000,
+      "recall": 0.9905,
+      "mean_documents_scored": 23400.408,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0106",
+      "method": "branch",
+      "top_k": 30,
+      "queries": 1000,
+      "recall": 0.9939666666666667,
+      "mean_documents_scored": 29998.347,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0118",
+      "method": "branch",
+      "top_k": 50,
+      "queries": 1000,
+      "recall": 0.99326,
+      "mean_documents_scored": 5460.969,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0130",
+      "method": "branch",
+      "top_k": 75,
+      "queries": 1000,
+      "recall": 0.9927066666666666,
+      "mean_documents_scored": 6738.537,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0142",
+      "method": "branch",
+      "top_k": 100,
+      "queries": 1000,
+      "recall": 0.99213,
+      "mean_documents_scored": 7842.204,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0011",
+      "method": "prefix",
+      "top_k": 1,
+      "queries": 1000,
+      "recall": 0.99,
+      "mean_documents_scored": 26153.499,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0028",
+      "method": "branch",
+      "top_k": 3,
+      "queries": 1000,
+      "recall": 0.9003333333333333,
+      "mean_documents_scored": 579.514,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0052",
+      "method": "branch",
+      "top_k": 7,
+      "queries": 1000,
+      "recall": 0.908,
+      "mean_documents_scored": 1632.668,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0055",
+      "method": "branch",
+      "top_k": 7,
+      "queries": 1000,
+      "recall": 0.954,
+      "mean_documents_scored": 2157.665,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0064",
+      "method": "branch",
+      "top_k": 10,
+      "queries": 1000,
+      "recall": 0.9012,
+      "mean_documents_scored": 5269.462,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0067",
+      "method": "branch",
+      "top_k": 10,
+      "queries": 1000,
+      "recall": 0.9503,
+      "mean_documents_scored": 2553.973,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0079",
+      "method": "branch",
+      "top_k": 15,
+      "queries": 1000,
+      "recall": 0.9577333333333333,
+      "mean_documents_scored": 3300.559,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0073",
+      "method": "branch",
+      "top_k": 15,
+      "queries": 1000,
+      "recall": 0.8005333333333333,
+      "mean_documents_scored": 2975.703,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0085",
+      "method": "branch",
+      "top_k": 20,
+      "queries": 1000,
+      "recall": 0.80445,
+      "mean_documents_scored": 3245.004,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0088",
+      "method": "branch",
+      "top_k": 20,
+      "queries": 1000,
+      "recall": 0.90055,
+      "mean_documents_scored": 7154.509,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0097",
+      "method": "branch",
+      "top_k": 30,
+      "queries": 1000,
+      "recall": 0.8015,
+      "mean_documents_scored": 3515.834,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0100",
+      "method": "branch",
+      "top_k": 30,
+      "queries": 1000,
+      "recall": 0.9012666666666667,
+      "mean_documents_scored": 7829.971,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0103",
+      "method": "branch",
+      "top_k": 30,
+      "queries": 1000,
+      "recall": 0.9503333333333334,
+      "mean_documents_scored": 14137.271,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0109",
+      "method": "branch",
+      "top_k": 50,
+      "queries": 1000,
+      "recall": 0.80312,
+      "mean_documents_scored": 4191.465,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0112",
+      "method": "branch",
+      "top_k": 50,
+      "queries": 1000,
+      "recall": 0.90092,
+      "mean_documents_scored": 9044.784,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0115",
+      "method": "branch",
+      "top_k": 50,
+      "queries": 1000,
+      "recall": 0.95036,
+      "mean_documents_scored": 16283.632,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0121",
+      "method": "branch",
+      "top_k": 75,
+      "queries": 1000,
+      "recall": 0.8022666666666667,
+      "mean_documents_scored": 4732.377,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0124",
+      "method": "branch",
+      "top_k": 75,
+      "queries": 1000,
+      "recall": 0.9016533333333333,
+      "mean_documents_scored": 10123.537,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0127",
+      "method": "branch",
+      "top_k": 75,
+      "queries": 1000,
+      "recall": 0.9501066666666667,
+      "mean_documents_scored": 18026.948,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0133",
+      "method": "branch",
+      "top_k": 100,
+      "queries": 1000,
+      "recall": 0.80108,
+      "mean_documents_scored": 5139.612,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0136",
+      "method": "branch",
+      "top_k": 100,
+      "queries": 1000,
+      "recall": 0.90087,
+      "mean_documents_scored": 11059.047,
+      "scores_checked": true
+    },
+    {
+      "study": "/Users/vinroger/DATA/STUDY/latihan/about/exa-interview/e2e-inverted-bitplane-project/results/k-prefix-study-2026-09-13/final",
+      "setting_id": "final-s0139",
+      "method": "branch",
+      "top_k": 100,
+      "queries": 1000,
+      "recall": 0.95032,
+      "mean_documents_scored": 19772.328,
+      "scores_checked": true
+    }
+  ]
+}

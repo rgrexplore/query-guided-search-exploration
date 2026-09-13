@@ -1,0 +1,23 @@
+{
+  "methods": {
+    "scan": {
+      "pilot_settings": 8,
+      "scheduled_settings": 240,
+      "seconds_at_pilot_median": 63.49794071749784,
+      "seconds_at_pilot_max": 246.74908848130144
+    },
+    "branch": {
+      "pilot_settings": 8,
+      "scheduled_settings": 1680,
+      "seconds_at_pilot_median": 154.86405747797107,
+      "seconds_at_pilot_max": 490.0021105486667
+    },
+    "prefix": {
+      "pilot_settings": 8,
+      "scheduled_settings": 1200,
+      "seconds_at_pilot_median": 284.57164612045744,
+      "seconds_at_pilot_max": 1146.6954876319505
+    }
+  },
+  "note": "Query-loop costs only. Fresh process startup, builds and JSON output add time."
+}
