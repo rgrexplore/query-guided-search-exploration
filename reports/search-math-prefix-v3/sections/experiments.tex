@@ -1,336 +1,287 @@
+\usetikzlibrary{plotmarks}
 \section{Experiments}
-So far, we have only looked at the methods mathematically.
+So far, we have only looked at the three methods mathematically.
 
-The calculations tell us what \emph{could} make Bitplanes or Backward Walk faster, but they cannot tell us whether that actually happens on real embeddings.
+The calculations tell us what \emph{could} make Bitplanes or Backward Walk faster, but the actual result depends on the documents, the queries, and how much work each method ends up doing.
 
-In this section, we will compare the three methods directly.
+So the experiment is simple:
 
-There are two things I want to understand.
+\textbf{For the same search problem and the same recall requirement, what is the fastest configuration I can find for A, B and C?}
 
-First, we will compare the search methods under the \textbf{same cluster selection}. In other words, if A, B and C are all given exactly the same documents to search, does Bitplanes or Backward Walk actually search those documents faster than simply scanning them?
+Each method is allowed to choose the parameters that make sense for it.
 
-After that, I will allow each method to choose its own cluster settings and search parameters. This answers the more practical question: if I were actually building the fastest version of each method, which one would be faster at the same recall?
+Method A can choose its cluster count and how many clusters to open.
 
-Finally, we will look at cases where the result changes, such as returning one document versus returning 100 documents. This helps us understand not only \textbf{which method wins}, but also \textbf{when and why}.
+Method B can choose those same cluster settings, together with its leaf size and node budget.
 
-\subsection{Experiment setup}
-I use two document collections:
+Method C can choose the cluster settings, starting prefix depth and stopping rule.
+
+The documents, queries, binary scoring function and correct answers remain unchanged.
+
+This is important because B and C do not necessarily work best with the same cluster layout as A. For example, Bitplanes may be able to open a much larger group of documents and then remove most of them before the document scoring operation.
+
+The experiment therefore compares the \textbf{best complete setup found for each method}, rather than forcing every method to use A's preferred settings.
+
+\subsection{Setup}
+I use two collections:
 \begin{center}\small
 \begin{tabular}{@{}llrrl@{}}\toprule
-Collection & Embedding model & Documents & Queries & Binary dimensions tested\\\midrule
+Collection & Embedding model & Documents & Queries & Binary dimensions\\\midrule
 MS MARCO & Nomic v1.5 & 1,000,000 & 1,000 & 64, 256, 768\\
 Quora & Qwen3 0.6B & 522,931 & 1,000 & 32, 256, 1024\\\bottomrule
 \end{tabular}
 \end{center}
-For each collection, I first generate the document and query embeddings once. The experiments then start from those already-generated vectors.
+The document and query embeddings are generated before the search experiment begins.
 
-This is important because the thing I am trying to compare is the \textbf{search stage}, not how fast Nomic or Qwen can generate an embedding.
+The timer therefore measures only the part of the pipeline that I am trying to improve:
 
-The cached MS MARCO documents and 1,000 selected official queries use Nomic v1.5~\cite{msmarco,nomic}. The complete Quora corpus and 1,000 selected official test queries use Qwen3-Embedding-0.6B~\cite{beir,qwen}. Each query selection was fixed before the searches. None of the selected Quora queries has identical text or ID in that corpus.
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[node distance=5mm]
+\node[box,text width=28mm] (q) {Query embedding\\already computed};
+\node[box,text width=28mm,right=of q] (route) {Select nearby\\clusters};
+\node[box,text width=36mm,right=of route] (search) {Search documents\\inside those clusters};
+\node[box,text width=24mm,right=of search] (ids) {Return\\top-$K$ IDs};
+\draw[arr](q)--(route);\draw[arr](route)--(search);\draw[arr](search)--(ids);
+\draw[Ink,thick] ([yshift=-4mm]route.south west)--++(0,-3mm)-|([yshift=-4mm]ids.south east);
+\node[font=\small,below=10mm of search] {Measured query time};
+\end{tikzpicture}
+\caption{The query embedding is already available when timing begins. Query time includes cluster selection, search inside those clusters and returned IDs.}
+\end{figure}
 
-For one comparison, I keep the following fixed:
+Embedding generation and the later full-vector reranking stage are not included.
+
+For one comparison, A, B and C use:
 \begin{itemize}\setlength{\itemsep}{1pt}
 \item the same documents;
 \item the same 1,000 queries;
 \item the same binary dimension;
 \item the same scoring function;
-\item the same number of requested results $K$;
+\item the same requested result count $K$;
 \item the same exact reference answers.
 \end{itemize}
-The idea is simple: \textbf{A, B and C should solve exactly the same search problem.}
+The idea is simply: \textbf{same search problem, different way of searching it.}
 
-If B is faster than A, I want that difference to come from the search method itself, not because B was given easier queries or a different definition of the correct result.
-
-Changing the binary dimension, for example from 32 bits to 256 bits, is treated as a separate experiment because it also changes the ranking that we are searching for.
+Changing the binary dimension is treated as a different comparison because, for example, a 32-bit binary vector and a 256-bit binary vector do not necessarily rank the documents in the same order.
 
 \begin{figure}[htbp]\centering
 \begin{tikzpicture}[node distance=8mm]
-\node[box,text width=120mm] (input) {Same documents\\Same 1,000 queries\\Same binary score};
-\node[scan,text width=32mm,below left=10mm and -31mm of input] (a) {A\\Scan};
-\node[branch,text width=32mm,below=10mm of input] (b) {B\\Bitplanes};
-\node[keys,text width=32mm,below right=10mm and -31mm of input] (c) {C\\Backward Walk};
-\node[box,text width=120mm,below=10mm of b] (ref) {Same exact top-$K$ reference};
+\node[box,text width=126mm] (input) {Same documents\\Same 1,000 queries\\Same binary dimension\\Same binary scoring function};
+\node[scan,text width=37mm,minimum height=42mm,below left=10mm and -36mm of input] (a) {\textbf{A: Original}\\[3pt]Choose: $C,P$\\[5pt]Select clusters\\$\downarrow$\\Scan all documents};
+\node[branch,text width=37mm,minimum height=42mm,below=10mm of input] (b) {\textbf{B: Bitplanes}\\[3pt]Choose: $C,P$,\\leaf size, node budget\\[5pt]Select clusters\\$\downarrow$\\Bitplane search};
+\node[keys,text width=37mm,minimum height=42mm,below right=10mm and -36mm of input] (c) {\textbf{C: Backward Walk}\\[3pt]Choose: $C,P$,\\starting depth, stopping rule\\[5pt]Select clusters\\$\downarrow$\\Prefix search};
+\node[box,text width=126mm,below=10mm of b] (compare) {Same exact binary top-$K$ reference\\[3pt]Compare: recall, query time, memory and work performed};
 \draw[arr](input)--(a);\draw[arr](input)--(b);\draw[arr](input)--(c);
-\draw[arr](a)--(ref);\draw[arr](b)--(ref);\draw[arr](c)--(ref);
+\draw[arr](a)--(compare);\draw[arr](b)--(compare);\draw[arr](c)--(compare);
 \end{tikzpicture}
-\caption{Within one comparison, A, B and C use the same documents, queries, score and reference. The local comparison and whole-collection comparison use different reference sets, explained below.}
+\caption{A, B and C search the same documents and queries using the same binary scoring function. Each method can choose its own index and search parameters; the fastest configuration meeting the same recall requirement is compared.}
 \end{figure}
 
-\subsection{What do I measure?}
-For every query, the timer starts after the query embedding has already been produced.
+\subsection{How the comparison works}
+Before testing approximate search, I first calculate the exact answer for every query.
 
-For the complete-query comparison, I measure:
+I do this by performing a scoring operation for every document in the collection using the same binary scoring function used by A, B and C.
 
-\begin{figure}[htbp]\centering
-\begin{tikzpicture}[node distance=5mm]
-\node[box,text width=29mm] (q) {Cached query\\embedding};
-\node[box,text width=31mm,right=of q] (route) {Select the\\clusters};
-\node[branch,text width=36mm,right=of route] (local) {Search documents\\inside them};
-\node[box,text width=27mm,right=of local] (ids) {Return top-$K$\\IDs};
-\draw[arr](q)--(route);\draw[arr](route)--(local);\draw[arr](local)--(ids);
-\draw[Ink,thick] ([yshift=-4mm]route.south west)--++(0,-3mm)-|([yshift=-4mm]ids.south east);
-\node[font=\small,below=10mm of local] {Experiment 2: routing + local search + returned IDs};
-\end{tikzpicture}
-\caption{Complete-query time begins with a cached embedding. Experiment 1 reuses cluster selections and times only the local call and returned IDs.}
-\end{figure}
+Suppose the exact top five document IDs are \texttt{[12, 7, 91, 4, 30]} and one method returns \texttt{[12, 7, 91, 4, 85]}.
 
-So the complete-query latency includes both:
-\begin{enumerate}\setlength{\itemsep}{1pt}
-\item selecting which clusters to open; and
-\item searching the documents inside those clusters.
-\end{enumerate}
-It does not include embedding generation or the later reranking stage.
-
-For the first experiment, I save the selected clusters before timing. Its local-search timer excludes routing. The two sets of timings answer different questions and come from separate runs; I do not subtract one table's median from another to estimate routing time.
-
-I also record:
-\begin{itemize}\setlength{\itemsep}{1pt}
-\item recall;
-\item number of documents inside the opened clusters;
-\item number of documents that receive the full score;
-\item Bitplane word visits for B;
-\item prefix depths and prefix lookups for C;
-\item peak process memory.
-\end{itemize}
-This lets us answer not only \textbf{Which method is faster?} but also \textbf{Why is it faster?}
-
-The machine is an Apple M5 Max with 128 GiB physical memory. Each search runs one native query at a time. The complete-query experiments use one Faiss routing thread. The earlier sweep used a 32 GB process cap; the new local comparison uses a common 64 GB cap. Actual peaks are reported separately, so these limits are not assumed to determine the outcome.
-
-\subsection{How do we know whether a result is correct?}
-Before testing A, B or C, I first calculate the exact binary result for every query.
-
-For one query, I score \textbf{every document in the collection} using the same binary score described earlier.
-
-Suppose the exact top five are \texttt{[12, 7, 91, 4, 30]} and one method returns \texttt{[12, 7, 91, 4, 85]}.
-
-It recovered four of the five correct IDs, so:
+Four of the five correct IDs were recovered, so:
 \[
-\mathrm{Recall@5}=4/5=80\%.
+\mathrm{Recall@5}=80\%.
 \]
-I repeat this over all 1,000 queries and report the average recall. Equal scores use document ID to decide the reference order.
+I repeat this over all 1,000 queries.
 
-So when I say \textbf{99\% recall} for the whole-collection comparison, I specifically mean: the method recovers 99\% of the exact top-$K$ document IDs under the binary score being tested, on average.
+Therefore, when I say \textbf{99\% recall}, I mean that the method recovers 99\% of the exact binary top-$K$ document IDs on average.
 
-It does \textbf{not} mean 99\% human relevance, and it does not necessarily mean 99\% agreement with the original full embedding. We will look at that distinction separately later.
+This is the quality requirement used when comparing the search methods.
 
-\subsection{Experiment 1: give every method the same clusters}
-\label{sec:same-clusters}
-The first experiment asks the simplest possible question:
+It does not mean 99\% human relevance, and it does not necessarily mean 99\% agreement with the original uncompressed embedding. That is a separate representation-quality question discussed later.
 
-\textbf{If A, B and C are given the exact same documents, which search method is faster?}
+\Needspace{4\baselineskip}
+\textbf{Choosing the parameters}\par
+For every method, I try multiple configurations.
 
-Normally, the pipeline first selects some clusters. For this experiment, I freeze the first part.
-
-A, B and C receive exactly the same opened clusters for every query.
-
-So if those clusters contain 50,000 documents:
-\begin{itemize}\setlength{\itemsep}{1pt}
-\item A may score all 50,000;
-\item B may use Bitplanes and score only some of them;
-\item C may start from a prefix and expose only some of them.
-\end{itemize}
-But all three started from the same 50,000 documents.
-
-\begin{figure}[htbp]\centering
-\begin{tikzpicture}[node distance=8mm]
-\node[box,text width=120mm] (route) {Cluster selection is saved once for each query};
-\node[box,text width=120mm,below=of route] (opened) {Same opened clusters\\Same documents inside};
-\node[scan,text width=37mm,below left=10mm and -31mm of opened] (a) {A: Scan\\Score all};
-\node[branch,text width=37mm,below=10mm of opened] (b) {B: Bitplanes\\Prune first};
-\node[keys,text width=37mm,below right=10mm and -31mm of opened] (c) {C: Backward Walk\\Prefix first};
-\draw[arr](route)--(opened);\draw[arr](opened)--(a);\draw[arr](opened)--(b);\draw[arr](opened)--(c);
-\end{tikzpicture}
-\caption{A, B and C search the same documents. Only the local search changes, and routing is outside this experiment's timer.}
-\end{figure}
-
-The reason for doing this experiment is straightforward.
-
-Suppose B is faster than A here. Then we know the improvement is actually coming from the Bitplane search, provided both meet the same local recall requirement.
-
-But suppose B is only faster when it also uses a completely different cluster layout. Then the story is different: the advantage may come from a combination of \textbf{cluster selection + Bitplanes}, rather than Bitplanes alone.
-
-Both results are useful, but I want to separate them.
-
-\subsubsection{Local recall}
-In this experiment, I also calculate a second type of recall.
-
-Imagine the selected clusters contain 50,000 documents. We can fully scan those 50,000 documents and find their exact top-$K$. That becomes the \textbf{local reference}.
-
-Then:
-\begin{itemize}\setlength{\itemsep}{1pt}
-\item A always has 100\% local recall because it scans all 50,000;
-\item B may lose some local results if it stops branching early;
-\item C may lose some if it stops at a prefix before reaching them.
-\end{itemize}
-This lets us distinguish two different ways of missing a result:
-
-\begin{figure}[htbp]\centering
-\begin{tikzpicture}[node distance=10mm]
-\node[box,text width=120mm] (ref) {A document belongs to the global exact top-$K$};
-\node[box,text width=58mm,below left=10mm and -59mm of ref] (routing) {Correct document was never inside the opened clusters\\\textbf{Routing loss}};
-\node[branch,text width=58mm,below right=10mm and -59mm of ref] (local) {Correct document was inside the opened clusters, but local search failed to reach it\\\textbf{Local-search loss}};
-\draw[arr](ref)--(routing);\draw[arr](ref)--(local);
-\end{tikzpicture}
-\caption{Global recall includes both losses. Local recall compares against a full scan of the already-selected clusters, so it isolates the second source of loss.}
-\end{figure}
-
-The normal global recall still matters for the final system, but local recall makes this particular experiment much easier to understand.
-
-\input{evidence/same-cluster-results}
-
-\subsection{Experiment 2: let each method choose its own settings}
-The first experiment intentionally fixes the clusters. But this may not be the best way to actually use B or C.
-
-For example, Bitplanes may work better if we use \textbf{larger clusters}. A larger cluster means more documents arrive at the local search stage, which would normally make A slower. But B may be able to cheaply remove most of those documents before fully scoring them.
-
-So for the second experiment, I let each method choose the configuration that works best for it.
-
-For A, I vary:
+For A:
 \begin{itemize}\setlength{\itemsep}{1pt}
 \item number of clusters $C$;
 \item number of opened clusters $P$.
 \end{itemize}
-For B, I vary:
+For B:
 \begin{itemize}\setlength{\itemsep}{1pt}
 \item $C$;
 \item $P$;
 \item leaf size;
 \item node budget.
 \end{itemize}
-For C, I vary:
+For C:
 \begin{itemize}\setlength{\itemsep}{1pt}
 \item $C$;
 \item $P$;
 \item starting prefix depth;
 \item stopping rule.
 \end{itemize}
-All methods can use the same available routing layouts. The short-code follow-up includes clusters trained from either float vectors or binary document signs.
+For a given recall target, such as 80\%, 90\%, 95\%, 99\%, I discard configurations that do not reach that recall.
 
-For each target recall, such as 80\%, 90\%, 95\%, 99\%, I choose the fastest tested configuration that reaches at least that recall.
+Among the remaining configurations, I keep the fastest one for each method.
 
-This gives us the practical comparison:
+So the comparison is:
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[node distance=6mm]
+\node[scan,text width=31mm] (a) {Many A settings};
+\node[scan,text width=67mm,right=8mm of a] (bestA) {Fastest A that reaches 99\%};
+\node[branch,text width=31mm,below=of a] (b) {Many B settings};
+\node[branch,text width=67mm,right=8mm of b] (bestB) {Fastest B that reaches 99\%};
+\node[keys,text width=31mm,below=of b] (c) {Many C settings};
+\node[keys,text width=67mm,right=8mm of c] (bestC) {Fastest C that reaches 99\%};
+\draw[arr](a)--(bestA);\draw[arr](b)--(bestB);\draw[arr](c)--(bestC);
+\node[box,text width=67mm,below=9mm of bestC] (result) {Compare their query time};
+\draw[arr](bestC)--(result);
+\end{tikzpicture}
+\caption{At each recall target, compare the fastest tested configuration for each method that meets the requirement. Measurements below the target remain in the saved results, but cannot win that comparison.}
+\end{figure}
 
-\textbf{If we were actually deploying the fastest tested version of A, B and C, which one would be fastest at the same recall?}
+This is the main experiment used throughout the section. The times reported below are medians from three repeated runs of each selected configuration, using the same 1,000 queries.
 
-I repeat the selected settings in three fresh processes with varied run order. The reported medians combine the repeated query times. This sweep contains 3,679 qualified A/B/C settings from 4,024 scheduled settings, with three grids partial under saved time limits. Every completed setting uses all 1,000 queries. This is a tested parameter grid, not a proof of a global optimum.
+\subsection{Main result}
+Let's first look at Qwen with 32-bit binary documents while returning one result: $K=1$.
 
-\subsection{Main result: Qwen 32-bit, return one document}
-Let's first look at Qwen with 32-bit binary documents and $K=1$, because this is the clearest case where the three methods behave differently.
-
-The fastest qualifying configurations are:
+This is the setting where the difference between the three search strategies is the clearest.
 \begin{center}\small
 \begin{tabular}{@{}rrrr@{}}\toprule
-Required recall & A: Scan & B: Bitplanes & C: Backward Walk\\\midrule
+Required recall & A: Original & B: Bitplanes & C: Backward Walk\\\midrule
 80\% & 0.0308 ms & \textbf{0.0295 ms} & 0.0318 ms\\
 90\% & 0.0498 ms & \textbf{0.0432 ms} & 0.0497 ms\\
 95\% & 0.0805 ms & \textbf{0.0520 ms} & 0.0799 ms\\
 99\% & 0.1948 ms & \textbf{0.0809 ms} & 0.1688 ms\\\bottomrule
 \end{tabular}
 \end{center}
-At the 99\% recall target, B takes $0.0809$ ms compared with $0.1948$ ms for A. So B is about $2.4\times$ faster in this setting.
+At the 99\% recall target, Bitplanes take $0.0809$ ms compared with $0.1948$ ms for A.
+
+So in this setting, B is approximately $2.4\times$ faster than the original method.
 
 \begin{figure}[htbp]\centering
 \begin{tikzpicture}[x=5.3mm,y=240mm]
-\foreach \y in {0.05,0.10,0.15,0.20}{\draw[gray!20](0,\y)--(19,\y);\node[left,font=\small] at(0,\y){\y};}
+\foreach \y in {0.05,0.10,0.15,0.20}{\draw[gray!20](0,\y)--(19,\y);\node[left,font=\small]at(0,\y){\y};}
 \draw[arr](0,0)--(20,0);\draw[arr](0,0)--(0,.215);
-\foreach \x/\label in {0/80,10/90,15/95,19/99}{\draw(\x,0)--(\x,-.004);\node[below,font=\small]at(\x,-.004){\label};}
-\draw[Scan,thick] plot[mark=*] coordinates{(0,.030792)(10,.049792)(15,.080500)(19,.194792)};
-\draw[Branch,thick] plot[mark=*] coordinates{(0,.029500)(10,.0431665)(15,.0519585)(19,.080875)};
-\draw[Keys,thick] plot[mark=*] coordinates{(0,.031792)(10,.049667)(15,.079917)(19,.1687505)};
+\foreach \x/\tick in {0/80,10/90,15/95,19/99}{\draw(\x,0)--(\x,-.004);\node[below,font=\small]at(\x,-.004){\tick};}
+\draw[Scan,thick] plot[mark=*,mark size=2pt] coordinates{(0,.030792)(10,.049792)(15,.080500)(19,.194792)};
+\draw[Branch,thick] plot[mark=square*,mark size=2pt] coordinates{(0,.029500)(10,.0431665)(15,.0519585)(19,.080875)};
+\draw[Keys,thick] plot[mark=triangle*,mark size=2.6pt] coordinates{(0,.031792)(10,.049667)(15,.079917)(19,.1687505)};
 \node[font=\small]at(10,-.025){Required binary recall (\%)};
-\node[rotate=90,font=\small]at(-3,.11){Median complete-query time (ms)};
-\node[font=\small,text=Scan]at(3,.225){A: Scan};
+\node[rotate=90,font=\small]at(-3,.11){Median query time (ms)};
+\node[font=\small,text=Scan]at(3,.225){A: Original};
 \node[font=\small,text=Branch]at(10,.225){B: Bitplanes};
 \node[font=\small,text=Keys]at(18,.225){C: Backward Walk};
 \end{tikzpicture}
-\caption{Qwen32, $K=1$. B has the lowest repeated median at these four recall targets. This figure uses the repeated timings in the table.}
+\caption{Query time for Qwen32 with $K=1$. Each point shows the repeated median for the fastest tested configuration selected at the required binary recall.}
 \end{figure}
 
-\subsection{Why is Bitplanes faster here?}
-The selected 99\% configurations are:
+\subsection{Why is Bitplanes faster?}
+The latency result by itself does not tell us what happened.
+
+So let's look at the 99\% settings chosen by each method.
 \begin{center}\small
-\begin{tabularx}{\linewidth}{@{}lrrY@{}}\toprule
-Method & Clusters & Opened clusters & Local search\\\midrule
-A & 4096 & 180 & scan\\
-B & 16 & 9 & leaf 128, budget 8192, deeper-first ties\\
-C & 1024 & 78 & start depth 4, target zero, exact stop\\\bottomrule
+\begin{tabularx}{\linewidth}{@{}lrrYrr@{}}\toprule
+Method & Clusters & Clusters opened & Search setting & Recall & Time (ms)\\\midrule
+A & 4096 & 180 & Scan & 99.0\% & 0.1948\\
+B & 16 & 9 & Leaf 128, budget 8192 & 99.2\% & 0.0809\\
+C & 1024 & 78 & Start depth 4, exact stop & 99.0\% & 0.1688\\\bottomrule
 \end{tabularx}
 \end{center}
-Now we can look at how many documents each method actually touches:
+B uses deeper-first ties, and C uses candidate target zero with its exact-stop rule.
+
+The first interesting thing is that the methods choose very different cluster layouts.
+
+Now look at how many documents reach the search stage and how many of them undergo a document scoring operation:
 \begin{center}\small
 \begin{tabular}{@{}lrr@{}}\toprule
-Method & Documents inside opened clusters & Documents fully scored\\\midrule
+Method & Documents inside opened clusters & \shortstack{Scoring\\operations}\\\midrule
 A & 24,181 & 24,181\\
 B & 295,031 & 818\\
 C & 41,147 & 26,153\\\bottomrule
 \end{tabular}
 \end{center}
-These document counts are means per query. The achieved global recalls are 99.0\%, 99.2\% and 99.0\% for A, B and C.
+These are average values per query. This is the most important part of the result.
 
-This is the most important part of the result.
-
-A tries to make the cluster selection very selective. B does almost the opposite:
-
-\begin{figure}[htbp]\centering
-\begin{tikzpicture}[node distance=7mm]
-\node[scan,text width=52mm] (ar) {\textbf{A}\\Select small clusters};
-\node[scan,text width=52mm,below=of ar] (ao) {24,181 documents};
-\node[scan,text width=52mm,below=of ao] (as) {Score all 24,181};
-\node[branch,text width=52mm,right=18mm of ar] (br) {\textbf{B}\\Select much larger clusters};
-\node[branch,text width=52mm,below=of br] (bo) {295,031 documents};
-\node[branch,text width=52mm,below=of bo] (bs) {Bitplanes\\Score only 818};
-\draw[arr](ar)--(ao);\draw[arr](ao)--(as);\draw[arr](br)--(bo);\draw[arr](bo)--(bs);
-\end{tikzpicture}
-\caption{The selected A and B configurations use different routing strategies. B opens more documents, then avoids most full scores through its local search.}
-\end{figure}
-
-So B is not faster because fewer documents reach the opened clusters. It actually opens \textbf{more than ten times as many documents as A}.
-
-The difference is that Bitplanes remove almost all of them before the expensive full-score calculation. B scores only around
+\textbf{Method A}\par
+A uses very selective cluster selection:
+\[
+\text{select clusters}\ \to\ 24{,}181\text{ documents}\ \to\ 24{,}181\text{ scoring operations}.
+\]
+\textbf{Method B}\par
+B does almost the opposite:
+\[
+\begin{aligned}
+&\text{select much larger clusters}\ \to\ 295{,}031\text{ documents}\\
+&\hspace{35mm}\downarrow\ \text{Bitplanes}\\
+&\hspace{35mm}818\text{ document scoring operations}.
+\end{aligned}
+\]
+B therefore performs scoring operations for only
 \[
 818/295031\approx0.28\%
 \]
-of its opened documents.
+of the documents inside its opened clusters.
+
+This is exactly the tradeoff described in Section 2. B performs extra bitmap work, but in this case that work removes so many document scoring operations that the complete query becomes faster.
 
 \begin{figure}[htbp]\centering
-\begin{tikzpicture}[x=.00033mm,y=8mm]
-\node[anchor=east,font=\small] at(-12000,0){A opened};
-\node[anchor=east,font=\small] at(-12000,-1){A scored};
-\node[anchor=east,font=\small] at(-12000,-3){B opened};
-\node[anchor=east,font=\small] at(-12000,-4){B scored};
-\fill[Scan!65](0,-.25)rectangle(24181,.25);
-\fill[Scan!65](0,-1.25)rectangle(24181,-.75);
-\fill[Branch!65](0,-3.25)rectangle(295031,-2.75);
-\fill[Branch!85](0,-4.25)rectangle(818,-3.75);
-\node[anchor=west,font=\small]at(30000,0){24,181};
-\node[anchor=west,font=\small]at(30000,-1){24,181};
-\node[anchor=east,font=\small]at(295031,-2.4){295,031};
-\node[anchor=west,font=\small]at(6500,-4){818};
-\node[anchor=west,font=\small,text=Branch,align=left]at(85000,-4.1){53,693 split-mask word visits\\5,838 leaf-mask word visits};
-\node[font=\small]at(120000,-5.3){All bars use the same document-count scale};
+\begin{tikzpicture}
+\node[font=\small\bfseries,text=Scan]at(24mm,0){Method A};
+\node[font=\small\bfseries,text=Branch]at(108mm,0){Method B};
+\node[anchor=west,font=\small,align=left]at(0,-10mm){Documents inside\\opened clusters};
+\node[anchor=west,font=\small,align=left]at(80mm,-10mm){Documents inside\\opened clusters};
+\fill[Scan!70](0,-23mm)rectangle(4.353mm,-18mm);
+\fill[Branch!70](80mm,-23mm)rectangle(133.106mm,-18mm);
+\node[anchor=west,font=\small]at(8mm,-20.5mm){24,181};
+\node[anchor=east,font=\small]at(133mm,-26mm){295,031};
+\draw[arr](2mm,-27mm)--node[right,font=\small,text=Scan]{Full scan}(2mm,-42mm);
+\draw[arr](82mm,-27mm)--node[right,font=\small,text=Branch]{Bitplanes}(82mm,-42mm);
+\node[anchor=west,font=\scriptsize,text=Branch,align=left]at(104mm,-36mm){53,693 split-mask\\word visits\\5,838 leaf-mask\\word visits};
+\fill[Scan!70](0,-53mm)rectangle(4.353mm,-48mm);
+\fill[Branch!85](80mm,-53mm)rectangle(80.147mm,-48mm);
+\node[anchor=west,font=\small]at(8mm,-50.5mm){24,181};
+\node[anchor=west,font=\small]at(85mm,-50.5mm){818};
+\node[anchor=west,font=\small]at(0,-59mm){\shortstack{Scoring\\operations}};
+\node[anchor=west,font=\small]at(80mm,-59mm){\shortstack{Scoring\\operations}};
+\node[font=\small]at(67mm,-69mm){The bars use the same document-count scale};
 \end{tikzpicture}
-\caption{At the selected 99\% setting, B opens about 295,000 documents but scores only 818. Its bitmap-word visits are shown separately because they are different work from full document scores.}
+\caption{At the selected 99\% setting, A opens a small set of documents and performs scoring operations for all of them. B opens a much larger set but uses Bitplanes to reduce roughly 295,000 documents to only 818 document scoring operations.}
 \end{figure}
 
-This connects directly back to the calculation in Section 2. Bitplanes only make sense if \textbf{the full scores we avoid are more expensive than the bitmap work we add}.
+\Needspace{4\baselineskip}
+\textbf{What about C?}\par
+Backward Walk also removes some document scoring operations:
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[node distance=6mm]
+\node[keys,text width=40mm] (opened) {41,147 documents\\inside opened clusters};
+\node[keys,text width=32mm,right=of opened] (walk) {Backward Walk};
+\node[keys,text width=38mm,right=of walk] (scored) {26,153\\scoring operations};
+\draw[arr](opened)--(walk);\draw[arr](walk)--(scored);
+\end{tikzpicture}
+\caption{C reduces the number of document scoring operations, but exposes a larger fraction of its selected documents than B does.}
+\end{figure}
 
-In this setting, B avoids roughly 294,000 full scores per query while performing around 59,000 bitmap-word visits. The comparison against scanning B's same opened clusters in Section~\ref{sec:same-clusters} checks that local saving directly. The independently selected complete-query comparison then shows whether B still beats A's own preferred routing.
+However, the reduction is much smaller than B's. C also needs to perform prefix lookups while progressively broadening the query prefix.
 
-The counters are not interchangeable units of CPU time. I have not separately timed every score, mask pass and queue operation, so I do not assign invented millisecond costs to those components.
+At this setting, C visits around 3.5 prefix depths and performs around 495 boundary searches per query.
 
-\subsection{What happens to Backward Walk?}
-C also avoids some full scores. It opens around 41,147 documents but only fully scores around 26,153.
+Its final time is $0.1688$ ms, which is better than A in this particular comparison, but still much slower than B. These are complete-configuration timings, so the difference also includes each method's routing choice.
 
-It therefore removes roughly 15,000 full scores. However, it also performs prefix searches and range expansion.
+So the three methods are effectively making three different choices:
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
+A & Reduce documents heavily during cluster selection, then perform a scoring operation for every document\\
+B & Use coarse cluster selection, then aggressively prune with Bitplanes\\
+C & Use medium cluster selection, then progressively broaden a prefix\\\bottomrule
+\end{tabularx}
+\end{center}
+That is the central result of the experiment.
 
-At the selected setting, it visits around 3.5 prefix depths and performs around 495 boundary searches per query. Its final time is $0.1688$ ms, which is lower than A's independently selected configuration, but still much slower than B.
+\subsection{Does this advantage always happen?}
+No.
 
-Because A and C use different cluster layouts here, this result alone cannot tell us whether the gain comes from Backward Walk itself or from C's preferred routing configuration. The fixed-cluster results in Section~\ref{sec:same-clusters} separate those questions.
+The previous result asks for only one final result: $K=1$. Now increase the number of requested results to $K=100$.
 
-\subsection{When does Bitplanes stop helping?}
-The previous result uses $K=1$. Now consider the same type of comparison when we ask for $K=100$.
-
-At 99\% recall:
+At the 99\% binary recall target:
 \begin{center}\small
 \begin{tabular}{@{}lrrr@{}}\toprule
 Representation & A & B & C\\\midrule
@@ -342,25 +293,33 @@ Qwen 256 & \textbf{3.564 ms} & 3.721 ms & 4.039 ms\\
 Qwen 1024 & \textbf{22.863 ms} & 23.098 ms & 22.930 ms\\\bottomrule
 \end{tabular}
 \end{center}
-The behavior is now very different. At these selected settings:
-\begin{itemize}\setlength{\itemsep}{1pt}
-\item B performs no splits;
-\item C starts at depth zero;
-\item all three methods score the same documents within each row.
-\end{itemize}
-So the pruning advantage disappears. C's small timing lead on Nomic64 does not come from skipping scores.
+In these selected settings, B performs no useful splitting and C starts from depth zero. In other words, both methods effectively fall back toward the original scan.
 
-When we only need one result, B can search for one very promising region and prune many alternatives. When we need 100 results, more branches may remain relevant. B must keep exploring until enough good documents have been found, which can remove much of its pruning advantage.
+C's slightly lower median on Nomic64 is a scan-like timing difference; it does not come from avoiding document scoring operations.
 
-In these tested settings, the strongest Bitplane advantage appears when the number of requested results is small enough that many branches can be safely ignored. This is not a guarantee for every model, code length or recall target.
+This also makes intuitive sense. When we only need one result, B can search the most promising branches and safely ignore many alternatives.
 
-\subsection{Binary length is a separate tradeoff}
-The 32-bit result above is fast, but a 32-bit binary vector does not produce the same ranking as the full embedding.
+When we need 100 results, many more branches can still contain one of the required documents. B therefore has to search much more of the tree.
 
-To measure this difference, I compare the exact binary results with the original full-vector score.
+Eventually, the cost of pruning is no longer worth it.
+
+\textbf{The Bitplane advantage therefore appears strongest when $K$ is small enough that many branches can be safely ignored.}
+
+This is a measured result for the tested settings, not a guarantee that B can never help for larger $K$.
+
+\subsection{One important note about binary dimension}
+The very fast result above uses Qwen with only 32 binary dimensions.
+
+That is a different representation from Qwen 256 or Qwen 1024. Therefore, 99\% recall for Qwen32 means:
+
+\textbf{99\% agreement with the exact Qwen32 binary ranking.}
+
+It does not mean 99\% agreement with the original full Qwen embedding.
+
+To see how much the binary representation itself changes the ranking:
 \begin{center}\small
 \begin{tabular}{@{}lrr@{}}\toprule
-Representation & \shortstack{Binary top-1 matches\\full-vector best} & \shortstack{Full-vector best appears\\in binary top-100}\\\midrule
+Representation & \shortstack{Binary top-1 agrees\\with full-vector best} & \shortstack{Full-vector best appears\\in binary top-100}\\\midrule
 Qwen 32 & 14.0\% & 73.0\%\\
 Qwen 256 & 75.8\% & 100.0\%\\
 Qwen 1024 & 88.6\% & 100.0\%\\
@@ -369,104 +328,45 @@ Nomic 256 & 48.0\% & 97.2\%\\
 Nomic 768 & 70.2\% & 99.9\%\\\bottomrule
 \end{tabular}
 \end{center}
-This result is not comparing A, B and C. It answers a different question:
+Agreement here means a full-vector score value within $10^{-5}$ of the exact best score value. Different document IDs can tie. The top-100 column rescores the exact binary candidates.
 
-\textbf{How much does the binary representation itself change the ranking?}
+So there are really two separate questions:
 
-For example, Qwen32 may be extremely cheap to search, but its exact binary top-1 agrees with the full-vector best on only 14\% of the queries. So search speed and representation quality should be treated separately.
+\textbf{How fast can we search this binary representation?}
 
-Here ``matches'' means the full-float score is within $10^{-5}$ of the exhaustive full-float best. Different document IDs can tie. The top-100 column rescores the exact binary candidates; it is not measured end-to-end quality for an approximate A/B/C configuration, and neither column is a human relevance judgment.
+versus
 
-\subsection{When does Backward Walk work especially well?}
-Backward Walk is designed to be very cheap when the query's specific binary prefix already corresponds to stored documents.
+\textbf{How well does this binary representation preserve the original embedding ranking?}
 
-I test this directly using Qwen32 with no cluster routing. Among the 1,000 queries, 82 have their complete 32-bit query pattern present in the collection.
+The A/B/C experiment answers the first question. The table above gives some context for the second.
 
-Using the same globally selected configuration for each method across all queries:
-\begin{center}\small
-\begin{tabular}{@{}lrrrr@{}}\toprule
-Query group & Queries & A ($\mu$s) & B ($\mu$s) & C ($\mu$s)\\\midrule
-All queries & 1000 & 2481.7 & 124.1 & 1163.5\\
-Exact 32-bit code exists & 82 & 2481.3 & 128.5 & \textbf{4.9}\\
-Exact code absent & 918 & 2481.7 & 123.8 & 1170.7\\\bottomrule
-\end{tabular}
-\end{center}
-When the exact code exists, C finds a tiny range immediately and scores only around 1.7 documents on average. Its search therefore looks approximately like:
+\subsection{Summary}
+The experiment gives a fairly simple picture.
 
-\begin{figure}[htbp]\centering
-\begin{tikzpicture}[node distance=5mm]
-\node[keys,text width=26mm] (q) {Query binary\\code};
-\node[keys,text width=34mm,right=of q] (range) {Exact prefix\\range exists};
-\node[keys,text width=28mm,right=of range] (rows) {1.68 rows\\on average};
-\node[keys,text width=30mm,right=of rows] (stop) {Score bound\\proves the stop};
-\draw[arr](q)--(range);\draw[arr](range)--(rows);\draw[arr](rows)--(stop);
-\end{tikzpicture}
-\caption{For the 82 exact-code queries, C reaches a small range immediately and stops after scoring it. The same configuration is used for the other 918 queries.}
-\end{figure}
+For Qwen32 with one requested result, Bitplanes are clearly faster in the tested search setup.
 
-In this case, Backward Walk is extremely fast. However, this only happens for 82 of the 1,000 queries.
-
-For the other 918 queries, C must progressively relax the prefix and scores about 303,177 documents on average. B remains faster over the complete 1,000-query batch.
-
-The groups were defined by existing code membership, not favorable timings, and their settings were not retuned. Every method returns the exact binary best result here. C starts at depth 32 with target zero and the exact-stop bound; B uses leaf 2048 and an unlimited budget.
-
-The observed advantage is specifically for a complete 32-bit match. An occupied shorter prefix alone does not prove that C can stop exactly; the score bound must still hold. Matching binary codes also do not imply identical text.
-
-\subsection{Memory}
-All selected configurations from the earlier complete-query sweep remain far below its 32 GB process limit.
-
-For the Qwen32 $K=1$ 99\% settings:
-\begin{center}\small
-\begin{tabular}{@{}lrr@{}}\toprule
-Method & Index + router fields & Measured process peak\\\midrule
-A & 8.924 MB & 77.971 MB\\
-B & 10.463 MB & 72.139 MB\\
-C & 10.598 MB & 77.529 MB\\\bottomrule
-\end{tabular}
-\end{center}
-The largest selected process peak across that completed sweep is around 505.6 MB. MB means one million bytes. Field totals exclude allocator capacity, overlapping buffers and other runtime memory.
-
-So at the collection sizes tested here, memory does not determine the winner. The main difference between the methods is query-time work. The local follow-up records its own process peaks under the common 64 GB cap; these are separate from the older numbers in this table.
-
-\subsection{Additional checks}
-\label{sec:prefix-check}
-I also verify that the work counters match the calculations from Section 2.
-
-For Bitplanes, I record:
+At 99\% binary recall:
 \begin{itemize}\setlength{\itemsep}{1pt}
-\item split-mask words;
-\item leaf-mask words;
-\item number of visited branches;
-\item rows fully scored.
+\item A takes 0.1948 ms;
+\item B takes 0.0809 ms;
+\item C takes 0.1688 ms.
 \end{itemize}
-For Backward Walk, I record:
-\begin{itemize}\setlength{\itemsep}{1pt}
-\item starting depth;
-\item final depth;
-\item number of prefix depths visited;
-\item number of boundary searches;
-\item rows fully scored.
-\end{itemize}
-The stored index-size formulas are also checked against the actual index fields. Across the earlier study, 890 index-storage checks and 3,849,076 query-count checks matched their formulas.
+B is therefore about $2.4\times$ faster than A.
 
-For Backward Walk's exact stopping rule, the predicted stopping depth and number of scored rows match all 3,000 checked query records: the same 1,000 global Qwen32 queries at starting depths 1, 4 and 32. The exact reference score is used only for this offline check. Actual search uses the scores it has found.
+The interesting part is \textbf{why}.
 
-The separate probability study retained all three seeds. On its fixed Qwen32 layout, probabilities 0, 0.1 and 0.2 gave top-1 recalls of 87.30\%, 83.33\% and 70.90\% at budget 128. At budget 8192 they all reached 95.30\%, while median time rose from 0.0766 to 0.0857 and 0.0959 ms. Nomic64 also showed no consistent time gain at matching recall. This did not improve the tested tradeoff; it does not prove randomness can never help.
+A selects a relatively small number of documents and then performs scoring operations for all of them.
 
-These checks do not determine which method is fastest; the measured query time does that. Their purpose is to verify that the explanation of the work matches what the implementation actually performs.
+B selects a much larger number of documents, but its Bitplane search reduces roughly 295,000 opened documents to only around 818 document scoring operations.
 
-\subsection{Experiment summary}
-The experiments show that there is no single method that is best in every setting.
+In this setting, the document scoring work avoided is large enough to repay the extra bitmap work.
 
-For Qwen32 with $K=1$, Bitplanes were substantially faster in the independently selected comparison. At the 99\% binary recall target, B took 0.0809 ms compared with 0.1948 ms for A.
+However, this does not happen everywhere. When the result count increases to $K=100$, B and C become much closer to ordinary scanning and the advantage disappears in the tested settings.
 
-The reason is not that B opened fewer documents. B actually opened a much larger set of documents, but its query-dependent Bitplane traversal reduced roughly 295,000 opened documents to only around 818 full scores.
+So the result is not: \textbf{Bitplanes are always faster.}
 
-When $K$ increased to 100 at the same 99\% target, the selected configurations across the six representations became scan-like. Backward Walk showed a more specific advantage when the complete query code existed; otherwise it often needed substantial prefix relaxation.
+It is: \textbf{Bitplanes can be faster when the query only needs a small number of results and the query bits allow a large fraction of the opened documents to be ruled out before document scoring operations.}
 
-The fixed-cluster comparison above separates local-search behavior from routing. Its conclusions are limited to the tested local settings, while the complete-query sweep allows each method to choose its own routing as well.
+Backward Walk shows the same general tradeoff, but in the tested data it does not reduce the scoring work as aggressively as Bitplanes.
 
-\subsection{Code and reproduction}
-The local comparison is in \path{experiments/same_clusters.py}. It saves cluster selections and local references first, then runs each method in fresh processes. Returned IDs, work counts, local/global recall and timing records are under \path{results/same-clusters-2026-09-13/}.
-
-The earlier complete-query sweep is under \path{results/prefix-study-2026-09-13/}. Its README links the final tables to the source settings and repeated observations. Data preparation is described in \path{docs/expanded-pool-preparation.md}. All searches use the common C++ scorer in \path{cpp/score.hpp}; the report diagrams illustrate those operations rather than adding different algorithms.
+That is the main conclusion the experiment needs to communicate.
