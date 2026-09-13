@@ -52,3 +52,16 @@ This run is closed to new datasets, algorithms and large sweeps. Complete the PD
 source bundle, checkpoint and memory only. No new UI, GPU search, update system or
 indexing framework is needed. Unfinished grid cells remain recorded rather than
 silently counted as losses.
+
+
+## Time-complexity draft: 13 September
+
+- [x] Keep both supplied opening paragraphs verbatim in Section 2.1.
+- [x] Adapt the same three-document example, diagrams and per-method totals from the draft.
+- [x] Use the summary's three tables and a separate variable-definition table.
+- [x] Retain the depth-zero lookup exception, query-key cost and optional exact-stop fields.
+- [x] Leave Section 1, Sections 2.2–2.3, search code and all experiment results unchanged.
+- [x] Build the 29-page PDF, inspect the updated pages and verify the small example.
+
+The supplied drafts are preserved in `docs/source/`. This is an explanation change;
+it does not change any algorithm or rerun the benchmark.
