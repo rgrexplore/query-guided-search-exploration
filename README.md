@@ -43,6 +43,7 @@ Those are different kinds of work, so fewer document scores alone do not prove l
 | Small numerical example | [examples/prefix_search.py](examples/prefix_search.py) |
 | Encode and prepare exact references | [experiments/prepare_prefix_pools_v2.py](experiments/prepare_prefix_pools_v2.py) |
 | Time one index on the fixed query set | [experiments/prefix_batch_worker_v2.py](experiments/prefix_batch_worker_v2.py) |
+| Compare local search on the same selected clusters | [experiments/same_clusters.py](experiments/same_clusters.py) |
 | Prepare settings, run, summarize and repeat | [experiments/prefix_study_v2.py](experiments/prefix_study_v2.py) |
 | Check storage and loop formulas | [experiments/prefix_work_checks_v2.py](experiments/prefix_work_checks_v2.py) |
 | Measure prefix counts and sign agreement | [experiments/prefix_geometry_v2.py](experiments/prefix_geometry_v2.py) |
@@ -98,6 +99,8 @@ A positive candidate target can still stop approximately. The stored index stays
 ## Reading the results
 
 The dated study is saved under [results/prefix-study-2026-09-13](results/prefix-study-2026-09-13).
+The [same-cluster follow-up](results/same-clusters-2026-09-13/README.md) separately
+measures local search time and local recall while keeping the opened clusters fixed.
 Within each collection, model and code length, all methods receive the same documents,
 queries and exact binary-score references. Each method can choose its fastest tested
 settings that reach the required recall and fit the common memory limit.

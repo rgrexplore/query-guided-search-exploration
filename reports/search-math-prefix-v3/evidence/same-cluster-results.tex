@@ -1,0 +1,58 @@
+\subsubsection{Same routing, different local search}
+I reused the three routing settings selected by the Qwen32, $K=1$, 99\% complete-query comparison shown later. Each setting was then tested with all three methods.
+
+B used leaf size 128, node budget 8192 and deeper-first ties. C started at depth 4, with target zero and the exact-stop rule. These local settings stayed the same across the three layouts. I repeated each comparison in three fresh processes, rotating method order. The times below measure only local search and returned arrays; cluster selection was saved before timing.
+
+\begin{center}\small
+\begin{tabular}{@{}lrrrr@{}}\toprule
+Local search & Rows fully scored & Local recall & Global recall & Local time (ms)\\\midrule
+\multicolumn{5}{@{}l}{\textbf{4096 clusters, 180 opened: the same 24,181 rows per query}}\\[3pt]
+A: scan & 24,181 & 100\% & 99.0\% & 0.0978\\
+B: Bitplanes & 17,936 & 100\% & 99.0\% & 0.1297\\
+C: Backward Walk & 15,793 & 100\% & 99.0\% & 0.1004\\\midrule
+\multicolumn{5}{@{}l}{\textbf{16 clusters, 9 opened: the same 295,031 rows per query}}\\[3pt]
+A: scan & 295,031 & 100\% & 99.2\% & 0.9402\\
+B: Bitplanes & 818 & 100\% & 99.2\% & \textbf{0.0565}\\
+C: Backward Walk & 169,362 & 100\% & 99.2\% & 0.4806\\\midrule
+\multicolumn{5}{@{}l}{\textbf{1024 clusters, 78 opened: the same 41,147 rows per query}}\\[3pt]
+A: scan & 41,147 & 100\% & 99.0\% & 0.1379\\
+B: Bitplanes & 4,854 & 100\% & 99.0\% & 0.1099\\
+C: Backward Walk & 26,153 & 100\% & 99.0\% & 0.1103\\\bottomrule
+\end{tabular}
+\end{center}
+Rows are means over the 1,000 queries; times are medians over all 3,000 repeated observations. Every method in a three-row block received identical cluster IDs and recovered every local top-1 reference in these runs.
+
+The large-cluster result answers the question directly. Scanning the same 295,031 documents took 0.9402 ms, while B took 0.0565 ms and scored only 818. B's three process medians were 0.0525--0.0609 ms, compared with A's 0.9301--0.9525 ms. The reduction is therefore a local-search benefit, not merely a different routing choice.
+
+C also helped on those large clusters: it reduced the scored rows to 169,362 and took 0.4806 ms. B was still faster. With the intermediate layout, B and C were close to each other and both faster than A. Their repeat ranges overlap, so the small B/C difference is not a clear winner.
+
+With many small clusters, B's filtering cost more than it saved. C's local time was close to A's, with overlapping repeat ranges. The benefit therefore depends on the selected documents and cluster sizes, even when the query and binary representation stay fixed.
+
+\subsubsection{The 256-bit comparison}
+I also repeated the local comparison with 256-bit codes and $K=100$, which is closer to the representation size in Exa's published pipeline. Each collection used A's selected 99\%-global-recall routing: 4096 clusters with 668 probes for Qwen, and 4096 clusters with 1414 probes for Nomic.
+
+The same B and C local settings were used as above:
+\begin{center}\small
+\begin{tabular}{@{}llrrr@{}}\toprule
+Collection & Method & Rows scored & Local recall & Local time (ms)\\\midrule
+Qwen256 & A & 86,504 & 100\% & 2.3576\\
+ & B, leaf 128 & 86,504 & 100\% & 2.7690\\
+ & C, start 4 & 86,504 & 100\% & 2.7649\\\midrule
+Nomic256 & A & 345,279 & 100\% & 8.9999\\
+ & B, leaf 128 & 104,233 & \textbf{84.14\%} & 4.6308\\
+ & C, start 4 & 345,279 & 100\% & 10.5210\\\bottomrule
+\end{tabular}
+\end{center}
+Nomic's B run was faster, but it did not reach 99\% local recall. Its global recall was 83.34\%, compared with 99.00\% for the exact local searches. That is not a valid high-recall speedup.
+
+I also gave B a leaf size large enough to scan every opened cluster immediately, and C its depth-zero scan. This checks that neither method is forced to perform filtering when it cannot help. Among the two local choices tested for each method, the fastest settings reaching 99\% local recall were:
+\begin{center}\small
+\begin{tabular}{@{}lrrr@{}}\toprule
+Collection & A & B: immediate scan & C: depth-zero scan\\\midrule
+Qwen256 & 2.3576 ms & 2.4086 ms & 2.5096 ms\\
+Nomic256 & 8.9999 ms & 9.3839 ms & 9.8842 ms\\\bottomrule
+\end{tabular}
+\end{center}
+All these settings had 100\% local recall. They did not establish a pruning advantage over A. This follow-up tested 25 local settings across five fixed layouts, rather than repeating the full parameter sweep. It shows what happened at those settings, not the best possible local configuration.
+
+All 75,000 query records were saved, including the low-recall result. The 60,000 calls in exact modes matched the saved local reference IDs. Input hashes matched before and after the run, and all workers recorded the same power configuration. The largest worker peak was 229.7 MB, well below the common 64 GB cap.

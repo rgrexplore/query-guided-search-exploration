@@ -111,3 +111,20 @@ explicitly requested Figure 1/caption edit; v2 retains its original hash.
 - [x] Leave every other section, algorithm and result unchanged.
 
 Current PDF: 35 pages. Editor-generated root-level LaTeX outputs are left untouched.
+
+## Educative experiment rewrite and same-cluster follow-up
+
+- [x] Use the last supplied draft's first-person teaching flow and draw all eight diagrams.
+- [x] Run five fixed cluster layouts: the three Qwen32 headline routes, plus Qwen256 and Nomic256 top-100 controls.
+- [x] Use all 1,000 queries and the same saved cluster IDs for every method; build the exact local reference first.
+- [x] Complete 25 settings, three repeats each, and save all 75,000 query records.
+- [x] Retain the 84.135% local-recall Nomic result as a recall miss, not a speedup at 99%.
+- [x] Save local/global recall, local-only timing, full returned IDs, work counters and power/input checks.
+- [x] Rewrite the experiment in LaTeX with the measured local results and existing complete-query results kept distinct.
+- [x] Build and inspect an experiment-only preview while manual calculation edits continue.
+- [ ] Rebuild the combined PDF/source archive after the calculation editor confirms readiness.
+
+The new local study is `results/same-clusters-2026-09-13/`.
+The experiment preview is `output/pdf/search-experiments-preview.pdf`.
+Calculation-section edits and the combined PDF/source ZIP changed concurrently in
+another editor; they are left untouched and excluded from this experiment commit.
