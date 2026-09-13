@@ -282,7 +282,7 @@ def tables_facts(data):
             numbers[f"probes{name}{word}"] = f"{r['probes'][str(t)]:,}"
             numbers[f"docs{name}{word}"] = fmt(r["docs_at_target"][str(t)])
             numbers[f"docsShare{name}{word}"] = f"{100 * r['docs_at_target'][str(t)] / N:.1f}"
-    write_tex(EVIDENCE / "numbers-facts.tex", "".join(f"\\newcommand{{\\{k}}}{{{v}}}\n" for k, v in numbers.items()))
+    write_tex(EVIDENCE / "numbers-facts.tex", "".join(f"\\newcommand{{\\{k}}}{{{v}\\xspace}}\n" for k, v in numbers.items()))
 
 
 # ----- Results of the sweep -----
@@ -457,7 +457,7 @@ def tables_results(rows, selected, checks, units):
         numbers["globalBranchMs"] = f"{global_b[0]['query_ms_p50']:.0f}"
         numbers["globalBranchSplitWords"] = fmt(global_b[0]["split_words"] / 1e6, 0)
         numbers["globalBranchGroups"] = fmt(global_b[0]["nodes"])
-    write_tex(EVIDENCE / "numbers-results.tex", "".join(f"\\newcommand{{\\{k}}}{{{v}}}\n" for k, v in numbers.items()))
+    write_tex(EVIDENCE / "numbers-results.tex", "".join(f"\\newcommand{{\\{k}}}{{{v}\\xspace}}\n" for k, v in numbers.items()))
 
 
 def main():
