@@ -2,6 +2,8 @@
 
 *Exploring Bitplanes and Backward Walk*
 
+I’m Vincentius Roger Kuswara, a software engineer at TikTok (TikTok Search team), based in Singapore.
+
 The query tells us which binary document pattern would give the highest score value,
 and how much each mismatched bit would reduce it. Can we use that information to find
 the best stored documents with fewer document scoring operations?
