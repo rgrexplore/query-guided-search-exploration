@@ -13,6 +13,27 @@ and a report that follows the calculations through to measured results.
 **[Try the small example](examples/prefix_search.py)** ·
 **[Explore the results](results/prefix-study-2026-09-13/README.md)**
 
+## Early sketches
+
+Some references from my ideation scratch notes:
+
+<table>
+  <tr>
+    <td width="50%"><a href="docs/ideation/original-pipeline.png"><img src="docs/ideation/original-pipeline.png" alt="Sketch of the original ingestion and query pipeline" /></a></td>
+    <td width="50%"><a href="docs/ideation/first-bitplane-idea.png"><img src="docs/ideation/first-bitplane-idea.png" alt="First idea for bit routing and searching a cluster with Bitplanes" /></a></td>
+  </tr>
+  <tr><td>Original pipeline</td><td>First Bitplane idea</td></tr>
+</table>
+
+<details>
+<summary>More sketches</summary>
+
+![A query and document example exploring branching](docs/ideation/branching-example.png)
+
+![Branch exploration and bit operations](docs/ideation/branching-and-bit-operations.png)
+
+</details>
+
 ## The idea
 
 Consider this query:
